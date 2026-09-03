@@ -1,0 +1,19 @@
+# Architecture decision records
+
+Each record follows blueprint section 8.2 (Context, Decision, Alternatives, Consequences, Status), with the run's recorded deviations applied where they touch a decision. Deviations are logged as D-nn in the run notes; the ones cited here are D-03, D-04, D-05, D-06, D-07, D-10, D-11, D-12 and D-13.
+
+| Id | Title | Status | Decision in one line |
+|---|---|---|---|
+| [ADR-001](ADR-001-provider-pins.md) | Provider pins for the product's model roles | Accepted 2026-09-03 | Every role runs on Z.ai `glm-5.3-flash` through one gateway; verifier independence is prompt-and-question-blindness plus gates C1 to C6; AC-EVAL-05 is the proof. |
+| [ADR-002](ADR-002-coverage-and-rulepack-equality-gate.md) | Two implementations of the coverage recipe and the rule pack, with an equality gate | Accepted 2026-09-03 | The Python harness is the reference; the app carries a TypeScript port; CI asserts byte-identical equality on the seeded corpus. |
+| [ADR-003](ADR-003-authentication-library.md) | Authentication library | Accepted 2026-09-03 | Credentials login only, in-house session layer (bcrypt, 8-hour httpOnly SameSite=Lax cookie, one `authorize(role)` helper); Better Auth not adopted, Auth.js not used. |
+| [ADR-004](ADR-004-async-drafting-one-invocation.md) | Asynchronous drafting inside one function invocation | Accepted 2026-09-03 | `POST /api/drafts` returns 202 and continues through `waitUntil` within the 300 s maximum; an expired lease becomes `blocked` with `deadline_exceeded`. |
+| [ADR-005](ADR-005-text-extractor-pin.md) | The text-extractor pin | Accepted 2026-09-03 | `pdftotext -raw` 26.02.0 everywhere: Homebrew locally, conda-forge through micromamba in CI; the fixture's `inventory.extractor` string is asserted by a test. |
+| [ADR-006](ADR-006-prior-harness-adopt-or-rebuild.md) | Prior harness artefacts: adopt or rebuild | Accepted 2026-09-03 | The supplied harness existed and was adopted into `thehub-harness`; the fixture rebuilt byte-identical (digest 918706e4, 14 of 57 generous, 41 of 57 strict, 174 findings). |
+| [ADR-007](ADR-007-agent-transcription-provenance.md) | Provenance of agent-transcribed artefacts | Accepted 2026-09-03 | Agent output carries `basis: agent_transcription`, `review_status: pending`; the adopted sidecars and readings are relabelled accordingly (D-12). |
+| [ADR-008](ADR-008-trace-policy-and-nfr-23.md) | Trace policy and NFR-23 | Accepted 2026-09-03 | Public, trace-free repositories; pull requests with required checks and fresh-context verification fleets replace the per-merge human review during the run; the Report's acceptance is the human acceptance. |
+| [ADR-009](ADR-009-embedding-pin.md) | Embedding pin under the one-provider lock | Accepted 2026-09-03 | `embedding-3` is not served on api.z.ai; the embedding role is a hash-pinned local `Xenova/multilingual-e5-small` ONNX file (384 dimensions) used identically in both lanes. |
+| [ADR-010](ADR-010-corpus-in-ci-and-runtime.md) | The corpus in CI and at runtime | Accepted 2026-09-03 | The corpus lives in the private `Finerium/thehub-corpus`, read by CI through a read-only deploy key; page derivatives are bytea rows served one page at a time to a role. |
+| [ADR-011](ADR-011-page-render-and-rate-limit-storage.md) | Page-render and rate-limit storage | Accepted 2026-09-03 | Rate limits are fixed-window counters in PostgreSQL; no cache service is load-bearing. |
+| [ADR-012](ADR-012-secret-blind-orchestration.md) | Secret-blind orchestration | Accepted 2026-09-03 | Secrets move only through the shell and CLIs; a hook denies every read or echo of a secret by any thread; propagation goes through one redirecting helper script. |
+| [ADR-013](ADR-013-login-required-live-deployment.md) | Login-required live deployment | Accepted 2026-09-03 | The live deployment is fully behind credentials login; no reviewer links; credentials reach the Committee out of band; the static export stays login-free (D-07). |

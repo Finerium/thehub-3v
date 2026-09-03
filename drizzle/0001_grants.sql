@@ -1,0 +1,12 @@
+-- audit_log is append-only at the grant level (blueprint 9.7, AC-NFR-07): UPDATE and DELETE are revoked from the
+-- one Neon role the application and the migration runner share, so the database itself refuses both. A dedicated
+-- application role is the upgrade path; so are the partitions of ARCHITECTURE 3.3 (audit_log_safety,
+-- audit_log_general), each of which gets the same REVOKE when it is created.
+--
+-- How drizzle-kit applies this file: it is a custom migration created with
+--   pnpm drizzle-kit generate --custom --name=grants
+-- which registered it as idx 1 in drizzle/meta/_journal.json after 0000_init (the table must exist first).
+-- `pnpm drizzle-kit migrate` (drizzle.config.ts, DATABASE_URL_UNPOOLED) runs the journal in order, each file in
+-- its own transaction, and records it in drizzle.__drizzle_migrations; a schema change later gets a new
+-- `drizzle-kit generate` file after this one, and this file is never edited once applied.
+REVOKE UPDATE, DELETE ON TABLE "public"."audit_log" FROM CURRENT_USER;
