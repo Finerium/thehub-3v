@@ -52,3 +52,6 @@ test-results/
 video/raw/
 video/frames/
 .env*
+
+# third-party agent skills auto-installed by integrations (trace policy)
+.agents/
