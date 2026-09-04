@@ -1,26 +1,468 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------------------------------------------------
+   Blueprint section 7.1: the lock and the accent. Drafting ink: paper white and warm greys with the texture and
+   rhythm of drafting film, one cobalt-ink accent, the plant's state colours reserved for state alone. Token names
+   are the contract; values are tuned inside the contrast constraints (every text token measures above 4.5:1 on
+   paper and on the film composite; the check lives beside the build notes). No dark mode; a reduced-transparency
+   fallback instead.
+   ------------------------------------------------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f4f1ea;
+  --paper-deep: #ebe7dd;
+  --film: rgba(255, 253, 248, 0.6);
+  --film-rim: rgba(255, 255, 255, 0.85);
+  --film-edge: rgba(27, 25, 22, 0.1);
+  --scrim: rgba(251, 248, 242, 0.92);
+  --ink-900: #1b1916;
+  --ink-700: #45413a;
+  --ink-500: #67625a;
+  --accent: #1e3fb8;
+  --state-caveat: #9a5600;
+  --state-defect: #b42318;
+  --state-verified: #1e7b45;
+  --grid: rgba(27, 25, 22, 0.045);
+  --blur: 14px;
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  color-scheme: light only;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-film: var(--film);
+  --color-ink-900: var(--ink-900);
+  --color-ink-700: var(--ink-700);
+  --color-ink-500: var(--ink-500);
+  --color-accent: var(--accent);
+  --color-caveat: var(--state-caveat);
+  --color-defect: var(--state-defect);
+  --color-verified: var(--state-verified);
+  --color-edge: var(--film-edge);
+  --font-display: var(--font-bricolage), ui-sans-serif, sans-serif;
+  --font-sans: var(--font-plex-sans), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --radius-panel: 14px;
+  --radius-chip: 8px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    background: var(--paper-deep);
+    color: var(--ink-900);
+    font-family: var(--font-sans);
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    min-height: 100dvh;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 48;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    font-weight: 600;
+    color: var(--ink-900);
+  }
+  h3 {
+    font-variation-settings: "opsz" 24;
+    letter-spacing: -0.005em;
+  }
+  code,
+  kbd,
+  .mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  table {
+    border-collapse: collapse;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ------------------------------------------------------------------------------------------------------------
+   The shell: a drawing sheet. The rail on the left is the sheet index; the sheet carries the drafting grid; the
+   title block at the bottom carries the deployment line.
+   ------------------------------------------------------------------------------------------------------------ */
+.shell {
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  min-height: 100dvh;
+}
+.rail {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 22px 18px;
+  background: var(--paper-deep);
+  border-right: 1px solid var(--film-edge);
+  overflow-y: auto;
+}
+.sheet {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 32px),
+    repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 32px);
+}
+.sheet > main {
+  flex: 1;
+  width: 100%;
+  max-width: 1320px;
+  padding: 28px 36px 48px;
+}
+.titleblock {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  padding: 12px 36px;
+  border-top: 1px solid var(--film-edge);
+  background: var(--paper-deep);
+  color: var(--ink-700);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+@media (max-width: 900px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rail {
+    position: static;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--film-edge);
+  }
+  .sheet > main,
+  .titleblock {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* Sheet index: the fourteen surfaces. Hover draws the underline; the current surface keeps it. */
+.index {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.index a {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 8px;
+  padding: 5px 6px;
+  border-radius: 6px;
+  color: var(--ink-700);
+}
+.index a .n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-500);
+}
+.index a:hover,
+.index a[aria-current] {
+  color: var(--accent);
+}
+.index a[aria-current] {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.index a[aria-current] .n {
+  color: var(--accent);
+}
+
+.draw {
+  position: relative;
+  display: inline-block;
+}
+.draw::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s var(--ease-out);
+}
+.draw:hover::after,
+.draw:focus-visible::after,
+a[aria-current] .draw::after {
+  transform: scaleX(1);
+}
+
+/* ------------------------------------------------------------------------------------------------------------
+   Glass: the frosted film over paper, the hairline rim, a scrim over an underlay, stacked blurs capped at two
+   layers, the reduced-transparency fallback. Hover on an interactive panel lifts it and brightens the rim
+   (transform and opacity only).
+   ------------------------------------------------------------------------------------------------------------ */
+.glass {
+  position: relative;
+  background: var(--film);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(1.15);
+  backdrop-filter: blur(var(--blur)) saturate(1.15);
+  border-radius: var(--radius-panel);
+  box-shadow:
+    inset 0 0 0 1px var(--film-rim),
+    0 0 0 1px var(--film-edge),
+    0 12px 28px -20px rgba(27, 25, 22, 0.35);
+}
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px #fff,
+    0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
+  opacity: 0;
+  transition: opacity 0.2s var(--ease-out);
+}
+.glass[data-interactive] {
+  transition: transform 0.2s var(--ease-out);
+}
+.glass[data-interactive]:hover,
+.glass[data-interactive]:focus-within {
+  transform: translateY(-1px);
+}
+.glass[data-interactive]:hover::after,
+.glass[data-interactive]:focus-within::after {
+  opacity: 1;
+}
+.glass[data-scrim],
+.glass .glass .glass {
+  background: var(--scrim);
+}
+.glass .glass .glass {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--scrim);
+  }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--scrim);
+  }
+}
+
+/* Neumorphic accent: tactile controls only (chips, decision buttons, the version switch). The pressed state is
+   always paired with a second cue by the component (label or icon), never shadow alone. */
+.neu {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--accent);
+  font-weight: 500;
+  box-shadow:
+    5px 5px 12px rgba(27, 25, 22, 0.13),
+    -5px -5px 12px rgba(255, 255, 255, 0.95);
+  transition: transform 0.15s var(--ease-out);
+}
+.neu:hover {
+  transform: translateY(-1px);
+}
+.neu:active,
+.neu[aria-pressed="true"] {
+  transform: translateY(0);
+  box-shadow:
+    inset 3px 3px 8px rgba(27, 25, 22, 0.14),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.95);
+}
+.neu[aria-disabled="true"] {
+  color: var(--ink-500);
+  pointer-events: none;
+}
+
+/* Hairline chip: content chips (questions, citations). */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: var(--radius-chip);
+  background: var(--scrim);
+  box-shadow:
+    inset 0 0 0 1px var(--film-rim),
+    0 0 0 1px var(--film-edge);
+  color: var(--ink-900);
+  transition: transform 0.15s var(--ease-out);
+}
+a.chip:hover,
+a.chip:focus-visible {
+  transform: translateY(-1px);
+  color: var(--accent);
+}
+
+/* Register: the dense operational table. Rows have no reveal animation; hover marks the row instantly. */
+.reg {
+  width: 100%;
+  font-size: 13px;
+}
+.reg th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 11.5px;
+  color: var(--ink-500);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--film-edge);
+  white-space: nowrap;
+}
+.reg td {
+  padding: 9px 10px;
+  border-bottom: 1px solid color-mix(in srgb, var(--film-edge) 60%, transparent);
+  vertical-align: top;
+  color: var(--ink-700);
+}
+.reg tbody tr:hover td {
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+  color: var(--ink-900);
+}
+.reg td.num,
+.reg th.num {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.reg tfoot td {
+  border-bottom: 0;
+  border-top: 1px solid var(--film-edge);
+  color: var(--ink-900);
+  font-weight: 500;
+}
+
+/* Field list: label and value pairs of a status card. */
+.fields {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 6px 18px;
+  font-size: 13px;
+}
+.fields dt {
+  color: var(--ink-500);
+}
+.fields dd {
+  margin: 0;
+  color: var(--ink-900);
+  overflow-wrap: anywhere;
+}
+
+/* Status badges: a flat legend-key swatch beside the fixed wording, in the state token. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 2px 8px 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--badge-ink);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--badge-ink) 45%, transparent);
+  background: color-mix(in srgb, var(--badge-ink) 7%, transparent);
+}
+.badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  background: var(--badge-ink);
+}
+.badge[data-tone="caveat"] {
+  --badge-ink: var(--state-caveat);
+}
+.badge[data-tone="defect"] {
+  --badge-ink: var(--state-defect);
+}
+.badge[data-tone="verified"] {
+  --badge-ink: var(--state-verified);
+}
+.badge[data-tone="accent"] {
+  --badge-ink: var(--accent);
+}
+.badge[data-tone="neutral"] {
+  --badge-ink: var(--ink-700);
+}
+
+/* Empty state: an unfilled drawing cell. Never a second glass layer. */
+.empty {
+  border: 1px dashed color-mix(in srgb, var(--ink-500) 55%, transparent);
+  border-radius: var(--radius-chip);
+  padding: 18px 20px;
+  color: var(--ink-700);
+}
+
+/* ------------------------------------------------------------------------------------------------------------
+   Motion: transform and opacity only, easeOut about 0.4 s, stagger 50 ms per child capped near 300 ms;
+   prefers-reduced-motion renders the complete static experience.
+   ------------------------------------------------------------------------------------------------------------ */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes roll {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.4s var(--ease-out) both;
+  animation-delay: calc(min(var(--i, 0) * 50ms, 300ms));
+}
+.roll {
+  display: inline-block;
+  animation: roll 0.35s var(--ease-out) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
 }

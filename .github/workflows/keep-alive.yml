@@ -1,0 +1,49 @@
+# Keep-alive (D-15, D-06, AC-NFR-05): the primary cold-start mitigation on Vercel Hobby and Neon Free.
+# Every run warms the function through GET /login (no cookie, so no database touch). Only the runs of the
+# 30-minute schedule also call GET /api/health, which wakes Neon (SELECT 1 and the active version): Neon Free allows
+# 100 CU-hours a month and a database ping every 10 minutes would spend about 90 of them. The two crons overlap at
+# :00 and :30, which is intended. GitHub disables schedules after 60 days without a push; the final-round window
+# closes on 2026-11-07 and the first step stops every run after that date.
+name: Keep-alive
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  BASE_URL: https://thehub-3v.vercel.app
+  LAST_DAY: "2026-11-07"
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stop after the final-round window
+        id: window
+        run: |
+          today="$(date -u +%F)"
+          if [[ "$today" > "$LAST_DAY" ]]; then
+            echo "expired=true" >> "$GITHUB_OUTPUT"
+            echo "past $LAST_DAY ($today): nothing to do"
+          else
+            echo "expired=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Warm the function (GET /login, no database)
+        if: steps.window.outputs.expired == 'false'
+        run: |
+          code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 60 --retry 2 "$BASE_URL/login")"
+          echo "login $code"
+          [[ "$code" == 2?? ]]
+
+      - name: Wake the database (GET /api/health, the 30-minute schedule and manual runs only)
+        if: steps.window.outputs.expired == 'false' && (github.event.schedule == '*/30 * * * *' || github.event_name == 'workflow_dispatch')
+        run: |
+          code="$(curl -s -o "$RUNNER_TEMP/health.json" -w '%{http_code}' --max-time 60 --retry 2 "$BASE_URL/api/health")"
+          echo "health $code"
+          cat "$RUNNER_TEMP/health.json"; echo
+          [[ "$code" == 2?? ]]

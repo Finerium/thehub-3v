@@ -547,6 +547,13 @@ CREATE TABLE "reviewer_link" (
 	CONSTRAINT "reviewer_link_role" CHECK ("reviewer_link"."role" <> 'Admin')
 );
 --> statement-breakpoint
+CREATE TABLE "sandbox" (
+	"id" text PRIMARY KEY NOT NULL,
+	"corpus_version_id" text,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"last_seen_at" timestamp with time zone DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE "seeded_chip" (
 	"id" text PRIMARY KEY NOT NULL,
 	"equipment_tag" text NOT NULL,
@@ -561,11 +568,6 @@ CREATE TABLE "session" (
 	"created_at" timestamp with time zone NOT NULL,
 	"expires_at" timestamp with time zone NOT NULL,
 	"reviewer_link_id" text
-);
---> statement-breakpoint
-CREATE TABLE "session_sandbox" (
-	"session_id" text PRIMARY KEY NOT NULL,
-	"corpus_version_id" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "draft"."sme_note" (
@@ -678,7 +680,7 @@ ALTER TABLE "draft"."draft_document" ADD CONSTRAINT "draft_document_cluster_id_d
 ALTER TABLE "draft"."draft_document" ADD CONSTRAINT "draft_document_equipment_tag_equipment_tag_fk" FOREIGN KEY ("equipment_tag") REFERENCES "public"."equipment"("tag") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "draft"."draft_document" ADD CONSTRAINT "draft_document_corpus_version_id_corpus_version_id_fk" FOREIGN KEY ("corpus_version_id") REFERENCES "public"."corpus_version"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "draft"."draft_document" ADD CONSTRAINT "draft_document_previous_draft_id_draft_document_id_fk" FOREIGN KEY ("previous_draft_id") REFERENCES "draft"."draft_document"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "draft"."draft_document" ADD CONSTRAINT "draft_document_session_scope_session_id_fk" FOREIGN KEY ("session_scope") REFERENCES "public"."session"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "draft"."draft_document" ADD CONSTRAINT "draft_document_session_scope_sandbox_id_fk" FOREIGN KEY ("session_scope") REFERENCES "public"."sandbox"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "draft"."draft_field" ADD CONSTRAINT "draft_field_draft_id_draft_document_id_fk" FOREIGN KEY ("draft_id") REFERENCES "draft"."draft_document"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "draft"."draft_transition" ADD CONSTRAINT "draft_transition_draft_id_draft_document_id_fk" FOREIGN KEY ("draft_id") REFERENCES "draft"."draft_document"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "equipment" ADD CONSTRAINT "equipment_area_code_area_code_fk" FOREIGN KEY ("area_code") REFERENCES "public"."area"("code") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
@@ -705,12 +707,11 @@ ALTER TABLE "proof_test" ADD CONSTRAINT "proof_test_wo_number_work_order_wo_numb
 ALTER TABLE "proof_test" ADD CONSTRAINT "proof_test_equipment_tag_equipment_tag_fk" FOREIGN KEY ("equipment_tag") REFERENCES "public"."equipment"("tag") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "draft"."redline_verdict" ADD CONSTRAINT "redline_verdict_draft_id_draft_document_id_fk" FOREIGN KEY ("draft_id") REFERENCES "draft"."draft_document"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "reviewer_link" ADD CONSTRAINT "reviewer_link_user_id_app_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."app_user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "sandbox" ADD CONSTRAINT "sandbox_corpus_version_id_corpus_version_id_fk" FOREIGN KEY ("corpus_version_id") REFERENCES "public"."corpus_version"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "seeded_chip" ADD CONSTRAINT "seeded_chip_equipment_tag_equipment_tag_fk" FOREIGN KEY ("equipment_tag") REFERENCES "public"."equipment"("tag") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "seeded_chip" ADD CONSTRAINT "seeded_chip_trace_id_answer_trace_id_fk" FOREIGN KEY ("trace_id") REFERENCES "public"."answer_trace"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "session" ADD CONSTRAINT "session_user_id_app_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."app_user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "session" ADD CONSTRAINT "session_reviewer_link_id_reviewer_link_id_fk" FOREIGN KEY ("reviewer_link_id") REFERENCES "public"."reviewer_link"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "session_sandbox" ADD CONSTRAINT "session_sandbox_session_id_session_id_fk" FOREIGN KEY ("session_id") REFERENCES "public"."session"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "session_sandbox" ADD CONSTRAINT "session_sandbox_corpus_version_id_corpus_version_id_fk" FOREIGN KEY ("corpus_version_id") REFERENCES "public"."corpus_version"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "draft"."sme_note" ADD CONSTRAINT "sme_note_draft_id_draft_document_id_fk" FOREIGN KEY ("draft_id") REFERENCES "draft"."draft_document"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "draft"."sme_note" ADD CONSTRAINT "sme_note_field_id_draft_field_id_fk" FOREIGN KEY ("field_id") REFERENCES "draft"."draft_field"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "span" ADD CONSTRAINT "span_document_revision_id_document_revision_id_fk" FOREIGN KEY ("document_revision_id") REFERENCES "public"."document_revision"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint

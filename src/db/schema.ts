@@ -747,14 +747,14 @@ export const session = pgTable(
   (t) => [index("session_user_idx").on(t.userId)],
 );
 
-// The visitor's never-activated child version for the guided loop (ARCHITECTURE 8.5, AC-LOOP-13)
-export const sessionSandbox = pgTable("session_sandbox", {
-  sessionId: text("session_id")
-    .primaryKey()
-    .references(() => session.id, { onDelete: "cascade" }),
-  corpusVersionId: text("corpus_version_id")
-    .notNull()
-    .references(() => corpusVersion.id),
+// The visitor's browser-scoped sandbox for the guided loop (D-16, ARCHITECTURE 8.5, AC-LOOP-13): id is the
+// thehub_sandbox cookie value, kept across logouts; corpus_version_id is the never-activated child version, null
+// until the visitor's first publication.
+export const sandbox = pgTable("sandbox", {
+  id: text("id").primaryKey(),
+  corpusVersionId: text("corpus_version_id").references(() => corpusVersion.id),
+  createdAt: timestamptz("created_at").notNull().defaultNow(),
+  lastSeenAt: timestamptz("last_seen_at").notNull().defaultNow(),
 });
 
 // Immutable: no UPDATE path exists in code (AC-ANS-11)
@@ -829,7 +829,7 @@ export const evaluationResult = pgTable(
   (t) => [primaryKey({ columns: [t.runId, t.caseId] })],
 );
 
-// AuditEvent rows (9.7). Append-only at the grant level: drizzle/0001_grants.sql revokes UPDATE and DELETE.
+// AuditEvent rows (9.7). Append-only at the grant level: scripts/db/app-role.ts (D-20) revokes UPDATE and DELETE.
 // The composite key carries the partition keys of ARCHITECTURE 3.3 (LIST on action, RANGE on server_ts).
 export const auditLog = pgTable(
   "audit_log",
@@ -923,8 +923,8 @@ export const draftDocument = draft.table(
     previousDraftId: text("previous_draft_id").references((): AnyPgColumn => draftDocument.id, {
       onDelete: "set null",
     }),
-    // non-null on the per-session demo sandbox; the sandbox goes with its session
-    sessionScope: text("session_scope").references(() => session.id, { onDelete: "cascade" }),
+    // frozen 9.6 name; holds the visitor's sandbox id (D-16), null on seeded replay sources; drafts go with the sandbox
+    sessionScope: text("session_scope").references(() => sandbox.id, { onDelete: "cascade" }),
   },
   (t) => [index("draft_document_state_idx").on(t.state), index("draft_document_session_scope_idx").on(t.sessionScope)],
 );

@@ -1,0 +1,291 @@
+/* Surface 14, login: the Drafting ink direction of blueprint section 7 in the tactile-transactional register.
+   A drawing sheet (paper, the drafting grid, a double hairline sheet border), one glass panel, the wordmark set
+   in the display face with an accent rule that draws in, the fields as paper wells, the neumorphic sign-in
+   button, a title block at the foot of the panel carrying the issuance line. Tokens come from globals.css by
+   name; transform and opacity only; reduced motion gets the complete static screen. */
+
+.stage {
+  position: relative;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: clamp(24px, 6vh, 72px) 24px;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(60% 45% at 30% 18%, rgba(255, 255, 255, 0.75), transparent 70%),
+    repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 32px),
+    repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 32px);
+  overflow: hidden;
+}
+
+/* The sheet border: two hairlines, the way a drawing frame is drawn. */
+.stage::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  pointer-events: none;
+  border: 1px solid var(--film-edge);
+  outline: 1px solid var(--film-edge);
+  outline-offset: 4px;
+}
+
+.frame {
+  position: relative;
+  width: min(100%, 460px);
+  display: grid;
+  gap: 14px;
+}
+
+.panel {
+  overflow: hidden;
+}
+
+.frame[data-failed] .panel {
+  animation: nudge 0.32s var(--ease-out);
+}
+
+.body {
+  padding: 40px 40px 32px;
+  display: grid;
+  gap: 28px;
+}
+
+.masthead {
+  display: grid;
+  gap: 10px;
+}
+
+.wordmark {
+  margin: 0;
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 96;
+  font-weight: 600;
+  font-size: clamp(42px, 7vw, 58px);
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--ink-900);
+}
+
+.rule {
+  display: block;
+  width: 64px;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left;
+  animation: draw 0.6s var(--ease-out) 0.25s both;
+}
+
+.tagline {
+  margin: 0;
+  max-width: 30ch;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--ink-700);
+}
+
+.form {
+  display: grid;
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field > span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-500);
+}
+
+.input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink-900);
+  font: inherit;
+  font-size: 15px;
+  box-shadow:
+    inset 0 0 0 1px var(--film-edge),
+    inset 0 1px 2px rgba(27, 25, 22, 0.06);
+  transition: box-shadow 0.15s var(--ease-out);
+}
+
+.input::placeholder {
+  color: color-mix(in srgb, var(--ink-500) 55%, transparent);
+}
+
+.input:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 0 0 1px var(--accent),
+    0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+.error {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--state-defect);
+  background: color-mix(in srgb, var(--state-defect) 7%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--state-defect) 35%, transparent);
+}
+
+.error > i {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+
+.submit {
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding: 13px 20px;
+  border: 0;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.submit > span:last-child {
+  font-family: var(--font-mono);
+  transition: transform 0.2s var(--ease-out);
+}
+
+.submit:hover > span:last-child,
+.submit:focus-visible > span:last-child {
+  transform: translateX(4px);
+}
+
+/* The title block: a drawing's title block at the foot of the sheet, hairline cells, the issuance line. */
+.titleblock {
+  display: grid;
+  grid-template-columns: max-content max-content minmax(0, 1fr);
+  border-top: 1px solid var(--film-edge);
+  background: color-mix(in srgb, var(--paper) 55%, transparent);
+}
+
+.cell {
+  display: grid;
+  gap: 3px;
+  padding: 10px 14px 11px;
+  min-width: 0;
+}
+
+.cell + .cell {
+  border-left: 1px solid var(--film-edge);
+}
+
+.cell > span {
+  font-size: 10.5px;
+  color: var(--ink-500);
+}
+
+.cell > strong {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ink-700);
+  overflow-wrap: anywhere;
+}
+
+.colophon {
+  margin: 0;
+  padding: 0 4px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-500);
+}
+
+/* Load choreography: opacity and a short translate, staggered by --i, reversing to nothing under reduced motion. */
+.reveal {
+  animation: rise 0.45s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes nudge {
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-5px);
+  }
+  60% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 520px) {
+  .body {
+    padding: 30px 24px 26px;
+  }
+  .titleblock {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cell:last-child {
+    grid-column: 1 / -1;
+    border-left: 0;
+    border-top: 1px solid var(--film-edge);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .rule,
+  .frame[data-failed] .panel {
+    animation: none;
+  }
+  .submit > span:last-child {
+    transition: none;
+  }
+}

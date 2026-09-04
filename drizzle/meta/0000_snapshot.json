@@ -1,5 +1,5 @@
 {
-  "id": "2fc32631-2890-4db0-8b36-cf53850583a5",
+  "id": "3cfa4d8f-195e-4e99-a52e-c296aa6e12f9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -2078,10 +2078,10 @@
           "onDelete": "set null",
           "onUpdate": "no action"
         },
-        "draft_document_session_scope_session_id_fk": {
-          "name": "draft_document_session_scope_session_id_fk",
+        "draft_document_session_scope_sandbox_id_fk": {
+          "name": "draft_document_session_scope_sandbox_id_fk",
           "tableFrom": "draft_document",
-          "tableTo": "session",
+          "tableTo": "sandbox",
           "columnsFrom": [
             "session_scope"
           ],
@@ -4023,6 +4023,59 @@
       },
       "isRLSEnabled": false
     },
+    "public.sandbox": {
+      "name": "sandbox",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "corpus_version_id": {
+          "name": "corpus_version_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "last_seen_at": {
+          "name": "last_seen_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sandbox_corpus_version_id_corpus_version_id_fk": {
+          "name": "sandbox_corpus_version_id_corpus_version_id_fk",
+          "tableFrom": "sandbox",
+          "tableTo": "corpus_version",
+          "columnsFrom": [
+            "corpus_version_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.seeded_chip": {
       "name": "seeded_chip",
       "schema": "",
@@ -4165,58 +4218,6 @@
           "tableTo": "reviewer_link",
           "columnsFrom": [
             "reviewer_link_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.session_sandbox": {
-      "name": "session_sandbox",
-      "schema": "",
-      "columns": {
-        "session_id": {
-          "name": "session_id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "corpus_version_id": {
-          "name": "corpus_version_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "session_sandbox_session_id_session_id_fk": {
-          "name": "session_sandbox_session_id_session_id_fk",
-          "tableFrom": "session_sandbox",
-          "tableTo": "session",
-          "columnsFrom": [
-            "session_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "session_sandbox_corpus_version_id_corpus_version_id_fk": {
-          "name": "session_sandbox_corpus_version_id_corpus_version_id_fk",
-          "tableFrom": "session_sandbox",
-          "tableTo": "corpus_version",
-          "columnsFrom": [
-            "corpus_version_id"
           ],
           "columnsTo": [
             "id"

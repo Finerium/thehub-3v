@@ -1,0 +1,36 @@
+# Production migrations (AC-ING-15, ARCHITECTURE sections 3 and 10): drizzle-kit applies the SQL under drizzle/
+# over the owner's unpooled URL before the deployment that needs them runs. The Vercel build never migrates.
+# DATABASE_URL_UNPOOLED is the repository secret the main thread sets. Seeding is a separate dispatch (seed.yml,
+# T2): this workflow only migrates, so a schema change and a data load are never one step.
+name: DB migrate (production)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: db-migrate-production
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6 # the version comes from package.json "packageManager"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Apply the migrations (drizzle-kit migrate over the unpooled owner URL)
+        run: pnpm db:migrate
+        env:
+          DATABASE_URL_UNPOOLED: ${{ secrets.DATABASE_URL_UNPOOLED }}

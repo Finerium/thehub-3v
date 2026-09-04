@@ -1,0 +1,126 @@
+# Tier A (blueprint 8.3, ARCHITECTURE section 10; AC-FND-06, AC-FND-07): every pull request and every push to main.
+# Deterministic checks only: no model call, no database. Two jobs run in parallel: `checks` (contracts, lint,
+# typecheck, unit tests, gitleaks, banned strings) and `no-corpus-text` (the harness's A7 scan of this repository
+# against the organiser's corpus, read through the read-only deploy key). Tier B (nightly, live model) is tier-b.yml.
+name: Tier A
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tier-a-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # The harness ref the contracts, the fixture and the tools are read from; pinned to a sha at the T1 release.
+  HARNESS_REF: main
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # gitleaks scans the commits of the push or the pull request
+
+      - uses: pnpm/action-setup@v6 # the version comes from package.json "packageManager"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Check out thehub-harness beside the application (contracts are read by pointer, ADR-010)
+        run: |
+          harness="$GITHUB_WORKSPACE/../thehub-harness"
+          git init -q "$harness"
+          git -C "$harness" fetch -q --depth 1 https://github.com/Finerium/thehub-harness.git "$HARNESS_REF"
+          git -C "$harness" checkout -q FETCH_HEAD
+          git -C "$harness" log -1 --format='harness %H'
+
+      - name: Contracts (JSON Schema 2020-12 strict; Zod regenerated with no diff)
+        run: pnpm contracts:check
+        env:
+          CONTRACTS_DIR: ../thehub-harness/contracts
+
+      - name: gate:quick (lint, typecheck, unit tests)
+        run: pnpm gate:quick
+
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Banned strings (AC-DEL-06)
+        run: |
+          dirs=""
+          for d in src deck video deliverables; do [ -d "$d" ] && dirs="$dirs $d"; done
+          set +e
+          hits="$(grep -rnIiwE 'SIMPUL|PUSAKA|WARISAN|SIAGA|SAKSI' $dirs)"
+          rc=$?
+          set -e
+          case "$rc" in
+            0) echo "$hits"; echo "::error::banned string found"; exit 1 ;;
+            1) echo "banned strings: clean in$dirs" ;;
+            *) exit "$rc" ;;
+          esac
+
+  no-corpus-text:
+    runs-on: ubuntu-latest
+    # The deploy key is a repository secret, absent on a pull request from a fork.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check out thehub-harness beside the application
+        run: |
+          harness="$GITHUB_WORKSPACE/../thehub-harness"
+          git init -q "$harness"
+          git -C "$harness" fetch -q --depth 1 https://github.com/Finerium/thehub-harness.git "$HARNESS_REF"
+          git -C "$harness" checkout -q FETCH_HEAD
+          git -C "$harness" log -1 --format='harness %H'
+
+      - name: SSH agent with the read-only corpus deploy key
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.CORPUS_DEPLOY_KEY }}
+          log-public-key: false
+
+      - name: Clone the corpus outside the workspace (never inside this repository's tree)
+        run: |
+          mkdir -p ~/.ssh
+          curl -sS https://api.github.com/meta | jq -r '.ssh_keys[] | "github.com \(.)"' >> ~/.ssh/known_hosts
+          git clone -q --depth 1 git@github.com:Finerium/thehub-corpus.git "$RUNNER_TEMP/thehub-corpus"
+
+      - name: Poppler 26.02.0 (the extractor pin, ADR-005, D-11)
+        uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: poppler
+          create-args: >-
+            -c conda-forge
+            poppler=26.02.0
+          init-shell: bash
+          cache-environment: true
+
+      - name: The extractor build must read 26.02.0
+        shell: bash -el {0}
+        run: pdftotext -v 2>&1 | head -1 | tee /dev/stderr | grep -F 'pdftotext version 26.02.0'
+
+      - uses: astral-sh/setup-uv@v10.0.1
+        with:
+          python-version: "3.12"
+
+      - name: Harness environment (uv sync --frozen)
+        run: uv sync --frozen --directory "$GITHUB_WORKSPACE/../thehub-harness"
+
+      - name: No run of corpus text longer than 200 characters in this repository (A7, AC-FND-07)
+        shell: bash -el {0}
+        env:
+          CASE1_CORPUS: ${{ runner.temp }}/thehub-corpus/CALIBER-2026_The-Case/Supporting Data/Case 1_ Manufacturing Knowledge Hub
+        run: uv run --directory "$GITHUB_WORKSPACE/../thehub-harness" python tools/no_corpus_in_repo.py --repo "$GITHUB_WORKSPACE"
