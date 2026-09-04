@@ -1,7 +1,9 @@
 # Tier A (blueprint 8.3, ARCHITECTURE section 10; AC-FND-06, AC-FND-07): every pull request and every push to main.
 # Deterministic checks only: no model call, no database. Two jobs run in parallel: `checks` (contracts, lint,
 # typecheck, unit tests, gitleaks, banned strings) and `no-corpus-text` (the harness's A7 scan of this repository
-# against the organiser's corpus, read through the read-only deploy key). Tier B (nightly, live model) is tier-b.yml.
+# against the organiser's corpus, read through the read-only deploy key). A push to main adds `production-smoke`
+# (AC-M0-01 to AC-M0-06): once the Vercel deployment of that commit answers on /api/health, scripts/smoke.sh runs
+# against the production URL and its JSON is kept as a run artifact. Tier B (nightly, live model) is tier-b.yml.
 name: Tier A
 
 on:
@@ -124,3 +126,43 @@ jobs:
         env:
           CASE1_CORPUS: ${{ runner.temp }}/thehub-corpus/CALIBER-2026_The-Case/Supporting Data/Case 1_ Manufacturing Knowledge Hub
         run: uv run --directory "$GITHUB_WORKSPACE/../thehub-harness" python tools/no_corpus_in_repo.py --repo "$GITHUB_WORKSPACE"
+
+  production-smoke:
+    # The Vercel Git integration deploys every push to main; /api/health reports VERCEL_GIT_COMMIT_SHA, so the
+    # deployment of this very commit is recognised by its sha. POLL_ATTEMPTS x POLL_SECONDS is the ten-minute wait.
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BASE_URL: https://thehub-3v.vercel.app
+      POLL_ATTEMPTS: "40"
+      POLL_SECONDS: "15"
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Wait for the deployment of this commit (GET /api/health reports the pushed sha)
+        run: |
+          for attempt in $(seq 1 "$POLL_ATTEMPTS"); do
+            commit="$(curl -s --max-time 30 "$BASE_URL/api/health" | jq -r '.commit // empty' 2>/dev/null || true)"
+            if [ "$commit" = "$GITHUB_SHA" ]; then
+              echo "deployed: $BASE_URL runs $commit"
+              exit 0
+            fi
+            echo "attempt $attempt of $POLL_ATTEMPTS: health reports '${commit:-no commit}', waiting for $GITHUB_SHA"
+            sleep "$POLL_SECONDS"
+          done
+          echo "::error::$BASE_URL did not report $GITHUB_SHA within $((POLL_ATTEMPTS * POLL_SECONDS)) seconds"
+          exit 1
+
+      - name: M0 smoke against production (health, login and Home, robots, noindex, designed 404, keep-alive)
+        env:
+          DEMO_ENGINEER_PASSWORD: ${{ secrets.DEMO_ENGINEER_PASSWORD }}
+        run: bash scripts/smoke.sh "$BASE_URL" "$RUNNER_TEMP/m0-smoke.json"
+
+      - name: Keep the smoke JSON (the M0 evidence input, blueprint 11.11)
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: m0-smoke-${{ github.sha }}
+          path: ${{ runner.temp }}/m0-smoke.json
+          if-no-files-found: error

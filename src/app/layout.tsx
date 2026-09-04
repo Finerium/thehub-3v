@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { AppShell, PRODUCT_NAME } from "@/components/AppShell";
+import { PRODUCT_NAME } from "@/components/AppShell";
 import { cx } from "@/components/cx";
 import { display, mono, sans } from "./fonts";
 import "./globals.css";
@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false, noarchive: true, nosnippet: true },
 };
 
+// ARCHITECTURE 1.1: html, the three faces and a body on paper, nothing else. The shell (rail, sheet, title block)
+// is drawn by src/app/(hub)/layout.tsx behind requireSession(); /login, the designed 404 and error.tsx render
+// bare on this paper.
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const commit = process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? null;
   return (
     <html lang="en" className={cx(display.variable, sans.variable, mono.variable)}>
-      <body>
-        <AppShell commit={commit}>{children}</AppShell>
-      </body>
+      <body className="bg-paper">{children}</body>
     </html>
   );
 }

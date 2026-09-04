@@ -1,11 +1,43 @@
 // The CI surface as text (deterministic checks as scripts): the keep-alive cadence of D-15, the migration workflow
-// of AC-ING-15 and the Tier A steps must not drift from what ARCHITECTURE section 10 records.
-import { readFileSync } from "node:fs";
+// of AC-ING-15, the Tier A steps and the production smoke of 11.11 must not drift from what ARCHITECTURE section 10
+// records, and no workflow may name a secret the repository does not hold.
+import { readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 const workflows = path.join(process.cwd(), ".github", "workflows");
 const read = (name: string) => readFileSync(path.join(workflows, name), "utf8");
+
+// The repository secrets by name (ARCHITECTURE section 10; the values never appear anywhere in this repository).
+const REPOSITORY_SECRETS = [
+  "CORPUS_DEPLOY_KEY",
+  "DATABASE_URL",
+  "DATABASE_URL_UNPOOLED",
+  "DEMO_ENGINEER_PASSWORD",
+  "DEMO_SUPERVISOR_PASSWORD",
+  "DEMO_MANAGER_PASSWORD",
+  "ADMIN_PASSWORD",
+  "AUTH_SECRET",
+  "ZAI_API_KEY",
+  "ADMIN_JOB_TOKEN",
+  "CI_INGEST_TOKEN",
+  "GITHUB_TOKEN",
+];
+
+describe("every workflow", () => {
+  const files = readdirSync(workflows).filter((f) => f.endsWith(".yml"));
+
+  it("is one of the three M0 workflows", () => {
+    expect(files.sort()).toEqual(["ci.yml", "db-migrate-production.yml", "keep-alive.yml"]);
+  });
+
+  for (const file of files) {
+    it(`${file} references repository secrets by a known name only`, () => {
+      const named = [...read(file).matchAll(/secrets\.([A-Za-z0-9_]+)/g)].map((m) => m[1]);
+      for (const name of named) expect(REPOSITORY_SECRETS, `secrets.${name}`).toContain(name);
+    });
+  }
+});
 
 describe("keep-alive.yml (D-15)", () => {
   const text = read("keep-alive.yml");
@@ -65,5 +97,29 @@ describe("ci.yml (Tier A)", () => {
 
   it("never clones the corpus into the repository tree", () => {
     expect(text).toContain('git clone -q --depth 1 git@github.com:Finerium/thehub-corpus.git "$RUNNER_TEMP/thehub-corpus"');
+  });
+
+  describe("production-smoke (11.11, AC-M0-01 to AC-M0-06)", () => {
+    const job = text.slice(text.indexOf("production-smoke:"));
+
+    it("runs on a push only, against the production URL", () => {
+      expect(job).toContain("if: github.event_name == 'push'");
+      expect(job).toContain("BASE_URL: https://thehub-3v.vercel.app");
+    });
+
+    it("waits up to ten minutes for /api/health to report the pushed commit", () => {
+      const attempts = Number(/POLL_ATTEMPTS: "(\d+)"/.exec(job)?.[1]);
+      const seconds = Number(/POLL_SECONDS: "(\d+)"/.exec(job)?.[1]);
+      expect(attempts * seconds).toBe(10 * 60);
+      expect(job).toContain('"$BASE_URL/api/health"');
+      expect(job).toContain('[ "$commit" = "$GITHUB_SHA" ]');
+    });
+
+    it("runs scripts/smoke.sh with the demo Engineer password from the repository secret and keeps the JSON", () => {
+      expect(job).toContain("DEMO_ENGINEER_PASSWORD: ${{ secrets.DEMO_ENGINEER_PASSWORD }}");
+      expect(job).toContain('run: bash scripts/smoke.sh "$BASE_URL" "$RUNNER_TEMP/m0-smoke.json"');
+      expect(job).toContain("uses: actions/upload-artifact@");
+      expect(job).toContain("path: ${{ runner.temp }}/m0-smoke.json");
+    });
   });
 });

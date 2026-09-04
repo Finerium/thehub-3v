@@ -17,9 +17,14 @@
     "db:seed:m0": "dotenv -e .env.local -- tsx scripts/db/seed-m0.ts",
     "db:check": "dotenv -e .env.local -- tsx scripts/db/check.ts",
     "smoke": "bash scripts/smoke.sh",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "db:app-role": "dotenv -e .env.local -- tsx scripts/db/app-role.ts",
+    "db:retention": "dotenv -e .env.local -- tsx scripts/db/retention.ts",
+    "models:fetch": "tsx scripts/models/fetch.ts",
+    "audit": "bash scripts/audits/run.sh"
   },
   "dependencies": {
+    "@huggingface/transformers": "4.2.0",
     "@neondatabase/serverless": "1.1.0",
     "bcryptjs": "^3.0.3",
     "drizzle-orm": "0.45.2",

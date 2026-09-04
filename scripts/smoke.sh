@@ -5,8 +5,9 @@
 #   scripts/smoke.sh BASE_URL [OUT_JSON]
 #
 # DEMO_ENGINEER_PASSWORD comes from the environment (dotenv on the build machine, the repository secret in CI) and is
-# never printed: it travels to curl on stdin, never on the command line. OUT_JSON, when given, receives
-# { checks: [{ name, pass, detail }], all_pass }. The exit status is non-zero when any check fails.
+# never printed: jq reads it from its environment and curl takes the body on stdin, so it is on no command line.
+# OUT_JSON, when given, receives { checks: [{ name, pass, detail }], all_pass }. The exit status is non-zero when
+# any check fails.
 set -u
 set +x
 
@@ -74,7 +75,7 @@ esac
 if [ -z "${DEMO_ENGINEER_PASSWORD:-}" ]; then
   record login_and_home false "DEMO_ENGINEER_PASSWORD is not set in the environment"
 else
-  code="$(jq -cn --arg u engineer_demo --arg p "$DEMO_ENGINEER_PASSWORD" '{username: $u, password: $p}' |
+  code="$(jq -cn --arg u engineer_demo '{username: $u, password: env.DEMO_ENGINEER_PASSWORD}' |
     fetch POST "$BASE_URL/api/auth/login" -H 'content-type: application/json' --data-binary @- -c "$JAR")"
   if [ "$code" = "200" ] && jq -e '.alias | type == "string"' "$TMP/body" >/dev/null 2>&1; then
     LOGGED_IN=true

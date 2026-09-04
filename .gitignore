@@ -57,3 +57,6 @@ video/frames/
 .agents/
 bundle/pages/
 bundle/opls.json
+/models/
+# conflict copies produced by a sync client during parallel writes
+* 2.*

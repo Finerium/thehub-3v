@@ -1,7 +1,7 @@
 // M0 seed (ARCHITECTURE 2 and 12): corpus version v0 from the harness packages, the eight areas, the eight P&ID
 // documents, the eight equipment rows and the four accounts of blueprint 9.7. Deterministic and idempotent: every
 // row is an upsert on its primary key and a second run changes nothing. Every value comes from a package file, the
-// corpus inventory (hashes and paths), the pinned extractor's text cache or the environment; nothing is typed here.
+// corpus inventory (hashes and paths) or the environment; nothing is typed here and no harness cache is needed.
 // Run as `pnpm db:seed:m0` (dotenv loads .env.local; this file only reads process.env and never prints a value).
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
@@ -34,7 +34,6 @@ const CORPUS_DIR = process.env.CORPUS_DIR ?? path.resolve(REPO_ROOT, "../thehub-
 const FIXTURES_PATH = path.join(HARNESS_DIR, "packages", "fixtures.json");
 const AREA_ALIASES_PATH = path.join(HARNESS_DIR, "packages", "area_aliases.json");
 const SIDECAR_DIR = path.join(HARNESS_DIR, "packages", "pid_sidecars");
-const EXTRACT_CACHE_DIR = path.join(HARNESS_DIR, ".cache"); // <sha256>-raw.txt, the pinned extractor's output
 const INVENTORY_PATH = path.join(CORPUS_DIR, "INVENTORY.sha256");
 
 // The four accounts of 9.7 (ARCHITECTURE 5; usernames per the foundation close-out decision in .crown/notes.md)
@@ -55,6 +54,7 @@ const Fixtures = z.object({
       tag: z.string(),
       name: z.string(),
       functional_location: z.string(),
+      service: z.string().min(1), // the datasheet's SERVICE line, carried by the fixture (harness master.py)
       area_datasheet: z.string(),
       criticality_datasheet: asset.Equipment.shape.criticality_datasheet,
       criticality_workbook: z.string(),
@@ -75,13 +75,16 @@ const AreaAliases = z.record(
   z.string(),
   z.object({ datasheet: z.string(), opl: z.string(), plot_plan_title: z.string(), workbook: z.string() }),
 );
-const Sidecar = z.object({ set: z.number().int(), file: z.string(), tag: z.string() });
+// The sidecar names its PNG (`file` in the committed layout, `document_id` in the fixture builder's revision) and,
+// in the committed layout, the set's tag; the file name is always cross-checked, the tag whenever it is carried.
+const Sidecar = z
+  .object({ set: z.number().int(), file: z.string().optional(), document_id: z.string().optional(), tag: z.string().optional() })
+  .transform((s) => ({ set: s.set, file: s.file ?? s.document_id, tag: s.tag }));
 
 const INVENTORY_LINE = /^([0-9a-f]{64})  (.+)$/; // shasum format: hash, two spaces, path
 const TAG_IN_SET = /Set_\d{2}_([A-Z]{2}-\d{4}[A-Z]?)/; // harness/pdftext.py TAG_IN_SET
 const SET_IN_PATH = /Set_(\d{2})_/;
 const AREA_CODE = /^(\d{4}) - /; // harness/master.py DS_AREA: "AREA <dddd> - <name>"
-const SERVICE_LINE = /^SERVICE (.+)$/m; // the datasheet title block's SERVICE line, first occurrence
 
 const sha256 = (bytes: Buffer): string => createHash("sha256").update(bytes).digest("hex");
 const readJson = (file: string): unknown => JSON.parse(readFileSync(file, "utf8")) as unknown;
@@ -98,23 +101,6 @@ function readInventory(): InventoryEntry[] {
       if (!m) throw new Error(`unreadable inventory line: ${line.slice(0, 40)}`);
       return { sha256: m[1] as string, path: m[2] as string };
     });
-}
-
-// The asset's datasheet in the inventory (folder tag plus the harness doc_class rule "Datasheet" in the file name).
-function datasheetOf(tag: string, inventory: InventoryEntry[]): InventoryEntry {
-  const hits = inventory.filter((e) => TAG_IN_SET.exec(e.path)?.[1] === tag && path.basename(e.path).includes("Datasheet"));
-  if (hits.length !== 1) throw new Error(`expected one datasheet for ${tag} in the inventory, found ${hits.length}`);
-  return hits[0] as InventoryEntry;
-}
-
-// Equipment.service (9.3) is not carried by the packages yet; read it from the pinned extractor's text of the asset's
-// datasheet (the same cache the harness computes from), failing closed when the cache or the line is missing.
-function serviceOf(tag: string, inventory: InventoryEntry[]): string {
-  const file = path.join(EXTRACT_CACHE_DIR, `${datasheetOf(tag, inventory).sha256}-raw.txt`);
-  if (!existsSync(file)) throw new Error(`extracted datasheet text for ${tag} not found under ${EXTRACT_CACHE_DIR} (run make fixtures)`);
-  const m = SERVICE_LINE.exec(readFileSync(file, "utf8"));
-  if (!m) throw new Error(`no SERVICE line in the extracted datasheet text of ${tag}`);
-  return (m[1] as string).trim();
 }
 
 function areaCodeOf(row: { tag: string; area_datasheet: string; functional_location: string }): string {
@@ -159,7 +145,7 @@ function buildRows() {
       const set = SET_IN_PATH.exec(e.path)?.[1];
       if (!tag || !set) throw new Error(`P&ID outside a set folder: ${path.basename(e.path)}`);
       const sidecar = Sidecar.parse(readJson(path.join(SIDECAR_DIR, `set_${set}.json`)));
-      if (sidecar.tag !== tag || sidecar.file !== path.basename(e.path)) {
+      if (sidecar.file !== path.basename(e.path) || (sidecar.tag !== undefined && sidecar.tag !== tag)) {
         throw new Error(`sidecar set_${set}.json does not describe ${path.basename(e.path)} (${tag})`);
       }
       return documentContract.Document.parse({
@@ -202,7 +188,7 @@ function buildRows() {
       name: row.name,
       functional_location: row.functional_location,
       area_code: code,
-      service: serviceOf(row.tag, inventory),
+      service: row.service,
       criticality_datasheet: row.criticality_datasheet,
       criticality_workbook: row.criticality_workbook,
       interlock_ref: interlockHeader.logic_no_text,
@@ -222,12 +208,22 @@ function buildRows() {
 // ---------------------------------------------------------------------------------------------------------------
 async function upsertAll(tx: Tx, rows: ReturnType<typeof buildRows>, passwords: Record<string, string>) {
   const v = rows.version;
+  // The seed owns the v0 lineage: the id carries the manifest hash, so changed package bytes mint a new v0 row. An
+  // earlier v0 (same label, other id) yields activation to it; any other active version keeps activation and this
+  // v0 lands inactive (a re-run never steals activation). Exactly one version is active (9.7, partial unique index).
+  const [active] = await tx
+    .select({ id: corpusVersion.id, label: corpusVersion.label })
+    .from(corpusVersion)
+    .where(eq(corpusVersion.isActive, true))
+    .limit(1);
+  const supersedes = active !== undefined && active.id !== v.id && active.label === v.label;
+  if (supersedes) await tx.update(corpusVersion).set({ isActive: false }).where(eq(corpusVersion.id, active.id));
   await tx
     .insert(corpusVersion)
     .values({
       id: v.id,
       label: v.label,
-      isActive: v.is_active,
+      isActive: active === undefined || active.id === v.id || supersedes,
       manifestSha256: v.manifest_sha256,
       corpusSha256: v.corpus_sha256,
       extractor: v.extractor,
@@ -325,7 +321,7 @@ async function upsertAll(tx: Tx, rows: ReturnType<typeof buildRows>, passwords: 
       set: { alias: values.alias, role: values.role, passwordHash: values.passwordHash, isDemo: values.isDemo },
     });
   }
-  return { rehashed };
+  return { rehashed, superseded: supersedes ? active.id : null };
 }
 
 async function main() {
@@ -334,10 +330,10 @@ async function main() {
   const passwords = Object.fromEntries(ACCOUNTS.map((a) => [a.env, process.env[a.env] as string]));
 
   const rows = buildRows();
-  const { rehashed } = await withTransaction((tx) => upsertAll(tx, rows, passwords));
+  const { rehashed, superseded } = await withTransaction((tx) => upsertAll(tx, rows, passwords));
   console.log(
     [
-      `corpus_version ${rows.version.id} (${rows.version.label})`,
+      `corpus_version ${rows.version.id} (${rows.version.label})${superseded ? `, supersedes ${superseded}` : ""}`,
       `area ${rows.areas.length}`,
       `document ${rows.documents.length}`,
       `equipment ${rows.equipmentRows.length}`,
