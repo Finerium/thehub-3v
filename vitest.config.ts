@@ -21,7 +21,9 @@ export default defineConfig({
   },
   test: {
     environment: "node",
-    include: ["src/**/*.test.ts", "tests/unit/**/*.test.ts"],
+    // tests/db/** are the integration cases that need a database: they run only when TEST_DATABASE_URL is set on
+    // purpose for that lane and skip themselves otherwise, so gate:quick stays hermetic.
+    include: ["src/**/*.test.ts", "tests/unit/**/*.test.ts", "tests/db/**/*.test.ts"],
     clearMocks: true,
     restoreMocks: true,
     env: {

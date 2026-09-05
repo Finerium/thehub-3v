@@ -27,8 +27,8 @@ const REPOSITORY_SECRETS = [
 describe("every workflow", () => {
   const files = readdirSync(workflows).filter((f) => f.endsWith(".yml"));
 
-  it("is one of the three M0 workflows", () => {
-    expect(files.sort()).toEqual(["ci.yml", "db-migrate-production.yml", "keep-alive.yml"]);
+  it("is one of the three M0 workflows or the nightly", () => {
+    expect(files.sort()).toEqual(["ci.yml", "db-migrate-production.yml", "keep-alive.yml", "nightly.yml"]);
   });
 
   for (const file of files) {
@@ -72,6 +72,54 @@ describe("db-migrate-production.yml (AC-ING-15)", () => {
     expect(text).toContain("run: pnpm db:migrate");
     expect(text).toContain("DATABASE_URL_UNPOOLED: ${{ secrets.DATABASE_URL_UNPOOLED }}");
     expect(text).toContain("seed");
+  });
+
+  it("names a failed connection before the migrate step, which drizzle-kit would swallow, and prints no value", () => {
+    const preflight = text.indexOf("select current_user as role");
+    expect(preflight).toBeGreaterThan(0);
+    expect(preflight).toBeLessThan(text.indexOf("run: pnpm db:migrate"));
+    expect(text).toContain('console.error("preflight failed: " + error.message)');
+    expect(text).not.toMatch(/console\.log\([^)]*(raw|href|password)\b/);
+  });
+});
+
+describe("nightly.yml (ARCHITECTURE 10; D-16, D-20; AC-LOOP-13)", () => {
+  const text = read("nightly.yml");
+
+  it("runs at 17:00 UTC and by hand, one run at a time", () => {
+    expect(text).toContain('- cron: "0 17 * * *"');
+    expect(text).toContain("workflow_dispatch:");
+    expect(text).toContain("group: nightly");
+    expect(text).toContain("cancel-in-progress: false");
+  });
+
+  it("resolves the seeded version id by the seed's own derivation: the tsx script over the manifest, else the v0 rule", () => {
+    expect(text).toContain("[ -f scripts/seeded-version-id.ts ] && [ -f bundle/manifest.json ]");
+    expect(text).toContain("pnpm exec tsx scripts/seeded-version-id.ts");
+    expect(text).toContain('id="cv-v0-$(sha256sum bundle/fixtures.json | cut -c1-12)"');
+  });
+
+  it("re-asserts it through POST /api/admin/corpus/activate as the job principal, the token never on a command line", () => {
+    expect(text).toContain("ADMIN_JOB_TOKEN: ${{ secrets.ADMIN_JOB_TOKEN }}");
+    expect(text).toContain('"$BASE_URL/api/admin/corpus/activate"');
+    expect(text).toContain('-H @"$RUNNER_TEMP/authorization.txt"');
+    expect(text).not.toMatch(/-H ["']authorization: Bearer \$/);
+    expect(text).toContain('[ "$code" = "200" ]');
+  });
+
+  it("checks that /api/health reports the re-asserted label, then runs retention as the owner", () => {
+    const activate = text.indexOf('"$BASE_URL/api/admin/corpus/activate"');
+    const health = text.indexOf('"$BASE_URL/api/health"');
+    const retention = text.indexOf("run: pnpm db:retention");
+    expect(activate).toBeGreaterThan(0);
+    expect(health).toBeGreaterThan(activate);
+    expect(retention).toBeGreaterThan(health);
+    expect(text).toContain("DATABASE_URL_UNPOOLED: ${{ secrets.DATABASE_URL_UNPOOLED }}");
+  });
+
+  it("names the two job secrets and no other", () => {
+    const named = [...text.matchAll(/secrets\.([A-Za-z0-9_]+)/g)].map((m) => m[1]);
+    expect(named.sort()).toEqual(["ADMIN_JOB_TOKEN", "DATABASE_URL_UNPOOLED"]);
   });
 });
 

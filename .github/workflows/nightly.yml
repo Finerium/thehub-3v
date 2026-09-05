@@ -1,0 +1,79 @@
+# Nightly (ARCHITECTURE sections 3.3, 8.5 and 10; D-16, D-20; AC-LOOP-13, AC-NFR-07): at 17:00 UTC (00:00 Asia/Jakarta)
+# the job principal re-asserts the seeded corpus version through POST /api/admin/corpus/activate under
+# ADMIN_JOB_TOKEN (audited as job:nightly-activation; the lineage rule marks every sandbox publication not current,
+# nothing is deleted), checks that /api/health reports it, then runs the owner's retention (`pnpm db:retention` over
+# DATABASE_URL_UNPOOLED: general audit events older than 30 days and rate-limit windows older than one hour go, the
+# two safety actions never). The version id is the seed's own derivation: scripts/seeded-version-id.ts over
+# bundle/manifest.json once the T2 seed lands them, and until then the v0 rule of scripts/db/seed-m0.ts,
+# cv-v0-<first 12 hex of sha256(bundle/fixtures.json)>, from the same tracked bytes the seed hashes. The token is
+# written to a file the runner alone reads and never appears on a command line.
+name: Nightly
+
+on:
+  schedule:
+    - cron: "0 17 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nightly
+  cancel-in-progress: false
+
+env:
+  BASE_URL: https://thehub-3v.vercel.app
+
+jobs:
+  activate-and-retain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6 # the version comes from package.json "packageManager"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Resolve the seeded version id (scripts/seeded-version-id.ts over bundle/manifest.json, else the v0 seed rule)
+        id: seeded
+        run: |
+          if [ -f scripts/seeded-version-id.ts ] && [ -f bundle/manifest.json ]; then
+            id="$(pnpm exec tsx scripts/seeded-version-id.ts | tail -n 1)"
+          else
+            id="cv-v0-$(sha256sum bundle/fixtures.json | cut -c1-12)"
+          fi
+          [ -n "$id" ]
+          echo "seeded version id $id"
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+
+      - name: Re-assert the seeded version (POST /api/admin/corpus/activate as the job principal)
+        env:
+          ADMIN_JOB_TOKEN: ${{ secrets.ADMIN_JOB_TOKEN }}
+          VERSION_ID: ${{ steps.seeded.outputs.id }}
+        run: |
+          printf 'authorization: Bearer %s\n' "$ADMIN_JOB_TOKEN" > "$RUNNER_TEMP/authorization.txt"
+          body="$(jq -cn --arg id "$VERSION_ID" '{version_id: $id}')"
+          code="$(curl -s -o "$RUNNER_TEMP/activate.json" -w '%{http_code}' --max-time 120 --retry 2 \
+            -X POST -H @"$RUNNER_TEMP/authorization.txt" -H 'content-type: application/json' --data "$body" \
+            "$BASE_URL/api/admin/corpus/activate")"
+          rm -f "$RUNNER_TEMP/authorization.txt"
+          echo "activate $code"
+          jq -c '{id, label, is_active, activated_by_alias, activated_at}' "$RUNNER_TEMP/activate.json" || cat "$RUNNER_TEMP/activate.json"
+          [ "$code" = "200" ]
+
+      - name: Health reports the re-asserted version (GET /api/health)
+        run: |
+          label="$(jq -r '.label' "$RUNNER_TEMP/activate.json")"
+          health="$(curl -s --max-time 60 --retry 2 "$BASE_URL/api/health")"
+          echo "$health"
+          [ "$(printf '%s' "$health" | jq -r '.corpus_version')" = "$label" ]
+
+      - name: Retention as the owner (pnpm db:retention over the unpooled URL; counts only are printed)
+        env:
+          DATABASE_URL_UNPOOLED: ${{ secrets.DATABASE_URL_UNPOOLED }}
+        run: pnpm db:retention

@@ -1,7 +1,10 @@
 # Production migrations (AC-ING-15, ARCHITECTURE sections 3 and 10): drizzle-kit applies the SQL under drizzle/
 # over the owner's unpooled URL before the deployment that needs them runs. The Vercel build never migrates.
 # DATABASE_URL_UNPOOLED is the repository secret the main thread sets. Seeding is a separate dispatch (seed.yml,
-# T2): this workflow only migrates, so a schema change and a data load are never one step.
+# T2): this workflow only migrates, so a schema change and a data load are never one step. drizzle-kit prints
+# nothing when the migrate task fails (its task view swallows the error and exits 1), so a preflight step first
+# parses the secret and asks the database who it is, naming any failure; it prints the role name and the URL's
+# options only, never the value. dotenv-cli tolerates the absent .env.local, so the package script runs unchanged.
 name: DB migrate (production)
 
 on:
@@ -29,6 +32,31 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
+
+      - name: Preflight (the secret parses as an owner URL and the database answers as that role; a failure is named here)
+        env:
+          DATABASE_URL_UNPOOLED: ${{ secrets.DATABASE_URL_UNPOOLED }}
+        run: |
+          node -e '
+            const { neon } = require("@neondatabase/serverless");
+            const raw = process.env.DATABASE_URL_UNPOOLED ?? "";
+            let url;
+            try {
+              url = new URL(raw);
+            } catch {
+              console.error("preflight failed: DATABASE_URL_UNPOOLED is not a URL (" + raw.length + " characters)");
+              process.exit(1);
+            }
+            const host = url.hostname.endsWith(".neon.tech") ? "neon" : "not neon";
+            const kind = url.hostname.includes("-pooler") ? "pooler" : "direct";
+            console.log("owner url: user " + url.username + ", host " + host + " (" + kind + "), options " + url.search);
+            neon(url.href)`select current_user as role`
+              .then((rows) => console.log("connected as " + rows[0].role))
+              .catch((error) => {
+                console.error("preflight failed: " + error.message);
+                process.exit(1);
+              });
+          '
 
       - name: Apply the migrations (drizzle-kit migrate over the unpooled owner URL)
         run: pnpm db:migrate
