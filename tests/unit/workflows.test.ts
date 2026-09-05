@@ -95,6 +95,16 @@ describe("ci.yml (Tier A)", () => {
     expect(text).toContain("CASE1_CORPUS:");
   });
 
+  it("enforces the coverage thresholds and runs the audits against the harness checkout (AC-EVAL-08, AC-NFR-10, AC-ANS-10)", () => {
+    const checks = text.slice(text.indexOf("\n  checks:"), text.indexOf("\n  no-corpus-text:"));
+    expect(checks).toContain("uses: astral-sh/setup-uv@");
+    expect(checks).toContain('uv sync --frozen --directory "$GITHUB_WORKSPACE/../thehub-harness"');
+    expect(checks).toContain("run: pnpm exec vitest run --coverage");
+    expect(checks).toContain("run: pnpm run audit"); // `pnpm audit` is pnpm's own vulnerability command, not the script
+    expect(checks).toContain("HARNESS_DIR: ${{ github.workspace }}/../thehub-harness");
+    expect(checks.indexOf("uv sync --frozen")).toBeLessThan(checks.indexOf("run: pnpm gate:quick"));
+  });
+
   it("never clones the corpus into the repository tree", () => {
     expect(text).toContain('git clone -q --depth 1 git@github.com:Finerium/thehub-corpus.git "$RUNNER_TEMP/thehub-corpus"');
   });

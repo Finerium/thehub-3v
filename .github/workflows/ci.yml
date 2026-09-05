@@ -1,6 +1,7 @@
 # Tier A (blueprint 8.3, ARCHITECTURE section 10; AC-FND-06, AC-FND-07): every pull request and every push to main.
 # Deterministic checks only: no model call, no database. Two jobs run in parallel: `checks` (contracts, lint,
-# typecheck, unit tests, gitleaks, banned strings) and `no-corpus-text` (the harness's A7 scan of this repository
+# typecheck, unit tests, the coverage thresholds of AC-EVAL-08, the audits of scripts/audits/ against the harness
+# reference, gitleaks, banned strings) and `no-corpus-text` (the harness's A7 scan of this repository
 # against the organiser's corpus, read through the read-only deploy key). A push to main adds `production-smoke`
 # (AC-M0-01 to AC-M0-06): once the Vercel deployment of that commit answers on /api/health, scripts/smoke.sh runs
 # against the production URL and its JSON is kept as a run artifact. Tier B (nightly, live model) is tier-b.yml.
@@ -51,8 +52,23 @@ jobs:
         env:
           CONTRACTS_DIR: ../thehub-harness/contracts
 
+      - uses: astral-sh/setup-uv@v10.0.1
+        with:
+          python-version: "3.12"
+
+      - name: Harness environment (uv sync --frozen; the reference lane of the rule-pack equality gate, ADR-002)
+        run: uv sync --frozen --directory "$GITHUB_WORKSPACE/../thehub-harness"
+
       - name: gate:quick (lint, typecheck, unit tests)
         run: pnpm gate:quick
+
+      - name: Coverage thresholds (AC-EVAL-08, 100 percent of lines on src/gates/** and src/rulepack/**)
+        run: pnpm exec vitest run --coverage
+
+      - name: Audits (provider egress, AC-NFR-10; rule-pack equality with the harness reference, AC-ANS-10)
+        run: pnpm run audit
+        env:
+          HARNESS_DIR: ${{ github.workspace }}/../thehub-harness
 
       - name: gitleaks
         uses: gitleaks/gitleaks-action@v3

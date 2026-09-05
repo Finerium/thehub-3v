@@ -2,8 +2,9 @@
 // `next/headers` resolve to the fakes under tests/helpers for every test file, so no unit test can reach a database
 // or need a request scope, and the cookie signing key is minted per run. Coverage thresholds: 100 percent lines on
 // src/gates/** and src/rulepack/** (AC-EVAL-08); a glob that matches no file yet reports 100 percent, so the
-// scaffold holds before those tracks land. Enforced with `vitest run --coverage` once @vitest/coverage-v8 is
-// installed.
+// scaffold holds before those tracks land. Enforced by `vitest run --coverage` (the Tier A step in ci.yml) through
+// @vitest/coverage-v8 at the vitest version; the test files themselves are excluded from the measure and the report
+// is text only, so no file is written.
 import { randomBytes } from "node:crypto";
 import path from "node:path";
 import { defineConfig } from "vitest/config";
@@ -30,6 +31,8 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       include: ["src/gates/**", "src/rulepack/**"],
+      exclude: ["**/*.test.ts"],
+      reporter: ["text"],
       thresholds: {
         "src/gates/**": { lines: 100 },
         "src/rulepack/**": { lines: 100 },
