@@ -4,6 +4,7 @@
 // mapping of typed errors to responses, so no handler repeats that and no 5xx ever carries a stack trace.
 import { NextResponse, type NextRequest } from "next/server";
 import { writeAudit } from "@/lib/audit";
+import { HttpError } from "@/lib/errors";
 import { logError, logRequest } from "@/lib/log";
 import { REQUEST_ID_HEADER, getRequestId, getRequestPath, requestIdOf } from "@/lib/request-id";
 import { can, type Permission } from "./matrix";
@@ -85,7 +86,7 @@ export function withRoute<Ctx, P extends Permission | null>(
       status = response.status;
       return response;
     } catch (error) {
-      if (error instanceof AuthError) {
+      if (error instanceof AuthError || error instanceof HttpError) {
         status = error.status;
         return error.toResponse(requestId);
       }

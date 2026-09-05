@@ -60,3 +60,4 @@ bundle/opls.json
 /models/
 # conflict copies produced by a sync client during parallel writes
 * 2.*
+graphify-out/
