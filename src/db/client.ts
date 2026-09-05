@@ -10,8 +10,11 @@ import { drizzle as drizzleWs, type NeonTransaction } from "drizzle-orm/neon-ser
 import * as schema from "./schema";
 
 function connectionString(): string {
-  const url = process.env.DATABASE_URL;
-  if (!url) throw new Error("DATABASE_URL is not set (blueprint 9.15: the pooled Neon URL)");
+  // D-20: the application connects as the dedicated role thehub_app through DATABASE_URL_APP (the pooled URL with
+  // that role's credentials, assembled by tools/app-role-url.sh); DATABASE_URL (the integration's owner URL) is the
+  // fallback so a checkout without the role still runs. Migrations, the seed and retention use the owner URL.
+  const url = process.env.DATABASE_URL_APP ?? process.env.DATABASE_URL;
+  if (!url) throw new Error("DATABASE_URL_APP or DATABASE_URL is not set (blueprint 9.15: the pooled Neon URL)");
   return url;
 }
 
