@@ -36,6 +36,21 @@ Every call sets `response_format` to JSON object and validates the parsed object
 
 ## Records
 
+- Role table as implemented in `src/gateway/config.ts` on 2026-09-05. Every row is parsed against the 9.13 `GatewayRole` contract at module load; `gateway_config_sha256` is the SHA-256 of the canonical JSON of this table and changes with any cell or any prompt edit, so its value is read from a `gateway_call` row rather than copied here. AG-4 has two tasks under the one 9.13 role name (verify, redline; ARCHITECTURE 13 decision 8): both write `gateway_call.role = "AG-4"` and share that role's budget.
+
+| task | 9.13 role | model_id | effort | response_format | temperature | max_tokens | timeout_ms | prompt file (prompt_version = SHA-256 of the file) | tokens_per_day | spend_cap_idr_per_day |
+|---|---|---|---|---|---|---|---|---|---|---|
+| AG-1 Extractor (build time) | AG-1 | `glm-5.3-flash` | high | json_object | 0 | 8192 | 120000 | `prompts/AG-1/v1.md` | 20,000,000 | 150,000 |
+| AG-2 Composer | AG-2 | `glm-5.3-flash` | low | json_object | 0 | 2048 | 20000 | `prompts/AG-2/v1.md` | 3,000,000 | 20,000 |
+| AG-3 Drafter | AG-3 | `glm-5.3-flash` | high | json_object | 0 | 8192 | 120000 | `prompts/AG-3/v1.md` | 3,000,000 | 20,000 |
+| AG-4 Verifier | AG-4 | `glm-5.3-flash` | low | json_object | 0 | 2048 | 20000 | `prompts/AG-4/verify/v1.md` | 3,000,000 (shared) | 20,000 (shared) |
+| AG-4 Redliner | AG-4 | `glm-5.3-flash` | low | json_object | 0 | 2048 | 60000 | `prompts/AG-4/redline/v1.md` | shared with the verifier | shared with the verifier |
+| embedding | embedding | `Xenova/multilingual-e5-small` (local_onnx, ADR-009) | n/a | n/a | null | 512 (the input limit) | 5000 | none | 0 (local, unmetered) | 0 |
+
+- Request shape, every chat task: `POST {base_url}/chat/completions` with `thinking: { type: "enabled" }`, `reasoning_effort` equal to the row's effort, `response_format: { type: "json_object" }`, `temperature: 0`, the row's `max_tokens`, `stream: false`; the prompt file is the system message and the envelope is the user message as canonical JSON (keys sorted, no whitespace), nothing concatenated into an instruction (AC-ANS-18). `AbortSignal.timeout(timeout_ms)` on every call; retries with backoff 500 ms then 2000 ms on timeout, 5xx and 429, at most two, each attempt its own `gateway_call` row with outcome `timeout` or `provider_error` and one `ok` row per logical call; a reply that is not JSON or fails the role's output schema is `parse_failed` with no retry (the caller's rule applies). The envelope is parsed against the role's input contract before any call, so a verifier envelope carrying a question is a thrown error, never a request.
+- Price constants (`src/gateway/config.ts`), read from https://docs.z.ai/guides/overview/pricing on 2026-09-05 for `glm-5.3-flash`: list price USD 0.15 per 1M input tokens, USD 0.03 per 1M cached input tokens, USD 0.50 per 1M output tokens; a promotion at USD 0.075, 0.015 and 0.25 runs until 24:00 on 2026-09-09 (UTC+8) and is not relied on. The page does not state how reasoning tokens are billed; the gateway records the provider's `prompt_tokens` and `completion_tokens` as input and output. The spend estimate charges every input token at the uncached list price, so it over-estimates and never under-estimates.
+- Currency constant for the IDR spend cap: USD 1 = IDR 17,656.567526, the open.er-api.com reference rate (exchangerate-api.com) of 2026-09-04T00:02:31Z; a configuration constant, refreshed by editing `config.ts`.
+- The token and spend caps above are configuration policy, not measurements; the Admin surface displays them as read from the configuration (ARCHITECTURE 9.3). The daily check sums today's UTC `gateway_call.input_tokens + output_tokens` per role and prices them with the constants; at or above either cap the gateway returns `budget_exhausted` without a provider call.
 - Confirmation run AC-EVAL-05: pending. The result, the model id and the prompt versions are written here when the run lands.
 - Terms reading for Z.ai (training use, retention, processing region, access and payment from Indonesia): human-gated, to be recorded and dated by Ghaisan.
 
