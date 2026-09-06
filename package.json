@@ -26,7 +26,11 @@
     "db:seed": "dotenv -e .env.local -- tsx scripts/db/seed.ts",
     "bundle:pull": "tsx scripts/bundle/pull.ts",
     "seeded:version-id": "tsx scripts/seeded-version-id.ts",
-    "vercel-build": "pnpm db:migrate:ci && pnpm models:fetch && next build"
+    "vercel-build": "pnpm db:migrate:ci && pnpm models:fetch && next build",
+    "golden:a": "dotenv -e .env.local -- tsx scripts/golden/run.ts --tier A",
+    "golden:b": "dotenv -e .env.local -- tsx scripts/golden/run.ts --tier B",
+    "golden:b:replay": "RECORD_MODE=replay RECORD_DIR=recordings dotenv -e .env.local -- tsx scripts/golden/run.ts --tier B",
+    "test:db": "vitest run --project db"
   },
   "dependencies": {
     "@huggingface/transformers": "4.2.0",
