@@ -357,25 +357,22 @@ body:has(dialog.drawer[open]) {
   font-size: 12.5px;
 }
 .verdicts-gates {
-  display: inline-grid;
-  grid-auto-flow: column;
-  border-radius: var(--radius-chip);
-  overflow: hidden;
-  box-shadow: 0 0 0 1px var(--film-edge);
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 1px;
 }
 .vcell {
   display: flex;
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
+  border-radius: 3px;
   background: var(--scrim);
-  border-right: 1px solid var(--film-edge);
+  box-shadow: 0 0 0 1px var(--film-edge);
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--ink-700);
-}
-.vcell:last-child {
-  border-right: 0;
 }
 .vcell b {
   font-weight: 500;
@@ -650,6 +647,7 @@ body:has(dialog.drawer[open]) {
   overflow: hidden;
 }
 .bands-bar {
+  display: block;
   height: 100%;
   width: 100%;
   transform-origin: left;
@@ -846,7 +844,7 @@ body:has(dialog.drawer[open]) {
 }
 .hop {
   display: grid;
-  grid-template-columns: 148px minmax(0, 1fr);
+  grid-template-columns: 172px minmax(0, 1fr);
   gap: 6px 18px;
   padding: 12px 0 14px;
   position: relative;
@@ -1092,6 +1090,7 @@ body:has(dialog.drawer[open]) {
 .ptest {
   padding: 16px 18px;
   display: grid;
+  align-content: start;
   gap: 12px;
 }
 .ptest-latest {
@@ -1653,4 +1652,54 @@ body:has(dialog.drawer[open]) {
   .gate-row::after {
     display: none;
   }
+}
+
+/* Additions for the last components of the inventory ------------------------------------------------------- */
+
+/* Ladder: the list reset, the trip row's vote cell, the omitted relief statement. */
+.ladder {
+  list-style: none;
+  padding: 0;
+}
+.ladder-wrap {
+  display: grid;
+  gap: 0;
+}
+.rung-vote {
+  font-size: 12.5px;
+  color: var(--ink-700);
+}
+.ladder-omitted {
+  margin: 0 0 8px;
+  font-size: 12.5px;
+  font-style: italic;
+  color: var(--ink-700);
+}
+
+/* Proof test card: the fixed interval statement, in the caveat token. */
+.ptest-interval {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--state-caveat);
+}
+
+/* Page viewer: the anchor form under the stage, and a bound neumorphic link. */
+.pager-foot {
+  font-size: 12px;
+  color: var(--ink-500);
+}
+.pager-foot code {
+  color: var(--ink-700);
+}
+a.neu[aria-disabled="true"] {
+  color: var(--ink-500);
+  background: var(--paper-deep);
+  box-shadow: inset 0 0 0 1px var(--film-edge);
+  pointer-events: none;
+}
+
+/* Trace: an id with its copy control. */
+.trace .id {
+  overflow-wrap: anywhere;
 }

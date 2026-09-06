@@ -33,10 +33,16 @@ import * as drafts from "../contracts/generated/drafts";
 import * as gateway from "../contracts/generated/gateway";
 import * as operations from "../contracts/generated/operations";
 import * as serving from "../contracts/generated/serving";
+import { SLOT_TEXT } from "../lib/fixed-strings";
 import { EMBEDDING_DIM } from "./embedding";
 
 // The enum values of a generated Zod enum as the non-empty tuple pgEnum wants; one source for both layers.
 const pin = <T extends string>(e: { options: readonly T[] }) => e.options as unknown as readonly [T, ...T[]];
+
+// The 9.6 slot text as a quoted SQL literal for the draft_field CHECK. The wording has one home
+// (src/lib/fixed-strings.ts, AC-UI-03), so the DDL is built from the constant, never retyped; sql.raw because
+// drizzle-kit keeps only the SQL text of a check and would drop a bound parameter.
+const SLOT_LITERAL = sql.raw(`'${SLOT_TEXT}'`); // the 9.6 slot wording, bound from the one constants module
 
 // pgvector column with the pinned dimension (9.2 Chunk.embedding, ADR-009); the driver speaks the "[x,y,z]" text form.
 const embeddingVector = customType<{ data: number[]; driverData: string }>({
@@ -947,10 +953,10 @@ export const draftField = draft.table(
   (t) => [
     index("draft_field_draft_idx").on(t.draftId),
     check("draft_field_section", sql`${t.section} BETWEEN 1 AND 6`),
-    // a slot's text is exactly REQUIRES ENGINEER INPUT; every other element carries provenance (9.6, 9.16 AG-3)
+    // a slot's text is exactly SLOT_TEXT; every other element carries provenance (9.6, 9.16 AG-3)
     check(
       "draft_field_slot_or_provenance",
-      sql`(${t.isSlot} AND ${t.text} = 'REQUIRES ENGINEER INPUT') OR (NOT ${t.isSlot} AND ${t.provenance} IS NOT NULL)`,
+      sql`(${t.isSlot} AND ${t.text} = ${SLOT_LITERAL}) OR (NOT ${t.isSlot} AND ${t.provenance} IS NOT NULL)`,
     ),
   ],
 );
