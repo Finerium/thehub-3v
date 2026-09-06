@@ -1,0 +1,35 @@
+{
+  "entailed": [
+    {
+      "sentence_id": "s1",
+      "verdict": "entailed",
+      "span_id": "sp-ds-1",
+      "reason": "The span states the sentence."
+    },
+    {
+      "sentence_id": "s2",
+      "verdict": "entailed",
+      "span_id": "sp-ds-2",
+      "reason": "The span states the sentence."
+    },
+    {
+      "sentence_id": "s3",
+      "verdict": "entailed",
+      "span_id": "sp-ce-1",
+      "reason": "The span states the sentence."
+    },
+    {
+      "sentence_id": "s4",
+      "verdict": "entailed",
+      "span_id": "sp-ct-0",
+      "reason": "The span states the sentence."
+    },
+    {
+      "sentence_id": "s5",
+      "verdict": "entailed",
+      "span_id": "sp-wo-1",
+      "reason": "The span states the sentence."
+    }
+  ],
+  "parse_failed": []
+}

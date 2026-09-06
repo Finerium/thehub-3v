@@ -1,0 +1,37 @@
+[
+  {
+    "id": "s1",
+    "text": "VSHH-1201 trips GA-1201A at 7.1 mm/s.",
+    "span_ids": [
+      "sp-ds-1"
+    ]
+  },
+  {
+    "id": "s2",
+    "text": "The set pressure of PSV-1201 is 9.2 barg.",
+    "span_ids": [
+      "sp-ds-2"
+    ]
+  },
+  {
+    "id": "s3",
+    "text": "SEQ-1201 has 3 lines of start permissives that must be TRUE before reset.",
+    "span_ids": [
+      "sp-ce-1"
+    ]
+  },
+  {
+    "id": "s4",
+    "text": "The CT-7801 fan motor is rated 45 kW at 1480 rpm.",
+    "span_ids": [
+      "sp-ct-0"
+    ]
+  },
+  {
+    "id": "s5",
+    "text": "The seal on GA-1201A was replaced after 3 hours of downtime.",
+    "span_ids": [
+      "sp-wo-1"
+    ]
+  }
+]

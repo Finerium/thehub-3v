@@ -1,0 +1,65 @@
+[
+  {
+    "label": "VSHH-1201 trip setpoint",
+    "value_text": "7.1",
+    "value_num": 7.1,
+    "unit": "mm/s",
+    "comparator": ">",
+    "source": {
+      "doc_no": "SYN-DS-GA-1201A",
+      "document_id": "doc-syn-ds-ga-1201a",
+      "revision": "3",
+      "approval_status": "issued_for_operation",
+      "approval_status_text": "ISSUED FOR OPERATION",
+      "page": 2,
+      "span_id": "sp-ds-1",
+      "quote_hash": "1e5668469751a9f79bf61d888c3a45e97d5f5690d6b6089bbffad8eab1deca2a",
+      "integrity_findings": [],
+      "superseded": false
+    },
+    "qualifier": null,
+    "source_class": "ce_row"
+  },
+  {
+    "label": "PSV-1201 set pressure",
+    "value_text": "9.2",
+    "value_num": 9.2,
+    "unit": "barg",
+    "comparator": null,
+    "source": {
+      "doc_no": "SYN-DS-GA-1201A",
+      "document_id": "doc-syn-ds-ga-1201a",
+      "revision": "3",
+      "approval_status": "issued_for_operation",
+      "approval_status_text": "ISSUED FOR OPERATION",
+      "page": 3,
+      "span_id": "sp-ds-2",
+      "quote_hash": "0a6802249ecd34e64d3389f0c5dbbd57977f9b45ca2d6584345923fc76cff54d",
+      "integrity_findings": [],
+      "superseded": false
+    },
+    "qualifier": "Training values",
+    "source_class": "datasheet_param"
+  },
+  {
+    "label": "SEQ-1201 start permissive lines",
+    "value_text": "3",
+    "value_num": 3,
+    "unit": null,
+    "comparator": null,
+    "source": {
+      "doc_no": "SYN-IL-GA-1201A",
+      "document_id": "doc-syn-il-ga-1201a",
+      "revision": "2",
+      "approval_status": "issued_for_operation",
+      "approval_status_text": "ISSUED FOR OPERATION",
+      "page": 1,
+      "span_id": "sp-ce-1",
+      "quote_hash": "a1831e5342e330c0717964e1f2104596b84fe3c2941260a46d1a79598053935b",
+      "integrity_findings": [],
+      "superseded": false
+    },
+    "qualifier": null,
+    "source_class": "ce_row"
+  }
+]
