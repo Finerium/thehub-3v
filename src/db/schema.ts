@@ -42,7 +42,7 @@ const pin = <T extends string>(e: { options: readonly T[] }) => e.options as unk
 // The 9.6 slot text as a quoted SQL literal for the draft_field CHECK. The wording has one home
 // (src/lib/fixed-strings.ts, AC-UI-03), so the DDL is built from the constant, never retyped; sql.raw because
 // drizzle-kit keeps only the SQL text of a check and would drop a bound parameter.
-const SLOT_LITERAL = sql.raw(`'${SLOT_TEXT}'`); // the 9.6 slot wording, bound from the one constants module
+const SLOT_LITERAL = sql.raw(`'${SLOT_TEXT.replace(/'/g, "''")}'`);
 
 // pgvector column with the pinned dimension (9.2 Chunk.embedding, ADR-009); the driver speaks the "[x,y,z]" text form.
 const embeddingVector = customType<{ data: number[]; driverData: string }>({
