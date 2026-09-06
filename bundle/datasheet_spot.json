@@ -1,0 +1,242 @@
+[
+ {
+  "equipment_tag": "CT-7801",
+  "field": "gearbox_oil_grade",
+  "group": "datasheet_spot",
+  "id": "DSS-CT-7801-gearbox_oil_grade",
+  "span_id": "rev-e84e4224c046/p1/922-952",
+  "unit": "ISO VG",
+  "value_num": 220,
+  "value_text": "ISO VG 220"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "gearbox_oil_volume",
+  "group": "datasheet_spot",
+  "id": "DSS-CT-7801-gearbox_oil_volume",
+  "span_id": "rev-e84e4224c046/p1/922-952",
+  "unit": "L",
+  "value_num": 4.5,
+  "value_text": "4.5 L"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "motor_output",
+  "group": "datasheet_spot",
+  "id": "DSS-CT-7801-motor_output",
+  "span_id": "rev-e84e4224c046/p1/982-994",
+  "unit": "kW",
+  "value_num": 55,
+  "value_text": "55 kW"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "design_pressure",
+  "group": "datasheet_spot",
+  "id": "DSS-DC-3401A-design_pressure",
+  "span_id": "rev-a7aa4c227eea/p1/685-712",
+  "unit": "barg",
+  "value_num": 6,
+  "value_text": "6 barg / FV"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "design_temperature",
+  "group": "datasheet_spot",
+  "id": "DSS-DC-3401A-design_temperature",
+  "span_id": "rev-a7aa4c227eea/p1/806-827",
+  "unit": "degC",
+  "value_num": 250,
+  "value_text": "250 degC"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "psv_set_pressure",
+  "group": "datasheet_spot",
+  "id": "DSS-DC-3401A-psv_set_pressure",
+  "span_id": "rev-a7aa4c227eea/p1/892-915",
+  "unit": "barg",
+  "value_num": 6,
+  "value_text": "6 barg"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "duty",
+  "group": "datasheet_spot",
+  "id": "DSS-EA-5601-duty",
+  "span_id": "rev-8d6b454ad2b4/p1/516-528",
+  "unit": "MW",
+  "value_num": 1.85,
+  "value_text": "1.85 MW"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "tube_design_pressure",
+  "group": "datasheet_spot",
+  "id": "DSS-EA-5601-tube_design_pressure",
+  "span_id": "rev-8d6b454ad2b4/p1/729-763",
+  "unit": "barg",
+  "value_num": 16,
+  "value_text": "16 barg"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "tube_design_temperature",
+  "group": "datasheet_spot",
+  "id": "DSS-EA-5601-tube_design_temperature",
+  "span_id": "rev-8d6b454ad2b4/p1/729-763",
+  "unit": "degC",
+  "value_num": 200,
+  "value_text": "200 degC"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "design_pressure",
+  "group": "datasheet_spot",
+  "id": "DSS-FA-8901-design_pressure",
+  "span_id": "rev-5682ee067bd1/p1/731-759",
+  "unit": "barg",
+  "value_num": 10,
+  "value_text": "10 barg / FV"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "design_temperature",
+  "group": "datasheet_spot",
+  "id": "DSS-FA-8901-design_temperature",
+  "span_id": "rev-5682ee067bd1/p1/821-842",
+  "unit": "degC",
+  "value_num": 120,
+  "value_text": "120 degC"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "psv_set_pressure",
+  "group": "datasheet_spot",
+  "id": "DSS-FA-8901-psv_set_pressure",
+  "span_id": "rev-5682ee067bd1/p1/843-867",
+  "unit": "barg",
+  "value_num": 10,
+  "value_text": "10 barg"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "differential_pressure",
+  "group": "datasheet_spot",
+  "id": "DSS-GA-1201A-differential_pressure",
+  "span_id": "rev-8f1851948743/p1/783-805",
+  "unit": "bar",
+  "value_num": 8.6,
+  "value_text": "8.6 bar"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "pumping_temperature",
+  "group": "datasheet_spot",
+  "id": "DSS-GA-1201A-pumping_temperature",
+  "span_id": "rev-8f1851948743/p1/849-870",
+  "unit": "degC",
+  "value_num": 40,
+  "value_text": "40 degC"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "rated_flow",
+  "group": "datasheet_spot",
+  "id": "DSS-GA-1201A-rated_flow",
+  "span_id": "rev-8f1851948743/p1/616-634",
+  "unit": "m3/h",
+  "value_num": 45,
+  "value_text": "45 m3/h"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "discharge_pressure",
+  "group": "datasheet_spot",
+  "id": "DSS-KC-4501-discharge_pressure",
+  "span_id": "rev-5ad9ec251d90/p1/686-714",
+  "unit": "barg",
+  "value_num": 12.5,
+  "value_text": "12.5 barg"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "discharge_temperature",
+  "group": "datasheet_spot",
+  "id": "DSS-KC-4501-discharge_temperature",
+  "span_id": "rev-5ad9ec251d90/p1/801-831",
+  "unit": "degC",
+  "value_num": 115,
+  "value_text": "115 degC (max)"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "suction_capacity",
+  "group": "datasheet_spot",
+  "id": "DSS-KC-4501-suction_capacity",
+  "span_id": "rev-5ad9ec251d90/p1/573-602",
+  "unit": "Nm3/h",
+  "value_num": 1250,
+  "value_text": "1250 Nm3/h"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "body_rating",
+  "group": "datasheet_spot",
+  "id": "DSS-LV-6701-body_rating",
+  "span_id": "rev-de4f69577847/p1/606-627",
+  "unit": "ASME class",
+  "value_num": 300,
+  "value_text": "ASME 300#"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "body_size",
+  "group": "datasheet_spot",
+  "id": "DSS-LV-6701-body_size",
+  "span_id": "rev-de4f69577847/p1/549-572",
+  "unit": "inch",
+  "value_num": 3,
+  "value_text": "3 inch (DN80)"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "rated_cv",
+  "group": "datasheet_spot",
+  "id": "DSS-LV-6701-rated_cv",
+  "span_id": "rev-de4f69577847/p1/827-839",
+  "unit": "Cv",
+  "value_num": 110,
+  "value_text": "110"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "lp_steam_pressure",
+  "group": "datasheet_spot",
+  "id": "DSS-YD-2301-lp_steam_pressure",
+  "span_id": "rev-d2383d821942/p1/682-714",
+  "unit": "barg",
+  "value_num": 4.5,
+  "value_text": "4.5 barg"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "motor_output",
+  "group": "datasheet_spot",
+  "id": "DSS-YD-2301-motor_output",
+  "span_id": "rev-d2383d821942/p1/859-871",
+  "unit": "kW",
+  "value_num": 22,
+  "value_text": "22 kW"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "motor_speed",
+  "group": "datasheet_spot",
+  "id": "DSS-YD-2301-motor_speed",
+  "span_id": "rev-d2383d821942/p1/940-954",
+  "unit": "rpm",
+  "value_num": 1450,
+  "value_text": "1450 rpm"
+ }
+]

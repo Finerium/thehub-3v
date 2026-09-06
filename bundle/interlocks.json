@@ -1,0 +1,3182 @@
+{
+ "equipment": [
+  {
+   "area_code": "7800",
+   "ce_doc_no": "TJC-LLD-IL-CT-7801",
+   "criticality_datasheet": "NON CRITICAL",
+   "criticality_workbook": "NON CRITICAL",
+   "datasheet_doc_no": "TJC-LLD-DS-CT-7801",
+   "functional_location": "TJC-LLD-7800-01",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "interlock_ref": "SEQ-7801",
+   "name": "COOLING TOWER CELL FAN",
+   "pid_document_id": "doc-eebaf2dfb732",
+   "plot_plan_doc_no": "TJC-LLD-PP-CT-7801",
+   "service": "Induced draft cooling of circulating water for LLDPE unit",
+   "tag": "CT-7801"
+  },
+  {
+   "area_code": "3400",
+   "ce_doc_no": "TJC-LLD-IL-DC-3401A",
+   "criticality_datasheet": "HIGH CRITICAL",
+   "criticality_workbook": "HIGH CRITICAL",
+   "datasheet_doc_no": "TJC-LLD-DS-DC-3401A",
+   "functional_location": "TJC-LLD-3400-01",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "interlock_ref": "SEQ-3401",
+   "name": "CATALYST REDUCTION REACTOR",
+   "pid_document_id": "doc-a3a6b1f0f149",
+   "plot_plan_doc_no": "TJC-LLD-PP-DC-3401A",
+   "service": "Reduction of PdO catalyst to Pd using H2 (PdO + H2 -> Pd)",
+   "tag": "DC-3401A"
+  },
+  {
+   "area_code": "5600",
+   "ce_doc_no": "TJC-LLD-IL-EA-5601",
+   "criticality_datasheet": "LOW CRITICAL",
+   "criticality_workbook": "LOW CRITICAL",
+   "datasheet_doc_no": "TJC-LLD-DS-EA-5601",
+   "functional_location": "TJC-LLD-5600-01",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "interlock_ref": "N/A (control loop only)",
+   "name": "SOLVENT HEATER",
+   "pid_document_id": "doc-3686d03098e6",
+   "plot_plan_doc_no": "TJC-LLD-PP-EA-5601",
+   "service": "Heat recovered hexane solvent using MP steam before recycle",
+   "tag": "EA-5601"
+  },
+  {
+   "area_code": "8900",
+   "ce_doc_no": "TJC-LLD-IL-FA-8901",
+   "criticality_datasheet": "HIGH CRITICAL",
+   "criticality_workbook": "HIGH CRITICAL",
+   "datasheet_doc_no": "TJC-LLD-DS-FA-8901",
+   "functional_location": "TJC-LLD-8900-01",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "interlock_ref": "SEQ-8901",
+   "name": "REFLUX ACCUMULATOR DRUM",
+   "pid_document_id": "doc-b470d97ed566",
+   "plot_plan_doc_no": "TJC-LLD-PP-FA-8901",
+   "service": "Collect DA-8910 column overhead condensate; supply reflux & product",
+   "tag": "FA-8901"
+  },
+  {
+   "area_code": "1200",
+   "ce_doc_no": "TJC-LLD-IL-GA-1201A",
+   "criticality_datasheet": "HIGH CRITICAL",
+   "criticality_workbook": "HIGH CRITICAL",
+   "datasheet_doc_no": "TJC-LLD-DS-GA-1201A",
+   "functional_location": "TJC-LLD-1200-01",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "interlock_ref": "SEQ-1201",
+   "name": "HEXANE FEED PUMP",
+   "pid_document_id": "doc-c825f0afd6a1",
+   "plot_plan_doc_no": "TJC-LLD-PP-GA-1201A",
+   "service": "Hexane feed transfer to 1st Polymerization Reactor DC-4501",
+   "tag": "GA-1201A"
+  },
+  {
+   "area_code": "4500",
+   "ce_doc_no": "TJC-LLD-IL-KC-4501",
+   "criticality_datasheet": "HIGH CRITICAL",
+   "criticality_workbook": "HIGH CRITICAL",
+   "datasheet_doc_no": "TJC-LLD-DS-KC-4501",
+   "functional_location": "TJC-LLD-4500-01",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "interlock_ref": "SEQ-4501",
+   "name": "RECYCLE GAS COMPRESSOR",
+   "pid_document_id": "doc-698f6cc812f8",
+   "plot_plan_doc_no": "TJC-LLD-PP-KC-4501",
+   "service": "Compress recycle ethylene/hexane vapour back to reactor loop",
+   "tag": "KC-4501"
+  },
+  {
+   "area_code": "6700",
+   "ce_doc_no": "TJC-LLD-IL-LV-6701",
+   "criticality_datasheet": "LOW CRITICAL",
+   "criticality_workbook": "LOW CRITICAL",
+   "datasheet_doc_no": "TJC-LLD-DS-LV-6701",
+   "functional_location": "TJC-LLD-6700-01",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "interlock_ref": "SEQ-6701",
+   "name": "SEPARATOR LEVEL CONTROL VALVE",
+   "pid_document_id": "doc-7cf17027cf00",
+   "plot_plan_doc_no": "TJC-LLD-PP-LV-6701",
+   "service": "Level control of LP Separator FA-6710 bottoms to downstream",
+   "tag": "LV-6701"
+  },
+  {
+   "area_code": "2300",
+   "ce_doc_no": "TJC-LLD-IL-YD-2301",
+   "criticality_datasheet": "HIGH CRITICAL",
+   "criticality_workbook": "HIGH CRITICAL",
+   "datasheet_doc_no": "TJC-LLD-DS-YD-2301",
+   "functional_location": "TJC-LLD-2300-01",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "interlock_ref": "SEQ-5500",
+   "name": "POLYMER FLUID BED DRYER",
+   "pid_document_id": "doc-18ff60f606ab",
+   "plot_plan_doc_no": "TJC-LLD-PP-YD-2301",
+   "service": "Drying of LLDPE polymer powder from centrifuge to < 300 ppm moisture",
+   "tag": "YD-2301"
+  }
+ ],
+ "instrument_tags": [
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "initiator",
+   "sources": [
+    "doc-2ac61d30549d",
+    "doc-3e2e8d0b4977",
+    "doc-42f18445dba0",
+    "doc-468ad6e6a04c",
+    "doc-80f0edee5c1e",
+    "doc-a2b637ea5f1e",
+    "doc-a3a6b1f0f149",
+    "doc-ef0271093a5c"
+   ],
+   "tag": "AI-3401"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "initiator",
+   "sources": [
+    "doc-16d4f296c47e",
+    "doc-18ff60f606ab",
+    "doc-a890a1e23396"
+   ],
+   "tag": "ASHH-2307"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "permissive",
+   "sources": [
+    "doc-16d4f296c47e",
+    "doc-a890a1e23396"
+   ],
+   "tag": "AT-2307"
+  },
+  {
+   "equipment_tag": "CT-7801",
+   "role": "final_element",
+   "sources": [
+    "doc-5956488b1878",
+    "doc-eebaf2dfb732"
+   ],
+   "tag": "CT-7802"
+  },
+  {
+   "equipment_tag": "FA-8901",
+   "role": "unknown",
+   "sources": [
+    "doc-5682ee067bd1",
+    "doc-b470d97ed566"
+   ],
+   "tag": "DA-8910"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "unknown",
+   "sources": [
+    "doc-8f1851948743",
+    "doc-c825f0afd6a1"
+   ],
+   "tag": "DC-4501"
+  },
+  {
+   "equipment_tag": "LV-6701",
+   "role": "permissive",
+   "sources": [
+    "doc-18d193968911",
+    "doc-26a3e1ae0c85",
+    "doc-3c9cc0563f32",
+    "doc-6eeef5996e2d",
+    "doc-7cf17027cf00",
+    "doc-8ae170ad4c3f",
+    "doc-939ace9389a8",
+    "doc-de4f69577847",
+    "doc-ebe41137cede"
+   ],
+   "tag": "DVC6200"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "final_element",
+   "sources": [
+    "doc-2ac61d30549d",
+    "doc-3e2e8d0b4977",
+    "doc-468ad6e6a04c",
+    "doc-a2b637ea5f1e",
+    "doc-a3a6b1f0f149",
+    "doc-a7aa4c227eea"
+   ],
+   "tag": "EA-3401"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "unknown",
+   "sources": [
+    "doc-5ad9ec251d90",
+    "doc-698f6cc812f8",
+    "doc-d13e41e2dc26",
+    "doc-ff81ba9654f0"
+   ],
+   "tag": "EA-4502"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "initiator",
+   "sources": [
+    "doc-3e2e8d0b4977",
+    "doc-a3a6b1f0f149"
+   ],
+   "tag": "EHT-3401"
+  },
+  {
+   "equipment_tag": "LV-6701",
+   "role": "unknown",
+   "sources": [
+    "doc-18d193968911",
+    "doc-7cf17027cf00",
+    "doc-8ae170ad4c3f",
+    "doc-939ace9389a8",
+    "doc-de4f69577847",
+    "doc-fee80769bc91"
+   ],
+   "tag": "FA-6710"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "permissive",
+   "sources": [
+    "doc-698f6cc812f8",
+    "doc-d13e41e2dc26",
+    "doc-f8cb31ac235f"
+   ],
+   "tag": "FSL-4508"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "initiator",
+   "sources": [
+    "doc-1b2a465bf4ad",
+    "doc-99c21b6749c8",
+    "doc-c825f0afd6a1"
+   ],
+   "tag": "FSLL-1201"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "initiator",
+   "sources": [
+    "doc-3e2e8d0b4977",
+    "doc-a3a6b1f0f149"
+   ],
+   "tag": "FSLL-17343"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "initiator",
+   "sources": [
+    "doc-16d4f296c47e",
+    "doc-18ff60f606ab",
+    "doc-a890a1e23396"
+   ],
+   "tag": "FSLL-2302"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "permissive",
+   "sources": [
+    "doc-3e2e8d0b4977",
+    "doc-a3a6b1f0f149"
+   ],
+   "tag": "FT-17343"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "permissive",
+   "sources": [
+    "doc-1c06cc06b083",
+    "doc-698f6cc812f8",
+    "doc-c7e7ce726f37",
+    "doc-f8cb31ac235f"
+   ],
+   "tag": "FT-4506"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "final_element",
+   "sources": [
+    "doc-1a392e2eebbf",
+    "doc-1b2a465bf4ad",
+    "doc-99c21b6749c8",
+    "doc-c825f0afd6a1"
+   ],
+   "tag": "FV-1201"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "final_element",
+   "sources": [
+    "doc-3e2e8d0b4977",
+    "doc-42f18445dba0",
+    "doc-a2b637ea5f1e",
+    "doc-a3a6b1f0f149"
+   ],
+   "tag": "FV-17343"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "final_element",
+   "sources": [
+    "doc-16d4f296c47e",
+    "doc-18ff60f606ab"
+   ],
+   "tag": "FV-2302"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "final_element",
+   "sources": [
+    "doc-3e2e8d0b4977",
+    "doc-a3a6b1f0f149"
+   ],
+   "tag": "FV-3403"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "final_element",
+   "sources": [
+    "doc-698f6cc812f8",
+    "doc-a628d9837c3d",
+    "doc-f8cb31ac235f"
+   ],
+   "tag": "FV-4502"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "final_element",
+   "sources": [
+    "doc-1b2a465bf4ad"
+   ],
+   "tag": "GA-1201B"
+  },
+  {
+   "equipment_tag": "FA-8901",
+   "role": "final_element",
+   "sources": [
+    "doc-5682ee067bd1",
+    "doc-743b1aef7bb6",
+    "doc-b470d97ed566",
+    "doc-f82f361d022b"
+   ],
+   "tag": "GA-8920"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "final_element",
+   "sources": [
+    "doc-16d4f296c47e",
+    "doc-18ff60f606ab"
+   ],
+   "tag": "GF-2210"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "initiator",
+   "sources": [
+    "doc-1b2a465bf4ad",
+    "doc-c825f0afd6a1"
+   ],
+   "tag": "HS-1201"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "initiator",
+   "sources": [
+    "doc-3e2e8d0b4977",
+    "doc-a3a6b1f0f149"
+   ],
+   "tag": "HS-3401"
+  },
+  {
+   "equipment_tag": "LV-6701",
+   "role": "initiator",
+   "sources": [
+    "doc-7cf17027cf00",
+    "doc-939ace9389a8"
+   ],
+   "tag": "HS-6701"
+  },
+  {
+   "equipment_tag": "FA-8901",
+   "role": "initiator",
+   "sources": [
+    "doc-743b1aef7bb6",
+    "doc-b470d97ed566"
+   ],
+   "tag": "HS-8901"
+  },
+  {
+   "equipment_tag": "LV-6701",
+   "role": "permissive",
+   "sources": [
+    "doc-7cf17027cf00",
+    "doc-939ace9389a8",
+    "doc-fee80769bc91"
+   ],
+   "tag": "HV-6701"
+  },
+  {
+   "equipment_tag": "LV-6701",
+   "role": "unknown",
+   "sources": [
+    "doc-18d193968911",
+    "doc-26a3e1ae0c85",
+    "doc-3c9cc0563f32",
+    "doc-6eeef5996e2d",
+    "doc-7cf17027cf00",
+    "doc-de4f69577847",
+    "doc-ebe41137cede",
+    "doc-fee80769bc91"
+   ],
+   "tag": "LIC-6701"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "initiator",
+   "sources": [
+    "doc-16d4f296c47e",
+    "doc-18ff60f606ab"
+   ],
+   "tag": "LSHH-2303"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "initiator",
+   "sources": [
+    "doc-1c06cc06b083",
+    "doc-3863216f4c98",
+    "doc-f8cb31ac235f"
+   ],
+   "tag": "LSHH-4510"
+  },
+  {
+   "equipment_tag": "LV-6701",
+   "role": "initiator",
+   "sources": [
+    "doc-18d193968911",
+    "doc-26a3e1ae0c85",
+    "doc-3c9cc0563f32",
+    "doc-6a2af0c157be",
+    "doc-6eeef5996e2d",
+    "doc-7cf17027cf00",
+    "doc-939ace9389a8",
+    "doc-ebe41137cede",
+    "doc-fee80769bc91"
+   ],
+   "tag": "LSHH-6710"
+  },
+  {
+   "equipment_tag": "FA-8901",
+   "role": "initiator",
+   "sources": [
+    "doc-03d0e5042a2d",
+    "doc-1d71e82f28f0",
+    "doc-5abdd24159fd",
+    "doc-743b1aef7bb6",
+    "doc-8e8f7f448771",
+    "doc-b470d97ed566",
+    "doc-de26a8dceb96",
+    "doc-f82f361d022b",
+    "doc-fcf9b15dfb2a"
+   ],
+   "tag": "LSHH-8901"
+  },
+  {
+   "equipment_tag": "LV-6701",
+   "role": "initiator",
+   "sources": [
+    "doc-7cf17027cf00",
+    "doc-939ace9389a8"
+   ],
+   "tag": "LSLL-6710"
+  },
+  {
+   "equipment_tag": "FA-8901",
+   "role": "initiator",
+   "sources": [
+    "doc-743b1aef7bb6",
+    "doc-b470d97ed566",
+    "doc-f82f361d022b",
+    "doc-fcf9b15dfb2a"
+   ],
+   "tag": "LSLL-8901"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "permissive",
+   "sources": [
+    "doc-3863216f4c98",
+    "doc-698f6cc812f8",
+    "doc-f8cb31ac235f"
+   ],
+   "tag": "LT-4510"
+  },
+  {
+   "equipment_tag": "CT-7801",
+   "role": "permissive",
+   "sources": [
+    "doc-5956488b1878",
+    "doc-eebaf2dfb732"
+   ],
+   "tag": "LT-7804"
+  },
+  {
+   "equipment_tag": "FA-8901",
+   "role": "permissive",
+   "sources": [
+    "doc-03d0e5042a2d",
+    "doc-5abdd24159fd",
+    "doc-743b1aef7bb6",
+    "doc-f82f361d022b",
+    "doc-fcf9b15dfb2a"
+   ],
+   "tag": "LT-8901"
+  },
+  {
+   "equipment_tag": "FA-8901",
+   "role": "permissive",
+   "sources": [
+    "doc-03d0e5042a2d",
+    "doc-743b1aef7bb6"
+   ],
+   "tag": "LT-8903"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "initiator",
+   "sources": [
+    "doc-1b2a465bf4ad"
+   ],
+   "tag": "MPR-1201"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "initiator",
+   "sources": [
+    "doc-16d4f296c47e",
+    "doc-18ff60f606ab"
+   ],
+   "tag": "MPR-2301"
+  },
+  {
+   "equipment_tag": "CT-7801",
+   "role": "initiator",
+   "sources": [
+    "doc-5956488b1878",
+    "doc-eebaf2dfb732"
+   ],
+   "tag": "MPR-7801"
+  },
+  {
+   "equipment_tag": "FA-8901",
+   "role": "final_element",
+   "sources": [
+    "doc-5682ee067bd1",
+    "doc-5abdd24159fd",
+    "doc-743b1aef7bb6",
+    "doc-b470d97ed566",
+    "doc-f82f361d022b",
+    "doc-fcf9b15dfb2a"
+   ],
+   "tag": "PCV-8905"
+  },
+  {
+   "equipment_tag": "EA-5601",
+   "role": "alarm",
+   "sources": [
+    "doc-1b30dab2c3c9",
+    "doc-3686d03098e6",
+    "doc-8fa5f7ed00dc"
+   ],
+   "tag": "PDAH-5605"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "permissive",
+   "sources": [
+    "doc-1a392e2eebbf",
+    "doc-1b2a465bf4ad",
+    "doc-a55be95bceff",
+    "doc-c825f0afd6a1",
+    "doc-dde6aaf2822b"
+   ],
+   "tag": "PDI-1201"
+  },
+  {
+   "equipment_tag": "LV-6701",
+   "role": "permissive",
+   "sources": [
+    "doc-18d193968911",
+    "doc-7cf17027cf00",
+    "doc-939ace9389a8"
+   ],
+   "tag": "PI-6702"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "initiator",
+   "sources": [
+    "doc-3e2e8d0b4977",
+    "doc-a3a6b1f0f149"
+   ],
+   "tag": "PSHH-3404"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "initiator",
+   "sources": [
+    "doc-a628d9837c3d",
+    "doc-f8cb31ac235f"
+   ],
+   "tag": "PSHH-4502"
+  },
+  {
+   "equipment_tag": "FA-8901",
+   "role": "initiator",
+   "sources": [
+    "doc-743b1aef7bb6",
+    "doc-b470d97ed566"
+   ],
+   "tag": "PSHH-8902"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "permissive",
+   "sources": [
+    "doc-16d4f296c47e",
+    "doc-18ff60f606ab"
+   ],
+   "tag": "PSL-2306"
+  },
+  {
+   "equipment_tag": "LV-6701",
+   "role": "initiator",
+   "sources": [
+    "doc-18d193968911",
+    "doc-7cf17027cf00",
+    "doc-939ace9389a8"
+   ],
+   "tag": "PSL-6702"
+  },
+  {
+   "equipment_tag": "CT-7801",
+   "role": "initiator",
+   "sources": [
+    "doc-5956488b1878",
+    "doc-eebaf2dfb732",
+    "doc-f5804238812d"
+   ],
+   "tag": "PSL-7807"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "initiator",
+   "sources": [
+    "doc-0f19e6b566c4",
+    "doc-192d609c3098",
+    "doc-1a392e2eebbf",
+    "doc-1b2a465bf4ad",
+    "doc-7da1c7cd27cc",
+    "doc-99c21b6749c8",
+    "doc-a55be95bceff",
+    "doc-c825f0afd6a1",
+    "doc-dde6aaf2822b"
+   ],
+   "tag": "PSLL-1201"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "initiator",
+   "sources": [
+    "doc-698f6cc812f8",
+    "doc-a628d9837c3d",
+    "doc-f8cb31ac235f"
+   ],
+   "tag": "PSLL-4501"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "initiator",
+   "sources": [
+    "doc-1c06cc06b083",
+    "doc-3863216f4c98",
+    "doc-698f6cc812f8",
+    "doc-81858f8ffc16",
+    "doc-a628d9837c3d",
+    "doc-c7e7ce726f37",
+    "doc-d13e41e2dc26",
+    "doc-f8cb31ac235f",
+    "doc-fceea39b4043"
+   ],
+   "tag": "PSLL-4504"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "unknown",
+   "sources": [
+    "doc-79c011db7221",
+    "doc-a3a6b1f0f149",
+    "doc-a7aa4c227eea",
+    "doc-efc84e9807b4"
+   ],
+   "tag": "PSV-3401"
+  },
+  {
+   "equipment_tag": "EA-5601",
+   "role": "relief",
+   "sources": [
+    "doc-1b30dab2c3c9",
+    "doc-3686d03098e6",
+    "doc-b6df4fc6cdae"
+   ],
+   "tag": "PSV-5607"
+  },
+  {
+   "equipment_tag": "FA-8901",
+   "role": "unknown",
+   "sources": [
+    "doc-03d0e5042a2d",
+    "doc-1d71e82f28f0",
+    "doc-5682ee067bd1",
+    "doc-5abdd24159fd",
+    "doc-81c4c8cf3d2b",
+    "doc-8e8f7f448771",
+    "doc-b470d97ed566",
+    "doc-de26a8dceb96"
+   ],
+   "tag": "PSV-8901"
+  },
+  {
+   "equipment_tag": "FA-8901",
+   "role": "permissive",
+   "sources": [
+    "doc-5abdd24159fd",
+    "doc-743b1aef7bb6",
+    "doc-b470d97ed566",
+    "doc-f82f361d022b",
+    "doc-fcf9b15dfb2a"
+   ],
+   "tag": "PT-8902"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "final_element",
+   "sources": [
+    "doc-3e2e8d0b4977",
+    "doc-80f0edee5c1e",
+    "doc-a3a6b1f0f149"
+   ],
+   "tag": "PV-3404"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "initiator",
+   "sources": [
+    "doc-08fcf7ac5d78",
+    "doc-16d4f296c47e",
+    "doc-18ff60f606ab",
+    "doc-1e985621f95e",
+    "doc-b739f14aa8f0",
+    "doc-fc0c8e8b275a"
+   ],
+   "tag": "SSLL-2305"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "permissive",
+   "sources": [
+    "doc-3e2e8d0b4977",
+    "doc-468ad6e6a04c",
+    "doc-80f0edee5c1e",
+    "doc-a3a6b1f0f149",
+    "doc-a7aa4c227eea",
+    "doc-ef0271093a5c",
+    "doc-efc84e9807b4"
+   ],
+   "tag": "TE-3401"
+  },
+  {
+   "equipment_tag": "EA-5601",
+   "role": "permissive",
+   "sources": [
+    "doc-1b30dab2c3c9",
+    "doc-3686d03098e6",
+    "doc-b3a4b92dc6c1"
+   ],
+   "tag": "TI-5604"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "unknown",
+   "sources": [
+    "doc-2ac61d30549d",
+    "doc-42f18445dba0",
+    "doc-468ad6e6a04c",
+    "doc-80f0edee5c1e",
+    "doc-a2b637ea5f1e",
+    "doc-a3a6b1f0f149",
+    "doc-a7aa4c227eea",
+    "doc-ef0271093a5c"
+   ],
+   "tag": "TIC-17343"
+  },
+  {
+   "equipment_tag": "EA-5601",
+   "role": "control",
+   "sources": [
+    "doc-1b30dab2c3c9",
+    "doc-3686d03098e6",
+    "doc-682c7aa0e205",
+    "doc-8fa5f7ed00dc"
+   ],
+   "tag": "TIC-5602"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "initiator",
+   "sources": [
+    "doc-1b2a465bf4ad",
+    "doc-c825f0afd6a1"
+   ],
+   "tag": "TSHH-1201"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "initiator",
+   "sources": [
+    "doc-08fcf7ac5d78",
+    "doc-16d4f296c47e",
+    "doc-18ff60f606ab",
+    "doc-1e985621f95e",
+    "doc-76e35a21c6e7",
+    "doc-a890a1e23396",
+    "doc-ad20663f608f",
+    "doc-b739f14aa8f0",
+    "doc-fc0c8e8b275a"
+   ],
+   "tag": "TSHH-2301"
+  },
+  {
+   "equipment_tag": "DC-3401A",
+   "role": "initiator",
+   "sources": [
+    "doc-2ac61d30549d",
+    "doc-3e2e8d0b4977",
+    "doc-42f18445dba0",
+    "doc-468ad6e6a04c",
+    "doc-79c011db7221",
+    "doc-80f0edee5c1e",
+    "doc-a2b637ea5f1e",
+    "doc-a3a6b1f0f149",
+    "doc-ef0271093a5c"
+   ],
+   "tag": "TSHH-3401"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "initiator",
+   "sources": [
+    "doc-3863216f4c98",
+    "doc-81858f8ffc16",
+    "doc-a628d9837c3d",
+    "doc-c7e7ce726f37",
+    "doc-d13e41e2dc26",
+    "doc-f8cb31ac235f",
+    "doc-fceea39b4043"
+   ],
+   "tag": "TSHH-4503"
+  },
+  {
+   "equipment_tag": "CT-7801",
+   "role": "initiator",
+   "sources": [
+    "doc-2704b766d7ac",
+    "doc-5956488b1878",
+    "doc-6a7baf0db981",
+    "doc-eebaf2dfb732",
+    "doc-f5804238812d"
+   ],
+   "tag": "TSHH-7803"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "final_element",
+   "sources": [
+    "doc-16d4f296c47e",
+    "doc-18ff60f606ab",
+    "doc-a890a1e23396"
+   ],
+   "tag": "TV-2301"
+  },
+  {
+   "equipment_tag": "EA-5601",
+   "role": "final_element",
+   "sources": [
+    "doc-1b30dab2c3c9",
+    "doc-3686d03098e6",
+    "doc-682c7aa0e205",
+    "doc-8fa5f7ed00dc"
+   ],
+   "tag": "TV-5602"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "initiator",
+   "sources": [
+    "doc-0f19e6b566c4",
+    "doc-192d609c3098",
+    "doc-1a392e2eebbf",
+    "doc-1b2a465bf4ad",
+    "doc-7da1c7cd27cc",
+    "doc-99c21b6749c8",
+    "doc-a55be95bceff",
+    "doc-c825f0afd6a1",
+    "doc-dde6aaf2822b"
+   ],
+   "tag": "VSHH-1201"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "initiator",
+   "sources": [
+    "doc-1c06cc06b083",
+    "doc-f8cb31ac235f"
+   ],
+   "tag": "VSHH-4505"
+  },
+  {
+   "equipment_tag": "CT-7801",
+   "role": "initiator",
+   "sources": [
+    "doc-2704b766d7ac",
+    "doc-2badb0699e9d",
+    "doc-5956488b1878",
+    "doc-5f304ecc2b5a",
+    "doc-6a7baf0db981",
+    "doc-850266fd7d3d",
+    "doc-98989fc6489c",
+    "doc-eebaf2dfb732",
+    "doc-f5804238812d"
+   ],
+   "tag": "VSHH-7802"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "unknown",
+   "sources": [
+    "doc-1c06cc06b083",
+    "doc-5ad9ec251d90",
+    "doc-698f6cc812f8"
+   ],
+   "tag": "VT-4501"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "final_element",
+   "sources": [
+    "doc-1b2a465bf4ad",
+    "doc-99c21b6749c8",
+    "doc-c825f0afd6a1"
+   ],
+   "tag": "XV-1201"
+  },
+  {
+   "equipment_tag": "KC-4501",
+   "role": "final_element",
+   "sources": [
+    "doc-698f6cc812f8",
+    "doc-f8cb31ac235f"
+   ],
+   "tag": "XV-4501"
+  },
+  {
+   "equipment_tag": "LV-6701",
+   "role": "unknown",
+   "sources": [
+    "doc-6eeef5996e2d",
+    "doc-7cf17027cf00",
+    "doc-de4f69577847"
+   ],
+   "tag": "XV-6701"
+  },
+  {
+   "equipment_tag": "LV-6701",
+   "role": "unknown",
+   "sources": [
+    "doc-3c9cc0563f32",
+    "doc-de4f69577847"
+   ],
+   "tag": "ZSH-6701"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "permissive",
+   "sources": [
+    "doc-1b2a465bf4ad",
+    "doc-c825f0afd6a1"
+   ],
+   "tag": "ZSO-1201"
+  },
+  {
+   "equipment_tag": "GA-1201A",
+   "role": "permissive",
+   "sources": [
+    "doc-1b2a465bf4ad"
+   ],
+   "tag": "ZSO-1202"
+  },
+  {
+   "equipment_tag": "YD-2301",
+   "role": "permissive",
+   "sources": [
+    "doc-16d4f296c47e",
+    "doc-18ff60f606ab"
+   ],
+   "tag": "ZSO-2304"
+  }
+ ],
+ "interlocks": [
+  {
+   "ce_doc_no": "TJC-LLD-IL-CT-7801",
+   "ce_revision": "3",
+   "equipment_tag": "CT-7801",
+   "logic_kind": "trip_logic",
+   "notes": [
+    {
+     "n": 1,
+     "span_id": "rev-5956488b1878/p1/1186-1231",
+     "text": "1. Trip set points are DUMMY training values."
+    },
+    {
+     "n": 2,
+     "span_id": "rev-5956488b1878/p1/1232-1326",
+     "text": "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS."
+    },
+    {
+     "n": 3,
+     "span_id": "rev-5956488b1878/p1/1327-1431",
+     "text": "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy."
+    },
+    {
+     "n": 4,
+     "span_id": "rev-5956488b1878/p1/1432-1535",
+     "text": "4. Refer to P&ID; TJC-LLD-PID-7801 for instrument loops and the Datasheet for design limits of CT-7801."
+    }
+   ],
+   "permissive_gate": "AND",
+   "seq_id": "SEQ-7801",
+   "sil_sheet": 1
+  },
+  {
+   "ce_doc_no": "TJC-LLD-IL-DC-3401A",
+   "ce_revision": "3",
+   "equipment_tag": "DC-3401A",
+   "logic_kind": "trip_logic",
+   "notes": [
+    {
+     "n": 1,
+     "span_id": "rev-3e2e8d0b4977/p1/1579-1624",
+     "text": "1. Trip set points are DUMMY training values."
+    },
+    {
+     "n": 2,
+     "span_id": "rev-3e2e8d0b4977/p1/1625-1719",
+     "text": "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS."
+    },
+    {
+     "n": 3,
+     "span_id": "rev-3e2e8d0b4977/p1/1720-1824",
+     "text": "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy."
+    },
+    {
+     "n": 4,
+     "span_id": "rev-3e2e8d0b4977/p1/1825-1928",
+     "text": "4. Refer to P&ID TJC-LLD-PID-3401 for instrument loops and the Datasheet for design limits of DC-3401A."
+    }
+   ],
+   "permissive_gate": "AND",
+   "seq_id": "SEQ-3401",
+   "sil_sheet": 2
+  },
+  {
+   "ce_doc_no": "TJC-LLD-IL-EA-5601",
+   "ce_revision": "3",
+   "equipment_tag": "EA-5601",
+   "logic_kind": "control_loop_only",
+   "notes": [
+    {
+     "n": 1,
+     "span_id": "rev-1b30dab2c3c9/p1/1201-1246",
+     "text": "1. Trip set points are DUMMY training values."
+    },
+    {
+     "n": 2,
+     "span_id": "rev-1b30dab2c3c9/p1/1247-1341",
+     "text": "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS."
+    },
+    {
+     "n": 3,
+     "span_id": "rev-1b30dab2c3c9/p1/1342-1446",
+     "text": "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy."
+    },
+    {
+     "n": 4,
+     "span_id": "rev-1b30dab2c3c9/p1/1447-1549",
+     "text": "4. Refer to P&ID TJC-LLD-PID-5601 for instrument loops and the Datasheet for design limits of EA-5601."
+    }
+   ],
+   "permissive_gate": "AND",
+   "seq_id": null,
+   "sil_sheet": null
+  },
+  {
+   "ce_doc_no": "TJC-LLD-IL-FA-8901",
+   "ce_revision": "3",
+   "equipment_tag": "FA-8901",
+   "logic_kind": "trip_logic",
+   "notes": [
+    {
+     "n": 1,
+     "span_id": "rev-743b1aef7bb6/p1/1285-1330",
+     "text": "1. Trip set points are DUMMY training values."
+    },
+    {
+     "n": 2,
+     "span_id": "rev-743b1aef7bb6/p1/1331-1425",
+     "text": "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS."
+    },
+    {
+     "n": 3,
+     "span_id": "rev-743b1aef7bb6/p1/1426-1530",
+     "text": "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy."
+    },
+    {
+     "n": 4,
+     "span_id": "rev-743b1aef7bb6/p1/1531-1634",
+     "text": "4. Refer to P&ID; TJC-LLD-PID-8901 for instrument loops and the Datasheet for design limits of FA-8901."
+    }
+   ],
+   "permissive_gate": "AND",
+   "seq_id": "SEQ-8901",
+   "sil_sheet": 1
+  },
+  {
+   "ce_doc_no": "TJC-LLD-IL-GA-1201A",
+   "ce_revision": "3",
+   "equipment_tag": "GA-1201A",
+   "logic_kind": "trip_logic",
+   "notes": [
+    {
+     "n": 1,
+     "span_id": "rev-1b2a465bf4ad/p1/1524-1569",
+     "text": "1. Trip set points are DUMMY training values."
+    },
+    {
+     "n": 2,
+     "span_id": "rev-1b2a465bf4ad/p1/1570-1664",
+     "text": "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS."
+    },
+    {
+     "n": 3,
+     "span_id": "rev-1b2a465bf4ad/p1/1665-1769",
+     "text": "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy."
+    },
+    {
+     "n": 4,
+     "span_id": "rev-1b2a465bf4ad/p1/1770-1874",
+     "text": "4. Refer to P&ID; TJC-LLD-PID-1201 for instrument loops and the Datasheet for design limits of GA-1201A."
+    }
+   ],
+   "permissive_gate": "AND",
+   "seq_id": "SEQ-1201",
+   "sil_sheet": 1
+  },
+  {
+   "ce_doc_no": "TJC-LLD-IL-KC-4501",
+   "ce_revision": "3",
+   "equipment_tag": "KC-4501",
+   "logic_kind": "trip_logic",
+   "notes": [
+    {
+     "n": 1,
+     "span_id": "rev-f8cb31ac235f/p1/1482-1527",
+     "text": "1. Trip set points are DUMMY training values."
+    },
+    {
+     "n": 2,
+     "span_id": "rev-f8cb31ac235f/p1/1528-1622",
+     "text": "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS."
+    },
+    {
+     "n": 3,
+     "span_id": "rev-f8cb31ac235f/p1/1623-1727",
+     "text": "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy."
+    },
+    {
+     "n": 4,
+     "span_id": "rev-f8cb31ac235f/p1/1728-1830",
+     "text": "4. Refer to P&ID TJC-LLD-PID-4501 for instrument loops and the Datasheet for design limits of KC-4501."
+    }
+   ],
+   "permissive_gate": "AND",
+   "seq_id": "SEQ-4501",
+   "sil_sheet": 2
+  },
+  {
+   "ce_doc_no": "TJC-LLD-IL-LV-6701",
+   "ce_revision": "3",
+   "equipment_tag": "LV-6701",
+   "logic_kind": "trip_logic",
+   "notes": [
+    {
+     "n": 1,
+     "span_id": "rev-939ace9389a8/p1/1338-1377",
+     "text": "1. Trip set points are training values."
+    },
+    {
+     "n": 2,
+     "span_id": "rev-939ace9389a8/p1/1378-1472",
+     "text": "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS."
+    },
+    {
+     "n": 3,
+     "span_id": "rev-939ace9389a8/p1/1473-1577",
+     "text": "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy."
+    },
+    {
+     "n": 4,
+     "span_id": "rev-939ace9389a8/p1/1578-1680",
+     "text": "4. Refer to P&ID TJC-LLD-PID-6701 for instrument loops and the Datasheet for design limits of LV-6701."
+    }
+   ],
+   "permissive_gate": "AND",
+   "seq_id": "SEQ-6701",
+   "sil_sheet": 1
+  },
+  {
+   "ce_doc_no": "TJC-LLD-IL-YD-2301",
+   "ce_revision": "3",
+   "equipment_tag": "YD-2301",
+   "logic_kind": "trip_logic",
+   "notes": [
+    {
+     "n": 1,
+     "span_id": "rev-16d4f296c47e/p1/1779-1824",
+     "text": "1. Trip set points are DUMMY training values."
+    },
+    {
+     "n": 2,
+     "span_id": "rev-16d4f296c47e/p1/1825-1919",
+     "text": "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS."
+    },
+    {
+     "n": 3,
+     "span_id": "rev-16d4f296c47e/p1/1508-1612",
+     "text": "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy."
+    },
+    {
+     "n": 4,
+     "span_id": "rev-16d4f296c47e/p1/1613-1716",
+     "text": "4. Refer to P&ID; TJC-LLD-PID-2301 for instrument loops and the Datasheet for design limits of YD-2301."
+    }
+   ],
+   "permissive_gate": "AND",
+   "seq_id": "SEQ-5500",
+   "sil_sheet": 2
+  }
+ ],
+ "permissives": [
+  {
+   "n": 1,
+   "seq_id": "SEQ-7801",
+   "signal_tag": null,
+   "span_id": "rev-5956488b1878/p1/992-1025",
+   "standing_bypass_state": null,
+   "text": "Gearbox oil level OK"
+  },
+  {
+   "n": 2,
+   "seq_id": "SEQ-7801",
+   "signal_tag": "LT-7804",
+   "span_id": "rev-5956488b1878/p1/1026-1067",
+   "standing_bypass_state": null,
+   "text": "Basin level normal (> LSL-7804)"
+  },
+  {
+   "n": 3,
+   "seq_id": "SEQ-7801",
+   "signal_tag": null,
+   "span_id": "rev-5956488b1878/p1/1068-1119",
+   "standing_bypass_state": null,
+   "text": "No fan lockout / maintenance key released"
+  },
+  {
+   "n": 1,
+   "seq_id": "SEQ-3401",
+   "signal_tag": "AI-3401",
+   "span_id": "rev-3e2e8d0b4977/p1/1252-1305",
+   "standing_bypass_state": null,
+   "text": "O2 free / inerting done (AI-3401 < 100 ppm)"
+  },
+  {
+   "n": 2,
+   "seq_id": "SEQ-3401",
+   "signal_tag": "FT-17343",
+   "span_id": "rev-3e2e8d0b4977/p1/1306-1357",
+   "standing_bypass_state": null,
+   "text": "N2 carrier flow established (> 150 kg/h)"
+  },
+  {
+   "n": 3,
+   "seq_id": "SEQ-3401",
+   "signal_tag": "TE-3401",
+   "span_id": "rev-3e2e8d0b4977/p1/1358-1416",
+   "standing_bypass_state": null,
+   "text": "Bed homogeneous 120 degC (all TE within 15 degC)"
+  },
+  {
+   "n": 4,
+   "seq_id": "SEQ-3401",
+   "signal_tag": null,
+   "span_id": "rev-3e2e8d0b4977/p1/1417-1456",
+   "standing_bypass_state": null,
+   "text": "No active trip / reset done"
+  },
+  {
+   "n": 1,
+   "seq_id": "EA-5601",
+   "signal_tag": null,
+   "span_id": "rev-1b30dab2c3c9/p1/970-1024",
+   "standing_bypass_state": null,
+   "text": "Solvent flow established (from GA-5610)"
+  },
+  {
+   "n": 2,
+   "seq_id": "EA-5601",
+   "signal_tag": "TI-5604",
+   "span_id": "rev-1b30dab2c3c9/p1/1025-1079",
+   "standing_bypass_state": null,
+   "text": "Condensate trap draining (TI-5604 < steam T)"
+  },
+  {
+   "n": 1,
+   "seq_id": "SEQ-8901",
+   "signal_tag": "LT-8901",
+   "span_id": "rev-743b1aef7bb6/p1/1083-1122",
+   "standing_bypass_state": null,
+   "text": "Level in normal band (20-80%)"
+  },
+  {
+   "n": 2,
+   "seq_id": "SEQ-8901",
+   "signal_tag": "PT-8902",
+   "span_id": "rev-743b1aef7bb6/p1/1123-1151",
+   "standing_bypass_state": null,
+   "text": "N2 blanket healthy"
+  },
+  {
+   "n": 3,
+   "seq_id": "SEQ-8901",
+   "signal_tag": "LT-8903",
+   "span_id": "rev-743b1aef7bb6/p1/1152-1178",
+   "standing_bypass_state": null,
+   "text": "Boot not flooded"
+  },
+  {
+   "n": 4,
+   "seq_id": "SEQ-8901",
+   "signal_tag": null,
+   "span_id": "rev-743b1aef7bb6/p1/1179-1218",
+   "standing_bypass_state": null,
+   "text": "No active trip / reset done"
+  },
+  {
+   "n": 1,
+   "seq_id": "SEQ-1201",
+   "signal_tag": "ZSO-1201",
+   "span_id": "rev-1b2a465bf4ad/p1/1252-1281",
+   "standing_bypass_state": null,
+   "text": "Suction valve OPEN"
+  },
+  {
+   "n": 2,
+   "seq_id": "SEQ-1201",
+   "signal_tag": "PDI-1201",
+   "span_id": "rev-1b2a465bf4ad/p1/1282-1330",
+   "standing_bypass_state": null,
+   "text": "Seal flush established (dP > 1.5 bar)"
+  },
+  {
+   "n": 3,
+   "seq_id": "SEQ-1201",
+   "signal_tag": "ZSO-1202",
+   "span_id": "rev-1b2a465bf4ad/p1/1331-1361",
+   "standing_bypass_state": null,
+   "text": "Min-flow valve OPEN"
+  },
+  {
+   "n": 4,
+   "seq_id": "SEQ-1201",
+   "signal_tag": null,
+   "span_id": "rev-1b2a465bf4ad/p1/1362-1401",
+   "standing_bypass_state": null,
+   "text": "No active trip / reset done"
+  },
+  {
+   "n": 1,
+   "seq_id": "SEQ-4501",
+   "signal_tag": "PSLL-4504",
+   "span_id": "rev-f8cb31ac235f/p1/1230-1273",
+   "standing_bypass_state": null,
+   "text": "Lube oil pressure OK (> 2 barg)"
+  },
+  {
+   "n": 2,
+   "seq_id": "SEQ-4501",
+   "signal_tag": "FT-4506",
+   "span_id": "rev-f8cb31ac235f/p1/1274-1304",
+   "standing_bypass_state": null,
+   "text": "Seal gas established"
+  },
+  {
+   "n": 3,
+   "seq_id": "SEQ-4501",
+   "signal_tag": "LT-4510",
+   "span_id": "rev-f8cb31ac235f/p1/1305-1343",
+   "standing_bypass_state": null,
+   "text": "KO drum level normal (< 50%)"
+  },
+  {
+   "n": 4,
+   "seq_id": "SEQ-4501",
+   "signal_tag": "FSL-4508",
+   "span_id": "rev-f8cb31ac235f/p1/1344-1375",
+   "standing_bypass_state": null,
+   "text": "Jacket water flow OK"
+  },
+  {
+   "n": 5,
+   "seq_id": "SEQ-4501",
+   "signal_tag": null,
+   "span_id": "rev-f8cb31ac235f/p1/1376-1415",
+   "standing_bypass_state": null,
+   "text": "No active trip / reset done"
+  },
+  {
+   "n": 1,
+   "seq_id": "SEQ-6701",
+   "signal_tag": "PI-6702",
+   "span_id": "rev-939ace9389a8/p1/1073-1120",
+   "standing_bypass_state": null,
+   "text": "Instrument air available (> 1.2 barg)"
+  },
+  {
+   "n": 2,
+   "seq_id": "SEQ-6701",
+   "signal_tag": "DVC6200",
+   "span_id": "rev-939ace9389a8/p1/1121-1165",
+   "standing_bypass_state": null,
+   "text": "Positioner DVC6200 in AUTO/healthy"
+  },
+  {
+   "n": 3,
+   "seq_id": "SEQ-6701",
+   "signal_tag": "HV-6701",
+   "span_id": "rev-939ace9389a8/p1/1166-1216",
+   "standing_bypass_state": null,
+   "text": "Bypass HV-6701 closed (normal operation)"
+  },
+  {
+   "n": 1,
+   "seq_id": "SEQ-5500",
+   "signal_tag": "AT-2307",
+   "span_id": "rev-16d4f296c47e/p1/1206-1255",
+   "standing_bypass_state": null,
+   "text": "Nitrogen inerting established (O2 < 5%)"
+  },
+  {
+   "n": 2,
+   "seq_id": "SEQ-5500",
+   "signal_tag": "ZSO-2304",
+   "span_id": "rev-16d4f296c47e/p1/1256-1294",
+   "standing_bypass_state": null,
+   "text": "Steam condensate drain open"
+  },
+  {
+   "n": 3,
+   "seq_id": "SEQ-5500",
+   "signal_tag": "PSL-2306",
+   "span_id": "rev-16d4f296c47e/p1/1295-1328",
+   "standing_bypass_state": null,
+   "text": "Lube oil to gearbox OK"
+  },
+  {
+   "n": 4,
+   "seq_id": "SEQ-5500",
+   "signal_tag": null,
+   "span_id": "rev-16d4f296c47e/p1/1329-1368",
+   "standing_bypass_state": null,
+   "text": "No active trip / reset done"
+  }
+ ],
+ "rows": [
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP FAN MOTOR CT-7801",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "REQUEST START OF SPARE CELL CT-7802",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "CT-7801",
+   "id": "SEQ-7801-T1",
+   "initiator": "Fan/gearbox vibration HIGH-HIGH",
+   "instrument_tag": "VSHH-7802",
+   "row_id": "T1",
+   "row_kind": "trip",
+   "seq_id": "SEQ-7801",
+   "setpoint_text": "> 9 mm/s",
+   "setpoint_unit": "mm/s",
+   "setpoint_value": 9.0,
+   "source_page": 1,
+   "span_id": "rev-5956488b1878/p1/446-510",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP FAN MOTOR CT-7801",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "REQUEST START OF SPARE CELL CT-7802",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "CT-7801",
+   "id": "SEQ-7801-T2",
+   "initiator": "Gearbox oil temperature HIGH-HIGH",
+   "instrument_tag": "TSHH-7803",
+   "row_id": "T2",
+   "row_kind": "trip",
+   "seq_id": "SEQ-7801",
+   "setpoint_text": "> 90 degC",
+   "setpoint_unit": "degC",
+   "setpoint_value": 90.0,
+   "source_page": 1,
+   "span_id": "rev-5956488b1878/p1/511-578",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": "<",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP FAN MOTOR CT-7801",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "REQUEST START OF SPARE CELL CT-7802",
+     "marked": false
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "CT-7801",
+   "id": "SEQ-7801-T3",
+   "initiator": "Gearbox oil pressure LOW",
+   "instrument_tag": "PSL-7807",
+   "row_id": "T3",
+   "row_kind": "trip",
+   "seq_id": "SEQ-7801",
+   "setpoint_text": "< 0.8 barg",
+   "setpoint_unit": "barg",
+   "setpoint_value": 0.8,
+   "source_page": 1,
+   "span_id": "rev-5956488b1878/p1/579-635",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": null,
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP FAN MOTOR CT-7801",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "REQUEST START OF SPARE CELL CT-7802",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "CT-7801",
+   "id": "SEQ-7801-T4",
+   "initiator": "Fan motor overload",
+   "instrument_tag": "MPR-7801",
+   "row_id": "T4",
+   "row_kind": "trip",
+   "seq_id": "SEQ-7801",
+   "setpoint_text": "MPR pickup",
+   "setpoint_unit": null,
+   "setpoint_value": null,
+   "source_page": 1,
+   "span_id": "rev-5956488b1878/p1/636-688",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP HEATER EA-3401",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE H2 INJECTION FV-3403",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN REACTOR VENT PV-3404",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN / INCREASE N2 FV-17343",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "DC-3401A",
+   "id": "SEQ-3401-T1",
+   "initiator": "Bed temperature HIGH-HIGH",
+   "instrument_tag": "TSHH-3401",
+   "row_id": "T1",
+   "row_kind": "trip",
+   "seq_id": "SEQ-3401",
+   "setpoint_text": "> 230 degC",
+   "setpoint_unit": "degC",
+   "setpoint_value": 230.0,
+   "source_page": 1,
+   "span_id": "rev-3e2e8d0b4977/p1/502-564",
+   "vote_cell_text": "2oo3",
+   "voting": "2oo3"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP HEATER EA-3401",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE H2 INJECTION FV-3403",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN REACTOR VENT PV-3404",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN / INCREASE N2 FV-17343",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "DC-3401A",
+   "id": "SEQ-3401-T2",
+   "initiator": "Reactor pressure HIGH-HIGH",
+   "instrument_tag": "PSHH-3404",
+   "row_id": "T2",
+   "row_kind": "trip",
+   "seq_id": "SEQ-3401",
+   "setpoint_text": "> 5 barg",
+   "setpoint_unit": "barg",
+   "setpoint_value": 5.0,
+   "source_page": 1,
+   "span_id": "rev-3e2e8d0b4977/p1/565-624",
+   "vote_cell_text": "1oo2",
+   "voting": "1oo2"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP HEATER EA-3401",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE H2 INJECTION FV-3403",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN REACTOR VENT PV-3404",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN / INCREASE N2 FV-17343",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "DC-3401A",
+   "id": "SEQ-3401-T3",
+   "initiator": "Outlet O2 HIGH during H2 (inerting fail)",
+   "instrument_tag": "AI-3401",
+   "row_id": "T3",
+   "row_kind": "trip",
+   "seq_id": "SEQ-3401",
+   "setpoint_text": "> 100 ppm",
+   "setpoint_unit": "ppm",
+   "setpoint_value": 100.0,
+   "source_page": 1,
+   "span_id": "rev-3e2e8d0b4977/p1/625-697",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": "<",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP HEATER EA-3401",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE H2 INJECTION FV-3403",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN REACTOR VENT PV-3404",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN / INCREASE N2 FV-17343",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "DC-3401A",
+   "id": "SEQ-3401-T4",
+   "initiator": "Nitrogen carrier flow LOW-LOW",
+   "instrument_tag": "FSLL-17343",
+   "row_id": "T4",
+   "row_kind": "trip",
+   "seq_id": "SEQ-3401",
+   "setpoint_text": "< 150 kg/h",
+   "setpoint_unit": "kg/h",
+   "setpoint_value": 150.0,
+   "source_page": 1,
+   "span_id": "rev-3e2e8d0b4977/p1/698-763",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP HEATER EA-3401",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE H2 INJECTION FV-3403",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN REACTOR VENT PV-3404",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN / INCREASE N2 FV-17343",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "DC-3401A",
+   "id": "SEQ-3401-T5",
+   "initiator": "Heater element over-temperature",
+   "instrument_tag": "EHT-3401",
+   "row_id": "T5",
+   "row_kind": "trip",
+   "seq_id": "SEQ-3401",
+   "setpoint_text": "skin TC > 260 degC",
+   "setpoint_unit": "degC",
+   "setpoint_value": 260.0,
+   "source_page": 1,
+   "span_id": "rev-3e2e8d0b4977/p1/764-835",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": null,
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP HEATER EA-3401",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE H2 INJECTION FV-3403",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN REACTOR VENT PV-3404",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN / INCREASE N2 FV-17343",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "DC-3401A",
+   "id": "SEQ-3401-T6",
+   "initiator": "Emergency stop (manual)",
+   "instrument_tag": "HS-3401",
+   "row_id": "T6",
+   "row_kind": "trip",
+   "seq_id": "SEQ-3401",
+   "setpoint_text": "Manual",
+   "setpoint_unit": null,
+   "setpoint_value": null,
+   "source_page": 1,
+   "span_id": "rev-3e2e8d0b4977/p1/836-890",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": null,
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "MODULATE STEAM VALVE TV-5602",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "ANNUNCIATE HIGH dP / FOULING ALARM",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "MECHANICAL RELIEF VIA PSV-5607",
+     "marked": false
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "EA-5601",
+   "id": "EA-5601-C1",
+   "initiator": "Outlet temperature control",
+   "instrument_tag": "TIC-5602",
+   "row_id": "C1",
+   "row_kind": "control",
+   "seq_id": null,
+   "setpoint_text": "SP 95 degC",
+   "setpoint_unit": "degC",
+   "setpoint_value": 95.0,
+   "source_page": 1,
+   "span_id": "rev-1b30dab2c3c9/p1/475-534",
+   "vote_cell_text": "control",
+   "voting": null
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "MODULATE STEAM VALVE TV-5602",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "ANNUNCIATE HIGH dP / FOULING ALARM",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "MECHANICAL RELIEF VIA PSV-5607",
+     "marked": false
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "EA-5601",
+   "id": "EA-5601-A1",
+   "initiator": "Tube-side dP HIGH (fouling)",
+   "instrument_tag": "PDAH-5605",
+   "row_id": "A1",
+   "row_kind": "alarm",
+   "seq_id": null,
+   "setpoint_text": "> 0.7 bar",
+   "setpoint_unit": "bar",
+   "setpoint_value": 0.7,
+   "source_page": 1,
+   "span_id": "rev-1b30dab2c3c9/p1/535-593",
+   "vote_cell_text": "alarm",
+   "voting": null
+  },
+  {
+   "comparator": null,
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "MODULATE STEAM VALVE TV-5602",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "ANNUNCIATE HIGH dP / FOULING ALARM",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "MECHANICAL RELIEF VIA PSV-5607",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "EA-5601",
+   "id": "EA-5601-R1",
+   "initiator": "Tube-side overpressure relief",
+   "instrument_tag": "PSV-5607",
+   "row_id": "R1",
+   "row_kind": "mech",
+   "seq_id": null,
+   "setpoint_text": "set 16 barg",
+   "setpoint_unit": "barg",
+   "setpoint_value": 16.0,
+   "source_page": 1,
+   "span_id": "rev-1b30dab2c3c9/p1/594-654",
+   "vote_cell_text": "mech",
+   "voting": null
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP COLUMN FEED (prevent carryover)",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "TRIP REFLUX PUMP GA-8920 (protect)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN VENT PCV-8905 (relieve pressure)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "FA-8901",
+   "id": "SEQ-8901-T1",
+   "initiator": "Drum level HIGH-HIGH",
+   "instrument_tag": "LSHH-8901",
+   "row_id": "T1",
+   "row_kind": "trip",
+   "seq_id": "SEQ-8901",
+   "setpoint_text": "> 85 %",
+   "setpoint_unit": "%",
+   "setpoint_value": 85.0,
+   "source_page": 1,
+   "span_id": "rev-743b1aef7bb6/p1/515-564",
+   "vote_cell_text": "1oo2",
+   "voting": "1oo2"
+  },
+  {
+   "comparator": "<",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP COLUMN FEED (prevent carryover)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "TRIP REFLUX PUMP GA-8920 (protect)",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN VENT PCV-8905 (relieve pressure)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "FA-8901",
+   "id": "SEQ-8901-T2",
+   "initiator": "Drum level LOW-LOW",
+   "instrument_tag": "LSLL-8901",
+   "row_id": "T2",
+   "row_kind": "trip",
+   "seq_id": "SEQ-8901",
+   "setpoint_text": "< 15 %",
+   "setpoint_unit": "%",
+   "setpoint_value": 15.0,
+   "source_page": 1,
+   "span_id": "rev-743b1aef7bb6/p1/565-612",
+   "vote_cell_text": "1oo2",
+   "voting": "1oo2"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP COLUMN FEED (prevent carryover)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "TRIP REFLUX PUMP GA-8920 (protect)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN VENT PCV-8905 (relieve pressure)",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "FA-8901",
+   "id": "SEQ-8901-T3",
+   "initiator": "Drum pressure HIGH-HIGH",
+   "instrument_tag": "PSHH-8902",
+   "row_id": "T3",
+   "row_kind": "trip",
+   "seq_id": "SEQ-8901",
+   "setpoint_text": "> 8 barg",
+   "setpoint_unit": "barg",
+   "setpoint_value": 8.0,
+   "source_page": 1,
+   "span_id": "rev-743b1aef7bb6/p1/613-667",
+   "vote_cell_text": "1oo2",
+   "voting": "1oo2"
+  },
+  {
+   "comparator": null,
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP COLUMN FEED (prevent carryover)",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "TRIP REFLUX PUMP GA-8920 (protect)",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN VENT PCV-8905 (relieve pressure)",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "FA-8901",
+   "id": "SEQ-8901-T4",
+   "initiator": "Emergency stop (manual)",
+   "instrument_tag": "HS-8901",
+   "row_id": "T4",
+   "row_kind": "trip",
+   "seq_id": "SEQ-8901",
+   "setpoint_text": "Manual",
+   "setpoint_unit": null,
+   "setpoint_value": null,
+   "source_page": 1,
+   "span_id": "rev-743b1aef7bb6/p1/668-722",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": "<",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP PUMP MOTOR GA-1201A",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE DISCHARGE XV-1201",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN MIN-FLOW FV-1201",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "START STANDBY PUMP GA-1201B (auto)",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "GA-1201A",
+   "id": "SEQ-1201-T1",
+   "initiator": "Suction pressure LOW-LOW",
+   "instrument_tag": "PSLL-1201",
+   "row_id": "T1",
+   "row_kind": "trip",
+   "seq_id": "SEQ-1201",
+   "setpoint_text": "< 0.5 barg",
+   "setpoint_unit": "barg",
+   "setpoint_value": 0.5,
+   "source_page": 1,
+   "span_id": "rev-1b2a465bf4ad/p1/487-548",
+   "vote_cell_text": "2oo3",
+   "voting": "2oo3"
+  },
+  {
+   "comparator": "<",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP PUMP MOTOR GA-1201A",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE DISCHARGE XV-1201",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN MIN-FLOW FV-1201",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "START STANDBY PUMP GA-1201B (auto)",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "GA-1201A",
+   "id": "SEQ-1201-T2",
+   "initiator": "Discharge flow LOW-LOW (min flow)",
+   "instrument_tag": "FSLL-1201",
+   "row_id": "T2",
+   "row_kind": "trip",
+   "seq_id": "SEQ-1201",
+   "setpoint_text": "< 9 m3/h for 30 s",
+   "setpoint_unit": "m3/h",
+   "setpoint_value": 9.0,
+   "source_page": 1,
+   "span_id": "rev-1b2a465bf4ad/p1/549-626",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP PUMP MOTOR GA-1201A",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE DISCHARGE XV-1201",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN MIN-FLOW FV-1201",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "START STANDBY PUMP GA-1201B (auto)",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "GA-1201A",
+   "id": "SEQ-1201-T3",
+   "initiator": "Bearing vibration HIGH-HIGH",
+   "instrument_tag": "VSHH-1201",
+   "row_id": "T3",
+   "row_kind": "trip",
+   "seq_id": "SEQ-1201",
+   "setpoint_text": "> 7.1 mm/s RMS",
+   "setpoint_unit": "mm/s",
+   "setpoint_value": 7.1,
+   "source_page": 1,
+   "span_id": "rev-1b2a465bf4ad/p1/627-695",
+   "vote_cell_text": "1oo2",
+   "voting": "1oo2"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP PUMP MOTOR GA-1201A",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE DISCHARGE XV-1201",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN MIN-FLOW FV-1201",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "START STANDBY PUMP GA-1201B (auto)",
+     "marked": false
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "GA-1201A",
+   "id": "SEQ-1201-T4",
+   "initiator": "Bearing temperature HIGH-HIGH",
+   "instrument_tag": "TSHH-1201",
+   "row_id": "T4",
+   "row_kind": "trip",
+   "seq_id": "SEQ-1201",
+   "setpoint_text": "> 95 degC",
+   "setpoint_unit": "degC",
+   "setpoint_value": 95.0,
+   "source_page": 1,
+   "span_id": "rev-1b2a465bf4ad/p1/696-759",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": null,
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP PUMP MOTOR GA-1201A",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE DISCHARGE XV-1201",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN MIN-FLOW FV-1201",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "START STANDBY PUMP GA-1201B (auto)",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "GA-1201A",
+   "id": "SEQ-1201-T5",
+   "initiator": "Motor overload / electrical fault",
+   "instrument_tag": "MPR-1201",
+   "row_id": "T5",
+   "row_kind": "trip",
+   "seq_id": "SEQ-1201",
+   "setpoint_text": "MPR relay pickup",
+   "setpoint_unit": null,
+   "setpoint_value": null,
+   "source_page": 1,
+   "span_id": "rev-1b2a465bf4ad/p1/760-835",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": null,
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP PUMP MOTOR GA-1201A",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE DISCHARGE XV-1201",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "OPEN MIN-FLOW FV-1201",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "START STANDBY PUMP GA-1201B (auto)",
+     "marked": false
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "GA-1201A",
+   "id": "SEQ-1201-T6",
+   "initiator": "Local/DCS emergency stop",
+   "instrument_tag": "HS-1201",
+   "row_id": "T6",
+   "row_kind": "trip",
+   "seq_id": "SEQ-1201",
+   "setpoint_text": "Manual",
+   "setpoint_unit": null,
+   "setpoint_value": null,
+   "source_page": 1,
+   "span_id": "rev-1b2a465bf4ad/p1/836-889",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": "<",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP COMPRESSOR MOTOR KC-4501",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "OPEN ANTI-SURGE RECYCLE FV-4502",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "CLOSE SUCTION XV-4501",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN SEAL GAS N2",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "KC-4501",
+   "id": "SEQ-4501-T1",
+   "initiator": "Lube oil pressure LOW-LOW",
+   "instrument_tag": "PSLL-4504",
+   "row_id": "T1",
+   "row_kind": "trip",
+   "seq_id": "SEQ-4501",
+   "setpoint_text": "< 1.5 barg",
+   "setpoint_unit": "barg",
+   "setpoint_value": 1.5,
+   "source_page": 1,
+   "span_id": "rev-f8cb31ac235f/p1/487-549",
+   "vote_cell_text": "2oo3",
+   "voting": "2oo3"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP COMPRESSOR MOTOR KC-4501",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "OPEN ANTI-SURGE RECYCLE FV-4502",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "CLOSE SUCTION XV-4501",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN SEAL GAS N2",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "KC-4501",
+   "id": "SEQ-4501-T2",
+   "initiator": "Discharge temperature HIGH-HIGH",
+   "instrument_tag": "TSHH-4503",
+   "row_id": "T2",
+   "row_kind": "trip",
+   "seq_id": "SEQ-4501",
+   "setpoint_text": "> 140 degC",
+   "setpoint_unit": "degC",
+   "setpoint_value": 140.0,
+   "source_page": 1,
+   "span_id": "rev-f8cb31ac235f/p1/550-616",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP COMPRESSOR MOTOR KC-4501",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "OPEN ANTI-SURGE RECYCLE FV-4502",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "CLOSE SUCTION XV-4501",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN SEAL GAS N2",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "KC-4501",
+   "id": "SEQ-4501-T3",
+   "initiator": "Discharge pressure HIGH-HIGH",
+   "instrument_tag": "PSHH-4502",
+   "row_id": "T3",
+   "row_kind": "trip",
+   "seq_id": "SEQ-4501",
+   "setpoint_text": "> 14 barg",
+   "setpoint_unit": "barg",
+   "setpoint_value": 14.0,
+   "source_page": 1,
+   "span_id": "rev-f8cb31ac235f/p1/617-679",
+   "vote_cell_text": "1oo2",
+   "voting": "1oo2"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP COMPRESSOR MOTOR KC-4501",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "OPEN ANTI-SURGE RECYCLE FV-4502",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "CLOSE SUCTION XV-4501",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN SEAL GAS N2",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "KC-4501",
+   "id": "SEQ-4501-T4",
+   "initiator": "Crosshead vibration HIGH-HIGH",
+   "instrument_tag": "VSHH-4505",
+   "row_id": "T4",
+   "row_kind": "trip",
+   "seq_id": "SEQ-4501",
+   "setpoint_text": "> 11 mm/s",
+   "setpoint_unit": "mm/s",
+   "setpoint_value": 11.0,
+   "source_page": 1,
+   "span_id": "rev-f8cb31ac235f/p1/680-745",
+   "vote_cell_text": "1oo2",
+   "voting": "1oo2"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP COMPRESSOR MOTOR KC-4501",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "OPEN ANTI-SURGE RECYCLE FV-4502",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "CLOSE SUCTION XV-4501",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN SEAL GAS N2",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "KC-4501",
+   "id": "SEQ-4501-T5",
+   "initiator": "Suction KO drum level HIGH-HIGH",
+   "instrument_tag": "LSHH-4510",
+   "row_id": "T5",
+   "row_kind": "trip",
+   "seq_id": "SEQ-4501",
+   "setpoint_text": "> 80 %",
+   "setpoint_unit": "%",
+   "setpoint_value": 80.0,
+   "source_page": 1,
+   "span_id": "rev-f8cb31ac235f/p1/746-808",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": "<",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP COMPRESSOR MOTOR KC-4501",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "OPEN ANTI-SURGE RECYCLE FV-4502",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "CLOSE SUCTION XV-4501",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "MAINTAIN SEAL GAS N2",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "KC-4501",
+   "id": "SEQ-4501-T6",
+   "initiator": "Suction pressure LOW-LOW",
+   "instrument_tag": "PSLL-4501",
+   "row_id": "T6",
+   "row_kind": "trip",
+   "seq_id": "SEQ-4501",
+   "setpoint_text": "< 0.3 barg",
+   "setpoint_unit": "barg",
+   "setpoint_value": 0.3,
+   "source_page": 1,
+   "span_id": "rev-f8cb31ac235f/p1/809-868",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "OPEN LV-6701 FULLY (relieve level)",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE LV-6701 (prevent gas blow-by)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "VENT ACTUATOR - LV-6701 FAILS CLOSED",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "LV-6701",
+   "id": "SEQ-6701-T1",
+   "initiator": "Separator level HIGH-HIGH",
+   "instrument_tag": "LSHH-6710",
+   "row_id": "T1",
+   "row_kind": "trip",
+   "seq_id": "SEQ-6701",
+   "setpoint_text": "> 85 %",
+   "setpoint_unit": "%",
+   "setpoint_value": 85.0,
+   "source_page": 1,
+   "span_id": "rev-939ace9389a8/p1/492-546",
+   "vote_cell_text": "1oo2",
+   "voting": "1oo2"
+  },
+  {
+   "comparator": "<",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "OPEN LV-6701 FULLY (relieve level)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE LV-6701 (prevent gas blow-by)",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "VENT ACTUATOR - LV-6701 FAILS CLOSED",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "LV-6701",
+   "id": "SEQ-6701-T2",
+   "initiator": "Separator level LOW-LOW",
+   "instrument_tag": "LSLL-6710",
+   "row_id": "T2",
+   "row_kind": "trip",
+   "seq_id": "SEQ-6701",
+   "setpoint_text": "< 15 %",
+   "setpoint_unit": "%",
+   "setpoint_value": 15.0,
+   "source_page": 1,
+   "span_id": "rev-939ace9389a8/p1/547-599",
+   "vote_cell_text": "1oo2",
+   "voting": "1oo2"
+  },
+  {
+   "comparator": null,
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "OPEN LV-6701 FULLY (relieve level)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE LV-6701 (prevent gas blow-by)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "VENT ACTUATOR - LV-6701 FAILS CLOSED",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "LV-6701",
+   "id": "SEQ-6701-T3",
+   "initiator": "ESD activation (manual)",
+   "instrument_tag": "HS-6701",
+   "row_id": "T3",
+   "row_kind": "trip",
+   "seq_id": "SEQ-6701",
+   "setpoint_text": "ESD signal",
+   "setpoint_unit": null,
+   "setpoint_value": null,
+   "source_page": 1,
+   "span_id": "rev-939ace9389a8/p1/600-654",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": "<",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "OPEN LV-6701 FULLY (relieve level)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE LV-6701 (prevent gas blow-by)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "VENT ACTUATOR - LV-6701 FAILS CLOSED",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "LV-6701",
+   "id": "SEQ-6701-T4",
+   "initiator": "Instrument air pressure LOW",
+   "instrument_tag": "PSL-6702",
+   "row_id": "T4",
+   "row_kind": "trip",
+   "seq_id": "SEQ-6701",
+   "setpoint_text": "< 1.0 barg",
+   "setpoint_unit": "barg",
+   "setpoint_value": 1.0,
+   "source_page": 1,
+   "span_id": "rev-939ace9389a8/p1/655-714",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP DRUM DRIVE MOTOR",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE STEAM INLET TV-2301",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "TRIP CENTRIFUGE FEED GF-2210",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "OPEN N2 PURGE FV-2302 (max inert)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "YD-2301",
+   "id": "SEQ-5500-T1",
+   "initiator": "Outlet temperature HIGH-HIGH",
+   "instrument_tag": "TSHH-2301",
+   "row_id": "T1",
+   "row_kind": "trip",
+   "seq_id": "SEQ-5500",
+   "setpoint_text": "> 125 degC",
+   "setpoint_unit": "degC",
+   "setpoint_value": 125.0,
+   "source_page": 1,
+   "span_id": "rev-16d4f296c47e/p1/483-546",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": "<",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP DRUM DRIVE MOTOR",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE STEAM INLET TV-2301",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "TRIP CENTRIFUGE FEED GF-2210",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "OPEN N2 PURGE FV-2302 (max inert)",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "YD-2301",
+   "id": "SEQ-5500-T2",
+   "initiator": "Nitrogen purge flow LOW-LOW",
+   "instrument_tag": "FSLL-2302",
+   "row_id": "T2",
+   "row_kind": "trip",
+   "seq_id": "SEQ-5500",
+   "setpoint_text": "< 200 kg/h",
+   "setpoint_unit": "kg/h",
+   "setpoint_value": 200.0,
+   "source_page": 1,
+   "span_id": "rev-16d4f296c47e/p1/547-611",
+   "vote_cell_text": "2oo3",
+   "voting": "2oo3"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP DRUM DRIVE MOTOR",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE STEAM INLET TV-2301",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "TRIP CENTRIFUGE FEED GF-2210",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "OPEN N2 PURGE FV-2302 (max inert)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "YD-2301",
+   "id": "SEQ-5500-T3",
+   "initiator": "Inlet chute level HIGH-HIGH",
+   "instrument_tag": "LSHH-2303",
+   "row_id": "T3",
+   "row_kind": "trip",
+   "seq_id": "SEQ-5500",
+   "setpoint_text": "> 90 %",
+   "setpoint_unit": "%",
+   "setpoint_value": 90.0,
+   "source_page": 1,
+   "span_id": "rev-16d4f296c47e/p1/612-668",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": "<",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP DRUM DRIVE MOTOR",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE STEAM INLET TV-2301",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "TRIP CENTRIFUGE FEED GF-2210",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "OPEN N2 PURGE FV-2302 (max inert)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "YD-2301",
+   "id": "SEQ-5500-T4",
+   "initiator": "Drum speed LOW-LOW (chain slip)",
+   "instrument_tag": "SSLL-2305",
+   "row_id": "T4",
+   "row_kind": "trip",
+   "seq_id": "SEQ-5500",
+   "setpoint_text": "< 1 rpm",
+   "setpoint_unit": "rpm",
+   "setpoint_value": 1.0,
+   "source_page": 1,
+   "span_id": "rev-16d4f296c47e/p1/669-730",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  },
+  {
+   "comparator": ">",
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP DRUM DRIVE MOTOR",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE STEAM INLET TV-2301",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "TRIP CENTRIFUGE FEED GF-2210",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "OPEN N2 PURGE FV-2302 (max inert)",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "YD-2301",
+   "id": "SEQ-5500-T5",
+   "initiator": "Vent O2 HIGH-HIGH",
+   "instrument_tag": "ASHH-2307",
+   "row_id": "T5",
+   "row_kind": "trip",
+   "seq_id": "SEQ-5500",
+   "setpoint_text": "> 8 % O2",
+   "setpoint_unit": "%",
+   "setpoint_value": 8.0,
+   "source_page": 1,
+   "span_id": "rev-16d4f296c47e/p1/731-783",
+   "vote_cell_text": "1oo2",
+   "voting": "1oo2"
+  },
+  {
+   "comparator": null,
+   "effects": [
+    {
+     "effect_id": "EFF-1",
+     "final_element": "TRIP DRUM DRIVE MOTOR",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-2",
+     "final_element": "CLOSE STEAM INLET TV-2301",
+     "marked": true
+    },
+    {
+     "effect_id": "EFF-3",
+     "final_element": "TRIP CENTRIFUGE FEED GF-2210",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-4",
+     "final_element": "OPEN N2 PURGE FV-2302 (max inert)",
+     "marked": false
+    },
+    {
+     "effect_id": "EFF-5",
+     "final_element": "ANNUNCIATE ALARM ON DCS",
+     "marked": true
+    }
+   ],
+   "effects_basis": "X count from the extracted text; column identity from packages/interlock_effects.json (agent_transcription, review pending), checked against the text by harness.master",
+   "equipment_tag": "YD-2301",
+   "id": "SEQ-5500-T6",
+   "initiator": "Drive motor overload",
+   "instrument_tag": "MPR-2301",
+   "row_id": "T6",
+   "row_kind": "trip",
+   "seq_id": "SEQ-5500",
+   "setpoint_text": "MPR pickup",
+   "setpoint_unit": null,
+   "setpoint_value": null,
+   "source_page": 1,
+   "span_id": "rev-16d4f296c47e/p1/784-838",
+   "vote_cell_text": "1oo1",
+   "voting": "1oo1"
+  }
+ ]
+}

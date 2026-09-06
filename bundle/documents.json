@@ -1,0 +1,982 @@
+[
+ {
+  "class": "opl",
+  "doc_no": "OPL-FA-8901-03",
+  "file_marker": null,
+  "id": "doc-03d0e5042a2d",
+  "page_count": 1,
+  "sha256": "03d0e5042a2d046b645475eabd110f850a08eaab5b37374c0c196b1e7a808fe8",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/One Point Lesson (OPL)/OPL-FA-8901-03 - Water_Boot_Draining_LT_8903.pdf",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-YD-2301-07",
+  "file_marker": null,
+  "id": "doc-08fcf7ac5d78",
+  "page_count": 1,
+  "sha256": "08fcf7ac5d782983c4905fda01c1d9848acb3b04d2ff6070322459775b391376",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/One Point Lesson/OPL-YD-2301-07 - Trunnion_Bearing_Inspection_Drum_Float.pdf",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-GA-1201A-03",
+  "file_marker": "edited",
+  "id": "doc-0f19e6b566c4",
+  "page_count": 1,
+  "sha256": "0f19e6b566c444b48615c4c700d464a74c4747fcb67f34651c60656059dd03fb",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/One Point Lesson/OPL-GA-1201A-03 - Pump_Motor_Alignment_Check_Laser_edited.pdf",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "interlock",
+  "doc_no": "TJC-LLD-IL-YD-2301",
+  "file_marker": null,
+  "id": "doc-16d4f296c47e",
+  "page_count": 1,
+  "sha256": "16d4f296c47eacc891e26bb77e25c87bcbde8340ec4dcab64e004ea44d12df31",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/Interlock Logic Diagram - YD-2301.pdf",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-LV-6701-02",
+  "file_marker": null,
+  "id": "doc-18d193968911",
+  "page_count": 1,
+  "sha256": "18d1939689119299649afa0183381bd66ed81860bc2917905f44a0c2990db869",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/OPL (One Point Lessons)/OPL-LV-6701-02 - Instrument_Air_Supply_Filter_Regulator.pdf",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "pid",
+  "doc_no": "TJC-LLD-PID-XXXX",
+  "file_marker": null,
+  "id": "doc-18ff60f606ab",
+  "page_count": 1,
+  "sha256": "18ff60f606abd5617fdeeece81dfc19ef1724cc7e7a40a52185aea9ba2f69f82",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/P&ID_Set_02.png",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-GA-1201A-02",
+  "file_marker": "EDITED_ONE_PAGE",
+  "id": "doc-192d609c3098",
+  "page_count": 1,
+  "sha256": "192d609c3098bc68712dbd876f7b792ea51b3e1c547e48cb6d779d38f7867b01",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/One Point Lesson/OPL-GA-1201A-02 - Bearing_Oil_Bath_Level_Greasing_EDITED_ONE_PAGE.pdf",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-GA-1201A-06",
+  "file_marker": "EDITED_ONE_PAGE",
+  "id": "doc-1a392e2eebbf",
+  "page_count": 1,
+  "sha256": "1a392e2eebbfae1cd8f5a89e7ad49a2ba17c8d2da585017b6b6c5b91a066d78d",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/One Point Lesson/OPL-GA-1201A-06 - Start_Up_Priming_Procedure_GA_1201A_EDITED_ONE_PAGE.pdf",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "interlock",
+  "doc_no": "TJC-LLD-IL-GA-1201A",
+  "file_marker": null,
+  "id": "doc-1b2a465bf4ad",
+  "page_count": 1,
+  "sha256": "1b2a465bf4ade4b49625fe4b96cdf79ee66e4e31b976ae711f1ab98e24dfd886",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/Interlock Logic Diagram - GA-1201A.pdf",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "interlock",
+  "doc_no": "TJC-LLD-IL-EA-5601",
+  "file_marker": null,
+  "id": "doc-1b30dab2c3c9",
+  "page_count": 1,
+  "sha256": "1b30dab2c3c9901173342aeae672fa1a0dd173df7806c2ec64f95f4c66f5c628",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/Interlock Logic Diagram EA-5601.pdf",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-KC-4501-05",
+  "file_marker": null,
+  "id": "doc-1c06cc06b083",
+  "page_count": 1,
+  "sha256": "1c06cc06b08301326dff0fc9b9ce34b4e568cd1cfdf63baf75b152f8184bcc15",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/OPL (One Point Lessons)/OPL-KC-4501-05 Crosshead_Vibration_Monitoring_VSHH_4505.pdf",
+  "subject_tag": "KC-4501"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-FA-8901-06",
+  "file_marker": null,
+  "id": "doc-1d71e82f28f0",
+  "page_count": 1,
+  "sha256": "1d71e82f28f0639e3eec1324c82da4aaa7c9f29e3392361676f8221ac5549cf5",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/One Point Lesson (OPL)/OPL-FA-8901-06 - Corrosion_Thickness_Inspection.pdf",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-YD-2301-02",
+  "file_marker": null,
+  "id": "doc-1e985621f95e",
+  "page_count": 1,
+  "sha256": "1e985621f95e1e3fe71dee14be0abf278eb8fae6f4ba5d1496e746f2ae629ee5",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/One Point Lesson/OPL-YD-2301-02 - Gland_Packing_Replacement_PTFE_4526L.pdf",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-LV-6701-01",
+  "file_marker": null,
+  "id": "doc-26a3e1ae0c85",
+  "page_count": 1,
+  "sha256": "26a3e1ae0c85abc89826b0412ca94ef0c0ba6509b91fd93efe2ac00ec8199507",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/OPL (One Point Lessons)/OPL-LV-6701-01 - Control_Valve_Stroke_Calibration_DVC6200.pdf",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-CT-7801-03",
+  "file_marker": null,
+  "id": "doc-2704b766d7ac",
+  "page_count": 1,
+  "sha256": "2704b766d7acbf33b4cac79086b6aa5b37fc2622cd0a273e93a8b96c41a05829",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/One Point Lesson (OPL)/OPL-CT-7801-03 - Fan_Blade_Inspection_Balance_FRP.pdf",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-DC-3401A-05",
+  "file_marker": null,
+  "id": "doc-2ac61d30549d",
+  "page_count": 1,
+  "sha256": "2ac61d30549d241169ca4380f6f21a8cb666f9b342bbd7369caa1febd8c0a933",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/OPL (One Point Lessons)/OPL-DC-3401A-05 Cooling_Down_Catalyst_Preservation.pdf",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-CT-7801-06",
+  "file_marker": null,
+  "id": "doc-2badb0699e9d",
+  "page_count": 1,
+  "sha256": "2badb0699e9dd0c470fbad27c296393b0474c93e3ea7e638723e1248f63ea7b8",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/One Point Lesson (OPL)/OPL-CT-7801-06 - Gearbox_Vibration_Monitoring_VSHH_7802.pdf",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "pid",
+  "doc_no": "TJC-LLD-PID-5601",
+  "file_marker": null,
+  "id": "doc-3686d03098e6",
+  "page_count": 1,
+  "sha256": "3686d03098e6063b82042dae6788eddfefe545c4468b8aac82a33f3703af4bc1",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/P&ID SET 5.png",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-KC-4501-06",
+  "file_marker": null,
+  "id": "doc-3863216f4c98",
+  "page_count": 1,
+  "sha256": "3863216f4c98e6eaff8017c4376383947e7b5b06e1eeaea8c551ad88658a0b9c",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/OPL (One Point Lessons)/OPL-KC-4501-06 Suction_KO_Drum_Draining_FA_4510.pdf",
+  "subject_tag": "KC-4501"
+ },
+ {
+  "class": "ga_drawing",
+  "doc_no": "TJC-LLD-GA-YD-2301",
+  "file_marker": null,
+  "id": "doc-3b31574c67f6",
+  "page_count": 1,
+  "sha256": "3b31574c67f618354b1021bdc6760c89555d4b03bfbcb21a3698d133b7bba23f",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/Equipment GA Drawing - YD-2301.pdf",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "plot_plan",
+  "doc_no": "TJC-LLD-PP-FA-8901",
+  "file_marker": null,
+  "id": "doc-3c3d6ed474e0",
+  "page_count": 1,
+  "sha256": "3c3d6ed474e03c8f246f6ae379fd5685c2ae96d133bd45e3f452e1ec4713809a",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/Plot Plan - FA-8901.pdf",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-LV-6701-04",
+  "file_marker": null,
+  "id": "doc-3c9cc0563f32",
+  "page_count": 1,
+  "sha256": "3c9cc0563f321e24ba9cb20af79810ba8354ec296226bbb15149e532c430414f",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/OPL (One Point Lessons)/OPL-LV-6701-04 - Positioner_Response_Loop_Check.pdf",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "interlock",
+  "doc_no": "TJC-LLD-IL-DC-3401A",
+  "file_marker": null,
+  "id": "doc-3e2e8d0b4977",
+  "page_count": 1,
+  "sha256": "3e2e8d0b497742e0fcc818aad5061993e551a58036e2d45a4717db98ee43cda2",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/Interlock Logic Diagram DC-3401A.pdf",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "plot_plan",
+  "doc_no": "TJC-LLD-PP-DC-3401A",
+  "file_marker": null,
+  "id": "doc-418116ba7c29",
+  "page_count": 1,
+  "sha256": "418116ba7c290a4d631e9558ed939341d9ccc34d478060cbef13366d9c9bfd46",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/Plot Plan DC-3401A.pdf",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-DC-3401A-02",
+  "file_marker": null,
+  "id": "doc-42f18445dba0",
+  "page_count": 1,
+  "sha256": "42f18445dba0d723fa2b1d067a13b07dcd700c935855bd7ba6f25bad6a5c4dcf",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/OPL (One Point Lessons)/OPL-DC-3401A-02 Inerting_O2_Freeing_Below_100_ppm.pdf",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-DC-3401A-03",
+  "file_marker": null,
+  "id": "doc-468ad6e6a04c",
+  "page_count": 1,
+  "sha256": "468ad6e6a04c12e098b436728e2bca0ed9b63df7e4464c7538caec827d19dc24",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/OPL (One Point Lessons)/OPL-DC-3401A-03 Heating_Up_Bed_Homogenisation.pdf",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "datasheet",
+  "doc_no": "TJC-LLD-DS-FA-8901",
+  "file_marker": null,
+  "id": "doc-5682ee067bd1",
+  "page_count": 1,
+  "sha256": "5682ee067bd1f46f82e0714597eda09b164187bd14d65c2e03d45950c61be9cd",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/Equipment Datasheet - FA-8901.pdf",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "interlock",
+  "doc_no": "TJC-LLD-IL-CT-7801",
+  "file_marker": null,
+  "id": "doc-5956488b1878",
+  "page_count": 1,
+  "sha256": "5956488b1878d544af7b29d92ad5540aad805611af781f44523a4d2530aa82af",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/Interlock Logic Diagram - CT-7801.pdf",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "plot_plan",
+  "doc_no": "TJC-LLD-PP-LV-6701",
+  "file_marker": null,
+  "id": "doc-59f44a2fda5d",
+  "page_count": 1,
+  "sha256": "59f44a2fda5d74c8a7715e61fd450000b2156cb777476b9070c9f83d92db7b8e",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/Plot Plan LV-6701.pdf",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-FA-8901-04",
+  "file_marker": null,
+  "id": "doc-5abdd24159fd",
+  "page_count": 1,
+  "sha256": "5abdd24159fd3325400f8a137cab9c7f5a8f4e8f56893b8c459d9ee2c518f7c9",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/One Point Lesson (OPL)/OPL-FA-8901-04 - Nitrogen_Blanketing_PCV_8905.pdf",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "datasheet",
+  "doc_no": "TJC-LLD-DS-KC-4501",
+  "file_marker": null,
+  "id": "doc-5ad9ec251d90",
+  "page_count": 1,
+  "sha256": "5ad9ec251d9030ef1615e984dfceea307467bee18b0639064e2ad33d64c00ed4",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/Equipment Datasheet - KC-4501.pdf",
+  "subject_tag": "KC-4501"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-CT-7801-07",
+  "file_marker": null,
+  "id": "doc-5f304ecc2b5a",
+  "page_count": 1,
+  "sha256": "5f304ecc2b5a12e5693c20c4dd837d13d7839c279905fd8ad270f3296cd9dc19",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/One Point Lesson (OPL)/OPL-CT-7801-07 - Conductivity_Blowdown_Control_AI_7806.pdf",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "workbook",
+  "doc_no": null,
+  "file_marker": null,
+  "id": "doc-62208bb3dd10",
+  "page_count": 212,
+  "sha256": "62208bb3dd107c290af9fb0bd2d51b3015580d3614b055313d132bde5f909f11",
+  "source_path": "Maintenance History (All Equipment).xlsx",
+  "subject_tag": null
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-EA-5601-04",
+  "file_marker": null,
+  "id": "doc-682c7aa0e205",
+  "page_count": 1,
+  "sha256": "682c7aa0e205845374ff05efff9efc4c58842012a3c2cf73eed9bb4460f4f194",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/OPL (One Point Lessons)/OPL-EA-5601-04 - Thermal_Shock_Avoidance_on_Start_Up.pdf",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "pid",
+  "doc_no": "TJC-LLD-PID-4501",
+  "file_marker": null,
+  "id": "doc-698f6cc812f8",
+  "page_count": 1,
+  "sha256": "698f6cc812f8fb3b143ed8dc463dbb3d80551afe0c3604f44458937616dbccbd",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/P&ID SET 4.png",
+  "subject_tag": "KC-4501"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-LV-6701-03",
+  "file_marker": null,
+  "id": "doc-6a2af0c157be",
+  "page_count": 1,
+  "sha256": "6a2af0c157be4e126fce5aceebde0b12dca0fa9445bd1ed78d3582d5d87bc528",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/OPL (One Point Lessons)/OPL-LV-6701-03 - Packing_Adjustment_PTFE_V_Ring.pdf",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-CT-7801-05",
+  "file_marker": null,
+  "id": "doc-6a7baf0db981",
+  "page_count": 1,
+  "sha256": "6a7baf0db981f0b7b74e81c96025fdddc208e8eb2b7eebd884439e73886bf0ef",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/One Point Lesson (OPL)/OPL-CT-7801-05 - Drift_Eliminator_Fill_Inspection.pdf",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-LV-6701-06",
+  "file_marker": null,
+  "id": "doc-6eeef5996e2d",
+  "page_count": 1,
+  "sha256": "6eeef5996e2d9c9e128cdbc635d320195c96ce8f70e7f7e7261a3d459f91733f",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/OPL (One Point Lessons)/OPL-LV-6701-06 - Fail_Closed_ESD_Action_Verification.pdf",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "interlock",
+  "doc_no": "TJC-LLD-IL-FA-8901",
+  "file_marker": null,
+  "id": "doc-743b1aef7bb6",
+  "page_count": 1,
+  "sha256": "743b1aef7bb6e0b51f051370e305514d06cf07467e8b4efbafafbac757f18a47",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/Interlock Logic Diagram - FA-8901.pdf",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-YD-2301-06",
+  "file_marker": null,
+  "id": "doc-76e35a21c6e7",
+  "page_count": 1,
+  "sha256": "76e35a21c6e70a0a0fc4446d6280d3102137182cf16c182a9c0d6d2c2240f7ba",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/One Point Lesson/OPL-YD-2301-06 - Outlet_Moisture_Control_Retention_Time_M.pdf",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-DC-3401A-07",
+  "file_marker": null,
+  "id": "doc-79c011db7221",
+  "page_count": 1,
+  "sha256": "79c011db7221a5f21da3c5f7446f6b6b8af10b393024daf258307a33b2854cf1",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/OPL (One Point Lessons)/OPL-DC-3401A-07 Manway_Gasket_Box_Up_After_Catalyst_Chan.pdf",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "pid",
+  "doc_no": "TJC-LLD-PID-XXXX",
+  "file_marker": null,
+  "id": "doc-7cf17027cf00",
+  "page_count": 1,
+  "sha256": "7cf17027cf005b44fb77d2ad5b906e0e953b20b8156aa97a11c1ded6d4559bab",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/P&ID SET 6.png",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-GA-1201A-05",
+  "file_marker": "edited",
+  "id": "doc-7da1c7cd27cc",
+  "page_count": 1,
+  "sha256": "7da1c7cd27cca2d54cd7995dd79fc496f67e17168e56b8f4df50159940b705bd",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/One Point Lesson/OPL-GA-1201A-05 - Cold_Alignment_vs_Hot_Check_for_Hexane_S_edited.pdf",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-DC-3401A-04",
+  "file_marker": null,
+  "id": "doc-80f0edee5c1e",
+  "page_count": 1,
+  "sha256": "80f0edee5c1ed086f05b4840efa4ec0ae5b4ab64013f99f45c916d43c7390d14",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/OPL (One Point Lessons)/OPL-DC-3401A-04 Hydrogen_Reduction_Safety_Exotherm_Contr.pdf",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-KC-4501-01",
+  "file_marker": null,
+  "id": "doc-81858f8ffc16",
+  "page_count": 1,
+  "sha256": "81858f8ffc1636337bb583436b37402eeee961b8c2d0351f0c66cd494ad4c83b",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/OPL (One Point Lessons)/OPL-KC-4501-01 Lube_Oil_System_Pre_Start_Priming.pdf",
+  "subject_tag": "KC-4501"
+ },
+ {
+  "class": "ga_drawing",
+  "doc_no": "TJC-LLD-GA-FA-8901",
+  "file_marker": null,
+  "id": "doc-81c4c8cf3d2b",
+  "page_count": 1,
+  "sha256": "81c4c8cf3d2b2990c716583c0e797bdad6f3419a35dce2ce132dfa86f6e1de18",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/Equipment GA Drawing - FA-8901.pdf",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-CT-7801-04",
+  "file_marker": null,
+  "id": "doc-850266fd7d3d",
+  "page_count": 1,
+  "sha256": "850266fd7d3dc9f651fe7ca21039a2127f3682f74fa2ba72ed9b7f2d6406a677",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/One Point Lesson (OPL)/OPL-CT-7801-04 - Circulating_Water_pH_Control_AI_7805.pdf",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "ga_drawing",
+  "doc_no": "TJC-LLD-GA-GA-1201A",
+  "file_marker": null,
+  "id": "doc-88469c528937",
+  "page_count": 1,
+  "sha256": "88469c528937820d3b2a23c337e01efed71a321bedb8f27ae2b0c0ba740a6716",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/Equipment GA Drawing - GA-1201A.pdf",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "ga_drawing",
+  "doc_no": "TJC-LLD-GA-EA-5601",
+  "file_marker": null,
+  "id": "doc-88f3d4a32736",
+  "page_count": 1,
+  "sha256": "88f3d4a327367aa61d72df8eeeaacdbc6b6a2813224530725afd5b2a84b4445a",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/Equipment GA Drawing EA-5601.pdf",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "ga_drawing",
+  "doc_no": "TJC-LLD-GA-LV-6701",
+  "file_marker": null,
+  "id": "doc-8ae170ad4c3f",
+  "page_count": 1,
+  "sha256": "8ae170ad4c3f5d400b75973a182ece642d16ece219c1b710b6e0aed275b601d8",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/Equipment GA Drawing - LV-6701.pdf",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "datasheet",
+  "doc_no": "TJC-LLD-DS-EA-5601",
+  "file_marker": null,
+  "id": "doc-8d6b454ad2b4",
+  "page_count": 1,
+  "sha256": "8d6b454ad2b42ce4836ca9be4bedca0c813ac92835e2f185237c9e875e0da114",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/Equipment Datasheet - EA-5601.pdf",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-FA-8901-02",
+  "file_marker": null,
+  "id": "doc-8e8f7f448771",
+  "page_count": 1,
+  "sha256": "8e8f7f448771795935f44f337250ecab644f32c4a056eb19091127df85f01c6b",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/One Point Lesson (OPL)/OPL-FA-8901-02 - PSV_8901_Testing_Car_Seal_Management.pdf",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "datasheet",
+  "doc_no": "TJC-LLD-DS-GA-1201A",
+  "file_marker": null,
+  "id": "doc-8f1851948743",
+  "page_count": 1,
+  "sha256": "8f185194874313e1b69b29aadcecec0e61c93e3d74617501c43e070192b8dccb",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/Equipment Datasheet - GA-1201A.pdf",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-EA-5601-06",
+  "file_marker": null,
+  "id": "doc-8fa5f7ed00dc",
+  "page_count": 1,
+  "sha256": "8fa5f7ed00dcf7e798f1930999be721ce9da43194692f44ce2bd45e23084d1e6",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/OPL (One Point Lessons)/OPL-EA-5601-06 - Fouling_Trend_Cleaning_Schedule_PDT_5605.pdf",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "interlock",
+  "doc_no": "TJC-LLD-IL-LV-6701",
+  "file_marker": null,
+  "id": "doc-939ace9389a8",
+  "page_count": 1,
+  "sha256": "939ace9389a8da96e085e1e24f181f106e1def1767abe91f331355085edf10f3",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/Interlock Logic Diagram - LV-6701.pdf",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "organiser_note",
+  "doc_no": null,
+  "file_marker": null,
+  "id": "doc-944143a978e9",
+  "page_count": 10,
+  "sha256": "944143a978e959b6eafc58270cb78495f7f49d3d14a496f6f3793253e6f0f268",
+  "source_path": "Data Set Explanation for Case 1 Manufacturing Knowledge Hub.pptx",
+  "subject_tag": null
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-CT-7801-01",
+  "file_marker": null,
+  "id": "doc-98989fc6489c",
+  "page_count": 1,
+  "sha256": "98989fc6489cbd9ebb72b280479256af178d179df3dceae72c1c7f82674da891",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/One Point Lesson (OPL)/OPL-CT-7801-01 - Barscreen_Cleaning_Suction_Screen.pdf",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-GA-1201A-04",
+  "file_marker": "EDITED_KEEP_SIZE_REFINED_TABLE",
+  "id": "doc-99c21b6749c8",
+  "page_count": 1,
+  "sha256": "99c21b6749c8afaf7cbbe8e8824c8a2512e367fec4b936176a7255b667488a58",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/One Point Lesson/OPL-GA-1201A-04 - Minimum_Flow_Line_Operation_Deadhead_Pro_EDITED_KEEP_SIZE_REFINED_TABLE.pdf",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-DC-3401A-01",
+  "file_marker": null,
+  "id": "doc-a2b637ea5f1e",
+  "page_count": 1,
+  "sha256": "a2b637ea5f1e545a4b09b6f04e350ba35b3b71a181fbaac2bfc5a29474f5f9be",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/OPL (One Point Lessons)/OPL-DC-3401A-01 Reduction_DC_3401A_4_Step_Overview.pdf",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "pid",
+  "doc_no": null,
+  "file_marker": null,
+  "id": "doc-a3a6b1f0f149",
+  "page_count": 1,
+  "sha256": "a3a6b1f0f149e291ffc490a07eb991fe23ed83296cabc97e8f4b2027c875a6b7",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/P&ID Set 3.png",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-GA-1201A-01",
+  "file_marker": "edited_one_page",
+  "id": "doc-a55be95bceff",
+  "page_count": 1,
+  "sha256": "a55be95bceff6a52d9cfedea59daa7acf30b03a1f2a57d1cb907b6417b87b1b7",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/One Point Lesson/OPL-GA-1201A-01 - Mechanical_Seal_Flush_API_Plan_11_Verifi_edited_one_page.pdf",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-KC-4501-04",
+  "file_marker": null,
+  "id": "doc-a628d9837c3d",
+  "page_count": 1,
+  "sha256": "a628d9837c3d7d42f40c367b622c56206dfea2bce9e92bd1fae382e11df5ac88",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/OPL (One Point Lessons)/OPL-KC-4501-04 Anti_Surge_Recycle_Operation.pdf",
+  "subject_tag": "KC-4501"
+ },
+ {
+  "class": "datasheet",
+  "doc_no": "TJC-LLD-DS-DC-3401A",
+  "file_marker": null,
+  "id": "doc-a7aa4c227eea",
+  "page_count": 1,
+  "sha256": "a7aa4c227eeaea9a16fbaa0f9385493347ab80873e2312c8e329d5f026f3b916",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/Equipment Datasheet - DC-3401A.pdf",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-YD-2301-01",
+  "file_marker": null,
+  "id": "doc-a890a1e23396",
+  "page_count": 1,
+  "sha256": "a890a1e233961eb6d01e9502bcf29cb9c5d9134815b79d1a68a27e1946972419",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/One Point Lesson/OPL-YD-2301-01 - Nitrogen_Inerting_Before_Steam_On.pdf",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-YD-2301-04",
+  "file_marker": null,
+  "id": "doc-ad20663f608f",
+  "page_count": 1,
+  "sha256": "ad20663f608f51ccd5dfa40d6064c45127509cae159d43c21c7606b8d8b9e30f",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/One Point Lesson/OPL-YD-2301-04 - Controlled_Temperature_Ramp_Up_Procedure.pdf",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-EA-5601-03",
+  "file_marker": null,
+  "id": "doc-b3a4b92dc6c1",
+  "page_count": 1,
+  "sha256": "b3a4b92dc6c1ecd625ba1b3523cb815745eb3fc6f1c58e1a925533c6653c5ed2",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/OPL (One Point Lessons)/OPL-EA-5601-03 - Steam_Trap_Health_Check.pdf",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "pid",
+  "doc_no": "TJC-LLD-PID-XXXX",
+  "file_marker": null,
+  "id": "doc-b470d97ed566",
+  "page_count": 1,
+  "sha256": "b470d97ed566e41a504fefe93fbc448a3b9fc3c6cf94594bfc66b8ef7afdf6ce",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/P&ID_Set 8.png",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-EA-5601-07",
+  "file_marker": null,
+  "id": "doc-b6df4fc6cdae",
+  "page_count": 1,
+  "sha256": "b6df4fc6cdaee33f4b5b62759df59138b950feda94fedc3c02fd9ef813effb64",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/OPL (One Point Lessons)/OPL-EA-5601-07 - PSV_5607_Testing_Car_Seal_Management.pdf",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-YD-2301-03",
+  "file_marker": null,
+  "id": "doc-b739f14aa8f0",
+  "page_count": 1,
+  "sha256": "b739f14aa8f0c16bc81a2798ee06f8d8368f1adc3eba76a70173074b431a1991",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/One Point Lesson/OPL-YD-2301-03 - Chain_Sprocket_Lubrication_and_Tension_S.pdf",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "plot_plan",
+  "doc_no": "TJC-LLD-PP-YD-2301",
+  "file_marker": null,
+  "id": "doc-beeb43d007cb",
+  "page_count": 1,
+  "sha256": "beeb43d007cb3b5c7bc348f9d005a74f49b9f9a426195e1be245da165dcd7469",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/Plot Plan - YD-2301.pdf",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-KC-4501-03",
+  "file_marker": null,
+  "id": "doc-c7e7ce726f37",
+  "page_count": 1,
+  "sha256": "c7e7ce726f3754861a47621f7d2c85a2e1dd065221a0b7735ff159820e683e7c",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/OPL (One Point Lessons)/OPL-KC-4501-03 Seal_Gas_N2_Buffer_Management.pdf",
+  "subject_tag": "KC-4501"
+ },
+ {
+  "class": "pid",
+  "doc_no": "TJC-LLD-PID-XXXX",
+  "file_marker": null,
+  "id": "doc-c825f0afd6a1",
+  "page_count": 1,
+  "sha256": "c825f0afd6a15261396e4d17cac75d8e870d26ca592f2c575c2ecda5d0db1ab0",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/PID_Set_01.png",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "ga_drawing",
+  "doc_no": "TJC-LLD-GA-CT-7801",
+  "file_marker": null,
+  "id": "doc-cd865b3ae7d3",
+  "page_count": 1,
+  "sha256": "cd865b3ae7d3248ce6d8d2dab6c0c7f88714ca79663675300bed6942436215ff",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/Equipment GA Drawing - CT-7801.pdf",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-KC-4501-07",
+  "file_marker": null,
+  "id": "doc-d13e41e2dc26",
+  "page_count": 1,
+  "sha256": "d13e41e2dc26f47aed914d31376f71deced9a4cb9d315956d9ac239ae897c12b",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/OPL (One Point Lessons)/OPL-KC-4501-07 Intercooler_EA_4502_Performance_Check.pdf",
+  "subject_tag": "KC-4501"
+ },
+ {
+  "class": "datasheet",
+  "doc_no": "TJC-LLD-DS-YD-2301",
+  "file_marker": null,
+  "id": "doc-d2383d821942",
+  "page_count": 1,
+  "sha256": "d2383d8219426ea6f08c682a5d83158b9920b0e9d6a0399366db494c25f191b5",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/Equipment Datasheet - YD-2301.pdf",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-EA-5601-02",
+  "file_marker": null,
+  "id": "doc-d76e9d01a2f8",
+  "page_count": 1,
+  "sha256": "d76e9d01a2f841d4c1f958c59a3aac5600c603bef3ca0ca48ab0cb32fcb12f44",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/OPL (One Point Lessons)/OPL-EA-5601-02 - Gasket_Replacement_Flange_Box_Up.pdf",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "plot_plan",
+  "doc_no": "TJC-LLD-PP-EA-5601",
+  "file_marker": null,
+  "id": "doc-da0b7c531bb7",
+  "page_count": 1,
+  "sha256": "da0b7c531bb7943cfccf344662b1e9ae23ca71bc5be0951428781d5471d6ee3a",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/Plot Plan EA-5601.pdf",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-GA-1201A-07",
+  "file_marker": "EDITED",
+  "id": "doc-dde6aaf2822b",
+  "page_count": 1,
+  "sha256": "dde6aaf2822bc4d6fdc9f9ae37c59fb6252161c0e4f7e206bd10d38f139ba52c",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/One Point Lesson/OPL-GA-1201A-07 - Vibration_Trend_Monitoring_Alarm_Respons_EDITED.pdf",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-FA-8901-07",
+  "file_marker": null,
+  "id": "doc-de26a8dceb96",
+  "page_count": 1,
+  "sha256": "de26a8dceb9666438e83d5e5a6013b20da191e32e365bf13a61e5b81684ce5c5",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/One Point Lesson (OPL)/OPL-FA-8901-07 - Manway_Box_Up_After_Internal_Inspection.pdf",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "datasheet",
+  "doc_no": "TJC-LLD-DS-LV-6701",
+  "file_marker": null,
+  "id": "doc-de4f69577847",
+  "page_count": 1,
+  "sha256": "de4f69577847a0373c809175be688ccc899f0978e4954e3b2c80e95299fadbb7",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/Equipment Datasheet - LV-6701.pdf",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "plot_plan",
+  "doc_no": "TJC-LLD-PP-CT-7801",
+  "file_marker": null,
+  "id": "doc-e030ddbb7831",
+  "page_count": 1,
+  "sha256": "e030ddbb7831a0fe3e71dcd29d945e5a4adf731b1aa8af8238cb6d6fd6d4b871",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/Plot Plan - CT-7801.pdf",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "datasheet",
+  "doc_no": "TJC-LLD-DS-CT-7801",
+  "file_marker": null,
+  "id": "doc-e84e4224c046",
+  "page_count": 1,
+  "sha256": "e84e4224c046d01de8539af2906f4de09ce26f0dcdb3fcf5348b7d09fd4c30af",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/Equipment Datasheet - CT-7801.pdf",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-EA-5601-05",
+  "file_marker": null,
+  "id": "doc-e92ad1d11e06",
+  "page_count": 1,
+  "sha256": "e92ad1d11e06343ba1eab37332a9427e780e47c8257ac7f43c5e35b477b7dcc4",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/OPL (One Point Lessons)/OPL-EA-5601-05 - Tube_Leak_Detection_Plugging.pdf",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-LV-6701-07",
+  "file_marker": null,
+  "id": "doc-ebe41137cede",
+  "page_count": 1,
+  "sha256": "ebe41137cede80793499aa8b381560c18616c57e7225f509a320f89cd1e8f3a2",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/OPL (One Point Lessons)/OPL-LV-6701-07 - Actuator_Diaphragm_Inspection_Fisher_667.pdf",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "pid",
+  "doc_no": "TJC-LLD-PID-XXXX",
+  "file_marker": null,
+  "id": "doc-eebaf2dfb732",
+  "page_count": 1,
+  "sha256": "eebaf2dfb73233f5b3571bf5ec480777cc28c5d6c3fe12a86acfc410a7026434",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/P&ID_Set 7.png",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-DC-3401A-06",
+  "file_marker": null,
+  "id": "doc-ef0271093a5c",
+  "page_count": 1,
+  "sha256": "ef0271093a5c9f0cd3981fd51af4a3a86f7ceeca507a39ae0e5af4ff3ad2fc5f",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/OPL (One Point Lessons)/OPL-DC-3401A-06 Multipoint_Thermocouple_TE_3401_Verifica.pdf",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "ga_drawing",
+  "doc_no": "TJC-LLD-GA-DC-3401A",
+  "file_marker": null,
+  "id": "doc-efc84e9807b4",
+  "page_count": 1,
+  "sha256": "efc84e9807b4c59f39a12110faea280dd3bb22d7d7c3aab431a09594b4d91dbc",
+  "source_path": "Set_03_DC-3401A_CATALYST_REDUCTION_REACTOR/Equipment Drawing DC-3401A.pdf",
+  "subject_tag": "DC-3401A"
+ },
+ {
+  "class": "plot_plan",
+  "doc_no": "TJC-LLD-PP-GA-1201A",
+  "file_marker": null,
+  "id": "doc-f3f628a25648",
+  "page_count": 1,
+  "sha256": "f3f628a25648798e1196da79c63ed44922bf359ba436d5676a1ac9dbfaaee7ae",
+  "source_path": "Set_01_GA-1201A_HEXANE_FEED_PUMP/Plot Plan - GA-1201A.pdf",
+  "subject_tag": "GA-1201A"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-EA-5601-01",
+  "file_marker": null,
+  "id": "doc-f511b1d8c536",
+  "page_count": 1,
+  "sha256": "f511b1d8c53643bb78fab90500a9b8fcd71275a67d1b12c92ff8a19a5d6ee146",
+  "source_path": "Set_05_EA-5601_SOLVENT_HEATER/OPL (One Point Lessons)/OPL-EA-5601-01 - Tube_Side_Cleaning_Hydrojetting.pdf",
+  "subject_tag": "EA-5601"
+ },
+ {
+  "class": "plot_plan",
+  "doc_no": "TJC-LLD-PP-KC-4501",
+  "file_marker": null,
+  "id": "doc-f518b699c506",
+  "page_count": 1,
+  "sha256": "f518b699c506e7bddcfbde11aa8e5267e738761b4de195f2593d36e438fd0f34",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/Plot Plan KC-4501.pdf",
+  "subject_tag": "KC-4501"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-CT-7801-02",
+  "file_marker": null,
+  "id": "doc-f5804238812d",
+  "page_count": 1,
+  "sha256": "f5804238812dec39f75c410fe200d89b8227dbbbdd558f322d96415f386b0cbd",
+  "source_path": "Set_07_CT-7801_COOLING_TOWER_CELL_FAN/One Point Lesson (OPL)/OPL-CT-7801-02 - Gearbox_Oil_Level_Change_ISO_VG_220.pdf",
+  "subject_tag": "CT-7801"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-FA-8901-05",
+  "file_marker": null,
+  "id": "doc-f82f361d022b",
+  "page_count": 1,
+  "sha256": "f82f361d022b969f54fa63e4d5d044172270ac395102201a969cfda7a9f859d1",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/One Point Lesson (OPL)/OPL-FA-8901-05 - Reflux_Pump_Low_Level_Protection_LSLL_89.pdf",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "interlock",
+  "doc_no": "TJC-LLD-IL-KC-4501",
+  "file_marker": null,
+  "id": "doc-f8cb31ac235f",
+  "page_count": 1,
+  "sha256": "f8cb31ac235f3781ca2f523550ca4714d9437ac040ded9212173059ce4f56e7f",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/Interlock Logic Diagram KC-4501.pdf",
+  "subject_tag": "KC-4501"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-YD-2301-05",
+  "file_marker": null,
+  "id": "doc-fc0c8e8b275a",
+  "page_count": 1,
+  "sha256": "fc0c8e8b275abfd43077047ee23f57897869b0cc91d8689ed44ca1860587f92f",
+  "source_path": "Set_02_YD-2301_POLYMER_FLUID_BED_DRYER/One Point Lesson/OPL-YD-2301-05 - Rotary_Joint_Steam_Leak_Handling_Kadant.pdf",
+  "subject_tag": "YD-2301"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-KC-4501-02",
+  "file_marker": null,
+  "id": "doc-fceea39b4043",
+  "page_count": 1,
+  "sha256": "fceea39b40431c3154b6ebdc0a426ddf817a7492f119d0b3531f5e83fe3ee7d6",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/OPL (One Point Lessons)/OPL-KC-4501-02 Compressor_Suction_Discharge_Valve_Inspe.pdf",
+  "subject_tag": "KC-4501"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-FA-8901-01",
+  "file_marker": null,
+  "id": "doc-fcf9b15dfb2a",
+  "page_count": 1,
+  "sha256": "fcf9b15dfb2a43b5e06d2050a049789fbc3def7d1b0894abd23f9aa52a92066d",
+  "source_path": "Set_08_FA-8901_REFLUX_ACCUMULATOR_DRUM/One Point Lesson (OPL)/OPL-FA-8901-01 - Level_Gauge_Bridle_Verification_LT_8901.pdf",
+  "subject_tag": "FA-8901"
+ },
+ {
+  "class": "opl",
+  "doc_no": "OPL-LV-6701-05",
+  "file_marker": null,
+  "id": "doc-fee80769bc91",
+  "page_count": 1,
+  "sha256": "fee80769bc91aa4e422b1079ba5fc9f90c9b7b5afd0304875ed74604329e3683",
+  "source_path": "Set_06_LV-6701_SEPARATOR_LEVEL_CONTROL_VALVE/OPL (One Point Lessons)/OPL-LV-6701-05 - Manual_Bypass_HV_6701_Operation.pdf",
+  "subject_tag": "LV-6701"
+ },
+ {
+  "class": "ga_drawing",
+  "doc_no": "TJC-LLD-GA-KC-4501",
+  "file_marker": null,
+  "id": "doc-ff81ba9654f0",
+  "page_count": 1,
+  "sha256": "ff81ba9654f0fbed5ba4c6505fd3eb61321b635afd00a54b66ef7b48ff5b6d65",
+  "source_path": "Set_04_KC-4501_RECYCLE_GAS_COMPRESSOR/Equipment GA Drawing KC-4501.pdf",
+  "subject_tag": "KC-4501"
+ }
+]

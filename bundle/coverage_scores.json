@@ -1,0 +1,4674 @@
+{
+ "assessments": [
+  {
+   "best_ratio": 0.7857,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240002"
+  },
+  {
+   "best_ratio": 0.5556,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240002"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240003"
+  },
+  {
+   "best_ratio": 0.4286,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240003"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240004"
+  },
+  {
+   "best_ratio": 0.4286,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240004"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-GA-1201A-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240005"
+  },
+  {
+   "best_ratio": 0.5556,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240005"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240006"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240006"
+  },
+  {
+   "best_ratio": 0.4286,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-GA-1201A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240007"
+  },
+  {
+   "best_ratio": 0.4286,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-GA-1201A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240007"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240008"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240008"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240009"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240009"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240010"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240010"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240011"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240011"
+  },
+  {
+   "best_ratio": 0.5714,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240012"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240012"
+  },
+  {
+   "best_ratio": 0.2,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240013"
+  },
+  {
+   "best_ratio": 0.2,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240013"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240014"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240014"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240015"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240015"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240016"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240016"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240017"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240017"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240018"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240018"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240019"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240019"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240020"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240020"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-GA-1201A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240021"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-GA-1201A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240021"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-GA-1201A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240022"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-GA-1201A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240022"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240023"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240023"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240024"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240024"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240025"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240025"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240026"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240026"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-GA-1201A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240027"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-GA-1201A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240027"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240028"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240028"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240029"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-YD-2301-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240029"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240030"
+  },
+  {
+   "best_ratio": 0.4286,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240030"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240031"
+  },
+  {
+   "best_ratio": 0.5714,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240031"
+  },
+  {
+   "best_ratio": 0.7143,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240032"
+  },
+  {
+   "best_ratio": 0.7143,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240032"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240033"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240033"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240034"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240034"
+  },
+  {
+   "best_ratio": 0.4286,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240035"
+  },
+  {
+   "best_ratio": 0.4286,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240035"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240036"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240036"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240037"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240037"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240038"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240038"
+  },
+  {
+   "best_ratio": 0.2857,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240039"
+  },
+  {
+   "best_ratio": 0.2857,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240039"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240040"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240040"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240041"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240041"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240042"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240042"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240043"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240043"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240044"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240044"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240045"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240045"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240046"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240046"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240047"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240047"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240048"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240048"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240049"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240049"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240050"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240050"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240051"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240051"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240052"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240052"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240053"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240053"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240054"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240054"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240055"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-YD-2301-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240055"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240056"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240056"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240057"
+  },
+  {
+   "best_ratio": 0.375,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240057"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240058"
+  },
+  {
+   "best_ratio": 0.2857,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240058"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240059"
+  },
+  {
+   "best_ratio": 0.4286,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240059"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240060"
+  },
+  {
+   "best_ratio": 0.2,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240060"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240061"
+  },
+  {
+   "best_ratio": 0.4444,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240061"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240062"
+  },
+  {
+   "best_ratio": 0.6,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240062"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240063"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240063"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240064"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240064"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240065"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240065"
+  },
+  {
+   "best_ratio": 0.375,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240066"
+  },
+  {
+   "best_ratio": 0.375,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240066"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240067"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240067"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240068"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240068"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240069"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240069"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240070"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240070"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240071"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240071"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240072"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240072"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240073"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240073"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240074"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240074"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240075"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-DC-3401A-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240075"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240076"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240076"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240077"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240077"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240078"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240078"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240079"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240079"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240080"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240080"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240081"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240081"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240082"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-DC-3401A-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240082"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240083"
+  },
+  {
+   "best_ratio": 0.7143,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240083"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240084"
+  },
+  {
+   "best_ratio": 0.5714,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240084"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240085"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240085"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240086"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240086"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240087"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240087"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240088"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240088"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-KC-4501-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240089"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-KC-4501-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240089"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240090"
+  },
+  {
+   "best_ratio": 0.7143,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240090"
+  },
+  {
+   "best_ratio": 0.8,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240091"
+  },
+  {
+   "best_ratio": 0.8,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240091"
+  },
+  {
+   "best_ratio": 0.2857,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240092"
+  },
+  {
+   "best_ratio": 0.2857,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240092"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240093"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240093"
+  },
+  {
+   "best_ratio": 0.6,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240094"
+  },
+  {
+   "best_ratio": 0.6,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240094"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240095"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240095"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240096"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240096"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240097"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240097"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240098"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240098"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240099"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240099"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240100"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-KC-4501-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240100"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240101"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-KC-4501-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240101"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240102"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240102"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240103"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240103"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240104"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240104"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240105"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240105"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240106"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240106"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240107"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240107"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240108"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240108"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-KC-4501-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240109"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-KC-4501-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240109"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240110"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240110"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240111"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240111"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240112"
+  },
+  {
+   "best_ratio": 0.8,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-EA-5601-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240112"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240113"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240113"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240114"
+  },
+  {
+   "best_ratio": 0.6,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240114"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240115"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240115"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240116"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240116"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240117"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240117"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240118"
+  },
+  {
+   "best_ratio": 0.6,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240118"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-EA-5601-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240119"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-EA-5601-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240119"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240120"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240120"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-EA-5601-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240121"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-EA-5601-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240121"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-EA-5601-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240122"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-EA-5601-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240122"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240123"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240123"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240124"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240124"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240125"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240125"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240126"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240126"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240127"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240127"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240128"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240128"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240129"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240129"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240130"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240130"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240131"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240131"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240132"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-EA-5601-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240132"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240133"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-EA-5601-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240133"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-EA-5601-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240134"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-EA-5601-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240134"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240135"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240135"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240136"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240136"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240137"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240137"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240138"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240138"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240139"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240139"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240140"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240140"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240141"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240141"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240142"
+  },
+  {
+   "best_ratio": 0.7143,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-LV-6701-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240142"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240143"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240143"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240144"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240144"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240145"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240145"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240146"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240146"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240147"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240147"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240148"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240148"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240149"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240149"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240150"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240150"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240151"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240151"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240152"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240152"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240153"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240153"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240154"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240154"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240155"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240155"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240156"
+  },
+  {
+   "best_ratio": 0.0,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": null,
+   "matched_lesson": null,
+   "threshold": 0.62,
+   "wo_number": "WO-240156"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240157"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240157"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240158"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-LV-6701-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240158"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-LV-6701-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240159"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-LV-6701-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240159"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-LV-6701-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240160"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-LV-6701-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240160"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240161"
+  },
+  {
+   "best_ratio": 0.4,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240161"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240162"
+  },
+  {
+   "best_ratio": 0.6,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240162"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240163"
+  },
+  {
+   "best_ratio": 0.8,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240163"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240164"
+  },
+  {
+   "best_ratio": 0.6,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240164"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240165"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240165"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240166"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240166"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-CT-7801-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240167"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-CT-7801-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240167"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240168"
+  },
+  {
+   "best_ratio": 0.6,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-CT-7801-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240168"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240169"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240169"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240170"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240170"
+  },
+  {
+   "best_ratio": 0.8,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240171"
+  },
+  {
+   "best_ratio": 0.8,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240171"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240172"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240172"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240173"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240173"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240174"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240174"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240175"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240175"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240176"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240176"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240177"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240177"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240178"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240178"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240179"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240179"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240180"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240180"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240181"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240181"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240182"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240182"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240183"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240183"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240184"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240184"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240185"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-CT-7801-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240185"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240186"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240186"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240187"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-CT-7801-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240187"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240188"
+  },
+  {
+   "best_ratio": 0.8,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240188"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240189"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240189"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240190"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240190"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240191"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-FA-8901-04",
+   "threshold": 0.62,
+   "wo_number": "WO-240191"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240192"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240192"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240193"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240193"
+  },
+  {
+   "best_ratio": 1.0,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240194"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-FA-8901-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240194"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240195"
+  },
+  {
+   "best_ratio": 0.75,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240195"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240196"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240196"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240197"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-07",
+   "threshold": 0.62,
+   "wo_number": "WO-240197"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240198"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240198"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-FA-8901-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240199"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240199"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-FA-8901-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240200"
+  },
+  {
+   "best_ratio": 0.25,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-06",
+   "threshold": 0.62,
+   "wo_number": "WO-240200"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240201"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240201"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240202"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240202"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240203"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240203"
+  },
+  {
+   "best_ratio": 0.6667,
+   "corpus_version_id": "v1",
+   "covered": true,
+   "layer": "generous",
+   "matched_field": "root_cause",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240204"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240204"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240205"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-FA-8901-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240205"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-02",
+   "threshold": 0.62,
+   "wo_number": "WO-240206"
+  },
+  {
+   "best_ratio": 0.1667,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "corrective_action",
+   "matched_lesson": "OPL-FA-8901-03",
+   "threshold": 0.62,
+   "wo_number": "WO-240206"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240207"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240207"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240208"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240208"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240209"
+  },
+  {
+   "best_ratio": 0.3333,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240209"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240210"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240210"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240211"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240211"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "generous",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-01",
+   "threshold": 0.62,
+   "wo_number": "WO-240212"
+  },
+  {
+   "best_ratio": 0.5,
+   "corpus_version_id": "v1",
+   "covered": false,
+   "layer": "strict",
+   "matched_field": "problem_description",
+   "matched_lesson": "OPL-FA-8901-05",
+   "threshold": 0.62,
+   "wo_number": "WO-240212"
+  }
+ ],
+ "method": {
+  "comparison": "uncovered when score <= threshold",
+  "extractor": "pdftotext -raw (pdftotext version 26.02.0)",
+  "labels_status": "machine_drafted_pending_human",
+  "min_content_words": 3,
+  "recipe_sha256": "a16e70cf22ae9ca1699c95555842580d8e6a6ea844486d9b797d8d018c9c7680",
+  "stop_list_sha256": "8262d5122704987d0f503b4f3289c8081d31c0469415ec442099bba4185b3ea5",
+  "strict_cut_marker": "This is sample data provided for CALIBER purposes only",
+  "strict_sections": [
+   "header",
+   "1",
+   "2",
+   "3",
+   "4",
+   "6"
+  ],
+  "threshold": 0.62,
+  "unscoreable_ids": [],
+  "window_multiplier": 2
+ },
+ "summaries": [
+  {
+   "bands": null,
+   "corpus_version_id": "v1",
+   "layer": "generous",
+   "population": "all",
+   "population_count": 211,
+   "sensitivity": [
+    {
+     "t": 0.5,
+     "uncovered_count": 141
+    },
+    {
+     "t": 0.55,
+     "uncovered_count": 141
+    },
+    {
+     "t": 0.6,
+     "uncovered_count": 143
+    },
+    {
+     "t": 0.62,
+     "uncovered_count": 143
+    },
+    {
+     "t": 0.65,
+     "uncovered_count": 143
+    },
+    {
+     "t": 0.7,
+     "uncovered_count": 151
+    },
+    {
+     "t": 0.75,
+     "uncovered_count": 160
+    }
+   ],
+   "threshold": 0.62,
+   "uncovered_breakdowns": 5,
+   "uncovered_cost_idr": 93721000,
+   "uncovered_count": 143,
+   "uncovered_downtime_hours": 74.5
+  },
+  {
+   "bands": null,
+   "corpus_version_id": "v1",
+   "layer": "generous",
+   "population": "failure",
+   "population_count": 66,
+   "sensitivity": [
+    {
+     "t": 0.5,
+     "uncovered_count": 18
+    },
+    {
+     "t": 0.55,
+     "uncovered_count": 18
+    },
+    {
+     "t": 0.6,
+     "uncovered_count": 19
+    },
+    {
+     "t": 0.62,
+     "uncovered_count": 19
+    },
+    {
+     "t": 0.65,
+     "uncovered_count": 19
+    },
+    {
+     "t": 0.7,
+     "uncovered_count": 20
+    },
+    {
+     "t": 0.75,
+     "uncovered_count": 26
+    }
+   ],
+   "threshold": 0.62,
+   "uncovered_breakdowns": 5,
+   "uncovered_cost_idr": 93721000,
+   "uncovered_count": 19,
+   "uncovered_downtime_hours": 74.5
+  },
+  {
+   "bands": null,
+   "corpus_version_id": "v1",
+   "layer": "generous",
+   "population": "planned_flagged",
+   "population_count": 8,
+   "sensitivity": [
+    {
+     "t": 0.5,
+     "uncovered_count": 4
+    },
+    {
+     "t": 0.55,
+     "uncovered_count": 4
+    },
+    {
+     "t": 0.6,
+     "uncovered_count": 4
+    },
+    {
+     "t": 0.62,
+     "uncovered_count": 4
+    },
+    {
+     "t": 0.65,
+     "uncovered_count": 4
+    },
+    {
+     "t": 0.7,
+     "uncovered_count": 5
+    },
+    {
+     "t": 0.75,
+     "uncovered_count": 5
+    }
+   ],
+   "threshold": 0.62,
+   "uncovered_breakdowns": 0,
+   "uncovered_cost_idr": 0,
+   "uncovered_count": 4,
+   "uncovered_downtime_hours": 0
+  },
+  {
+   "bands": null,
+   "corpus_version_id": "v1",
+   "layer": "generous",
+   "population": "unplanned_breakdowns",
+   "population_count": 23,
+   "sensitivity": [
+    {
+     "t": 0.5,
+     "uncovered_count": 5
+    },
+    {
+     "t": 0.55,
+     "uncovered_count": 5
+    },
+    {
+     "t": 0.6,
+     "uncovered_count": 5
+    },
+    {
+     "t": 0.62,
+     "uncovered_count": 5
+    },
+    {
+     "t": 0.65,
+     "uncovered_count": 5
+    },
+    {
+     "t": 0.7,
+     "uncovered_count": 5
+    },
+    {
+     "t": 0.75,
+     "uncovered_count": 8
+    }
+   ],
+   "threshold": 0.62,
+   "uncovered_breakdowns": 5,
+   "uncovered_cost_idr": 93721000,
+   "uncovered_count": 5,
+   "uncovered_downtime_hours": 74.5
+  },
+  {
+   "bands": {
+    "copied_row_only": 27,
+    "no_lesson": 14,
+    "taught": 16
+   },
+   "corpus_version_id": "v1",
+   "layer": "generous",
+   "population": "unplanned_failure",
+   "population_count": 57,
+   "sensitivity": [
+    {
+     "t": 0.5,
+     "uncovered_count": 13
+    },
+    {
+     "t": 0.55,
+     "uncovered_count": 13
+    },
+    {
+     "t": 0.6,
+     "uncovered_count": 14
+    },
+    {
+     "t": 0.62,
+     "uncovered_count": 14
+    },
+    {
+     "t": 0.65,
+     "uncovered_count": 14
+    },
+    {
+     "t": 0.7,
+     "uncovered_count": 14
+    },
+    {
+     "t": 0.75,
+     "uncovered_count": 20
+    }
+   ],
+   "threshold": 0.62,
+   "uncovered_breakdowns": 5,
+   "uncovered_cost_idr": 93721000,
+   "uncovered_count": 14,
+   "uncovered_downtime_hours": 74.5
+  },
+  {
+   "bands": null,
+   "corpus_version_id": "v1",
+   "layer": "strict",
+   "population": "all",
+   "population_count": 211,
+   "sensitivity": [
+    {
+     "t": 0.5,
+     "uncovered_count": 179
+    },
+    {
+     "t": 0.55,
+     "uncovered_count": 179
+    },
+    {
+     "t": 0.6,
+     "uncovered_count": 190
+    },
+    {
+     "t": 0.62,
+     "uncovered_count": 190
+    },
+    {
+     "t": 0.65,
+     "uncovered_count": 190
+    },
+    {
+     "t": 0.7,
+     "uncovered_count": 194
+    },
+    {
+     "t": 0.75,
+     "uncovered_count": 205
+    }
+   ],
+   "threshold": 0.62,
+   "uncovered_breakdowns": 14,
+   "uncovered_cost_idr": 198418000,
+   "uncovered_count": 190,
+   "uncovered_downtime_hours": 146.0
+  },
+  {
+   "bands": null,
+   "corpus_version_id": "v1",
+   "layer": "strict",
+   "population": "failure",
+   "population_count": 66,
+   "sensitivity": [
+    {
+     "t": 0.5,
+     "uncovered_count": 40
+    },
+    {
+     "t": 0.55,
+     "uncovered_count": 40
+    },
+    {
+     "t": 0.6,
+     "uncovered_count": 49
+    },
+    {
+     "t": 0.62,
+     "uncovered_count": 49
+    },
+    {
+     "t": 0.65,
+     "uncovered_count": 49
+    },
+    {
+     "t": 0.7,
+     "uncovered_count": 52
+    },
+    {
+     "t": 0.75,
+     "uncovered_count": 61
+    }
+   ],
+   "threshold": 0.62,
+   "uncovered_breakdowns": 14,
+   "uncovered_cost_idr": 198418000,
+   "uncovered_count": 49,
+   "uncovered_downtime_hours": 146.0
+  },
+  {
+   "bands": null,
+   "corpus_version_id": "v1",
+   "layer": "strict",
+   "population": "planned_flagged",
+   "population_count": 8,
+   "sensitivity": [
+    {
+     "t": 0.5,
+     "uncovered_count": 7
+    },
+    {
+     "t": 0.55,
+     "uncovered_count": 7
+    },
+    {
+     "t": 0.6,
+     "uncovered_count": 7
+    },
+    {
+     "t": 0.62,
+     "uncovered_count": 7
+    },
+    {
+     "t": 0.65,
+     "uncovered_count": 7
+    },
+    {
+     "t": 0.7,
+     "uncovered_count": 8
+    },
+    {
+     "t": 0.75,
+     "uncovered_count": 8
+    }
+   ],
+   "threshold": 0.62,
+   "uncovered_breakdowns": 0,
+   "uncovered_cost_idr": 0,
+   "uncovered_count": 7,
+   "uncovered_downtime_hours": 0
+  },
+  {
+   "bands": null,
+   "corpus_version_id": "v1",
+   "layer": "strict",
+   "population": "unplanned_breakdowns",
+   "population_count": 23,
+   "sensitivity": [
+    {
+     "t": 0.5,
+     "uncovered_count": 12
+    },
+    {
+     "t": 0.55,
+     "uncovered_count": 12
+    },
+    {
+     "t": 0.6,
+     "uncovered_count": 14
+    },
+    {
+     "t": 0.62,
+     "uncovered_count": 14
+    },
+    {
+     "t": 0.65,
+     "uncovered_count": 14
+    },
+    {
+     "t": 0.7,
+     "uncovered_count": 15
+    },
+    {
+     "t": 0.75,
+     "uncovered_count": 19
+    }
+   ],
+   "threshold": 0.62,
+   "uncovered_breakdowns": 14,
+   "uncovered_cost_idr": 198418000,
+   "uncovered_count": 14,
+   "uncovered_downtime_hours": 146.0
+  },
+  {
+   "bands": {
+    "copied_row_only": 27,
+    "no_lesson": 14,
+    "taught": 16
+   },
+   "corpus_version_id": "v1",
+   "layer": "strict",
+   "population": "unplanned_failure",
+   "population_count": 57,
+   "sensitivity": [
+    {
+     "t": 0.5,
+     "uncovered_count": 32
+    },
+    {
+     "t": 0.55,
+     "uncovered_count": 32
+    },
+    {
+     "t": 0.6,
+     "uncovered_count": 41
+    },
+    {
+     "t": 0.62,
+     "uncovered_count": 41
+    },
+    {
+     "t": 0.65,
+     "uncovered_count": 41
+    },
+    {
+     "t": 0.7,
+     "uncovered_count": 43
+    },
+    {
+     "t": 0.75,
+     "uncovered_count": 52
+    }
+   ],
+   "threshold": 0.62,
+   "uncovered_breakdowns": 14,
+   "uncovered_cost_idr": 198418000,
+   "uncovered_count": 41,
+   "uncovered_downtime_hours": 146.0
+  }
+ ]
+}

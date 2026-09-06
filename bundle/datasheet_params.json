@@ -1,0 +1,3072 @@
+[
+ {
+  "equipment_tag": "CT-7801",
+  "field": "DOC NO",
+  "group": "header",
+  "id": "DSP-CT-7801-001",
+  "span_id": "rev-e84e4224c046/p1/92-118",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-DS-CT-7801"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "REV",
+  "group": "header",
+  "id": "DSP-CT-7801-002",
+  "span_id": "rev-e84e4224c046/p1/119-125",
+  "unit": null,
+  "value_num": 3.0,
+  "value_text": "3"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "ITEM / TAG NO.",
+  "group": "header",
+  "id": "DSP-CT-7801-003",
+  "span_id": "rev-e84e4224c046/p1/159-181",
+  "unit": null,
+  "value_num": null,
+  "value_text": "CT-7801"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "EQUIPMENT ID",
+  "group": "header",
+  "id": "DSP-CT-7801-004",
+  "span_id": "rev-e84e4224c046/p1/182-208",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EQ-1000078011"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "EQUIPMENT NAME",
+  "group": "header",
+  "id": "DSP-CT-7801-005",
+  "span_id": "rev-e84e4224c046/p1/209-246",
+  "unit": null,
+  "value_num": null,
+  "value_text": "COOLING TOWER CELL FAN"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "TYPE",
+  "group": "header",
+  "id": "DSP-CT-7801-006",
+  "span_id": "rev-e84e4224c046/p1/247-283",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Induced Draft Cooling Tower Fan"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "PLANT / UNIT",
+  "group": "header",
+  "id": "DSP-CT-7801-007",
+  "span_id": "rev-e84e4224c046/p1/284-341",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LINEAR LOW DENSITY POLYETHYLENE (LLDPE) UNIT"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "AREA",
+  "group": "header",
+  "id": "DSP-CT-7801-008",
+  "span_id": "rev-e84e4224c046/p1/342-374",
+  "unit": null,
+  "value_num": 7800.0,
+  "value_text": "7800 - COOLING WATER SYSTEM"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "FUNCTIONAL LOC.",
+  "group": "header",
+  "id": "DSP-CT-7801-009",
+  "span_id": "rev-e84e4224c046/p1/375-406",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-7800-01"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "CRITICALITY",
+  "group": "header",
+  "id": "DSP-CT-7801-010",
+  "span_id": "rev-e84e4224c046/p1/407-431",
+  "unit": null,
+  "value_num": null,
+  "value_text": "NON CRITICAL"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "SERVICE",
+  "group": "header",
+  "id": "DSP-CT-7801-011",
+  "span_id": "rev-e84e4224c046/p1/432-497",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Induced draft cooling of circulating water for LLDPE unit"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "TOWER TYPE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-012",
+  "span_id": "rev-e84e4224c046/p1/523-568",
+  "unit": null,
+  "value_num": null,
+  "value_text": "INDUCED DRAFT, COUNTERFLOW, CELL 1"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "BLADE MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-013",
+  "span_id": "rev-e84e4224c046/p1/569-593",
+  "unit": null,
+  "value_num": null,
+  "value_text": "FRP (GRP)"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "ITEM NO.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-014",
+  "span_id": "rev-e84e4224c046/p1/594-610",
+  "unit": null,
+  "value_num": null,
+  "value_text": "CT-7801"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "HUB MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-015",
+  "span_id": "rev-e84e4224c046/p1/611-638",
+  "unit": null,
+  "value_num": null,
+  "value_text": "CAST ALUMINIUM"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "FAN DIAMETER",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-016",
+  "span_id": "rev-e84e4224c046/p1/639-667",
+  "unit": "mm",
+  "value_num": 7300.0,
+  "value_text": "7300 mm (24 ft)"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "DRIVE SHAFT",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-017",
+  "span_id": "rev-e84e4224c046/p1/668-704",
+  "unit": null,
+  "value_num": null,
+  "value_text": "COMPOSITE FLOATING SHAFT"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "FAN TYPE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-018",
+  "span_id": "rev-e84e4224c046/p1/705-733",
+  "unit": null,
+  "value_num": null,
+  "value_text": "AXIAL, 6 FRP BLADES"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "WATER FLOW (CELL)",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-019",
+  "span_id": "rev-e84e4224c046/p1/734-761",
+  "unit": "m3/h",
+  "value_num": 2200.0,
+  "value_text": "2200 m3/h"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "AIR FLOW",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-020",
+  "span_id": "rev-e84e4224c046/p1/762-785",
+  "unit": "m3/h",
+  "value_num": 1150000.0,
+  "value_text": "1,150,000 m3/h"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "RANGE / APPROACH",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-021",
+  "span_id": "rev-e84e4224c046/p1/786-819",
+  "unit": "degC",
+  "value_num": 10.0,
+  "value_text": "10 degC / 4 degC"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "FAN SPEED",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-022",
+  "span_id": "rev-e84e4224c046/p1/820-837",
+  "unit": "rpm",
+  "value_num": 128.0,
+  "value_text": "128 rpm"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "DRIFT ELIMINATOR",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-023",
+  "span_id": "rev-e84e4224c046/p1/838-867",
+  "unit": null,
+  "value_num": null,
+  "value_text": "PVC CELLULAR"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "GEARBOX RATIO",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-024",
+  "span_id": "rev-e84e4224c046/p1/868-902",
+  "unit": null,
+  "value_num": 11.3,
+  "value_text": "11.3 : 1 RIGHT ANGLE"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "FILL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-025",
+  "span_id": "rev-e84e4224c046/p1/903-921",
+  "unit": null,
+  "value_num": null,
+  "value_text": "PVC FILM FILL"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "GEARBOX OIL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-CT-7801-026",
+  "span_id": "rev-e84e4224c046/p1/922-952",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ISO VG 220 (4.5 L)"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "OUTPUT",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-CT-7801-027",
+  "span_id": "rev-e84e4224c046/p1/982-994",
+  "unit": "kW",
+  "value_num": 55.0,
+  "value_text": "55 kW"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "ENCLOSURE",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-CT-7801-028",
+  "span_id": "rev-e84e4224c046/p1/995-1025",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TEFC IP56 (wet duty)"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "POLES",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-CT-7801-029",
+  "span_id": "rev-e84e4224c046/p1/1026-1038",
+  "unit": "POLE",
+  "value_num": 6.0,
+  "value_text": "6 POLE"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "AREA CLASSIFICATION",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-CT-7801-030",
+  "span_id": "rev-e84e4224c046/p1/1039-1072",
+  "unit": null,
+  "value_num": null,
+  "value_text": "NON-HAZARDOUS"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "SPEED",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-CT-7801-031",
+  "span_id": "rev-e84e4224c046/p1/1073-1086",
+  "unit": "rpm",
+  "value_num": 970.0,
+  "value_text": "970 rpm"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "MOUNTING",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-CT-7801-032",
+  "span_id": "rev-e84e4224c046/p1/1087-1108",
+  "unit": null,
+  "value_num": null,
+  "value_text": "IN-DUCT, WET"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "VOLTAGE",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-CT-7801-033",
+  "span_id": "rev-e84e4224c046/p1/1109-1137",
+  "unit": "V",
+  "value_num": 380.0,
+  "value_text": "380 V / 3 Ph / 50 Hz"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "FRAME",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-CT-7801-034",
+  "span_id": "rev-e84e4224c046/p1/1138-1152",
+  "unit": null,
+  "value_num": null,
+  "value_text": "IEC 250M"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "RATED CURRENT",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-CT-7801-035",
+  "span_id": "rev-e84e4224c046/p1/1153-1172",
+  "unit": "A",
+  "value_num": 104.0,
+  "value_text": "104 A"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "WEIGHT (MOTOR)",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-CT-7801-036",
+  "span_id": "rev-e84e4224c046/p1/1173-1194",
+  "unit": "kg",
+  "value_num": 410.0,
+  "value_text": "410 kg"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "INSULATION CLASS",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-CT-7801-037",
+  "span_id": "rev-e84e4224c046/p1/1195-1213",
+  "unit": null,
+  "value_num": null,
+  "value_text": "F"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "DRIVER TYPE",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-CT-7801-038",
+  "span_id": "rev-e84e4224c046/p1/1252-1296",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Electric Motor via Gearbox, TEFC"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "field": "DATASHEET REV",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-CT-7801-039",
+  "span_id": "rev-e84e4224c046/p1/1297-1339",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Rev 3 - ISSUED FOR OPERATION"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "DOC NO",
+  "group": "header",
+  "id": "DSP-DC-3401A-001",
+  "span_id": "rev-a7aa4c227eea/p1/29-56",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-DS-DC-3401A"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "REV",
+  "group": "header",
+  "id": "DSP-DC-3401A-002",
+  "span_id": "rev-a7aa4c227eea/p1/57-63",
+  "unit": null,
+  "value_num": 3.0,
+  "value_text": "3"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "ITEM / TAG NO.",
+  "group": "header",
+  "id": "DSP-DC-3401A-003",
+  "span_id": "rev-a7aa4c227eea/p1/64-87",
+  "unit": null,
+  "value_num": null,
+  "value_text": "DC-3401A"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "EQUIPMENT ID",
+  "group": "header",
+  "id": "DSP-DC-3401A-004",
+  "span_id": "rev-a7aa4c227eea/p1/88-114",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EQ-1000034011"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "EQUIPMENT NAME",
+  "group": "header",
+  "id": "DSP-DC-3401A-005",
+  "span_id": "rev-a7aa4c227eea/p1/115-156",
+  "unit": null,
+  "value_num": null,
+  "value_text": "CATALYST REDUCTION REACTOR"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "TYPE",
+  "group": "header",
+  "id": "DSP-DC-3401A-006",
+  "span_id": "rev-a7aa4c227eea/p1/157-193",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Fixed-Bed Reactor (Pd Catalyst)"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "PLANT / UNIT",
+  "group": "header",
+  "id": "DSP-DC-3401A-007",
+  "span_id": "rev-a7aa4c227eea/p1/194-251",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LINEAR LOW DENSITY POLYETHYLENE (LLDPE) UNIT"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "AREA",
+  "group": "header",
+  "id": "DSP-DC-3401A-008",
+  "span_id": "rev-a7aa4c227eea/p1/252-284",
+  "unit": null,
+  "value_num": 3400.0,
+  "value_text": "3400 - CATALYST PREPARATION"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "FUNCTIONAL LOC.",
+  "group": "header",
+  "id": "DSP-DC-3401A-009",
+  "span_id": "rev-a7aa4c227eea/p1/285-316",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-3400-01"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "CRITICALITY",
+  "group": "header",
+  "id": "DSP-DC-3401A-010",
+  "span_id": "rev-a7aa4c227eea/p1/317-342",
+  "unit": null,
+  "value_num": null,
+  "value_text": "HIGH CRITICAL"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "SERVICE",
+  "group": "header",
+  "id": "DSP-DC-3401A-011",
+  "span_id": "rev-a7aa4c227eea/p1/343-408",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Reduction of PdO catalyst to Pd using H2 (PdO + H2 -> Pd)"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "REACTOR TYPE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-012",
+  "span_id": "rev-a7aa4c227eea/p1/434-475",
+  "unit": null,
+  "value_num": null,
+  "value_text": "VERTICAL FIXED-BED, DOWNFLOW"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "CATALYST",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-013",
+  "span_id": "rev-a7aa4c227eea/p1/476-515",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Pd / Al2O3 (PdO reduced to Pd)"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "ITEM NO.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-014",
+  "span_id": "rev-a7aa4c227eea/p1/516-533",
+  "unit": null,
+  "value_num": null,
+  "value_text": "DC-3401A"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "CATALYST VOLUME",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-015",
+  "span_id": "rev-a7aa4c227eea/p1/534-556",
+  "unit": "m3",
+  "value_num": 3.2,
+  "value_text": "3.2 m3"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "DIAMETER (ID)",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-016",
+  "span_id": "rev-a7aa4c227eea/p1/557-578",
+  "unit": "mm",
+  "value_num": 1200.0,
+  "value_text": "1200 mm"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "SHELL MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-017",
+  "span_id": "rev-a7aa4c227eea/p1/579-619",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SA-516 Gr.70 + SS304 clad"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "TANGENT-TANGENT",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-018",
+  "span_id": "rev-a7aa4c227eea/p1/620-643",
+  "unit": "mm",
+  "value_num": 4500.0,
+  "value_text": "4500 mm"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "INTERNALS",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-019",
+  "span_id": "rev-a7aa4c227eea/p1/644-684",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SS304 support grid + hold-down"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "DESIGN PRESSURE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-020",
+  "span_id": "rev-a7aa4c227eea/p1/685-712",
+  "unit": "barg",
+  "value_num": 6.0,
+  "value_text": "6 barg / FV"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "HEATER",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-021",
+  "span_id": "rev-a7aa4c227eea/p1/713-754",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EA-3401 ELECTRIC PRE-HEATER 180 kW"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "OPERATING PRESSURE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-022",
+  "span_id": "rev-a7aa4c227eea/p1/755-783",
+  "unit": "kg/cm2g",
+  "value_num": 2.0,
+  "value_text": "2 kg/cm2g"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "INERT MEDIUM",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-023",
+  "span_id": "rev-a7aa4c227eea/p1/784-805",
+  "unit": null,
+  "value_num": null,
+  "value_text": "NITROGEN"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "DESIGN TEMP.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-024",
+  "span_id": "rev-a7aa4c227eea/p1/806-827",
+  "unit": "degC",
+  "value_num": 250.0,
+  "value_text": "250 degC"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "REDUCTANT",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-025",
+  "span_id": "rev-a7aa4c227eea/p1/828-862",
+  "unit": null,
+  "value_num": null,
+  "value_text": "HYDROGEN (diluted in N2)"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "OPERATING TEMP.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-026",
+  "span_id": "rev-a7aa4c227eea/p1/863-891",
+  "unit": null,
+  "value_num": null,
+  "value_text": "180-210 degC"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "PSV",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-DC-3401A-027",
+  "span_id": "rev-a7aa4c227eea/p1/892-915",
+  "unit": null,
+  "value_num": null,
+  "value_text": "PSV-3401 set 6 barg"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "EA-3401 HEATER OUTPUT",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-DC-3401A-028",
+  "span_id": "rev-a7aa4c227eea/p1/942-970",
+  "unit": "kW",
+  "value_num": 180.0,
+  "value_text": "180 kW"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "AREA CLASSIFICATION",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-DC-3401A-029",
+  "span_id": "rev-a7aa4c227eea/p1/971-1005",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ZONE 1, IIC T3"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "HEATER VOLTAGE",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-DC-3401A-030",
+  "span_id": "rev-a7aa4c227eea/p1/1006-1041",
+  "unit": "V",
+  "value_num": 380.0,
+  "value_text": "380 V / 3 Ph / 50 Hz"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "EX PROTECTION",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-DC-3401A-031",
+  "span_id": "rev-a7aa4c227eea/p1/1042-1067",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Ex d IIC T3"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "HEATER CURRENT",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-DC-3401A-032",
+  "span_id": "rev-a7aa4c227eea/p1/1068-1088",
+  "unit": "A",
+  "value_num": 273.0,
+  "value_text": "273 A"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "TIC CONTROL",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-DC-3401A-033",
+  "span_id": "rev-a7aa4c227eea/p1/1089-1126",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TIC-17343 (heater outlet)"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "HEATER TYPE",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-DC-3401A-034",
+  "span_id": "rev-a7aa4c227eea/p1/1127-1166",
+  "unit": null,
+  "value_num": null,
+  "value_text": "IN-LINE ELECTRIC, N2 STREAM"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "BED TC's",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-DC-3401A-035",
+  "span_id": "rev-a7aa4c227eea/p1/1167-1199",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TE-3401-1..8 multipoint"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "DRIVER TYPE",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-DC-3401A-036",
+  "span_id": "rev-a7aa4c227eea/p1/1238-1294",
+  "unit": null,
+  "value_num": null,
+  "value_text": "None (static vessel) - assoc. heater EA-3401"
+ },
+ {
+  "equipment_tag": "DC-3401A",
+  "field": "DATASHEET REV",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-DC-3401A-037",
+  "span_id": "rev-a7aa4c227eea/p1/1295-1337",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Rev 3 - ISSUED FOR OPERATION"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "DOC NO",
+  "group": "header",
+  "id": "DSP-EA-5601-001",
+  "span_id": "rev-8d6b454ad2b4/p1/39-65",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-DS-EA-5601"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "REV",
+  "group": "header",
+  "id": "DSP-EA-5601-002",
+  "span_id": "rev-8d6b454ad2b4/p1/66-72",
+  "unit": null,
+  "value_num": 3.0,
+  "value_text": "3"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "ITEM / TAG NO.",
+  "group": "header",
+  "id": "DSP-EA-5601-003",
+  "span_id": "rev-8d6b454ad2b4/p1/73-95",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EA-5601"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "EQUIPMENT ID",
+  "group": "header",
+  "id": "DSP-EA-5601-004",
+  "span_id": "rev-8d6b454ad2b4/p1/96-122",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EQ-1000056011"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "EQUIPMENT NAME",
+  "group": "header",
+  "id": "DSP-EA-5601-005",
+  "span_id": "rev-8d6b454ad2b4/p1/123-152",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SOLVENT HEATER"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "TYPE",
+  "group": "header",
+  "id": "DSP-EA-5601-006",
+  "span_id": "rev-8d6b454ad2b4/p1/153-191",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Shell & Tube Heat Exchanger (BEM)"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "PLANT / UNIT",
+  "group": "header",
+  "id": "DSP-EA-5601-007",
+  "span_id": "rev-8d6b454ad2b4/p1/192-249",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LINEAR LOW DENSITY POLYETHYLENE (LLDPE) UNIT"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "AREA",
+  "group": "header",
+  "id": "DSP-EA-5601-008",
+  "span_id": "rev-8d6b454ad2b4/p1/250-285",
+  "unit": null,
+  "value_num": 5600.0,
+  "value_text": "5600 - SOLVENT RECOVERY SYSTEM"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "FUNCTIONAL LOC.",
+  "group": "header",
+  "id": "DSP-EA-5601-009",
+  "span_id": "rev-8d6b454ad2b4/p1/286-317",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-5600-01"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "CRITICALITY",
+  "group": "header",
+  "id": "DSP-EA-5601-010",
+  "span_id": "rev-8d6b454ad2b4/p1/318-342",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LOW CRITICAL"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "SERVICE",
+  "group": "header",
+  "id": "DSP-EA-5601-011",
+  "span_id": "rev-8d6b454ad2b4/p1/343-410",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Heat recovered hexane solvent using MP steam before recycle"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "TEMA TYPE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-012",
+  "span_id": "rev-8d6b454ad2b4/p1/436-461",
+  "unit": null,
+  "value_num": null,
+  "value_text": "BEM, HORIZONTAL"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "TUBE LENGTH",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-013",
+  "span_id": "rev-8d6b454ad2b4/p1/462-481",
+  "unit": "mm",
+  "value_num": 6000.0,
+  "value_text": "6000 mm"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "ITEM NO.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-014",
+  "span_id": "rev-8d6b454ad2b4/p1/482-498",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EA-5601"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "NO. OF TUBES",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-015",
+  "span_id": "rev-8d6b454ad2b4/p1/499-515",
+  "unit": null,
+  "value_num": 246.0,
+  "value_text": "246"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "DUTY",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-016",
+  "span_id": "rev-8d6b454ad2b4/p1/516-528",
+  "unit": "MW",
+  "value_num": 1.85,
+  "value_text": "1.85 MW"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "TUBE PASSES",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-017",
+  "span_id": "rev-8d6b454ad2b4/p1/529-542",
+  "unit": null,
+  "value_num": 2.0,
+  "value_text": "2"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "SHELL SIDE FLUID",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-018",
+  "span_id": "rev-8d6b454ad2b4/p1/543-576",
+  "unit": null,
+  "value_num": null,
+  "value_text": "MP STEAM 10 barg"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "TUBE MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-019",
+  "span_id": "rev-8d6b454ad2b4/p1/577-597",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SS304L"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "TUBE SIDE FLUID",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-020",
+  "span_id": "rev-8d6b454ad2b4/p1/598-628",
+  "unit": null,
+  "value_num": null,
+  "value_text": "HEXANE SOLVENT"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "SHELL MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-021",
+  "span_id": "rev-8d6b454ad2b4/p1/629-656",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SA-516 Gr.70"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "SHELL DESIGN P/T",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-022",
+  "span_id": "rev-8d6b454ad2b4/p1/657-692",
+  "unit": "barg",
+  "value_num": 13.0,
+  "value_text": "13 barg / 200 degC"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "TUBESHEET",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-023",
+  "span_id": "rev-8d6b454ad2b4/p1/693-728",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SA-516-70 + SS304 overlay"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "TUBE DESIGN P/T",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-024",
+  "span_id": "rev-8d6b454ad2b4/p1/729-763",
+  "unit": "barg",
+  "value_num": 16.0,
+  "value_text": "16 barg / 200 degC"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "BAFFLE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-025",
+  "span_id": "rev-8d6b454ad2b4/p1/764-788",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SEGMENTAL 25% CUT"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "TUBE OD x BWG",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-026",
+  "span_id": "rev-8d6b454ad2b4/p1/789-820",
+  "unit": "mm",
+  "value_num": 19.05,
+  "value_text": "19.05 mm x 14 BWG"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "GASKET",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-EA-5601-027",
+  "span_id": "rev-8d6b454ad2b4/p1/821-855",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SPIRAL WOUND SS316/GRAPHITE"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "HEAT TRANSFER AREA",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-EA-5601-028",
+  "span_id": "rev-8d6b454ad2b4/p1/882-906",
+  "unit": "m2",
+  "value_num": 88.0,
+  "value_text": "88 m2"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "STEAM CONSUMPTION",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-EA-5601-029",
+  "span_id": "rev-8d6b454ad2b4/p1/907-934",
+  "unit": "kg/h",
+  "value_num": 3100.0,
+  "value_text": "3100 kg/h"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "CLEAN U",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-EA-5601-030",
+  "span_id": "rev-8d6b454ad2b4/p1/935-952",
+  "unit": "W/m2K",
+  "value_num": 620.0,
+  "value_text": "620 W/m2K"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "SOLVENT INLET T",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-EA-5601-031",
+  "span_id": "rev-8d6b454ad2b4/p1/953-976",
+  "unit": "degC",
+  "value_num": 45.0,
+  "value_text": "45 degC"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "SERVICE U",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-EA-5601-032",
+  "span_id": "rev-8d6b454ad2b4/p1/977-996",
+  "unit": "W/m2K",
+  "value_num": 480.0,
+  "value_text": "480 W/m2K"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "SOLVENT OUTLET T",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-EA-5601-033",
+  "span_id": "rev-8d6b454ad2b4/p1/997-1021",
+  "unit": "degC",
+  "value_num": 95.0,
+  "value_text": "95 degC"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "FOULING (TUBE)",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-EA-5601-034",
+  "span_id": "rev-8d6b454ad2b4/p1/1022-1050",
+  "unit": "m2K/W",
+  "value_num": 0.00035,
+  "value_text": "0.00035 m2K/W"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "PRESSURE DROP (TUBE)",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-EA-5601-035",
+  "span_id": "rev-8d6b454ad2b4/p1/1051-1080",
+  "unit": "bar",
+  "value_num": 0.35,
+  "value_text": "0.35 bar"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "DRIVER TYPE",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-EA-5601-036",
+  "span_id": "rev-8d6b454ad2b4/p1/1119-1144",
+  "unit": null,
+  "value_num": null,
+  "value_text": "None (static)"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "field": "DATASHEET REV",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-EA-5601-037",
+  "span_id": "rev-8d6b454ad2b4/p1/1145-1187",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Rev 3 - ISSUED FOR OPERATION"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "DOC NO",
+  "group": "header",
+  "id": "DSP-FA-8901-001",
+  "span_id": "rev-5682ee067bd1/p1/82-108",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-DS-FA-8901"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "REV",
+  "group": "header",
+  "id": "DSP-FA-8901-002",
+  "span_id": "rev-5682ee067bd1/p1/109-115",
+  "unit": null,
+  "value_num": 3.0,
+  "value_text": "3"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "ITEM / TAG NO.",
+  "group": "header",
+  "id": "DSP-FA-8901-003",
+  "span_id": "rev-5682ee067bd1/p1/149-171",
+  "unit": null,
+  "value_num": null,
+  "value_text": "FA-8901"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "EQUIPMENT ID",
+  "group": "header",
+  "id": "DSP-FA-8901-004",
+  "span_id": "rev-5682ee067bd1/p1/172-198",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EQ-1000089011"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "EQUIPMENT NAME",
+  "group": "header",
+  "id": "DSP-FA-8901-005",
+  "span_id": "rev-5682ee067bd1/p1/199-237",
+  "unit": null,
+  "value_num": null,
+  "value_text": "REFLUX ACCUMULATOR DRUM"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "TYPE",
+  "group": "header",
+  "id": "DSP-FA-8901-006",
+  "span_id": "rev-5682ee067bd1/p1/238-269",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Horizontal Pressure Vessel"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "PLANT / UNIT",
+  "group": "header",
+  "id": "DSP-FA-8901-007",
+  "span_id": "rev-5682ee067bd1/p1/270-327",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LINEAR LOW DENSITY POLYETHYLENE (LLDPE) UNIT"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "AREA",
+  "group": "header",
+  "id": "DSP-FA-8901-008",
+  "span_id": "rev-5682ee067bd1/p1/328-361",
+  "unit": null,
+  "value_num": 8900.0,
+  "value_text": "8900 - SOLVENT FRACTIONATION"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "FUNCTIONAL LOC.",
+  "group": "header",
+  "id": "DSP-FA-8901-009",
+  "span_id": "rev-5682ee067bd1/p1/362-393",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-8900-01"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "CRITICALITY",
+  "group": "header",
+  "id": "DSP-FA-8901-010",
+  "span_id": "rev-5682ee067bd1/p1/394-419",
+  "unit": null,
+  "value_num": null,
+  "value_text": "HIGH CRITICAL"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "SERVICE",
+  "group": "header",
+  "id": "DSP-FA-8901-011",
+  "span_id": "rev-5682ee067bd1/p1/420-495",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Collect DA-8910 column overhead condensate; supply reflux & product"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "VESSEL TYPE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-012",
+  "span_id": "rev-5682ee067bd1/p1/521-553",
+  "unit": null,
+  "value_num": null,
+  "value_text": "HORIZONTAL DRUM WITH"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "SHELL MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-013",
+  "span_id": "rev-5682ee067bd1/p1/559-586",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SA-516 Gr.70"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "ITEM NO.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-014",
+  "span_id": "rev-5682ee067bd1/p1/587-603",
+  "unit": null,
+  "value_num": null,
+  "value_text": "FA-8901"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "HEAD TYPE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-015",
+  "span_id": "rev-5682ee067bd1/p1/604-629",
+  "unit": null,
+  "value_num": null,
+  "value_text": "2:1 ELLIPSOIDAL"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "DIAMETER (ID)",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-016",
+  "span_id": "rev-5682ee067bd1/p1/630-651",
+  "unit": "mm",
+  "value_num": 1600.0,
+  "value_text": "1600 mm"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "CORROSION ALLOW.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-017",
+  "span_id": "rev-5682ee067bd1/p1/652-675",
+  "unit": "mm",
+  "value_num": 3.0,
+  "value_text": "3.0 mm"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "TANGENT-TANGENT",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-018",
+  "span_id": "rev-5682ee067bd1/p1/676-730",
+  "unit": "mm",
+  "value_num": 4800.0,
+  "value_text": "4800 mm BOOT WATER DRAW-OFF BOOT DN300"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "DESIGN PRESSURE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-019",
+  "span_id": "rev-5682ee067bd1/p1/731-759",
+  "unit": "barg",
+  "value_num": 10.0,
+  "value_text": "10 barg / FV"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "PWHT",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-020",
+  "span_id": "rev-5682ee067bd1/p1/760-768",
+  "unit": null,
+  "value_num": null,
+  "value_text": "YES"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "OPERATING PRESSURE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-021",
+  "span_id": "rev-5682ee067bd1/p1/769-796",
+  "unit": "barg",
+  "value_num": 3.5,
+  "value_text": "3.5 barg"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "RADIOGRAPHY",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-022",
+  "span_id": "rev-5682ee067bd1/p1/797-820",
+  "unit": null,
+  "value_num": null,
+  "value_text": "FULL (RT-1)"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "DESIGN TEMP.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-023",
+  "span_id": "rev-5682ee067bd1/p1/821-842",
+  "unit": "degC",
+  "value_num": 120.0,
+  "value_text": "120 degC"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "PSV",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-024",
+  "span_id": "rev-5682ee067bd1/p1/843-867",
+  "unit": null,
+  "value_num": null,
+  "value_text": "PSV-8901 set 10 barg"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "OPERATING TEMP.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-025",
+  "span_id": "rev-5682ee067bd1/p1/868-891",
+  "unit": "degC",
+  "value_num": 68.0,
+  "value_text": "68 degC"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "N2 BLANKET",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-FA-8901-026",
+  "span_id": "rev-5682ee067bd1/p1/892-923",
+  "unit": null,
+  "value_num": null,
+  "value_text": "PCV-8905 SPLIT-RANGE"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "VOLUME",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-FA-8901-027",
+  "span_id": "rev-5682ee067bd1/p1/950-963",
+  "unit": "m3",
+  "value_num": 9.6,
+  "value_text": "9.6 m3"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "PRODUCT NOZZLE N3",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-FA-8901-028",
+  "span_id": "rev-5682ee067bd1/p1/964-988",
+  "unit": "inch",
+  "value_num": 4.0,
+  "value_text": "4 inch"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "REFLUX PUMP",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-FA-8901-029",
+  "span_id": "rev-5682ee067bd1/p1/989-1012",
+  "unit": null,
+  "value_num": null,
+  "value_text": "GA-8920 A/B"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "BOOT DRAIN N4",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-FA-8901-030",
+  "span_id": "rev-5682ee067bd1/p1/1013-1033",
+  "unit": "inch",
+  "value_num": 2.0,
+  "value_text": "2 inch"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "INLET NOZZLE N1",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-FA-8901-031",
+  "span_id": "rev-5682ee067bd1/p1/1034-1074",
+  "unit": "inch",
+  "value_num": 8.0,
+  "value_text": "8 inch (column overhead)"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "PSV NOZZLE N5",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-FA-8901-032",
+  "span_id": "rev-5682ee067bd1/p1/1075-1095",
+  "unit": "inch",
+  "value_num": 3.0,
+  "value_text": "3 inch"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "REFLUX NOZZLE N2",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-FA-8901-033",
+  "span_id": "rev-5682ee067bd1/p1/1096-1119",
+  "unit": "inch",
+  "value_num": 6.0,
+  "value_text": "6 inch"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "MANWAY",
+  "group": "PERFORMANCE / NOZZLE DATA",
+  "id": "DSP-FA-8901-034",
+  "span_id": "rev-5682ee067bd1/p1/1120-1134",
+  "unit": "inch",
+  "value_num": 24.0,
+  "value_text": "24 inch"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "DRIVER TYPE",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-FA-8901-035",
+  "span_id": "rev-5682ee067bd1/p1/1173-1198",
+  "unit": null,
+  "value_num": null,
+  "value_text": "None (static)"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "field": "DATASHEET REV",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-FA-8901-036",
+  "span_id": "rev-5682ee067bd1/p1/1199-1241",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Rev 3 - ISSUED FOR OPERATION"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "DOC NO",
+  "group": "header",
+  "id": "DSP-GA-1201A-001",
+  "span_id": "rev-8f1851948743/p1/28-55",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-DS-GA-1201A"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "REV",
+  "group": "header",
+  "id": "DSP-GA-1201A-002",
+  "span_id": "rev-8f1851948743/p1/56-62",
+  "unit": null,
+  "value_num": 3.0,
+  "value_text": "3"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "ITEM / TAG NO.",
+  "group": "header",
+  "id": "DSP-GA-1201A-003",
+  "span_id": "rev-8f1851948743/p1/98-121",
+  "unit": null,
+  "value_num": null,
+  "value_text": "GA-1201A"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "EQUIPMENT ID",
+  "group": "header",
+  "id": "DSP-GA-1201A-004",
+  "span_id": "rev-8f1851948743/p1/122-148",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EQ-1000012011"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "EQUIPMENT NAME",
+  "group": "header",
+  "id": "DSP-GA-1201A-005",
+  "span_id": "rev-8f1851948743/p1/149-180",
+  "unit": null,
+  "value_num": null,
+  "value_text": "HEXANE FEED PUMP"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "TYPE",
+  "group": "header",
+  "id": "DSP-GA-1201A-006",
+  "span_id": "rev-8f1851948743/p1/181-216",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Centrifugal Pump (API 610 OH2)"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "PLANT / UNIT",
+  "group": "header",
+  "id": "DSP-GA-1201A-007",
+  "span_id": "rev-8f1851948743/p1/217-274",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LINEAR LOW DENSITY POLYETHYLENE (LLDPE) UNIT"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "AREA",
+  "group": "header",
+  "id": "DSP-GA-1201A-008",
+  "span_id": "rev-8f1851948743/p1/275-318",
+  "unit": null,
+  "value_num": 1200.0,
+  "value_text": "1200 - FEED PREPARATION & PURIFICATION"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "FUNCTIONAL LOC.",
+  "group": "header",
+  "id": "DSP-GA-1201A-009",
+  "span_id": "rev-8f1851948743/p1/319-350",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-1200-01"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "CRITICALITY",
+  "group": "header",
+  "id": "DSP-GA-1201A-010",
+  "span_id": "rev-8f1851948743/p1/351-376",
+  "unit": null,
+  "value_num": null,
+  "value_text": "HIGH CRITICAL"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "SERVICE",
+  "group": "header",
+  "id": "DSP-GA-1201A-011",
+  "span_id": "rev-8f1851948743/p1/377-443",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Hexane feed transfer to 1st Polymerization Reactor DC-4501"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "PUMP TYPE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-012",
+  "span_id": "rev-8f1851948743/p1/469-516",
+  "unit": null,
+  "value_num": null,
+  "value_text": "HORIZONTAL, END SUCTION, SINGLE STAGE"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "CASING MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-013",
+  "span_id": "rev-8f1851948743/p1/517-555",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ASTM A351 CF8M (SS316)"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "MODEL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-014",
+  "span_id": "rev-8f1851948743/p1/556-574",
+  "unit": null,
+  "value_num": null,
+  "value_text": "3x2x10 CDX-M"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "IMPELLER MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-015",
+  "span_id": "rev-8f1851948743/p1/575-615",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ASTM A351 CF8M (SS316)"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "RATED FLOW",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-016",
+  "span_id": "rev-8f1851948743/p1/616-634",
+  "unit": "m3/h",
+  "value_num": 45.0,
+  "value_text": "45 m3/h"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "SHAFT MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-017",
+  "span_id": "rev-8f1851948743/p1/635-659",
+  "unit": null,
+  "value_num": null,
+  "value_text": "AISI 4140"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "RATED HEAD",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-018",
+  "span_id": "rev-8f1851948743/p1/660-676",
+  "unit": "m",
+  "value_num": 120.0,
+  "value_text": "120 m"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "MECHANICAL SEAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-019",
+  "span_id": "rev-8f1851948743/p1/677-717",
+  "unit": null,
+  "value_num": null,
+  "value_text": "JOHN CRANE T2100, SINGLE"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "NPSH REQUIRED",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-020",
+  "span_id": "rev-8f1851948743/p1/718-737",
+  "unit": "m",
+  "value_num": 3.5,
+  "value_text": "3.5 m"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "SEAL FLUSH PLAN",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-021",
+  "span_id": "rev-8f1851948743/p1/738-782",
+  "unit": null,
+  "value_num": null,
+  "value_text": "API PLAN 11 + PLAN 62 QUENCH"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "DIFF. PRESSURE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-022",
+  "span_id": "rev-8f1851948743/p1/783-805",
+  "unit": "bar",
+  "value_num": 8.6,
+  "value_text": "8.6 bar"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "BEARING TYPE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-023",
+  "span_id": "rev-8f1851948743/p1/806-848",
+  "unit": null,
+  "value_num": null,
+  "value_text": "DE: 7310 BECBM / NDE: 6310 C3"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "PUMPING TEMP.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-024",
+  "span_id": "rev-8f1851948743/p1/849-870",
+  "unit": "degC",
+  "value_num": 40.0,
+  "value_text": "40 degC"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "LUBRICATION",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-025",
+  "span_id": "rev-8f1851948743/p1/871-902",
+  "unit": null,
+  "value_num": null,
+  "value_text": "OIL BATH, ISO VG 68"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "SPECIFIC GRAVITY",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-026",
+  "span_id": "rev-8f1851948743/p1/903-935",
+  "unit": null,
+  "value_num": 0.66,
+  "value_text": "0.66 (n-Hexane)"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "COUPLING",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-027",
+  "span_id": "rev-8f1851948743/p1/936-969",
+  "unit": null,
+  "value_num": null,
+  "value_text": "FLEXIBLE SPACER, REXNORD"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "VISCOSITY",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-GA-1201A-028",
+  "span_id": "rev-8f1851948743/p1/970-987",
+  "unit": "cP",
+  "value_num": 0.31,
+  "value_text": "0.31 cP"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "OUTPUT",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-GA-1201A-029",
+  "span_id": "rev-8f1851948743/p1/1017-1029",
+  "unit": "kW",
+  "value_num": 30.0,
+  "value_text": "30 kW"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "ENCLOSURE",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-GA-1201A-030",
+  "span_id": "rev-8f1851948743/p1/1030-1049",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TEFC IP55"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "POLES",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-GA-1201A-031",
+  "span_id": "rev-8f1851948743/p1/1050-1062",
+  "unit": "POLE",
+  "value_num": 2.0,
+  "value_text": "2 POLE"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "AREA CLASSIFICATION",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-GA-1201A-032",
+  "span_id": "rev-8f1851948743/p1/1063-1097",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ZONE 2, IIA T3"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "SPEED",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-GA-1201A-033",
+  "span_id": "rev-8f1851948743/p1/1098-1112",
+  "unit": "rpm",
+  "value_num": 2970.0,
+  "value_text": "2970 rpm"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "EX PROTECTION",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-GA-1201A-034",
+  "span_id": "rev-8f1851948743/p1/1113-1142",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Ex nA IIC T3 Gc"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "VOLTAGE",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-GA-1201A-035",
+  "span_id": "rev-8f1851948743/p1/1143-1171",
+  "unit": "V",
+  "value_num": 380.0,
+  "value_text": "380 V / 3 Ph / 50 Hz"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "FRAME",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-GA-1201A-036",
+  "span_id": "rev-8f1851948743/p1/1172-1186",
+  "unit": null,
+  "value_num": null,
+  "value_text": "IEC 200L"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "RATED CURRENT",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-GA-1201A-037",
+  "span_id": "rev-8f1851948743/p1/1187-1205",
+  "unit": "A",
+  "value_num": 56.0,
+  "value_text": "56 A"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "WEIGHT (MOTOR)",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-GA-1201A-038",
+  "span_id": "rev-8f1851948743/p1/1206-1227",
+  "unit": "kg",
+  "value_num": 295.0,
+  "value_text": "295 kg"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "INSULATION CLASS",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-GA-1201A-039",
+  "span_id": "rev-8f1851948743/p1/1228-1260",
+  "unit": null,
+  "value_num": null,
+  "value_text": "F (Temp rise B)"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "DRIVER TYPE",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-GA-1201A-040",
+  "span_id": "rev-8f1851948743/p1/1299-1331",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Electric Motor, TEFC"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "field": "DATASHEET REV",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-GA-1201A-041",
+  "span_id": "rev-8f1851948743/p1/1332-1374",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Rev 3 - ISSUED FOR OPERATION"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "DOC NO",
+  "group": "header",
+  "id": "DSP-KC-4501-001",
+  "span_id": "rev-5ad9ec251d90/p1/36-62",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-DS-KC-4501"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "REV",
+  "group": "header",
+  "id": "DSP-KC-4501-002",
+  "span_id": "rev-5ad9ec251d90/p1/63-69",
+  "unit": null,
+  "value_num": 3.0,
+  "value_text": "3"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "ITEM / TAG NO.",
+  "group": "header",
+  "id": "DSP-KC-4501-003",
+  "span_id": "rev-5ad9ec251d90/p1/70-92",
+  "unit": null,
+  "value_num": null,
+  "value_text": "KC-4501"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "EQUIPMENT ID",
+  "group": "header",
+  "id": "DSP-KC-4501-004",
+  "span_id": "rev-5ad9ec251d90/p1/93-119",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EQ-1000045011"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "EQUIPMENT NAME",
+  "group": "header",
+  "id": "DSP-KC-4501-005",
+  "span_id": "rev-5ad9ec251d90/p1/120-157",
+  "unit": null,
+  "value_num": null,
+  "value_text": "RECYCLE GAS COMPRESSOR"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "TYPE",
+  "group": "header",
+  "id": "DSP-KC-4501-006",
+  "span_id": "rev-5ad9ec251d90/p1/158-197",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Reciprocating Compressor (2-stage)"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "PLANT / UNIT",
+  "group": "header",
+  "id": "DSP-KC-4501-007",
+  "span_id": "rev-5ad9ec251d90/p1/198-255",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LINEAR LOW DENSITY POLYETHYLENE (LLDPE) UNIT"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "AREA",
+  "group": "header",
+  "id": "DSP-KC-4501-008",
+  "span_id": "rev-5ad9ec251d90/p1/256-294",
+  "unit": null,
+  "value_num": 4500.0,
+  "value_text": "4500 - GAS RECOVERY & COMPRESSION"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "FUNCTIONAL LOC.",
+  "group": "header",
+  "id": "DSP-KC-4501-009",
+  "span_id": "rev-5ad9ec251d90/p1/295-326",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-4500-01"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "CRITICALITY",
+  "group": "header",
+  "id": "DSP-KC-4501-010",
+  "span_id": "rev-5ad9ec251d90/p1/327-352",
+  "unit": null,
+  "value_num": null,
+  "value_text": "HIGH CRITICAL"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "SERVICE",
+  "group": "header",
+  "id": "DSP-KC-4501-011",
+  "span_id": "rev-5ad9ec251d90/p1/353-421",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Compress recycle ethylene/hexane vapour back to reactor loop"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "COMPRESSOR TYPE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-012",
+  "span_id": "rev-5ad9ec251d90/p1/447-494",
+  "unit": null,
+  "value_num": null,
+  "value_text": "RECIPROCATING, 2-STAGE, 2-THROW"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "CYLINDER MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-013",
+  "span_id": "rev-5ad9ec251d90/p1/495-530",
+  "unit": null,
+  "value_num": null,
+  "value_text": "NODULAR CAST IRON"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "ITEM NO.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-014",
+  "span_id": "rev-5ad9ec251d90/p1/531-547",
+  "unit": null,
+  "value_num": null,
+  "value_text": "KC-4501"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "PISTON RINGS",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-015",
+  "span_id": "rev-5ad9ec251d90/p1/548-572",
+  "unit": null,
+  "value_num": null,
+  "value_text": "PTFE FILLED"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "CAPACITY (SUCTION)",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-016",
+  "span_id": "rev-5ad9ec251d90/p1/573-602",
+  "unit": "Nm3/h",
+  "value_num": 1250.0,
+  "value_text": "1250 Nm3/h"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "PACKING",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-017",
+  "span_id": "rev-5ad9ec251d90/p1/603-637",
+  "unit": null,
+  "value_num": null,
+  "value_text": "PTFE RINGS, DISTANCE PIECE"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "SUCTION PRESSURE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-018",
+  "span_id": "rev-5ad9ec251d90/p1/638-663",
+  "unit": "barg",
+  "value_num": 1.2,
+  "value_text": "1.2 barg"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "VALVES",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-019",
+  "span_id": "rev-5ad9ec251d90/p1/664-685",
+  "unit": null,
+  "value_num": null,
+  "value_text": "PLATE TYPE, SS"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "DISCHARGE PRESSURE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-020",
+  "span_id": "rev-5ad9ec251d90/p1/686-714",
+  "unit": "barg",
+  "value_num": 12.5,
+  "value_text": "12.5 barg"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "LUBE SYSTEM",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-021",
+  "span_id": "rev-5ad9ec251d90/p1/715-740",
+  "unit": null,
+  "value_num": null,
+  "value_text": "FORCED FEED +"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "FRAME",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-022",
+  "span_id": "rev-5ad9ec251d90/p1/741-753",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SPLASH"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "SUCTION TEMP.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-023",
+  "span_id": "rev-5ad9ec251d90/p1/754-775",
+  "unit": "degC",
+  "value_num": 40.0,
+  "value_text": "40 degC"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "SEAL GAS",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-024",
+  "span_id": "rev-5ad9ec251d90/p1/776-800",
+  "unit": null,
+  "value_num": null,
+  "value_text": "NITROGEN BUFFER"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "DISCHARGE TEMP.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-025",
+  "span_id": "rev-5ad9ec251d90/p1/801-831",
+  "unit": "degC",
+  "value_num": 115.0,
+  "value_text": "115 degC (max)"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "COOLING",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-026",
+  "span_id": "rev-5ad9ec251d90/p1/832-874",
+  "unit": null,
+  "value_num": null,
+  "value_text": "JACKET WATER + INTERCOOLER EA-4502"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "GAS",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-027",
+  "span_id": "rev-5ad9ec251d90/p1/875-905",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ETHYLENE / HEXANE / H2 MIX"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "VIBRATION MON.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-KC-4501-028",
+  "span_id": "rev-5ad9ec251d90/p1/906-938",
+  "unit": null,
+  "value_num": null,
+  "value_text": "VT-4501 CROSSHEAD"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "OUTPUT",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-KC-4501-029",
+  "span_id": "rev-5ad9ec251d90/p1/968-981",
+  "unit": "kW",
+  "value_num": 250.0,
+  "value_text": "250 kW"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "ENCLOSURE",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-KC-4501-030",
+  "span_id": "rev-5ad9ec251d90/p1/982-996",
+  "unit": null,
+  "value_num": null,
+  "value_text": "WPII"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "POLES",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-KC-4501-031",
+  "span_id": "rev-5ad9ec251d90/p1/997-1009",
+  "unit": "POLE",
+  "value_num": 4.0,
+  "value_text": "4 POLE"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "AREA CLASSIFICATION",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-KC-4501-032",
+  "span_id": "rev-5ad9ec251d90/p1/1010-1044",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ZONE 2, IIB T3"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "SPEED",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-KC-4501-033",
+  "span_id": "rev-5ad9ec251d90/p1/1045-1059",
+  "unit": "rpm",
+  "value_num": 1485.0,
+  "value_text": "1485 rpm"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "EX PROTECTION",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-KC-4501-034",
+  "span_id": "rev-5ad9ec251d90/p1/1060-1086",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Ex px IIB T3"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "VOLTAGE",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-KC-4501-035",
+  "span_id": "rev-5ad9ec251d90/p1/1087-1116",
+  "unit": "V",
+  "value_num": 6000.0,
+  "value_text": "6000 V / 3 Ph / 50 Hz"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "FRAME",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-KC-4501-036",
+  "span_id": "rev-5ad9ec251d90/p1/1117-1130",
+  "unit": null,
+  "value_num": null,
+  "value_text": "IEC 355"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "RATED CURRENT",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-KC-4501-037",
+  "span_id": "rev-5ad9ec251d90/p1/1131-1149",
+  "unit": "A",
+  "value_num": 30.0,
+  "value_text": "30 A"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "WEIGHT (MOTOR)",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-KC-4501-038",
+  "span_id": "rev-5ad9ec251d90/p1/1150-1172",
+  "unit": "kg",
+  "value_num": 1980.0,
+  "value_text": "1980 kg"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "INSULATION CLASS",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-KC-4501-039",
+  "span_id": "rev-5ad9ec251d90/p1/1173-1191",
+  "unit": null,
+  "value_num": null,
+  "value_text": "F"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "DRIVER TYPE",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-KC-4501-040",
+  "span_id": "rev-5ad9ec251d90/p1/1230-1264",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Electric Motor, 4-pole"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "field": "DATASHEET REV",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-KC-4501-041",
+  "span_id": "rev-5ad9ec251d90/p1/1265-1307",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Rev 3 - ISSUED FOR OPERATION"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "DOC NO",
+  "group": "header",
+  "id": "DSP-LV-6701-001",
+  "span_id": "rev-de4f69577847/p1/25-51",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-DS-LV-6701"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "REV",
+  "group": "header",
+  "id": "DSP-LV-6701-002",
+  "span_id": "rev-de4f69577847/p1/52-58",
+  "unit": null,
+  "value_num": 3.0,
+  "value_text": "3"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "ITEM / TAG NO.",
+  "group": "header",
+  "id": "DSP-LV-6701-003",
+  "span_id": "rev-de4f69577847/p1/59-81",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LV-6701"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "EQUIPMENT ID",
+  "group": "header",
+  "id": "DSP-LV-6701-004",
+  "span_id": "rev-de4f69577847/p1/82-108",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EQ-1000067011"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "EQUIPMENT NAME",
+  "group": "header",
+  "id": "DSP-LV-6701-005",
+  "span_id": "rev-de4f69577847/p1/109-153",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SEPARATOR LEVEL CONTROL VALVE"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "TYPE",
+  "group": "header",
+  "id": "DSP-LV-6701-006",
+  "span_id": "rev-de4f69577847/p1/154-199",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Globe Control Valve + Diaphragm Actuator"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "PLANT / UNIT",
+  "group": "header",
+  "id": "DSP-LV-6701-007",
+  "span_id": "rev-de4f69577847/p1/200-257",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LINEAR LOW DENSITY POLYETHYLENE (LLDPE) UNIT"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "AREA",
+  "group": "header",
+  "id": "DSP-LV-6701-008",
+  "span_id": "rev-de4f69577847/p1/258-288",
+  "unit": null,
+  "value_num": 6700.0,
+  "value_text": "6700 - PRODUCT SEPARATION"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "FUNCTIONAL LOC.",
+  "group": "header",
+  "id": "DSP-LV-6701-009",
+  "span_id": "rev-de4f69577847/p1/289-320",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-6700-01"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "CRITICALITY",
+  "group": "header",
+  "id": "DSP-LV-6701-010",
+  "span_id": "rev-de4f69577847/p1/321-345",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LOW CRITICAL"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "SERVICE",
+  "group": "header",
+  "id": "DSP-LV-6701-011",
+  "span_id": "rev-de4f69577847/p1/346-413",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Level control of LP Separator FA-6710 bottoms to downstream"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "VALVE TYPE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-012",
+  "span_id": "rev-de4f69577847/p1/439-472",
+  "unit": null,
+  "value_num": null,
+  "value_text": "GLOBE, CAGE-GUIDED, ED"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "FAIL ACTION",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-013",
+  "span_id": "rev-de4f69577847/p1/473-501",
+  "unit": null,
+  "value_num": null,
+  "value_text": "FAIL CLOSED (FC)"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "TAG / ITEM",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-014",
+  "span_id": "rev-de4f69577847/p1/502-520",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LV-6701"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "ACTUATOR",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-015",
+  "span_id": "rev-de4f69577847/p1/521-548",
+  "unit": null,
+  "value_num": null,
+  "value_text": "FISHER 667 SIZE 45"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "BODY SIZE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-016",
+  "span_id": "rev-de4f69577847/p1/549-572",
+  "unit": "inch",
+  "value_num": 3.0,
+  "value_text": "3 inch (DN80)"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "POSITIONER",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-017",
+  "span_id": "rev-de4f69577847/p1/573-605",
+  "unit": null,
+  "value_num": null,
+  "value_text": "DVC6200 HART, 4-20 mA"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "BODY RATING",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-018",
+  "span_id": "rev-de4f69577847/p1/606-627",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ASME 300#"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "AIR SUPPLY",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-019",
+  "span_id": "rev-de4f69577847/p1/628-662",
+  "unit": "barg",
+  "value_num": 1.4,
+  "value_text": "1.4 barg INSTRUMENT AIR"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "BODY MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-020",
+  "span_id": "rev-de4f69577847/p1/663-693",
+  "unit": null,
+  "value_num": null,
+  "value_text": "WCC CARBON STEEL"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "PACKING",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-021",
+  "span_id": "rev-de4f69577847/p1/694-713",
+  "unit": null,
+  "value_num": null,
+  "value_text": "PTFE V-RING"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "TRIM MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-022",
+  "span_id": "rev-de4f69577847/p1/714-744",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SS316 + STELLITE"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "BENCH SET",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-023",
+  "span_id": "rev-de4f69577847/p1/745-767",
+  "unit": null,
+  "value_num": null,
+  "value_text": "0.2-1.0 barg"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "TRIM CHARACTERISTIC",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-024",
+  "span_id": "rev-de4f69577847/p1/768-804",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EQUAL PERCENTAGE"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "HANDWHEEL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-025",
+  "span_id": "rev-de4f69577847/p1/805-826",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TOP-MOUNTED"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "RATED CV",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-026",
+  "span_id": "rev-de4f69577847/p1/827-839",
+  "unit": null,
+  "value_num": 110.0,
+  "value_text": "110"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "SERVICE FLUID",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-LV-6701-027",
+  "span_id": "rev-de4f69577847/p1/840-878",
+  "unit": null,
+  "value_num": null,
+  "value_text": "HEXANE + POLYMER BOTTOMS"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "CONTROLLER",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-LV-6701-028",
+  "span_id": "rev-de4f69577847/p1/908-946",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LIC-6701 (on FA-6710 level)"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "ACTION ON AIR FAIL",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-LV-6701-029",
+  "span_id": "rev-de4f69577847/p1/947-978",
+  "unit": null,
+  "value_num": null,
+  "value_text": "VALVE CLOSES"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "INPUT SIGNAL",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-LV-6701-030",
+  "span_id": "rev-de4f69577847/p1/979-999",
+  "unit": null,
+  "value_num": null,
+  "value_text": "4-20 mA"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "SOLENOID",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-LV-6701-031",
+  "span_id": "rev-de4f69577847/p1/1000-1022",
+  "unit": null,
+  "value_num": null,
+  "value_text": "XV-6701 (ESD)"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "STROKE",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-LV-6701-032",
+  "span_id": "rev-de4f69577847/p1/1023-1035",
+  "unit": "mm",
+  "value_num": 38.0,
+  "value_text": "38 mm"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "LIMIT SWITCH",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-LV-6701-033",
+  "span_id": "rev-de4f69577847/p1/1036-1061",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ZSL/ZSH-6701"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "LEAKAGE CLASS",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-LV-6701-034",
+  "span_id": "rev-de4f69577847/p1/1062-1089",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ANSI CLASS IV"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "DRIVER TYPE",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-LV-6701-035",
+  "span_id": "rev-de4f69577847/p1/1128-1175",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Pneumatic Spring-Diaphragm Actuator"
+ },
+ {
+  "equipment_tag": "LV-6701",
+  "field": "DATASHEET REV",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-LV-6701-036",
+  "span_id": "rev-de4f69577847/p1/1176-1218",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Rev 3 - ISSUED FOR OPERATION"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "DOC NO",
+  "group": "header",
+  "id": "DSP-YD-2301-001",
+  "span_id": "rev-d2383d821942/p1/30-56",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-DS-YD-2301"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "REV",
+  "group": "header",
+  "id": "DSP-YD-2301-002",
+  "span_id": "rev-d2383d821942/p1/57-63",
+  "unit": null,
+  "value_num": 3.0,
+  "value_text": "3"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "ITEM / TAG NO.",
+  "group": "header",
+  "id": "DSP-YD-2301-003",
+  "span_id": "rev-d2383d821942/p1/64-86",
+  "unit": null,
+  "value_num": null,
+  "value_text": "YD-2301"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "EQUIPMENT ID",
+  "group": "header",
+  "id": "DSP-YD-2301-004",
+  "span_id": "rev-d2383d821942/p1/87-113",
+  "unit": null,
+  "value_num": null,
+  "value_text": "EQ-1000023011"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "EQUIPMENT NAME",
+  "group": "header",
+  "id": "DSP-YD-2301-005",
+  "span_id": "rev-d2383d821942/p1/114-152",
+  "unit": null,
+  "value_num": null,
+  "value_text": "POLYMER FLUID BED DRYER"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "TYPE",
+  "group": "header",
+  "id": "DSP-YD-2301-006",
+  "span_id": "rev-d2383d821942/p1/153-181",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Rotary Steam-Tube Dryer"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "PLANT / UNIT",
+  "group": "header",
+  "id": "DSP-YD-2301-007",
+  "span_id": "rev-d2383d821942/p1/182-239",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LINEAR LOW DENSITY POLYETHYLENE (LLDPE) UNIT"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "AREA",
+  "group": "header",
+  "id": "DSP-YD-2301-008",
+  "span_id": "rev-d2383d821942/p1/240-279",
+  "unit": null,
+  "value_num": 2300.0,
+  "value_text": "2300 - POLYMER SEPARATION & DRYING"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "FUNCTIONAL LOC.",
+  "group": "header",
+  "id": "DSP-YD-2301-009",
+  "span_id": "rev-d2383d821942/p1/280-311",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TJC-LLD-2300-01"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "CRITICALITY",
+  "group": "header",
+  "id": "DSP-YD-2301-010",
+  "span_id": "rev-d2383d821942/p1/312-337",
+  "unit": null,
+  "value_num": null,
+  "value_text": "HIGH CRITICAL"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "SERVICE",
+  "group": "header",
+  "id": "DSP-YD-2301-011",
+  "span_id": "rev-d2383d821942/p1/338-414",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Drying of LLDPE polymer powder from centrifuge to < 300 ppm moisture"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "DRYER TYPE",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-012",
+  "span_id": "rev-d2383d821942/p1/440-478",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ROTARY STEAM-TUBE, INDIRECT"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "OPERATING TEMP.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-013",
+  "span_id": "rev-d2383d821942/p1/479-506",
+  "unit": null,
+  "value_num": null,
+  "value_text": "95-110 degC"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "ITEM NO.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-014",
+  "span_id": "rev-d2383d821942/p1/507-523",
+  "unit": null,
+  "value_num": null,
+  "value_text": "YD-2301"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "BODY MATERIAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-015",
+  "span_id": "rev-d2383d821942/p1/524-544",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SM400B"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "DRUM DIAMETER",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-016",
+  "span_id": "rev-d2383d821942/p1/545-566",
+  "unit": "mm",
+  "value_num": 1800.0,
+  "value_text": "1800 mm"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "ROTOR SHAFT",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-017",
+  "span_id": "rev-d2383d821942/p1/567-593",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SM400B / SS400"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "DRUM LENGTH",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-018",
+  "span_id": "rev-d2383d821942/p1/594-613",
+  "unit": "mm",
+  "value_num": 9000.0,
+  "value_text": "9000 mm"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "GLAND PACKING",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-019",
+  "span_id": "rev-d2383d821942/p1/614-647",
+  "unit": null,
+  "value_num": null,
+  "value_text": "PTFE (PILLER 4526L)"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "ROTATION SPEED",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-020",
+  "span_id": "rev-d2383d821942/p1/648-668",
+  "unit": "rpm",
+  "value_num": 4.0,
+  "value_text": "4 rpm"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "OIL SEAL",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-021",
+  "span_id": "rev-d2383d821942/p1/669-681",
+  "unit": null,
+  "value_num": null,
+  "value_text": "NBR"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "HEATING MEDIUM",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-022",
+  "span_id": "rev-d2383d821942/p1/682-714",
+  "unit": null,
+  "value_num": null,
+  "value_text": "LP STEAM 4.5 barg"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "O-RING",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-023",
+  "span_id": "rev-d2383d821942/p1/715-725",
+  "unit": null,
+  "value_num": null,
+  "value_text": "NBR"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "INERT MEDIUM",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-024",
+  "span_id": "rev-d2383d821942/p1/726-747",
+  "unit": null,
+  "value_num": null,
+  "value_text": "NITROGEN"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "ROTARY JOINT",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-025",
+  "span_id": "rev-d2383d821942/p1/748-777",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ASSEMBLY, KADANT"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "DESIGN TEMP.",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-026",
+  "span_id": "rev-d2383d821942/p1/778-799",
+  "unit": "degC",
+  "value_num": 150.0,
+  "value_text": "150 degC"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "DRIVE CHAIN & SPROCKET",
+  "group": "DESIGN & MECHANICAL DATA",
+  "id": "DSP-YD-2301-027",
+  "span_id": "rev-d2383d821942/p1/800-829",
+  "unit": null,
+  "value_num": null,
+  "value_text": "SCM440"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "OUTPUT",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-YD-2301-028",
+  "span_id": "rev-d2383d821942/p1/859-871",
+  "unit": "kW",
+  "value_num": 22.0,
+  "value_text": "22 kW"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "ENCLOSURE",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-YD-2301-029",
+  "span_id": "rev-d2383d821942/p1/872-891",
+  "unit": null,
+  "value_num": null,
+  "value_text": "TEFC IP55"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "POLES",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-YD-2301-030",
+  "span_id": "rev-d2383d821942/p1/892-904",
+  "unit": "POLE",
+  "value_num": 4.0,
+  "value_text": "4 POLE"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "AREA CLASSIFICATION",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-YD-2301-031",
+  "span_id": "rev-d2383d821942/p1/905-939",
+  "unit": null,
+  "value_num": null,
+  "value_text": "ZONE 2, IIA T3"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "SPEED",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-YD-2301-032",
+  "span_id": "rev-d2383d821942/p1/940-954",
+  "unit": "rpm",
+  "value_num": 1450.0,
+  "value_text": "1450 rpm"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "EX PROTECTION",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-YD-2301-033",
+  "span_id": "rev-d2383d821942/p1/955-984",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Ex nA IIC T3 Gc"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "VOLTAGE",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-YD-2301-034",
+  "span_id": "rev-d2383d821942/p1/985-1013",
+  "unit": "V",
+  "value_num": 380.0,
+  "value_text": "380 V / 3 Ph / 50 Hz"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "FRAME",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-YD-2301-035",
+  "span_id": "rev-d2383d821942/p1/1014-1028",
+  "unit": null,
+  "value_num": null,
+  "value_text": "IEC 180L"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "RATED CURRENT",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-YD-2301-036",
+  "span_id": "rev-d2383d821942/p1/1029-1047",
+  "unit": "A",
+  "value_num": 43.0,
+  "value_text": "43 A"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "WEIGHT (MOTOR+GEARBOX)",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-YD-2301-037",
+  "span_id": "rev-d2383d821942/p1/1048-1077",
+  "unit": "kg",
+  "value_num": 833.0,
+  "value_text": "833 kg"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "INSULATION CLASS",
+  "group": "DRIVER / MOTOR / HEATER DATA",
+  "id": "DSP-YD-2301-038",
+  "span_id": "rev-d2383d821942/p1/1078-1096",
+  "unit": null,
+  "value_num": null,
+  "value_text": "F"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "DRIVER TYPE",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-YD-2301-039",
+  "span_id": "rev-d2383d821942/p1/1135-1186",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Electric Motor via Chain-Sprocket, TEFC"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "field": "DATASHEET REV",
+  "group": "VENDOR / MANUFACTURER",
+  "id": "DSP-YD-2301-040",
+  "span_id": "rev-d2383d821942/p1/1187-1229",
+  "unit": null,
+  "value_num": null,
+  "value_text": "Rev 3 - ISSUED FOR OPERATION"
+ }
+]

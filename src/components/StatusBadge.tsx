@@ -1,15 +1,11 @@
-// Blueprint 6.4 StatusBadge: the fixed wordings, string-matched in CI. The wording constants are the contract;
-// a surface never types them. Caveat amber carries the provenance caveats (7.1); the closeout defect carries red;
-// Reviewer mode is interactive chrome and carries the accent.
+// Blueprint 6.4 StatusBadge: the fixed wordings, string-matched in CI. The wording constants are the contract and
+// live in src/lib/fixed-strings.ts (re-exported here for the M0 importers); a surface never types them. Caveat
+// amber carries the provenance caveats (7.1); the closeout defect carries red; Reviewer mode is interactive chrome
+// and carries the accent.
+import { STATUS_WORDING } from "@/lib/fixed-strings";
 import { cx } from "./cx";
 
-export const STATUS_WORDING = {
-  machine_drafted: "machine-drafted",
-  incomplete_closeout: "incomplete closeout",
-  simulated: "SIMULATED",
-  specified_not_connected: "specified, not connected",
-  reviewer_mode: "Reviewer mode",
-} as const;
+export { STATUS_WORDING };
 
 export type StatusKind = keyof typeof STATUS_WORDING;
 

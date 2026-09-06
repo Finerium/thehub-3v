@@ -1,0 +1,1598 @@
+{
+ "items": [
+  {
+   "description": "FANBLADE(FRP)",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-01",
+   "item_no": 1,
+   "material": "GRP",
+   "quantity": "6",
+   "span_id": "rev-cd865b3ae7d3/p1/151-172"
+  },
+  {
+   "description": "FANHUB",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-02",
+   "item_no": 2,
+   "material": "CASTALUMINIUM",
+   "quantity": "1",
+   "span_id": "rev-cd865b3ae7d3/p1/173-197"
+  },
+  {
+   "description": "GEARBOX(RIGHTANGLE)",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-03",
+   "item_no": 3,
+   "material": "CASTIRON",
+   "quantity": "1",
+   "span_id": "rev-cd865b3ae7d3/p1/198-230"
+  },
+  {
+   "description": "FLOATINGDRIVESHAFT",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-04",
+   "item_no": 4,
+   "material": "COMPOSITE",
+   "quantity": "1",
+   "span_id": "rev-cd865b3ae7d3/p1/231-263"
+  },
+  {
+   "description": "MOTOR",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-05",
+   "item_no": 5,
+   "material": "TECO55kW",
+   "quantity": "1",
+   "span_id": "rev-cd865b3ae7d3/p1/264-282"
+  },
+  {
+   "description": "FANDECK/STACK",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-06",
+   "item_no": 6,
+   "material": "FRP",
+   "quantity": "1",
+   "span_id": "rev-cd865b3ae7d3/p1/283-304"
+  },
+  {
+   "description": "DRIFTELIMINATOR",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-07",
+   "item_no": 7,
+   "material": "PVC",
+   "quantity": "1set",
+   "span_id": "rev-cd865b3ae7d3/p1/305-331"
+  },
+  {
+   "description": "FILMFILL",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-08",
+   "item_no": 8,
+   "material": "PVC",
+   "quantity": "1set",
+   "span_id": "rev-cd865b3ae7d3/p1/332-351"
+  },
+  {
+   "description": "GEARBOXOILSEAL",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-09",
+   "item_no": 9,
+   "material": "NBR",
+   "quantity": "2",
+   "span_id": "rev-cd865b3ae7d3/p1/352-374"
+  },
+  {
+   "description": "FANBEARING",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-10",
+   "item_no": 10,
+   "material": "SPHERICALROLLER",
+   "quantity": "2",
+   "span_id": "rev-cd865b3ae7d3/p1/375-406"
+  },
+  {
+   "description": "VIBRATIONSWITCH",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-11",
+   "item_no": 11,
+   "material": null,
+   "quantity": "1",
+   "span_id": "rev-cd865b3ae7d3/p1/407-429"
+  },
+  {
+   "description": "BARSCREEN",
+   "equipment_tag": "CT-7801",
+   "ga_drawing_doc_no": "TJC-LLD-GA-CT-7801",
+   "id": "BOM-CT-7801-12",
+   "item_no": 12,
+   "material": "SS304",
+   "quantity": "1",
+   "span_id": "rev-cd865b3ae7d3/p1/430-450"
+  },
+  {
+   "description": "SHELL",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-01",
+   "item_no": 1,
+   "material": "SA-516-70+SS304CLAD",
+   "quantity": "1",
+   "span_id": "rev-efc84e9807b4/p1/227-256"
+  },
+  {
+   "description": "TOPHEAD(2:1ELLIP)",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-02",
+   "item_no": 2,
+   "material": "SA-516-70",
+   "quantity": "1",
+   "span_id": "rev-efc84e9807b4/p1/257-288"
+  },
+  {
+   "description": "BOTTOMHEAD",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-03",
+   "item_no": 3,
+   "material": "SA-516-70",
+   "quantity": "1",
+   "span_id": "rev-efc84e9807b4/p1/289-313"
+  },
+  {
+   "description": "CATALYSTSUPPORTGRID",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-04",
+   "item_no": 4,
+   "material": "SS304",
+   "quantity": "1",
+   "span_id": "rev-efc84e9807b4/p1/314-343"
+  },
+  {
+   "description": "HOLD-DOWNGRID",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-05",
+   "item_no": 5,
+   "material": "SS304",
+   "quantity": "1",
+   "span_id": "rev-efc84e9807b4/p1/344-367"
+  },
+  {
+   "description": "MULTIPOINTTHERMOWELL",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-06",
+   "item_no": 6,
+   "material": "SS316",
+   "quantity": "1",
+   "span_id": "rev-efc84e9807b4/p1/368-398"
+  },
+  {
+   "description": "INLETDISTRIBUTOR",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-07",
+   "item_no": 7,
+   "material": "SS304",
+   "quantity": "1",
+   "span_id": "rev-efc84e9807b4/p1/399-425"
+  },
+  {
+   "description": "MANWAY24inch",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-08",
+   "item_no": 8,
+   "material": "SA-516-70",
+   "quantity": "2",
+   "span_id": "rev-efc84e9807b4/p1/426-452"
+  },
+  {
+   "description": "PSVNOZZLEN3",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-09",
+   "item_no": 9,
+   "material": "SS304",
+   "quantity": "1",
+   "span_id": "rev-efc84e9807b4/p1/453-474"
+  },
+  {
+   "description": "SKIRTSUPPORT",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-10",
+   "item_no": 10,
+   "material": "CARBONSTEEL",
+   "quantity": "1",
+   "span_id": "rev-efc84e9807b4/p1/475-504"
+  },
+  {
+   "description": "GASKET(MANWAY)",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-11",
+   "item_no": 11,
+   "material": "SWSS316/GRAPHITE",
+   "quantity": "2",
+   "span_id": "rev-efc84e9807b4/p1/505-541"
+  },
+  {
+   "description": "CATALYSTPd/Al2O3",
+   "equipment_tag": "DC-3401A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-DC-3401A",
+   "id": "BOM-DC-3401A-12",
+   "item_no": 12,
+   "material": "CATALYST",
+   "quantity": "3.2m3",
+   "span_id": "rev-efc84e9807b4/p1/542-576"
+  },
+  {
+   "description": "SHELL",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-01",
+   "item_no": 1,
+   "material": "SA-516-70",
+   "quantity": "1",
+   "span_id": "rev-88f3d4a32736/p1/236-255"
+  },
+  {
+   "description": "CHANNEL/BONNET",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-02",
+   "item_no": 2,
+   "material": "SA-516-70",
+   "quantity": "1",
+   "span_id": "rev-88f3d4a32736/p1/256-284"
+  },
+  {
+   "description": "TUBEBUNDLE",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-03",
+   "item_no": 3,
+   "material": "SS304L",
+   "quantity": "1",
+   "span_id": "rev-88f3d4a32736/p1/285-306"
+  },
+  {
+   "description": "TUBESHEET",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-04",
+   "item_no": 4,
+   "material": "SA-516-70+SS304",
+   "quantity": "2",
+   "span_id": "rev-88f3d4a32736/p1/307-336"
+  },
+  {
+   "description": "BAFFLEPLATES",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-05",
+   "item_no": 5,
+   "material": "CARBONSTEEL",
+   "quantity": "9",
+   "span_id": "rev-88f3d4a32736/p1/337-365"
+  },
+  {
+   "description": "TIERODS&SPACERS",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-06",
+   "item_no": 6,
+   "material": "CARBONSTEEL",
+   "quantity": "6",
+   "span_id": "rev-88f3d4a32736/p1/366-397"
+  },
+  {
+   "description": "CHANNELCOVER",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-07",
+   "item_no": 7,
+   "material": "SA-516-70",
+   "quantity": "1",
+   "span_id": "rev-88f3d4a32736/p1/398-424"
+  },
+  {
+   "description": "SHELLGASKET",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-08",
+   "item_no": 8,
+   "material": "SWSS316/GRAPHITE",
+   "quantity": "2",
+   "span_id": "rev-88f3d4a32736/p1/425-457"
+  },
+  {
+   "description": "CHANNELGASKET",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-09",
+   "item_no": 9,
+   "material": "SWSS316/GRAPHITE",
+   "quantity": "2",
+   "span_id": "rev-88f3d4a32736/p1/458-492"
+  },
+  {
+   "description": "SADDLESUPPORT",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-10",
+   "item_no": 10,
+   "material": "CARBONSTEEL",
+   "quantity": "2",
+   "span_id": "rev-88f3d4a32736/p1/493-523"
+  },
+  {
+   "description": "VENT/DRAINNOZZLE",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-11",
+   "item_no": 11,
+   "material": "SS304",
+   "quantity": "4",
+   "span_id": "rev-88f3d4a32736/p1/524-551"
+  },
+  {
+   "description": "STEAMTRAPASSY",
+   "equipment_tag": "EA-5601",
+   "ga_drawing_doc_no": "TJC-LLD-GA-EA-5601",
+   "id": "BOM-EA-5601-12",
+   "item_no": 12,
+   "material": null,
+   "quantity": "1",
+   "span_id": "rev-88f3d4a32736/p1/552-572"
+  },
+  {
+   "description": "SHELL",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-01",
+   "item_no": 1,
+   "material": "SA-516-70",
+   "quantity": "1",
+   "span_id": "rev-81c4c8cf3d2b/p1/227-246"
+  },
+  {
+   "description": "HEAD(2:1ELLIP)",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-02",
+   "item_no": 2,
+   "material": "SA-516-70",
+   "quantity": "2",
+   "span_id": "rev-81c4c8cf3d2b/p1/247-275"
+  },
+  {
+   "description": "WATERBOOT",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-03",
+   "item_no": 3,
+   "material": "SA-516-70",
+   "quantity": "1",
+   "span_id": "rev-81c4c8cf3d2b/p1/276-299"
+  },
+  {
+   "description": "SADDLESUPPORT",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-04",
+   "item_no": 4,
+   "material": "CARBONSTEEL",
+   "quantity": "2",
+   "span_id": "rev-81c4c8cf3d2b/p1/300-329"
+  },
+  {
+   "description": "MANWAY24inch",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-05",
+   "item_no": 5,
+   "material": "SA-516-70",
+   "quantity": "1",
+   "span_id": "rev-81c4c8cf3d2b/p1/330-356"
+  },
+  {
+   "description": "VORTEXBREAKER",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-06",
+   "item_no": 6,
+   "material": "SS304",
+   "quantity": "2",
+   "span_id": "rev-81c4c8cf3d2b/p1/357-380"
+  },
+  {
+   "description": "MISTPAD(INLET)",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-07",
+   "item_no": 7,
+   "material": "SS304MESH",
+   "quantity": "1",
+   "span_id": "rev-81c4c8cf3d2b/p1/381-409"
+  },
+  {
+   "description": "LEVELBRIDLE",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-08",
+   "item_no": 8,
+   "material": "SA-106-B",
+   "quantity": "1",
+   "span_id": "rev-81c4c8cf3d2b/p1/410-434"
+  },
+  {
+   "description": "PSVNOZZLEN5",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-09",
+   "item_no": 9,
+   "material": "SS304",
+   "quantity": "1",
+   "span_id": "rev-81c4c8cf3d2b/p1/435-456"
+  },
+  {
+   "description": "NAMEPLATE&BRACKET",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-10",
+   "item_no": 10,
+   "material": "SS304",
+   "quantity": "1",
+   "span_id": "rev-81c4c8cf3d2b/p1/457-485"
+  },
+  {
+   "description": "MANWAYGASKET",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-11",
+   "item_no": 11,
+   "material": "SWSS316/GRAPHITE",
+   "quantity": "1",
+   "span_id": "rev-81c4c8cf3d2b/p1/486-520"
+  },
+  {
+   "description": "EARTHINGBOSS",
+   "equipment_tag": "FA-8901",
+   "ga_drawing_doc_no": "TJC-LLD-GA-FA-8901",
+   "id": "BOM-FA-8901-12",
+   "item_no": 12,
+   "material": "CARBONSTEEL",
+   "quantity": "2",
+   "span_id": "rev-81c4c8cf3d2b/p1/521-550"
+  },
+  {
+   "description": "CASING",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-01",
+   "item_no": 1,
+   "material": "ASTMA351CF8M",
+   "quantity": "1",
+   "span_id": "rev-88469c528937/p1/169-192"
+  },
+  {
+   "description": "IMPELLER",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-02",
+   "item_no": 2,
+   "material": "ASTMA351CF8M",
+   "quantity": "1",
+   "span_id": "rev-88469c528937/p1/193-218"
+  },
+  {
+   "description": "SHAFT",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-03",
+   "item_no": 3,
+   "material": "AISI4140",
+   "quantity": "1",
+   "span_id": "rev-88469c528937/p1/219-237"
+  },
+  {
+   "description": "SHAFTSLEEVE",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-04",
+   "item_no": 4,
+   "material": "SS316",
+   "quantity": "1",
+   "span_id": "rev-88469c528937/p1/238-259"
+  },
+  {
+   "description": "MECHANICALSEAL",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-05",
+   "item_no": 5,
+   "material": "JCT2100",
+   "quantity": "1",
+   "span_id": "rev-88469c528937/p1/260-286"
+  },
+  {
+   "description": "BEARING(DE)",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-06",
+   "item_no": 6,
+   "material": "7310BECBM",
+   "quantity": "1",
+   "span_id": "rev-88469c528937/p1/287-312"
+  },
+  {
+   "description": "BEARING(NDE)",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-07",
+   "item_no": 7,
+   "material": "6310C3",
+   "quantity": "1",
+   "span_id": "rev-88469c528937/p1/313-336"
+  },
+  {
+   "description": "BEARINGHOUSING",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-08",
+   "item_no": 8,
+   "material": "CASTIRON",
+   "quantity": "1",
+   "span_id": "rev-88469c528937/p1/337-364"
+  },
+  {
+   "description": "WEARRING",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-09",
+   "item_no": 9,
+   "material": "SS316",
+   "quantity": "2",
+   "span_id": "rev-88469c528937/p1/365-383"
+  },
+  {
+   "description": "COUPLINGSPACER",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-10",
+   "item_no": 10,
+   "material": "AISI4140",
+   "quantity": "1",
+   "span_id": "rev-88469c528937/p1/384-412"
+  },
+  {
+   "description": "BASEPLATE",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-11",
+   "item_no": 11,
+   "material": "CARBONSTEEL",
+   "quantity": "1",
+   "span_id": "rev-88469c528937/p1/413-439"
+  },
+  {
+   "description": "OILSEAL",
+   "equipment_tag": "GA-1201A",
+   "ga_drawing_doc_no": "TJC-LLD-GA-GA-1201A",
+   "id": "BOM-GA-1201A-12",
+   "item_no": 12,
+   "material": "NBR",
+   "quantity": "2",
+   "span_id": "rev-88469c528937/p1/440-456"
+  },
+  {
+   "description": "CRANKCASE/FRAME",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-01",
+   "item_no": 1,
+   "material": "CASTIRON",
+   "quantity": "1",
+   "span_id": "rev-ff81ba9654f0/p1/253-281"
+  },
+  {
+   "description": "CRANKSHAFT",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-02",
+   "item_no": 2,
+   "material": "FORGEDSTEEL",
+   "quantity": "1",
+   "span_id": "rev-ff81ba9654f0/p1/282-308"
+  },
+  {
+   "description": "CONNECTINGROD",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-03",
+   "item_no": 3,
+   "material": "FORGEDSTEEL",
+   "quantity": "2",
+   "span_id": "rev-ff81ba9654f0/p1/309-338"
+  },
+  {
+   "description": "CROSSHEAD",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-04",
+   "item_no": 4,
+   "material": "CASTIRON",
+   "quantity": "2",
+   "span_id": "rev-ff81ba9654f0/p1/339-361"
+  },
+  {
+   "description": "PISTON(1STSTAGE)",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-05",
+   "item_no": 5,
+   "material": "ALUMINIUM",
+   "quantity": "1",
+   "span_id": "rev-ff81ba9654f0/p1/362-392"
+  },
+  {
+   "description": "PISTON(2NDSTAGE)",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-06",
+   "item_no": 6,
+   "material": "ALUMINIUM",
+   "quantity": "1",
+   "span_id": "rev-ff81ba9654f0/p1/393-423"
+  },
+  {
+   "description": "PISTONRINGS",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-07",
+   "item_no": 7,
+   "material": "PTFEFILLED",
+   "quantity": "8",
+   "span_id": "rev-ff81ba9654f0/p1/424-450"
+  },
+  {
+   "description": "SUCTION/DISCHVALVES",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-08",
+   "item_no": 8,
+   "material": "SSPLATE",
+   "quantity": "8",
+   "span_id": "rev-ff81ba9654f0/p1/451-482"
+  },
+  {
+   "description": "PACKINGSET",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-09",
+   "item_no": 9,
+   "material": "PTFE",
+   "quantity": "2",
+   "span_id": "rev-ff81ba9654f0/p1/483-502"
+  },
+  {
+   "description": "MAINBEARING",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-10",
+   "item_no": 10,
+   "material": "TRI-METAL",
+   "quantity": "3",
+   "span_id": "rev-ff81ba9654f0/p1/503-529"
+  },
+  {
+   "description": "LUBEOILPUMP",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-11",
+   "item_no": 11,
+   "material": "GEARTYPE",
+   "quantity": "1",
+   "span_id": "rev-ff81ba9654f0/p1/530-555"
+  },
+  {
+   "description": "INTERCOOLEREA-4502",
+   "equipment_tag": "KC-4501",
+   "ga_drawing_doc_no": "TJC-LLD-GA-KC-4501",
+   "id": "BOM-KC-4501-12",
+   "item_no": 12,
+   "material": "SSTUBE",
+   "quantity": "1",
+   "span_id": "rev-ff81ba9654f0/p1/556-586"
+  },
+  {
+   "description": "VALVEBODY",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-01",
+   "item_no": 1,
+   "material": "WCC",
+   "quantity": "1",
+   "span_id": "rev-8ae170ad4c3f/p1/116-133"
+  },
+  {
+   "description": "BONNET",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-02",
+   "item_no": 2,
+   "material": "WCC",
+   "quantity": "1",
+   "span_id": "rev-8ae170ad4c3f/p1/134-148"
+  },
+  {
+   "description": "CAGE",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-03",
+   "item_no": 3,
+   "material": "SS316",
+   "quantity": "1",
+   "span_id": "rev-8ae170ad4c3f/p1/149-163"
+  },
+  {
+   "description": "PLUG/STEM",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-04",
+   "item_no": 4,
+   "material": "SS316+STELLITE",
+   "quantity": "1",
+   "span_id": "rev-8ae170ad4c3f/p1/164-192"
+  },
+  {
+   "description": "SEATRING",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-05",
+   "item_no": 5,
+   "material": "SS316+STELLITE",
+   "quantity": "1",
+   "span_id": "rev-8ae170ad4c3f/p1/193-220"
+  },
+  {
+   "description": "PACKING(PTFEV-RING)",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-06",
+   "item_no": 6,
+   "material": "PTFE",
+   "quantity": "1set",
+   "span_id": "rev-8ae170ad4c3f/p1/221-252"
+  },
+  {
+   "description": "DIAPHRAGM",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-07",
+   "item_no": 7,
+   "material": "NBR/FABRIC",
+   "quantity": "1",
+   "span_id": "rev-8ae170ad4c3f/p1/253-277"
+  },
+  {
+   "description": "ACTUATORSPRING",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-08",
+   "item_no": 8,
+   "material": "SPRINGSTEEL",
+   "quantity": "1",
+   "span_id": "rev-8ae170ad4c3f/p1/278-308"
+  },
+  {
+   "description": "POSITIONERDVC6200",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-09",
+   "item_no": 9,
+   "material": null,
+   "quantity": "1",
+   "span_id": "rev-8ae170ad4c3f/p1/309-332"
+  },
+  {
+   "description": "BODYGASKET",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-10",
+   "item_no": 10,
+   "material": "SPIRALWOUND",
+   "quantity": "1",
+   "span_id": "rev-8ae170ad4c3f/p1/333-360"
+  },
+  {
+   "description": "STEMCONNECTOR",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-11",
+   "item_no": 11,
+   "material": "STEEL",
+   "quantity": "1",
+   "span_id": "rev-8ae170ad4c3f/p1/361-385"
+  },
+  {
+   "description": "AIRFILTERREGULATOR",
+   "equipment_tag": "LV-6701",
+   "ga_drawing_doc_no": "TJC-LLD-GA-LV-6701",
+   "id": "BOM-LV-6701-12",
+   "item_no": 12,
+   "material": null,
+   "quantity": "1",
+   "span_id": "rev-8ae170ad4c3f/p1/386-411"
+  },
+  {
+   "description": "BODY(DRUM)",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-01",
+   "item_no": 1,
+   "material": "SM400B",
+   "quantity": "1",
+   "span_id": "rev-3b31574c67f6/p1/268-289"
+  },
+  {
+   "description": "ROTORSHAFT",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-02",
+   "item_no": 2,
+   "material": "SM400B/SS400",
+   "quantity": "1",
+   "span_id": "rev-3b31574c67f6/p1/290-317"
+  },
+  {
+   "description": "BEARINGASSEMBLY",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-03",
+   "item_no": 3,
+   "material": null,
+   "quantity": "2",
+   "span_id": "rev-3b31574c67f6/p1/318-339"
+  },
+  {
+   "description": "SPROCKET",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-04",
+   "item_no": 4,
+   "material": "SCM440",
+   "quantity": "1",
+   "span_id": "rev-3b31574c67f6/p1/340-359"
+  },
+  {
+   "description": "ROTARYJOINT",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-05",
+   "item_no": 5,
+   "material": "KADANTASSY",
+   "quantity": "2",
+   "span_id": "rev-3b31574c67f6/p1/360-386"
+  },
+  {
+   "description": "SUPPORT(TRUNNION)",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-06",
+   "item_no": 6,
+   "material": "SS400",
+   "quantity": "2",
+   "span_id": "rev-3b31574c67f6/p1/387-414"
+  },
+  {
+   "description": "GLANDPACKING",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-07",
+   "item_no": 7,
+   "material": "PTFEPILLER4526L",
+   "quantity": "8",
+   "span_id": "rev-3b31574c67f6/p1/415-447"
+  },
+  {
+   "description": "GLANDPACKING",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-08",
+   "item_no": 8,
+   "material": "PTFEPILLER4505L",
+   "quantity": "2",
+   "span_id": "rev-3b31574c67f6/p1/448-480"
+  },
+  {
+   "description": "OILSEAL",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-09",
+   "item_no": 9,
+   "material": "NBR",
+   "quantity": "2",
+   "span_id": "rev-3b31574c67f6/p1/481-496"
+  },
+  {
+   "description": "OILSEAL",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-10",
+   "item_no": 10,
+   "material": "NBR",
+   "quantity": "2",
+   "span_id": "rev-3b31574c67f6/p1/497-513"
+  },
+  {
+   "description": "O-RING",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-11",
+   "item_no": 11,
+   "material": "NBR",
+   "quantity": "2",
+   "span_id": "rev-3b31574c67f6/p1/514-529"
+  },
+  {
+   "description": "STEAMTUBEBUNDLE",
+   "equipment_tag": "YD-2301",
+   "ga_drawing_doc_no": "TJC-LLD-GA-YD-2301",
+   "id": "BOM-YD-2301-12",
+   "item_no": 12,
+   "material": "SS304",
+   "quantity": "1",
+   "span_id": "rev-3b31574c67f6/p1/530-556"
+  }
+ ],
+ "matches": [
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-GA-1201A-05",
+   "disambiguator_text": null,
+   "part_string": "Mechanical seal JC T2100",
+   "status": "matched",
+   "wo_number": "WO-240002"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Shim pack",
+   "status": "unmatched",
+   "wo_number": "WO-240003"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-GA-1201A-06",
+   "disambiguator_text": null,
+   "part_string": "Bearing 7310 BECBM",
+   "status": "matched",
+   "wo_number": "WO-240004"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "ISO VG 68 lubricating oil (0.5 L)",
+   "status": "unmatched",
+   "wo_number": "WO-240005"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Rexnord coupling spacer element",
+   "status": "unmatched",
+   "wo_number": "WO-240007"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Polyurea grease (100 g)",
+   "status": "unmatched",
+   "wo_number": "WO-240010"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Epoxy grout",
+   "status": "unmatched",
+   "wo_number": "WO-240013"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240016"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240017"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240018"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-YD-2301-07",
+   "disambiguator_text": null,
+   "part_string": "PTFE packing PILLER 4526L (8 pcs)",
+   "status": "matched",
+   "wo_number": "WO-240028"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-YD-2301-08",
+   "disambiguator_text": null,
+   "part_string": "PTFE packing PILLER 4505L (2 pcs)",
+   "status": "matched",
+   "wo_number": "WO-240029"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Chain oil",
+   "status": "unmatched",
+   "wo_number": "WO-240031"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Kadant rotary joint seal kit",
+   "status": "unmatched",
+   "wo_number": "WO-240032"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Trunnion roller bearing",
+   "status": "unmatched",
+   "wo_number": "WO-240034"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "ISO VG 220 gear oil (18 L)",
+   "status": "unmatched",
+   "wo_number": "WO-240036"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Tube plugs (tapered) x4",
+   "status": "unmatched",
+   "wo_number": "WO-240037"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "O2 analyzer sensor cell",
+   "status": "unmatched",
+   "wo_number": "WO-240039"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240042"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240043"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240044"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Multipoint thermocouple element (1 pt)",
+   "status": "unmatched",
+   "wo_number": "WO-240056"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Heater element bank",
+   "status": "unmatched",
+   "wo_number": "WO-240057"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Sample dryer cartridge",
+   "status": "unmatched",
+   "wo_number": "WO-240058"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Actuator seal kit",
+   "status": "unmatched",
+   "wo_number": "WO-240059"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "PSV soft goods kit",
+   "status": "unmatched",
+   "wo_number": "WO-240060"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Pd/Al2O3 catalyst 3.2 m3",
+   "status": "unmatched",
+   "wo_number": "WO-240061"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-DC-3401A-11",
+   "disambiguator_text": null,
+   "part_string": "SW SS316/graphite gasket",
+   "status": "matched",
+   "wo_number": "WO-240062"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "H2 analyzer cell",
+   "status": "unmatched",
+   "wo_number": "WO-240063"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240071"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240072"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-KC-4501-08",
+   "disambiguator_text": null,
+   "part_string": "Plate valve set (suction)",
+   "status": "matched",
+   "wo_number": "WO-240083"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-KC-4501-11",
+   "disambiguator_text": null,
+   "part_string": "Lube oil pump gear set",
+   "status": "matched",
+   "wo_number": "WO-240084"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-KC-4501-07",
+   "disambiguator_text": null,
+   "part_string": "PTFE piston rings",
+   "status": "matched",
+   "wo_number": "WO-240085"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "N2 regulator",
+   "status": "unmatched",
+   "wo_number": "WO-240087"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Crosshead pin",
+   "status": "unmatched",
+   "wo_number": "WO-240088"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Gaskets EA-4502",
+   "status": "unmatched",
+   "wo_number": "WO-240089"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Main bearing shell (inspected)",
+   "status": "unmatched",
+   "wo_number": "WO-240091"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-KC-4501-09",
+   "disambiguator_text": null,
+   "part_string": "PTFE packing set",
+   "status": "matched",
+   "wo_number": "WO-240094"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240097"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240098"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240099"
+  },
+  {
+   "alternative_bom_item_id": "BOM-EA-5601-09",
+   "bom_item_id": "BOM-EA-5601-08",
+   "disambiguator_text": null,
+   "part_string": "SW SS316/graphite gaskets (2)",
+   "status": "matched",
+   "wo_number": "WO-240110"
+  },
+  {
+   "alternative_bom_item_id": "BOM-EA-5601-08",
+   "bom_item_id": "BOM-EA-5601-09",
+   "disambiguator_text": "Hexane weep at channel flange",
+   "part_string": "SW SS316/graphite gasket",
+   "status": "matched",
+   "wo_number": "WO-240111"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Steam trap element",
+   "status": "unmatched",
+   "wo_number": "WO-240112"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Tapered tube plugs x4",
+   "status": "unmatched",
+   "wo_number": "WO-240113"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "PSV soft goods",
+   "status": "unmatched",
+   "wo_number": "WO-240116"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Gauge glass",
+   "status": "unmatched",
+   "wo_number": "WO-240118"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Bundle gaskets set",
+   "status": "unmatched",
+   "wo_number": "WO-240119"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Hold-down bolts",
+   "status": "unmatched",
+   "wo_number": "WO-240120"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240123"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240124"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240125"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-LV-6701-06",
+   "disambiguator_text": null,
+   "part_string": "PTFE V-ring packing set",
+   "status": "matched",
+   "wo_number": "WO-240135"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Handwheel assembly",
+   "status": "unmatched",
+   "wo_number": "WO-240136"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-LV-6701-06",
+   "disambiguator_text": null,
+   "part_string": "PTFE V-ring packing set",
+   "status": "matched",
+   "wo_number": "WO-240138"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Filter regulator element",
+   "status": "unmatched",
+   "wo_number": "WO-240139"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Fisher 667 diaphragm",
+   "status": "unmatched",
+   "wo_number": "WO-240140"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Lapping compound",
+   "status": "unmatched",
+   "wo_number": "WO-240143"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "SW body gasket",
+   "status": "unmatched",
+   "wo_number": "WO-240145"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240149"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240150"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "ISO VG 220 gear oil (4.5 L)",
+   "status": "unmatched",
+   "wo_number": "WO-240162"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Balance weights",
+   "status": "unmatched",
+   "wo_number": "WO-240163"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "ISO VG 220 oil",
+   "status": "unmatched",
+   "wo_number": "WO-240164"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "pH electrode",
+   "status": "unmatched",
+   "wo_number": "WO-240165"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-CT-7801-10",
+   "disambiguator_text": null,
+   "part_string": "Spherical roller bearing",
+   "status": "matched",
+   "wo_number": "WO-240166"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "PVC eliminator panels",
+   "status": "unmatched",
+   "wo_number": "WO-240167"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Composite shaft coupling",
+   "status": "unmatched",
+   "wo_number": "WO-240169"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "PVC film fill packs",
+   "status": "unmatched",
+   "wo_number": "WO-240171"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240175"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240176"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240177"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "PSV soft goods kit",
+   "status": "unmatched",
+   "wo_number": "WO-240189"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Boot drain valve",
+   "status": "unmatched",
+   "wo_number": "WO-240190"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-FA-8901-11",
+   "disambiguator_text": null,
+   "part_string": "SW SS316/graphite manway gasket",
+   "status": "matched",
+   "wo_number": "WO-240195"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": "BOM-FA-8901-11",
+   "disambiguator_text": null,
+   "part_string": "Manway gasket",
+   "status": "matched",
+   "wo_number": "WO-240197"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240201"
+  },
+  {
+   "alternative_bom_item_id": null,
+   "bom_item_id": null,
+   "disambiguator_text": null,
+   "part_string": "Grease / oil",
+   "status": "unmatched",
+   "wo_number": "WO-240202"
+  }
+ ]
+}

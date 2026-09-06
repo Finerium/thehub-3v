@@ -15,7 +15,7 @@ for r in src scripts tests next.config.ts; do [ -e "$r" ] && roots+=("$r"); done
 
 # 1. provider names outside the allowed paths
 hits=$(grep -rniE "$providers" "${roots[@]}" 2>/dev/null \
-  | grep -vE '^src/gateway/|^scripts/models/fetch\.ts:|^src/contracts/generated/|^scripts/audits/' || true)
+  | grep -vE '^src/gateway/|^scripts/models/fetch\.ts:|^scripts/bundle/pull\.ts:|^src/contracts/generated/|^scripts/audits/|\.test\.tsx?:' || true)
 if [ -n "$hits" ]; then
   echo "$hits"
   echo "provider-egress: a provider name outside src/gateway/"
@@ -26,7 +26,7 @@ fi
 while IFS= read -r f; do
   [ -z "$f" ] && continue
   case "$f" in
-    src/gateway/*|scripts/models/fetch.ts|tests/*|*.test.ts|*.test.tsx|*.spec.ts) continue ;;
+    src/gateway/*|scripts/models/fetch.ts|scripts/bundle/pull.ts|tests/*|*.test.ts|*.test.tsx|*.spec.ts) continue ;;
   esac
   if grep -q '// egress: none' "$f"; then continue; fi
   echo "$f: fetch( outside src/gateway/ without '// egress: none'"

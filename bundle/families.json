@@ -1,0 +1,130 @@
+[
+ {
+  "basis": "agent_classification",
+  "id": "FF-01",
+  "label": "PTFE packing and stem friction",
+  "members": [
+   {
+    "recorded_root_cause": "PTFE 4526L gland packing worn beyond service limit",
+    "wo_number": "WO-240028"
+   },
+   {
+    "recorded_root_cause": "PTFE 4505L packing hardened and worn",
+    "wo_number": "WO-240029"
+   },
+   {
+    "recorded_root_cause": "PTFE pressure packing rings worn",
+    "wo_number": "WO-240094"
+   },
+   {
+    "recorded_root_cause": "Stem seized in PTFE packing (over-tightened + fines)",
+    "wo_number": "WO-240135"
+   },
+   {
+    "recorded_root_cause": "PTFE V-ring packing worn",
+    "wo_number": "WO-240138"
+   }
+  ],
+  "review_status": "pending"
+ },
+ {
+  "basis": "agent_classification",
+  "id": "FF-02",
+  "label": "alignment and bearing degradation",
+  "members": [
+   {
+    "recorded_root_cause": "Angular misalignment 0.12 mm/100mm after foundation settlement",
+    "wo_number": "WO-240003"
+   },
+   {
+    "recorded_root_cause": "Outer race spalling on DE bearing due to prolonged misalignment",
+    "wo_number": "WO-240004"
+   },
+   {
+    "recorded_root_cause": "Rexnord coupling element cracked from repeated misalignment cycles",
+    "wo_number": "WO-240007"
+   },
+   {
+    "recorded_root_cause": "NDE trunnion support roller bearing worn/spalled",
+    "wo_number": "WO-240034"
+   },
+   {
+    "recorded_root_cause": "Crosshead pin clearance excessive",
+    "wo_number": "WO-240088"
+   },
+   {
+    "recorded_root_cause": "Spherical roller fan bearing worn",
+    "wo_number": "WO-240166"
+   },
+   {
+    "recorded_root_cause": "Composite floating-shaft coupling worn",
+    "wo_number": "WO-240169"
+   }
+  ],
+  "review_status": "pending"
+ },
+ {
+  "basis": "agent_classification",
+  "id": "FF-03",
+  "label": "exchanger fouling and thermal performance",
+  "members": [
+   {
+    "recorded_root_cause": "Waterside fouling of intercooler tubes",
+    "wo_number": "WO-240089"
+   },
+   {
+    "recorded_root_cause": "Hexane fouling / polymer fines deposit on tube bores",
+    "wo_number": "WO-240110"
+   },
+   {
+    "recorded_root_cause": "General fouling, tubes within wall-loss limit",
+    "wo_number": "WO-240119"
+   },
+   {
+    "recorded_root_cause": "Degraded oil and fouled oil cooler",
+    "wo_number": "WO-240164"
+   }
+  ],
+  "review_status": "pending"
+ },
+ {
+  "basis": "agent_classification",
+  "id": "FF-04",
+  "label": "gasket seating and manway leaks",
+  "members": [
+   {
+    "recorded_root_cause": "Spiral-wound gasket unevenly seated",
+    "wo_number": "WO-240062"
+   },
+   {
+    "recorded_root_cause": "Spiral-wound channel gasket relaxed / damaged",
+    "wo_number": "WO-240111"
+   },
+   {
+    "recorded_root_cause": "Spiral-wound body gasket relaxed",
+    "wo_number": "WO-240145"
+   },
+   {
+    "recorded_root_cause": "SW gasket unevenly seated",
+    "wo_number": "WO-240195"
+   }
+  ],
+  "review_status": "pending"
+ },
+ {
+  "basis": "agent_classification",
+  "id": "FF-05",
+  "label": "lubrication supply and oil-system degradation",
+  "members": [
+   {
+    "recorded_root_cause": "Lube oil pump gears worn, relief valve set low",
+    "wo_number": "WO-240084"
+   },
+   {
+    "recorded_root_cause": "Restricted oil supply groove to No.2 main bearing",
+    "wo_number": "WO-240091"
+   }
+  ],
+  "review_status": "pending"
+ }
+]

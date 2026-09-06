@@ -1,0 +1,200 @@
+[
+ {
+  "equipment_tag": "CT-7801",
+  "from_wo": "WO-240164",
+  "id": "CL-01",
+  "interval_days": 157,
+  "linking_field": "root_cause",
+  "linking_sentence": "Conductivity cell fouled with scale",
+  "mechanism_noun": "fouled",
+  "span_id": "rev-62208bb3dd10/p176/51-86",
+  "to_wo": "WO-240168"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "from_wo": "WO-240169",
+  "id": "CL-02",
+  "interval_days": 129,
+  "linking_field": "root_cause",
+  "linking_sentence": "Spherical roller fan bearing worn",
+  "mechanism_noun": "worn",
+  "span_id": "rev-62208bb3dd10/p114/47-80",
+  "to_wo": "WO-240166"
+ },
+ {
+  "equipment_tag": "CT-7801",
+  "from_wo": "WO-240171",
+  "id": "CL-03",
+  "interval_days": 77,
+  "linking_field": "root_cause",
+  "linking_sentence": "Degraded oil and fouled oil cooler",
+  "mechanism_noun": "degraded",
+  "span_id": "rev-62208bb3dd10/p131/51-85",
+  "to_wo": "WO-240164"
+ },
+ {
+  "equipment_tag": "EA-5601",
+  "from_wo": "WO-240119",
+  "id": "CL-04",
+  "interval_days": 49,
+  "linking_field": "root_cause",
+  "linking_sentence": "Hexane fouling / polymer fines deposit on tube bores",
+  "mechanism_noun": "fouling",
+  "span_id": "rev-62208bb3dd10/p79/64-116",
+  "to_wo": "WO-240110"
+ },
+ {
+  "equipment_tag": "FA-8901",
+  "from_wo": "WO-240196",
+  "id": "CL-05",
+  "interval_days": 215,
+  "linking_field": "root_cause",
+  "linking_sentence": "Bridle legs plugged with fines",
+  "mechanism_noun": "plugged",
+  "span_id": "rev-62208bb3dd10/p126/42-72",
+  "to_wo": "WO-240193"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "from_wo": "WO-240003",
+  "id": "CL-06",
+  "interval_days": 33,
+  "linking_field": "root_cause",
+  "linking_sentence": "Outer race spalling on DE bearing due to prolonged misalignment",
+  "mechanism_noun": "misalignment",
+  "span_id": "rev-62208bb3dd10/p124/65-128",
+  "to_wo": "WO-240004"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "from_wo": "WO-240003",
+  "id": "CL-07",
+  "interval_days": 182,
+  "linking_field": "root_cause",
+  "linking_sentence": "Rexnord coupling element cracked from repeated misalignment cycles",
+  "mechanism_noun": "misalignment",
+  "span_id": "rev-62208bb3dd10/p169/61-127",
+  "to_wo": "WO-240007"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "from_wo": "WO-240004",
+  "id": "CL-08",
+  "interval_days": 149,
+  "linking_field": "root_cause",
+  "linking_sentence": "Rexnord coupling element cracked from repeated misalignment cycles",
+  "mechanism_noun": "misalignment",
+  "span_id": "rev-62208bb3dd10/p169/61-127",
+  "to_wo": "WO-240007"
+ },
+ {
+  "equipment_tag": "GA-1201A",
+  "from_wo": "WO-240013",
+  "id": "CL-09",
+  "interval_days": 159,
+  "linking_field": "problem_description",
+  "linking_sentence": "Abnormal noise from coupling area, guard vibration",
+  "mechanism_noun": "vibration",
+  "span_id": "rev-62208bb3dd10/p169/10-60",
+  "to_wo": "WO-240007"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "from_wo": "WO-240085",
+  "id": "CL-10",
+  "interval_days": 91,
+  "linking_field": "root_cause",
+  "linking_sentence": "Lube oil pump gears worn, relief valve set low",
+  "mechanism_noun": "worn",
+  "span_id": "rev-62208bb3dd10/p48/61-107",
+  "to_wo": "WO-240084"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "from_wo": "WO-240085",
+  "id": "CL-11",
+  "interval_days": 59,
+  "linking_field": "root_cause",
+  "linking_sentence": "PTFE pressure packing rings worn",
+  "mechanism_noun": "worn",
+  "span_id": "rev-62208bb3dd10/p33/54-86",
+  "to_wo": "WO-240094"
+ },
+ {
+  "equipment_tag": "KC-4501",
+  "from_wo": "WO-240094",
+  "id": "CL-12",
+  "interval_days": 32,
+  "linking_field": "root_cause",
+  "linking_sentence": "Lube oil pump gears worn, relief valve set low",
+  "mechanism_noun": "worn",
+  "span_id": "rev-62208bb3dd10/p48/61-107",
+  "to_wo": "WO-240084"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "from_wo": "WO-240028",
+  "id": "CL-13",
+  "interval_days": 255,
+  "linking_field": "root_cause",
+  "linking_sentence": "Kadant rotary joint carbon seal worn out",
+  "mechanism_noun": "worn",
+  "span_id": "rev-62208bb3dd10/p198/58-98",
+  "to_wo": "WO-240032"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "from_wo": "WO-240028",
+  "id": "CL-14",
+  "interval_days": 179,
+  "linking_field": "root_cause",
+  "linking_sentence": "NDE trunnion support roller bearing worn/spalled",
+  "mechanism_noun": "worn",
+  "span_id": "rev-62208bb3dd10/p171/57-105",
+  "to_wo": "WO-240034"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "from_wo": "WO-240029",
+  "id": "CL-15",
+  "interval_days": 65,
+  "linking_field": "root_cause",
+  "linking_sentence": "PTFE 4526L gland packing worn beyond service limit",
+  "mechanism_noun": "worn",
+  "span_id": "rev-62208bb3dd10/p113/62-112",
+  "to_wo": "WO-240028"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "from_wo": "WO-240029",
+  "id": "CL-16",
+  "interval_days": 320,
+  "linking_field": "root_cause",
+  "linking_sentence": "Kadant rotary joint carbon seal worn out",
+  "mechanism_noun": "worn",
+  "span_id": "rev-62208bb3dd10/p198/58-98",
+  "to_wo": "WO-240032"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "from_wo": "WO-240029",
+  "id": "CL-17",
+  "interval_days": 245,
+  "linking_field": "root_cause",
+  "linking_sentence": "NDE trunnion support roller bearing worn/spalled",
+  "mechanism_noun": "worn",
+  "span_id": "rev-62208bb3dd10/p171/57-105",
+  "to_wo": "WO-240034"
+ },
+ {
+  "equipment_tag": "YD-2301",
+  "from_wo": "WO-240034",
+  "id": "CL-18",
+  "interval_days": 75,
+  "linking_field": "root_cause",
+  "linking_sentence": "Kadant rotary joint carbon seal worn out",
+  "mechanism_noun": "worn",
+  "span_id": "rev-62208bb3dd10/p198/58-98",
+  "to_wo": "WO-240032"
+ }
+]

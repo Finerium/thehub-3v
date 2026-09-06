@@ -1,0 +1,250 @@
+[
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 6.5,
+  "equipment_tag": "GA-1201A",
+  "maintenance_cost_idr": 12630000,
+  "report_date": "2025-08-25T11:58:00",
+  "wo_number": "WO-240007"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 12.0,
+  "equipment_tag": "YD-2301",
+  "maintenance_cost_idr": 17562000,
+  "report_date": "2025-03-03T09:41:00",
+  "wo_number": "WO-240028"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 10.5,
+  "equipment_tag": "YD-2301",
+  "maintenance_cost_idr": 11635000,
+  "report_date": "2024-12-27T12:07:00",
+  "wo_number": "WO-240029"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 4.0,
+  "equipment_tag": "YD-2301",
+  "maintenance_cost_idr": 7475000,
+  "report_date": "2025-05-21T12:03:00",
+  "wo_number": "WO-240031"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 36.0,
+  "equipment_tag": "YD-2301",
+  "maintenance_cost_idr": 30248000,
+  "report_date": "2025-09-16T17:52:00",
+  "wo_number": "WO-240037"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 6.0,
+  "equipment_tag": "YD-2301",
+  "maintenance_cost_idr": 14129000,
+  "report_date": "2024-08-05T11:31:00",
+  "wo_number": "WO-240039"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 8.0,
+  "equipment_tag": "DC-3401A",
+  "maintenance_cost_idr": 16104000,
+  "report_date": "2024-07-08T11:28:00",
+  "wo_number": "WO-240056"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 6.0,
+  "equipment_tag": "DC-3401A",
+  "maintenance_cost_idr": 12162000,
+  "report_date": "2024-07-30T08:23:00",
+  "wo_number": "WO-240059"
+ },
+ {
+  "breakdown_kind": "planned_flagged",
+  "downtime_hours": 12.0,
+  "equipment_tag": "DC-3401A",
+  "maintenance_cost_idr": 4266000,
+  "report_date": "2024-08-05T06:20:00",
+  "wo_number": "WO-240060"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 10.0,
+  "equipment_tag": "DC-3401A",
+  "maintenance_cost_idr": 12272000,
+  "report_date": "2025-09-29T06:57:00",
+  "wo_number": "WO-240062"
+ },
+ {
+  "breakdown_kind": "planned_flagged",
+  "downtime_hours": 24.0,
+  "equipment_tag": "DC-3401A",
+  "maintenance_cost_idr": 1314000,
+  "report_date": "2025-08-01T07:43:00",
+  "wo_number": "WO-240065"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 16.0,
+  "equipment_tag": "KC-4501",
+  "maintenance_cost_idr": 20176000,
+  "report_date": "2025-02-05T18:09:00",
+  "wo_number": "WO-240089"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 22.0,
+  "equipment_tag": "KC-4501",
+  "maintenance_cost_idr": 17497000,
+  "report_date": "2025-02-18T17:30:00",
+  "wo_number": "WO-240091"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 16.0,
+  "equipment_tag": "EA-5601",
+  "maintenance_cost_idr": 7367000,
+  "report_date": "2024-12-13T09:06:00",
+  "wo_number": "WO-240110"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 8.0,
+  "equipment_tag": "EA-5601",
+  "maintenance_cost_idr": 9838000,
+  "report_date": "2024-09-02T14:40:00",
+  "wo_number": "WO-240111"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 30.0,
+  "equipment_tag": "EA-5601",
+  "maintenance_cost_idr": 40794000,
+  "report_date": "2025-03-05T06:49:00",
+  "wo_number": "WO-240113"
+ },
+ {
+  "breakdown_kind": "planned_flagged",
+  "downtime_hours": 6.0,
+  "equipment_tag": "EA-5601",
+  "maintenance_cost_idr": 9724000,
+  "report_date": "2024-07-31T10:32:00",
+  "wo_number": "WO-240116"
+ },
+ {
+  "breakdown_kind": "planned_flagged",
+  "downtime_hours": 24.0,
+  "equipment_tag": "EA-5601",
+  "maintenance_cost_idr": 1776000,
+  "report_date": "2025-11-28T09:01:00",
+  "wo_number": "WO-240117"
+ },
+ {
+  "breakdown_kind": "planned_flagged",
+  "downtime_hours": 40.0,
+  "equipment_tag": "EA-5601",
+  "maintenance_cost_idr": 34668000,
+  "report_date": "2024-10-25T06:14:00",
+  "wo_number": "WO-240119"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 5.0,
+  "equipment_tag": "LV-6701",
+  "maintenance_cost_idr": 14706000,
+  "report_date": "2025-01-06T12:21:00",
+  "wo_number": "WO-240135"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 4.0,
+  "equipment_tag": "LV-6701",
+  "maintenance_cost_idr": 13383000,
+  "report_date": "2024-07-16T10:36:00",
+  "wo_number": "WO-240138"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 8.0,
+  "equipment_tag": "LV-6701",
+  "maintenance_cost_idr": 18030000,
+  "report_date": "2024-12-16T13:11:00",
+  "wo_number": "WO-240140"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 4.0,
+  "equipment_tag": "LV-6701",
+  "maintenance_cost_idr": 13138000,
+  "report_date": "2024-12-20T12:46:00",
+  "wo_number": "WO-240145"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 12.0,
+  "equipment_tag": "CT-7801",
+  "maintenance_cost_idr": 8888000,
+  "report_date": "2025-10-04T18:11:00",
+  "wo_number": "WO-240163"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 10.0,
+  "equipment_tag": "CT-7801",
+  "maintenance_cost_idr": 16538000,
+  "report_date": "2024-10-26T11:05:00",
+  "wo_number": "WO-240169"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 24.0,
+  "equipment_tag": "CT-7801",
+  "maintenance_cost_idr": 16448000,
+  "report_date": "2025-01-25T08:20:00",
+  "wo_number": "WO-240171"
+ },
+ {
+  "breakdown_kind": "planned_flagged",
+  "downtime_hours": 10.0,
+  "equipment_tag": "FA-8901",
+  "maintenance_cost_idr": 10110000,
+  "report_date": "2024-11-30T08:52:00",
+  "wo_number": "WO-240189"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 4.0,
+  "equipment_tag": "FA-8901",
+  "maintenance_cost_idr": 945000,
+  "report_date": "2025-04-06T10:50:00",
+  "wo_number": "WO-240193"
+ },
+ {
+  "breakdown_kind": "planned_flagged",
+  "downtime_hours": 12.0,
+  "equipment_tag": "FA-8901",
+  "maintenance_cost_idr": 740000,
+  "report_date": "2025-05-26T15:56:00",
+  "wo_number": "WO-240194"
+ },
+ {
+  "breakdown_kind": "unplanned",
+  "downtime_hours": 8.0,
+  "equipment_tag": "FA-8901",
+  "maintenance_cost_idr": 12110000,
+  "report_date": "2024-07-01T09:40:00",
+  "wo_number": "WO-240195"
+ },
+ {
+  "breakdown_kind": "planned_flagged",
+  "downtime_hours": 36.0,
+  "equipment_tag": "FA-8901",
+  "maintenance_cost_idr": 6672000,
+  "report_date": "2025-11-01T07:22:00",
+  "wo_number": "WO-240197"
+ }
+]

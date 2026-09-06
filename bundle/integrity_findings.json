@@ -1,0 +1,6844 @@
+{
+ "findings": [
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-a2b637ea5f1e",
+   "id": "CD-1-001",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-DC-3401A-01",
+    "tag": "DC-3401A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-42f18445dba0",
+   "id": "CD-1-002",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-DC-3401A-02",
+    "tag": "DC-3401A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-468ad6e6a04c",
+   "id": "CD-1-003",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-DC-3401A-03",
+    "tag": "DC-3401A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-80f0edee5c1e",
+   "id": "CD-1-004",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-DC-3401A-04",
+    "tag": "DC-3401A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-2ac61d30549d",
+   "id": "CD-1-005",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-DC-3401A-05",
+    "tag": "DC-3401A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-ef0271093a5c",
+   "id": "CD-1-006",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-DC-3401A-06",
+    "tag": "DC-3401A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-79c011db7221",
+   "id": "CD-1-007",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-DC-3401A-07",
+    "tag": "DC-3401A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-f511b1d8c536",
+   "id": "CD-1-008",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-EA-5601-01",
+    "tag": "EA-5601"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-d76e9d01a2f8",
+   "id": "CD-1-009",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-EA-5601-02",
+    "tag": "EA-5601"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-b3a4b92dc6c1",
+   "id": "CD-1-010",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-EA-5601-03",
+    "tag": "EA-5601"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-682c7aa0e205",
+   "id": "CD-1-011",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-EA-5601-04",
+    "tag": "EA-5601"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-e92ad1d11e06",
+   "id": "CD-1-012",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-EA-5601-05",
+    "tag": "EA-5601"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-8fa5f7ed00dc",
+   "id": "CD-1-013",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-EA-5601-06",
+    "tag": "EA-5601"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-b6df4fc6cdae",
+   "id": "CD-1-014",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-EA-5601-07",
+    "tag": "EA-5601"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-81858f8ffc16",
+   "id": "CD-1-015",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-KC-4501-01",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-fceea39b4043",
+   "id": "CD-1-016",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-KC-4501-02",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-c7e7ce726f37",
+   "id": "CD-1-017",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-KC-4501-03",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-a628d9837c3d",
+   "id": "CD-1-018",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-KC-4501-04",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-1c06cc06b083",
+   "id": "CD-1-019",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-KC-4501-05",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-3863216f4c98",
+   "id": "CD-1-020",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-KC-4501-06",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-d13e41e2dc26",
+   "id": "CD-1-021",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-KC-4501-07",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-26a3e1ae0c85",
+   "id": "CD-1-022",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-LV-6701-01",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-18d193968911",
+   "id": "CD-1-023",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-LV-6701-02",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-6a2af0c157be",
+   "id": "CD-1-024",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-LV-6701-03",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-3c9cc0563f32",
+   "id": "CD-1-025",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-LV-6701-04",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-fee80769bc91",
+   "id": "CD-1-026",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-LV-6701-05",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-6eeef5996e2d",
+   "id": "CD-1-027",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-LV-6701-06",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-ebe41137cede",
+   "id": "CD-1-028",
+   "item": {
+    "foreign_tags": [
+     "GA-1201A"
+    ],
+    "opl_id": "OPL-LV-6701-07",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign cross-reference",
+   "rule_id": "CD-1",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "M",
+   "discipline": null,
+   "document_id": "doc-c825f0afd6a1",
+   "id": "CD-2-001",
+   "item": {
+    "file": "PID_Set_01.png",
+    "ref_dwg": "TJC-LLD-PID-XXXX",
+    "set": 1,
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "P&ID drawing number placeholder or absent",
+   "rule_id": "CD-2",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "M",
+   "discipline": null,
+   "document_id": "doc-18ff60f606ab",
+   "id": "CD-2-002",
+   "item": {
+    "file": "P&ID_Set_02.png",
+    "ref_dwg": "TJC-LLD-PID-XXXX",
+    "set": 2,
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "P&ID drawing number placeholder or absent",
+   "rule_id": "CD-2",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "M",
+   "discipline": null,
+   "document_id": "doc-a3a6b1f0f149",
+   "id": "CD-2-003",
+   "item": {
+    "file": "P&ID Set 3.png",
+    "ref_dwg": null,
+    "set": 3,
+    "tag": "DC-3401A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "P&ID drawing number placeholder or absent",
+   "rule_id": "CD-2",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "M",
+   "discipline": null,
+   "document_id": "doc-7cf17027cf00",
+   "id": "CD-2-004",
+   "item": {
+    "file": "P&ID SET 6.png",
+    "ref_dwg": "TJC-LLD-PID-XXXX",
+    "set": 6,
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "P&ID drawing number placeholder or absent",
+   "rule_id": "CD-2",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "M",
+   "discipline": null,
+   "document_id": "doc-eebaf2dfb732",
+   "id": "CD-2-005",
+   "item": {
+    "file": "P&ID_Set 7.png",
+    "ref_dwg": "TJC-LLD-PID-XXXX",
+    "set": 7,
+    "tag": "CT-7801"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "P&ID drawing number placeholder or absent",
+   "rule_id": "CD-2",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "M",
+   "discipline": null,
+   "document_id": "doc-b470d97ed566",
+   "id": "CD-2-006",
+   "item": {
+    "file": "P&ID_Set 8.png",
+    "ref_dwg": "TJC-LLD-PID-XXXX",
+    "set": 8,
+    "tag": "FA-8901"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "P&ID drawing number placeholder or absent",
+   "rule_id": "CD-2",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-001",
+   "item": {
+    "priority": "Emergency",
+    "report_date": "2025-08-29",
+    "tag": "GA-1201A",
+    "wo": "WO-240002",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-002",
+   "item": {
+    "priority": "High",
+    "report_date": "2025-02-23",
+    "tag": "GA-1201A",
+    "wo": "WO-240003",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-003",
+   "item": {
+    "priority": "High",
+    "report_date": "2025-03-29",
+    "tag": "GA-1201A",
+    "wo": "WO-240004",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-004",
+   "item": {
+    "priority": "High",
+    "report_date": "2025-02-21",
+    "tag": "GA-1201A",
+    "wo": "WO-240011",
+    "work_type": "Overhaul"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-005",
+   "item": {
+    "priority": "Low",
+    "report_date": "2025-03-19",
+    "tag": "GA-1201A",
+    "wo": "WO-240013",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-006",
+   "item": {
+    "priority": "Emergency",
+    "report_date": "2025-11-13",
+    "tag": "YD-2301",
+    "wo": "WO-240032",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-007",
+   "item": {
+    "priority": "High",
+    "report_date": "2025-08-29",
+    "tag": "YD-2301",
+    "wo": "WO-240034",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-008",
+   "item": {
+    "priority": "Low",
+    "report_date": "2025-03-05",
+    "tag": "YD-2301",
+    "wo": "WO-240036",
+    "work_type": "Preventive"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Electrical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-009",
+   "item": {
+    "priority": "High",
+    "report_date": "2024-11-29",
+    "tag": "DC-3401A",
+    "wo": "WO-240057",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-010",
+   "item": {
+    "priority": "High",
+    "report_date": "2025-04-07",
+    "tag": "DC-3401A",
+    "wo": "WO-240061",
+    "work_type": "Overhaul"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-011",
+   "item": {
+    "priority": "Emergency",
+    "report_date": "2025-06-10",
+    "tag": "KC-4501",
+    "wo": "WO-240083",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-012",
+   "item": {
+    "priority": "High",
+    "report_date": "2024-09-21",
+    "tag": "KC-4501",
+    "wo": "WO-240084",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-013",
+   "item": {
+    "priority": "High",
+    "report_date": "2024-06-22",
+    "tag": "KC-4501",
+    "wo": "WO-240085",
+    "work_type": "Overhaul"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-014",
+   "item": {
+    "priority": "High",
+    "report_date": "2024-06-18",
+    "tag": "KC-4501",
+    "wo": "WO-240087",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-015",
+   "item": {
+    "priority": "High",
+    "report_date": "2025-10-23",
+    "tag": "KC-4501",
+    "wo": "WO-240088",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-016",
+   "item": {
+    "priority": "High",
+    "report_date": "2024-08-20",
+    "tag": "KC-4501",
+    "wo": "WO-240094",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-017",
+   "item": {
+    "priority": "Low",
+    "report_date": "2025-11-16",
+    "tag": "EA-5601",
+    "wo": "WO-240118",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-018",
+   "item": {
+    "priority": "Low",
+    "report_date": "2025-10-12",
+    "tag": "EA-5601",
+    "wo": "WO-240120",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-019",
+   "item": {
+    "priority": "Medium",
+    "report_date": "2024-11-13",
+    "tag": "LV-6701",
+    "wo": "WO-240136",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-020",
+   "item": {
+    "priority": "Medium",
+    "report_date": "2025-03-12",
+    "tag": "LV-6701",
+    "wo": "WO-240143",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-021",
+   "item": {
+    "priority": "Low",
+    "report_date": "2025-08-21",
+    "tag": "CT-7801",
+    "wo": "WO-240162",
+    "work_type": "Preventive"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-022",
+   "item": {
+    "priority": "Medium",
+    "report_date": "2025-04-12",
+    "tag": "CT-7801",
+    "wo": "WO-240164",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-023",
+   "item": {
+    "priority": "Low",
+    "report_date": "2024-10-07",
+    "tag": "CT-7801",
+    "wo": "WO-240165",
+    "work_type": "Calibration"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-024",
+   "item": {
+    "priority": "Medium",
+    "report_date": "2025-03-04",
+    "tag": "CT-7801",
+    "wo": "WO-240166",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-025",
+   "item": {
+    "priority": "Low",
+    "report_date": "2024-09-19",
+    "tag": "CT-7801",
+    "wo": "WO-240167",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-4-026",
+   "item": {
+    "priority": "Medium",
+    "report_date": "2024-07-04",
+    "tag": "FA-8901",
+    "wo": "WO-240190",
+    "work_type": "Corrective"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Incomplete closeout",
+   "rule_id": "CD-4",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-a55be95bceff",
+   "id": "CD-5-001",
+   "item": {
+    "opl_id": "OPL-GA-1201A-01",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "No cross-reference line",
+   "rule_id": "CD-5",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-192d609c3098",
+   "id": "CD-5-002",
+   "item": {
+    "opl_id": "OPL-GA-1201A-02",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "No cross-reference line",
+   "rule_id": "CD-5",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-0f19e6b566c4",
+   "id": "CD-5-003",
+   "item": {
+    "opl_id": "OPL-GA-1201A-03",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "No cross-reference line",
+   "rule_id": "CD-5",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-7da1c7cd27cc",
+   "id": "CD-5-004",
+   "item": {
+    "opl_id": "OPL-GA-1201A-05",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "No cross-reference line",
+   "rule_id": "CD-5",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-1a392e2eebbf",
+   "id": "CD-5-005",
+   "item": {
+    "opl_id": "OPL-GA-1201A-06",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "No cross-reference line",
+   "rule_id": "CD-5",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-6-001",
+   "item": {
+    "cost_idr": 4266000,
+    "description": "Scheduled statutory PSV pop test",
+    "downtime_h": 12.0,
+    "tag": "DC-3401A",
+    "wo": "WO-240060",
+    "work_type": "Inspection"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Planned work flagged breakdown",
+   "rule_id": "CD-6",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-6-002",
+   "item": {
+    "cost_idr": 1314000,
+    "description": "Grid inspection during catalyst change window",
+    "downtime_h": 24.0,
+    "tag": "DC-3401A",
+    "wo": "WO-240065",
+    "work_type": "Inspection"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Planned work flagged breakdown",
+   "rule_id": "CD-6",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-6-003",
+   "item": {
+    "cost_idr": 9724000,
+    "description": "Statutory relief valve test",
+    "downtime_h": 6.0,
+    "tag": "EA-5601",
+    "wo": "WO-240116",
+    "work_type": "Inspection"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Planned work flagged breakdown",
+   "rule_id": "CD-6",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-6-004",
+   "item": {
+    "cost_idr": 1776000,
+    "description": "Turnaround pressure test and inspection",
+    "downtime_h": 24.0,
+    "tag": "EA-5601",
+    "wo": "WO-240117",
+    "work_type": "Inspection"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Planned work flagged breakdown",
+   "rule_id": "CD-6",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-6-005",
+   "item": {
+    "cost_idr": 34668000,
+    "description": "Scheduled major bundle inspection",
+    "downtime_h": 40.0,
+    "tag": "EA-5601",
+    "wo": "WO-240119",
+    "work_type": "Overhaul"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Planned work flagged breakdown",
+   "rule_id": "CD-6",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-6-006",
+   "item": {
+    "cost_idr": 10110000,
+    "description": "Statutory relief valve test",
+    "downtime_h": 10.0,
+    "tag": "FA-8901",
+    "wo": "WO-240189",
+    "work_type": "Inspection"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Planned work flagged breakdown",
+   "rule_id": "CD-6",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-6-007",
+   "item": {
+    "cost_idr": 740000,
+    "description": "Scheduled corrosion monitoring of boot",
+    "downtime_h": 12.0,
+    "tag": "FA-8901",
+    "wo": "WO-240194",
+    "work_type": "Inspection"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Planned work flagged breakdown",
+   "rule_id": "CD-6",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-6-008",
+   "item": {
+    "cost_idr": 6672000,
+    "description": "Turnaround internal inspection",
+    "downtime_h": 36.0,
+    "tag": "FA-8901",
+    "wo": "WO-240197",
+    "work_type": "Inspection"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Planned work flagged breakdown",
+   "rule_id": "CD-6",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H+M",
+   "discipline": null,
+   "document_id": "doc-18ff60f606ab",
+   "id": "CD-7-001",
+   "item": {
+    "cited": "TJC-LLD-DS-GA-1201A",
+    "expected": "TJC-LLD-DS-YD-2301",
+    "set": 2,
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Wrong datasheet cited",
+   "rule_id": "CD-7",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "H+M",
+   "discipline": null,
+   "document_id": "doc-698f6cc812f8",
+   "id": "CD-7-002",
+   "item": {
+    "cited": "TJC-LLD-PF-GA-4501A",
+    "expected": "TJC-LLD-DS-KC-4501",
+    "set": 4,
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Wrong datasheet cited",
+   "rule_id": "CD-7",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "H+M",
+   "discipline": null,
+   "document_id": "doc-eebaf2dfb732",
+   "id": "CD-7-003",
+   "item": {
+    "cited": "TJC-LLD-DS-GA-7801A",
+    "expected": "TJC-LLD-DS-CT-7801",
+    "set": 7,
+    "tag": "CT-7801"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Wrong datasheet cited",
+   "rule_id": "CD-7",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "H+M",
+   "discipline": null,
+   "document_id": "doc-b470d97ed566",
+   "id": "CD-7-004",
+   "item": {
+    "cited": "TJC-LLD-GA-FA-8901",
+    "expected": "TJC-LLD-DS-FA-8901",
+    "set": 8,
+    "tag": "FA-8901"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Wrong datasheet cited",
+   "rule_id": "CD-7",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "H+M",
+   "discipline": null,
+   "document_id": "doc-18ff60f606ab",
+   "id": "CD-8-001",
+   "item": {
+    "cited": "SEQ-1201",
+    "expected": "SEQ-5500",
+    "set": 2,
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Wrong interlock sequence cited",
+   "rule_id": "CD-8",
+   "safety_function": "SEQ-5500",
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "M",
+   "discipline": null,
+   "document_id": "doc-18ff60f606ab",
+   "id": "CD-9-001",
+   "item": {
+    "foreign_tags": [
+     "HS-1201",
+     "RO-1201",
+     "PDI-1201",
+     "EQ1000012011"
+    ],
+    "set": 2,
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign tags on P&ID",
+   "rule_id": "CD-9",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "M",
+   "discipline": null,
+   "document_id": "doc-698f6cc812f8",
+   "id": "CD-9-002",
+   "item": {
+    "foreign_tags": [
+     "PI-1201"
+    ],
+    "set": 4,
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign tags on P&ID",
+   "rule_id": "CD-9",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "M",
+   "discipline": null,
+   "document_id": "doc-eebaf2dfb732",
+   "id": "CD-9-003",
+   "item": {
+    "foreign_tags": [
+     "PT-1201",
+     "PSLL-1201",
+     "FI-1201"
+    ],
+    "set": 7,
+    "tag": "CT-7801"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign tags on P&ID",
+   "rule_id": "CD-9",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "M",
+   "discipline": null,
+   "document_id": "doc-b470d97ed566",
+   "id": "CD-9-004",
+   "item": {
+    "foreign_tags": [
+     "XV-1201A/B",
+     "PSLL-1201",
+     "PI-1201",
+     "TSHH-1201"
+    ],
+    "set": 8,
+    "tag": "FA-8901"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Foreign tags on P&ID",
+   "rule_id": "CD-9",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": "doc-e84e4224c046",
+   "id": "CD-10-001",
+   "item": {
+    "criticality": "NON CRITICAL",
+    "events": 3,
+    "tag": "CT-7801",
+    "unplanned_h": 46.0
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Criticality review candidate",
+   "rule_id": "CD-10",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "asset"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": "doc-8d6b454ad2b4",
+   "id": "CD-10-002",
+   "item": {
+    "criticality": "LOW CRITICAL",
+    "events": 3,
+    "tag": "EA-5601",
+    "unplanned_h": 54.0
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Criticality review candidate",
+   "rule_id": "CD-10",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "asset"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": "doc-cd865b3ae7d3",
+   "id": "CD-11-001",
+   "item": {
+    "evidence": [
+     "DRY WEIGHT past"
+    ],
+    "tag": "CT-7801"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "GA drawing content inconsistent with class",
+   "rule_id": "CD-11",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "drawing"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": "doc-88f3d4a32736",
+   "id": "CD-11-002",
+   "item": {
+    "evidence": [
+     "drum vocabulary WATER BOOT / MIST PAD / HORIZONTAL DRUM absent from the datasheet"
+    ],
+    "tag": "EA-5601"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "GA drawing content inconsistent with class",
+   "rule_id": "CD-11",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "drawing"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-a2b637ea5f1e",
+   "id": "CD-12-001",
+   "item": {
+    "cell": "Replaced TC point 3 in the multipoint assembly, verified reading",
+    "field": "Corrective_Action",
+    "field_text": "Replaced TC point 3 in the multipoint assembly, verified reading and TSHH-3401 select",
+    "opl_id": "OPL-DC-3401A-01",
+    "tag": "DC-3401A",
+    "wo": "WO-240056"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-42f18445dba0",
+   "id": "CD-12-002",
+   "item": {
+    "cell": "Replaced TC point 3 in the multipoint assembly, verified reading",
+    "field": "Corrective_Action",
+    "field_text": "Replaced TC point 3 in the multipoint assembly, verified reading and TSHH-3401 select",
+    "opl_id": "OPL-DC-3401A-02",
+    "tag": "DC-3401A",
+    "wo": "WO-240056"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-468ad6e6a04c",
+   "id": "CD-12-003",
+   "item": {
+    "cell": "Replaced TC point 3 in the multipoint assembly, verified reading",
+    "field": "Corrective_Action",
+    "field_text": "Replaced TC point 3 in the multipoint assembly, verified reading and TSHH-3401 select",
+    "opl_id": "OPL-DC-3401A-03",
+    "tag": "DC-3401A",
+    "wo": "WO-240056"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-80f0edee5c1e",
+   "id": "CD-12-004",
+   "item": {
+    "cell": "Replaced TC point 3 in the multipoint assembly, verified reading",
+    "field": "Corrective_Action",
+    "field_text": "Replaced TC point 3 in the multipoint assembly, verified reading and TSHH-3401 select",
+    "opl_id": "OPL-DC-3401A-04",
+    "tag": "DC-3401A",
+    "wo": "WO-240056"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-2ac61d30549d",
+   "id": "CD-12-005",
+   "item": {
+    "cell": "Replaced TC point 3 in the multipoint assembly, verified reading",
+    "field": "Corrective_Action",
+    "field_text": "Replaced TC point 3 in the multipoint assembly, verified reading and TSHH-3401 select",
+    "opl_id": "OPL-DC-3401A-05",
+    "tag": "DC-3401A",
+    "wo": "WO-240056"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-ef0271093a5c",
+   "id": "CD-12-006",
+   "item": {
+    "cell": "Replaced TC point 3 in the multipoint assembly, verified reading",
+    "field": "Corrective_Action",
+    "field_text": "Replaced TC point 3 in the multipoint assembly, verified reading and TSHH-3401 select",
+    "opl_id": "OPL-DC-3401A-06",
+    "tag": "DC-3401A",
+    "wo": "WO-240056"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-79c011db7221",
+   "id": "CD-12-007",
+   "item": {
+    "cell": "Vacuumed out spent catalyst, inspected grids, loaded 3.2 m3 fresh cat",
+    "field": "Corrective_Action",
+    "field_text": "Vacuumed out spent catalyst, inspected grids, loaded 3.2 m3 fresh catalyst",
+    "opl_id": "OPL-DC-3401A-07",
+    "tag": "DC-3401A",
+    "wo": "WO-240061"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-a55be95bceff",
+   "id": "CD-12-008",
+   "item": {
+    "cell": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, v",
+    "field": "Corrective_Action",
+    "field_text": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, verified PDI-1201 dP",
+    "opl_id": "OPL-GA-1201A-01",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-a55be95bceff",
+   "id": "CD-12-009",
+   "item": {
+    "cell": "Hexane leak observed at GA-1201A seal gland during operation, seal dr",
+    "field": "Problem_Description",
+    "field_text": "Hexane leak observed at GA-1201A seal gland during operation, seal drain flowing",
+    "opl_id": "OPL-GA-1201A-01",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-a55be95bceff",
+   "id": "CD-12-010",
+   "item": {
+    "cell": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face",
+    "field": "Root_Cause",
+    "field_text": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face to run dry and score",
+    "opl_id": "OPL-GA-1201A-01",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-a55be95bceff",
+   "id": "CD-12-011",
+   "item": {
+    "cell": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to",
+    "field": "Corrective_Action",
+    "field_text": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to 1.9 mm/s",
+    "opl_id": "OPL-GA-1201A-01",
+    "tag": "GA-1201A",
+    "wo": "WO-240003"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-192d609c3098",
+   "id": "CD-12-012",
+   "item": {
+    "cell": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, v",
+    "field": "Corrective_Action",
+    "field_text": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, verified PDI-1201 dP",
+    "opl_id": "OPL-GA-1201A-02",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-192d609c3098",
+   "id": "CD-12-013",
+   "item": {
+    "cell": "Hexane leak observed at GA-1201A seal gland during operation, seal dr",
+    "field": "Problem_Description",
+    "field_text": "Hexane leak observed at GA-1201A seal gland during operation, seal drain flowing",
+    "opl_id": "OPL-GA-1201A-02",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-192d609c3098",
+   "id": "CD-12-014",
+   "item": {
+    "cell": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face",
+    "field": "Root_Cause",
+    "field_text": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face to run dry and score",
+    "opl_id": "OPL-GA-1201A-02",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-192d609c3098",
+   "id": "CD-12-015",
+   "item": {
+    "cell": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to",
+    "field": "Corrective_Action",
+    "field_text": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to 1.9 mm/s",
+    "opl_id": "OPL-GA-1201A-02",
+    "tag": "GA-1201A",
+    "wo": "WO-240003"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-0f19e6b566c4",
+   "id": "CD-12-016",
+   "item": {
+    "cell": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, v",
+    "field": "Corrective_Action",
+    "field_text": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, verified PDI-1201 dP",
+    "opl_id": "OPL-GA-1201A-03",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-0f19e6b566c4",
+   "id": "CD-12-017",
+   "item": {
+    "cell": "Hexane leak observed at GA-1201A seal gland during operation, seal dr",
+    "field": "Problem_Description",
+    "field_text": "Hexane leak observed at GA-1201A seal gland during operation, seal drain flowing",
+    "opl_id": "OPL-GA-1201A-03",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-0f19e6b566c4",
+   "id": "CD-12-018",
+   "item": {
+    "cell": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face",
+    "field": "Root_Cause",
+    "field_text": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face to run dry and score",
+    "opl_id": "OPL-GA-1201A-03",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-0f19e6b566c4",
+   "id": "CD-12-019",
+   "item": {
+    "cell": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to",
+    "field": "Corrective_Action",
+    "field_text": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to 1.9 mm/s",
+    "opl_id": "OPL-GA-1201A-03",
+    "tag": "GA-1201A",
+    "wo": "WO-240003"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-99c21b6749c8",
+   "id": "CD-12-020",
+   "item": {
+    "cell": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, v",
+    "field": "Corrective_Action",
+    "field_text": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, verified PDI-1201 dP",
+    "opl_id": "OPL-GA-1201A-04",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-99c21b6749c8",
+   "id": "CD-12-021",
+   "item": {
+    "cell": "Hexane leak observed at GA-1201A seal gland during operation, seal dr",
+    "field": "Problem_Description",
+    "field_text": "Hexane leak observed at GA-1201A seal gland during operation, seal drain flowing",
+    "opl_id": "OPL-GA-1201A-04",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-99c21b6749c8",
+   "id": "CD-12-022",
+   "item": {
+    "cell": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face",
+    "field": "Root_Cause",
+    "field_text": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face to run dry and score",
+    "opl_id": "OPL-GA-1201A-04",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-99c21b6749c8",
+   "id": "CD-12-023",
+   "item": {
+    "cell": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to",
+    "field": "Corrective_Action",
+    "field_text": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to 1.9 mm/s",
+    "opl_id": "OPL-GA-1201A-04",
+    "tag": "GA-1201A",
+    "wo": "WO-240003"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-7da1c7cd27cc",
+   "id": "CD-12-024",
+   "item": {
+    "cell": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, v",
+    "field": "Corrective_Action",
+    "field_text": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, verified PDI-1201 dP",
+    "opl_id": "OPL-GA-1201A-05",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-7da1c7cd27cc",
+   "id": "CD-12-025",
+   "item": {
+    "cell": "Hexane leak observed at GA-1201A seal gland during operation, seal dr",
+    "field": "Problem_Description",
+    "field_text": "Hexane leak observed at GA-1201A seal gland during operation, seal drain flowing",
+    "opl_id": "OPL-GA-1201A-05",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-7da1c7cd27cc",
+   "id": "CD-12-026",
+   "item": {
+    "cell": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face",
+    "field": "Root_Cause",
+    "field_text": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face to run dry and score",
+    "opl_id": "OPL-GA-1201A-05",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-7da1c7cd27cc",
+   "id": "CD-12-027",
+   "item": {
+    "cell": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to",
+    "field": "Corrective_Action",
+    "field_text": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to 1.9 mm/s",
+    "opl_id": "OPL-GA-1201A-05",
+    "tag": "GA-1201A",
+    "wo": "WO-240003"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-1a392e2eebbf",
+   "id": "CD-12-028",
+   "item": {
+    "cell": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, v",
+    "field": "Corrective_Action",
+    "field_text": "Replaced JC T2100 mechanical seal cartridge, cleaned flush orifice, verified PDI-1201 dP",
+    "opl_id": "OPL-GA-1201A-06",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-1a392e2eebbf",
+   "id": "CD-12-029",
+   "item": {
+    "cell": "Hexane leak observed at GA-1201A seal gland during operation, seal dr",
+    "field": "Problem_Description",
+    "field_text": "Hexane leak observed at GA-1201A seal gland during operation, seal drain flowing",
+    "opl_id": "OPL-GA-1201A-06",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-1a392e2eebbf",
+   "id": "CD-12-030",
+   "item": {
+    "cell": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face",
+    "field": "Root_Cause",
+    "field_text": "API Plan 11 flush orifice RO-1201 partially plugged causing seal face to run dry and score",
+    "opl_id": "OPL-GA-1201A-06",
+    "tag": "GA-1201A",
+    "wo": "WO-240002"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-1a392e2eebbf",
+   "id": "CD-12-031",
+   "item": {
+    "cell": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to",
+    "field": "Corrective_Action",
+    "field_text": "Laser re-aligned pump/motor, re-shimmed motor feet, vibration back to 1.9 mm/s",
+    "opl_id": "OPL-GA-1201A-06",
+    "tag": "GA-1201A",
+    "wo": "WO-240003"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-a890a1e23396",
+   "id": "CD-12-032",
+   "item": {
+    "cell": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after",
+    "field": "Corrective_Action",
+    "field_text": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after warm-up",
+    "opl_id": "OPL-YD-2301-01",
+    "tag": "YD-2301",
+    "wo": "WO-240028"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-1e985621f95e",
+   "id": "CD-12-033",
+   "item": {
+    "cell": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after",
+    "field": "Corrective_Action",
+    "field_text": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after warm-up",
+    "opl_id": "OPL-YD-2301-02",
+    "tag": "YD-2301",
+    "wo": "WO-240028"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-b739f14aa8f0",
+   "id": "CD-12-034",
+   "item": {
+    "cell": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after",
+    "field": "Corrective_Action",
+    "field_text": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after warm-up",
+    "opl_id": "OPL-YD-2301-03",
+    "tag": "YD-2301",
+    "wo": "WO-240028"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-ad20663f608f",
+   "id": "CD-12-035",
+   "item": {
+    "cell": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after",
+    "field": "Corrective_Action",
+    "field_text": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after warm-up",
+    "opl_id": "OPL-YD-2301-04",
+    "tag": "YD-2301",
+    "wo": "WO-240028"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-fc0c8e8b275a",
+   "id": "CD-12-036",
+   "item": {
+    "cell": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after",
+    "field": "Corrective_Action",
+    "field_text": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after warm-up",
+    "opl_id": "OPL-YD-2301-05",
+    "tag": "YD-2301",
+    "wo": "WO-240028"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-76e35a21c6e7",
+   "id": "CD-12-037",
+   "item": {
+    "cell": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after",
+    "field": "Corrective_Action",
+    "field_text": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after warm-up",
+    "opl_id": "OPL-YD-2301-06",
+    "tag": "YD-2301",
+    "wo": "WO-240028"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-08fcf7ac5d78",
+   "id": "CD-12-038",
+   "item": {
+    "cell": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after",
+    "field": "Corrective_Action",
+    "field_text": "Replaced 8 pcs PTFE 4526L packing, staggered joints, re-nipped after warm-up",
+    "opl_id": "OPL-YD-2301-07",
+    "tag": "YD-2301",
+    "wo": "WO-240028"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Truncated troubleshooting cell",
+   "rule_id": "CD-12",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "cell"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-98989fc6489c",
+   "id": "CD-13-001",
+   "item": {
+    "hazard_note": "NON CRITICAL handling Circulating water / air at up to atm / 50 degC",
+    "missing": [
+     [
+      "50",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-CT-7801-01",
+    "tag": "CT-7801"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-f5804238812d",
+   "id": "CD-13-002",
+   "item": {
+    "hazard_note": "NON CRITICAL handling Circulating water / air at up to atm / 50 degC",
+    "missing": [
+     [
+      "50",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-CT-7801-02",
+    "tag": "CT-7801"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-2704b766d7ac",
+   "id": "CD-13-003",
+   "item": {
+    "hazard_note": "NON CRITICAL handling Circulating water / air at up to atm / 50 degC",
+    "missing": [
+     [
+      "50",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-CT-7801-03",
+    "tag": "CT-7801"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-850266fd7d3d",
+   "id": "CD-13-004",
+   "item": {
+    "hazard_note": "NON CRITICAL handling Circulating water / air at up to atm / 50 degC",
+    "missing": [
+     [
+      "50",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-CT-7801-04",
+    "tag": "CT-7801"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-6a7baf0db981",
+   "id": "CD-13-005",
+   "item": {
+    "hazard_note": "NON CRITICAL handling Circulating water / air at up to atm / 50 degC",
+    "missing": [
+     [
+      "50",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-CT-7801-05",
+    "tag": "CT-7801"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-2badb0699e9d",
+   "id": "CD-13-006",
+   "item": {
+    "hazard_note": "NON CRITICAL handling Circulating water / air at up to atm / 50 degC",
+    "missing": [
+     [
+      "50",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-CT-7801-06",
+    "tag": "CT-7801"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-5f304ecc2b5a",
+   "id": "CD-13-007",
+   "item": {
+    "hazard_note": "NON CRITICAL handling Circulating water / air at up to atm / 50 degC",
+    "missing": [
+     [
+      "50",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-CT-7801-07",
+    "tag": "CT-7801"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-a55be95bceff",
+   "id": "CD-13-008",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling n-Hexane at up to 16 barg / 80 degC",
+    "missing": [
+     [
+      "16",
+      "barg",
+      "pressure"
+     ],
+     [
+      "80",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-GA-1201A-01",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-192d609c3098",
+   "id": "CD-13-009",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling n-Hexane at up to 16 barg / 80 degC",
+    "missing": [
+     [
+      "16",
+      "barg",
+      "pressure"
+     ],
+     [
+      "80",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-GA-1201A-02",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-0f19e6b566c4",
+   "id": "CD-13-010",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling n-Hexane at up to 16 barg / 80 degC",
+    "missing": [
+     [
+      "16",
+      "barg",
+      "pressure"
+     ],
+     [
+      "80",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-GA-1201A-03",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-99c21b6749c8",
+   "id": "CD-13-011",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling n-Hexane at up to 16 barg / 80 degC",
+    "missing": [
+     [
+      "16",
+      "barg",
+      "pressure"
+     ],
+     [
+      "80",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-GA-1201A-04",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-7da1c7cd27cc",
+   "id": "CD-13-012",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling n-Hexane at up to 16 barg / 80 degC",
+    "missing": [
+     [
+      "16",
+      "barg",
+      "pressure"
+     ],
+     [
+      "80",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-GA-1201A-05",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-1a392e2eebbf",
+   "id": "CD-13-013",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling n-Hexane at up to 16 barg / 80 degC",
+    "missing": [
+     [
+      "16",
+      "barg",
+      "pressure"
+     ],
+     [
+      "80",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-GA-1201A-06",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-dde6aaf2822b",
+   "id": "CD-13-014",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling n-Hexane at up to 16 barg / 80 degC",
+    "missing": [
+     [
+      "16",
+      "barg",
+      "pressure"
+     ],
+     [
+      "80",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-GA-1201A-07",
+    "tag": "GA-1201A"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-81858f8ffc16",
+   "id": "CD-13-015",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Ethylene/Hexane/H2 at up to 16 barg / 150 degC",
+    "missing": [
+     [
+      "150",
+      "degC",
+      "temperature"
+     ],
+     [
+      "16",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-KC-4501-01",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-fceea39b4043",
+   "id": "CD-13-016",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Ethylene/Hexane/H2 at up to 16 barg / 150 degC",
+    "missing": [
+     [
+      "150",
+      "degC",
+      "temperature"
+     ],
+     [
+      "16",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-KC-4501-02",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-c7e7ce726f37",
+   "id": "CD-13-017",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Ethylene/Hexane/H2 at up to 16 barg / 150 degC",
+    "missing": [
+     [
+      "150",
+      "degC",
+      "temperature"
+     ],
+     [
+      "16",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-KC-4501-03",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-a628d9837c3d",
+   "id": "CD-13-018",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Ethylene/Hexane/H2 at up to 16 barg / 150 degC",
+    "missing": [
+     [
+      "150",
+      "degC",
+      "temperature"
+     ],
+     [
+      "16",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-KC-4501-04",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-1c06cc06b083",
+   "id": "CD-13-019",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Ethylene/Hexane/H2 at up to 16 barg / 150 degC",
+    "missing": [
+     [
+      "150",
+      "degC",
+      "temperature"
+     ],
+     [
+      "16",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-KC-4501-05",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-3863216f4c98",
+   "id": "CD-13-020",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Ethylene/Hexane/H2 at up to 16 barg / 150 degC",
+    "missing": [
+     [
+      "150",
+      "degC",
+      "temperature"
+     ],
+     [
+      "16",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-KC-4501-06",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-d13e41e2dc26",
+   "id": "CD-13-021",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Ethylene/Hexane/H2 at up to 16 barg / 150 degC",
+    "missing": [
+     [
+      "150",
+      "degC",
+      "temperature"
+     ],
+     [
+      "16",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-KC-4501-07",
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-26a3e1ae0c85",
+   "id": "CD-13-022",
+   "item": {
+    "hazard_note": "LOW CRITICAL handling Hexane + polymer bottoms at up to ASME 300# / 120 degC",
+    "missing": [
+     [
+      "120",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-LV-6701-01",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-18d193968911",
+   "id": "CD-13-023",
+   "item": {
+    "hazard_note": "LOW CRITICAL handling Hexane + polymer bottoms at up to ASME 300# / 120 degC",
+    "missing": [
+     [
+      "120",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-LV-6701-02",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-6a2af0c157be",
+   "id": "CD-13-024",
+   "item": {
+    "hazard_note": "LOW CRITICAL handling Hexane + polymer bottoms at up to ASME 300# / 120 degC",
+    "missing": [
+     [
+      "120",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-LV-6701-03",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-3c9cc0563f32",
+   "id": "CD-13-025",
+   "item": {
+    "hazard_note": "LOW CRITICAL handling Hexane + polymer bottoms at up to ASME 300# / 120 degC",
+    "missing": [
+     [
+      "120",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-LV-6701-04",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-fee80769bc91",
+   "id": "CD-13-026",
+   "item": {
+    "hazard_note": "LOW CRITICAL handling Hexane + polymer bottoms at up to ASME 300# / 120 degC",
+    "missing": [
+     [
+      "120",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-LV-6701-05",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-6eeef5996e2d",
+   "id": "CD-13-027",
+   "item": {
+    "hazard_note": "LOW CRITICAL handling Hexane + polymer bottoms at up to ASME 300# / 120 degC",
+    "missing": [
+     [
+      "120",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-LV-6701-06",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-ebe41137cede",
+   "id": "CD-13-028",
+   "item": {
+    "hazard_note": "LOW CRITICAL handling Hexane + polymer bottoms at up to ASME 300# / 120 degC",
+    "missing": [
+     [
+      "120",
+      "degC",
+      "temperature"
+     ]
+    ],
+    "opl_id": "OPL-LV-6701-07",
+    "tag": "LV-6701"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-a890a1e23396",
+   "id": "CD-13-029",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Polymer powder / LP Steam at up to 6 barg (shell) / 150 degC",
+    "missing": [
+     [
+      "6",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-YD-2301-01",
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-1e985621f95e",
+   "id": "CD-13-030",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Polymer powder / LP Steam at up to 6 barg (shell) / 150 degC",
+    "missing": [
+     [
+      "6",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-YD-2301-02",
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-b739f14aa8f0",
+   "id": "CD-13-031",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Polymer powder / LP Steam at up to 6 barg (shell) / 150 degC",
+    "missing": [
+     [
+      "6",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-YD-2301-03",
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-ad20663f608f",
+   "id": "CD-13-032",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Polymer powder / LP Steam at up to 6 barg (shell) / 150 degC",
+    "missing": [
+     [
+      "6",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-YD-2301-04",
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-fc0c8e8b275a",
+   "id": "CD-13-033",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Polymer powder / LP Steam at up to 6 barg (shell) / 150 degC",
+    "missing": [
+     [
+      "6",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-YD-2301-05",
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process / Operations",
+   "document_id": "doc-76e35a21c6e7",
+   "id": "CD-13-034",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Polymer powder / LP Steam at up to 6 barg (shell) / 150 degC",
+    "missing": [
+     [
+      "6",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-YD-2301-06",
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-08fcf7ac5d78",
+   "id": "CD-13-035",
+   "item": {
+    "hazard_note": "HIGH CRITICAL handling Polymer powder / LP Steam at up to 6 barg (shell) / 150 degC",
+    "missing": [
+     [
+      "6",
+      "barg",
+      "pressure"
+     ]
+    ],
+    "opl_id": "OPL-YD-2301-07",
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Hazard limit absent from datasheet",
+   "rule_id": "CD-13",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "lesson"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-14-001",
+   "item": {
+    "diff_idr": 1000,
+    "labor_cost_idr": 278000,
+    "material_cost_idr": 2203000,
+    "total_cost_idr": 2480000,
+    "wo": "WO-240044"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Cost arithmetic",
+   "rule_id": "CD-14",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-14-002",
+   "item": {
+    "diff_idr": -1000,
+    "labor_cost_idr": 1350000,
+    "material_cost_idr": 18825000,
+    "total_cost_idr": 20176000,
+    "wo": "WO-240089"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Cost arithmetic",
+   "rule_id": "CD-14",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-14-003",
+   "item": {
+    "diff_idr": 1000,
+    "labor_cost_idr": 278000,
+    "material_cost_idr": 1933000,
+    "total_cost_idr": 2210000,
+    "wo": "WO-240097"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Cost arithmetic",
+   "rule_id": "CD-14",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-14-004",
+   "item": {
+    "diff_idr": 1000,
+    "labor_cost_idr": 648000,
+    "material_cost_idr": 40147000,
+    "total_cost_idr": 40794000,
+    "wo": "WO-240113"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Cost arithmetic",
+   "rule_id": "CD-14",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-14-005",
+   "item": {
+    "diff_idr": 1000,
+    "labor_cost_idr": 1240000,
+    "material_cost_idr": 8485000,
+    "total_cost_idr": 9724000,
+    "wo": "WO-240116"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Cost arithmetic",
+   "rule_id": "CD-14",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-14-006",
+   "item": {
+    "diff_idr": -1000,
+    "labor_cost_idr": 1350000,
+    "material_cost_idr": 33317000,
+    "total_cost_idr": 34668000,
+    "wo": "WO-240119"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Cost arithmetic",
+   "rule_id": "CD-14",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-14-007",
+   "item": {
+    "diff_idr": 1000,
+    "labor_cost_idr": 278000,
+    "material_cost_idr": 823000,
+    "total_cost_idr": 1100000,
+    "wo": "WO-240123"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Cost arithmetic",
+   "rule_id": "CD-14",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-14-008",
+   "item": {
+    "diff_idr": 1000,
+    "labor_cost_idr": 574000,
+    "material_cost_idr": 15875000,
+    "total_cost_idr": 16448000,
+    "wo": "WO-240171"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Cost arithmetic",
+   "rule_id": "CD-14",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-14-009",
+   "item": {
+    "diff_idr": 1000,
+    "labor_cost_idr": 278000,
+    "material_cost_idr": 1581000,
+    "total_cost_idr": 1858000,
+    "wo": "WO-240177"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Cost arithmetic",
+   "rule_id": "CD-14",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-14-010",
+   "item": {
+    "diff_idr": -1000,
+    "labor_cost_idr": 1276000,
+    "material_cost_idr": 8833000,
+    "total_cost_idr": 10110000,
+    "wo": "WO-240189"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Cost arithmetic",
+   "rule_id": "CD-14",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-14-011",
+   "item": {
+    "diff_idr": 1000,
+    "labor_cost_idr": 278000,
+    "material_cost_idr": 1517000,
+    "total_cost_idr": 1794000,
+    "wo": "WO-240201"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Cost arithmetic",
+   "rule_id": "CD-14",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-001",
+   "item": {
+    "notification_no": "NT-2024-560005",
+    "report_year": 2025,
+    "wo": "WO-240002"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-002",
+   "item": {
+    "notification_no": "NT-2024-560011",
+    "report_year": 2025,
+    "wo": "WO-240003"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-003",
+   "item": {
+    "notification_no": "NT-2024-560017",
+    "report_year": 2025,
+    "wo": "WO-240004"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-004",
+   "item": {
+    "notification_no": "NT-2024-560019",
+    "report_year": 2025,
+    "wo": "WO-240005"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-005",
+   "item": {
+    "notification_no": "NT-2024-560021",
+    "report_year": 2025,
+    "wo": "WO-240006"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-006",
+   "item": {
+    "notification_no": "NT-2024-560027",
+    "report_year": 2025,
+    "wo": "WO-240007"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-007",
+   "item": {
+    "notification_no": "NT-2024-560044",
+    "report_year": 2025,
+    "wo": "WO-240011"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-008",
+   "item": {
+    "notification_no": "NT-2024-560055",
+    "report_year": 2025,
+    "wo": "WO-240013"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-009",
+   "item": {
+    "notification_no": "NT-2024-560063",
+    "report_year": 2025,
+    "wo": "WO-240015"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-010",
+   "item": {
+    "notification_no": "NT-2024-560072",
+    "report_year": 2025,
+    "wo": "WO-240018"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-011",
+   "item": {
+    "notification_no": "NT-2024-560077",
+    "report_year": 2025,
+    "wo": "WO-240019"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-012",
+   "item": {
+    "notification_no": "NT-2024-560083",
+    "report_year": 2025,
+    "wo": "WO-240020"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Electrical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-013",
+   "item": {
+    "notification_no": "NT-2024-560089",
+    "report_year": 2025,
+    "wo": "WO-240021"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-014",
+   "item": {
+    "notification_no": "NT-2024-560097",
+    "report_year": 2025,
+    "wo": "WO-240023"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-015",
+   "item": {
+    "notification_no": "NT-2024-560106",
+    "report_year": 2025,
+    "wo": "WO-240025"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-016",
+   "item": {
+    "notification_no": "NT-2024-560109",
+    "report_year": 2025,
+    "wo": "WO-240026"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-017",
+   "item": {
+    "notification_no": "NT-2024-560117",
+    "report_year": 2025,
+    "wo": "WO-240028"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-018",
+   "item": {
+    "notification_no": "NT-2024-560127",
+    "report_year": 2025,
+    "wo": "WO-240031"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-019",
+   "item": {
+    "notification_no": "NT-2024-560130",
+    "report_year": 2025,
+    "wo": "WO-240032"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-020",
+   "item": {
+    "notification_no": "NT-2024-560134",
+    "report_year": 2025,
+    "wo": "WO-240034"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-021",
+   "item": {
+    "notification_no": "NT-2024-560141",
+    "report_year": 2025,
+    "wo": "WO-240036"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-022",
+   "item": {
+    "notification_no": "NT-2024-560143",
+    "report_year": 2025,
+    "wo": "WO-240037"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-023",
+   "item": {
+    "notification_no": "NT-2024-560147",
+    "report_year": 2025,
+    "wo": "WO-240038"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-024",
+   "item": {
+    "notification_no": "NT-2024-560159",
+    "report_year": 2025,
+    "wo": "WO-240041"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-025",
+   "item": {
+    "notification_no": "NT-2024-560166",
+    "report_year": 2025,
+    "wo": "WO-240043"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-026",
+   "item": {
+    "notification_no": "NT-2024-560168",
+    "report_year": 2025,
+    "wo": "WO-240044"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-027",
+   "item": {
+    "notification_no": "NT-2024-560175",
+    "report_year": 2025,
+    "wo": "WO-240046"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Electrical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-028",
+   "item": {
+    "notification_no": "NT-2024-560178",
+    "report_year": 2025,
+    "wo": "WO-240047"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Electrical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-029",
+   "item": {
+    "notification_no": "NT-2024-560182",
+    "report_year": 2025,
+    "wo": "WO-240048"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-030",
+   "item": {
+    "notification_no": "NT-2024-560189",
+    "report_year": 2025,
+    "wo": "WO-240050"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-031",
+   "item": {
+    "notification_no": "NT-2024-560194",
+    "report_year": 2025,
+    "wo": "WO-240051"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-032",
+   "item": {
+    "notification_no": "NT-2024-560200",
+    "report_year": 2025,
+    "wo": "WO-240052"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-033",
+   "item": {
+    "notification_no": "NT-2024-560202",
+    "report_year": 2025,
+    "wo": "WO-240053"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-034",
+   "item": {
+    "notification_no": "NT-2024-560205",
+    "report_year": 2025,
+    "wo": "WO-240054"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-035",
+   "item": {
+    "notification_no": "NT-2024-560210",
+    "report_year": 2025,
+    "wo": "WO-240055"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-036",
+   "item": {
+    "notification_no": "NT-2024-560240",
+    "report_year": 2025,
+    "wo": "WO-240061"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-037",
+   "item": {
+    "notification_no": "NT-2024-560242",
+    "report_year": 2025,
+    "wo": "WO-240062"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-038",
+   "item": {
+    "notification_no": "NT-2024-560248",
+    "report_year": 2025,
+    "wo": "WO-240064"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-039",
+   "item": {
+    "notification_no": "NT-2024-560253",
+    "report_year": 2025,
+    "wo": "WO-240065"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-040",
+   "item": {
+    "notification_no": "NT-2024-560256",
+    "report_year": 2025,
+    "wo": "WO-240066"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-041",
+   "item": {
+    "notification_no": "NT-2024-560259",
+    "report_year": 2025,
+    "wo": "WO-240067"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-042",
+   "item": {
+    "notification_no": "NT-2024-560263",
+    "report_year": 2025,
+    "wo": "WO-240068"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-043",
+   "item": {
+    "notification_no": "NT-2024-560272",
+    "report_year": 2025,
+    "wo": "WO-240070"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-044",
+   "item": {
+    "notification_no": "NT-2024-560274",
+    "report_year": 2025,
+    "wo": "WO-240071"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-045",
+   "item": {
+    "notification_no": "NT-2024-560277",
+    "report_year": 2025,
+    "wo": "WO-240072"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-046",
+   "item": {
+    "notification_no": "NT-2024-560281",
+    "report_year": 2025,
+    "wo": "WO-240073"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-047",
+   "item": {
+    "notification_no": "NT-2024-560288",
+    "report_year": 2025,
+    "wo": "WO-240075"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-048",
+   "item": {
+    "notification_no": "NT-2024-560300",
+    "report_year": 2025,
+    "wo": "WO-240078"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-049",
+   "item": {
+    "notification_no": "NT-2024-560311",
+    "report_year": 2025,
+    "wo": "WO-240080"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-050",
+   "item": {
+    "notification_no": "NT-2024-560313",
+    "report_year": 2025,
+    "wo": "WO-240081"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-051",
+   "item": {
+    "notification_no": "NT-2024-560317",
+    "report_year": 2025,
+    "wo": "WO-240082"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-052",
+   "item": {
+    "notification_no": "NT-2024-560322",
+    "report_year": 2025,
+    "wo": "WO-240083"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-053",
+   "item": {
+    "notification_no": "NT-2024-560334",
+    "report_year": 2025,
+    "wo": "WO-240086"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-054",
+   "item": {
+    "notification_no": "NT-2024-560342",
+    "report_year": 2025,
+    "wo": "WO-240088"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-055",
+   "item": {
+    "notification_no": "NT-2024-560347",
+    "report_year": 2025,
+    "wo": "WO-240089"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-056",
+   "item": {
+    "notification_no": "NT-2024-560356",
+    "report_year": 2025,
+    "wo": "WO-240091"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Electrical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-057",
+   "item": {
+    "notification_no": "NT-2024-560359",
+    "report_year": 2025,
+    "wo": "WO-240092"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-058",
+   "item": {
+    "notification_no": "NT-2024-560364",
+    "report_year": 2025,
+    "wo": "WO-240093"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-059",
+   "item": {
+    "notification_no": "NT-2024-560371",
+    "report_year": 2025,
+    "wo": "WO-240095"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-060",
+   "item": {
+    "notification_no": "NT-2024-560377",
+    "report_year": 2025,
+    "wo": "WO-240096"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-061",
+   "item": {
+    "notification_no": "NT-2024-560384",
+    "report_year": 2025,
+    "wo": "WO-240098"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-062",
+   "item": {
+    "notification_no": "NT-2024-560390",
+    "report_year": 2025,
+    "wo": "WO-240099"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-063",
+   "item": {
+    "notification_no": "NT-2024-560392",
+    "report_year": 2025,
+    "wo": "WO-240100"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-064",
+   "item": {
+    "notification_no": "NT-2024-560396",
+    "report_year": 2025,
+    "wo": "WO-240101"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-065",
+   "item": {
+    "notification_no": "NT-2024-560410",
+    "report_year": 2025,
+    "wo": "WO-240104"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-066",
+   "item": {
+    "notification_no": "NT-2024-560413",
+    "report_year": 2025,
+    "wo": "WO-240105"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-067",
+   "item": {
+    "notification_no": "NT-2024-560419",
+    "report_year": 2025,
+    "wo": "WO-240107"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-068",
+   "item": {
+    "notification_no": "NT-2024-560421",
+    "report_year": 2025,
+    "wo": "WO-240108"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-069",
+   "item": {
+    "notification_no": "NT-2024-560438",
+    "report_year": 2025,
+    "wo": "WO-240112"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-070",
+   "item": {
+    "notification_no": "NT-2024-560441",
+    "report_year": 2025,
+    "wo": "WO-240113"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-071",
+   "item": {
+    "notification_no": "NT-2024-560446",
+    "report_year": 2025,
+    "wo": "WO-240114"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-072",
+   "item": {
+    "notification_no": "NT-2024-560457",
+    "report_year": 2025,
+    "wo": "WO-240117"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-073",
+   "item": {
+    "notification_no": "NT-2024-560460",
+    "report_year": 2025,
+    "wo": "WO-240118"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-074",
+   "item": {
+    "notification_no": "NT-2024-560468",
+    "report_year": 2025,
+    "wo": "WO-240120"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-075",
+   "item": {
+    "notification_no": "NT-2024-560470",
+    "report_year": 2025,
+    "wo": "WO-240121"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-076",
+   "item": {
+    "notification_no": "NT-2024-560472",
+    "report_year": 2025,
+    "wo": "WO-240122"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-077",
+   "item": {
+    "notification_no": "NT-2024-560475",
+    "report_year": 2025,
+    "wo": "WO-240123"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-078",
+   "item": {
+    "notification_no": "NT-2024-560479",
+    "report_year": 2025,
+    "wo": "WO-240124"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-079",
+   "item": {
+    "notification_no": "NT-2024-560485",
+    "report_year": 2025,
+    "wo": "WO-240125"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-080",
+   "item": {
+    "notification_no": "NT-2024-560489",
+    "report_year": 2025,
+    "wo": "WO-240126"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-081",
+   "item": {
+    "notification_no": "NT-2024-560493",
+    "report_year": 2025,
+    "wo": "WO-240127"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-082",
+   "item": {
+    "notification_no": "NT-2024-560513",
+    "report_year": 2025,
+    "wo": "WO-240132"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-083",
+   "item": {
+    "notification_no": "NT-2024-560518",
+    "report_year": 2025,
+    "wo": "WO-240133"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-084",
+   "item": {
+    "notification_no": "NT-2024-560530",
+    "report_year": 2025,
+    "wo": "WO-240135"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-085",
+   "item": {
+    "notification_no": "NT-2024-560542",
+    "report_year": 2025,
+    "wo": "WO-240137"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-086",
+   "item": {
+    "notification_no": "NT-2024-560558",
+    "report_year": 2025,
+    "wo": "WO-240141"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Process",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-087",
+   "item": {
+    "notification_no": "NT-2024-560564",
+    "report_year": 2025,
+    "wo": "WO-240142"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-088",
+   "item": {
+    "notification_no": "NT-2024-560566",
+    "report_year": 2025,
+    "wo": "WO-240143"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-089",
+   "item": {
+    "notification_no": "NT-2024-560570",
+    "report_year": 2025,
+    "wo": "WO-240144"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-090",
+   "item": {
+    "notification_no": "NT-2024-560586",
+    "report_year": 2025,
+    "wo": "WO-240148"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-091",
+   "item": {
+    "notification_no": "NT-2024-560588",
+    "report_year": 2025,
+    "wo": "WO-240149"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-092",
+   "item": {
+    "notification_no": "NT-2024-560596",
+    "report_year": 2025,
+    "wo": "WO-240151"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-093",
+   "item": {
+    "notification_no": "NT-2024-560600",
+    "report_year": 2025,
+    "wo": "WO-240152"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-094",
+   "item": {
+    "notification_no": "NT-2024-560602",
+    "report_year": 2025,
+    "wo": "WO-240153"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Electrical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-095",
+   "item": {
+    "notification_no": "NT-2024-560607",
+    "report_year": 2025,
+    "wo": "WO-240155"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Electrical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-096",
+   "item": {
+    "notification_no": "NT-2024-560609",
+    "report_year": 2025,
+    "wo": "WO-240156"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-097",
+   "item": {
+    "notification_no": "NT-2024-560619",
+    "report_year": 2025,
+    "wo": "WO-240158"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-098",
+   "item": {
+    "notification_no": "NT-2024-560624",
+    "report_year": 2025,
+    "wo": "WO-240159"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-099",
+   "item": {
+    "notification_no": "NT-2024-560628",
+    "report_year": 2025,
+    "wo": "WO-240160"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-100",
+   "item": {
+    "notification_no": "NT-2024-560636",
+    "report_year": 2025,
+    "wo": "WO-240162"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-101",
+   "item": {
+    "notification_no": "NT-2024-560638",
+    "report_year": 2025,
+    "wo": "WO-240163"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-102",
+   "item": {
+    "notification_no": "NT-2024-560642",
+    "report_year": 2025,
+    "wo": "WO-240164"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-103",
+   "item": {
+    "notification_no": "NT-2024-560650",
+    "report_year": 2025,
+    "wo": "WO-240166"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-104",
+   "item": {
+    "notification_no": "NT-2024-560654",
+    "report_year": 2025,
+    "wo": "WO-240168"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-105",
+   "item": {
+    "notification_no": "NT-2024-560667",
+    "report_year": 2025,
+    "wo": "WO-240171"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-106",
+   "item": {
+    "notification_no": "NT-2024-560688",
+    "report_year": 2025,
+    "wo": "WO-240175"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-107",
+   "item": {
+    "notification_no": "NT-2024-560690",
+    "report_year": 2025,
+    "wo": "WO-240176"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-108",
+   "item": {
+    "notification_no": "NT-2024-560703",
+    "report_year": 2025,
+    "wo": "WO-240179"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Electrical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-109",
+   "item": {
+    "notification_no": "NT-2024-560707",
+    "report_year": 2025,
+    "wo": "WO-240180"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Electrical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-110",
+   "item": {
+    "notification_no": "NT-2024-560719",
+    "report_year": 2025,
+    "wo": "WO-240182"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-111",
+   "item": {
+    "notification_no": "NT-2024-560724",
+    "report_year": 2025,
+    "wo": "WO-240183"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-112",
+   "item": {
+    "notification_no": "NT-2024-560730",
+    "report_year": 2025,
+    "wo": "WO-240185"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-113",
+   "item": {
+    "notification_no": "NT-2024-560737",
+    "report_year": 2025,
+    "wo": "WO-240187"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-114",
+   "item": {
+    "notification_no": "NT-2024-560753",
+    "report_year": 2025,
+    "wo": "WO-240192"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-115",
+   "item": {
+    "notification_no": "NT-2024-560757",
+    "report_year": 2025,
+    "wo": "WO-240193"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-116",
+   "item": {
+    "notification_no": "NT-2024-560763",
+    "report_year": 2025,
+    "wo": "WO-240194"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-117",
+   "item": {
+    "notification_no": "NT-2024-560773",
+    "report_year": 2025,
+    "wo": "WO-240197"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-118",
+   "item": {
+    "notification_no": "NT-2024-560784",
+    "report_year": 2025,
+    "wo": "WO-240200"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Instrument",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-119",
+   "item": {
+    "notification_no": "NT-2024-560795",
+    "report_year": 2025,
+    "wo": "WO-240204"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Electrical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-120",
+   "item": {
+    "notification_no": "NT-2024-560797",
+    "report_year": 2025,
+    "wo": "WO-240205"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Electrical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-121",
+   "item": {
+    "notification_no": "NT-2024-560803",
+    "report_year": 2025,
+    "wo": "WO-240206"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-122",
+   "item": {
+    "notification_no": "NT-2024-560808",
+    "report_year": 2025,
+    "wo": "WO-240207"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": "Mechanical",
+   "document_id": "doc-62208bb3dd10",
+   "id": "CD-15-123",
+   "item": {
+    "notification_no": "NT-2024-560819",
+    "report_year": 2025,
+    "wo": "WO-240209"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Identifier chronology",
+   "rule_id": "CD-15",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "work order"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": null,
+   "id": "CD-16-001",
+   "item": {
+    "area_code": [
+     7800
+    ],
+    "datasheet": "7800 - COOLING WATER SYSTEM",
+    "n_vocabularies": 2,
+    "opl": "7800 - COOLING TOWER SYSTEM",
+    "plot_plan_title": "7800-COOLINGTOWERSYSTEM",
+    "tag": "CT-7801",
+    "vocabularies": [
+     "COOLINGTOWERSYSTEM",
+     "COOLINGWATERSYSTEM"
+    ],
+    "workbook": "COOLING WATER SYSTEM"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Area vocabulary",
+   "rule_id": "CD-16",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "area"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": null,
+   "id": "CD-16-002",
+   "item": {
+    "area_code": [
+     3400
+    ],
+    "datasheet": "3400 - CATALYST PREPARATION",
+    "n_vocabularies": 2,
+    "opl": "3400 - CATALYST REDUCTION SYSTEM",
+    "plot_plan_title": "3400-CATALYSTREDUCTIONSYSTEM",
+    "tag": "DC-3401A",
+    "vocabularies": [
+     "CATALYSTPREPARATION",
+     "CATALYSTREDUCTIONSYSTEM"
+    ],
+    "workbook": "CATALYST PREPARATION"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Area vocabulary",
+   "rule_id": "CD-16",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "area"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": null,
+   "id": "CD-16-003",
+   "item": {
+    "area_code": [
+     5600
+    ],
+    "datasheet": "5600 - SOLVENT RECOVERY SYSTEM",
+    "n_vocabularies": 2,
+    "opl": "5600 - SOLVENT HEATING SYSTEM",
+    "plot_plan_title": "5600-SOLVENTHEATINGSYSTEM",
+    "tag": "EA-5601",
+    "vocabularies": [
+     "SOLVENTHEATINGSYSTEM",
+     "SOLVENTRECOVERYSYSTEM"
+    ],
+    "workbook": "SOLVENT RECOVERY SYSTEM"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Area vocabulary",
+   "rule_id": "CD-16",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "area"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": null,
+   "id": "CD-16-004",
+   "item": {
+    "area_code": [
+     8900
+    ],
+    "datasheet": "8900 - SOLVENT FRACTIONATION",
+    "n_vocabularies": 2,
+    "opl": "8900 - HEXANE COLUMN OVERHEAD SYSTEM",
+    "plot_plan_title": "8900-HEXANECOLUMNOVERHEADSYSTEM",
+    "tag": "FA-8901",
+    "vocabularies": [
+     "HEXANECOLUMNOVERHEADSYSTEM",
+     "SOLVENTFRACTIONATION"
+    ],
+    "workbook": "SOLVENT FRACTIONATION"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Area vocabulary",
+   "rule_id": "CD-16",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "area"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": null,
+   "id": "CD-16-005",
+   "item": {
+    "area_code": [
+     1200
+    ],
+    "datasheet": "1200 - FEED PREPARATION & PURIFICATION",
+    "n_vocabularies": 2,
+    "opl": "1200 - HEXANE FEED SYSTEM",
+    "plot_plan_title": "1200-HEXANEFEEDSYSTEM",
+    "tag": "GA-1201A",
+    "vocabularies": [
+     "FEEDPREPARATIONPURIFICATION",
+     "HEXANEFEEDSYSTEM"
+    ],
+    "workbook": "FEED PREPARATION & PURIFICATION"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Area vocabulary",
+   "rule_id": "CD-16",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "area"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": null,
+   "id": "CD-16-006",
+   "item": {
+    "area_code": [
+     4500
+    ],
+    "datasheet": "4500 - GAS RECOVERY & COMPRESSION",
+    "n_vocabularies": 2,
+    "opl": "4500 - RECYCLE GAS SYSTEM",
+    "plot_plan_title": "4500-RECYCLEGASSYSTEM",
+    "tag": "KC-4501",
+    "vocabularies": [
+     "GASRECOVERYCOMPRESSION",
+     "RECYCLEGASSYSTEM"
+    ],
+    "workbook": "GAS RECOVERY & COMPRESSION"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Area vocabulary",
+   "rule_id": "CD-16",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "area"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": null,
+   "id": "CD-16-007",
+   "item": {
+    "area_code": [
+     6700
+    ],
+    "datasheet": "6700 - PRODUCT SEPARATION",
+    "n_vocabularies": 2,
+    "opl": "6700 - LP SEPARATOR SYSTEM",
+    "plot_plan_title": "6700-LPSEPARATORSYSTEM",
+    "tag": "LV-6701",
+    "vocabularies": [
+     "LPSEPARATORSYSTEM",
+     "PRODUCTSEPARATION"
+    ],
+    "workbook": "PRODUCT SEPARATION"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Area vocabulary",
+   "rule_id": "CD-16",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "area"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": null,
+   "id": "CD-16-008",
+   "item": {
+    "area_code": [
+     2300
+    ],
+    "datasheet": "2300 - POLYMER SEPARATION & DRYING",
+    "n_vocabularies": 2,
+    "opl": "2300 - POWDER DRYING SYSTEM",
+    "plot_plan_title": "2300-POWDERDRYINGSYSTEM",
+    "tag": "YD-2301",
+    "vocabularies": [
+     "POLYMERSEPARATIONDRYING",
+     "POWDERDRYINGSYSTEM"
+    ],
+    "workbook": "POLYMER SEPARATION & DRYING"
+   },
+   "observation_only": true,
+   "routing_recommendation": null,
+   "rule": "Area vocabulary",
+   "rule_id": "CD-16",
+   "safety_function": null,
+   "severity": "low",
+   "span_id": null,
+   "state": "open",
+   "unit": "area"
+  },
+  {
+   "basis": "H",
+   "discipline": null,
+   "document_id": "doc-1b30dab2c3c9",
+   "id": "CD-17-001",
+   "item": {
+    "boilerplate": [
+     "On any trip",
+     "Safety PLC",
+     "latched"
+    ],
+    "logic_no": "N/A (control loop only)",
+    "row_kinds": [
+     "alarm",
+     "control",
+     "mech"
+    ],
+    "tag": "EA-5601",
+    "trip_rows": 0
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "Trip boilerplate without trip rows",
+   "rule_id": "CD-17",
+   "safety_function": null,
+   "severity": "medium",
+   "span_id": null,
+   "state": "open",
+   "unit": "sheet"
+  },
+  {
+   "basis": "H+M",
+   "discipline": null,
+   "document_id": "doc-18ff60f606ab",
+   "id": "CD-18-001",
+   "item": {
+    "kind": "footprint",
+    "pid": "4.0 x 8.5 m",
+    "set": 2,
+    "sibling": "plot_plan",
+    "sibling_confirmed": true,
+    "sibling_values": [
+     "4.0 x 9.5 m"
+    ],
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "P&ID contradicts sibling document",
+   "rule_id": "CD-18",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "contradiction"
+  },
+  {
+   "basis": "H+M",
+   "discipline": null,
+   "document_id": "doc-18ff60f606ab",
+   "id": "CD-18-002",
+   "item": {
+    "kind": "instrument identity",
+    "pid": "PSLL-2303 / S5LL-2305",
+    "set": 2,
+    "sibling": "interlock",
+    "sibling_confirmed": true,
+    "sibling_values": [
+     "LSHH-2303",
+     "SSLL-2305"
+    ],
+    "tag": "YD-2301"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "P&ID contradicts sibling document",
+   "rule_id": "CD-18",
+   "safety_function": "SEQ-5500",
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "contradiction"
+  },
+  {
+   "basis": "H+M",
+   "discipline": null,
+   "document_id": "doc-698f6cc812f8",
+   "id": "CD-18-003",
+   "item": {
+    "kind": "revision",
+    "pid": "Rev 02",
+    "set": 4,
+    "sibling": "ga_drawing",
+    "sibling_confirmed": true,
+    "sibling_values": [
+     "REV:0"
+    ],
+    "tag": "KC-4501"
+   },
+   "observation_only": false,
+   "routing_recommendation": null,
+   "rule": "P&ID contradicts sibling document",
+   "rule_id": "CD-18",
+   "safety_function": null,
+   "severity": "high",
+   "span_id": null,
+   "state": "open",
+   "unit": "contradiction"
+  }
+ ],
+ "observations": {
+  "CD-15": 123,
+  "CD-16": 8
+ },
+ "rules": {
+  "CD-1": 28,
+  "CD-10": 2,
+  "CD-11": 2,
+  "CD-12": 38,
+  "CD-13": 35,
+  "CD-14": 11,
+  "CD-17": 1,
+  "CD-18": 3,
+  "CD-2": 6,
+  "CD-4": 26,
+  "CD-5": 5,
+  "CD-6": 8,
+  "CD-7": 4,
+  "CD-8": 1,
+  "CD-9": 4
+ },
+ "total": 174
+}

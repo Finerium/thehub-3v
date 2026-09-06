@@ -10,6 +10,9 @@ type Props = {
   className?: string;
   id?: string;
   "aria-labelledby"?: string;
+  "aria-label"?: string;
+  /** Marker attributes for the export script and the verifier (`data-component`, `data-tone`, ...). */
+  [dataAttribute: `data-${string}`]: string | undefined;
   children: ReactNode;
 };
 

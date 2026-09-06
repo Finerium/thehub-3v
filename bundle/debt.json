@@ -1,0 +1,215 @@
+[
+ {
+  "coefficients": {
+   "a": 0.4,
+   "b": 0.3,
+   "basis": "ASSUMPTION",
+   "c": 0.2,
+   "d": 0.1
+  },
+  "corpus_version_id": "v1",
+  "equipment_tag": "YD-2301",
+  "factors": {
+   "C_idr": 44902000,
+   "C_max": 44902000,
+   "D_hours": 42.0,
+   "D_max": 42.0,
+   "k": 1.0,
+   "r": 0.375
+  },
+  "id": "DEBT-YD-2301",
+  "incomplete_uncovered": 1,
+  "rank": 1,
+  "score": 0.9375,
+  "uncovered_wo_numbers": [
+   "WO-240033",
+   "WO-240034",
+   "WO-240037",
+   "WO-240039"
+  ]
+ },
+ {
+  "coefficients": {
+   "a": 0.4,
+   "b": 0.3,
+   "basis": "ASSUMPTION",
+   "c": 0.2,
+   "d": 0.1
+  },
+  "corpus_version_id": "v1",
+  "equipment_tag": "KC-4501",
+  "factors": {
+   "C_idr": 20176000,
+   "C_max": 44902000,
+   "D_hours": 16.0,
+   "D_max": 42.0,
+   "k": 1.0,
+   "r": 0.625
+  },
+  "id": "DEBT-KC-4501",
+  "incomplete_uncovered": 1,
+  "rank": 2,
+  "score": 0.5497,
+  "uncovered_wo_numbers": [
+   "WO-240089",
+   "WO-240094"
+  ]
+ },
+ {
+  "coefficients": {
+   "a": 0.4,
+   "b": 0.3,
+   "basis": "ASSUMPTION",
+   "c": 0.2,
+   "d": 0.1
+  },
+  "corpus_version_id": "v1",
+  "equipment_tag": "GA-1201A",
+  "factors": {
+   "C_idr": 12630000,
+   "C_max": 44902000,
+   "D_hours": 6.5,
+   "D_max": 42.0,
+   "k": 1.0,
+   "r": 0.4286
+  },
+  "id": "DEBT-GA-1201A",
+  "incomplete_uncovered": 1,
+  "rank": 3,
+  "score": 0.3891,
+  "uncovered_wo_numbers": [
+   "WO-240007",
+   "WO-240013"
+  ]
+ },
+ {
+  "coefficients": {
+   "a": 0.4,
+   "b": 0.3,
+   "basis": "ASSUMPTION",
+   "c": 0.2,
+   "d": 0.1
+  },
+  "corpus_version_id": "v1",
+  "equipment_tag": "DC-3401A",
+  "factors": {
+   "C_idr": 13443000,
+   "C_max": 44902000,
+   "D_hours": 0.0,
+   "D_max": 42.0,
+   "k": 1.0,
+   "r": 0.1429
+  },
+  "id": "DEBT-DC-3401A",
+  "incomplete_uncovered": 0,
+  "rank": 4,
+  "score": 0.3041,
+  "uncovered_wo_numbers": [
+   "WO-240063",
+   "WO-240064"
+  ]
+ },
+ {
+  "coefficients": {
+   "a": 0.4,
+   "b": 0.3,
+   "basis": "ASSUMPTION",
+   "c": 0.2,
+   "d": 0.1
+  },
+  "corpus_version_id": "v1",
+  "equipment_tag": "CT-7801",
+  "factors": {
+   "C_idr": 16538000,
+   "C_max": 44902000,
+   "D_hours": 10.0,
+   "D_max": 42.0,
+   "k": 0.25,
+   "r": 0.4286
+  },
+  "id": "DEBT-CT-7801",
+  "incomplete_uncovered": 1,
+  "rank": 5,
+  "score": 0.2986,
+  "uncovered_wo_numbers": [
+   "WO-240167",
+   "WO-240169"
+  ]
+ },
+ {
+  "coefficients": {
+   "a": 0.4,
+   "b": 0.3,
+   "basis": "ASSUMPTION",
+   "c": 0.2,
+   "d": 0.1
+  },
+  "corpus_version_id": "v1",
+  "equipment_tag": "FA-8901",
+  "factors": {
+   "C_idr": 252000,
+   "C_max": 44902000,
+   "D_hours": 0.0,
+   "D_max": 42.0,
+   "k": 1.0,
+   "r": 0.2
+  },
+  "id": "DEBT-FA-8901",
+  "incomplete_uncovered": 0,
+  "rank": 6,
+  "score": 0.2217,
+  "uncovered_wo_numbers": [
+   "WO-240196"
+  ]
+ },
+ {
+  "coefficients": {
+   "a": 0.4,
+   "b": 0.3,
+   "basis": "ASSUMPTION",
+   "c": 0.2,
+   "d": 0.1
+  },
+  "corpus_version_id": "v1",
+  "equipment_tag": "LV-6701",
+  "factors": {
+   "C_idr": 0,
+   "C_max": 44902000,
+   "D_hours": 0.0,
+   "D_max": 42.0,
+   "k": 0.5,
+   "r": 0.4286
+  },
+  "id": "DEBT-LV-6701",
+  "incomplete_uncovered": 0,
+  "rank": 7,
+  "score": 0.1429,
+  "uncovered_wo_numbers": []
+ },
+ {
+  "coefficients": {
+   "a": 0.4,
+   "b": 0.3,
+   "basis": "ASSUMPTION",
+   "c": 0.2,
+   "d": 0.1
+  },
+  "corpus_version_id": "v1",
+  "equipment_tag": "EA-5601",
+  "factors": {
+   "C_idr": 0,
+   "C_max": 44902000,
+   "D_hours": 0.0,
+   "D_max": 42.0,
+   "k": 0.5,
+   "r": 0.25
+  },
+  "id": "DEBT-EA-5601",
+  "incomplete_uncovered": 1,
+  "rank": 8,
+  "score": 0.125,
+  "uncovered_wo_numbers": [
+   "WO-240120"
+  ]
+ }
+]
