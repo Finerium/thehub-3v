@@ -86,6 +86,8 @@ describe("currentRevisionIds (the lineage rule of ARCHITECTURE 3.4)", () => {
     const sameVersion = (id: string, revision: string) => ({ id, documentId: "d1", corpusVersionId: "cv-v1", revision });
     expect(currentRevisionIds([sameVersion("r9", "9"), sameVersion("r10", "10")], lineage)).toEqual(["r10"]);
     expect(currentRevisionIds([sameVersion("rB", "B"), sameVersion("rA", "A")], lineage)).toEqual(["rB"]);
+    expect(currentRevisionIds([sameVersion("rA", "A"), sameVersion("r0", "0"), sameVersion("rB", "B")], lineage)).toEqual(["r0"]);
+    expect(currentRevisionIds([sameVersion("r1", "1"), sameVersion("rC", "C")], lineage)).toEqual(["r1"]);
     expect(currentRevisionIds([sameVersion("r-a", "1"), sameVersion("r-b", "1")], lineage)).toEqual(["r-b"]);
   });
 
@@ -218,6 +220,27 @@ describe("activateIn (one transaction)", () => {
     const values = argOf(named("insert")[0]!, "values") as { id: string; route: string };
     expect(values.id).toMatch(/^[0-9a-f-]{36}$/);
     expect(values.route).toBe(ACTIVATE_ROUTE);
+  });
+
+  it("activate_v1_after_publish (AC-ING-10): re-activating v1 under a later child reads v1's lineage only, re-marks v1's revisions current and deletes nothing", async () => {
+    // d1 was re-issued by a sandbox publication into cv-s1 (child of cv-v1); d2 exists in v1 only.
+    const v1Revisions = [
+      { id: "r-d1-v1", documentId: "d1", corpusVersionId: "cv-v1", revision: "A" },
+      { id: "r-d2-v1", documentId: "d2", corpusVersionId: "cv-v1", revision: "0" },
+    ];
+    queueActivation("cv-v1", v1Revisions);
+    const result = await withTransaction((tx) => activateIn(tx, "cv-v1", { alias: "job:nightly-activation", role: "job" }, { auditId: "req-reassert" }));
+
+    expect(result).toMatchObject({ id: "cv-v1", is_active: true });
+    const read = statements.find((s) => s.some((c) => c.method === "from" && c.args[0] === documentRevision))!;
+    const readWhere = compile(argOf(read, "where"));
+    expect(readWhere.sql).toBe('"document_revision"."corpus_version_id" in ($1)');
+    expect(readWhere.params).toEqual(["cv-v1"]); // the child's revision is outside the lineage and stays not current
+    const [clear, set] = updatesOf(documentRevision);
+    expect(argOf(clear!, "set")).toEqual({ isCurrent: false });
+    expect(compile(argOf(set!, "where")).params).toEqual(["r-d1-v1", "r-d2-v1"]);
+    expect(named("delete")).toHaveLength(0);
+    expect(argOf(named("insert")[0]!, "values")).toMatchObject({ id: "req-reassert", action: ACTIVATED_ACTION, entityId: "cv-v1" });
   });
 
   it("answers not_found for an unknown version after the lock and writes nothing", async () => {

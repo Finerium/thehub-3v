@@ -694,15 +694,18 @@ export const integrityFinding = pgTable(
   {
     id: text("id").primaryKey(),
     ruleId: text("rule_id").notNull(),
+    rule: text("rule"), // the rule's name as the register prints it (CD-1 to CD-18)
     severity: text("severity").notNull(),
-    discipline: text("discipline").notNull(),
-    documentId: text("document_id")
-      .notNull()
-      .references(() => documentTable.id),
+    discipline: text("discipline"), // null where the register assigns none (the bundle's Finding is nullable here)
+    documentId: text("document_id").references(() => documentTable.id), // null for the CD-16 area observations spanning several documents
     spanId: text("span_id").references(() => span.id),
     state: integrityState("state").notNull(),
     safetyFunction: boolean("safety_function").notNull(),
     routingRecommendation: text("routing_recommendation"),
+    observationOnly: boolean("observation_only").notNull().default(false), // CD-15 and CD-16 are reported outside the 174 total
+    unit: text("unit"), // what the item is (work order, document, ...)
+    basis: text("basis"), // H or M basis of the reading
+    item: jsonb("item").$type<Record<string, unknown>>(), // the register item's own fields, as the harness emitted them
     corpusVersionId: text("corpus_version_id")
       .notNull()
       .references(() => corpusVersion.id),

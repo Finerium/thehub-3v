@@ -9,7 +9,7 @@
 // publicOnly names a public release. Nothing here touches a database.
 import path from "node:path";
 import type { Manifest } from "@/contracts/generated/manifest";
-import { readBundle, type Bundle, type ReadOptions, type Violation, type ViolationKind } from "./g1/bundle";
+import { readBundle, type Bundle, type ReadOptions, type Violation } from "./g1/bundle";
 import { runChecks } from "./g1/checks";
 
 export type { Bundle, Violation, ViolationKind } from "./g1/bundle";

@@ -84,10 +84,21 @@ export function currentRevisionIds(revisions: ReadonlyArray<RevisionLink>, linea
   return [...best.values()].map((r) => r.id).sort();
 }
 
+// Drawing convention (9.2, the GA drawings and plot plans carry A, B then 0): an alphabetic label is a pre-issue
+// revision and a numeric label an issue, so any numeric label supersedes any alphabetic one; numerics compare as
+// numbers ("10" above "9"), letters alphabetically ("B" above "A"); revision_date is free text and never orders.
+function compareRevisionLabels(a: string, b: string): number {
+  const na = /^\d+$/.test(a.trim());
+  const nb = /^\d+$/.test(b.trim());
+  if (na && nb) return Number(a) - Number(b);
+  if (na !== nb) return na ? 1 : -1;
+  return a.localeCompare(b, "en", { numeric: true, sensitivity: "base" });
+}
+
 function supersedes(a: RevisionLink, b: RevisionLink, rank: ReadonlyMap<string, number>): boolean {
   const byVersion = (rank.get(a.corpusVersionId) ?? Infinity) - (rank.get(b.corpusVersionId) ?? Infinity);
   if (byVersion !== 0) return byVersion < 0;
-  const byRevision = a.revision.localeCompare(b.revision, "en", { numeric: true, sensitivity: "base" });
+  const byRevision = compareRevisionLabels(a.revision, b.revision);
   if (byRevision !== 0) return byRevision > 0;
   return a.id > b.id;
 }

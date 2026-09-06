@@ -2,7 +2,10 @@
 # Deterministic checks only: no model call, no database. Two jobs run in parallel: `checks` (contracts, lint,
 # typecheck, unit tests, the coverage thresholds of AC-EVAL-08, the audits of scripts/audits/ against the harness
 # reference, gitleaks, banned strings) and `no-corpus-text` (the harness's A7 scan of this repository
-# against the organiser's corpus, read through the read-only deploy key). A push to main adds `production-smoke`
+# against the organiser's corpus, read through the read-only deploy key). `seed` (AC-ING-09, AC-ING-10, AC-ING-15,
+# AC-NFR-07, AC-NFR-13) builds the bundle from the corpus checkout with `make bundle`, seeds it twice, timed, into a
+# disposable pgvector service container behind the local Neon proxy, then runs the `db` Vitest project against that
+# container as the application role. A push to main adds `production-smoke`
 # (AC-M0-01 to AC-M0-06): once the Vercel deployment of that commit answers on /api/health, scripts/smoke.sh runs
 # against the production URL and its JSON is kept as a run artifact. Tier B (nightly, live model) is tier-b.yml.
 name: Tier A
@@ -142,6 +145,205 @@ jobs:
         env:
           CASE1_CORPUS: ${{ runner.temp }}/thehub-corpus/CALIBER-2026_The-Case/Supporting Data/Case 1_ Manufacturing Knowledge Hub
         run: uv run --directory "$GITHUB_WORKSPACE/../thehub-harness" python tools/no_corpus_in_repo.py --repo "$GITHUB_WORKSPACE"
+
+  seed:
+    # The bundle built from the corpus and admitted by both G1 lanes (AC-ING-09), seeded twice into a disposable
+    # pgvector service container, timed, the second run from a fresh database (AC-ING-15), then the `db` Vitest
+    # project against that container as the application role (AC-ING-10, AC-NFR-07, AC-NFR-13). The application's
+    # driver speaks Neon's HTTP and WebSocket protocols, so a local proxy that answers them sits in front of Postgres
+    # and tests/db/neon-local.mjs (NODE_OPTIONS on the database steps only) points drizzle-kit, the seed and the tests
+    # at it. The container credentials below are throwaway values of this job, not secrets; the deploy key is the
+    # only secret.
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    timeout-minutes: 45
+    services:
+      postgres:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: thehub
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      neon-proxy:
+        image: ghcr.io/timowilhelm/local-neon-http-proxy:main
+        env:
+          PG_CONNECTION_STRING: postgres://postgres:postgres@postgres:5432/thehub
+        ports:
+          - 4444:4444
+    env:
+      OWNER_URL: postgres://postgres:postgres@localhost:5432/thehub
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/thehub
+      DATABASE_URL_UNPOOLED: postgres://postgres:postgres@localhost:5432/thehub
+      APP_ROLE_PASSWORD: thehub-app-ci-only
+      NEON_LOCAL_PROXY: localhost:4444
+      NEON_PRELOAD: --import ${{ github.workspace }}/tests/db/neon-local.mjs
+      SEED_LIMIT_SECONDS: "300"
+      TIMING_LOG: ${{ runner.temp }}/seed-timing.log
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6 # the version comes from package.json "packageManager"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Check out thehub-harness beside the application
+        run: |
+          harness="$GITHUB_WORKSPACE/../thehub-harness"
+          git init -q "$harness"
+          git -C "$harness" fetch -q --depth 1 https://github.com/Finerium/thehub-harness.git "$HARNESS_REF"
+          git -C "$harness" checkout -q FETCH_HEAD
+          git -C "$harness" log -1 --format='harness %H'
+
+      - name: SSH agent with the read-only corpus deploy key
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.CORPUS_DEPLOY_KEY }}
+          log-public-key: false
+
+      - name: Clone the corpus outside the workspace (never inside this repository's tree)
+        run: |
+          mkdir -p ~/.ssh
+          curl -sS https://api.github.com/meta | jq -r '.ssh_keys[] | "github.com \(.)"' >> ~/.ssh/known_hosts
+          git clone -q --depth 1 git@github.com:Finerium/thehub-corpus.git "$RUNNER_TEMP/thehub-corpus"
+
+      - name: Poppler 26.02.0 (the extractor pin, ADR-005, D-11)
+        uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: poppler
+          create-args: >-
+            -c conda-forge
+            poppler=26.02.0
+          init-shell: bash
+          cache-environment: true
+
+      - name: The extractor build must read 26.02.0
+        shell: bash -el {0}
+        run: pdftotext -v 2>&1 | head -1 | tee /dev/stderr | grep -F 'pdftotext version 26.02.0'
+
+      - uses: astral-sh/setup-uv@v10.0.1
+        with:
+          python-version: "3.12"
+
+      - name: Harness environment (uv sync --frozen)
+        run: uv sync --frozen --directory "$GITHUB_WORKSPACE/../thehub-harness"
+
+      - name: Cache the pinned embedding model files of the harness (ADR-009)
+        uses: actions/cache@v5
+        with:
+          path: ${{ github.workspace }}/../thehub-harness/.cache/models
+          key: harness-embedding-model-${{ hashFiles('bundle/embedding_pin.json') }}
+
+      - name: make bundle (chunks, pages, embeddings, the bundle and the Python G1) from the corpus checkout (D-17)
+        shell: bash -el {0}
+        env:
+          CASE1_CORPUS: ${{ runner.temp }}/thehub-corpus/CALIBER-2026_The-Case/Supporting Data/Case 1_ Manufacturing Knowledge Hub
+        run: make -C "$GITHUB_WORKSPACE/../thehub-harness" bundle
+
+      - name: The TypeScript G1 admits the same bundle (dry run, no database)
+        run: pnpm db:seed --bundle ../thehub-harness/bundle --dry-run
+
+      - name: Wait for the Neon proxy in front of the service container
+        run: |
+          for attempt in $(seq 1 30); do
+            if curl -s -o /dev/null -X POST "http://$NEON_LOCAL_PROXY/sql" -H 'content-type: application/json' \
+                 -H "Neon-Connection-String: $OWNER_URL" --data '{"query":"select 1","params":[]}'; then
+              echo "proxy answers after $attempt attempt(s)"; exit 0
+            fi
+            sleep 2
+          done
+          echo "::error::the Neon proxy at $NEON_LOCAL_PROXY did not answer"; exit 1
+
+      - name: Instrument validation (blueprint section 11), two timed empty runs establish the noise of the clock
+        run: |
+          noise() { local t0; t0="$(date +%s%N)"; :; echo $(( ($(date +%s%N) - t0) / 1000000 )); }
+          a="$(noise)"; b="$(noise)"
+          echo "empty run 1: $a ms, empty run 2: $b ms, threshold $SEED_LIMIT_SECONDS s" | tee -a "$TIMING_LOG"
+          [ $(( a > b ? a - b : b - a )) -lt $(( SEED_LIMIT_SECONDS * 1000 / 4 )) ]
+
+      - name: Migrate and create the application role (run 1, empty database)
+        env:
+          NODE_OPTIONS: ${{ env.NEON_PRELOAD }}
+        run: pnpm db:migrate && pnpm db:app-role
+
+      - name: Seed run 1 (fresh schema), timed against the AC-ING-15 limit
+        env:
+          NODE_OPTIONS: ${{ env.NEON_PRELOAD }}
+        run: |
+          start="$(date +%s)"
+          pnpm db:seed --bundle ../thehub-harness/bundle | tee "$RUNNER_TEMP/seed-run-1.log"
+          seconds=$(( $(date +%s) - start ))
+          echo "seed run 1 (fresh schema): $seconds s" | tee -a "$TIMING_LOG"
+          [ "$seconds" -lt "$SEED_LIMIT_SECONDS" ]
+
+      # psql runs inside the service container itself (the pgvector image ships it); the runner image need not.
+      - name: The active version carries the manifest digest of the bundle (run 1)
+        run: |
+          pg="$(docker ps -q --filter ancestor=pgvector/pgvector:pg17)"
+          want="$(sha256sum ../thehub-harness/bundle/manifest.json | cut -c1-64)"
+          got="$(docker exec "$pg" psql -U postgres -d thehub -tAc "select manifest_sha256 from corpus_version where is_active")"
+          echo "manifest sha256 $want, active corpus_version.manifest_sha256 $got" | tee -a "$TIMING_LOG"
+          [ "$want" = "$got" ]
+
+      # db:reset without a DROP: the second run gets a fresh, empty database in the same container (the proxy serves
+      # whichever database the client's URL names), so migrate and seed start from nothing, timed as one.
+      - name: db:reset (a fresh database, migrate again), then seed run 2, timed
+        env:
+          NODE_OPTIONS: ${{ env.NEON_PRELOAD }}
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/thehub_reset
+          DATABASE_URL_UNPOOLED: postgres://postgres:postgres@localhost:5432/thehub_reset
+        run: |
+          pg="$(docker ps -q --filter ancestor=pgvector/pgvector:pg17)"
+          docker exec "$pg" createdb -U postgres thehub_reset
+          start="$(date +%s)"
+          pnpm db:migrate && pnpm db:app-role
+          pnpm db:seed --bundle ../thehub-harness/bundle | tee "$RUNNER_TEMP/seed-run-2.log"
+          seconds=$(( $(date +%s) - start ))
+          echo "seed run 2 (fresh database, migrate, seed): $seconds s" | tee -a "$TIMING_LOG"
+          [ "$seconds" -lt "$SEED_LIMIT_SECONDS" ]
+          want="$(sha256sum ../thehub-harness/bundle/manifest.json | cut -c1-64)"
+          got="$(docker exec "$pg" psql -U postgres -d thehub_reset -tAc "select manifest_sha256 from corpus_version where is_active")"
+          echo "manifest sha256 $want, active corpus_version.manifest_sha256 $got" | tee -a "$TIMING_LOG"
+          [ "$want" = "$got" ]
+
+      - name: Current revisions after activation equal the bundle's (the seed's own report)
+        run: |
+          if grep -q 'WARNING current revision divergence' "$RUNNER_TEMP/seed-run-2.log"; then
+            echo "::warning::$(grep 'WARNING current revision divergence' "$RUNNER_TEMP/seed-run-2.log")"
+          else
+            grep -F 'current revisions after activation equal the bundle' "$RUNNER_TEMP/seed-run-2.log"
+          fi
+
+      - name: The db Vitest project against the seeded container as the application role (AC-ING-10, AC-NFR-07, AC-NFR-13)
+        env:
+          NODE_OPTIONS: ${{ env.NEON_PRELOAD }}
+          TEST_DATABASE_URL: postgres://thehub_app:thehub-app-ci-only@localhost:5432/thehub
+        run: pnpm exec vitest run --project db
+
+      - name: Timing log (the AC-ING-15 artifact)
+        if: always()
+        run: |
+          { echo '### Seed timing (AC-ING-15)'; echo; echo '```'; cat "$TIMING_LOG"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep the timing log and the seed output
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: seed-timing-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/seed-timing.log
+            ${{ runner.temp }}/seed-run-1.log
+            ${{ runner.temp }}/seed-run-2.log
+          if-no-files-found: error
 
   production-smoke:
     # The Vercel Git integration deploys every push to main; /api/health reports VERCEL_GIT_COMMIT_SHA, so the

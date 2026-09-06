@@ -38,10 +38,13 @@ const BundleMap = z.looseObject({
 });
 
 class ReleaseNotPublished extends Error {}
+class PullFailed extends Error {}
+// Set once bundle/ is being written (step 5); every check before it leaves bundle/ as it was.
+let touched = false;
 
+// Throws, never exits, so main()'s finally still removes the temporary directory.
 function fail(message: string): never {
-  console.error(`bundle:pull failed: ${message}`);
-  process.exit(1);
+  throw new PullFailed(message);
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -197,6 +200,7 @@ async function main(): Promise<void> {
     const seedTimeListed = [...listed.keys()].filter((rel) => isSeedTime(rel, seedTime)).length;
 
     // 5. Everything passed: write bundle/ (overwrite, never delete) and the pin.
+    touched = true;
     mkdirSync(BUNDLE_DIR, { recursive: true });
     cpSync(tree, BUNDLE_DIR, { recursive: true });
     const pulled = [
@@ -222,8 +226,14 @@ async function main(): Promise<void> {
 }
 
 main().catch((error: unknown) => {
+  let message: string;
   if (error instanceof ReleaseNotPublished) {
-    fail(`release v${process.argv[2]} of ${REPO} is not published yet (${error.message}); bundle/ untouched`);
+    message = `release v${process.argv[2]} of ${REPO} is not published yet (${error.message}); bundle/ untouched`;
+  } else if (error instanceof PullFailed) {
+    message = error.message;
+  } else {
+    message = `${error instanceof Error ? error.message : String(error)}${touched ? "" : "; bundle/ untouched"}`;
   }
-  fail(`${error instanceof Error ? error.message : String(error)}; bundle/ untouched`);
+  console.error(`bundle:pull failed: ${message}`);
+  process.exit(1);
 });
