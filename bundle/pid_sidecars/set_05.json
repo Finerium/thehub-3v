@@ -34,13 +34,13 @@
   },
   {
    "as_drawn_text": "GA-5610",
-   "bound_tag": null,
+   "bound_tag": "GA-5610",
    "drawn_setpoint": null,
    "foreign": false,
    "h_frac": 0.0,
    "id": "set05-002",
    "role": "equipment",
-   "unbound_reason": "drawn 'GA-5610' was read as GA-5610, which no cause-and-effect sheet or datasheet types",
+   "unbound_reason": null,
    "w_frac": 0.0,
    "x_frac": 0.199,
    "y_frac": 0.221

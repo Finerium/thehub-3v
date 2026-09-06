@@ -1,8 +1,8 @@
 {
- "bundle_version": "1.0.0",
+ "bundle_version": "1.0.1",
  "canonical_form_version": "1",
  "corpus_sha256": "918706e41dad6323819db1dca5b568e71a2f827a0cdc4d37b5e5ad735ffa61de",
- "created_at": "2026-09-05T06:05:56Z",
+ "created_at": "2026-09-06T03:13:36Z",
  "embedding_model": "Xenova/multilingual-e5-small",
  "extractor": "pdftotext -raw (pdftotext version 26.02.0)",
  "files": [
@@ -32,9 +32,9 @@
    "sha256": "055f892b164207f9f78c860150cdad560ca6a40871e817d23fa76dafe211a861"
   },
   {
-   "bytes": 766633,
+   "bytes": 766644,
    "path": "claims.json",
-   "sha256": "552315eb359c4979502b3b255583ee2b6fd065939799c96a42078bc653d4058d"
+   "sha256": "dc317abc34c3336edc31ddd17214fe2b5393bfbe1522838f51b4bfcd10ab3a92"
   },
   {
    "bytes": 1257,
@@ -62,9 +62,9 @@
    "sha256": "2db4b5317d4672e2442eef7b1288d02608f0d387512f531c0c78e6421452553f"
   },
   {
-   "bytes": 74319,
+   "bytes": 74324,
    "path": "datasheet_params.json",
-   "sha256": "232c2e2202e82ffb6ea8e8dc143d49e12d33ac1c4066b6285aaf97a384dbe7dc"
+   "sha256": "c5d087d1911fe794b1e1f927b226a74ade8155824a3d166da05b7535a34d6ff2"
   },
   {
    "bytes": 5870,
@@ -92,9 +92,9 @@
    "sha256": "4626abb5e7759945e089e059ae451df8bd91bfc5a243972a7d2135b1a31bbafb"
   },
   {
-   "bytes": 426218,
+   "bytes": 426217,
    "path": "fixtures.json",
-   "sha256": "a9ad2ac35b1cceac6c0cedafde086c514de38145aa6151b9480935c48ef58dc3"
+   "sha256": "97dae9372be4ca7cf8153e339edfb9006a1ff4b9103bf6ea2bf58af1f9de9357"
   },
   {
    "bytes": 234255,
@@ -112,9 +112,9 @@
    "sha256": "3480515e52953bfe0750323deb06fe78ad351671b47cd093d49baafed541515e"
   },
   {
-   "bytes": 79532,
+   "bytes": 79841,
    "path": "interlocks.json",
-   "sha256": "f8b80cc4fa42449a3e7bd316d6354b75add41fdcee5f73b4de3bc9b6f5d41159"
+   "sha256": "6e4aa0ecf364b58200d67d98f87cd49ac40e7558c0bdec631e83fbf5ff76e01e"
   },
   {
    "bytes": 35572,
@@ -1912,9 +1912,9 @@
    "sha256": "69d0e90ad0b0633a4d4c211cadb9b03d4b5d56dbe339dd4a21e36e5123634fb5"
   },
   {
-   "bytes": 17190,
+   "bytes": 17110,
    "path": "pid_sidecars/set_05.json",
-   "sha256": "327c78a208c11fdb63246d57e58ba2052452596b332dcedea9eb4415cda55454"
+   "sha256": "472c51757a4198e3bce47dce39b003523cf7daa6c88b983b8c317ecaa98edd3c"
   },
   {
    "bytes": 14181,
@@ -1922,9 +1922,9 @@
    "sha256": "3e82c72328fbb6f25632e937aac6bc7ad6bb1d3b949b103af9063adaa6e4ca98"
   },
   {
-   "bytes": 13841,
+   "bytes": 13739,
    "path": "pid_sidecars/set_07.json",
-   "sha256": "024f94b3c60f139b97967410b00757adf85eed9c0ba06d6d901f3a99c99e054f"
+   "sha256": "4f3985dd9e1c6689e4c1f75f3a75dbfc5e439ad7c0cb63069950841264169f48"
   },
   {
    "bytes": 22657,
@@ -1957,7 +1957,7 @@
    "sha256": "00c3525400c40558cb4a305faca9e251d52b00c9a8e97a1e70399ec1ac4da1cd"
   }
  ],
- "harness_commit": "c6bb363b5c08e778e4b70f9fcb42922d35a7c8c0",
+ "harness_commit": "b06e2eeeaf41aa83bc72bacfe47ee0f5d1fdd5e4",
  "recipe_sha256": "a16e70cf22ae9ca1699c95555842580d8e6a6ea844486d9b797d8d018c9c7680",
  "rulepack_version": "1",
  "stop_list_sha256": "8262d5122704987d0f503b4f3289c8081d31c0469415ec442099bba4185b3ea5"

@@ -363,6 +363,15 @@
    "tag": "GA-1201B"
   },
   {
+   "equipment_tag": "EA-5601",
+   "role": "permissive",
+   "sources": [
+    "doc-1b30dab2c3c9",
+    "doc-3686d03098e6"
+   ],
+   "tag": "GA-5610"
+  },
+  {
    "equipment_tag": "FA-8901",
    "role": "final_element",
    "sources": [
@@ -493,6 +502,15 @@
     "doc-fcf9b15dfb2a"
    ],
    "tag": "LSHH-8901"
+  },
+  {
+   "equipment_tag": "CT-7801",
+   "role": "permissive",
+   "sources": [
+    "doc-5956488b1878",
+    "doc-eebaf2dfb732"
+   ],
+   "tag": "LSL-7804"
   },
   {
    "equipment_tag": "LV-6701",

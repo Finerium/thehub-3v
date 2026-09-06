@@ -2717,8 +2717,8 @@
     "basis": "parser"
    },
    "id": "CLM-00272",
-   "span_id": "rev-5682ee067bd1/p1/521-553",
-   "value_text": "HORIZONTAL DRUM WITH"
+   "span_id": "rev-5682ee067bd1/p1/521-558",
+   "value_text": "HORIZONTAL DRUM WITH BOOT"
   },
   {
    "claim_kind": "parameter",
@@ -2777,8 +2777,8 @@
     "basis": "parser"
    },
    "id": "CLM-00278",
-   "span_id": "rev-5682ee067bd1/p1/676-730",
-   "value_text": "4800 mm BOOT WATER DRAW-OFF BOOT DN300"
+   "span_id": "rev-5682ee067bd1/p1/676-699",
+   "value_text": "4800 mm"
   },
   {
    "claim_kind": "parameter",
@@ -2787,6 +2787,16 @@
     "basis": "parser"
    },
    "id": "CLM-00279",
+   "span_id": "rev-5682ee067bd1/p1/700-730",
+   "value_text": "WATER DRAW-OFF BOOT DN300"
+  },
+  {
+   "claim_kind": "parameter",
+   "entity_binding": "FA-8901",
+   "extracted_by": {
+    "basis": "parser"
+   },
+   "id": "CLM-00280",
    "span_id": "rev-5682ee067bd1/p1/731-759",
    "value_text": "10 barg / FV"
   },
@@ -2796,7 +2806,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00280",
+   "id": "CLM-00281",
    "span_id": "rev-5682ee067bd1/p1/760-768",
    "value_text": "YES"
   },
@@ -2806,7 +2816,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00281",
+   "id": "CLM-00282",
    "span_id": "rev-5682ee067bd1/p1/769-796",
    "value_text": "3.5 barg"
   },
@@ -2816,7 +2826,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00282",
+   "id": "CLM-00283",
    "span_id": "rev-5682ee067bd1/p1/797-820",
    "value_text": "FULL (RT-1)"
   },
@@ -2826,7 +2836,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00283",
+   "id": "CLM-00284",
    "span_id": "rev-5682ee067bd1/p1/82-108",
    "value_text": "TJC-LLD-DS-FA-8901"
   },
@@ -2836,7 +2846,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00284",
+   "id": "CLM-00285",
    "span_id": "rev-5682ee067bd1/p1/821-842",
    "value_text": "120 degC"
   },
@@ -2846,7 +2856,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00285",
+   "id": "CLM-00286",
    "span_id": "rev-5682ee067bd1/p1/843-867",
    "value_text": "10 barg"
   },
@@ -2856,7 +2866,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00286",
+   "id": "CLM-00287",
    "span_id": "rev-5682ee067bd1/p1/843-867",
    "value_text": "PSV-8901 set 10 barg"
   },
@@ -2866,7 +2876,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00287",
+   "id": "CLM-00288",
    "span_id": "rev-5682ee067bd1/p1/868-891",
    "value_text": "68 degC"
   },
@@ -2876,7 +2886,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00288",
+   "id": "CLM-00289",
    "span_id": "rev-5682ee067bd1/p1/892-923",
    "value_text": "PCV-8905 SPLIT-RANGE"
   },
@@ -2886,7 +2896,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00289",
+   "id": "CLM-00290",
    "span_id": "rev-5682ee067bd1/p1/950-963",
    "value_text": "9.6 m3"
   },
@@ -2896,7 +2906,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00290",
+   "id": "CLM-00291",
    "span_id": "rev-5682ee067bd1/p1/964-988",
    "value_text": "4 inch"
   },
@@ -2906,7 +2916,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00291",
+   "id": "CLM-00292",
    "span_id": "rev-5682ee067bd1/p1/989-1012",
    "value_text": "GA-8920 A/B"
   },
@@ -2916,7 +2926,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00292",
+   "id": "CLM-00293",
    "span_id": "rev-5956488b1878/p1/1026-1067",
    "value_text": "2 Basin level normal (> LSL-7804) LT-7804"
   },
@@ -2926,7 +2936,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00293",
+   "id": "CLM-00294",
    "span_id": "rev-5956488b1878/p1/1068-1119",
    "value_text": "3 No fan lockout / maintenance key released lockout"
   },
@@ -2936,7 +2946,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00294",
+   "id": "CLM-00295",
    "span_id": "rev-5956488b1878/p1/1186-1231",
    "value_text": "1. Trip set points are DUMMY training values."
   },
@@ -2946,7 +2956,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00295",
+   "id": "CLM-00296",
    "span_id": "rev-5956488b1878/p1/1232-1326",
    "value_text": "2. On any trip the effects marked X are actuated by the Safety PLC and annunciated on the DCS."
   },
@@ -2956,7 +2966,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00296",
+   "id": "CLM-00297",
    "span_id": "rev-5956488b1878/p1/1327-1431",
    "value_text": "3. A trip is latched and requires a manual reset once the cause has cleared and permissives are healthy."
   },
@@ -2966,7 +2976,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00297",
+   "id": "CLM-00298",
    "span_id": "rev-5956488b1878/p1/1432-1535",
    "value_text": "4. Refer to P&ID; TJC-LLD-PID-7801 for instrument loops and the Datasheet for design limits of CT-7801."
   },
@@ -2976,7 +2986,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00298",
+   "id": "CLM-00299",
    "span_id": "rev-5956488b1878/p1/1432-1535",
    "value_text": "4. Refer to P&ID; TJC-LLD-PID-7801 for instrument loops and the Datasheet for design limits of CT-7801."
   },
@@ -2986,7 +2996,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00299",
+   "id": "CLM-00300",
    "span_id": "rev-5956488b1878/p1/446-510",
    "value_text": "T1 Fan/gearbox vibration HIGH-HIGH VSHH-7802 > 9 mm/s 1oo1 X X X"
   },
@@ -2996,7 +3006,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00300",
+   "id": "CLM-00301",
    "span_id": "rev-5956488b1878/p1/511-578",
    "value_text": "T2 Gearbox oil temperature HIGH-HIGH TSHH-7803 > 90 degC 1oo1 X X X"
   },
@@ -3006,7 +3016,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00301",
+   "id": "CLM-00302",
    "span_id": "rev-5956488b1878/p1/579-635",
    "value_text": "T3 Gearbox oil pressure LOW PSL-7807 < 0.8 barg 1oo1 X X"
   },
@@ -3016,7 +3026,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00302",
+   "id": "CLM-00303",
    "span_id": "rev-5956488b1878/p1/636-688",
    "value_text": "T4 Fan motor overload MPR-7801 MPR pickup 1oo1 X X X"
   },
@@ -3026,7 +3036,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00303",
+   "id": "CLM-00304",
    "span_id": "rev-5956488b1878/p1/992-1025",
    "value_text": "1 Gearbox oil level OK LG gearbox"
   },
@@ -3036,7 +3046,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00304",
+   "id": "CLM-00305",
    "span_id": "rev-59f44a2fda5d/p1/777-807",
    "value_text": "4. REFERTOGADRAWINGSFORDETAIL."
   },
@@ -3046,7 +3056,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00305",
+   "id": "CLM-00306",
    "span_id": "rev-5abdd24159fd/p1/1064-1141",
    "value_text": "Obtain the correct operating permit and brief the shift team before the task."
   },
@@ -3056,7 +3066,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00306",
+   "id": "CLM-00307",
    "span_id": "rev-5abdd24159fd/p1/1292-1370",
    "value_text": "Never defeat a safety interlock or trip without an authorised override permit."
   },
@@ -3066,7 +3076,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00307",
+   "id": "CLM-00308",
    "span_id": "rev-5abdd24159fd/p1/1641-1669",
    "value_text": "Permit-to-work documentation"
   },
@@ -3076,7 +3086,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00308",
+   "id": "CLM-00309",
    "span_id": "rev-5abdd24159fd/p1/1731-1810",
    "value_text": "1 Verify the PCV-8905 split-range holds PT-8902 pressure Permit valid & briefed"
   },
@@ -3086,7 +3096,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00309",
+   "id": "CLM-00310",
    "span_id": "rev-5abdd24159fd/p1/1731-1810",
    "value_text": "Verify the PCV-8905 split-range holds PT-8902 pressure"
   },
@@ -3096,7 +3106,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00310",
+   "id": "CLM-00311",
    "span_id": "rev-5abdd24159fd/p1/1811-1884",
    "value_text": "Confirm the blanket makes up on falling pressure"
   },
@@ -3106,7 +3116,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00311",
+   "id": "CLM-00312",
    "span_id": "rev-5abdd24159fd/p1/1885-1958",
    "value_text": "Confirm the vent relieves on rising pressure"
   },
@@ -3116,7 +3126,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00312",
+   "id": "CLM-00313",
    "span_id": "rev-5abdd24159fd/p1/1959-2025",
    "value_text": "Respond immediately to a blanket-loss alarm"
   },
@@ -3126,7 +3136,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00313",
+   "id": "CLM-00314",
    "span_id": "rev-5abdd24159fd/p1/2026-2098",
    "value_text": "Check the N2 supply header pressure is adequate"
   },
@@ -3136,7 +3146,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00314",
+   "id": "CLM-00315",
    "span_id": "rev-5abdd24159fd/p1/2760-2857",
    "value_text": "Always cross-check the Datasheet limits and the P&ID; TJC-LLD-PID-8901 before working on FA-8901."
   },
@@ -3146,7 +3156,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00315",
+   "id": "CLM-00316",
    "span_id": "rev-5abdd24159fd/p1/280-341",
    "value_text": "Related Interlock SEQ-8901 (SIL 1) P&ID; Ref TJC-LLD-PID-8901"
   },
@@ -3156,7 +3166,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00316",
+   "id": "CLM-00317",
    "span_id": "rev-5abdd24159fd/p1/3132-3216",
    "value_text": "Cross-ref tag FA-8901 across Datasheet, GA, P&ID, Interlock and Maintenance History."
   },
@@ -3166,7 +3176,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00317",
+   "id": "CLM-00318",
    "span_id": "rev-5ad9ec251d90/p1/1010-1044",
    "value_text": "ZONE 2, IIB T3"
   },
@@ -3176,7 +3186,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00318",
+   "id": "CLM-00319",
    "span_id": "rev-5ad9ec251d90/p1/1045-1059",
    "value_text": "1485 rpm"
   },
@@ -3186,7 +3196,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00319",
+   "id": "CLM-00320",
    "span_id": "rev-5ad9ec251d90/p1/1060-1086",
    "value_text": "Ex px IIB T3"
   },
@@ -3196,7 +3206,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00320",
+   "id": "CLM-00321",
    "span_id": "rev-5ad9ec251d90/p1/1087-1116",
    "value_text": "6000 V / 3 Ph / 50 Hz"
   },
@@ -3206,7 +3216,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00321",
+   "id": "CLM-00322",
    "span_id": "rev-5ad9ec251d90/p1/1117-1130",
    "value_text": "IEC 355"
   },
@@ -3216,7 +3226,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00322",
+   "id": "CLM-00323",
    "span_id": "rev-5ad9ec251d90/p1/1131-1149",
    "value_text": "30 A"
   },
@@ -3226,7 +3236,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00323",
+   "id": "CLM-00324",
    "span_id": "rev-5ad9ec251d90/p1/1150-1172",
    "value_text": "1980 kg"
   },
@@ -3236,7 +3246,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00324",
+   "id": "CLM-00325",
    "span_id": "rev-5ad9ec251d90/p1/1173-1191",
    "value_text": "F"
   },
@@ -3246,7 +3256,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00325",
+   "id": "CLM-00326",
    "span_id": "rev-5ad9ec251d90/p1/120-157",
    "value_text": "RECYCLE GAS COMPRESSOR"
   },
@@ -3256,7 +3266,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00326",
+   "id": "CLM-00327",
    "span_id": "rev-5ad9ec251d90/p1/1230-1264",
    "value_text": "Electric Motor, 4-pole"
   },
@@ -3266,7 +3276,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00327",
+   "id": "CLM-00328",
    "span_id": "rev-5ad9ec251d90/p1/1265-1307",
    "value_text": "Rev 3 - ISSUED FOR OPERATION"
   },
@@ -3276,7 +3286,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00328",
+   "id": "CLM-00329",
    "span_id": "rev-5ad9ec251d90/p1/1406-1529",
    "value_text": "Cross-reference for tag KC-4501: GA Drawing, P&ID TJC-LLD-PID-4501, Interlock SEQ-4501, OPL sheets and Maintenance History."
   },
@@ -3286,7 +3296,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00329",
+   "id": "CLM-00330",
    "span_id": "rev-5ad9ec251d90/p1/158-197",
    "value_text": "Reciprocating Compressor (2-stage)"
   },
@@ -3296,7 +3306,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00330",
+   "id": "CLM-00331",
    "span_id": "rev-5ad9ec251d90/p1/198-255",
    "value_text": "LINEAR LOW DENSITY POLYETHYLENE (LLDPE) UNIT"
   },
@@ -3306,7 +3316,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00331",
+   "id": "CLM-00332",
    "span_id": "rev-5ad9ec251d90/p1/256-294",
    "value_text": "4500 - GAS RECOVERY & COMPRESSION"
   },
@@ -3316,7 +3326,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00332",
+   "id": "CLM-00333",
    "span_id": "rev-5ad9ec251d90/p1/295-326",
    "value_text": "TJC-LLD-4500-01"
   },
@@ -3326,7 +3336,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00333",
+   "id": "CLM-00334",
    "span_id": "rev-5ad9ec251d90/p1/327-352",
    "value_text": "HIGH CRITICAL"
   },
@@ -3336,7 +3346,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00334",
+   "id": "CLM-00335",
    "span_id": "rev-5ad9ec251d90/p1/353-421",
    "value_text": "Compress recycle ethylene/hexane vapour back to reactor loop"
   },
@@ -3346,7 +3356,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00335",
+   "id": "CLM-00336",
    "span_id": "rev-5ad9ec251d90/p1/36-62",
    "value_text": "TJC-LLD-DS-KC-4501"
   },
@@ -3356,7 +3366,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00336",
+   "id": "CLM-00337",
    "span_id": "rev-5ad9ec251d90/p1/447-494",
    "value_text": "RECIPROCATING, 2-STAGE, 2-THROW"
   },
@@ -3366,7 +3376,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00337",
+   "id": "CLM-00338",
    "span_id": "rev-5ad9ec251d90/p1/495-530",
    "value_text": "NODULAR CAST IRON"
   },
@@ -3376,7 +3386,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00338",
+   "id": "CLM-00339",
    "span_id": "rev-5ad9ec251d90/p1/531-547",
    "value_text": "KC-4501"
   },
@@ -3386,7 +3396,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00339",
+   "id": "CLM-00340",
    "span_id": "rev-5ad9ec251d90/p1/548-572",
    "value_text": "PTFE FILLED"
   },
@@ -3396,7 +3406,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00340",
+   "id": "CLM-00341",
    "span_id": "rev-5ad9ec251d90/p1/573-602",
    "value_text": "1250 Nm3/h"
   },
@@ -3406,7 +3416,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00341",
+   "id": "CLM-00342",
    "span_id": "rev-5ad9ec251d90/p1/603-637",
    "value_text": "PTFE RINGS, DISTANCE PIECE"
   },
@@ -3416,7 +3426,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00342",
+   "id": "CLM-00343",
    "span_id": "rev-5ad9ec251d90/p1/63-69",
    "value_text": "3"
   },
@@ -3426,7 +3436,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00343",
+   "id": "CLM-00344",
    "span_id": "rev-5ad9ec251d90/p1/638-663",
    "value_text": "1.2 barg"
   },
@@ -3436,7 +3446,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00344",
+   "id": "CLM-00345",
    "span_id": "rev-5ad9ec251d90/p1/664-685",
    "value_text": "PLATE TYPE, SS"
   },
@@ -3446,7 +3456,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00345",
+   "id": "CLM-00346",
    "span_id": "rev-5ad9ec251d90/p1/686-714",
    "value_text": "12.5 barg"
   },
@@ -3456,7 +3466,7 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00346",
+   "id": "CLM-00347",
    "span_id": "rev-5ad9ec251d90/p1/70-92",
    "value_text": "KC-4501"
   },
@@ -3466,19 +3476,9 @@
    "extracted_by": {
     "basis": "parser"
    },
-   "id": "CLM-00347",
-   "span_id": "rev-5ad9ec251d90/p1/715-740",
-   "value_text": "FORCED FEED +"
-  },
-  {
-   "claim_kind": "parameter",
-   "entity_binding": "KC-4501",
-   "extracted_by": {
-    "basis": "parser"
-   },
    "id": "CLM-00348",
-   "span_id": "rev-5ad9ec251d90/p1/741-753",
-   "value_text": "SPLASH"
+   "span_id": "rev-5ad9ec251d90/p1/715-753",
+   "value_text": "FORCED FEED + FRAME SPLASH"
   },
   {
    "claim_kind": "parameter",
@@ -17636,12 +17636,12 @@
    "start_ordinal": 420
   },
   {
-   "anchor_text": "VESSEL TYPE HORIZONTAL DRUM WITH",
+   "anchor_text": "VESSEL TYPE HORIZONTAL DRUM WITH BOOT",
    "document_revision_id": "rev-5682ee067bd1",
-   "end_ordinal": 553,
-   "id": "rev-5682ee067bd1/p1/521-553",
+   "end_ordinal": 558,
+   "id": "rev-5682ee067bd1/p1/521-558",
    "page": 1,
-   "quote_hash": "b65346cb4fc5be52dd81fb7de7a542f25c79a11f68dc8e76538bb5646922214f",
+   "quote_hash": "389702f351bab5c4afb8d326ff1f70e4c8f7614f4b7ca7845930d044bdda4027",
    "start_ordinal": 521
   },
   {
@@ -17690,13 +17690,22 @@
    "start_ordinal": 652
   },
   {
-   "anchor_text": "TANGENT-TANGENT 4800 mm BOOT WATER DRAW-OFF BOOT DN300",
+   "anchor_text": "TANGENT-TANGENT 4800 mm",
+   "document_revision_id": "rev-5682ee067bd1",
+   "end_ordinal": 699,
+   "id": "rev-5682ee067bd1/p1/676-699",
+   "page": 1,
+   "quote_hash": "070cb28edb905c3870e955a7f5bdb5813ffc7342314390b03b320db1e82cc584",
+   "start_ordinal": 676
+  },
+  {
+   "anchor_text": "BOOT WATER DRAW-OFF BOOT DN300",
    "document_revision_id": "rev-5682ee067bd1",
    "end_ordinal": 730,
-   "id": "rev-5682ee067bd1/p1/676-730",
+   "id": "rev-5682ee067bd1/p1/700-730",
    "page": 1,
-   "quote_hash": "8bdfd4f5343497654b3fbce7ecdf1fa10a8d91f901426ea65c94bb7975d04176",
-   "start_ordinal": 676
+   "quote_hash": "0f71820573a816bd3d9d9fc7e7e9ca2d53e8ff67477cd3194e493479db199654",
+   "start_ordinal": 700
   },
   {
    "anchor_text": "DESIGN PRESSURE 10 barg / FV",
@@ -18284,22 +18293,13 @@
    "start_ordinal": 70
   },
   {
-   "anchor_text": "LUBE SYSTEM FORCED FEED +",
-   "document_revision_id": "rev-5ad9ec251d90",
-   "end_ordinal": 740,
-   "id": "rev-5ad9ec251d90/p1/715-740",
-   "page": 1,
-   "quote_hash": "49ee821d8a7552067b31aa2cd5f53054d76f20c56b196298986f5e2f0e0f8e46",
-   "start_ordinal": 715
-  },
-  {
-   "anchor_text": "FRAME SPLASH",
+   "anchor_text": "LUBE SYSTEM FORCED FEED + FRAME SPLASH",
    "document_revision_id": "rev-5ad9ec251d90",
    "end_ordinal": 753,
-   "id": "rev-5ad9ec251d90/p1/741-753",
+   "id": "rev-5ad9ec251d90/p1/715-753",
    "page": 1,
-   "quote_hash": "f810962406ff0c6fdbf51b6814fee0d2e74ad6f06ae42f5b0251c6eb9eb74a47",
-   "start_ordinal": 741
+   "quote_hash": "a85af2e760fd818b8308262f0193bac586f543df2796e304c8c3332adc36f39c",
+   "start_ordinal": 715
   },
   {
    "anchor_text": "SUCTION TEMP. 40 degC",

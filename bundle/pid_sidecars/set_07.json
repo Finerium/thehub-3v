@@ -413,13 +413,13 @@
   },
   {
    "as_drawn_text": "Basin level normal (LSL-7804)",
-   "bound_tag": null,
+   "bound_tag": "LSL-7804",
    "drawn_setpoint": null,
    "foreign": false,
    "h_frac": 0.0,
    "id": "set07-030",
    "role": "permissive",
-   "unbound_reason": "drawn 'Basin level normal (LSL-7804)' was read as LSL-7804, which no cause-and-effect sheet or datasheet types",
+   "unbound_reason": null,
    "w_frac": 0.0,
    "x_frac": 0.863,
    "y_frac": 0.55
