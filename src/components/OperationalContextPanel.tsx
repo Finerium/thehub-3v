@@ -202,7 +202,8 @@ export function OperationalContextPanel({ context, hrefFor, className }: Operati
       <div className="mt-5 grid gap-6 xl:grid-cols-2">
         <div className="flex flex-col gap-6">
           <Block id="breakdown-split" title="Breakdown split" note="failure_event rows by their recorded flag">
-            <div className="overflow-x-auto">
+            {/* A scroll container a keyboard reader can reach and scroll (axe scrollable-region-focusable). */}
+            <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Breakdown split, scrollable">
               <table className="reg" data-component="breakdown-split">
                 <thead>
                   <tr>
