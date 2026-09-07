@@ -62,6 +62,10 @@ export default defineConfig({
           setupFiles: ["tests/db/setup.ts"],
           testTimeout: 60_000,
           hookTimeout: 120_000,
+          // One database, one file at a time. These files share the seeded corpus and one of them publishes, which
+          // rolls the corpus version; run in parallel, a publication in one file changes the row counts another
+          // file is in the middle of comparing.
+          fileParallelism: false,
         },
       },
     ],

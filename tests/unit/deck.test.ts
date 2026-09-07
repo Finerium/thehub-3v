@@ -303,7 +303,7 @@ function sandboxBuild(plant: boolean): Run {
     mkdirSync(path.join(repo, "deliverables"), { recursive: true });
     mkdirSync(path.join(root, "supplied"), { recursive: true });
     symlinkSync(path.join(WORLD, "thehub-harness"), path.join(root, "thehub-harness"));
-    for (const rel of ["bundle", "src", "node_modules"]) symlinkSync(path.join(REPO, rel), path.join(repo, rel));
+    for (const rel of ["bundle", "src", "tools", "node_modules"]) symlinkSync(path.join(REPO, rel), path.join(repo, rel));
     for (const rel of ["figures", "fonts"]) symlinkSync(path.join(REPO, "deck", rel), path.join(deck, rel));
     symlinkSync(path.join(REPO, "deck", "src", "deck.css"), path.join(deck, "src", "deck.css"));
     copyFileSync(BUILD, path.join(deck, "build.ts"));
@@ -534,8 +534,12 @@ describe("the upload budget of 9.12 (AC-DEL-02, AC-DEL-05)", () => {
 });
 
 describe("banned strings across the built deliverables (AC-DEL-06)", () => {
-  /** The five legacy product names. They may appear in no deliverable, in any casing, in markup or in data. */
-  const LEGACY = ["SIMPUL", "PUSAKA", "WARISAN", "SIAGA", "SAKSI"];
+  /** The legacy product names, from their one home. They may appear in no deliverable, in any casing, in markup
+   * or in data, and the list is not copied here so that a name added there is checked here too. */
+  const LEGACY = readFileSync(path.join(process.cwd(), "tools", "legacy-names.txt"), "utf8")
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => l && !l.startsWith("#"));
 
   it.skipIf(![PDF, EXPORT, VIDEO, POINTER].some((f) => existsSync(f)))(
     "finds no legacy product name in any built deliverable",

@@ -93,7 +93,9 @@ hit() { # hit <label> <grep output>
 # Check 8, part 1: the legacy product names of the earlier drafts. Whole word, either case.
 # ---------------------------------------------------------------------------------------------------------
 if [ "$names" -eq 1 ]; then
-  LEGACY='SIMPUL|PUSAKA|WARISAN|SIAGA|SAKSI'
+  # the names come from their one home, so this script does not have to carry them either
+  LEGACY="$(grep -vE '^[[:space:]]*(#|$)' tools/legacy-names.txt | paste -sd '|' -)"
+  [ -n "$LEGACY" ] || { echo "banned-strings: tools/legacy-names.txt lists no name"; exit 1; }
   out="$(grep -nIiwE -e "$LEGACY" "$scan" 2>/dev/null | cut -d: -f2-)" \
     && hit "a legacy product name survives" "$out"
 

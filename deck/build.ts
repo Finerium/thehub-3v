@@ -355,7 +355,13 @@ const bannedList = readFileSync(join(WORLD, "thehub-harness", "tools", "banned_s
   .split("\n")
   .map((l) => l.trim())
   .filter((l) => l && !l.startsWith("#"))
-  .concat(["[TBD]", "PUSAKA", "WARISAN", "SIAGA", "SAKSI"]);
+  .concat(
+    readFileSync(join(REPO, "tools", "legacy-names.txt"), "utf8")
+      .split("\n")
+      .map((l) => l.trim())
+      .filter((l) => l && !l.startsWith("#")),
+  )
+  .concat(["[TBD]"]);
 const hits = bannedList.filter((b) => text.includes(b));
 if (hits.length) fail.push(`banned string in the deck text: ${hits.join(", ")}`);
 else ok.push(`banned-strings list clean (${bannedList.length} strings checked against the extracted text)`);

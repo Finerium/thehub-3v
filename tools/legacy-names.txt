@@ -1,0 +1,9 @@
+# The product names of the earlier drafts, which appear in no deliverable, no source file and no page of this
+# repository (AC-DEL-06). This file is their one home: tools/banned-strings.sh, deck/build.ts and the deck test
+# read it, so no scanned directory has to carry the names in order to check for them, and adding a name here
+# arms every scan at once. One name per line; a blank line and a line starting with # are ignored.
+SIMPUL
+PUSAKA
+WARISAN
+SIAGA
+SAKSI
