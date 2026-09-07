@@ -1,8 +1,15 @@
 // G3 step 3 (ARCHITECTURE 8.6): the accepted draft becomes a document of the corpus. One page of text composed
 // from the draft's own elements, and from it the `document`, its `document_revision` (revision 0, approved by the
 // publishing Manager, current), the `span` rows every quotation of the lesson resolves through, the `chunk` rows
-// retrieval reads (embedded through the Node lane of ARCHITECTURE 6), the `opl` row of 9.5 and the `opl_step` rows
-// of its procedure section, and the `document_edge` rows the draft's own provenance already names.
+// retrieval reads (embedded through the Node lane of ARCHITECTURE 6), the `opl` row of 9.5, the `opl_step` rows of
+// its procedure section, the `troubleshooting_row` rows of its section 5, and the `document_edge` rows the draft's
+// own provenance already names.
+//
+// Section 5 is the one section that is not made of draft fields. AG-3 returns it as `troubleshooting_rows` (9.16),
+// the drafting lane stores it in draft.draft_troubleshooting_row, and this step reads it back through
+// src/loop/rows.ts on the publishing transaction: it composes the rows into the lesson's section 5 body, so the
+// page a reader sees, the digest the document is identified by and the text coverage measures all carry it, and it
+// writes the typed rows themselves so a published lesson quotes its records with their work-order ids (AC-LOOP-04).
 //
 // Nothing here is invented. The header fields 9.5 requires but the draft does not carry are read from the asset:
 // the area's OPL header name, the asset's interlock reference, the doc_no of the P&ID it appears on, and the
@@ -23,11 +30,13 @@ import {
   opl,
   oplStep,
   span,
+  troubleshootingRow,
   workOrder,
 } from "@/db/schema";
 import { embed } from "@/gateway";
 import { NotFound } from "@/lib/errors";
 import { quoteHash, sha256Hex } from "@/lib/hash";
+import { troubleshootingRows, type TroubleshootingRowRow } from "@/loop/rows";
 import { SECTION_HEADINGS } from "@/loop/template";
 
 /** One page: a machine-drafted lesson is composed, never extracted, so it has exactly one. */
@@ -46,6 +55,17 @@ type SectionNumber = Section["n"];
 const SECTION_NUMBERS: readonly SectionNumber[] = [1, 2, 3, 4, 5, 6];
 /** 9.5: section 4 is DETAILED PROCEDURE / STEPS, so its elements are the lesson's steps. */
 const STEPS_SECTION: SectionNumber = 4;
+/** 9.5: section 5 is COMMON PROBLEMS & TROUBLESHOOTING, so its body is the draft's rows and not its elements. */
+const TROUBLESHOOTING_SECTION: SectionNumber = 5;
+
+// One row as one line of the lesson body: the three cells the record was quoted into, then the work order they were
+// quoted from. The corpus flattens the same table cell by cell with one space between them, and an empty cell is
+// dropped rather than left as a double space (harness/opl.py:121). The work-order id is what AC-LOOP-04 asks a
+// published section 5 to carry, and the typed row beside it carries the same id in `quoted_wo_number`.
+function rowLine(row: TroubleshootingRowRow): string {
+  const wo = row.quotedWoNumber === null ? "" : `(${row.quotedWoNumber})`;
+  return [row.problem, row.cause, row.action, wo].filter((part) => part !== "").join(" ");
+}
 
 /** The 9.5 header fields the draft does not carry, each read from the asset it teaches. */
 type AssetHeader = { areaUnit: string; relatedInterlockText: string; pidRef: string; discipline: string };
@@ -92,7 +112,7 @@ type Composed = {
 };
 
 /** The lesson as one page: an identifying head line, then each section as its heading followed by its elements. */
-function compose(draft: DraftRow, fields: readonly FieldRow[]): Composed {
+function compose(draft: DraftRow, fields: readonly FieldRow[], rows: readonly TroubleshootingRowRow[]): Composed {
   const lines: string[] = [];
   const offsets = new Map<string, { start: number; end: number }>();
   let cursor = 0;
@@ -109,11 +129,16 @@ function compose(draft: DraftRow, fields: readonly FieldRow[]): Composed {
   const chunkTexts = new Map<SectionNumber, string>();
   for (const n of SECTION_NUMBERS) {
     const elements = fields.filter((f) => f.section === n);
-    if (elements.length === 0) continue;
+    // Section 5 has no fields to carry a span, so its lines are pushed without one: nothing quotes a row through a
+    // span, and the rows themselves are published typed. They are part of the page all the same, because the page
+    // is what the document's digest is taken over and what the generous coverage layer measures.
+    const lines = n === TROUBLESHOOTING_SECTION ? rows.map(rowLine) : [];
+    if (elements.length === 0 && lines.length === 0) continue;
     const heading = SECTION_HEADINGS[n];
     push(`${n}. ${heading}`);
     for (const element of elements) push(element.text, element.id);
-    const bodyText = elements.map((e) => e.text).join(" ");
+    for (const line of lines) push(line);
+    const bodyText = [...elements.map((e) => e.text), ...lines].join(" ");
     sections.push({ n, heading, body_text: bodyText, body_hash: quoteHash(bodyText) });
     chunkTexts.set(n, `${n}. ${heading} ${bodyText}`);
   }
@@ -145,7 +170,8 @@ export async function writeLesson(
   corpusVersionId: string,
 ): Promise<PublishedLesson> {
   const header = await readAssetHeader(tx, draft.equipmentTag);
-  const { sections, pageText, offsets, chunkTexts } = compose(draft, fields);
+  const rows = await troubleshootingRows(tx, draft.id);
+  const { sections, pageText, offsets, chunkTexts } = compose(draft, fields, rows);
 
   const digest = sha256Hex(pageText);
   const documentId = `doc-${digest.slice(0, 12)}`;
@@ -243,6 +269,22 @@ export async function writeLesson(
     machineDrafted: true,
     approverAlias: actor.alias,
   });
+
+  // Section 5: the draft's rows, keeping the numbering the draft gave them, with `truncated` as the draft holds it
+  // (false on every drafted row: only an extracted row can be cut at the page watermark).
+  if (rows.length > 0) {
+    await tx.insert(troubleshootingRow).values(
+      rows.map((row) => ({
+        oplId: draft.oplIdReserved,
+        n: row.n,
+        problem: row.problem,
+        cause: row.cause,
+        action: row.action,
+        quotedWoNumber: row.quotedWoNumber,
+        truncated: row.truncated,
+      })),
+    );
+  }
 
   // The procedure: the elements of section 4 in order, a slot excluded (its value is the SME note, never a step).
   const steps = fields.filter((f) => f.section === STEPS_SECTION && !f.isSlot);

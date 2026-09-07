@@ -31,7 +31,10 @@ const SECTIONS: readonly TemplateSection[] = [
 ];
 
 const HEADER_FIELDS = {
-  opl_id: "the lesson id reserved for this draft; never invented",
+  // The reserved id is on the draft row, not in the envelope, so the drafter has no way to know it and must not
+  // guess: it is written when a Manager publishes. Asking for it here made every live round block on an
+  // outstanding slot the drafter could never have filled.
+  opl_id: "reserved by the system for this draft and written on publication; leave it out",
   title: "the work the lesson teaches, in the plant's own words",
   discipline: "Mechanical, Instrument, Electrical or Process, from the work orders of the cluster",
   equipment_tag: "the cluster's equipment tag, exactly as the evidence spells it",
@@ -51,9 +54,12 @@ export const HOUSE_TEMPLATE = {
 /** The rules of the house template as text; the redliner reads exactly these as `template_rules` (9.16). */
 export const TEMPLATE_RULES: readonly string[] = [
   "the six sections appear once each, in order 1 to 6, under the headings of the house template",
-  "every header field of the template is filled, and no header field is invented",
+  "every header field the evidence can fill is filled, and no header field is invented",
   "every element carries provenance pointing at one evidence item, or is a slot whose text is exactly REQUIRES ENGINEER INPUT",
-  "a numeral appears in an element only with a numeric_provenance entry naming that numeral and its source",
+  // Worded for what the redliner is shown, which is the draft and the evidence references: `numeric_provenance` is
+  // this application's own derivation from the evidence and is not in the draft the redliner reads, so a rule that
+  // named it made the redliner report a missing field on every element that carries a number.
+  "a numeral appears in an element only when that element's provenance names the evidence item that states it",
   "sections 1, 2, 3, 4 and 6 never reproduce a work-order narrative field verbatim",
   "section 5 quotes the records it uses and names the work order of every troubleshooting row",
   "a protective function, a setpoint, a trip, a voting arrangement or a permissive is never bypassed, inhibited, forced or changed",

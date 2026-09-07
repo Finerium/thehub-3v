@@ -6,13 +6,17 @@
 // from the model) -> `drafted`; the verbatim and the numeric check; the AG-4 redline of the round -> `redlined`;
 // pass -> `in_review`, block -> `drafted` and one more pass (round 2) -> `in_review` or `blocked`. The two
 // deterministic checks decide with the redliner and never through it: their violations make the round a block
-// whatever the model returned, and they name the field and the section that blocked the draft.
+// whatever the model returned, and they name the field and the section that blocked the draft. The rounds run
+// against a clock: every provider call the drafting starts has to fit the invocation, so a second round is opened
+// only while the budget still holds one, and a draft the redliner blocked ends blocked with those reasons rather
+// than stranded in `redlined` by a call that could not land.
 import { randomUUID } from "node:crypto";
 import { eq } from "drizzle-orm";
 import type { DraftField, RedlineVerdict } from "@/contracts/generated/drafts";
 import { AG3Output, type AG3Input } from "@/contracts/generated/gateway";
 import { db } from "@/db/client";
 import { draftDocument, draftField, redlineVerdict } from "@/db/schema";
+import { saveTroubleshootingRows } from "./rows";
 import { invoke } from "@/gateway";
 import { SLOT_TEXT } from "@/lib/fixed-strings";
 import { transition } from "@/loop/state";
@@ -29,11 +33,26 @@ export { HOUSE_TEMPLATE } from "./template";
 const AG3_ATTEMPTS = 2;
 const ROUNDS: readonly RedlineRound[] = [1, 2];
 
+/**
+ * The drafting budget: the lease of src/loop/lease.ts, counted from the start of the drafting work inside the
+ * invocation's 300 s (ADR-004). A round is one AG-3 reply plus the redline of it, and what it costs is measured
+ * rather than assumed: the first round always runs, and a second is started only while the budget still holds a
+ * round of the size the first one turned out to be. The same rule governs the retry inside a round. Live on the
+ * seeded corpus a complete AG-3 reply took 39.4 to 60.6 s and its redline 7.1 to 16.2 s, so a round that went well
+ * leaves room for another and a round that was fought for does not, which is the difference between a blocked
+ * draft a person can act on and a draft the route kills mid-call and leaves to its lease.
+ */
+const DRAFT_BUDGET_MS = 240_000;
+
 type Reason = RedlineVerdict["reasons"][number];
 
-async function draftOnce(envelope: AG3Input): Promise<AG3Output | null> {
+async function draftOnce(envelope: AG3Input, left: () => number): Promise<AG3Output | null> {
+  let longestMs = 0; // zero before the first call, which is why the first call is never refused
   for (let attempt = 1; attempt <= AG3_ATTEMPTS; attempt++) {
+    if (left() < longestMs) return null;
+    const at = performance.now();
     const result = await invoke("AG-3", envelope, AG3Output);
+    longestMs = Math.max(longestMs, performance.now() - at);
     if (result.outcome === "ok" && result.data) return result.data;
   }
   return null;
@@ -107,6 +126,7 @@ export async function runDraft(draftId: string): Promise<void> {
     .where(eq(draftDocument.id, draftId))
     .limit(1);
   if (!draft || draft.state !== "proposed") return; // idempotent per draft id (ADR-004)
+  const started = performance.now();
 
   const cluster = await loadCluster(draft.clusterId);
   if (!cluster) return;
@@ -115,14 +135,23 @@ export async function runDraft(draftId: string): Promise<void> {
   const refs = evidenceRefs(evidence);
   const sources = numeralSources(evidence);
 
+  const left = (): number => DRAFT_BUDGET_MS - (performance.now() - started);
+  let block: { round: RedlineRound; reasons: Reason[] } | null = null;
+  let longestRoundMs = 0; // zero before the first round, which is why the first round is never refused
   for (const round of ROUNDS) {
-    const output = await draftOnce(envelope);
-    if (!output) return; // nothing usable twice: the draft stays proposed and its lease expiry blocks it
+    const roundStarted = performance.now();
+    if (left() < longestRoundMs) break;
+
+    const output = await draftOnce(envelope, left);
+    if (!output) break; // nothing usable twice: the block of the round before it, else the lease
 
     const fields = fieldsOf(draftId, output, sources);
     // The round rewrites the body: whatever a previous round or a died invocation left behind goes with it.
     await db.delete(draftField).where(eq(draftField.draftId, draftId));
     if (fields.length > 0) await db.insert(draftField).values(fields.map(row));
+    // Section 5 quotes work-order rows (9.6, AC-LOOP-04). They are part of the body this round wrote, so they are
+    // rewritten with it; saveTroubleshootingRows clears the round before it.
+    await saveTroubleshootingRows(db, draftId, output.troubleshooting_rows);
     await transition(draftId, "drafted", SYSTEM_ACTOR, null);
 
     const deterministic = deterministicReasons(fields, evidence);
@@ -144,10 +173,14 @@ export async function runDraft(draftId: string): Promise<void> {
       await transition(draftId, "in_review", SYSTEM_ACTOR, null);
       return;
     }
-    if (round === ROUNDS[ROUNDS.length - 1]) {
-      const why = reasons.map((reason) => reason.text).join(" ");
-      await transition(draftId, "blocked", SYSTEM_ACTOR, why === "" ? `redline round ${round} blocked` : why);
-      return;
-    }
+    block = { round, reasons };
+    longestRoundMs = Math.max(longestRoundMs, performance.now() - roundStarted);
   }
+
+  // A blocked draft is terminal and re-proposable, so the round that blocked it is written whether the loop ran out
+  // of rounds or the clock ran out first; only a first round that produced nothing at all leaves the state to the
+  // lease, which is the one path 9.6 lets reach `blocked` from `proposed`.
+  if (!block) return;
+  const why = block.reasons.map((reason) => reason.text).join(" ");
+  await transition(draftId, "blocked", SYSTEM_ACTOR, why === "" ? `redline round ${block.round} blocked` : why);
 }

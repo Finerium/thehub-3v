@@ -964,6 +964,27 @@ export const draftField = draft.table(
   ],
 );
 
+// 9.6 "Opl carries TroubleshootingRow": section 5 of a draft is a table of rows, not prose elements, so it has no
+// place in draft_field, whose every row is one sentence under one provenance. AG-3 returns it as
+// `troubleshooting_rows` (9.16) and it lives here, mirroring the frozen TroubleshootingRow of 9.5 column for column
+// with the draft in place of the lesson, under the same isolation and the same cascade as every other draft table.
+// G3 copies it into `troubleshooting_row` when the Manager publishes (AC-LOOP-04, ARCHITECTURE 8.6).
+export const draftTroubleshootingRow = draft.table(
+  "draft_troubleshooting_row",
+  {
+    draftId: text("draft_id")
+      .notNull()
+      .references(() => draftDocument.id, { onDelete: "cascade" }),
+    n: integer("n").notNull(),
+    problem: text("problem").notNull(),
+    cause: text("cause").notNull(),
+    action: text("action").notNull(),
+    quotedWoNumber: text("quoted_wo_number"),
+    truncated: boolean("truncated").notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.draftId, t.n] })],
+);
+
 export const redlineVerdict = draft.table(
   "redline_verdict",
   {

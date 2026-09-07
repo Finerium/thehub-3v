@@ -34,8 +34,9 @@ export const PROMPT_FILES: Record<ChatTask, string> = {
   "AG-1": "AG-1/v1.md",
   "AG-2": "AG-2/v2.md", // v1.md is kept as history; v2 states that a citation comes only from the evidence list,
   // that a typed fact's value is stated with its own span_id, and that document metadata is never a claim.
-  "AG-3": "AG-3/v1.md",
-  "AG-4": "AG-4/verify/v1.md",
+  "AG-3": "AG-3/v2.md", // v1.md is kept as history; v2 adds the output budget the six-section house template
+  // implies (one line per element, a cap per section, no restatement) and says to read a lesson from its steps.
+  "AG-4": "AG-4/verify/v2.md", // v1.md is kept as history; v2 weighs a sentence against its spans together (9.8)
   "AG-4/redline": "AG-4/redline/v1.md",
 };
 
@@ -172,12 +173,24 @@ export const ROLE_TABLE: Record<Task, RoleConfig> = {
     prompt_version: PROMPTS["AG-2"].version,
     budget: BUDGETS["AG-2"],
   },
+  // AG-3 is the one role whose reply is a whole document, and its row is sized from live runs rather than from the
+  // shape of the other rows (ADR-001 Records). At max_tokens 8192 three of four T4 replies stopped at exactly 8192
+  // completion tokens, which does not parse and costs the round its retry; the two that completed returned 5904 and
+  // 6653, and under prompt v2 a complete reply is 5023 to 6679. 16384 is well over twice the largest of those and
+  // far inside this model's own 128K output ceiling, so a truncated reply is off the table. timeout_ms is the
+  // number that has to close against the route's 300 s, and it closes downwards, not upwards. The gateway retries a
+  // timeout twice inside one call, so one AG-3 call can cost 3 x timeout_ms plus 2.5 s of backoff whatever the
+  // drafting lane does about it. Against the envelope as src/loop/evidence.ts now sends it, eight complete replies
+  // took 39.4 to 60.6 s, and a call that misses that band does not come back slowly, it hangs: at 90 s no reply
+  // ever arrived between 61 s and the cut. So a timeout is a stall to abandon cheaply, not a reply to wait for,
+  // and 75 s is a fifth again the slowest complete reply with a ladder of 227.5 s, which leaves a first round of
+  // its measured 53 s and a second round's whole ladder inside the route.
   "AG-3": {
     role: "AG-3",
     ...ZAI_CHAT,
     effort: "high",
-    max_tokens: 8192,
-    timeout_ms: 120_000,
+    max_tokens: 16_384,
+    timeout_ms: 75_000,
     prompt_version: PROMPTS["AG-3"].version,
     budget: BUDGETS["AG-3"],
   },

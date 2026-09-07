@@ -1,6 +1,8 @@
 // The reads the loop lane shares (blueprint 9.6, 9.9; ARCHITECTURE 8.2, 8.4, 8.6): the draft, its fields, its
-// redline verdicts, its transitions and its SME notes, plus the five mappers that put a Drizzle row into the
-// spelling of section 9.6 and validate it through the generated Zod on the way out (ARCHITECTURE 1.4). Both the
+// section 5 rows, its redline verdicts, its transitions and its SME notes, plus the five mappers that put a Drizzle
+// row into the spelling of section 9.6 and validate it through the generated Zod on the way out (ARCHITECTURE 1.4).
+// The rows have no mapper: 9.6 names no envelope shape of their own, and their one contract is AG-3's
+// `troubleshooting_rows`, which src/loop/rows.ts already parses through the generated Zod before it writes. Both the
 // drafting lane (POST /api/drafts, the poll, re-proposal) and the review lane (decision, publish, the SME note)
 // read through this module, so a column name lives here once.
 //
@@ -132,6 +134,13 @@ export async function readFields(draftId: string): Promise<FieldRow[]> {
     .where(eq(draftField.draftId, draftId))
     .orderBy(asc(draftField.section), asc(draftField.ordinal));
 }
+
+/**
+ * The draft's section 5 rows in table order (9.6: an Opl carries TroubleshootingRow of 9.5; AC-LOOP-04). The read
+ * and the write both live in src/loop/rows.ts, where the drafting lane calls the writer; the read is re-exported
+ * here under the naming of its neighbours, so a surface that reads a draft reads its whole body through one module.
+ */
+export { troubleshootingRows as readTroubleshootingRows, type TroubleshootingRowRow } from "@/loop/rows";
 
 /** The redline rounds of the draft, round 1 first (9.6 RedlineVerdict). */
 export async function readVerdicts(draftId: string): Promise<VerdictRow[]> {

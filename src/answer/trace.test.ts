@@ -42,7 +42,7 @@ describe("promptsOf and modelIdsOf (AC-NFR-09)", () => {
     // AG-2 is on v2 since the evidence-set revision (src/gateway/config.test.ts pins the file and its hash).
     expect(promptsOf(["AG-2", "AG-4"])).toEqual([
       { role: "AG-2", version: "v2", sha256: PROMPTS["AG-2"].version },
-      { role: "AG-4", version: "v1", sha256: PROMPTS["AG-4"].version },
+      { role: "AG-4", version: "v2", sha256: PROMPTS["AG-4"].version },
     ]);
     expect(promptsOf([])).toEqual([]);
   });

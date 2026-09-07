@@ -1,16 +1,19 @@
-// The loop against a real database (AC-LOOP-08 direct-write leg, AC-LOOP-09 publish_parallel_10; blueprint 9.6,
-// ARCHITECTURE 3.2 and 8.6). Two things only a database can prove: the CHECK constraint on
-// draft.draft_transition refuses an illegal pair written straight past src/loop/state.ts, and ten concurrent
-// publishes of one accepted draft serialise on the advisory lock into exactly one revision, one child version and
-// nine 409s. Runs only when TEST_DATABASE_URL names the disposable database of this lane (tests/db/setup.ts);
-// skipped otherwise, so gate:quick stays hermetic. Every row it writes is a row the product writes anyway, labelled
-// as this test's and scoped to drafts it created; nothing is deleted and no active corpus version is touched (the
-// child version G3 creates is is_active false by construction).
+// The loop against a real database (AC-LOOP-04 published leg, AC-LOOP-08 direct-write leg, AC-LOOP-09
+// publish_parallel_10; blueprint 9.6, ARCHITECTURE 3.2 and 8.6). Three things only a database can prove: the CHECK
+// constraint on draft.draft_transition refuses an illegal pair written straight past src/loop/state.ts, the
+// draft's section 5 round trips through draft.draft_troubleshooting_row in table order and reaches the published
+// lesson with the work order every row quotes, and ten concurrent publishes of one accepted draft serialise on the
+// advisory lock into exactly one revision, one child version and nine 409s. Runs only when TEST_DATABASE_URL names
+// the disposable database of this lane (tests/db/setup.ts); skipped otherwise, so gate:quick stays hermetic. Every
+// row it writes is a row the product writes anyway, labelled as this test's and scoped to drafts it created;
+// nothing is deleted and no active corpus version is touched (the child version G3 creates is is_active false by
+// construction).
 import { randomUUID } from "node:crypto";
 import { neon } from "@neondatabase/serverless";
-import { and, eq } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import { drizzle, type NeonHttpDatabase } from "drizzle-orm/neon-http";
 import { beforeAll, describe, expect, it } from "vitest";
+import { db as appDb } from "../../src/db/client";
 import {
   corpusVersion,
   debtCluster,
@@ -19,13 +22,24 @@ import {
   draftField,
   draftTransition,
   opl,
+  troubleshootingRow,
 } from "../../src/db/schema";
 import { publish } from "../../src/gates/g3";
 import { HttpError } from "../../src/lib/errors";
+import { saveTroubleshootingRows, troubleshootingRows } from "../../src/loop/rows";
 
 const CHECK_VIOLATION = "23514"; // the SQLSTATE a CHECK constraint answers with
 const TIMEOUT_MS = 120_000; // a Neon wake, ten transactions on the lock and one coverage recount
 const MANAGER = { alias: "MANAGER", role: "Manager" } as const;
+
+// Section 5 as AG-3 returns it (9.16), in this file's own words and against this file's own work-order numbers:
+// no corpus text and no corpus record. They are written in an order that is neither the work orders' nor any
+// order a column would sort into, so the order read back is the order AG-3 gave them.
+const DRAFTED_ROWS = [
+  { problem: "Vibration rises at load", cause: "Coupling element hardened", action: "Replace the element", quoted_wo_number: "WO-990002" },
+  { problem: "Bearing runs warm", cause: "Lubricant degraded", action: "Drain, flush and refill", quoted_wo_number: "WO-990001" },
+  { problem: "Guard fouls the shaft", cause: "Guard refitted out of line", action: "Refit the guard to its dowels", quoted_wo_number: "WO-990003" },
+] as const;
 
 const url = process.env.TEST_DATABASE_URL;
 
@@ -93,7 +107,38 @@ describe.skipIf(!url)("the loop against a real database", () => {
     db = drizzle(neon(url!));
     publishable = await seedDraft("accepted");
     constrained = await seedDraft("proposed");
+    // Section 5 through `saveTroubleshootingRows`, the one writer of this table, on the client the product uses
+    // (setup.ts points it at this lane's database), so the rows read back are rows written the product's way.
+    await saveTroubleshootingRows(appDb, publishable, DRAFTED_ROWS);
   }, TIMEOUT_MS);
+
+  describe("the draft's section 5 (9.6 Opl carries TroubleshootingRow, AC-LOOP-04)", () => {
+    it(
+      "round trips through draft.draft_troubleshooting_row in the order AG-3 returned",
+      async () => {
+        const rows = await troubleshootingRows(appDb, publishable);
+
+        expect(rows.map((row) => row.n)).toEqual([1, 2, 3]);
+        expect(rows.map((row) => row.problem)).toEqual(DRAFTED_ROWS.map((row) => row.problem));
+        expect(rows.map((row) => row.quotedWoNumber)).toEqual(DRAFTED_ROWS.map((row) => row.quoted_wo_number));
+        expect(rows.every((row) => row.truncated === false)).toBe(true);
+      },
+      TIMEOUT_MS,
+    );
+
+    it(
+      "a second round replaces the first round's rows rather than adding to them",
+      async () => {
+        await saveTroubleshootingRows(appDb, constrained, DRAFTED_ROWS);
+        await saveTroubleshootingRows(appDb, constrained, [DRAFTED_ROWS[0]]);
+
+        const rows = await troubleshootingRows(appDb, constrained);
+        expect(rows).toHaveLength(1);
+        expect(rows[0]).toMatchObject({ n: 1, quotedWoNumber: DRAFTED_ROWS[0].quoted_wo_number });
+      },
+      TIMEOUT_MS,
+    );
+  });
 
   describe("the transition CHECK of ARCHITECTURE 3.2 (AC-LOOP-08)", () => {
     async function insertTransition(from: string, to: string, reason: string | null): Promise<unknown> {
@@ -200,6 +245,43 @@ describe.skipIf(!url)("the loop against a real database", () => {
           .from(draftTransition)
           .where(and(eq(draftTransition.draftId, publishable), eq(draftTransition.toState, "published")));
         expect(transitions).toHaveLength(1);
+      },
+      TIMEOUT_MS,
+    );
+
+    it(
+      "the published lesson carries the draft's troubleshooting rows in order, each naming its work order",
+      async () => {
+        expect(published, "the publication above is what this reads").not.toBeNull();
+        const [draft] = await db
+          .select({ oplId: draftDocument.oplIdReserved })
+          .from(draftDocument)
+          .where(eq(draftDocument.id, publishable));
+
+        const rows = await db
+          .select()
+          .from(troubleshootingRow)
+          .where(eq(troubleshootingRow.oplId, draft!.oplId))
+          .orderBy(asc(troubleshootingRow.n));
+
+        // AC-LOOP-04: the table is the rows the draft carried, in that order, and every row still quotes its
+        // record. Ten publishes ran; exactly one wrote them, which the primary key on (opl_id, n) guarantees.
+        expect(rows.map((row) => row.n)).toEqual([1, 2, 3]);
+        expect(rows.map((row) => row.problem)).toEqual(DRAFTED_ROWS.map((row) => row.problem));
+        expect(rows.map((row) => row.action)).toEqual(DRAFTED_ROWS.map((row) => row.action));
+        expect(rows.map((row) => row.quotedWoNumber)).toEqual(DRAFTED_ROWS.map((row) => row.quoted_wo_number));
+
+        // And the same rows in the page a reader sees: section 5 of the lesson, composed from them in order.
+        const [lesson] = await db
+          .select({ sections: opl.sections })
+          .from(opl)
+          .where(eq(opl.oplId, draft!.oplId));
+        const five = lesson?.sections.find((section) => section.n === 5);
+        expect(five?.body_text).toContain(DRAFTED_ROWS[0].problem);
+        expect(five?.body_text).toContain(`(${DRAFTED_ROWS[2].quoted_wo_number})`);
+        expect(five?.body_text.indexOf(DRAFTED_ROWS[0].problem)).toBeLessThan(
+          five!.body_text.indexOf(DRAFTED_ROWS[1].problem),
+        );
       },
       TIMEOUT_MS,
     );

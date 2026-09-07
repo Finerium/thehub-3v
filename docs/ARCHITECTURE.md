@@ -307,8 +307,8 @@ AG-1 runs through this module too (D-18): `scripts/ag1/extract.ts` (`pnpm ag1:ex
 | --- | --- | --- | --- | --- | --- | --- |
 | AG-1 Extractor (build) | glm-5.3-flash | high | json_object | 8192 | 120000 | prompts/AG-1/v1.md |
 | AG-2 Composer | glm-5.3-flash | low | json_object | 2048 | 20000 | prompts/AG-2/v2.md (v1 kept as history) |
-| AG-3 Drafter | glm-5.3-flash | high | json_object | 8192 | 120000 | prompts/AG-3/v1.md |
-| AG-4 Verifier | glm-5.3-flash | low | json_object | 2048 | 20000 | prompts/AG-4/verify/v1.md |
+| AG-3 Drafter | glm-5.3-flash | high | json_object | 16384 | 75000 | prompts/AG-3/v2.md (v1 kept as history) |
+| AG-4 Verifier | glm-5.3-flash | low | json_object | 2048 | 20000 | prompts/AG-4/verify/v2.md (v1 kept as history) |
 | AG-4 Redliner | glm-5.3-flash | low | json_object | 2048 | 60000 | prompts/AG-4/redline/v1.md |
 | embedding | Xenova/multilingual-e5-small (local_onnx) | n/a | n/a | n/a | 5000 | null |
 
