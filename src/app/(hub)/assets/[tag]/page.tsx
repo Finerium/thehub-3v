@@ -19,7 +19,9 @@ import { DesignedState } from "@/components/DesignedState";
 import { EmptyState } from "@/components/EmptyState";
 import { GlassPanel } from "@/components/GlassPanel";
 import { HotspotLayer } from "@/components/HotspotLayer";
+import { ConnectorPanel } from "@/components/ConnectorPanel";
 import { InterlockMatrix } from "@/components/InterlockMatrix";
+import { OperationalContextPanel } from "@/components/OperationalContextPanel";
 import { IntegrityDot } from "@/components/IntegrityDot";
 import { NeumorphicChip } from "@/components/NeumorphicChip";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -38,7 +40,9 @@ import {
 import { DOCUMENT_CLASS_LABEL, findingLocator } from "@/db/queries/documents-view";
 import { TRIP_BOILERPLATE_RULE } from "@/db/queries/interlock";
 import { preferenceOrder } from "@/db/queries/failures";
+import { operationalContext } from "@/db/queries/operational-context";
 import { activeVersion } from "@/db/versions";
+import { connectorContracts, unreadableContracts } from "@/app/api/connectors/contracts";
 import { log } from "@/lib/log";
 
 export const dynamic = "force-dynamic";
@@ -478,10 +482,13 @@ export default async function AssetPage({ params, searchParams }: Props) {
 
   let asset: AssetView | null;
   let version: Awaited<ReturnType<typeof activeVersion>>;
+  // Blueprint 6.2 surface 5 puts the operational-context panel and the connector panel on this page beside the
+  // interlock matrix, so both are read here and the asset page carries the whole of what 6.2 lists for it.
+  let context: Awaited<ReturnType<typeof operationalContext>>;
   try {
     const box = await getSandbox(jar);
     const versions = preferenceOrder(await visibleVersionIds(box), box?.corpusVersionId ?? null);
-    [asset, version] = await Promise.all([readAsset(tag, versions), activeVersion()]);
+    [asset, version, context] = await Promise.all([readAsset(tag, versions), activeVersion(), operationalContext(tag, versions)]);
   } catch (error) {
     log.error({ event: "assets.asset_read_failed", route: "/assets/:tag", message: error instanceof Error ? error.message : String(error) });
     return (
@@ -754,8 +761,34 @@ export default async function AssetPage({ params, searchParams }: Props) {
       </Section>
 
       <Section
-        id="lessons"
+        id="operational-context"
         index={7}
+        title="Operational context"
+        lead="What the workbook records around this asset: how its unplanned and flagged work compares with the fleet, the lead time of the records, the protective function if one is recorded, and the demand history."
+      >
+        {context ? (
+          <OperationalContextPanel className="mt-4" context={context} hrefFor={(wo) => `/failures/${encodeURIComponent(tag)}#${wo}`} />
+        ) : (
+          <EmptyState
+            className="mt-4"
+            title="No operational context is recorded for this asset"
+            explanation="The workbook carries no row joined to this tag, so there is nothing to reconcile and nothing is shown."
+          />
+        )}
+      </Section>
+
+      <Section
+        id="connectors"
+        index={8}
+        title="Connectors"
+        lead="The three integration contracts of blueprint 9.14, each specified and not connected. No write path toward any system exists anywhere in this product."
+      >
+        <ConnectorPanel className="mt-4" contracts={connectorContracts()} unreadable={unreadableContracts()} />
+      </Section>
+
+      <Section
+        id="lessons"
+        index={9}
         title="Lessons"
         lead="The One Point Lessons bound to this asset, newest identifier last. A lesson a model drafted carries its badge and the alias of the person who approved it."
       >
@@ -816,7 +849,7 @@ export default async function AssetPage({ params, searchParams }: Props) {
 
       <Section
         id="findings"
-        index={8}
+        index={10}
         title="Open integrity findings"
         lead="Every finding open against a document of this asset, with the rule that raised it. A finding is a statement about the document, never a task and never an owner."
       >
