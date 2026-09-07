@@ -346,9 +346,10 @@ if [ ! -f "$EXPORT" ]; then
 elif ! pnpm exec playwright --version >/dev/null 2>&1; then
   fail "playwright is not installed (pnpm install, then pnpm exec playwright install chromium)"
 else
-  out="$(pnpm exec node tools/offline-export.mjs "$EXPORT" 2>"$TMP/offline.err")"
+  pnpm exec node tools/offline-export.mjs "$EXPORT" "$TMP/offline.json" >"$TMP/offline.out" 2>"$TMP/offline.err"
+  out="$(cat "$TMP/offline.json" 2>/dev/null)"
   if [ -z "$out" ]; then
-    sed -n '1,10p' "$TMP/offline.err"
+    sed -n '1,10p' "$TMP/offline.err"; sed -n '1,10p' "$TMP/offline.out"
     fail "the headless run produced no report"
   else
     ext="$(printf '%s' "$out" | python3 -c 'import json,sys; d=json.load(sys.stdin); print(len(d["external"]))')"

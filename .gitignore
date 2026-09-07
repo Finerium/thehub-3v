@@ -61,3 +61,10 @@ bundle/opls.json
 # conflict copies produced by a sync client during parallel writes
 * 2.*
 graphify-out/
+
+# The three deliverable artefacts are the organiser's corpus rendered for the Committee: the export carries runs of
+# corpus text beyond citation length (measured: 1 file, tools/no_corpus_in_repo.py) and the video shows corpus pages,
+# so they are never tracked in a public repository (INV-7, blueprint 8.3). deliverables/SHA256SUMS.txt IS tracked and
+# is the record of what was handed over; every artefact rebuilds from this repository (D-25).
+deliverables/*
+!deliverables/SHA256SUMS.txt

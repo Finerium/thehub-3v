@@ -67,7 +67,11 @@ describe("the role table (9.13, ARCHITECTURE 9.2)", () => {
       return [effort, max_tokens, timeout_ms];
     };
     expect(row("AG-1")).toEqual(["high", 8192, 120_000]);
-    expect(row("AG-2")).toEqual(["low", 2048, 20_000]);
+    // AG-2 moved on 2026-09-07 with prompt v3 (ADR-001 Records): v3 writes one sentence per distinct fact over the
+    // whole evidence list, so its reply is longer than the reply both of v2's ceilings were sized for. Measured over
+    // the 372 ok AG-2 calls to that date: output 33 to 1102 tokens, latency 1.2 s to 19.4 s against a 20 s cut.
+    // Truncation costs a whole round and a timeout costs three attempts; an unreached ceiling costs nothing.
+    expect(row("AG-2")).toEqual(["low", 4096, 35_000]);
     // AG-3 moved on 2026-09-07 (ADR-001 Records): at 8192 three of four live replies stopped at exactly 8192
     // completion tokens, which is a truncated reply that does not parse, and the one complete two-round draft took
     // 352 s against a 300 s route. A complete reply measured 4284 to 6679 completion tokens, so 16384 is over twice
@@ -138,13 +142,41 @@ describe("prompt versions (9.16: every prompt is a versioned file)", () => {
     expect(new Set(CHAT_TASKS.map((task) => PROMPTS[task].version)).size).toBe(CHAT_TASKS.length);
   });
 
-  it("AG-2 runs the composer prompt v2, whose hash is not v1's (the evidence-set revision)", () => {
-    expect(PROMPT_FILES["AG-2"]).toBe("AG-2/v2.md");
-    const v1 = sha256Hex(readFileSync(path.join(PROMPTS_DIR, "AG-2/v1.md")));
-    const v2 = sha256Hex(readFileSync(path.join(PROMPTS_DIR, "AG-2/v2.md")));
-    expect(ROLE_TABLE["AG-2"].prompt_version).toBe(v2);
+  it("AG-2 runs the composer prompt v3, whose hash is neither v2's nor v1's (the yield revision)", () => {
+    expect(PROMPT_FILES["AG-2"]).toBe("AG-2/v3.md");
+    const [v1, v2, v3] = ["v1", "v2", "v3"].map((v) => sha256Hex(readFileSync(path.join(PROMPTS_DIR, `AG-2/${v}.md`))));
+    expect(ROLE_TABLE["AG-2"].prompt_version).toBe(v3);
+    expect(ROLE_TABLE["AG-2"].prompt_version).not.toBe(v2);
     expect(ROLE_TABLE["AG-2"].prompt_version).not.toBe(v1);
-    expect(v1).toMatch(HEX64);
+    expect([v1, v2, v3].every((v) => HEX64.test(v))).toBe(true);
+    expect(new Set([v1, v2, v3]).size).toBe(3);
+    // v1 and v2 stay on disk as history and are named by no row: a version not in the table is in no hash.
+    for (const task of CHAT_TASKS) expect([v1, v2]).not.toContain(PROMPTS[task].version);
+    // What v3 adds over v2, and the three failure classes the golden run of 2026-09-07 measured it against: an
+    // empty claims array over a non-empty evidence set (rank 3), one sentence per distinct fact rather than one
+    // sentence for the whole answer, and the whole evidence list read rather than the first document that answers.
+    expect(PROMPTS["AG-2"].text).toContain("prompt version 3");
+    expect(PROMPTS["AG-2"].text).toContain("Never answer with nothing.");
+    expect(PROMPTS["AG-2"].text).toContain("One sentence, one fact.");
+    expect(PROMPTS["AG-2"].text).toContain("Cover the question across the whole evidence list");
+    // v2's rules are kept, not replaced: a citation comes only from the evidence list, a typed fact may be stated
+    // with its own span, and document metadata is never a claim (which is what put AG-4 in conflict under v1).
+    expect(PROMPTS["AG-2"].text).toContain("Document metadata is never a claim.");
+    expect(PROMPTS["AG-2"].text).toContain("Cite only span_ids that appear in the `evidence` list.");
+  });
+
+  // The ceiling the AG-2 row has to close inside, the way AG-3's ladder closes inside the drafting route. One
+  // answer is at most composer, verify, repair, verify (MAX_COMPOSER_CALLS = 2 in src/answer/compose.ts), and all
+  // of it runs inside the invocation POST /api/ask declares. A timeout raised further fails here, not on a live
+  // question. The gateway's own retries are not counted: a retried timeout is one of them replacing the other.
+  it("the answer lane's slow path closes inside the ask route's maxDuration (AC-NFR-04, ARCHITECTURE 8.2)", () => {
+    const route = readFileSync(path.join(process.cwd(), "src", "app", "api", "ask", "route.ts"), "utf8");
+    const declared = /export const maxDuration = (\d+)/.exec(route)?.[1];
+    expect(declared, "POST /api/ask declares its maxDuration").toBeDefined();
+    const routeMs = Number(declared) * 1000;
+    const slowPath = 2 * ROLE_TABLE["AG-2"].timeout_ms + 2 * ROLE_TABLE["AG-4"].timeout_ms;
+    expect(slowPath).toBe(110_000);
+    expect(slowPath).toBeLessThan(routeMs);
   });
 
   it("AG-3 runs the drafter prompt v2, whose hash is not v1's and is not any other role's", () => {

@@ -51,7 +51,7 @@ if [ "${#roots[@]}" -eq 0 ]; then
   for r in src scripts tests; do [ -e "$r" ] && roots+=("$r"); done
 fi
 
-common=(-rn --include='*.ts' --include='*.tsx' --include='*.js' --include='*.mjs' --include='*.sql'
+common=(-rnH --include='*.ts' --include='*.tsx' --include='*.js' --include='*.mjs' --include='*.sql'
   --exclude-dir=node_modules --exclude-dir=.next --exclude-dir=generated)
 
 hits=0

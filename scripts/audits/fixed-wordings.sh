@@ -21,7 +21,7 @@ MIN_SENTENCE=25
 roots=()
 for r in src scripts; do [ -d "$r" ] && roots+=("$r"); done
 
-common=(-rnF --include='*.ts' --include='*.tsx' --include='*.js' --include='*.mjs' --include='*.jsx'
+common=(-rnHF --include='*.ts' --include='*.tsx' --include='*.js' --include='*.mjs' --include='*.jsx'
   --exclude-dir=generated --exclude-dir=graphify-out --exclude-dir=audits --exclude-dir=node_modules --exclude-dir=.next
   --exclude=fixed-strings.ts --exclude='*.test.ts' --exclude='*.test.tsx' --exclude='*.spec.ts')
 

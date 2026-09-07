@@ -14,6 +14,16 @@ const ci = process.env.CI === "true";
 /** The signed-in state minted by the global setup; the setup writes it, every test reads it. */
 export const STATE_PATH = process.env.PLAYWRIGHT_STATE_PATH ?? path.join(os.tmpdir(), "thehub-3v-e2e", "state.json");
 
+/**
+ * The offline export (AC-DEL-01) is a file on disk, not a deployment: tests/e2e/export.spec.ts opens
+ * `deliverables/TheHub_prototype.html` from `file://` with every network route aborted and holds no session at
+ * all. It is a project of its own so that `--project=export` reaches no server and needs no credential, which is
+ * what lets Tier A check the export on a runner that has neither. The global setup signs in to nothing when this
+ * is the only project selected.
+ */
+export const OFFLINE_PROJECT = "export";
+const OFFLINE_SPEC = /export\.spec\.ts$/;
+
 export default defineConfig({
   testDir: "tests/e2e",
   globalSetup: "./tests/e2e/global-setup.ts",
@@ -39,5 +49,14 @@ export default defineConfig({
     // The deployment is noindex and unlisted; a run must not be mistaken for a crawler in the access log.
     userAgent: "thehub-3v-e2e (Playwright)",
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } }],
+  projects: [
+    { name: "chromium", testIgnore: OFFLINE_SPEC, use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },
+    {
+      name: OFFLINE_PROJECT,
+      testMatch: OFFLINE_SPEC,
+      // No base address and no stored session: the one artefact under test is a file, and a context that carried
+      // a cookie jar for a deployment would be a context that could reach one.
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 }, baseURL: undefined, storageState: undefined },
+    },
+  ],
 });

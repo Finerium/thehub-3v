@@ -56,6 +56,9 @@ const BLUEPRINT_9_8_CAVEAT =
 
 type Outcome = GatewayCall["outcome"];
 type Reply = { outcome: Outcome; data?: unknown };
+
+/** A composer reply that parses and carries no claim: a failed reply over a non-empty evidence set (9.16 rule 7). */
+const EMPTY_REPLY: Reply = { outcome: "ok", data: { claims: [], gaps: [], suggested_outcome: "abstention" } };
 type Recorded = { task: ChatTask; envelope: Record<string, unknown>; at: number };
 
 const gw = vi.hoisted(() => ({ invoke: vi.fn(), embed: vi.fn(), budgetStatus: vi.fn() }));
@@ -566,7 +569,7 @@ describe("the packet (9.8)", () => {
   });
 
   it("an abstention carries exactly three nearest same-asset documents where three exist, the escalation role from the fixed set, and the typed facts beside it", async () => {
-    script({ "AG-2": [{ outcome: "ok", data: { claims: [], gaps: [], suggested_outcome: "abstention" } }] });
+    script({ "AG-2": [EMPTY_REPLY, EMPTY_REPLY] });
     const { lines } = await stream({ question: TRIP_QUESTION });
     const packet = packetOf(lines);
     expect(packet.outcome).toBe("abstention");
@@ -579,16 +582,50 @@ describe("the packet (9.8)", () => {
     expect(Abstention.shape.escalation_role.options).toContain(abstention.escalation_role);
     expect(abstention.escalation_role).toBe("On-call Instrument and Control engineer");
     expect(abstention.served_beside).toEqual(typedFacts);
-    expect(abstention.reason).toBe(NO_ENTAILED_CLAIM_REASON);
+    // Twice nothing over a full evidence set is the composer failing, not the lane deciding to abstain (9.16 rule 7).
+    expect(abstention.reason).toBe(COMPOSER_FAILED_REASON);
   });
 
   it("where fewer than three documents exist, the abstention lists what exists and never pads", async () => {
     lane.retrieve.mockResolvedValue(retrievalOf(chunks.slice(0, 3)));
-    script({ "AG-2": [{ outcome: "ok", data: { claims: [], gaps: [], suggested_outcome: "abstention" } }] });
+    script({ "AG-2": [EMPTY_REPLY, EMPTY_REPLY] });
     const { lines } = await stream({ question: TRIP_QUESTION });
     const nearest = packetOf(lines).abstention?.nearest_documents ?? [];
     expect(nearest.map((c) => c.document_id)).toEqual(["doc-syn-ds-ga-1201a", "doc-syn-il-ga-1201a"]);
   });
+
+  // The diagnosis of 2026-09-07, rank 3: an empty claims array on the first call in twenty-five traces, over twelve
+  // retrieved chunks and a full typed layer. 9.16 rule 7 makes that a failed reply, so the lane asks once more.
+  it("a composer that returns no claim over a non-empty evidence set is retried once, and the trace records both calls", async () => {
+    script({ "AG-2": [EMPTY_REPLY, { outcome: "ok", data: composerReply }], "AG-4": [{ outcome: "ok", data: entailedReply() }] });
+    const { lines } = await stream({ question: TRIP_QUESTION });
+    expect(calls("AG-2")).toHaveLength(2);
+    // The retry composes the same envelope, not a repair one: the first reply left nothing to repair.
+    expect(recorded.filter((r) => r.task === "AG-2").map((r) => r.envelope.repair)).toEqual([null, null]);
+    const packet = packetOf(lines);
+    expect(packet.outcome).toBe("answer");
+    expect(packet.claims.map((c) => c.id)).toEqual(["s1", "s2", "s3", "s4", "s5"]);
+    const row = insertedTrace();
+    // Both calls are on the trace, and the empty reply keeps its own gateway outcome: the provider answered and the
+    // reply parsed, so `ok` is the transport's truth; what it was worth to the lane is the lane's judgement.
+    expect(row.modelIds).toMatchObject({ gateway_calls: "3" });
+    expect(row.repairRounds).toBe(0);
+  });
+
+  it("an empty reply on the repair round costs no third call and keeps the sentences the first gate round kept", async () => {
+    script({
+      "AG-2": [{ outcome: "ok", data: composerReply }, EMPTY_REPLY],
+      "AG-4": [{ outcome: "ok", data: replyWithNotEntailed(["s1"]) }],
+    });
+    const { lines } = await stream({ question: TRIP_QUESTION });
+    expect(calls("AG-2")).toHaveLength(2);
+    expect(calls("AG-4")).toHaveLength(1);
+    const packet = packetOf(lines);
+    expect(packet.claims.map((c) => c.id)).toEqual(["s2", "s3", "s4", "s5"]);
+    expect(packet.gaps_declared).toEqual([droppedSentencesGap(1)]);
+    expect(insertedTrace().repairRounds).toBe(1);
+  });
+
 
   it("the audit event of an answer carries ids, route, alias, version, class, gate outcome and band, never the question or a span", async () => {
     await stream({ question: TRIP_QUESTION });

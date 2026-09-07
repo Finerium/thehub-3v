@@ -4,7 +4,7 @@
 // findings a chip carries, and the typed rows the templates read. Drizzle only, parameterised throughout; every
 // function takes the client so a test can pass its own. A function given an empty id list returns empty without a
 // round trip. Nothing here reads a draft table (INV-1: drafts are physically separate from the retrieval path).
-import { and, asc, desc, eq, inArray, ne, or, sql, type SQL } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, isNull, ne, or, sql, type SQL } from "drizzle-orm";
 import type { Db } from "@/db/client";
 import {
   area,
@@ -197,18 +197,40 @@ export async function revisionsOf(
     .orderBy(asc(documentRevision.documentId), asc(documentRevision.revision), asc(documentRevision.id));
 }
 
-/** Rule ids of the findings open against each document, distinct and sorted (9.8 Citation.integrity_findings). */
-export async function openFindingRuleIds(db: Db, documentIds: readonly string[]): Promise<Map<string, string[]>> {
+/**
+ * Rule ids of the open findings, distinct and sorted, keyed by what the finding binds to (9.8
+ * Citation.integrity_findings). `keys` are document ids and, optionally, equipment tags:
+ *
+ *  - a finding with a `document_id` is keyed by that document id, which is how it rides the citation of its own
+ *    document and reaches the reader on a chip;
+ *  - the area observations (CD-16) bind to no document at all, so they are keyed by the equipment tag their own
+ *    register item names (`item.tag`). They used to be dropped here, which left them with no carrier anywhere in
+ *    the lane; the caller now looks them up by tag and renders them beside the area they name.
+ *
+ * Document ids and equipment tags never collide (`doc-<sha12>` against `GA-1201A`), so one parameter serves both
+ * and a caller that passes document ids alone gets exactly what it always got.
+ */
+export async function openFindingRuleIds(db: Db, keys: readonly string[]): Promise<Map<string, string[]>> {
   const out = new Map<string, string[]>();
-  if (documentIds.length === 0) return out;
+  const distinct = [...new Set(keys)];
+  if (distinct.length === 0) return out;
+  const areaTag = sql<string | null>`${integrityFinding.item}->>'tag'`;
   const rows = await db
-    .selectDistinct({ documentId: integrityFinding.documentId, ruleId: integrityFinding.ruleId })
+    .selectDistinct({ documentId: integrityFinding.documentId, areaTag, ruleId: integrityFinding.ruleId })
     .from(integrityFinding)
-    .where(and(inArray(integrityFinding.documentId, [...documentIds]), eq(integrityFinding.state, "open")))
+    .where(
+      and(
+        eq(integrityFinding.state, "open"),
+        or(inArray(integrityFinding.documentId, distinct), and(isNull(integrityFinding.documentId), inArray(areaTag, distinct))),
+      ),
+    )
     .orderBy(asc(integrityFinding.documentId), asc(integrityFinding.ruleId));
   for (const r of rows) {
-    if (r.documentId === null) continue; // area observations (CD-16) bind to no single document
-    out.set(r.documentId, [...(out.get(r.documentId) ?? []), r.ruleId]);
+    const key = r.documentId ?? r.areaTag;
+    if (key === null) continue; // a finding that binds to neither a document nor an area has nothing to ride
+    const already = out.get(key) ?? [];
+    if (already.includes(r.ruleId)) continue;
+    out.set(key, [...already, r.ruleId].sort());
   }
   return out;
 }
@@ -405,6 +427,26 @@ export async function workOrderSpans(db: Db, woNumbers: readonly string[]): Prom
 // ---------------------------------------------------------------------------------------------------------------
 // Typed rows for the templates (ARCHITECTURE 7 step 8; blueprint 9.3, 9.4, 9.5)
 // ---------------------------------------------------------------------------------------------------------------
+
+/**
+ * The equipment master rows of the assets in scope (9.3): the name, the service, the functional location and the
+ * criticality a typed sheet states about the asset in its own header. A typed row renders its value; these are the
+ * identity of the thing the value is about, and no other query carries them into the answer lane.
+ */
+export async function equipmentOf(db: Db, tags: readonly string[]): Promise<EquipmentRow[]> {
+  if (tags.length === 0) return [];
+  return db.select().from(equipment).where(inArray(equipment.tag, [...tags])).orderBy(asc(equipment.tag));
+}
+
+/**
+ * The bill-of-material rows of the assets' own general-arrangement drawings (9.4), by item number. bomMatchesOf
+ * reaches these rows only through a work order, so a question about the asset itself reaches none of them and the
+ * drawing is never cited: this is the keyed read that gives a drawing a typed row of its own.
+ */
+export async function bomItemsOf(db: Db, tags: readonly string[]): Promise<BomItemRow[]> {
+  if (tags.length === 0) return [];
+  return db.select().from(bomItem).where(inArray(bomItem.equipmentTag, [...tags])).orderBy(asc(bomItem.equipmentTag), asc(bomItem.itemNo));
+}
 
 export async function interlocksOf(db: Db, tags: readonly string[]): Promise<InterlockRowType[]> {
   if (tags.length === 0) return [];

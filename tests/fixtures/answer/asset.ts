@@ -145,6 +145,8 @@ export const spans: SpanSource[] = [
   span("sp-ds-8", "rev-ds-3", 2, 3, "Packing Graphite braided"),
   span("sp-ds-old", "rev-ds-2", 1, 1, "Design pressure 8.0 barg (superseded)"),
   span("sp-ga-1", "rev-ga-0", 1, 1, "12 Coupling element Polyurethane 1"),
+  // A drawing row no work order asks for: only a keyed read of the drawing's own bill of material reaches it.
+  span("sp-ga-2", "rev-ga-0", 1, 2, "7 Mechanical seal Silicon carbide 1"),
   span("sp-opl1-t", "rev-opl1", 1, 1, `${LESSON_1} Coupling element inspection and replacement GA-9901A`),
   span("sp-opl1-p", "rev-opl1", 1, 2, PERMIT_LINE_1),
   span("sp-opl1-s1", "rev-opl1", 2, 1, STEP_TEXTS[0]),
@@ -156,6 +158,7 @@ export const spans: SpanSource[] = [
   span("sp-wb-2", "rev-wb", 12, 2, "WO-990011 Seal leak at the drive end"),
   span("sp-wb-3", "rev-wb", 13, 1, "WO-990001 SIS proof test SEQ-9901 Pass"),
   span("sp-wb-4", "rev-wb", 13, 2, "WO-990003 Calibration of VSHH-9901 Pass"),
+  span("sp-wb-5", "rev-wb", 13, 3, "WO-990012 SIS proof test SEQ-9901 Pass"),
   span("sp-9902-1", "rev-ds-9902", 1, 1, "LV-9902 Design pressure 5 barg"),
 ];
 
@@ -322,9 +325,16 @@ export const params: DatasheetParamRow[] = [
   param("dp-8", "materials", "Packing", null, "Graphite braided", null, "sp-ds-8"),
 ];
 
+/**
+ * Three SIS proof tests of the same function and one calibration: WO-990001 is the last SIS test, WO-990012 an
+ * earlier one that carries its own workbook span, and WO-990002 an earlier one that carries none. The block holds
+ * the whole record and marks the last of each class; the spanless row is dropped whatever its date, because a row
+ * with no span cannot be cited.
+ */
 export const proofTests: ProofTestRow[] = [
   { woNumber: "WO-990003", equipmentTag: TAG, seqId: null, deviceTag: "VSHH-9901", testClass: "calibration_proof_test", completionDate: "2025-05-01", resultText: "Pass", asFound: "7.0", asLeft: "7.1" },
   { woNumber: "WO-990001", equipmentTag: TAG, seqId: SEQ, deviceTag: "VSHH-9901", testClass: "sis_proof_test", completionDate: "2025-03-01", resultText: "Pass", asFound: "7.1", asLeft: "7.1" },
+  { woNumber: "WO-990012", equipmentTag: TAG, seqId: SEQ, deviceTag: "VSHH-9901", testClass: "sis_proof_test", completionDate: "2024-09-01", resultText: "Pass", asFound: "7.0", asLeft: "7.1" },
   { woNumber: "WO-990002", equipmentTag: TAG, seqId: SEQ, deviceTag: "VSHH-9901", testClass: "sis_proof_test", completionDate: "2024-03-01", resultText: "Pass", asFound: "7.2", asLeft: "7.1" },
 ];
 
@@ -339,6 +349,13 @@ function workOrder(partial: Partial<WorkOrderRow> & Pick<WorkOrderRow, "woNumber
     relatedInterlock: null,
     breakdownKind: "none",
     closeoutComplete: true,
+    // The five outcome columns of the workbook (9.4). Every row carries them, because a row that leaves one empty is
+    // what CD-4 is about and the packet must be able to name an empty column rather than lose it.
+    priority: "Medium",
+    criticality: "B",
+    executedByAlias: "EXE-01",
+    downtimeHours: null,
+    totalCostIdr: null,
     ...partial,
   });
 }
@@ -346,6 +363,7 @@ function workOrder(partial: Partial<WorkOrderRow> & Pick<WorkOrderRow, "woNumber
 export const workOrders: WorkOrderRow[] = [
   workOrder({ woNumber: "WO-990001", equipmentTag: TAG, problemDescription: "SIS proof test SEQ-9901", workType: "Inspection", discipline: "Instrument", relatedInterlock: SEQ, reportDate: "2025-03-01" }),
   workOrder({ woNumber: "WO-990002", equipmentTag: TAG, problemDescription: "SIS proof test SEQ-9901", workType: "Inspection", discipline: "Instrument", relatedInterlock: SEQ, reportDate: "2024-03-01" }),
+  workOrder({ woNumber: "WO-990012", equipmentTag: TAG, problemDescription: "SIS proof test SEQ-9901", workType: "Inspection", discipline: "Instrument", relatedInterlock: SEQ, reportDate: "2024-09-01" }),
   workOrder({ woNumber: "WO-990003", equipmentTag: TAG, problemDescription: "Calibration of VSHH-9901", workType: "Calibration", discipline: "Instrument", reportDate: "2025-05-01" }),
   workOrder({
     woNumber: "WO-990010",
@@ -356,8 +374,14 @@ export const workOrders: WorkOrderRow[] = [
     sparePartsUsed: "coupling element",
     relatedInterlock: SEQ,
     breakdownKind: "unplanned",
+    priority: "Emergency",
+    criticality: "A",
+    executedByAlias: "EXE-07",
+    downtimeHours: 6.5,
+    totalCostIdr: 12_500_000,
   }),
-  workOrder({ woNumber: "WO-990011", equipmentTag: TAG, problemDescription: "Seal leak at the drive end", rootCause: "worn seal", correctiveAction: "Seal replaced", reportDate: "2025-01-05" }),
+  // The unfilled closeout of CD-4: the row exists, the column is empty, and the packet has to be able to say so.
+  workOrder({ woNumber: "WO-990011", equipmentTag: TAG, problemDescription: "Seal leak at the drive end", rootCause: "worn seal", correctiveAction: "Seal replaced", reportDate: "2025-01-05", executedByAlias: "", closeoutComplete: false }),
   workOrder({ woNumber: "WO-990020", equipmentTag: OTHER_TAG, problemDescription: "Positioner drift", rootCause: "misalignment", reportDate: "2025-04-01" }),
 ];
 
@@ -371,6 +395,7 @@ export const bomMatches: BomMatchRow[] = [
 
 export const bomItems: BomItemRow[] = [
   { id: "bom-12", equipmentTag: TAG, gaDrawingDocNo: "SYN-GA-GA-9901A", itemNo: 12, description: "Coupling element", material: "Polyurethane", quantity: "1", spanId: "sp-ga-1" },
+  { id: "bom-7", equipmentTag: TAG, gaDrawingDocNo: "SYN-GA-GA-9901A", itemNo: 7, description: "Mechanical seal", material: "Silicon carbide", quantity: "1", spanId: "sp-ga-2" },
 ];
 
 const FOOTER = { prepared_by: "PRP-01", reviewed_by_alias: "REV-01", approved_by_alias: "APR-01", date_of_sharing: "2025-06-01" };
@@ -435,6 +460,7 @@ export const workOrderSpanIds = new Map<string, string>([
   ["WO-990011", "sp-wb-2"],
   ["WO-990001", "sp-wb-3"],
   ["WO-990003", "sp-wb-4"],
+  ["WO-990012", "sp-wb-5"],
 ]);
 
 function chunk(chunkId: string, revisionId: string, page: number, ordinal: number, text: string, lexical: number, cosine: number, unitKind: ChunkCandidate["unitKind"] = "note"): ChunkCandidate {
@@ -550,6 +576,14 @@ export const fakeQueries: Queries = {
       if (s) out.set(wo, s);
     }
     return out;
+  },
+  async equipmentOf(_db, tags) {
+    record("equipmentOf", tags);
+    return equipment.filter((e) => tags.includes(e.tag)).sort((a, b) => a.tag.localeCompare(b.tag));
+  },
+  async bomItemsOf(_db, tags) {
+    record("bomItemsOf", tags);
+    return byTag(bomItems, tags).sort((a, b) => a.equipmentTag.localeCompare(b.equipmentTag) || a.itemNo - b.itemNo);
   },
   async interlocksOf(_db, tags) {
     return byTag(interlocks, tags);

@@ -8,9 +8,9 @@
 // and the reading template's ladder omits the relief layer at a vibration reading. The query module is the in-memory
 // fake over the synthetic asset.
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { Block, type Citation } from "@/contracts/generated/evidence_packet";
+import { Block, type Citation, type TypedFact } from "@/contracts/generated/evidence_packet";
 import { db } from "@/db/client";
-import { LESSON_1, LESSON_2, PERMIT_LINE_1, PERMIT_LINE_OTHER_LESSON, SEQ, STEP_TEXTS, TAG, opls, resetAsset, spans } from "../../tests/fixtures/answer/asset";
+import { LESSON_1, LESSON_2, PERMIT_LINE_1, PERMIT_LINE_OTHER_LESSON, SEQ, STEP_TEXTS, TAG, opls, params, resetAsset, revisions, spans } from "../../tests/fixtures/answer/asset";
 import { citationOf } from "./retrieve";
 import {
   BLOCK_LABEL,
@@ -27,7 +27,7 @@ import {
   withBypassBlocks,
 } from "./templates";
 import { procedureOf } from "./permit";
-import type { InterlockRowItem, LadderItem, LessonItem, Retrieval, Scope, Template, WorkOrderItem } from "./types";
+import type { BomPartItem, InterlockRowItem, LadderItem, LessonItem, ProofTestItem, Retrieval, Scope, Template, WorkOrderItem } from "./types";
 
 vi.mock("@/db/queries/retrieval", async () => (await import("../../tests/fixtures/answer/asset")).fakeQueries);
 
@@ -107,11 +107,16 @@ describe("job", () => {
     expect(out.blocks.map((b) => b.kind).slice(0, BLOCK_ORDER.job.length)).toEqual([...BLOCK_ORDER.job]);
     expectWellFormed(out.blocks, "job");
     const limits = out.blocks.find((b) => b.kind === "datasheet_limits");
-    expect(out.typed_facts.map((f) => f.label)).toEqual(["design: Design pressure", "vibration: Vibration normal", "header: Area classification", "header: Ex protection", "header: Service", "design: PSV set pressure", "design: Design pressure"]);
+    expect(out.typed_facts.map((f) => f.label)).toEqual(["design: Design pressure", "vibration: Vibration normal", "header: Area classification", "header: Ex protection", "header: Service", "design: PSV set pressure", "design: Design pressure", "materials: Packing"]);
     expect(limits?.items).toEqual(out.typed_facts);
     for (const f of out.typed_facts) expect(f.source_class).toBe("datasheet_param");
     const parts = out.blocks.find((b) => b.kind === "bom_parts");
-    expect(parts?.items).toEqual([expect.objectContaining({ wo_number: "WO-990010", part_string: "coupling element", status: "matched", item_no: 12, description: "Coupling element", material: "Polyurethane", quantity: "1", citation: expect.objectContaining({ span_id: "sp-ga-1" }) })]);
+    // The drawing's own rows are read by tag, so a row no work order asks for is still cited (wo_number null); the
+    // row a work order matched keeps the work order that asked for it.
+    expect(parts?.items).toEqual([
+      expect.objectContaining({ wo_number: null, item_no: 7, description: "Mechanical seal", material: "Silicon carbide", citation: expect.objectContaining({ span_id: "sp-ga-2" }) }),
+      expect.objectContaining({ wo_number: "WO-990010", part_string: "coupling element", status: "matched", item_no: 12, description: "Coupling element", material: "Polyurethane", quantity: "1", citation: expect.objectContaining({ span_id: "sp-ga-1" }) }),
+    ]);
     const wos = out.blocks.find((b) => b.kind === "related_work_orders");
     expect(wos?.items.map((w) => (w as { wo_number: string }).wo_number)).toEqual(["WO-990010"]);
     const functions = out.blocks.find((b) => b.kind === "functions_out_of_service");
@@ -156,8 +161,11 @@ describe("readiness", () => {
     expectWellFormed(out.blocks, "readiness");
     expectLeadsWith(out.blocks, "readiness");
     const tests = out.blocks.find((b) => b.kind === "proof_tests");
-    expect(tests?.items.map((t) => (t as { wo_number: string; test_class: string; completion_date: string }).wo_number)).toEqual(["WO-990003", "WO-990001"]);
-    expect(JSON.stringify(tests)).not.toContain("WO-990002"); // the older test of the same class, never the last
+    // The whole record of the scope, newest first, with the last of each class marked; the typed facts are built
+    // from the marked records alone, so both readings of "when was this last proof-tested" are served.
+    expect(tests?.items.map((t) => (t as ProofTestItem).wo_number)).toEqual(["WO-990003", "WO-990001", "WO-990012"]);
+    expect(tests?.items.map((t) => (t as ProofTestItem).last_of_class)).toEqual([true, true, false]);
+    expect(JSON.stringify(tests)).not.toContain("WO-990002"); // no workbook span, so it can never be cited
     expect(out.typed_facts).toEqual([
       expect.objectContaining({ label: "Last Calibration proof test (VSHH-9901)", value_text: "2025-05-01", unit: "date", qualifier: "Pass", source_class: "proof_test" }),
       expect.objectContaining({ label: `Last SIS proof test (${SEQ})`, value_text: "2025-03-01", unit: "date", qualifier: "Pass", source_class: "proof_test" }),
@@ -292,6 +300,50 @@ describe("a block item carries its row's own identity", () => {
     });
   });
 
+  it("a work order carries its five outcome columns, and the question that names its number reaches it", async () => {
+    const out = await typedFacts(db, scope, null, { question: "Who executed WO-990011 and what did it cost?" });
+    const items = (out.blocks.find((b) => b.kind === "related_work_orders")?.items ?? []) as WorkOrderItem[];
+    const wo = items.find((w) => w.wo_number === "WO-990011");
+    // The row a question names by number is evidence whatever its narrative fields say: nothing in this row's text
+    // matches the question's terms, and before the number was read it reached no work order at all.
+    expect(wo).toMatchObject({ priority: "Medium", criticality: "B", executed_by_alias: "", downtime_hours: null, total_cost_idr: null, closeout_complete: false });
+  });
+
+  it("the outcome columns of a named work order are typed facts under the workbook's own column names, an empty one included", async () => {
+    const out = await typedFacts(db, scope, null, { question: "Who executed WO-990011 and what did it cost?" });
+    const named = out.typed_facts.filter((f) => f.label.startsWith("WO-990011 "));
+    // An empty column keeps its name and renders nothing after it: that is how "the closeout is not filled in" is
+    // stated rather than inferred, and a column the workbook holds no value for is omitted, never guessed at.
+    expect(named).toEqual([
+      expect.objectContaining({ label: "WO-990011 Priority", value_text: "Medium", value_num: null, unit: null, source_class: "work_order" }),
+      expect.objectContaining({ label: "WO-990011 Criticality", value_text: "B" }),
+      expect.objectContaining({ label: "WO-990011 Executed_By", value_text: "" }),
+    ]);
+    for (const f of named) expect(f.source.span_id).toBe("sp-wb-2");
+  });
+
+  it("a job's downtime and cost carry the unit the column name states, grouped as the cell displays it", async () => {
+    const out = await typedFacts(db, scope, null, { question: "What was the downtime and the cost of WO-990010?" });
+    const named = new Map(out.typed_facts.filter((f) => f.label.startsWith("WO-990010 ")).map((f) => [f.label, f] as const));
+    expect(named.get("WO-990010 Downtime_Hours")).toMatchObject({ value_text: "6.5", value_num: 6.5, unit: "h" });
+    expect(named.get("WO-990010 Total_Cost_IDR")).toMatchObject({ value_text: "12,500,000", value_num: 12_500_000, unit: "IDR" });
+  });
+
+  it("the asset's own general-arrangement drawing is cited without any work order asking for a part", async () => {
+    const out = await typedFacts(db, scope, null, { question: "What is on the GA-9901A general arrangement drawing?" });
+    const parts = (out.blocks.find((b) => b.kind === "bom_parts")?.items ?? []) as BomPartItem[];
+    const own = parts.find((p) => p.wo_number === null);
+    expect(own).toMatchObject({ item_no: 7, description: "Mechanical seal", material: "Silicon carbide", quantity: "1" });
+    expect(own?.citation?.span_id).toBe("sp-ga-2");
+  });
+
+  it("a lesson carries its head lines as the sheet prints them, cited to the title block they are on", async () => {
+    const out = await typedFacts(db, withInstrument, "trip", { question: "Why did it trip on VSHH-9901?" });
+    const lesson = out.blocks.find((b) => b.kind === "lessons")?.items[0] as LessonItem;
+    expect(lesson.header_lines).toEqual([`Equipment ${TAG} - Feed pump A`, "Area / Unit Feed Area 99", `Related Interlock ${SEQ} (VSHH-9901)`, "P&ID Ref "]);
+    expect(lesson.citation.span_id).toBe("sp-opl1-t");
+  });
+
   it("a lesson carries its title, its classification and its own sections", async () => {
     const out = await typedFacts(db, withInstrument, "trip", { question: "Why did it trip on VSHH-9901?" });
     const lesson = out.blocks.find((b) => b.kind === "lessons")?.items[0] as LessonItem;
@@ -331,21 +383,51 @@ describe("the procedure is bound to the question's own task", () => {
   });
 });
 
-// The diagnosis of 2026-09-07, rank 20: a text-valued datasheet row is neither a limit nor a header field the lane
-// always serves, so a material, a fail action or a service reached no reader at all.
+// The diagnosis of 2026-09-07, rank 20 and its repair: a text-valued datasheet row used to reach the reader only
+// where the question's own terms happened to name its field, so the same row passed under one wording and was
+// unreachable under another. Every row of the scope's datasheet is evidence now, whatever its value parses as; the
+// question's terms decide what leads, never what exists.
 describe("a text-valued datasheet row", () => {
   const packing = { label: "materials: Packing", value_text: "Graphite braided", value_num: null, unit: null, source_class: "datasheet_param" };
 
-  it("renders when the question's own terms name its field", async () => {
-    const out = await typedFacts(db, scope, null, { question: "What is the packing material of GA-9901A?" });
-    expect(out.blocks.find((b) => b.kind === "datasheet_limits")?.items).toContainEqual(expect.objectContaining(packing));
+  it("renders whether or not the question's own terms name its field", async () => {
+    for (const question of ["What is the packing material of GA-9901A?", "What is the design pressure of GA-9901A?"]) {
+      const out = await typedFacts(db, scope, null, { question });
+      expect(out.blocks.find((b) => b.kind === "datasheet_limits")?.items, question).toContainEqual(expect.objectContaining(packing));
+    }
   });
 
-  it("stays out when the question names another field", async () => {
+  it("every row of the scope's datasheet is served, in the sheet's own order, each cited to its own span", async () => {
     const out = await typedFacts(db, scope, null, { question: "What is the design pressure of GA-9901A?" });
     const items = out.blocks.find((b) => b.kind === "datasheet_limits")?.items ?? [];
-    expect(items).not.toContainEqual(expect.objectContaining(packing));
-    expect(items.length).toBeGreaterThan(0);
+    expect(items.map((f) => (f as TypedFact).source.span_id)).toEqual(params.map((p) => p.spanId));
+    for (const f of items) expect((f as TypedFact).source_class).toBe("datasheet_param");
+  });
+});
+
+// The diagnosis of 2026-09-07, rank 14: document metadata has no carrier in the packet. Composer prompt v2 rule 8
+// forbids a claim whose subject is a revision or an approval status, because no span text states them and AG-4
+// returns not_entailed on such a sentence; the packet is therefore the only place they can be served, and today it
+// serves them nowhere. GS-45 ("Which revision of the GA-1201A datasheet is cited, and is it approved?") wants
+// "Rev 3" and "Issued for Operation", GS-46 the revision history of a plot plan, GS-47 the footer aliases and the
+// date of sharing of a lesson. Nothing is invented here: the value asserted is the revision row's own column and
+// the span asserted is the revision's own first span, which is what every citation of that revision already opens.
+describe("a document's own metadata as typed facts", () => {
+  // Both readings of "the scope's revisions" are given, so this binds whichever the carrier reads: the tags, and
+  // the ids resolveScope puts on the scope.
+  const withDocuments: Scope = { ...scope, document_ids: ["doc-ds-9901a"], revision_ids: ["rev-ds-3"] };
+
+  it("serves the datasheet's revision and its approval status, each on the revision's own first span", async () => {
+    const out = await typedFacts(db, withDocuments, null, { question: "Which revision of the GA-9901A datasheet is cited, and is it approved?" });
+    const revision = revisions.find((r) => r.id === "rev-ds-3");
+    if (revision === undefined) throw new Error("fixture: no rev-ds-3");
+    // sp-ds-1 is the first span of rev-ds-3 by page then ordinal, which is what firstSpanOfRevisions returns.
+    const onTitleBlock = out.typed_facts.filter((f) => f.source.span_id === "sp-ds-1");
+    expect(onTitleBlock.map((f) => f.value_text)).toEqual(expect.arrayContaining([revision.revision, revision.approvalStatusText]));
+    for (const f of onTitleBlock) {
+      expect(f.source.doc_no).toBe("SYN-DS-GA-9901A");
+      expect(f.source.revision).toBe(revision.revision);
+    }
   });
 });
 

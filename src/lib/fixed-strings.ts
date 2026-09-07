@@ -110,3 +110,31 @@ export function familyLinkBasis(familyId: string, label: string, tags: readonly 
 
 /** 6.2 surface 10, AC-EVAL-03: a golden-set category the latest ingested run holds no case for. */
 export const NO_CASES_IN_CATEGORY = "No case of this category ran in this run.";
+
+// ---------------------------------------------------------------------------------------------------------------
+// The offline export (blueprint 9.12, ARCHITECTURE 11, AC-DEL-01). The reviewer landing is the one screen the
+// export authors rather than captures, so its wordings live here with every other fixed wording of the build.
+// ---------------------------------------------------------------------------------------------------------------
+
+/** 9.12: the deployment the export points at; D-07 leaves it as the export's only address. */
+export const EXPORT_LIVE_URL = "https://thehub-3v.vercel.app";
+
+/** 9.12, section 2.1: what the file is, stated on the first screen before anything is clicked. */
+export const EXPORT_OFFLINE_LINE =
+  "This file is self-contained. It opens from a local disk with the network switched off, and it makes no external request of any kind.";
+
+/** Section 2, Replay: stated on the first screen and beside every answer the export shows. */
+export const EXPORT_REPLAY_LINE =
+  "Every model output in this file is replayed from storage. Each was produced once by the pipeline over the seeded corpus, recorded with its provenance, and is served here from that record; nothing in this file calls a model.";
+
+/** 9.12: the export carries the surfaces as they rendered, and says what a static copy cannot do. */
+export const EXPORT_READONLY_LINE =
+  "Each surface below is the deployment's own render, captured as it stood. Reading works; typing a new question, publishing a draft and every other write belongs to the live deployment.";
+
+// ---------------------------------------------------------------------------------------------------------------
+// The submission deliverables (blueprint 9.12, the PRD's 26.4). One wording lives here because two artefacts must
+// agree on it: the deck renders it on the Team Profile page and tools/presubmit.sh check 6 greps this file for it.
+// ---------------------------------------------------------------------------------------------------------------
+
+/** D-08: the faculty supervisor's name is withheld by owner decision, so slide 7 carries this labelled line. */
+export const SUPERVISOR_LINE = "Faculty supervisor: as registered with the CALIBER 2026 Committee";

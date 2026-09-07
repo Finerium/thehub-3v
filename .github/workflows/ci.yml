@@ -165,6 +165,17 @@ jobs:
             echo "deck build skipped: no team facts on this runner"
           fi
 
+      # D-25: the three artefacts are not tracked, so this checkout carries none of them. The export rebuilds here
+      # from the deployment with the demo Engineer, which is the same walk `pnpm export:demo` runs locally, so the
+      # budget, the banned strings and the offline walk below measure a real artefact rather than skipping. A fork's
+      # pull request has no demo password, and the checks that need the file skip themselves there.
+      - name: Build the export from the deployment (AC-DEL-01)
+        if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          EXPORT_BASE_URL: https://thehub-3v.vercel.app
+          DEMO_ENGINEER_PASSWORD: ${{ secrets.DEMO_ENGINEER_PASSWORD }}
+        run: pnpm exec tsx scripts/export/build.ts
+
       - name: The deck and the video contracts (AC-DEL-02, AC-DEL-03, AC-DEL-06)
         run: pnpm exec vitest run --project unit tests/unit/deck.test.ts tests/unit/video.test.ts
 
@@ -183,6 +194,7 @@ jobs:
       # read-only surface of 6.2 and asserts that nothing was asked for. A checkout without the built export fails
       # here rather than skipping, because an export nobody can open is the one result a judge would find first.
       - name: The offline export opens from file:// and reaches every surface (AC-DEL-01)
+        if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
         run: pnpm exec playwright test --project=export
 
       - name: Keep the Playwright report of the offline export walk
@@ -374,10 +386,13 @@ jobs:
         env:
           HARNESS_BUNDLE: ${{ github.workspace }}/../thehub-harness/bundle
         run: |
+          set -o pipefail # tee must not swallow a red gate
           pnpm exec vitest run tests/equality/coverage.test.ts --project unit --reporter verbose \
             | tee "$RUNNER_TEMP/equality.log"
           grep -q "the coverage port equals the harness bundle" "$RUNNER_TEMP/equality.log"
-          ! grep -q "the coverage equality gate is skipped" "$RUNNER_TEMP/equality.log"
+          # the marker the skipped gate prints itself, not the title of the skipped block, which the verbose
+          # reporter lists in every run
+          ! grep -q "SKIPPED tests/equality/coverage.test.ts" "$RUNNER_TEMP/equality.log"
 
       - name: Wait for the Neon proxy in front of the service container
         run: |

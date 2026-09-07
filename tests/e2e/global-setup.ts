@@ -5,11 +5,33 @@
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import { request, type FullConfig } from "@playwright/test";
-import { STATE_PATH } from "../../playwright.config";
+import { OFFLINE_PROJECT, STATE_PATH } from "../../playwright.config";
 
 const USERNAME = "engineer_demo";
 
+/**
+ * The projects a run selected. Playwright hands the global setup every configured project rather than the filtered
+ * set, so the selection is read from the command line the runner was started with, in both spellings the CLI takes.
+ */
+function selectedProjects(argv: readonly string[]): string[] {
+  const names: string[] = [];
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i] as string;
+    if (arg.startsWith("--project=")) names.push(arg.slice("--project=".length));
+    else if (arg === "--project" && argv[i + 1] !== undefined) names.push(argv[i + 1] as string);
+  }
+  return names;
+}
+
 export default async function globalSetup(config: FullConfig): Promise<void> {
+  // The offline export project opens a file and aborts every network route, so a run that selects it alone signs
+  // in to nothing: Tier A checks AC-DEL-01 on a runner that holds no credential and has no deployment to hold one
+  // against. Every other selection, the default included, still needs the session below.
+  const selected = selectedProjects(process.argv);
+  if (selected.length > 0 && selected.every((name) => name === OFFLINE_PROJECT)) {
+    console.log(`e2e: ${OFFLINE_PROJECT} only, no session is minted (the export reaches no server)`);
+    return;
+  }
   const baseURL = config.projects[0]?.use.baseURL ?? process.env.PLAYWRIGHT_BASE_URL;
   if (!baseURL) throw new Error("no baseURL: set PLAYWRIGHT_BASE_URL");
   const password = process.env.DEMO_ENGINEER_PASSWORD;

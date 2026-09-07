@@ -107,6 +107,12 @@ export type Band = EvidencePacket["confidence"]["band"];
 /** A start permissive (9.3 StartPermissive, the PermissiveGate row) with its citation. */
 export type PermissiveItem = StartPermissive & { citation: Citation };
 
+/**
+ * A proof-test record of the function (9.4). The block carries the whole history of the scope in completion-date
+ * order and marks the last of each class on the item; the readiness summary of AC-ANS-16 is the typed fact built
+ * from the marked one, so a question about the record ("when was SEQ-4501 last proof-tested") is answered without
+ * hiding the five records behind the one (the diagnosis of 2026-09-07, the proof-test block's content policy).
+ */
 export type ProofTestItem = {
   wo_number: string;
   seq_id: string | null;
@@ -116,6 +122,8 @@ export type ProofTestItem = {
   result_text: string;
   as_found: string | null;
   as_left: string | null;
+  /** Whether this is the most recent record of its class for the asset (the readiness answer of AC-ANS-16). */
+  last_of_class: boolean;
   citation: Citation;
 };
 
@@ -135,6 +143,14 @@ export type InterlockRowItem = {
   voting: string | null;
   sil_text: string | null;
   setpoint_text: string;
+  /**
+   * The sheet the row is on and where the asset sits, from the typed columns the sheet's header states. Optional:
+   * the refusal lane builds its initiator row from the sheet alone (src/answer/outcome.ts) and states the sheet on
+   * Refusal.function instead, so the identity rides the item only where the typed layer builds it.
+   */
+  ce_doc_no?: string | null;
+  ce_revision?: string | null;
+  functional_location?: string | null;
   fact: TypedFact;
 };
 
@@ -156,12 +172,23 @@ export type EffectItem = {
 
 export type ResetNoteItem = { n: number; text: string; citation: Citation };
 
-/** A work order as a block item: its identity, its typed columns and the four narrative fields it was written in. */
+/**
+ * A work order as a block item: its identity, its typed columns and the four narrative fields it was written in.
+ * The outcome columns (priority, criticality, who executed it, the downtime and the cost) are the row's own, and a
+ * column the workbook left empty renders as the empty string rather than disappearing: an unfilled closeout is
+ * what CD-4 is about, and a packet that drops the column cannot say the column is empty (the diagnosis of
+ * 2026-09-07: the packet declared no downtime for a job whose downtime sits in the same table).
+ */
 export type WorkOrderItem = {
   wo_number: string;
   report_date: string;
   work_type: string;
   discipline: string;
+  priority: string;
+  criticality: string;
+  executed_by_alias: string;
+  downtime_hours: number | null;
+  total_cost_idr: number | null;
   related_interlock: string | null;
   breakdown_kind: "unplanned" | "planned_flagged" | "none";
   closeout_complete: boolean;
@@ -194,6 +221,12 @@ export type LessonItem = {
   classification: "Basic Knowledge" | "Improvement" | "Trouble Case";
   aspect: string;
   discipline: string;
+  /**
+   * The sheet's own head lines, each written as the lesson prints it ("Equipment GA-1201A - HEXANE FEED PUMP",
+   * "Area / Unit 1200 - HEXANE FEED SYSTEM"): the field name is the form's, the value is the stored column, and the
+   * title-block span the item cites is the span those lines are on.
+   */
+  header_lines: string[];
   related_interlock_text: string;
   sections: Array<{ n: number; heading: string; body_text: string }>;
   footer: Opl["footer"];
@@ -229,8 +262,13 @@ export type ReturnToServiceItem = {
 
 export type StepItem = { n: number; text: string; acceptance_criterion: string | null; hash_ok: true; citation: Citation };
 
+/**
+ * A bill-of-material row: either a part string a work order asked for, matched against the asset's general
+ * arrangement drawing, or a row of that drawing's own bill of material read directly (`wo_number` null), which is
+ * the only path by which a drawing becomes a cited document of an answer that names no work order.
+ */
 export type BomPartItem = {
-  wo_number: string;
+  wo_number: string | null;
   part_string: string;
   status: "matched" | "unmatched";
   item_no: number | null;
@@ -265,6 +303,28 @@ export type PrecedentItem = {
   review_status: "reviewed" | "pending";
   member_wo_numbers: string[];
   citation: Citation;
+};
+
+/**
+ * One reading of a P&ID sheet, as the contradictions carrier of 9.8 receives it (deviation D-12, ADR-007). The
+ * sheets are images with no extracted text, so the reading has no span and therefore no Citation of its own: it is
+ * named in the contradiction's `subject` beside its transcription basis and its review status, and the `readings`
+ * array carries only what the governing typed sheet states, under that sheet's own citation. Nothing here is ever
+ * given a citation that belongs to another document.
+ */
+export type SidecarReading = {
+  /** The P&ID set number, which is how the golden set and the corpus name the sheet ("P&ID Set 3"). */
+  set: number;
+  /** The asset the sheet is drawn for, from its document's subject_tag; null where the document names none. */
+  subject_tag: string | null;
+  /** The sidecar's own rule name for the conflict ("label_vs_ce_mismatch", "wrong_seq_citation", ...). */
+  rule: string;
+  /** The sidecar's own sentence, verbatim: what the sheet draws and what the typed document states instead. */
+  detail: string;
+  /** provenance.basis of the sidecar ("agent_transcription" for every adopted sheet, D-12). */
+  basis: string;
+  /** provenance.review_status ("pending" until a human review is recorded). */
+  review_status: string;
 };
 
 export type DocumentedResponseItem = {

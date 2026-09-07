@@ -4,6 +4,7 @@
 // needs the network to render is a page that fails on a judge's laptop with the wi-fi off.
 import { chromium } from "@playwright/test";
 import { pathToFileURL } from "node:url";
+import { writeFileSync } from "node:fs";
 const file = pathToFileURL(process.argv[2]).href;
 const browser = await chromium.launch();
 const context = await browser.newContext({ offline: true });
@@ -25,5 +26,9 @@ const surfaces = await page.evaluate(() =>
   [...new Set([...document.querySelectorAll("[data-x-route]")].map((el) => el.getAttribute("data-x-route")))],
 );
 const snapshot = await page.evaluate(() => !!document.querySelector('script[type="application/json"], #snapshot'));
-console.log(JSON.stringify({ external, errors, surfaces, snapshot }));
+const report = JSON.stringify({ external, errors, surfaces, snapshot });
+// argv[3], when given, is where the report is written: a caller that reads a file cannot be confused by a
+// line some other tool wrote to this process's stdout.
+if (process.argv[3]) writeFileSync(process.argv[3], report);
+console.log(report);
 await browser.close();

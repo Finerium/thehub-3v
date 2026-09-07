@@ -1,0 +1,51 @@
+{
+  "note": "The tallies of the last complete golden run (tier A and tier B), as the runner reported them. Regenerated from the runner report after every full run; the README prints from this file and the Evaluation surface publishes the same run with its per-case failures.",
+  "recorded": "2026-09-07",
+  "base_url": "https://thehub-3v.vercel.app",
+  "deployment": "1bc744a",
+  "corpus_version": "cv-1.0.1-b5eb2fb76d26",
+  "tiers": [
+    "A",
+    "B"
+  ],
+  "cases": 102,
+  "pass": 5,
+  "fail": 84,
+  "skipped": 13,
+  "hard_gates_present": 16,
+  "hard_gates_pass": 5,
+  "by_tier": {
+    "A": {
+      "cases": 50,
+      "pass": 5,
+      "fail": 38,
+      "skipped": 7,
+      "hard_gates_present": 15,
+      "hard_gates_pass": 5,
+      "hard_gates_skipped": 1
+    },
+    "B": {
+      "cases": 52,
+      "pass": 0,
+      "fail": 46,
+      "skipped": 6,
+      "hard_gates_present": 1,
+      "hard_gates_pass": 0
+    }
+  },
+  "leading_failing_checks": {
+    "string_present": 131,
+    "expected.must_contain": 83,
+    "citation_resolves": 73,
+    "expected.must_cite": 72,
+    "expected.outcome": 51,
+    "numeral_fidelity": 19,
+    "expected.numerals_allowed": 19,
+    "hash_render": 13
+  },
+  "skipped_reason": "the case carries a setup the runner cannot satisfy (a published draft, an injected string, an outbound draft); GS-72 is hard-gated, so one gate is unproved rather than failed",
+  "not_evaluated": {
+    "checks": 196,
+    "reason": "the check's arguments reach outside the ask lane (the corpus, the packages, the rule-pack port, a draft, the export or the coverage console); counted as neither pass nor fail"
+  }
+}

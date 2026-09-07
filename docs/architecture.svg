@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 742" width="1180" height="742" role="img" aria-labelledby="t d" font-family="IBM Plex Sans, Segoe UI, Helvetica, Arial, sans-serif">
+  <title id="t">The Hub: three lanes over three repositories</title>
+  <desc id="d">The build lane ingests the corpus into typed packages and a hash-admitted bundle that seeds one corpus version. The answer lane classifies safety intent in code, retrieves, composes, verifies question-blind and passes six gate checks before a packet is served with its trace. The self-healing lane measures which failure knowledge no lesson covers, drafts the missing lesson, routes it through a human review chain and publishes it as a new corpus version, which the build lane then serves.</desc>
+
+  <rect width="1180" height="742" fill="#FAF9F7"/>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#46423C"/>
+    </marker>
+    <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1E4FD8"/>
+    </marker>
+  </defs>
+
+  <g fill="#1F1D1A">
+    <text x="30" y="38" font-size="21" font-weight="600">The Hub</text>
+    <text x="128" y="38" font-size="15" fill="#46423C">three lanes, one corpus version, three repositories</text>
+  </g>
+  <line x1="30" y1="52" x2="1150" y2="52" stroke="#E3DFD8" stroke-width="1"/>
+
+  <!-- lane headers -->
+  <g font-size="13" font-weight="600" letter-spacing="0.6">
+    <rect x="30" y="70" width="340" height="26" rx="13" fill="#EFEBE4" stroke="#E3DFD8"/>
+    <text x="46" y="87" fill="#1F1D1A">1 &#183; BUILD</text>
+    <text x="140" y="87" font-weight="400" font-size="11.5" fill="#6E6862">offline, versioned, hash-admitted</text>
+
+    <rect x="420" y="70" width="340" height="26" rx="13" fill="#EFEBE4" stroke="#E3DFD8"/>
+    <text x="436" y="87" fill="#1F1D1A">2 &#183; ANSWER</text>
+    <text x="540" y="87" font-weight="400" font-size="11.5" fill="#6E6862">provenance or nothing</text>
+
+    <rect x="810" y="70" width="340" height="26" rx="13" fill="#EFEBE4" stroke="#E3DFD8"/>
+    <text x="826" y="87" fill="#1F1D1A">3 &#183; SELF-HEALING</text>
+    <text x="962" y="87" font-weight="400" font-size="11.5" fill="#6E6862">a human publishes, always</text>
+  </g>
+
+  <!-- lane 1: build -->
+  <g font-size="12.5">
+    <g>
+      <rect x="30" y="112" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="46" y="132" fill="#1F1D1A">98 controlled documents, 8 equipment tags</text>
+      <text x="46" y="148" font-size="11" fill="#6E6862">thehub-corpus, private, read-only deploy key</text>
+    </g>
+    <line x1="200" y1="156" x2="200" y2="172" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="30" y="174" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="46" y="194" fill="#1F1D1A">one extractor, one canonical form</text>
+      <text x="46" y="210" font-size="11" fill="#6E6862">pdftotext -raw 26.02.0, NFKC, pinned in CI</text>
+    </g>
+    <line x1="200" y1="218" x2="200" y2="234" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="30" y="236" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="46" y="256" fill="#1F1D1A">typed packages keyed on the tag</text>
+      <text x="46" y="272" font-size="11" fill="#6E6862">datasheet rows, interlock rows, work orders, lessons, edges</text>
+    </g>
+    <line x1="200" y1="280" x2="200" y2="296" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="30" y="298" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="46" y="318" fill="#1F1D1A">bundle + manifest, every file by SHA-256</text>
+      <text x="46" y="334" font-size="11" fill="#6E6862">thehub-harness release, the same bytes the app seeds</text>
+    </g>
+    <line x1="200" y1="342" x2="200" y2="358" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="30" y="360" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#2F7A46"/>
+      <text x="46" y="380" fill="#1F1D1A">G1 admits or refuses the bundle</text>
+      <text x="46" y="396" font-size="11" fill="#2F7A46">both lanes, Python and TypeScript, same checks</text>
+    </g>
+    <line x1="200" y1="404" x2="200" y2="420" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="30" y="422" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="46" y="442" fill="#1F1D1A">one active corpus version</text>
+      <text x="46" y="458" font-size="11" fill="#6E6862">Postgres + pgvector; activation, never deletion</text>
+    </g>
+  </g>
+
+  <!-- lane 2: answer -->
+  <g font-size="12.5">
+    <g>
+      <rect x="420" y="112" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="436" y="132" fill="#1F1D1A">a question, English or Bahasa Indonesia</text>
+      <text x="436" y="148" font-size="11" fill="#6E6862">seeded chip, free text, or semantic search</text>
+    </g>
+    <line x1="590" y1="156" x2="590" y2="172" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="420" y="174" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#B3261E"/>
+      <text x="436" y="194" fill="#1F1D1A">rule pack classifies intent, in code</text>
+      <text x="436" y="210" font-size="11" fill="#B3261E">defeat / documented bypass / permanent change, before any model call</text>
+    </g>
+    <line x1="590" y1="218" x2="590" y2="234" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="420" y="236" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="436" y="256" fill="#1F1D1A">scope, retrieve, rerank</text>
+      <text x="436" y="272" font-size="11" fill="#6E6862">approved current revisions of the asset in scope</text>
+    </g>
+    <line x1="590" y1="280" x2="590" y2="296" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="420" y="298" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="436" y="318" fill="#1F1D1A">AG-2 composes, one claim per line</text>
+      <text x="436" y="334" font-size="11" fill="#6E6862">one gateway module is the only path to a provider</text>
+    </g>
+    <line x1="590" y1="342" x2="590" y2="358" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="420" y="360" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="436" y="380" fill="#1F1D1A">AG-4 verifies, question-blind</text>
+      <text x="436" y="396" font-size="11" fill="#6E6862">verdicts per sentence; the verifier never edits</text>
+    </g>
+    <line x1="590" y1="404" x2="590" y2="420" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="420" y="422" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#2F7A46"/>
+      <text x="436" y="442" fill="#1F1D1A">G2: C1 citation, C2 quote hash, C3 numerals,</text>
+      <text x="436" y="458" font-size="11" fill="#2F7A46">C4 approval, C5 outbound screen, C6 entailment</text>
+    </g>
+    <line x1="590" y1="466" x2="590" y2="482" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="420" y="484" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="436" y="504" fill="#1F1D1A">packet, or abstention, or refusal</text>
+      <text x="436" y="520" font-size="11" fill="#6E6862">every claim cited; a trace replays the whole decision</text>
+    </g>
+  </g>
+
+  <!-- lane 3: self-healing -->
+  <g font-size="12.5">
+    <g>
+      <rect x="810" y="112" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="826" y="132" fill="#1F1D1A">coverage console, two layers, three bands</text>
+      <text x="826" y="148" font-size="11" fill="#6E6862">14 of 57 with no lesson, 41 of 57 with a copied row at most</text>
+    </g>
+    <line x1="980" y1="156" x2="980" y2="172" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="810" y="174" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="826" y="194" fill="#1F1D1A">an uncovered cluster, ranked</text>
+      <text x="826" y="210" font-size="11" fill="#6E6862">its coefficients labelled ASSUMPTION, never as fact</text>
+    </g>
+    <line x1="980" y1="218" x2="980" y2="234" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="810" y="236" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#B5761A"/>
+      <text x="826" y="256" fill="#1F1D1A">AG-3 drafts into the house template</text>
+      <text x="826" y="272" font-size="11" fill="#B5761A">machine-drafted, provenance on every element</text>
+    </g>
+    <line x1="980" y1="280" x2="980" y2="296" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="810" y="298" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="826" y="318" fill="#1F1D1A">verbatim and numeric checks, then the redline</text>
+      <text x="826" y="334" font-size="11" fill="#6E6862">no work-order narrative copied; no number invented</text>
+    </g>
+    <line x1="980" y1="342" x2="980" y2="358" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="810" y="360" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="826" y="380" fill="#1F1D1A">REQUIRES ENGINEER INPUT, filled by an SME</text>
+      <text x="826" y="396" font-size="11" fill="#6E6862">the value the corpus does not carry is asked for, not guessed</text>
+    </g>
+    <line x1="980" y1="404" x2="980" y2="420" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="810" y="422" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#2F7A46"/>
+      <text x="826" y="442" fill="#1F1D1A">G3: the Manager publishes, one transaction</text>
+      <text x="826" y="458" font-size="11" fill="#2F7A46">Prepared, Reviewed, Approved; Admin may do none of it</text>
+    </g>
+    <line x1="980" y1="466" x2="980" y2="482" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+    <g>
+      <rect x="810" y="484" width="340" height="44" rx="8" fill="#FFFFFF" stroke="#1E4FD8"/>
+      <text x="826" y="504" fill="#1F1D1A">corpus version increments, both layers recount</text>
+      <text x="826" y="520" font-size="11" fill="#1E4FD8">the same question now answers from a lesson that did not exist</text>
+    </g>
+  </g>
+
+  <!-- the loop back into the build lane -->
+  <path d="M810 506 L790 506 L790 560 L200 560 L200 470" fill="none" stroke="#1E4FD8" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ac)"/>
+  <text x="470" y="553" font-size="11.5" fill="#1E4FD8">the published lesson becomes the next corpus version</text>
+
+  <!-- the answer lane reads the active version -->
+  <path d="M370 444 L395 444 L395 258 L416 258" fill="none" stroke="#46423C" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#a)"/>
+
+  <line x1="30" y1="588" x2="1150" y2="588" stroke="#E3DFD8" stroke-width="1"/>
+  <text x="30" y="612" font-size="13" font-weight="600" fill="#1F1D1A">Three repositories</text>
+
+  <g font-size="12.5">
+    <g>
+      <rect x="30" y="626" width="340" height="86" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="46" y="648" fill="#1E4FD8" font-family="IBM Plex Mono, SFMono-Regular, Menlo, monospace">thehub-corpus</text>
+      <text x="46" y="668" font-size="11" fill="#6E6862">private. The organiser's files and their SHA-256</text>
+      <text x="46" y="684" font-size="11" fill="#6E6862">inventory. Read by CI through a read-only deploy</text>
+      <text x="46" y="700" font-size="11" fill="#6E6862">key; never vendored into a public repository.</text>
+    </g>
+    <g>
+      <rect x="420" y="626" width="340" height="86" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="436" y="648" fill="#1E4FD8" font-family="IBM Plex Mono, SFMono-Regular, Menlo, monospace">thehub-harness</text>
+      <text x="436" y="668" font-size="11" fill="#6E6862">public. Python reference implementation: ingestion,</text>
+      <text x="436" y="684" font-size="11" fill="#6E6862">the frozen coverage recipe, the rule-pack matcher,</text>
+      <text x="436" y="700" font-size="11" fill="#6E6862">the golden set, the fixture, the bundle, contracts/.</text>
+    </g>
+    <g>
+      <rect x="810" y="626" width="340" height="86" rx="8" fill="#FFFFFF" stroke="#E3DFD8"/>
+      <text x="826" y="648" fill="#1E4FD8" font-family="IBM Plex Mono, SFMono-Regular, Menlo, monospace">thehub-3v</text>
+      <text x="826" y="668" font-size="11" fill="#6E6862">public, this repository. The Next.js application,</text>
+      <text x="826" y="684" font-size="11" fill="#6E6862">the gateway, the TypeScript ports of the recipe and</text>
+      <text x="826" y="700" font-size="11" fill="#6E6862">the rule pack, the gates, the surfaces, the export.</text>
+    </g>
+  </g>
+
+  <path d="M370 660 L416 660" fill="none" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+  <path d="M760 660 L806 660" fill="none" stroke="#46423C" stroke-width="1.4" marker-end="url(#a)"/>
+  <text x="372" y="652" font-size="10.5" fill="#6E6862">deploy key</text>
+  <text x="762" y="652" font-size="10.5" fill="#6E6862">bundle</text>
+</svg>

@@ -39,9 +39,9 @@ describe("gateResults (9.7)", () => {
 
 describe("promptsOf and modelIdsOf (AC-NFR-09)", () => {
   it("names each role's prompt file version and the sha256 of its bytes", () => {
-    // AG-2 is on v2 since the evidence-set revision (src/gateway/config.test.ts pins the file and its hash).
+    // AG-2 is on v3 since the yield revision (src/gateway/config.test.ts pins the file and its hash).
     expect(promptsOf(["AG-2", "AG-4"])).toEqual([
-      { role: "AG-2", version: "v2", sha256: PROMPTS["AG-2"].version },
+      { role: "AG-2", version: "v3", sha256: PROMPTS["AG-2"].version },
       { role: "AG-4", version: "v2", sha256: PROMPTS["AG-4"].version },
     ]);
     expect(promptsOf([])).toEqual([]);

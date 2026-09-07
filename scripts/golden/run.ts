@@ -23,6 +23,7 @@
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
+import { SANDBOX_COOKIE } from "../../src/auth/cookie";
 import { ROLE_TABLE, TASKS } from "../../src/gateway/config";
 import { seededVersionFromBundle } from "../../src/lib/version-id";
 import { packVersion } from "../../src/rulepack";
@@ -32,6 +33,7 @@ import { ask, health, login, readTrace, LoginFailed, type Role } from "./client"
 import { runCheck, type CheckContext } from "./checks";
 import { resolves } from "./checks/citation_resolves";
 import { evaluationPayload, write, type Failure, type Report, type Result, type Run } from "./report";
+import { cookieValue, SetupDriver, withCookie } from "./setup";
 import { citationsOf, citedDocuments, renderedNumerals, textAt, type Answer } from "./view";
 
 const ROOT = path.resolve(import.meta.dirname, "..", "..");
@@ -186,16 +188,27 @@ async function main(): Promise<number> {
   if (readAudit === null) console.log("no database in reach: every audit_event check will report unsupported");
 
   const sessions = new Map<Role, string>();
+  // One sandbox for the whole run (D-16, ARCHITECTURE 8.5): every login issues its own, and the draft the Supervisor
+  // stages has to be the draft the Manager publishes and the Engineer's ask sees. Nothing outside this sandbox moves.
+  let sandbox: string | null = null;
   const sessionFor = async (role: Role): Promise<string> => {
     const known = sessions.get(role);
     if (known) return known;
-    const cookie = await login(options.baseUrl, role);
+    const fresh = await login(options.baseUrl, role);
+    if (sandbox === null) sandbox = cookieValue(fresh, SANDBOX_COOKIE);
+    const cookie = sandbox === null ? fresh : withCookie(fresh, SANDBOX_COOKIE, sandbox);
     sessions.set(role, cookie);
     return cookie;
   };
 
   const results: Result[] = [];
   const answers = new Map<string, Answer>();
+  const driver = new SetupDriver({
+    baseUrl: options.baseUrl,
+    session: sessionFor,
+    cases: new Map(all.map((c) => [c.id, c] as const)),
+    answered: (id) => answers.has(id),
+  });
 
   for (const goldenCase of chosen) {
     const base = {
@@ -208,11 +221,17 @@ async function main(): Promise<number> {
       unsupported: [] as Failure[],
     };
 
-    // A setup names a state the case assumes (a published draft, a seeded fixture, an injected string). The runner
-    // drives POST /api/ask alone, so it satisfies none of them and says so rather than running the case blind.
+    // A setup names a state the case assumes (a draft in a state, a published lesson, a seeded fixture, an injected
+    // string). ./setup.ts stages the two the product's own routes reach, inside this run's sandbox, and says which
+    // of the three it decided; a case it could not stage is skipped with the reason, as every one of them was before.
     if (goldenCase.input.setup) {
-      results.push({ ...base, pass: false, verdict: "skipped", failures: [], skipped_reason: `setup not satisfied by the runner: ${goldenCase.input.setup}`, trace_id: null, latency_ms: 0, line1_ms: null });
-      continue;
+      const staged = await driver.stage(goldenCase);
+      if (staged.decision === "skip") {
+        results.push({ ...base, pass: false, verdict: "skipped", failures: [], skipped_reason: staged.reason, trace_id: null, latency_ms: 0, line1_ms: null });
+        console.log(`${goldenCase.id} ${goldenCase.tier} ${goldenCase.hard_gate ? "gate " : "     "}SKIP ${staged.reason}`);
+        continue;
+      }
+      base.notes.push(`setup ${staged.decision}: ${staged.note}`);
     }
 
     const wanted = goldenCase.input.role ?? "Engineer";

@@ -138,11 +138,11 @@ describe("the envelope's evidence is the one evidence set (blueprint 9.8, 9.16; 
   });
 });
 
-describe("the AG-2 prompt the gateway sends with that envelope (prompts/AG-2/v2.md)", () => {
+describe("the AG-2 prompt the gateway sends with that envelope (prompts/AG-2/v3.md)", () => {
   const text = PROMPTS["AG-2"].text;
 
-  it("is version 2 and states that the evidence list is the whole set, typed-fact spans included", () => {
-    expect(text).toContain("# AG-2 Composer, prompt version 2");
+  it("is version 3 and states that the evidence list is the whole set, typed-fact spans included", () => {
+    expect(text).toContain("# AG-2 Composer, prompt version 3");
     expect(text).toContain(
       "`evidence` is the whole evidence set of this answer: the retrieved passages first, then the span each typed fact was read from, each with the text of that span.",
     );
@@ -157,5 +157,62 @@ describe("the AG-2 prompt the gateway sends with that envelope (prompts/AG-2/v2.
   it("never asks for a claim about approval status, which v1 did (rule 5 of v1 is gone)", () => {
     expect(text).not.toContain("Approval status is part of the evidence.");
     expect(text).toContain("Never write a claim whose subject is one of them");
+  });
+
+  // The three yield rules v3 adds, each against the failure class the golden run of 2026-09-07 measured: one
+  // sentence per distinct fact, the whole evidence list rather than the first document that answers, and no empty
+  // claims array over a non-empty evidence set. The last is the rule compose() below enforces in code.
+  it("asks for one sentence per fact, the whole evidence list, and never an empty answer over evidence", () => {
+    expect(text).toContain("One sentence, one fact.");
+    expect(text).toContain("Cover the question across the whole evidence list, do not summarise.");
+    expect(text).toContain("Never answer with nothing.");
+    expect(text).toContain("An empty `claims` array on a non-empty evidence set is a failed reply, not an abstention");
+    expect(text).toContain('An empty `claims` array with `suggested_outcome` "abstention" is a valid output only when the `evidence` list itself is empty.');
+  });
+});
+
+// The diagnosis of 2026-09-07, rank 3: the composer spent a fraction of the evidence it was given, and in
+// twenty-five traces it returned an empty claims array on the first call over a full evidence set. 9.16 rule 7
+// makes that a failed reply, so the lane treats it as one and asks again inside its own two-call ceiling.
+describe("an empty claims array (9.16 rule 7)", () => {
+  const reply = (claims: AG2Output["claims"], gaps: string[] = []) => ({
+    outcome: "ok" as const,
+    data: AG2Output.parse({ claims, gaps, suggested_outcome: "abstention" }),
+    call: gatewayCall("AG-2", "ok"),
+  });
+
+  it("over a non-empty evidence set is handed back as parse_failed, which is what the caller retries on", async () => {
+    gw.invoke.mockResolvedValue(reply([], ["No span states the setpoint."]));
+    const result = await compose(input, 0);
+    expect(result.outcome).toBe("parse_failed");
+    expect(result.claims).toEqual([]);
+    expect(result.suggested_outcome).toBe("abstention");
+    // The gaps of the failed reply are kept: they are the composer's own account of what it could not write.
+    expect(result.gaps).toEqual(["No span states the setpoint."]);
+    // The gateway row keeps the transport's truth: the provider answered and the reply parsed.
+    expect(result.call.outcome).toBe("ok");
+    expect(MAX_COMPOSER_CALLS).toBe(2);
+  });
+
+  it("over an empty evidence set is the abstention it says it is, and is never retried", async () => {
+    gw.invoke.mockResolvedValue(reply([]));
+    const result = await compose({ ...input, chunks: [] }, 0);
+    expect(result.outcome).toBe("ok");
+    expect(result.claims).toEqual([]);
+    expect(result.suggested_outcome).toBe("abstention");
+  });
+
+  it("is the empty array alone that fails: one claim over the same evidence is an ok round", async () => {
+    gw.invoke.mockResolvedValue({ outcome: "ok" as const, data: AG2Output.parse({ ...composerReply, claims: composerReply.claims.slice(0, 1) }), call: gatewayCall("AG-2", "ok") });
+    const result = await compose(input, 0);
+    expect(result.outcome).toBe("ok");
+    expect(result.claims.map((c) => c.id)).toEqual(["s1"]);
+  });
+
+  it("on the repair round it fails the same way, so the caller keeps what round 0's gate kept", async () => {
+    gw.invoke.mockResolvedValue(reply([]));
+    const result = await compose({ ...input, repair: { verdicts: [{ sentence_id: "s1", verdict: "not_entailed", span_id: null, reason: "The span does not state the value." }] } }, 1);
+    expect(result.outcome).toBe("parse_failed");
+    expect(result.claims).toEqual([]);
   });
 });

@@ -32,8 +32,9 @@ export const TASKS: readonly Task[] = [...CHAT_TASKS, "embedding"];
 
 export const PROMPT_FILES: Record<ChatTask, string> = {
   "AG-1": "AG-1/v1.md",
-  "AG-2": "AG-2/v2.md", // v1.md is kept as history; v2 states that a citation comes only from the evidence list,
-  // that a typed fact's value is stated with its own span_id, and that document metadata is never a claim.
+  "AG-2": "AG-2/v3.md", // v1.md and v2.md are kept as history; v3 keeps every rule of v2 and adds the yield rules
+  // the golden set measured missing: one sentence per distinct fact with the one span that carries it, the whole
+  // evidence list covered rather than summarised, and no empty claims array on a non-empty evidence set.
   "AG-3": "AG-3/v2.md", // v1.md is kept as history; v2 adds the output budget the six-section house template
   // implies (one line per element, a cap per section, no restatement) and says to read a lesson from its steps.
   "AG-4": "AG-4/verify/v2.md", // v1.md is kept as history; v2 weighs a sentence against its spans together (9.8)
@@ -164,12 +165,23 @@ export const ROLE_TABLE: Record<Task, RoleConfig> = {
     prompt_version: PROMPTS["AG-1"].version,
     budget: BUDGETS["AG-1"],
   },
+  // Under prompt v3 the composer writes one sentence per distinct fact and covers the whole evidence list, so its
+  // reply is longer than the reply v2 produced, and both of this row's ceilings were sized for v2. Measured over
+  // the 372 ok AG-2 calls of the three days to 2026-09-07 (gateway_call): output_tokens min 33, mean 236, max 1102,
+  // and latency 1.2 s to 19.4 s, with 17.0 s, 18.0 s and 18.2 s among the completed replies. A 19.4 s reply against
+  // a 20 s cut is a reply that was 0.6 s from being killed. The v3 replies measured on the three composer-empty
+  // cases the same day (19 ok calls) run 172 to 571 output tokens at 2.5 s to 12.9 s, but those are three case
+  // shapes of fifty and none of them is one of the fact-heavy readiness questions, where one sentence per fact over
+  // thirty typed facts is the longest reply this role will ever write. So both ceilings move to leave that reply
+  // room: truncation costs a whole round (the reply does not parse, the caller retries and pays twice) and a
+  // timeout costs three attempts, while an unreached ceiling costs nothing at all. The slow path of one answer
+  // stays inside the route's maxDuration 120: composer 35 plus verify 20 plus repair 35 plus verify 20 is 110 s.
   "AG-2": {
     role: "AG-2",
     ...ZAI_CHAT,
     effort: "low",
-    max_tokens: 2048,
-    timeout_ms: 20_000,
+    max_tokens: 4096,
+    timeout_ms: 35_000,
     prompt_version: PROMPTS["AG-2"].version,
     budget: BUDGETS["AG-2"],
   },

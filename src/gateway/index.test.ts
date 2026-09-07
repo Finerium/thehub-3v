@@ -113,7 +113,8 @@ describe("a call that succeeds", () => {
       thinking: { type: "enabled" },
       reasoning_effort: "low",
       temperature: 0,
-      max_tokens: 2048,
+      // The row's own ceiling, not a literal: src/gateway/config.test.ts is where the number is pinned and argued.
+      max_tokens: ROLE_TABLE["AG-2"].max_tokens,
       stream: false,
     });
     expect((init?.headers as Record<string, string>).authorization).toBe("Bearer test");

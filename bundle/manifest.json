@@ -1,8 +1,8 @@
 {
- "bundle_version": "1.0.2",
+ "bundle_version": "1.0.3",
  "canonical_form_version": "1",
  "corpus_sha256": "918706e41dad6323819db1dca5b568e71a2f827a0cdc4d37b5e5ad735ffa61de",
- "created_at": "2026-09-07T09:27:19Z",
+ "created_at": "2026-09-07T16:25:23Z",
  "embedding_model": "Xenova/multilingual-e5-small",
  "extractor": "pdftotext -raw (pdftotext version 26.02.0)",
  "files": [
@@ -1947,9 +1947,9 @@
    "sha256": "903c2600c8b149f4b13f1c8433810b4dfac6e429f151cbb97fe3d9c8297d4891"
   },
   {
-   "bytes": 39219,
+   "bytes": 39496,
    "path": "rulepack/v1.json",
-   "sha256": "4eb4064376b759fb4e71308fe06958c8e222308761d096ff869d8da99e30c791"
+   "sha256": "741a0fa6ba1a7c270744ddc5f2045822775cc6c0ebcff3133dcc8323d1c3f485"
   },
   {
    "bytes": 284764,
@@ -1957,7 +1957,7 @@
    "sha256": "00c3525400c40558cb4a305faca9e251d52b00c9a8e97a1e70399ec1ac4da1cd"
   }
  ],
- "harness_commit": "57b98f699914b8c98c3224524c069dd911c779cc",
+ "harness_commit": "9809a7fd2840bfc318a90c772450c23db7ea9176",
  "recipe_sha256": "a16e70cf22ae9ca1699c95555842580d8e6a6ea844486d9b797d8d018c9c7680",
  "rulepack_version": "1",
  "stop_list_sha256": "8262d5122704987d0f503b4f3289c8081d31c0469415ec442099bba4185b3ea5"

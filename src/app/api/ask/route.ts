@@ -320,7 +320,6 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
     visible_version_ids: visible,
   });
   const evidence: Citation[] = retrieval.evidence;
-  const chunks: CitedText[] = retrieval.chunks.map((c) => ({ citation: c.citation, text: c.text }));
 
   const base = {
     trace_id: traceId,
@@ -430,6 +429,11 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
     if (composed.outcome === "parse_failed" && composerCalls < MAX_COMPOSER_CALLS) composed = await round(null, 0);
     if (composed.outcome === "parse_failed") composerFailed = true;
     else if (composed.outcome !== "ok") providerDown = true;
+    // The composer's own gaps, whatever the round was worth: a reply that parsed and carried no claim over a
+    // non-empty evidence set is a failed round (compose.ts emptyOnEvidence) but it still said what it found
+    // missing, and that sentence is the abstention's reason. Keeping this inside the ok branch made the double
+    // empty path abstain with the fixed composer_failed string instead (9.8 Abstention.reason).
+    gaps = composed.gaps;
 
     const gateRound = async (claims: typeof composed.claims) => {
       const verified = await verify(claims, spansById, caseOptions);
@@ -451,15 +455,23 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
 
     if (composed.outcome === "ok") {
       let gate = await gateRound(composed.claims);
-      gaps = composed.gaps;
       const repairable = gate.dropped.filter((d) => d.check === "C6" || d.check === "C3");
       if (repairable.length > 0 && !providerDown && composerCalls < MAX_COMPOSER_CALLS) {
         const verdicts = repairable.map((d) => verdictsAll.find((v) => v.sentence_id === d.claim.id && v.verdict !== ENTAILED) ?? { sentence_id: d.claim.id, verdict: "not_entailed" as const, span_id: null, reason: d.reason });
         const repaired = await round({ verdicts }, 1);
         repairRounds = 1;
         if (repaired.outcome === "ok") {
-          gate = await gateRound(repaired.claims);
-          gaps = repaired.gaps;
+          // AC-ANS-19: a second failure returns the entailed claims. The repair is asked to drop or reword the
+          // sentences the verdicts name and to reproduce every other one (prompt rule 12); a repair that comes
+          // back with fewer entailed sentences than the round it repaired has lost sentences AG-4 had already
+          // entailed, so that round's gate result and its gaps stand. Measured on GS-80: round 0 kept an entailed
+          // datasheet sentence, the repair replaced the whole set with one sentence, that one was dropped, and the
+          // answer abstained on evidence it had already verified. Nothing unverified is served either way.
+          const repairedGate = await gateRound(repaired.claims);
+          if (repairedGate.kept.length >= gate.kept.length) {
+            gate = repairedGate;
+            gaps = repaired.gaps;
+          }
         } else if (repaired.outcome !== "parse_failed") providerDown = true;
       }
       kept = gate.kept;
