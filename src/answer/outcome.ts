@@ -5,7 +5,7 @@
 // the procedure of a documented bypass served verbatim under its step hashes; the confidence inputs the band is
 // computed from (traced, AC-ANS-07); the fixed as-built caveat on every protective-function answer. Everything here
 // is deterministic over stored data and the gate's result; nothing calls a provider.
-import { and, asc, eq, inArray } from "drizzle-orm";
+import { and, asc, eq, inArray, or } from "drizzle-orm";
 import {
   Procedure,
   Refusal,
@@ -17,14 +17,16 @@ import {
 } from "@/contracts/generated/evidence_packet";
 import type { Role } from "@/contracts/generated/serving";
 import { db } from "@/db/client";
-import { debtCluster, documentRevision, documentTable, interlock, opl, oplStep, startPermissive } from "@/db/schema";
+import { debtCluster, documentRevision, documentTable, interlock, interlockRow, opl, oplStep, startPermissive } from "@/db/schema";
 import type { Dropped } from "@/gates/g2";
 import { writeAudit } from "@/lib/audit";
 import { HashMismatch } from "@/lib/errors";
 import { AS_BUILT_CAVEAT, MOC_TEXT, NO_ENTAILED_CLAIM_REASON, droppedSentencesGap } from "@/lib/fixed-strings";
 import { quoteHash } from "@/lib/hash";
 import { ROUTE_TEXT_NO_FUNCTION, pack, protectiveRow, routingText, tagsIn, tokens, type Classification } from "@/rulepack";
-import type { Scope, Template } from "./types";
+import { cite, loadSources } from "./permit";
+import { blockOf, orderFor, setpointQualifier, silTextOf } from "./templates";
+import type { EffectItem, InterlockRowItem, Scope, Template } from "./types";
 
 export type EscalationRole = Abstention["escalation_role"];
 
@@ -144,6 +146,94 @@ export async function refusalFor(c: Classification): Promise<Refusal> {
     rule_id: c.rule_id,
     matched_phrase: c.matched_phrase ?? "",
   });
+}
+
+/** The typed rows a refusal serves beside its route text: the sheet's own row layer, never a composed sentence. */
+export type RefusalEvidence = { typed_facts: TypedFact[]; blocks: Block[] };
+
+// The unit tests settle an unqueued fake-client chain with undefined; a read that returns nothing is simply no
+// evidence, never a throw on the refusal path (the refusal must render whatever else is missing).
+function rowsOf<T>(value: readonly T[] | undefined): readonly T[] {
+  return value ?? [];
+}
+
+/**
+ * The evidence of a refusal (9.8 Refusal, AC-ANS-08; the diagnosis of 2026-09-07, rank 8): keyed reads by seq id
+ * for the sheet the request targets, the trip row it names, the effects that row actuates in sheet order and the
+ * sheet's own notes as the qualifier. Deterministic, before any provider call and without retrieval, so the
+ * refusal shows the function it is protecting instead of asserting one. The Refusal shape itself does not change.
+ */
+export async function refusalEvidence(refusal: Refusal, question: string): Promise<RefusalEvidence> {
+  const fn = refusal.function;
+  if (fn === null) return { typed_facts: [], blocks: [] };
+  const sheets: Array<typeof interlock.$inferSelect> | undefined = await db
+    .select()
+    .from(interlock)
+    .where(or(eq(interlock.seqId, fn.seq_id), eq(interlock.equipmentTag, fn.seq_id)));
+  const found = rowsOf(sheets);
+  const sheet = found.find((s) => s.ceDocNo === fn.ce_doc_no) ?? found[0];
+  if (sheet === undefined) return { typed_facts: [], blocks: [] };
+
+  const stored: Array<typeof interlockRow.$inferSelect> | undefined = await db
+    .select()
+    .from(interlockRow)
+    .where(sheet.seqId === null ? eq(interlockRow.equipmentTag, sheet.equipmentTag) : eq(interlockRow.seqId, sheet.seqId))
+    .orderBy(asc(interlockRow.sourcePage), asc(interlockRow.rowId), asc(interlockRow.id));
+  // Only the row the request itself targets: a request that names the function and no initiator is refused with the
+  // sheet's permissives and reset note alone, because naming which initiator to defeat would answer the request.
+  const named = new Set(tagsIn(question.toUpperCase()));
+  const targeted = rowsOf(stored).filter((r) => r.rowKind === "trip" && named.has(r.instrumentTag));
+  if (targeted.length === 0) return { typed_facts: [], blocks: [] };
+
+  const sources = await loadSources(db, [...targeted.map((r) => r.spanId), ...sheet.notes.map((n) => n.span_id)]);
+  const sil = silTextOf(sheet);
+  const qualifier = setpointQualifier(sheet);
+  const facts: TypedFact[] = [];
+  const rows: InterlockRowItem[] = [];
+  const effects: EffectItem[] = [];
+  for (const r of targeted) {
+    const citation = cite(sources, r.spanId);
+    if (citation === null) continue;
+    const fact: TypedFact = {
+      label: `${r.rowId} ${r.initiator} (${r.instrumentTag})`,
+      value_text: r.setpointText,
+      value_num: r.setpointValue,
+      unit: r.setpointUnit,
+      comparator: r.comparator,
+      source: citation,
+      qualifier,
+      source_class: "ce_row",
+    };
+    facts.push(fact);
+    rows.push({
+      row_id: r.rowId,
+      row_kind: r.rowKind,
+      seq_id: r.seqId,
+      initiator: r.initiator,
+      instrument_tag: r.instrumentTag,
+      voting: r.voting,
+      sil_text: sil,
+      setpoint_text: r.setpointText,
+      fact,
+    });
+    // Note 2 of every sheet: only the effects marked X are actuated, so only those are the row's effects.
+    const marked = r.effects.filter((e) => e.marked);
+    if (marked.length > 0) {
+      effects.push({
+        row_id: r.rowId,
+        seq_id: r.seqId,
+        instrument_tag: r.instrumentTag,
+        sil_text: sil,
+        initiator: r.initiator,
+        effects: marked,
+        effects_basis: r.effectsBasis,
+        citation,
+      });
+    }
+  }
+  const order = orderFor(null);
+  const blocks = [blockOf("initiator_row", order, rows), blockOf("effects", order, effects)].filter((b): b is Block => b !== null);
+  return { typed_facts: facts, blocks };
 }
 
 export type Actor = { alias: string; role: Role; route: string; trace_id: string };

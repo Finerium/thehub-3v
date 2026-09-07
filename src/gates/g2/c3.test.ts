@@ -105,4 +105,24 @@ describe("C3 numeric fidelity: tags and document numbers are not numerals", () =
   it("digits inside a source tag never supply a numeral: 1201 rpm is stray beside GA-1201A", () => {
     droppedC3("GA-1201A runs at 1201 rpm.", ["sp-ds-1"], "1201", NO_FACTS);
   });
+
+  // The two forms the ranked diagnosis of 2026-09-07 named (rank 12): C3 read them as numerals and dropped the
+  // sentence that carried the answer, although both are names the corpus itself writes.
+  it("a tag written with a possessive is still a tag, straight or typographic", () => {
+    kept("GA-1201A's vibration initiator is VSHH-1201.", ["sp-ds-3"], NO_FACTS);
+    kept("GA-1201A’s vibration initiator is VSHH-1201.", ["sp-ds-3"], NO_FACTS);
+    kept("GA-1201A's trip point is 7.1 mm/s.", ["sp-ds-1"], NO_FACTS);
+  });
+
+  it("a hyphenated name that opens with digits and carries a letter is an identifier: a functional location, a voting arrangement in words", () => {
+    kept("GA-1201A sits at functional location 12-GA-1201A.", ["sp-ds-3"], NO_FACTS);
+    kept("VSHH-1201 trips GA-1201A on 2-out-of-3 voting.", ["sp-ds-1"], NO_FACTS);
+  });
+
+  it("a hyphenated run of digits alone is not an identifier: a date and a range are still matched", () => {
+    droppedC3("The proof test was completed on 2025-02-23.", ["sp-ds-1"], "2025-02-23", NO_FACTS);
+    droppedC3("The transmitter is a 4-20 mA loop.", ["sp-ds-1"], "4-20", NO_FACTS);
+    const dated = typedFacts.map((f) => ({ ...f, label: "Last SIS proof test", value_text: "2025-02-23", value_num: null, unit: "date" }));
+    kept("The proof test was completed on 2025-02-23.", ["sp-ds-1"], { typed_facts: dated.slice(0, 1) });
+  });
 });

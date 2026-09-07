@@ -2,9 +2,11 @@
 // tags, vector for ranking, deterministic rerank in code"; AC-ANS-02, AC-ANS-14, AC-NFR-06). Candidates are the
 // chunks of the scope's current revisions whose approval status is in the served set (one constant, shared with
 // gate C4); the lexical stage is text_tsv @@ plainto_tsquery('simple', ...) over the question's content terms plus
-// an exact tag match that ranks first; the vector stage orders by cosine to the query vector and fills to k = 12;
-// rerank.ts fixes the order. include_superseded is honoured only when the caller passes it (the labelled history
-// toggle) and the caller traces it; a superseded citation keeps `superseded: true` so the chip can say so.
+// an exact tag match that ranks first; the vector stage orders by cosine to the query vector. One slot of k = 12 is
+// reserved for the best chunk of every document class present, the rest of k is filled in rerank order, and
+// rerank.ts fixes the order of the whole set. include_superseded is honoured only when the caller passes it (the
+// labelled history toggle) and the caller traces it; a superseded citation keeps `superseded: true` so the chip
+// can say so.
 // Each retrieved chunk cites the first span of the span table it contains (page-exact, hash-exact) or, when it
 // contains none, itself; the text behind the cited hash travels with it so the gate can recompute it.
 import type { Citation } from "@/contracts/generated/evidence_packet";
@@ -12,7 +14,7 @@ import type { Db } from "@/db/client";
 import * as q from "@/db/queries/retrieval";
 import { SERVED_APPROVAL_STATUSES } from "@/gates/g2";
 import { contentTerms, questionTags } from "./scope";
-import { lexicalOf, rerank } from "./rerank";
+import { lexicalOf, reserveByClass } from "./rerank";
 import { RETRIEVAL_K, type RetrieveOptions, type Retrieval, type RetrievedChunk, type Scope } from "./types";
 
 export { SERVED_APPROVAL_STATUSES, RETRIEVAL_K };
@@ -71,7 +73,10 @@ export async function retrieve(
   const inQuestion = new Set(questionTags(question));
   const tags = [...scope.tags, ...scope.instrument_tags].filter((t) => inQuestion.has(t));
 
-  const candidates = rerank(
+  // The pool the query returns is the top k plus the best chunk of each document class present; reserveByClass keeps
+  // one slot per class and fills the rest of k in rerank order, so a lesson-heavy asset never crowds the sheet, the
+  // datasheet, the drawing or the plot plan out of the served set. The rerank key and the order are unchanged.
+  const candidates = reserveByClass(
     await q.candidateChunks(db, {
       revisionIds,
       servedStatuses: SERVED_APPROVAL_STATUSES,
@@ -82,6 +87,7 @@ export async function retrieve(
       tags,
       k,
     }),
+    k,
   );
   if (candidates.length === 0) return { evidence: [], chunks: [] };
 

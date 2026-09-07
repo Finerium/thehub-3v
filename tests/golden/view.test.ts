@@ -28,6 +28,16 @@ describe("resolve", () => {
     expect(resolve(a, "typed_facts.ce_row")).toHaveLength(1);
     expect(resolve(a, "typed_facts.opl_step")).toEqual([]);
     expect(textAt(a, "citation_chip")).toContain("TEST-IL-1");
+    // The packet haystack is the rendered answer: a claim and a typed fact are read beside their citation chip, so
+    // the chip's document number, revision, approval wording and page belong to the scanned text (rank 9).
+    const scanned = textAt(a, "packet") ?? "";
+    expect(scanned).toContain("The test claim states 7.4 units.");
+    expect(scanned).toContain("TEST-DOC-1"); // the claim's own citation
+    expect(scanned).toContain("TEST-IL-1"); // the typed fact's source
+    expect(scanned).toContain("page 1");
+    // The targeted paths stay the field itself, so an `ordered` check with a count still counts the items.
+    expect(resolve(a, "claims")).toHaveLength(1);
+    expect(resolve(a, "typed_facts")).toHaveLength(1);
   });
 
   it("reads a block by kind and an absent block as empty", () => {
@@ -107,6 +117,56 @@ describe("citationsOf and citedDocuments", () => {
     const inBlock = citation({ doc_no: "TEST-IL-2", document_id: "doc-2", span_id: "span-9" });
     const p = packet({ blocks: [{ kind: "effects", order: 1, label: "Effects", items: [{ text: "an effect", source: inBlock }] }] });
     expect(citationsOf(p).map((c) => c.doc_no)).toEqual(["TEST-DOC-1", "TEST-IL-2"]);
+  });
+
+  // The runner's view is the rendered answer, not a subset of it (the ranked diagnosis of 2026-09-07, rank 9): a
+  // work order is cited on a page of the maintenance workbook, so its own number reaches `must_cite` only from the
+  // block item that carries it.
+  it("takes the work order and lesson identifiers a block item carries beside its citation", () => {
+    const p = packet({
+      blocks: [
+        {
+          kind: "proof_tests",
+          order: 0,
+          label: "Last proof test per class",
+          items: [{ wo_number: "WO-990001", test_class: "sis_proof_test", citation: citation({ doc_no: "TEST-WB-1", document_id: "doc-wb", span_id: "span-5" }) }],
+        },
+        {
+          kind: "related_work_orders",
+          order: 1,
+          label: "Related work orders",
+          items: [{ wo_number: "WO-990010", problem_description: "a worn element", citation: citation({ doc_no: "TEST-WB-1", document_id: "doc-wb", span_id: "span-6" }) }],
+        },
+        {
+          kind: "causal_chain",
+          order: 2,
+          label: "Causal chain",
+          items: [{ id: "cl-1", from_wo: "WO-990011", to_wo: "WO-990010", citation: citation({ doc_no: "TEST-WB-1", document_id: "doc-wb", span_id: "span-7" }) }],
+        },
+        {
+          kind: "precedent",
+          order: 3,
+          label: "Precedent",
+          items: [{ family_id: "FF-01", member_wo_numbers: ["WO-990010", "WO-990020"], row_id: "R1", citation: citation({ doc_no: "TEST-WB-1", document_id: "doc-wb", span_id: "span-8" }) }],
+        },
+        {
+          kind: "lessons",
+          order: 4,
+          label: "Lessons",
+          items: [{ opl_id: "OPL-TEST-07", title: "a lesson", citation: citation({ doc_no: "TEST-OPL-7", document_id: "doc-opl", span_id: "span-9" }) }],
+        },
+      ],
+    });
+    const documents = citedDocuments(p, citationsOf(p));
+    expect(documents).toContain("WO-990001");
+    expect(documents).toContain("WO-990010");
+    expect(documents).toContain("WO-990011");
+    expect(documents).toContain("WO-990020");
+    expect(documents).toContain("OPL-TEST-07");
+    // Only the identifiers of a source document: a row id, a family id and a free-text field are not documents.
+    expect(documents).not.toContain("R1");
+    expect(documents).not.toContain("FF-01");
+    expect(documents).not.toContain("a worn element");
   });
 
   it("names the lesson of a procedure and the sheet a refusal names, which carry no Citation of their own", () => {

@@ -6,6 +6,7 @@
 import { z } from "zod";
 import type { Citation, EvidencePacket, TypedFact, Block, Procedure } from "@/contracts/generated/evidence_packet";
 import type { InterlockRow, StartPermissive } from "@/contracts/generated/asset";
+import type { Opl } from "@/contracts/generated/coverage";
 import type { Chunk } from "@/contracts/generated/document";
 import type { AnswerTrace } from "@/contracts/generated/serving";
 
@@ -75,7 +76,11 @@ export type Template = NonNullable<EvidencePacket["template"]>;
 
 export type Contradiction = EvidencePacket["contradictions"][number];
 
-/** What templates.ts returns for a template (AC-ANS-16): the block order per template, empty blocks omitted. */
+/**
+ * What templates.ts returns (AC-ANS-16): the typed layer of the scope's own rows. The blocks are built from the
+ * rows whatever moment was inferred; the template decides the order and which block leads (the diagnosis of
+ * 2026-09-07, rank 1).
+ */
 export type TypedFacts = {
   typed_facts: TypedFact[];
   blocks: Block[];
@@ -116,7 +121,11 @@ export type ProofTestItem = {
 
 export type StandingBypassItem = PermissiveItem & { standing_bypass_state: string };
 
-/** An interlock row as a block item: the typed setpoint fact plus the row's own columns. */
+/**
+ * An interlock row as a block item: the typed setpoint fact plus the row's own columns. `sil_text` is the sheet
+ * header's own display string ("SIL 1"), which is how the row names its integrity level to a reader; the number
+ * alone is a metadatum nobody reads back (the diagnosis of 2026-09-07, rank 4).
+ */
 export type InterlockRowItem = {
   row_id: string;
   row_kind: "trip" | "control" | "alarm" | "mech";
@@ -124,14 +133,22 @@ export type InterlockRowItem = {
   initiator: string;
   instrument_tag: string;
   voting: string | null;
+  sil_text: string | null;
+  setpoint_text: string;
   fact: TypedFact;
 };
 
-/** The effects of one interlock row (9.3 InterlockRow.effects with effects_basis, the EffectsRow), cited. */
+/**
+ * The effects of one interlock row (9.3 InterlockRow.effects with effects_basis, the EffectsRow), cited. Only the
+ * effects the sheet marks are carried: note 2 of every sheet says the marked effects are the actuated ones, and the
+ * golden set asserts an unmarked effect id is absent from the block.
+ */
 export type EffectItem = {
   row_id: string;
   seq_id: string | null;
   instrument_tag: string;
+  sil_text: string | null;
+  initiator: string;
   effects: InterlockRow["effects"];
   effects_basis: string;
   citation: Citation;
@@ -139,6 +156,7 @@ export type EffectItem = {
 
 export type ResetNoteItem = { n: number; text: string; citation: Citation };
 
+/** A work order as a block item: its identity, its typed columns and the four narrative fields it was written in. */
 export type WorkOrderItem = {
   wo_number: string;
   report_date: string;
@@ -147,6 +165,10 @@ export type WorkOrderItem = {
   related_interlock: string | null;
   breakdown_kind: "unplanned" | "planned_flagged" | "none";
   closeout_complete: boolean;
+  problem_description: string;
+  root_cause: string;
+  corrective_action: string;
+  spare_parts_used: string;
   citation: Citation;
 };
 
@@ -161,11 +183,20 @@ export type CausalLinkItem = {
   citation: Citation;
 };
 
+/**
+ * A lesson as a block item (9.8 Block kind "lessons"): its identity, the interlock line it names, its sections'
+ * own headings and bodies, and the footer aliases the sheet was signed with. The section body is the lesson's own
+ * sentence; without it the block carries metadata about a document nobody can read (the diagnosis, rank 4).
+ */
 export type LessonItem = {
   opl_id: string;
   title: string;
   classification: "Basic Knowledge" | "Improvement" | "Trouble Case";
   aspect: string;
+  discipline: string;
+  related_interlock_text: string;
+  sections: Array<{ n: number; heading: string; body_text: string }>;
+  footer: Opl["footer"];
   machine_drafted: boolean;
   approver_alias: string | null;
   citation: Citation;
@@ -221,6 +252,8 @@ export type LadderItem = {
   layers: Record<LadderLayer, TypedFact | null>;
   /** The source class of the alarm layer (the sheet row kind or the datasheet group), stated on the alarm rung. */
   alarm_source_class: string | null;
+  /** The governing sheet's own SIL display string ("SIL 1"), or null where no sheet of the scope states one. */
+  sil_text: string | null;
   /** The document classes read for the ladder, for the absence statement of src/lib/fixed-strings.ts. */
   classes_read: string[];
 };

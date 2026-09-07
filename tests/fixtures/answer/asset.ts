@@ -4,7 +4,8 @@
 // page and a neighbouring asset LV-9902 that only a named family link may reach. `fakeQueries` is an in-memory
 // implementation of every function of src/db/queries/retrieval.ts over these rows, typed against the real module so
 // a renamed query fails here first; the row order it returns is `chunkOrder`, which a test may permute to prove the
-// rerank is order-independent. Every document number carries the SYN- prefix and no text is corpus text.
+// rerank is order-independent. Every document number carries the SYN- prefix except the two lesson ids (see below)
+// and no text is corpus text.
 import { quoteHash } from "@/lib/hash";
 
 import type * as q from "@/db/queries/retrieval";
@@ -43,8 +44,12 @@ export const VERSION_ID = "cv-1";
 export const TAG = "GA-9901A";
 export const OTHER_TAG = "LV-9902";
 export const SEQ = "SEQ-9901";
-export const LESSON_1 = "SYN-OPL-GA-9901A-01";
-export const LESSON_2 = "SYN-OPL-GA-9901A-07";
+// A lesson is named by its own OPL id, and a question that writes that id binds the procedure to it
+// (src/answer/templates.ts lessonIdIn, whose pattern is OPL-<2 letters>-<4 digits><letter?>-<2 digits>). The id is
+// the lesson document's own number, so these two carry no SYN- prefix; the synthetic asset is 9901, which no
+// corpus document names.
+export const LESSON_1 = "OPL-GA-9901A-01";
+export const LESSON_2 = "OPL-GA-9901A-07";
 
 export const documents: DocumentRow[] = [
   { id: "doc-ds-9901a", docNo: "SYN-DS-GA-9901A", class: "datasheet", subjectTag: TAG },
@@ -137,6 +142,7 @@ export const spans: SpanSource[] = [
   span("sp-ds-5", "rev-ds-3", 1, 5, "Service Crude naphtha"),
   span("sp-ds-6", "rev-ds-3", 2, 1, "PSV set pressure 10 barg"),
   span("sp-ds-7", "rev-ds-3", 2, 2, "Design pressure 8.0 barg"),
+  span("sp-ds-8", "rev-ds-3", 2, 3, "Packing Graphite braided"),
   span("sp-ds-old", "rev-ds-2", 1, 1, "Design pressure 8.0 barg (superseded)"),
   span("sp-ga-1", "rev-ga-0", 1, 1, "12 Coupling element Polyurethane 1"),
   span("sp-opl1-t", "rev-opl1", 1, 1, `${LESSON_1} Coupling element inspection and replacement GA-9901A`),
@@ -311,6 +317,9 @@ export const params: DatasheetParamRow[] = [
   param("dp-5", "header", "Service", null, "Crude naphtha", null, "sp-ds-5"),
   param("dp-6", "design", "PSV set pressure", "barg", "10", 10, "sp-ds-6"),
   param("dp-7", "design", "Design pressure", "barg", "8.0", 8, "sp-ds-7"),
+  // A text-valued row of a group that is neither a limit nor a header field the lane always serves: it reaches the
+  // reader only when the question's own terms name its field (the diagnosis of 2026-09-07, rank 20).
+  param("dp-8", "materials", "Packing", null, "Graphite braided", null, "sp-ds-8"),
 ];
 
 export const proofTests: ProofTestRow[] = [

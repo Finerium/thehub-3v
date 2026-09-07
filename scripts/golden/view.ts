@@ -71,14 +71,43 @@ export function citationsOf(packet: EvidencePacket): Citation[] {
   return out;
 }
 
+// A key whose value names a source document that the citation beside it does not: a work order lives on a page of
+// the maintenance workbook, so its citation's doc_no is the workbook's, and a lesson block item names its own
+// OPL id. `must_cite` is written in those names (the harness's naming rule: WO-..., OPL-...), so a packet that
+// renders the row cites the document but resolves none of them without this. Only Block.items carry them: 9.8
+// closes TypedFact over label, value, unit, comparator, source, qualifier and source_class, so a typed fact names
+// its work order or its lesson only through the block item built from the same row.
+const IDENTIFIER_KEY = /(^|_)wo(_numbers?)?$|(^|_)opl_id$/;
+
+/** Every identifier a block item carries beside its citation, in walk order. */
+function identifiersIn(value: unknown, out: string[]): void {
+  if (Array.isArray(value)) {
+    for (const item of value) identifiersIn(item, out);
+    return;
+  }
+  if (value === null || typeof value !== "object") return;
+  for (const [key, item] of Object.entries(value as Record<string, unknown>)) {
+    if (typeof item === "string") {
+      if (IDENTIFIER_KEY.test(key)) out.push(item);
+      continue;
+    }
+    if (Array.isArray(item) && IDENTIFIER_KEY.test(key)) {
+      for (const one of item) if (typeof one === "string") out.push(one);
+      continue;
+    }
+    identifiersIn(item, out);
+  }
+}
+
 /**
  * The documents the packet names as its sources, which is what `must_cite` is matched against: the document number
- * of every citation, the lesson served as a procedure, and the cause-and-effect sheet a refusal names. A refusal
- * packet carries no Citation at all (9.8 gives Refusal a `ce_doc_no`, not a citation), so a safety case's
- * must_cite could not resolve without this.
+ * of every citation, the work order and lesson identifiers the block items carry beside their citations, the lesson
+ * served as a procedure, and the cause-and-effect sheet a refusal names. A refusal packet carries no Citation at all
+ * (9.8 gives Refusal a `ce_doc_no`, not a citation), so a safety case's must_cite could not resolve without this.
  */
 export function citedDocuments(packet: EvidencePacket, citations: Citation[]): string[] {
   const out = citations.map((c) => c.doc_no);
+  for (const block of packet.blocks) identifiersIn(block.items, out);
   if (packet.procedure) out.push(packet.procedure.opl_id);
   if (packet.refusal?.function) out.push(packet.refusal.function.ce_doc_no);
   return [...new Set(out.filter((s) => s.length > 0))];
@@ -144,9 +173,12 @@ function procedurePath(packet: EvidencePacket, rest: string | null): string[] | 
 
 function packetPath(packet: EvidencePacket, rest: string | null): string[] | null {
   if (rest === null) {
+    // The rendered answer, not a subset of it: a claim and a typed fact are read beside their citation chip, so the
+    // chip's own text (the document number, the revision, the approval wording, the page) is part of what the reader
+    // sees. A block item carries its citation inside itself, so itemText already prints it.
     return [
-      ...packet.claims.map((c) => c.text),
-      ...packet.typed_facts.map(factText),
+      ...packet.claims.flatMap((c) => [c.text, ...c.citations.map(citationText)]),
+      ...packet.typed_facts.flatMap((f) => [factText(f), citationText(f.source)]),
       ...packet.blocks.flatMap((b) => [b.label, ...b.items.map(itemText)]),
       ...(refusalPath(packet, null) ?? []),
       ...(abstentionPath(packet, null) ?? []),

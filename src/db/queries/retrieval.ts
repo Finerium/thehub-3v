@@ -251,17 +251,23 @@ export type ChunkQuery = {
   terms: string;
   /** The equipment and instrument tags in scope; an exact tag match is the authoritative lexical hit. */
   tags: readonly string[];
+  /** The size of the served set; the pool comes back slightly larger, one extra row per document class at most. */
   k: number;
 };
 
 /**
- * Both retrieval stages in one statement: candidates are chunks of the named revisions (served statuses, current,
- * unless the toggle admits the rest); the lexical stage marks exact tag matches (2) and tsquery hits (1); the vector
- * stage orders each lexical group by cosine and fills to k from the rest, so lexical hits always rank first. The
+ * Both retrieval stages, and the pool the caller selects k from: candidates are chunks of the named revisions
+ * (served statuses, current, unless the toggle admits the rest); the lexical stage marks exact tag matches (2) and
+ * tsquery hits (1); the vector stage orders each lexical group by cosine, so lexical hits always rank first. The
  * full sort key (lexical, cosine, revision id, page, ordinal) makes the k-boundary deterministic (AC-NFR-06).
+ * Two statements, deduplicated: the top k, and the best chunk of each document class present (DISTINCT ON class,
+ * same sort key). One asset's seven lessons are about three quarters of its chunks, so the top k alone can hold no
+ * cause-and-effect sheet, datasheet, general-arrangement drawing or plot plan at all; the second statement puts each
+ * class's best chunk within the caller's reach and answer/rerank.ts reserveByClass keeps one slot for it. At most k plus the
+ * eight document classes come back, and the caller's rerank fixes the order of whatever it keeps.
  */
-// ponytail: ORDER BY on a compound key scans the scope's chunks (a few documents of 832 chunks); an HNSW-first
-// pre-filter if the corpus grows by orders of magnitude.
+// ponytail: ORDER BY on a compound key scans the named revisions' chunks, a few documents of 832, or all 832 when
+// the scope is the corpus-wide fallback; an HNSW-first pre-filter if the corpus grows by orders of magnitude.
 export async function candidateChunks(db: Db, q: ChunkQuery): Promise<ChunkCandidate[]> {
   if (q.revisionIds.length === 0 || q.visibleVersionIds.length === 0 || q.k <= 0) return [];
   const vector = `[${q.queryVector.join(",")}]`;
@@ -281,34 +287,49 @@ export async function candidateChunks(db: Db, q: ChunkQuery): Promise<ChunkCandi
     if (q.servedStatuses.length > 0) conditions.push(inArray(documentRevision.approvalStatus, [...q.servedStatuses]));
   }
 
-  const rows = await db
-    .select({
-      chunkId: chunk.id,
-      revisionId: chunk.documentRevisionId,
-      page: chunk.page,
-      ordinal: chunk.ordinal,
-      unitKind: chunk.unitKind,
-      text: chunk.text,
-      quoteHash: chunk.quoteHash,
-      lexical,
-      cosine,
-      revision: documentRevision.revision,
-      approvalStatus: documentRevision.approvalStatus,
-      approvalStatusText: documentRevision.approvalStatusText,
-      isCurrent: documentRevision.isCurrent,
-      documentId: documentTable.id,
-      docNo: documentTable.docNo,
-      documentClass: documentTable.class,
-      subjectTag: documentTable.subjectTag,
-    })
-    .from(chunk)
-    .innerJoin(documentRevision, eq(chunk.documentRevisionId, documentRevision.id))
-    .innerJoin(documentTable, eq(documentRevision.documentId, documentTable.id))
-    .where(and(...conditions))
-    .orderBy(desc(lexical), desc(cosine), asc(chunk.documentRevisionId), asc(chunk.page), asc(chunk.ordinal))
-    .limit(q.k);
+  const columns = {
+    chunkId: chunk.id,
+    revisionId: chunk.documentRevisionId,
+    page: chunk.page,
+    ordinal: chunk.ordinal,
+    unitKind: chunk.unitKind,
+    text: chunk.text,
+    quoteHash: chunk.quoteHash,
+    lexical,
+    cosine,
+    revision: documentRevision.revision,
+    approvalStatus: documentRevision.approvalStatus,
+    approvalStatusText: documentRevision.approvalStatusText,
+    isCurrent: documentRevision.isCurrent,
+    documentId: documentTable.id,
+    docNo: documentTable.docNo,
+    documentClass: documentTable.class,
+    subjectTag: documentTable.subjectTag,
+  };
+  const rank: SQL[] = [desc(lexical), desc(cosine), asc(chunk.documentRevisionId), asc(chunk.page), asc(chunk.ordinal)];
+
+  const [top, perClass] = await Promise.all([
+    db
+      .select(columns)
+      .from(chunk)
+      .innerJoin(documentRevision, eq(chunk.documentRevisionId, documentRevision.id))
+      .innerJoin(documentTable, eq(documentRevision.documentId, documentTable.id))
+      .where(and(...conditions))
+      .orderBy(...rank)
+      .limit(q.k),
+    db
+      .selectDistinctOn([documentTable.class], columns)
+      .from(chunk)
+      .innerJoin(documentRevision, eq(chunk.documentRevisionId, documentRevision.id))
+      .innerJoin(documentTable, eq(documentRevision.documentId, documentTable.id))
+      .where(and(...conditions))
+      .orderBy(asc(documentTable.class), ...rank),
+  ]);
+
   // The driver returns numeric expressions as strings or numbers depending on the cast; pin both to numbers.
-  return rows.map((r) => ({ ...r, lexical: Number(r.lexical), cosine: Number(r.cosine) }));
+  const pool = new Map<string, ChunkCandidate>();
+  for (const r of [...top, ...perClass]) pool.set(r.chunkId, { ...r, lexical: Number(r.lexical), cosine: Number(r.cosine) });
+  return [...pool.values()];
 }
 
 export type PageSpan = { spanId: string; revisionId: string; page: number; anchorText: string; quoteHash: string; startOrdinal: number };

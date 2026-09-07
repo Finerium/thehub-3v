@@ -1,16 +1,33 @@
-// Moment templates (ARCHITECTURE 7 step 8; blueprint 9.8 TypedFact and Block; AC-ANS-16): the block order per
-// template is the one the golden set pins, every block is cited, a block with no evidence is omitted, every value
-// is a row's own column with the sheet's own qualifier, the permit block renders only the cited lesson's own
-// permit_lines, the readiness template serves the last proof test per class, and the reading template's ladder
-// omits the relief layer at a vibration reading. The query module is the in-memory fake over the synthetic asset.
+// Moment templates (ARCHITECTURE 7 step 8; blueprint 9.8 TypedFact and Block; AC-ANS-16): the typed layer is built
+// from the scope's own rows whatever moment was inferred and the template only orders it (the diagnosis of
+// 2026-09-07, rank 1), the block order per template is the one the golden set pins, every block is cited, a block
+// with no evidence is omitted, every value is a row's own column with the sheet's own qualifier, every item carries
+// its row's own identity (rank 4), the procedure is bound to the question's task (rank 10), the permit block renders
+// only the cited lesson's own permit_lines and leads a documented bypass (rank 17), a text-valued datasheet row
+// renders when the question names its field (rank 20), the readiness template serves the last proof test per class,
+// and the reading template's ladder omits the relief layer at a vibration reading. The query module is the in-memory
+// fake over the synthetic asset.
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { Block, type Citation } from "@/contracts/generated/evidence_packet";
 import { db } from "@/db/client";
-import { LESSON_1, PERMIT_LINE_1, SEQ, TAG, opls, resetAsset, spans } from "../../tests/fixtures/answer/asset";
+import { LESSON_1, LESSON_2, PERMIT_LINE_1, PERMIT_LINE_OTHER_LESSON, SEQ, STEP_TEXTS, TAG, opls, resetAsset, spans } from "../../tests/fixtures/answer/asset";
 import { citationOf } from "./retrieve";
-import { BLOCK_LABEL, BLOCK_ORDER, BYPASS_ORDER, blockOf, bypassBlocks, contradictionsOf, typedFacts, variableOf } from "./templates";
+import {
+  BLOCK_LABEL,
+  BLOCK_ORDER,
+  BYPASS_ORDER,
+  DEFAULT_ORDER,
+  blockOf,
+  bypassBlocks,
+  contradictionsOf,
+  lessonIdIn,
+  orderFor,
+  typedFacts,
+  variableOf,
+  withBypassBlocks,
+} from "./templates";
 import { procedureOf } from "./permit";
-import type { LadderItem, Retrieval, Scope, Template } from "./types";
+import type { InterlockRowItem, LadderItem, LessonItem, Retrieval, Scope, Template, WorkOrderItem } from "./types";
 
 vi.mock("@/db/queries/retrieval", async () => (await import("../../tests/fixtures/answer/asset")).fakeQueries);
 
@@ -34,9 +51,14 @@ function citationsOfItem(item: unknown): Citation[] {
   return [];
 }
 
-function expectWellFormed(blocks: Block[], template: Template): void {
-  const order = BLOCK_ORDER[template];
-  expect(blocks.map((b) => b.order)).toEqual([...blocks.map((b) => b.order)].sort((a, b) => a - b));
+/**
+ * Every block is contract-valid, cited, non-empty, labelled and numbered by its position in the one order the
+ * template produces: the moment's own kinds first, then the rest of the typed layer in the default order.
+ */
+function expectWellFormed(blocks: Block[], template: Template | null): void {
+  const order = orderFor(template);
+  const kinds = blocks.map((b) => b.kind);
+  expect(kinds).toEqual(order.filter((k) => kinds.includes(k)));
   for (const b of blocks) {
     expect(() => Block.parse(b)).not.toThrow();
     expect(b.order).toBe(order.indexOf(b.kind) + 1);
@@ -44,6 +66,13 @@ function expectWellFormed(blocks: Block[], template: Template): void {
     expect(b.items.length).toBeGreaterThan(0);
     for (const item of b.items) expect(citationsOfItem(item).length, `${b.kind} item is cited`).toBeGreaterThan(0);
   }
+}
+
+/** The kinds the moment leads with, in the pinned order, as far as the scope's rows support them. */
+function expectLeadsWith(blocks: Block[], template: Template): void {
+  const kinds = blocks.map((b) => b.kind);
+  const lead = BLOCK_ORDER[template].filter((k) => kinds.includes(k));
+  expect(kinds.slice(0, lead.length)).toEqual(lead);
 }
 
 beforeEach(() => {
@@ -75,7 +104,7 @@ describe("the block orders (AC-ANS-16)", () => {
 describe("job", () => {
   it("renders limits, area classification, Ex protection, service, BOM parts, work orders, steps, permit, functions out of service and return to service, in that order", async () => {
     const out = await typedFacts(db, scope, "job", { question: "Which job steps replace the coupling element on GA-9901A?", retrieval: lessonRetrieval() });
-    expect(out.blocks.map((b) => b.kind)).toEqual([...BLOCK_ORDER.job]);
+    expect(out.blocks.map((b) => b.kind).slice(0, BLOCK_ORDER.job.length)).toEqual([...BLOCK_ORDER.job]);
     expectWellFormed(out.blocks, "job");
     const limits = out.blocks.find((b) => b.kind === "datasheet_limits");
     expect(out.typed_facts.map((f) => f.label)).toEqual(["design: Design pressure", "vibration: Vibration normal", "header: Area classification", "header: Ex protection", "header: Service", "design: PSV set pressure", "design: Design pressure"]);
@@ -123,8 +152,9 @@ describe("job", () => {
 describe("readiness", () => {
   it("renders the permissives, the last proof test per class and the standing bypasses; no steps or permit without a cited lesson", async () => {
     const out = await typedFacts(db, scope, "readiness", { question: "Is GA-9901A ready to start tonight: permissives and last proof test?" });
-    expect(out.blocks.map((b) => b.kind)).toEqual(["permissives", "proof_tests", "standing_bypasses"]);
+    expect(out.blocks.map((b) => b.kind).slice(0, 3)).toEqual(["permissives", "proof_tests", "standing_bypasses"]);
     expectWellFormed(out.blocks, "readiness");
+    expectLeadsWith(out.blocks, "readiness");
     const tests = out.blocks.find((b) => b.kind === "proof_tests");
     expect(tests?.items.map((t) => (t as { wo_number: string; test_class: string; completion_date: string }).wo_number)).toEqual(["WO-990003", "WO-990001"]);
     expect(JSON.stringify(tests)).not.toContain("WO-990002"); // the older test of the same class, never the last
@@ -142,7 +172,7 @@ describe("trip", () => {
   it("renders the initiator row, the effects, the reset note, then the permissives, the work orders, the chain and the lessons", async () => {
     // The pump tag is a content term, so a question naming it matches every lesson title; the initiator alone selects.
     const out = await typedFacts(db, withInstrument, "trip", { question: "Why did it trip on VSHH-9901?" });
-    expect(out.blocks.map((b) => b.kind)).toEqual([...BLOCK_ORDER.trip]);
+    expect(out.blocks.map((b) => b.kind).slice(0, BLOCK_ORDER.trip.length)).toEqual([...BLOCK_ORDER.trip]);
     expectWellFormed(out.blocks, "trip");
     const initiator = out.blocks.find((b) => b.kind === "initiator_row");
     expect(initiator?.items).toHaveLength(1);
@@ -164,8 +194,9 @@ describe("trip", () => {
 describe("reading", () => {
   it("a vibration reading renders the ladder with its alarm source class and omits the relief layer, then the documented response and the precedent", async () => {
     const out = await typedFacts(db, scope, "reading", { question: "What is the vibration reading on GA-9901A right now?" });
-    expect(out.blocks.map((b) => b.kind)).toEqual(["ladder", "documented_response", "precedent"]);
+    expect(out.blocks.map((b) => b.kind).slice(0, 3)).toEqual(["ladder", "documented_response", "precedent"]);
     expectWellFormed(out.blocks, "reading");
+    expectLeadsWith(out.blocks, "reading");
     const ladder = out.blocks.find((b) => b.kind === "ladder")?.items[0] as LadderItem;
     expect(ladder.variable).toBe("vibration");
     expect(ladder.pressure).toBe(false);
@@ -197,14 +228,128 @@ describe("reading", () => {
   });
 });
 
-describe("no moment, the contradictions and the bypass blocks", () => {
-  it("with no template, only the facts the question's own tags select, and no block", async () => {
-    const out = await typedFacts(db, withInstrument, null, { question: "What is the setpoint of VSHH-9901?" });
-    expect(out.blocks).toEqual([]);
-    expect(out.typed_facts.map((f) => f.value_text)).toEqual(["7.1"]);
-    expect(out.procedure).toBeNull();
+// The diagnosis of 2026-09-07, rank 1: the moment used to gate the existence of the typed layer, so a question that
+// inferred no template emitted no block, no procedure and almost no fact. The layer is the scope's rows; the
+// template only orders them.
+describe("no moment: the typed layer still renders, in the default order", () => {
+  const QUESTION = "Why did it trip on VSHH-9901?";
+
+  it("builds the blocks, the facts and the procedure from the scope's rows with no template at all", async () => {
+    const out = await typedFacts(db, withInstrument, null, { question: QUESTION });
+    expect(out.blocks.length).toBeGreaterThan(0);
+    expectWellFormed(out.blocks, null);
+    expect(out.blocks.map((b) => b.kind)).toEqual(DEFAULT_ORDER.filter((k) => out.blocks.some((b) => b.kind === k)));
+    // The row the question's own tag names leads the facts, then the values of every block of the default order.
+    expect(out.typed_facts[0]).toMatchObject({ label: "R1 High-high vibration (VSHH-9901)", value_text: "7.1", source_class: "ce_row" });
+    expect(out.typed_facts.length).toBeGreaterThan(1);
+    expect(out.procedure?.opl_id).toBe(LESSON_1);
   });
 
+  it("the template orders the same rows and never removes one: every block a moment renders is rendered without it, item for item", async () => {
+    const none = await typedFacts(db, withInstrument, null, { question: QUESTION });
+    const trip = await typedFacts(db, withInstrument, "trip", { question: QUESTION });
+    expect(trip.blocks.length).toBeGreaterThan(0);
+    for (const b of trip.blocks) {
+      const same = none.blocks.find((x) => x.kind === b.kind);
+      expect(same?.items, `${b.kind} renders without a template`).toEqual(b.items);
+    }
+    expect(trip.blocks.map((b) => b.kind).slice(0, BLOCK_ORDER.trip.length)).toEqual([...BLOCK_ORDER.trip]);
+    expect(orderFor("trip")).toEqual([...BLOCK_ORDER.trip, ...DEFAULT_ORDER.filter((k) => !BLOCK_ORDER.trip.includes(k))]);
+    expect(orderFor(null)).toEqual([...DEFAULT_ORDER]);
+    // Every kind of 9.8 appears exactly once in the default order, so no kind can be lost by ordering.
+    expect(new Set(DEFAULT_ORDER).size).toBe(DEFAULT_ORDER.length);
+    for (const template of ["readiness", "trip", "job", "reading"] as const) {
+      for (const kind of BLOCK_ORDER[template]) expect(DEFAULT_ORDER).toContain(kind);
+    }
+  });
+});
+
+// The diagnosis of 2026-09-07, rank 4: a block item carried the row's metadata but not the row's own sentence or
+// identity, so the reader was handed a citation to a document nobody could read back.
+describe("a block item carries its row's own identity", () => {
+  it("an interlock row and its effects state the sheet's own SIL as text", async () => {
+    const out = await typedFacts(db, withInstrument, "trip", { question: "Why did it trip on VSHH-9901?" });
+    const row = out.blocks.find((b) => b.kind === "initiator_row")?.items[0] as InterlockRowItem;
+    expect(row).toMatchObject({ row_id: "R1", row_kind: "trip", seq_id: SEQ, initiator: "High-high vibration", instrument_tag: "VSHH-9901", voting: "1oo2", sil_text: "SIL 1", setpoint_text: "7.1" });
+    expect(out.blocks.find((b) => b.kind === "effects")?.items[0]).toMatchObject({ row_id: "R1", sil_text: "SIL 1", initiator: "High-high vibration" });
+  });
+
+  it("a work order carries its four narrative fields", async () => {
+    const out = await typedFacts(db, withInstrument, "trip", { question: "Why did it trip on VSHH-9901?" });
+    const items = (out.blocks.find((b) => b.kind === "related_work_orders")?.items ?? []) as WorkOrderItem[];
+    const wo = items.find((w) => w.wo_number === "WO-990010");
+    expect(wo).toMatchObject({
+      problem_description: "Coupling element worn, high vibration VSHH-9901",
+      root_cause: "misalignment",
+      corrective_action: "Replaced coupling element",
+      spare_parts_used: "coupling element",
+      report_date: "2025-02-10",
+      work_type: "Corrective",
+      discipline: "Mechanical",
+      breakdown_kind: "unplanned",
+      closeout_complete: true,
+      related_interlock: SEQ,
+    });
+  });
+
+  it("a lesson carries its title, its classification and its own sections", async () => {
+    const out = await typedFacts(db, withInstrument, "trip", { question: "Why did it trip on VSHH-9901?" });
+    const lesson = out.blocks.find((b) => b.kind === "lessons")?.items[0] as LessonItem;
+    expect(lesson).toMatchObject({
+      opl_id: LESSON_1,
+      title: "Coupling element inspection and replacement GA-9901A",
+      classification: "Basic Knowledge",
+      aspect: "Reliability",
+      discipline: "Mechanical",
+      related_interlock_text: `${SEQ} (VSHH-9901)`,
+      machine_drafted: false,
+      approver_alias: "APR-01",
+    });
+    expect(lesson.sections).toEqual([{ n: 1, heading: "Purpose", body_text: "A worn coupling element raises vibration at VSHH-9901 and ends in a trip." }]);
+    expect(lesson.footer).toMatchObject({ prepared_by: "PRP-01", reviewed_by_alias: "REV-01", approved_by_alias: "APR-01", date_of_sharing: "2025-06-01" });
+  });
+});
+
+// The diagnosis of 2026-09-07, rank 10: the procedure was bound to whatever retrieval ranked first, so a question
+// about one task was answered with another task's steps.
+describe("the procedure is bound to the question's own task", () => {
+  it("the lesson whose title names the task wins over the lesson retrieval ranked first", async () => {
+    const out = await typedFacts(db, scope, "job", { question: "Which steps line up the seal flush before a start on GA-9901A?", retrieval: lessonRetrieval() });
+    expect(out.procedure?.opl_id).toBe(LESSON_2);
+    expect(out.blocks.find((b) => b.kind === "permit")?.items).toEqual([expect.objectContaining({ text: PERMIT_LINE_OTHER_LESSON })]);
+    // The other lesson's steps are never served under this question, whatever the retrieval order was.
+    expect(JSON.stringify(out.procedure)).not.toContain(STEP_TEXTS[0]);
+  });
+
+  it("a question naming a lesson by its id is served that lesson, before any ranking", async () => {
+    expect(lessonIdIn(`Render ${LESSON_2} verbatim.`)).toBe(LESSON_2);
+    expect(lessonIdIn("Which steps replace the coupling element?")).toBeNull();
+    const out = await typedFacts(db, scope, "job", { question: `Render ${LESSON_2} verbatim.`, retrieval: lessonRetrieval() });
+    expect(out.procedure?.opl_id).toBe(LESSON_2);
+    const byCaller = await typedFacts(db, scope, "job", { question: "Which steps replace the coupling element on GA-9901A?", opl_id: LESSON_2 });
+    expect(byCaller.procedure?.opl_id).toBe(LESSON_2);
+  });
+});
+
+// The diagnosis of 2026-09-07, rank 20: a text-valued datasheet row is neither a limit nor a header field the lane
+// always serves, so a material, a fail action or a service reached no reader at all.
+describe("a text-valued datasheet row", () => {
+  const packing = { label: "materials: Packing", value_text: "Graphite braided", value_num: null, unit: null, source_class: "datasheet_param" };
+
+  it("renders when the question's own terms name its field", async () => {
+    const out = await typedFacts(db, scope, null, { question: "What is the packing material of GA-9901A?" });
+    expect(out.blocks.find((b) => b.kind === "datasheet_limits")?.items).toContainEqual(expect.objectContaining(packing));
+  });
+
+  it("stays out when the question names another field", async () => {
+    const out = await typedFacts(db, scope, null, { question: "What is the design pressure of GA-9901A?" });
+    const items = out.blocks.find((b) => b.kind === "datasheet_limits")?.items ?? [];
+    expect(items).not.toContainEqual(expect.objectContaining(packing));
+    expect(items.length).toBeGreaterThan(0);
+  });
+});
+
+describe("the contradictions and the bypass blocks", () => {
   it("the datasheet's own contradiction is reported with both readings and the governing document (GS-21)", async () => {
     const out = await typedFacts(db, scope, "job", { question: "What is the design pressure of GA-9901A?" });
     expect(out.contradictions).toEqual([
@@ -230,5 +375,24 @@ describe("no moment, the contradictions and the bypass blocks", () => {
       ["functions_out_of_service", 3],
     ]);
     for (const b of blocks) for (const item of b.items) expect(citationsOfItem(item).length).toBeGreaterThan(0);
+  });
+
+  // AC-ANS-15 and the diagnosis of 2026-09-07, rank 17: the documented-bypass block shape was dead code, so the
+  // served lesson reached the reader with its steps above its permit lines.
+  it("a documented bypass leads with the permit above the steps and renumbers the typed layer after them", async () => {
+    const bundle = await procedureOf(db, LESSON_1, ["VSHH-9901"]);
+    if (bundle === null) throw new Error("no bundle");
+    const rest = (await typedFacts(db, scope, null, { question: "How is the standing bypass of GA-9901A documented?", opl_id: LESSON_1 })).blocks;
+    expect(rest.map((b) => b.kind)).toContain("steps");
+    const blocks = withBypassBlocks(bundle, rest);
+    const kinds = blocks.map((b) => b.kind);
+    expect(kinds.slice(0, BYPASS_ORDER.length)).toEqual([...BYPASS_ORDER]);
+    expect(kinds.indexOf("permit")).toBeLessThan(kinds.indexOf("steps"));
+    expect(blocks.map((b) => b.order)).toEqual(blocks.map((_b, i) => i + 1));
+    // No kind is served twice: the typed layer's own permit, steps and functions blocks give way to the bypass's.
+    expect(new Set(kinds).size).toBe(kinds.length);
+    expect(blocks.find((b) => b.kind === "permit")?.items).toEqual([expect.objectContaining({ text: PERMIT_LINE_1 })]);
+    expect(blocks.find((b) => b.kind === "steps")?.items.map((s) => (s as { text: string }).text)).toEqual([...STEP_TEXTS]);
+    for (const b of blocks) for (const item of b.items) expect(citationsOfItem(item).length, `${b.kind} item is cited`).toBeGreaterThan(0);
   });
 });

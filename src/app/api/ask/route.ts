@@ -26,15 +26,17 @@ import {
   nearestDocuments,
   procedureFor,
   pseudonymise,
+  refusalEvidence,
   refusalFor,
   type AbstentionContext,
 } from "@/answer/outcome";
+import { procedureOf, type ProcedureBundle } from "@/answer/permit";
 import { retrieve } from "@/answer/retrieve";
 import { resolveScope } from "@/answer/scope";
 import { approvedLessonSpans, screenLines, type CitedText } from "@/answer/screen";
 import { evidenceOf, findSeeded, seededTrace } from "@/answer/seeded";
 import { ndjsonResponse, type Emit } from "@/answer/stream";
-import { typedFacts } from "@/answer/templates";
+import { NO_TASK_LESSON_GAP, lessonIdIn, taskShaped, typedFacts, withBypassBlocks } from "@/answer/templates";
 import { gateResults, insertTrace, modelIdsOf, promptsOf } from "@/answer/trace";
 import { RETRIEVAL_K, toTraceScope, type Scope, type Template } from "@/answer/types";
 import { verify } from "@/answer/verify";
@@ -196,6 +198,8 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
 
   if (classification.intent_class === "defeat" || classification.intent_class === "permanent_change") {
     const refusal = await refusalFor(classification);
+    // The sheet the request targets, read by seq id from the seeded rows: no retrieval, no provider call, one line.
+    const sheet = await refusalEvidence(refusal, question);
     const packet = EvidencePacket.parse({
       trace_id: traceId,
       corpus_version: version.label,
@@ -203,8 +207,8 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
       template,
       rulepack: packetRulepack,
       claims: [],
-      typed_facts: [],
-      blocks: [],
+      typed_facts: sheet.typed_facts,
+      blocks: sheet.blocks,
       procedure: null,
       contradictions: [],
       abstention: null,
@@ -269,13 +273,20 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
   let procedure: Procedure | null = null;
   let safetyNotice: string | null = null;
   let bypassGap: string | null = null;
+  let bypassBundle: ProcedureBundle | null = null;
+  let servedLesson: string | null = null;
   if (classification.intent_class === "documented_bypass") {
     const rows = entityRows(pack, classification.entity ?? "", scope.tags);
     const oplIds = [...new Set(rows.map((r) => r.opl_id))];
     if (oplIds.length === 1 && oplIds[0] !== undefined) {
       procedure = await procedureFor(oplIds[0], { alias: user.alias, role: user.role, route: ROUTE, trace_id: traceId });
       if (procedure === null) bypassGap = NO_EVIDENCE_IN_SCOPE_REASON;
-      else safetyNotice = DOCUMENTED_BYPASS_NOTICE;
+      else {
+        safetyNotice = DOCUMENTED_BYPASS_NOTICE;
+        servedLesson = oplIds[0];
+        // The blocks of a bypass are the pack's own order, permit above steps (AC-ANS-15); the typed layer follows.
+        bypassBundle = await procedureOf(db, oplIds[0], scope.instrument_tags);
+      }
       if (procedure !== null) await writeAudit({
         id: traceId,
         actor_alias: user.alias,
@@ -367,13 +378,22 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
       return;
     }
 
-    // 8. Typed facts and blocks in the template's order (AC-ANS-16).
-    const facts = await typedFacts(db, scope, template, { retrieval, question });
-    const served = procedure ?? facts.procedure;
+    // 8. The typed layer: every block the scope's rows support, in the template's order (AC-ANS-16); a documented
+    // bypass leads with the pack's own order instead, permit above steps (AC-ANS-15).
+    const facts = await typedFacts(db, scope, template, { retrieval, question, ...(servedLesson === null ? {} : { opl_id: servedLesson }) });
+    const blocks = bypassBundle === null ? facts.blocks : withBypassBlocks(bypassBundle, facts.blocks);
+    // A lesson the question names by its id is resolved through procedureFor, which re-hashes every step and writes
+    // render.integrity_blocked before anything renders (AC-ANS-05); the typed lane's own bundle, which also carries
+    // the protective functions the isolation affects, is kept when it bound that same lesson.
+    const namedLesson = lessonIdIn(question);
+    let served = procedure ?? facts.procedure;
+    if (procedure === null && namedLesson !== null && served?.opl_id !== namedLesson) {
+      served = (await procedureFor(namedLesson, { alias: user.alias, role: user.role, route: ROUTE, trace_id: traceId })) ?? served;
+    }
     // The one evidence set: the retrieved chunks and the spans the typed facts and the blocks cite, with their
     // texts (src/answer/evidence.ts). The composer writes from it, AG-4 is given its texts and C1 resolves against
     // it; line 1 above stays the retrieved set alone, as 9.8 spells it.
-    const evidenceSet = await buildEvidenceSet(db, { retrieved: retrieval.chunks, typed_facts: facts.typed_facts, blocks: facts.blocks });
+    const evidenceSet = await buildEvidenceSet(db, { retrieved: retrieval.chunks, typed_facts: facts.typed_facts, blocks });
     const spansById = new Map(evidenceSet.map((s) => [s.span_id, s] as const));
     const cited: CitedText[] = evidenceSet.map(({ text, ...citation }) => ({ citation, text }));
     // AC-ANS-17 and INV-2: the whitelist is built from the same evidence set the claims cite, so a sentence that
@@ -448,7 +468,9 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
 
     // 13. The outcome, the caveat, the band from its traced inputs.
     const screenedGaps = screenLines(gaps, whitelist).kept;
-    const declared = [...screenedGaps, ...(bypassGap === null ? [] : [bypassGap])];
+    // A task-shaped question that no approved lesson teaches is a declared gap, never a silent omission.
+    const lessonGap = taskShaped(template, question) && served === null ? [NO_TASK_LESSON_GAP] : [];
+    const declared = [...screenedGaps, ...lessonGap, ...(bypassGap === null ? [] : [bypassGap])];
     const reason = providerDown
       ? PROVIDER_UNREACHABLE_REASON
       : composerFailed
@@ -466,13 +488,13 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
       outcome: decision.outcome,
       claims: decision.claims,
       typed_facts: facts.typed_facts,
-      blocks: facts.blocks,
+      blocks,
       procedure: served,
       contradictions: facts.contradictions,
       abstention: decision.abstention,
       gaps_declared: decision.gaps_declared,
       confidence: { band },
-      caveat: caveatFor(classification, facts.typed_facts, facts.blocks),
+      caveat: caveatFor(classification, facts.typed_facts, blocks),
       safety_notice: safetyNotice,
     });
 

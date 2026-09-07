@@ -4,7 +4,7 @@
 // 9.8 filled from the sheet and the pack; a lesson's procedure served verbatim under its hashes or blocked with the
 // integrity audit. Deterministic over stored data; the database is the fake and the audit writer a mock.
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { Abstention, Refusal, type Block, type Claim, type TypedFact } from "@/contracts/generated/evidence_packet";
+import { Abstention, Block, Refusal, type Claim, type TypedFact } from "@/contracts/generated/evidence_packet";
 import type { Dropped } from "@/gates/g2";
 import { HashMismatch } from "@/lib/errors";
 import { AS_BUILT_CAVEAT, MOC_TEXT, NO_ENTAILED_CLAIM_REASON, droppedSentencesGap } from "@/lib/fixed-strings";
@@ -12,10 +12,15 @@ import { quoteHash } from "@/lib/hash";
 import { classify, pack, protectiveRow, routingText, type Classification } from "@/rulepack";
 import { citation, retrieval, scope, typedFacts } from "../../tests/fixtures/answer";
 import { queueResult, resetFakeDb, statements } from "../../tests/helpers/fake-db-client";
-import { caveatFor, decide, escalationRole, nearestDocuments, procedureFor, pseudonymise, refusalFor, type AbstentionContext } from "./outcome";
+import { caveatFor, decide, escalationRole, nearestDocuments, procedureFor, pseudonymise, refusalEvidence, refusalFor, type AbstentionContext } from "./outcome";
 
 const audit = vi.hoisted(() => ({ writeAudit: vi.fn(), activeCorpusVersion: vi.fn() }));
 vi.mock("@/lib/audit", () => ({ writeAudit: audit.writeAudit, activeCorpusVersion: audit.activeCorpusVersion }));
+
+// Nothing on this path may reach a provider (blueprint section 1: the class is decided in code before any model
+// call). The gateway is replaced by spies, so a call added to the refusal or the outcome path is recorded here.
+const gateway = vi.hoisted(() => ({ invoke: vi.fn(), embed: vi.fn(), budgetStatus: vi.fn() }));
+vi.mock("@/gateway", () => gateway);
 
 const ROLES = Abstention.shape.escalation_role.options;
 
@@ -196,6 +201,159 @@ describe("refusalFor (9.8 Refusal)", () => {
 
   it("refuses to build a Refusal for a class that is not refused", async () => {
     await expect(refusalFor(none())).rejects.toThrow(/not a refusal class/);
+  });
+});
+
+// The diagnosis of 2026-09-07, rank 8: the refusal packet was built evidence-free, so the sheet's own trip row, its
+// effects and its note never rendered although all three are seeded and reachable by seq id with no provider call.
+describe("refusalEvidence (9.8 Refusal, AC-ANS-08)", () => {
+  const QUESTION = "How do I bypass SEQ-3401 at AI-3401?";
+  const defeat = classify(pack, QUESTION);
+  const row = protectiveRow(pack, defeat.protective_function);
+  if (row === null || row.seq_id === null) throw new Error("the fixture question names no SEQ");
+  const seq = row.seq_id;
+
+  const SET_POINT_NOTE = "1. Trip set points are training values.";
+  const RESET_NOTE = "2. A trip is latched and requires a manual reset once the cause has cleared.";
+  const sheet = {
+    seqId: seq,
+    equipmentTag: row.equipment_tag,
+    logicKind: "trip_logic",
+    silSheet: 2,
+    ceDocNo: row.ce_doc_no,
+    ceRevision: "B",
+    notes: [
+      { n: 1, text: SET_POINT_NOTE, span_id: "sp-note-1" },
+      { n: 2, text: RESET_NOTE, span_id: "sp-note-2" },
+    ],
+    permissiveGate: "AND",
+  };
+  // Sheet order: the row the request names, another trip row it does not, and an alarm row on the same tag.
+  const sheetRow = (id: string, rowId: string, rowKind: string, instrumentTag: string, effects: Array<{ effect_id: string; final_element: string; marked: boolean }>) => ({
+    id,
+    seqId: seq,
+    equipmentTag: row.equipment_tag,
+    rowId,
+    rowKind,
+    initiator: "High analysis",
+    instrumentTag,
+    setpointValue: 2.5,
+    setpointUnit: "%",
+    comparator: ">",
+    setpointText: "2.5",
+    voting: rowKind === "trip" ? "1oo2" : null,
+    voteCellText: "1oo2",
+    effects,
+    effectsBasis: "marked X in the sheet",
+    sourcePage: 1,
+    spanId: `sp-${id}`,
+  });
+  const targeted = sheetRow("r1", "R1", "trip", "AI-3401", [
+    { effect_id: "E1", final_element: "TRIP MOTOR KC-3401", marked: true },
+    { effect_id: "E2", final_element: "CLOSE XV-3401", marked: true },
+    { effect_id: "E3", final_element: "ALARM DCS", marked: false },
+  ]);
+  const otherTrip = sheetRow("r2", "R2", "trip", "PSLL-3401", [{ effect_id: "E1", final_element: "TRIP MOTOR KC-3401", marked: true }]);
+  const alarm = sheetRow("r3", "R3", "alarm", "AI-3401", [{ effect_id: "E4", final_element: "ALARM DCS", marked: true }]);
+
+  const source = (spanId: string, text: string) => ({
+    spanId,
+    page: 1,
+    quoteHash: quoteHash(text),
+    anchorText: text,
+    startOrdinal: 1,
+    revisionId: "rev-ce-3401",
+    revision: "B",
+    approvalStatus: "issued_for_operation",
+    approvalStatusText: "ISSUED FOR OPERATION",
+    isCurrent: true,
+    documentId: "doc-ce-3401",
+    docNo: row.ce_doc_no,
+    documentClass: "interlock",
+    subjectTag: row.equipment_tag,
+  });
+
+  /** The four reads of the refusal path: the sheet, its rows, the spans they cite and the findings of that document. */
+  function queueSheet(rows: unknown[]): void {
+    queueResult([sheet]);
+    queueResult(rows);
+    queueResult([source("sp-r1", "AI-3401 high analysis 2.5 % 1oo2 TRIP"), source("sp-note-1", SET_POINT_NOTE), source("sp-note-2", RESET_NOTE)]);
+    queueResult([]);
+  }
+
+  async function refusalOf(): Promise<Refusal> {
+    queueResult([{ sil: sheet.silSheet, ceDocNo: sheet.ceDocNo, ceRevision: sheet.ceRevision }]);
+    queueResult([]);
+    return refusalFor(defeat);
+  }
+
+  it("is a defeat that names the protective function, so the sheet is reachable by seq id alone", async () => {
+    expect(defeat.intent_class).toBe("defeat");
+    expect(defeat.protective_function).toBe(seq);
+  });
+
+  it("serves the sheet's targeted trip row with its SIL, its setpoint and the sheet's own set-point note as the qualifier", async () => {
+    const refusal = await refusalOf();
+    queueSheet([targeted, otherTrip, alarm]);
+    const evidence = await refusalEvidence(refusal, QUESTION);
+    expect(evidence.typed_facts).toEqual([
+      expect.objectContaining({
+        label: "R1 High analysis (AI-3401)",
+        value_text: "2.5",
+        value_num: 2.5,
+        unit: "%",
+        comparator: ">",
+        qualifier: "Trip set points are training values.", // the note's own list number is not a value it states
+        source_class: "ce_row",
+      }),
+    ]);
+    expect(evidence.typed_facts[0]?.source.span_id).toBe("sp-r1");
+    const rows = evidence.blocks.find((b) => b.kind === "initiator_row");
+    expect(rows?.items).toEqual([expect.objectContaining({ row_id: "R1", seq_id: seq, instrument_tag: "AI-3401", voting: "1oo2", sil_text: "SIL 2", setpoint_text: "2.5" })]);
+    // Only the row the request names: a second trip row and the alarm row of the same tag are not served.
+    expect(JSON.stringify(evidence)).not.toContain("R2");
+    expect(JSON.stringify(evidence)).not.toContain("R3");
+  });
+
+  it("serves the effects the sheet marks, in sheet order, and the two blocks in the default order", async () => {
+    const refusal = await refusalOf();
+    queueSheet([targeted, otherTrip, alarm]);
+    const evidence = await refusalEvidence(refusal, QUESTION);
+    expect(evidence.blocks.map((b) => [b.kind, b.order])).toEqual([
+      ["initiator_row", 1],
+      ["effects", 2],
+    ]);
+    const effects = evidence.blocks.find((b) => b.kind === "effects");
+    expect(effects?.items).toEqual([
+      expect.objectContaining({
+        row_id: "R1",
+        sil_text: "SIL 2",
+        effects_basis: "marked X in the sheet",
+        effects: [
+          { effect_id: "E1", final_element: "TRIP MOTOR KC-3401", marked: true },
+          { effect_id: "E2", final_element: "CLOSE XV-3401", marked: true },
+        ],
+      }),
+    ]);
+    // Note 2 of every sheet: an unmarked cell is not an effect.
+    expect(JSON.stringify(effects)).not.toContain("E3");
+    for (const b of evidence.blocks) expect(() => Block.parse(b)).not.toThrow();
+  });
+
+  it("names no initiator when the request names none, and reads nothing at all without a function", async () => {
+    const refusal = await refusalOf();
+    queueSheet([targeted, otherTrip, alarm]);
+    expect(await refusalEvidence(refusal, "How do I bypass SEQ-3401?")).toEqual({ typed_facts: [], blocks: [] });
+    expect(await refusalEvidence({ ...refusal, function: null }, QUESTION)).toEqual({ typed_facts: [], blocks: [] });
+  });
+
+  it("reads the sheet before any provider call: the refusal is built without the gateway", async () => {
+    const refusal = await refusalOf();
+    queueSheet([targeted, otherTrip, alarm]);
+    const evidence = await refusalEvidence(refusal, QUESTION);
+    expect(evidence.typed_facts).toHaveLength(1);
+    expect(gateway.invoke).not.toHaveBeenCalled();
+    expect(gateway.embed).not.toHaveBeenCalled();
   });
 });
 

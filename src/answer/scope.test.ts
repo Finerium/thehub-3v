@@ -2,13 +2,16 @@
 // every step written as one basis line; an instrument tag binds its asset and its source documents; an area alias
 // binds every asset of the area; one hop through document_edge never crosses to another asset's documents; a
 // failure family joins only when the question names it and is labelled as the link it is; an unknown tag resolves
-// to nothing and offers the nearest asset by stem. The query module is the in-memory fake over the synthetic asset.
+// to nothing and offers the nearest asset by stem; a protective function or a work order number named alone binds
+// the asset it belongs to, and a question that names no identifier at all reads the visible corpus by its content
+// words instead of abstaining. The query module is the in-memory fake over the synthetic asset.
 import { describe, expect, it, vi } from "vitest";
 import { db } from "@/db/client";
 import { familyLinkBasis } from "@/lib/fixed-strings";
-import { FAMILY, OTHER_TAG, TAG, VERSION_ID } from "../../tests/fixtures/answer/asset";
-import { contentTerms, nearestAssetTags, questionTags, resolveScope } from "./scope";
-import { Scope } from "./types";
+import { FAMILY, OTHER_TAG, SEQ, TAG, VERSION_ID } from "../../tests/fixtures/answer/asset";
+import { retrieve } from "./retrieve";
+import { CORPUS_WIDE_BASIS, contentTerms, nearestAssetTags, questionTags, resolveScope, workOrderNumbers } from "./scope";
+import { RETRIEVAL_K, Scope } from "./types";
 
 vi.mock("@/db/queries/retrieval", async () => (await import("../../tests/fixtures/answer/asset")).fakeQueries);
 vi.mock("@/auth/sandbox", () => ({ visibleVersionIds: vi.fn(async () => [VERSION_ID]) }));
@@ -75,9 +78,44 @@ describe("resolveScope (AC-ANS-01)", () => {
   it("an unknown tag resolves to nothing and offers the nearest asset by stem without adding it (AC-ANS-06)", async () => {
     const scope = await resolveScope(db, "Why did GA-9901B trip?", null);
     expect(scope).toEqual({ tags: [], instrument_tags: [], document_ids: [], revision_ids: [], basis: [`no equipment tag matched; nearest by tag stem: ${TAG} (not added to the scope)`], family_ids: [] });
-    const nothing = await resolveScope(db, "What is the weather?", null);
-    expect(nothing.basis).toEqual(["no equipment tag, instrument tag, area alias or family matched"]);
-    expect(nothing.document_ids).toEqual([]);
+    const unknownWorkOrder = await resolveScope(db, "What happened on WO-999999?", null);
+    expect(unknownWorkOrder.document_ids).toEqual([]);
+    expect(unknownWorkOrder.basis).toEqual(["no equipment tag, instrument tag, area alias or family matched"]);
+  });
+
+  // The diagnosis of 2026-09-07, rank 5: a question that names only a protective function or a work order number
+  // bound nothing and abstained, and a question that names no identifier at all abstained for want of a tag.
+  it("a protective function named alone binds the asset its sheet governs, read from equipment.interlock_ref", async () => {
+    const scope = await resolveScope(db, `What does ${SEQ} protect?`, null);
+    expect(scope.tags).toEqual([TAG]);
+    expect(scope.basis).toContain(`protective function ${SEQ} named in the question binds ${TAG} (equipment.interlock_ref)`);
+    expect(scope.document_ids).toEqual(ASSET_DOCUMENTS);
+    expect(scope.revision_ids).toEqual(ASSET_REVISIONS);
+  });
+
+  it("a work order number named alone binds the asset the workbook records it against, and is never read as a tag", async () => {
+    const scope = await resolveScope(db, "What was done on WO-990010?", null);
+    expect(scope.tags).toEqual([TAG]);
+    expect(scope.instrument_tags).toEqual([]);
+    expect(scope.basis).toContain(`work order WO-990010 named in the question binds ${TAG} (work_order.equipment_tag)`);
+    expect(workOrderNumbers("What was done on WO-990010?")).toEqual(["WO-990010"]);
+    expect(questionTags("What was done on WO-990010?")).toEqual([]);
+    expect(scope.document_ids).toEqual(ASSET_DOCUMENTS);
+  });
+
+  it("a question that names no identifier reads the visible corpus by its content words instead of abstaining", async () => {
+    const scope = await resolveScope(db, "Which pumps run on crude naphtha?", null);
+    expect(scope.tags).toEqual([]); // nothing matched, so no typed row may claim an asset the question never named
+    expect(scope.instrument_tags).toEqual([]);
+    expect(scope.family_ids).toEqual([]);
+    expect(scope.basis[0]).toBe(`${CORPUS_WIDE_BASIS}: ${contentTerms("Which pumps run on crude naphtha?").join(", ")}`);
+    expect(scope.basis).toContain(`corpus documents read by content words: ${scope.document_ids.length}`);
+    expect(scope.document_ids).toContain("doc-ds-9902"); // every asset of the visible corpus, not one
+    expect(scope.document_ids).not.toContain("doc-note"); // the organiser's own note is excluded everywhere
+    expect(scope.revision_ids.length).toBeGreaterThan(0);
+    // And it retrieves: the fallback exists so that a question with no tag is answered from the corpus, not abstained.
+    const { chunks } = await retrieve(db, scope, "Which pumps run on crude naphtha?", [0.1, 0.2, 0.3], { k: RETRIEVAL_K, include_superseded: false, visible_version_ids: [VERSION_ID] });
+    expect(chunks.length).toBeGreaterThan(0);
   });
 
   it("is deterministic: the same question resolves to the same scope twice, and case does not matter for a tag", async () => {
