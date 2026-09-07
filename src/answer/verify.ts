@@ -15,7 +15,12 @@ export type VerifyResult = {
   outcome: InvokeOutcome | "skipped";
 };
 
-/** The 9.16 pairs: each sentence with the texts of the spans it cites, in citation order; nothing else. */
+/**
+ * The 9.16 pairs: each sentence with the texts of the spans it cites, in citation order; nothing else.
+ * `spansById` is the one evidence set of src/answer/evidence.ts keyed by span id, so a sentence that cites a typed
+ * fact's own span reaches the verifier with that span's text; only an id no span carries leaves a pair short, and
+ * G2 C1 drops that sentence anyway.
+ */
 export function verifierPairs(claims: readonly ComposerClaim[], spansById: ReadonlyMap<string, EvidenceSpan>): AG4VerifyInput["pairs"] {
   return claims.map((c) => ({
     sentence_id: c.id,

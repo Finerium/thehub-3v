@@ -6,11 +6,12 @@
 // contract fails before any lane test runs.
 import { z } from "zod";
 import type { RetrievedChunk, Retrieval, Scope } from "@/answer/types";
-import { Citation, EvidencePacket, TypedFact } from "@/contracts/generated/evidence_packet";
+import { Block, Citation, EvidencePacket, TypedFact } from "@/contracts/generated/evidence_packet";
 import { AG2Output, AG4VerifyOutput, GatewayCall } from "@/contracts/generated/gateway";
 import { AnswerTrace } from "@/contracts/generated/serving";
 import { AS_BUILT_CAVEAT } from "@/lib/fixed-strings";
-import { citation, claims as gateClaims, span, typedFacts as gateFacts, verdicts as gateVerdicts } from "../g2";
+import type { SpanSource } from "@/db/queries/retrieval";
+import { citation, claims as gateClaims, span, spans as gateSpans, typedFacts as gateFacts, verdicts as gateVerdicts } from "../g2";
 
 export { citation, span };
 
@@ -171,3 +172,101 @@ export async function readLines(response: Response): Promise<NdjsonLine[]> {
     .filter((line) => line.length > 0)
     .map((line) => NdjsonLine.parse(JSON.parse(line)));
 }
+
+// ---------------------------------------------------------------------------------------------------------------
+// The one evidence set (src/answer/evidence.ts; blueprint 9.8, 9.16). Retrieval returns chunks; a typed fact and a
+// block item carry a span of their own, which retrieval need not have returned. The live UC-1 trace failed on
+// exactly that shape, so the fixtures below carry it: `sp-ws` is a served, current, hash-exact SYN- span of the same
+// datasheet that is not among `chunks`, and `UNKNOWN_SPAN_ID` is an id the span table does not carry at all.
+// ---------------------------------------------------------------------------------------------------------------
+
+/** A served span the fixture's retrieval does not return; the typed fact below is its only way into the set. */
+export const UNRETRIEVED_SPAN_ID = "sp-ws";
+/** An id no span carries: what is cited from it is left out of the set ("provenance or nothing"). */
+export const UNKNOWN_SPAN_ID = "sp-not-in-the-span-table";
+
+/** The typed fact whose source span retrieval did not return: the setpoint the composer cited on the live trace. */
+export const unretrievedFact: TypedFact = TypedFact.parse({
+  label: "VSHH-1201 trip setpoint (interlock sheet)",
+  value_text: "7.1",
+  value_num: 7.1,
+  unit: "mm/s",
+  comparator: ">",
+  source: citation(UNRETRIEVED_SPAN_ID),
+  qualifier: null,
+  source_class: "ce_row",
+});
+
+/** The typed facts of the packet plus that one: what templates.ts hands the lane when a fact is read off-chunk. */
+export const typedFactsWithUnretrieved: TypedFact[] = [...typedFacts.map((f) => structuredClone(f)), unretrievedFact];
+
+/** The SpanSource row of a fixture span, as src/db/queries/retrieval.ts returns it (synthetic revision and ordinal). */
+export function spanSourceOf(id: string): SpanSource {
+  const s = span(id);
+  return {
+    spanId: s.span_id,
+    page: s.page,
+    quoteHash: s.quote_hash,
+    anchorText: s.text,
+    startOrdinal: 0,
+    revisionId: `rev-${s.document_id}-${s.revision}`,
+    revision: s.revision,
+    approvalStatus: s.approval_status,
+    approvalStatusText: s.approval_status_text,
+    isCurrent: !s.superseded,
+    documentId: s.document_id,
+    docNo: s.doc_no,
+    documentClass: "datasheet",
+    subjectTag: null,
+  };
+}
+
+/** spansByIds over the fixture spans: an id the fixture does not carry is absent from the map, as in the table. */
+export function spanSources(ids: readonly string[]): Map<string, SpanSource> {
+  const out = new Map<string, SpanSource>();
+  for (const id of ids) if (gateSpans.some((s) => s.span_id === id)) out.set(id, spanSourceOf(id));
+  return out;
+}
+
+/**
+ * Blocks in block order whose items cite spans at the depths templates.ts emits: inside a typed fact (an interlock
+ * row), inside a nested list and beside the item (return to service), a null citation (an unmatched BOM part), and
+ * an id the span table does not carry (a lesson). Item shapes follow src/answer/types.ts; no text is corpus text.
+ */
+export const evidenceBlocks: Block[] = [
+  Block.parse({
+    kind: "initiator_row",
+    order: 1,
+    label: "Initiator",
+    items: [{ row_id: "ir-syn-1", row_kind: "trip", seq_id: "SEQ-1201", initiator: "high vibration", instrument_tag: "VSHH-1201", voting: "1oo2", fact: unretrievedFact }],
+  }),
+  Block.parse({
+    kind: "return_to_service",
+    order: 2,
+    label: "Return to service",
+    items: [
+      {
+        seq_id: "SEQ-1201",
+        permissive_gate: "AND",
+        permissives: [{ seq_id: "SEQ-1201", n: 1, text: "Suction valve open", signal_tag: null, standing_bypass_state: null, span_id: "sp-ds-old", citation: citation("sp-ds-old") }],
+        reset_notes: [],
+        citation: citation("sp-ce-1"),
+      },
+    ],
+  }),
+  Block.parse({
+    kind: "bom_parts",
+    order: 3,
+    label: "Parts",
+    items: [{ wo_number: "WO-SYN-0001", part_string: "mechanical seal", status: "unmatched", item_no: null, description: null, material: null, quantity: null, alternative_item_no: null, disambiguator_text: null, citation: null }],
+  }),
+  Block.parse({
+    kind: "lessons",
+    order: 4,
+    label: "Lessons",
+    items: [{ opl_id: "SYN-OPL-LV-6701-05", title: "Pump start after a seal change", classification: "Trouble Case", aspect: "Machine", machine_drafted: false, approver_alias: null, citation: { ...citation("sp-opl-1"), span_id: UNKNOWN_SPAN_ID } }],
+  }),
+];
+
+/** The span ids the set carries in order for `chunks`, `typedFactsWithUnretrieved` and `evidenceBlocks`. */
+export const EVIDENCE_SET_ORDER: readonly string[] = [...chunks.map((c) => c.citation.span_id), UNRETRIEVED_SPAN_ID, "sp-ds-old"];

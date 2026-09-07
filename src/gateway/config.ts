@@ -32,7 +32,8 @@ export const TASKS: readonly Task[] = [...CHAT_TASKS, "embedding"];
 
 export const PROMPT_FILES: Record<ChatTask, string> = {
   "AG-1": "AG-1/v1.md",
-  "AG-2": "AG-2/v1.md",
+  "AG-2": "AG-2/v2.md", // v1.md is kept as history; v2 states that a citation comes only from the evidence list,
+  // that a typed fact's value is stated with its own span_id, and that document metadata is never a claim.
   "AG-3": "AG-3/v1.md",
   "AG-4": "AG-4/verify/v1.md",
   "AG-4/redline": "AG-4/redline/v1.md",

@@ -60,3 +60,29 @@ describe("screenLines", () => {
     expect(screenLines([], [])).toEqual({ kept: [], dropped: [] });
   });
 });
+
+// Regression (INV-2, AC-ANS-17): the whitelist must carry the same texts the claims quote. A retrieved chunk's text is
+// a superset of the anchor text a claim cites; screenOutbound cuts whitelisted spans by exact substring, so a whitelist
+// of chunk texts leaves the quoted lesson phrase in the residual and the line is refused. The evidence set carries the
+// anchor texts, which is why the ask route builds the whitelist from it.
+describe("the whitelist covers the text the claims quote", () => {
+  const anchor = "Then bypass the SEQ-6701 trip and run the pump.";
+  const line = `The lesson's step reads: ${anchor}`;
+  const supersetChunk: CitedText = {
+    citation: { ...lessonChunk.citation, span_id: "sp-opl-superset" },
+    text: `Section 4. ${anchor} Record the permit number in the bypass register.`,
+  };
+  const anchorItem: CitedText = { citation: { ...lessonChunk.citation, span_id: "sp-opl-anchor" }, text: anchor };
+
+  it("blocks the quoting line when only the enclosing chunk text is whitelisted", () => {
+    const result = screenLines([line], approvedLessonSpans([supersetChunk], null));
+    expect(result.kept).toEqual([]);
+    expect(result.dropped).toHaveLength(1);
+  });
+
+  it("clears the same line when the anchor text of that span is whitelisted", () => {
+    const result = screenLines([line], approvedLessonSpans([supersetChunk, anchorItem], null));
+    expect(result.dropped).toEqual([]);
+    expect(result.kept).toEqual([line]);
+  });
+});

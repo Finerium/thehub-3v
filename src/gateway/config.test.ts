@@ -112,6 +112,15 @@ describe("prompt versions (9.16: every prompt is a versioned file)", () => {
     expect(new Set(CHAT_TASKS.map((task) => PROMPTS[task].version)).size).toBe(CHAT_TASKS.length);
   });
 
+  it("AG-2 runs the composer prompt v2, whose hash is not v1's (the evidence-set revision)", () => {
+    expect(PROMPT_FILES["AG-2"]).toBe("AG-2/v2.md");
+    const v1 = sha256Hex(readFileSync(path.join(PROMPTS_DIR, "AG-2/v1.md")));
+    const v2 = sha256Hex(readFileSync(path.join(PROMPTS_DIR, "AG-2/v2.md")));
+    expect(ROLE_TABLE["AG-2"].prompt_version).toBe(v2);
+    expect(ROLE_TABLE["AG-2"].prompt_version).not.toBe(v1);
+    expect(v1).toMatch(HEX64);
+  });
+
   it("the verifier prompt never mentions a question and the redliner prompt declares no edit field", () => {
     expect(PROMPTS["AG-4"].text.toLowerCase()).not.toContain("question");
     expect(PROMPTS["AG-4"].text).toContain('{ "pairs": [');

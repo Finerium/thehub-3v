@@ -24,6 +24,11 @@ export type ComposeInput = {
   question: string;
   template: Template | null;
   scope: Scope;
+  /**
+   * The one evidence set of src/answer/evidence.ts, not the retrieved chunks alone: the chunks in rerank order
+   * followed by the spans the typed facts and the block items cite, each with the text its quote_hash was stored
+   * over. The composer may cite any of them, C1 resolves every one of them, and AG-4 receives their texts.
+   */
   chunks: readonly CitedText[];
   typed_facts: readonly TypedFact[];
   repair: { verdicts: VerifierVerdict[] } | null;

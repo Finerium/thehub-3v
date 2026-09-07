@@ -24,13 +24,17 @@ import {
   scope,
   seeded,
   seededPacket,
+  spanSourceOf,
   typedFacts,
+  typedFactsWithUnretrieved,
+  UNRETRIEVED_SPAN_ID,
+  citation,
 } from "../../../../tests/fixtures/answer";
-import { argOf, resetFakeDb, statements } from "../../../../tests/helpers/fake-db-client";
+import { argOf, queueResult, resetFakeDb, statements } from "../../../../tests/helpers/fake-db-client";
 import { setRequest } from "../../../../tests/helpers/next-headers";
 import { evidenceOf } from "@/answer/seeded";
 import { Abstention, AskStream, Refusal, type EvidencePacket } from "@/contracts/generated/evidence_packet";
-import { AG4VerifyInput, type GatewayCall } from "@/contracts/generated/gateway";
+import { AG2Output, AG4VerifyInput, type GatewayCall } from "@/contracts/generated/gateway";
 import { answerTrace } from "@/db/schema";
 import { INPUT_SCHEMAS, type ChatTask } from "@/gateway/config";
 import { utcDayStart } from "@/gateway/budget";
@@ -597,5 +601,57 @@ describe("the packet (9.8)", () => {
     const json = JSON.stringify(event);
     expect(json).not.toContain(TRIP_QUESTION);
     for (const c of chunks) expect(json).not.toContain(c.text);
+  });
+});
+
+describe("the one evidence set (blueprint 9.8; AC-ANS-03)", () => {
+  // The live UC-1 shape: a typed fact read off a span retrieval did not return. Line 1 is the retrieved set, as 9.8
+  // spells it; the composer, the verifier and C1 get that set plus the spans the typed facts and the blocks cite.
+  const CLAIM_TEXT = "VSHH-1201 trips GA-1201A at 7.1 mm/s.";
+  const composerCitesTheFact = AG2Output.parse({ claims: [{ text: CLAIM_TEXT, span_ids: [UNRETRIEVED_SPAN_ID] }], gaps: [], suggested_outcome: "answer" });
+  const entailedOnTheFact = { verdicts: [{ sentence_id: "s1", verdict: "entailed", span_id: UNRETRIEVED_SPAN_ID, reason: "The span states the sentence." }] };
+
+  beforeEach(() => {
+    lane.typedFacts.mockResolvedValue({ typed_facts: structuredClone(typedFactsWithUnretrieved), blocks: [], procedure: null, contradictions: [] });
+    queueResult([spanSourceOf(UNRETRIEVED_SPAN_ID)]); // what spansByIds reads for the span the chunks do not carry
+    script({ "AG-2": [{ outcome: "ok", data: composerCitesTheFact }], "AG-4": [{ outcome: "ok", data: entailedOnTheFact }] });
+  });
+
+  it("line 1 carries the retrieved citations alone, while the packet's claim cites the typed fact's own span", async () => {
+    const { lines } = await stream({ question: TRIP_QUESTION });
+    const first = evidenceLineOf(lines);
+    expect(first.evidence).toEqual(retrieval.evidence);
+    expect(first.evidence.map((c) => c.span_id)).not.toContain(UNRETRIEVED_SPAN_ID);
+
+    const packet = packetOf(lines);
+    expect(packet.outcome).toBe("answer");
+    expect(packet.claims).toHaveLength(1);
+    expect(packet.claims[0]?.text).toBe(CLAIM_TEXT);
+    expect(packet.claims[0]?.citations).toEqual([citation(UNRETRIEVED_SPAN_ID)]);
+    expect(packet.typed_facts).toEqual(typedFactsWithUnretrieved);
+    const row = insertedTrace();
+    expect(row.gateResults.C1).toEqual({ pass: true, detail: "no sentence dropped" });
+    expect(row.retrievedChunkIds).toEqual(chunks.map((c) => c.chunk_id));
+  });
+
+  it("the composer envelope lists that span with its text, after the retrieved ones", async () => {
+    await stream({ question: TRIP_QUESTION });
+    const envelope = calls("AG-2")[0]?.envelope;
+    const evidence = (envelope?.evidence ?? []) as Array<{ span_id: string; text: string }>;
+    expect(evidence.map((e) => e.span_id)).toEqual([...chunks.map((c) => c.citation.span_id), UNRETRIEVED_SPAN_ID]);
+    expect(evidence.at(-1)?.text).toBe(spanSourceOf(UNRETRIEVED_SPAN_ID).anchorText);
+    const listed = new Set(evidence.map((e) => e.span_id));
+    for (const fact of typedFactsWithUnretrieved) expect(listed.has(fact.source.span_id), fact.label).toBe(true);
+  });
+
+  it("the verifier pair of that sentence carries the span's text and still never the question", async () => {
+    await stream({ question: TRIP_QUESTION });
+    const request = calls("AG-4")[0];
+    if (request === undefined) throw new Error("no verifier call recorded");
+    expect(JSON.stringify(request.envelope)).not.toContain(TRIP_QUESTION);
+    const parsed = AG4VerifyInput.parse(request.envelope);
+    expect(parsed.pairs).toEqual([
+      { sentence_id: "s1", sentence: CLAIM_TEXT, spans: [{ span_id: UNRETRIEVED_SPAN_ID, text: spanSourceOf(UNRETRIEVED_SPAN_ID).anchorText }] },
+    ]);
   });
 });

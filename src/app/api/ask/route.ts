@@ -17,6 +17,7 @@ import { getSandbox, visibleVersionIds } from "@/auth/sandbox";
 import type { SessionUser } from "@/auth/session";
 import { compose, MAX_COMPOSER_CALLS, type ComposeInput } from "@/answer/compose";
 import { confidenceBand, confidenceInputs } from "@/answer/confidence";
+import { buildEvidenceSet } from "@/answer/evidence";
 import {
   caveatFor,
   clusterFor,
@@ -42,7 +43,7 @@ import type { GatewayCall } from "@/contracts/generated/gateway";
 import type { AnswerTrace } from "@/contracts/generated/serving";
 import { db } from "@/db/client";
 import { corpusVersion } from "@/db/schema";
-import { runG2, type Dropped, type EvidenceSpan, type VerifierVerdict } from "@/gates/g2";
+import { runG2, type Dropped, type VerifierVerdict } from "@/gates/g2";
 import { budgetStatus, embed } from "@/gateway";
 import { utcDayStart } from "@/gateway/budget";
 import { activeCorpusVersion, writeAudit, type AuditInput } from "@/lib/audit";
@@ -302,8 +303,6 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
   });
   const evidence: Citation[] = retrieval.evidence;
   const chunks: CitedText[] = retrieval.chunks.map((c) => ({ citation: c.citation, text: c.text }));
-  const spans: EvidenceSpan[] = retrieval.chunks.map((c) => ({ ...c.citation, text: c.text }));
-  const spansById = new Map(spans.map((s) => [s.span_id, s] as const));
 
   const base = {
     trace_id: traceId,
@@ -364,7 +363,16 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
     // 8. Typed facts and blocks in the template's order (AC-ANS-16).
     const facts = await typedFacts(db, scope, template, { retrieval, question });
     const served = procedure ?? facts.procedure;
-    const whitelist = approvedLessonSpans(chunks, served);
+    // The one evidence set: the retrieved chunks and the spans the typed facts and the blocks cite, with their
+    // texts (src/answer/evidence.ts). The composer writes from it, AG-4 is given its texts and C1 resolves against
+    // it; line 1 above stays the retrieved set alone, as 9.8 spells it.
+    const evidenceSet = await buildEvidenceSet(db, { retrieved: retrieval.chunks, typed_facts: facts.typed_facts, blocks: facts.blocks });
+    const spansById = new Map(evidenceSet.map((s) => [s.span_id, s] as const));
+    const cited: CitedText[] = evidenceSet.map(({ text, ...citation }) => ({ citation, text }));
+    // AC-ANS-17 and INV-2: the whitelist is built from the same evidence set the claims cite, so a sentence that
+    // quotes an approved lesson's anchor text is cleared; a chunk-text whitelist never matches that quotation and the
+    // line would be screened as a defeat, which is a false refusal and therefore a safety failure.
+    const whitelist = approvedLessonSpans(cited, served);
     const ctx: AbstentionContext = {
       escalation_role: escalationRole(question, scope, template),
       nearest_documents: nearestDocuments(evidence),
@@ -383,7 +391,7 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
     let dropped: Dropped[] = [];
     let kept: Claim[] = [];
 
-    const input: ComposeInput = { question, template, scope, chunks, typed_facts: facts.typed_facts, repair: null };
+    const input: ComposeInput = { question, template, scope, chunks: cited, typed_facts: facts.typed_facts, repair: null };
     const round = async (repair: ComposeInput["repair"], n: 0 | 1) => {
       const composed = await compose({ ...input, repair }, n);
       composerCalls += 1;
@@ -403,7 +411,7 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
       verdictsAll.push(...verified.verdicts);
       const result = runG2({
         claims,
-        evidence: spans,
+        evidence: evidenceSet,
         typed_facts: facts.typed_facts,
         verdicts: verified.verdicts,
         pack,
