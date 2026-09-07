@@ -1,0 +1,38 @@
+# Strings exempt from the scans of tools/banned-strings.sh. One list, used by both scans: every entry is removed
+# from the text before either scan runs, so an entry listed for one reason is invisible to the other as well.
+#
+# Three kinds of string are allowed to survive a scan, and each must be listed here first, so that every one of
+# them is a deliberate, reviewable act rather than a slip:
+#
+#   1. a quotation from the organiser's corpus, kept in its source spelling (--english);
+#   2. a registered proper name that has no English form: an institution, a department, a degree title (--english);
+#   3. a Case 2 term that the text DECLARES OUT OF SCOPE or DENIES (--names). AC-DEL-06 bans that vocabulary
+#      "presented as a feature"; a grep cannot read intent, so a sentence that says the product does not do the
+#      thing is listed here by hand. Never list a sentence that claims the capability.
+#
+# One string per line, matched literally and removed from the text before the scans run. A blank line and a line
+# starting with # are ignored. Keep each entry to the shortest span that covers the term: a whole paragraph listed
+# here would exempt everything inside it, in both scans.
+#
+# Literal means literal. A PDF's extracted text wraps lines, so an entry that spans a line break in the deck will
+# never match; list the shortest span that survives on one line of `pdftotext -layout` output.
+#
+# No run of corpus text longer than a citation belongs in this file, or in any tracked file of a public
+# repository (ADR-010, invariant 7).
+
+# 2. The registered department and major of all three members (supplied/team-facts.json), on the Team Profile page.
+#    The full string is the source's own; the department alone is what survives the deck's column wrap.
+D4 Teknik Informatika (Sarjana Terapan), Jurusan Teknik Komputer dan Informatika
+Jurusan Teknik Komputer dan Informatika
+
+# 3. The deck's own out-of-scope row (Feasibility & Roadmap): it names what The Hub deliberately does not do.
+#    Both spans sit inside a denial. The row reads "out of scope" and the sentence begins "Nothing here".
+Prediction, alerting, work assignment
+forecasts a failure
+
+# 3. The product's own denials beside the coverage exposure. Check 8 part 3 bans a saving attached to that
+#    figure; these three spans are the sentences that say the figure is not one. Each is the shortest span
+#    that carries the denial, and each appears verbatim in the surface named beside it.
+an exposure and not a saving
+an exposure, not a saving
+not a saving and not a forecast
