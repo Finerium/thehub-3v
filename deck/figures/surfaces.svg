@@ -1,0 +1,81 @@
+<!-- Cover surface strip. Drawn, not photographed: three of the product's own surfaces reduced to their layout, at
+     the proportions the deployed application uses. Blueprint 7.4 allows native SVG and forbids invented imagery,
+     and AC-DEL-02 forbids a raster figure, so the strip is a drawing of the layout rather than a screen capture. -->
+<svg viewBox="0 0 660 200" role="img" aria-label="Layout strip of three product surfaces: Home, Ask and the Coverage Console" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans">
+  <g>
+    <rect x="0.5" y="12.5" width="206" height="150" rx="8" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.16"/>
+    <rect x="0.5" y="12.5" width="206" height="18" rx="8" fill="#ebe7dd"/>
+    <rect x="0.5" y="24" width="206" height="7" fill="#ebe7dd"/>
+    <line x1="0.5" y1="30.5" x2="206.5" y2="30.5" stroke="#1b1916" stroke-opacity="0.14"/>
+    <circle cx="11" cy="21.5" r="2.4" fill="#1e3fb8"/>
+    <rect x="19" y="19" width="34" height="5" rx="2.5" fill="#45413a"/>
+    <text x="12" y="52" font-family="IBM Plex Mono" font-size="7.5" fill="#67625a">GAP HEADLINE</text>
+    <rect x="12" y="58" width="180" height="7" rx="3" fill="#1b1916" fill-opacity="0.75"/>
+    <rect x="12" y="69" width="144" height="7" rx="3" fill="#1b1916" fill-opacity="0.75"/>
+    <rect x="12" y="82" width="58" height="10" rx="5" fill="#dfe4f6" stroke="#1e3fb8" stroke-opacity="0.6"/>
+    <g fill="#ffffff" stroke="#1b1916" stroke-opacity="0.14">
+      <rect x="12" y="102" width="56" height="22" rx="5"/><rect x="74" y="102" width="56" height="22" rx="5"/><rect x="136" y="102" width="56" height="22" rx="5"/>
+      <rect x="12" y="128" width="56" height="22" rx="5"/><rect x="74" y="128" width="56" height="22" rx="5"/><rect x="136" y="128" width="56" height="22" rx="5"/>
+    </g>
+    <g fill="#67625a">
+      <rect x="18" y="110" width="30" height="4" rx="2"/><rect x="80" y="110" width="30" height="4" rx="2"/><rect x="142" y="110" width="30" height="4" rx="2"/>
+      <rect x="18" y="136" width="30" height="4" rx="2"/><rect x="80" y="136" width="30" height="4" rx="2"/><rect x="142" y="136" width="30" height="4" rx="2"/>
+    </g>
+    <text x="0" y="180" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">HOME</text>
+    <text x="0" y="192" font-family="IBM Plex Mono" font-size="8" fill="#67625a">the gap, its method, the seeded chips</text>
+  </g>
+
+  <g transform="translate(227,0)">
+    <rect x="0.5" y="12.5" width="206" height="150" rx="8" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.16"/>
+    <rect x="0.5" y="12.5" width="206" height="18" rx="8" fill="#ebe7dd"/>
+    <rect x="0.5" y="24" width="206" height="7" fill="#ebe7dd"/>
+    <line x1="0.5" y1="30.5" x2="206.5" y2="30.5" stroke="#1b1916" stroke-opacity="0.14"/>
+    <circle cx="11" cy="21.5" r="2.4" fill="#1e3fb8"/>
+    <rect x="19" y="19" width="34" height="5" rx="2.5" fill="#45413a"/>
+    <rect x="12" y="40" width="180" height="14" rx="7" fill="#ffffff" stroke="#1e3fb8" stroke-opacity="0.55"/>
+    <rect x="19" y="45" width="86" height="4.5" rx="2.2" fill="#67625a"/>
+    <g>
+      <rect x="12" y="62" width="180" height="16" rx="4" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+      <rect x="18" y="68" width="120" height="4.5" rx="2.2" fill="#1b1916" fill-opacity="0.7"/>
+      <rect x="146" y="66" width="40" height="9" rx="4.5" fill="#dfe4f6" stroke="#1e3fb8" stroke-opacity="0.6"/>
+      <rect x="12" y="82" width="180" height="16" rx="4" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+      <rect x="18" y="88" width="104" height="4.5" rx="2.2" fill="#1b1916" fill-opacity="0.7"/>
+      <rect x="146" y="86" width="40" height="9" rx="4.5" fill="#dfe4f6" stroke="#1e3fb8" stroke-opacity="0.6"/>
+      <rect x="12" y="102" width="180" height="16" rx="4" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+      <rect x="18" y="108" width="132" height="4.5" rx="2.2" fill="#1b1916" fill-opacity="0.7"/>
+      <rect x="156" y="106" width="30" height="9" rx="4.5" fill="#dfe4f6" stroke="#1e3fb8" stroke-opacity="0.6"/>
+    </g>
+    <rect x="12" y="124" width="180" height="26" rx="5" fill="#ffffff" stroke="#9a5600" stroke-opacity="0.45"/>
+    <rect x="18" y="130" width="52" height="4.5" rx="2.2" fill="#9a5600"/>
+    <rect x="18" y="139" width="120" height="4.5" rx="2.2" fill="#67625a"/>
+    <text x="0" y="180" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">ASK</text>
+    <text x="0" y="192" font-family="IBM Plex Mono" font-size="8" fill="#67625a">one claim a line, a citation on each</text>
+  </g>
+
+  <g transform="translate(454,0)">
+    <rect x="0.5" y="12.5" width="206" height="150" rx="8" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.16"/>
+    <rect x="0.5" y="12.5" width="206" height="18" rx="8" fill="#ebe7dd"/>
+    <rect x="0.5" y="24" width="206" height="7" fill="#ebe7dd"/>
+    <line x1="0.5" y1="30.5" x2="206.5" y2="30.5" stroke="#1b1916" stroke-opacity="0.14"/>
+    <circle cx="11" cy="21.5" r="2.4" fill="#1e3fb8"/>
+    <rect x="19" y="19" width="34" height="5" rx="2.5" fill="#45413a"/>
+    <text x="12" y="48" font-family="IBM Plex Mono" font-size="7.5" fill="#67625a">BOTH LAYERS</text>
+    <g>
+      <rect x="12" y="56" width="180" height="12" rx="3" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+      <rect x="12" y="56" width="44" height="12" rx="3" fill="#b42318"/>
+      <rect x="12" y="72" width="180" height="12" rx="3" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+      <rect x="12" y="72" width="85" height="12" rx="3" fill="#9a5600"/>
+      <rect x="12" y="88" width="180" height="12" rx="3" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+      <rect x="12" y="88" width="50" height="12" rx="3" fill="#1e7b45"/>
+    </g>
+    <line x1="12" y1="110" x2="192" y2="110" stroke="#1b1916" stroke-opacity="0.2"/>
+    <g fill="#67625a">
+      <rect x="12" y="118" width="76" height="4.5" rx="2.2"/>
+      <rect x="12" y="128" width="118" height="4.5" rx="2.2"/>
+      <rect x="12" y="138" width="96" height="4.5" rx="2.2"/>
+    </g>
+    <rect x="140" y="116" width="52" height="10" rx="5" fill="#dfe4f6" stroke="#1e3fb8" stroke-opacity="0.6"/>
+    <text x="0" y="180" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">COVERAGE CONSOLE</text>
+    <text x="0" y="192" font-family="IBM Plex Mono" font-size="8" fill="#67625a">the three bands, the threshold control</text>
+  </g>
+</svg>

@@ -1,0 +1,22 @@
+{
+  "note": [
+    "Planted inputs for the negative deck build of tests/unit/deck.test.ts (blueprint 11.9 AC-DEL-02 and AC-DEL-07).",
+    "A gate nobody has ever seen fire is a gate nobody knows works, so the test copies deck/, bundle/ and",
+    "supplied/team-facts.json into a throwaway tree, applies the two plants below to the copies alone, runs the real",
+    "deck/build.ts against them and requires a non-zero exit carrying both messages verbatim. Nothing here touches the",
+    "repository's own deck source, its fixture or the read-only supplied/ directory."
+  ],
+  "missing_key": {
+    "why": "A data-fx key the fixture does not carry must stop the build, never render as an empty span on a slide.",
+    "key": "populations.unplanned_failure",
+    "planted": "populations.unplanned_failure_absent_from_the_fixture",
+    "expect": "data-fx keys that rendered empty: populations.unplanned_failure_absent_from_the_fixture"
+  },
+  "placeholder": {
+    "why": "TBD_ is the placeholder marker of supplied/team-facts.json; one reaching a rendered slide must be red.",
+    "member_no": 2,
+    "field": "area",
+    "planted": "TBD_AREA_OF_EXPERTISE",
+    "expect": "TBD_ placeholder visible in the deck: TBD_AREA_OF_EXPERTISE"
+  }
+}

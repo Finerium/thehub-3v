@@ -1,0 +1,46 @@
+<!-- The operator-side roadmap. Every duration is the team's own assumption and is labelled as one; the gates
+     between phases are written so a sponsor can refuse to advance on evidence the product itself displays.
+     Bar lengths are drawn to the assumed durations and carry no fixture key, so the durations are marked nonfx. -->
+<svg viewBox="0 0 1120 152" role="img" aria-label="Operator-side roadmap: pilot, plant scale, group scale" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans">
+  <g font-family="IBM Plex Mono" font-size="9" letter-spacing="0.6" fill="#67625a">
+    <text x="0" y="9">PHASE AND SCOPE</text>
+    <text x="392" y="9">DURATION</text>
+    <text x="470" y="9" fill="#9a5600">ASSUMPTION</text>
+    <text x="700" y="9">GATE TO ADVANCE</text>
+  </g>
+  <line x1="0" y1="16" x2="1120" y2="16" stroke="#1b1916" stroke-width="1"/>
+
+  <g transform="translate(0,22)">
+    <rect x="0" y="2" width="3" height="32" fill="#1e3fb8"/>
+    <text x="14" y="14" font-size="12" fill="#1b1916">A. Pilot, one process unit</text>
+    <text x="14" y="30" font-size="10" fill="#67625a">site corpus, vocabulary calibration, a coverage baseline, first drafts</text>
+    <text x="392" y="14" font-family="IBM Plex Mono" font-size="11" fill="#1b1916" class="nonfx">12 weeks</text>
+    <rect x="392" y="21" width="72" height="8" rx="4" fill="#1e3fb8"/>
+    <text x="700" y="14" font-size="10" fill="#45413a">coverage trending down on the published method; draft acceptance at</text>
+    <text x="700" y="28" font-size="10" fill="#45413a">target; no safety event attributable to the tool</text>
+  </g>
+
+  <line x1="0" y1="62" x2="1120" y2="62" stroke="#1b1916" stroke-opacity="0.1"/>
+
+  <g transform="translate(0,68)">
+    <rect x="0" y="2" width="3" height="32" fill="#1e3fb8" fill-opacity="0.7"/>
+    <text x="14" y="14" font-size="12" fill="#1b1916">B. Plant scale</text>
+    <text x="14" y="30" font-size="10" fill="#67625a">all units on site; AIMS activated; a historian mirror from the replica</text>
+    <text x="392" y="14" font-family="IBM Plex Mono" font-size="11" fill="#1b1916" class="nonfx">2 to 3 quarters</text>
+    <rect x="392" y="21" width="156" height="8" rx="4" fill="#1e3fb8" fill-opacity="0.7"/>
+    <text x="700" y="14" font-size="10" fill="#45413a">the operator's own integration security review signed off, zone and</text>
+    <text x="700" y="28" font-size="10" fill="#45413a">conduit boundaries included</text>
+  </g>
+
+  <line x1="0" y1="108" x2="1120" y2="108" stroke="#1b1916" stroke-opacity="0.1"/>
+
+  <g transform="translate(0,114)">
+    <rect x="0" y="2" width="3" height="32" fill="#1e3fb8" fill-opacity="0.45"/>
+    <text x="14" y="14" font-size="12" fill="#1b1916">C. Group scale</text>
+    <text x="14" y="30" font-size="10" fill="#67625a">federation across sites, new and acquired ones; digital-twin deep links</text>
+    <text x="392" y="14" font-family="IBM Plex Mono" font-size="11" fill="#1b1916">tracks the operator</text>
+    <rect x="392" y="21" width="240" height="8" rx="4" fill="#1e3fb8" fill-opacity="0.45"/>
+    <text x="700" y="14" font-size="10" fill="#45413a">per-site data-protection and security review; a coverage baseline</text>
+    <text x="700" y="28" font-size="10" fill="#45413a">published per site before any federation</text>
+  </g>
+</svg>

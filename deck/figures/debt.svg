@@ -1,0 +1,86 @@
+<!-- Knowledge-debt ranking, eight assets. The score is the harness's composite over uncovered downtime, uncovered
+     recorded cost, repeat-family share and incomplete closeouts; rank, tag, score, hours and cost are fixture
+     values and each bar length is computed from the score it sits beside. -->
+<svg viewBox="0 0 470 290" role="img" aria-label="Knowledge-debt ranking across the eight assets" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans">
+  <g font-family="IBM Plex Mono" font-size="9" letter-spacing="0.6" fill="#67625a">
+    <text x="0" y="9">RANK</text>
+    <text x="34" y="9">ASSET</text>
+    <text x="92" y="9">SCORE</text>
+    <text x="134" y="9">COMPOSITE</text>
+    <text x="372" y="9" text-anchor="end">DOWNTIME h</text>
+    <text x="470" y="9" text-anchor="end">COST IDR m</text>
+  </g>
+  <line x1="0" y1="15" x2="470" y2="15" stroke="#1b1916" stroke-width="1"/>
+  <g transform="translate(0,22)">
+    <text x="0" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#67625a" data-fx="debt.per_asset[rank=1].rank"></text>
+    <text x="34" y="12" font-family="IBM Plex Mono" font-size="10.5" font-weight="600" fill="#1b1916" data-fx="debt.per_asset[rank=1].tag"></text>
+    <text x="92" y="12" font-family="IBM Plex Mono" font-size="10.5" fill="#1b1916" data-fx="debt.per_asset[rank=1].score" data-fx-fmt="d2"></text>
+    <rect x="134" y="3" width="200" height="12" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+    <rect x="134" y="3" height="12" fill="#1e3fb8" data-fx-bar="debt.per_asset[rank=1].score" data-fx-max="1" data-fx-span="200"/>
+    <text x="380" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=1].D_h" data-fx-fmt="d1"></text>
+    <text x="470" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=1].C_idr" data-fx-fmt="M1"></text>
+  </g>
+  <g transform="translate(0,56)">
+    <text x="0" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#67625a" data-fx="debt.per_asset[rank=2].rank"></text>
+    <text x="34" y="12" font-family="IBM Plex Mono" font-size="10.5" font-weight="600" fill="#1b1916" data-fx="debt.per_asset[rank=2].tag"></text>
+    <text x="92" y="12" font-family="IBM Plex Mono" font-size="10.5" fill="#1b1916" data-fx="debt.per_asset[rank=2].score" data-fx-fmt="d2"></text>
+    <rect x="134" y="3" width="200" height="12" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+    <rect x="134" y="3" height="12" fill="#1e3fb8" data-fx-bar="debt.per_asset[rank=2].score" data-fx-max="1" data-fx-span="200"/>
+    <text x="380" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=2].D_h" data-fx-fmt="d1"></text>
+    <text x="470" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=2].C_idr" data-fx-fmt="M1"></text>
+  </g>
+  <g transform="translate(0,90)">
+    <text x="0" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#67625a" data-fx="debt.per_asset[rank=3].rank"></text>
+    <text x="34" y="12" font-family="IBM Plex Mono" font-size="10.5" font-weight="600" fill="#1e3fb8" data-fx="debt.per_asset[rank=3].tag"></text>
+    <text x="92" y="12" font-family="IBM Plex Mono" font-size="10.5" fill="#1b1916" data-fx="debt.per_asset[rank=3].score" data-fx-fmt="d2"></text>
+    <rect x="134" y="3" width="200" height="12" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+    <rect x="134" y="3" height="12" fill="#1e3fb8" data-fx-bar="debt.per_asset[rank=3].score" data-fx-max="1" data-fx-span="200"/>
+    <text x="380" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=3].D_h" data-fx-fmt="d1"></text>
+    <text x="470" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=3].C_idr" data-fx-fmt="M1"></text>
+  </g>
+  <g transform="translate(0,124)">
+    <text x="0" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#67625a" data-fx="debt.per_asset[rank=4].rank"></text>
+    <text x="34" y="12" font-family="IBM Plex Mono" font-size="10.5" font-weight="600" fill="#1b1916" data-fx="debt.per_asset[rank=4].tag"></text>
+    <text x="92" y="12" font-family="IBM Plex Mono" font-size="10.5" fill="#1b1916" data-fx="debt.per_asset[rank=4].score" data-fx-fmt="d2"></text>
+    <rect x="134" y="3" width="200" height="12" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+    <rect x="134" y="3" height="12" fill="#1e3fb8" data-fx-bar="debt.per_asset[rank=4].score" data-fx-max="1" data-fx-span="200"/>
+    <text x="380" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=4].D_h" data-fx-fmt="d1"></text>
+    <text x="470" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=4].C_idr" data-fx-fmt="M1"></text>
+  </g>
+  <g transform="translate(0,158)">
+    <text x="0" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#67625a" data-fx="debt.per_asset[rank=5].rank"></text>
+    <text x="34" y="12" font-family="IBM Plex Mono" font-size="10.5" font-weight="600" fill="#1b1916" data-fx="debt.per_asset[rank=5].tag"></text>
+    <text x="92" y="12" font-family="IBM Plex Mono" font-size="10.5" fill="#1b1916" data-fx="debt.per_asset[rank=5].score" data-fx-fmt="d2"></text>
+    <rect x="134" y="3" width="200" height="12" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+    <rect x="134" y="3" height="12" fill="#1e3fb8" data-fx-bar="debt.per_asset[rank=5].score" data-fx-max="1" data-fx-span="200"/>
+    <text x="380" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=5].D_h" data-fx-fmt="d1"></text>
+    <text x="470" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=5].C_idr" data-fx-fmt="M1"></text>
+  </g>
+  <g transform="translate(0,192)">
+    <text x="0" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#67625a" data-fx="debt.per_asset[rank=6].rank"></text>
+    <text x="34" y="12" font-family="IBM Plex Mono" font-size="10.5" font-weight="600" fill="#1b1916" data-fx="debt.per_asset[rank=6].tag"></text>
+    <text x="92" y="12" font-family="IBM Plex Mono" font-size="10.5" fill="#1b1916" data-fx="debt.per_asset[rank=6].score" data-fx-fmt="d2"></text>
+    <rect x="134" y="3" width="200" height="12" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+    <rect x="134" y="3" height="12" fill="#1e3fb8" data-fx-bar="debt.per_asset[rank=6].score" data-fx-max="1" data-fx-span="200"/>
+    <text x="380" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=6].D_h" data-fx-fmt="d1"></text>
+    <text x="470" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=6].C_idr" data-fx-fmt="M1"></text>
+  </g>
+  <g transform="translate(0,226)">
+    <text x="0" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#67625a" data-fx="debt.per_asset[rank=7].rank"></text>
+    <text x="34" y="12" font-family="IBM Plex Mono" font-size="10.5" font-weight="600" fill="#1b1916" data-fx="debt.per_asset[rank=7].tag"></text>
+    <text x="92" y="12" font-family="IBM Plex Mono" font-size="10.5" fill="#1b1916" data-fx="debt.per_asset[rank=7].score" data-fx-fmt="d2"></text>
+    <rect x="134" y="3" width="200" height="12" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+    <rect x="134" y="3" height="12" fill="#1e3fb8" data-fx-bar="debt.per_asset[rank=7].score" data-fx-max="1" data-fx-span="200"/>
+    <text x="380" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=7].D_h" data-fx-fmt="d1"></text>
+    <text x="470" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=7].C_idr" data-fx-fmt="M1"></text>
+  </g>
+  <g transform="translate(0,260)">
+    <text x="0" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#67625a" data-fx="debt.per_asset[rank=8].rank"></text>
+    <text x="34" y="12" font-family="IBM Plex Mono" font-size="10.5" font-weight="600" fill="#1b1916" data-fx="debt.per_asset[rank=8].tag"></text>
+    <text x="92" y="12" font-family="IBM Plex Mono" font-size="10.5" fill="#1b1916" data-fx="debt.per_asset[rank=8].score" data-fx-fmt="d2"></text>
+    <rect x="134" y="3" width="200" height="12" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.1"/>
+    <rect x="134" y="3" height="12" fill="#1e3fb8" data-fx-bar="debt.per_asset[rank=8].score" data-fx-max="1" data-fx-span="200"/>
+    <text x="380" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=8].D_h" data-fx-fmt="d1"></text>
+    <text x="470" y="12" font-family="IBM Plex Mono" font-size="9.5" fill="#45413a" text-anchor="end" data-fx="debt.per_asset[rank=8].C_idr" data-fx-fmt="M1"></text>
+  </g>
+</svg>

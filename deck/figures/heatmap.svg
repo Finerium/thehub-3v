@@ -1,0 +1,72 @@
+<!-- Compliance heatmap, appendix A1: the three Key Questions, the six Expected Solution components, the
+     operational-context row and tacit knowledge against modules M1 to M7. A filled cell is an owner module; the
+     one hatched cell is the single honest partial, ES5, which ships as read-only connector contracts plus the
+     operational-context layer rather than as a connection. -->
+<svg viewBox="0 0 500 372" role="img" aria-label="Compliance heatmap of Key Questions and Expected Solution components against the seven modules" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans">
+  <defs>
+    <pattern id="partial" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="5" height="5" fill="#fdfbf7"/>
+      <line x1="0" y1="0" x2="0" y2="5" stroke="#9a5600" stroke-width="1.6"/>
+    </pattern>
+  </defs>
+
+  <g font-family="IBM Plex Mono" font-size="9" font-weight="600" fill="#67625a" text-anchor="middle">
+    <text x="222" y="24">M1</text><text x="260" y="24">M2</text><text x="298" y="24">M3</text>
+    <text x="336" y="24">M4</text><text x="374" y="24">M5</text><text x="412" y="24">M6</text><text x="450" y="24">M7</text>
+  </g>
+  <g font-family="IBM Plex Mono" font-size="7.5" fill="#67625a" text-anchor="middle">
+    <text x="222" y="34">ingest</text><text x="260" y="34">answer</text><text x="298" y="34">memory</text>
+    <text x="336" y="34">draft</text><text x="374" y="34">context</text><text x="412" y="34">graph</text><text x="450" y="34">eval</text>
+  </g>
+  <line x1="0" y1="40" x2="470" y2="40" stroke="#1b1916" stroke-width="1"/>
+
+  <g font-size="10" fill="#1b1916">
+    <text x="0" y="60">KQ1 Industrial Data Ops foundation</text>
+    <text x="0" y="86">KQ2 Trusted information, less improper execution</text>
+    <text x="0" y="112">KQ3 Integration for reliability and improvement</text>
+    <text x="0" y="146">ES1 Industrial Data Ops</text>
+    <text x="0" y="172">ES2 AI document ingestion</text>
+    <text x="0" y="198">ES3 Q and A, semantic search</text>
+    <text x="0" y="224">ES4 Traceable answers</text>
+    <text x="0" y="250">ES5 EDMS, AIMS, digital twin</text>
+    <text x="0" y="276">ES6 Failure memory</text>
+    <text x="0" y="310">Operational context, one tag</text>
+    <text x="0" y="336">Tacit knowledge, made writable</text>
+  </g>
+  <g stroke="#1b1916" stroke-opacity="0.08">
+    <line x1="0" y1="66" x2="470" y2="66"/><line x1="0" y1="92" x2="470" y2="92"/>
+    <line x1="0" y1="118" x2="470" y2="118"/><line x1="0" y1="152" x2="470" y2="152"/>
+    <line x1="0" y1="178" x2="470" y2="178"/><line x1="0" y1="204" x2="470" y2="204"/>
+    <line x1="0" y1="230" x2="470" y2="230"/><line x1="0" y1="256" x2="470" y2="256"/>
+    <line x1="0" y1="282" x2="470" y2="282"/><line x1="0" y1="316" x2="470" y2="316"/>
+    <line x1="0" y1="342" x2="470" y2="342"/>
+  </g>
+  <line x1="0" y1="124" x2="470" y2="124" stroke="#1b1916" stroke-opacity="0.3"/>
+  <line x1="0" y1="288" x2="470" y2="288" stroke="#1b1916" stroke-opacity="0.3"/>
+
+  <!-- filled cells: 14 x 14 rounded squares centred on the module column, on the row baseline minus 10 -->
+  <g fill="#1e3fb8">
+    <rect x="215" y="46" width="14" height="14" rx="3"/><rect x="405" y="46" width="14" height="14" rx="3"/>
+    <rect x="253" y="72" width="14" height="14" rx="3"/><rect x="443" y="72" width="14" height="14" rx="3"/>
+    <rect x="291" y="98" width="14" height="14" rx="3"/><rect x="329" y="98" width="14" height="14" rx="3"/><rect x="367" y="98" width="14" height="14" rx="3"/>
+    <rect x="215" y="132" width="14" height="14" rx="3"/><rect x="405" y="132" width="14" height="14" rx="3"/>
+    <rect x="215" y="158" width="14" height="14" rx="3"/>
+    <rect x="253" y="184" width="14" height="14" rx="3"/>
+    <rect x="253" y="210" width="14" height="14" rx="3"/><rect x="443" y="210" width="14" height="14" rx="3"/>
+    <rect x="291" y="262" width="14" height="14" rx="3"/><rect x="329" y="262" width="14" height="14" rx="3"/>
+    <rect x="367" y="296" width="14" height="14" rx="3"/><rect x="405" y="296" width="14" height="14" rx="3"/>
+    <rect x="329" y="322" width="14" height="14" rx="3"/><rect x="291" y="322" width="14" height="14" rx="3"/>
+  </g>
+  <g>
+    <rect x="291" y="236" width="14" height="14" rx="3" fill="url(#partial)" stroke="#9a5600" stroke-width="1"/>
+    <rect x="367" y="236" width="14" height="14" rx="3" fill="#1e3fb8"/>
+    <text x="470" y="250" font-family="IBM Plex Mono" font-size="8.5" fill="#9a5600" text-anchor="end">PARTIAL</text>
+  </g>
+
+  <g transform="translate(0,352)" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">
+    <rect x="0" y="-8" width="10" height="10" rx="2" fill="#1e3fb8"/>
+    <text x="15" y="1">owner module</text>
+    <rect x="105" y="-8" width="10" height="10" rx="2" fill="url(#partial)" stroke="#9a5600" stroke-width="1"/>
+    <text x="120" y="1">specified, not connected</text>
+  </g>
+</svg>

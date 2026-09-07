@@ -1,0 +1,11 @@
+TheHub_demo.mp4, as delivered
+  built        2026-09-07T15:55:13Z
+  commit       76697f2
+  bytes        4128927 of 5000000
+  duration     175.000000 s of 180 (planned 175)
+  container    mov,mp4,m4a,3gp,3g2,mj2
+  overall rate 188750 bps
+  video        codec_name=h264 profile=High width=1280 height=720 pix_fmt=yuv420p r_frame_rate=15/1 bit_rate=182924 nb_frames=2625 
+  audio        codec_name=aac profile=LC sample_rate=48000 channels=1 bit_rate=1525 
+  captions     codec_name=mov_text codec_type=subtitle 
+  srt cues     33 in video/captions.srt

@@ -1,0 +1,40 @@
+<!-- The three coverage bands over the unplanned-failure population at the frozen threshold. Every count is a
+     data-fx element; every bar length is computed by build.ts from the same fixture value (data-fx-bar), so a bar
+     cannot disagree with the number printed beside it. -->
+<svg viewBox="0 0 560 346" role="img" aria-label="Coverage bands over the unplanned-failure records" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans">
+  <g font-family="IBM Plex Mono" font-size="9.5" letter-spacing="0.6" fill="#67625a">
+    <text x="0" y="9">POPULATION</text>
+    <text x="150" y="9">RECORDS</text>
+    <text x="216" y="9">SHARE OF THE POPULATION</text>
+  </g>
+  <line x1="0" y1="15" x2="560" y2="15" stroke="#1b1916" stroke-width="1"/>
+
+  <g>
+    <text x="0" y="55" font-size="14" fill="#1b1916">No lesson at all</text>
+    <text x="0" y="71" font-size="10.5" fill="#67625a">generous layer, uncovered</text>
+    <text x="150" y="57" font-family="IBM Plex Mono" font-size="21" font-weight="600" fill="#b42318" data-fx="coverage.bands.unplanned_failure[t=0.62].no_lesson"></text>
+    <rect x="216" y="40" width="320" height="24" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.12"/>
+    <rect x="216" y="40" height="24" fill="#b42318" data-fx-bar="coverage.bands.unplanned_failure[t=0.62].no_lesson" data-fx-max="populations.unplanned_failure" data-fx-span="320"/>
+  </g>
+
+  <g>
+    <text x="0" y="145" font-size="14" fill="#1b1916">Copied row only</text>
+    <text x="0" y="161" font-size="10.5" fill="#67625a">a work-order row reprinted, nothing taught</text>
+    <text x="150" y="147" font-family="IBM Plex Mono" font-size="21" font-weight="600" fill="#9a5600" data-fx="coverage.bands.unplanned_failure[t=0.62].copied_row_only"></text>
+    <rect x="216" y="130" width="320" height="24" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.12"/>
+    <rect x="216" y="130" height="24" fill="#9a5600" data-fx-bar="coverage.bands.unplanned_failure[t=0.62].copied_row_only" data-fx-max="populations.unplanned_failure" data-fx-span="320"/>
+  </g>
+
+  <g>
+    <text x="0" y="235" font-size="14" fill="#1b1916">Taught by a lesson</text>
+    <text x="0" y="251" font-size="10.5" fill="#67625a">strict layer, covered</text>
+    <text x="150" y="237" font-family="IBM Plex Mono" font-size="21" font-weight="600" fill="#1e7b45" data-fx="coverage.bands.unplanned_failure[t=0.62].taught"></text>
+    <rect x="216" y="220" width="320" height="24" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.12"/>
+    <rect x="216" y="220" height="24" fill="#1e7b45" data-fx-bar="coverage.bands.unplanned_failure[t=0.62].taught" data-fx-max="populations.unplanned_failure" data-fx-span="320"/>
+  </g>
+
+  <line x1="216" y1="300" x2="536" y2="300" stroke="#1b1916" stroke-opacity="0.25"/>
+  <text x="216" y="318" font-family="IBM Plex Mono" font-size="10" fill="#67625a">0</text>
+  <text x="536" y="318" font-family="IBM Plex Mono" font-size="10" fill="#67625a" text-anchor="end"><tspan data-fx="populations.unplanned_failure"></tspan> records</text>
+  <text x="0" y="340" font-family="IBM Plex Mono" font-size="10" fill="#67625a">Bands are drawn from the same fixture values printed beside them.</text>
+</svg>

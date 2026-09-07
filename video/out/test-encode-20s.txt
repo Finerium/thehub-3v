@@ -1,0 +1,6 @@
+test encode, the roughest 20 s at the delivery settings
+  bytes            456116
+  seconds          20.000
+  achieved rate    182.4 kbps over the window
+  extrapolated     3991015 bytes over 175 s, against a budget of 5000000
+  verdict          INSIDE the budget

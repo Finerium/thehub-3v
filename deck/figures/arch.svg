@@ -1,0 +1,82 @@
+<!-- The architecture in one figure. The read boundary is one-way by construction: nothing in the product holds a
+     write path toward a control system, and the connector row is drawn as specified, not connected. -->
+<svg viewBox="0 0 560 250" role="img" aria-label="Architecture: the read-only boundary, the application, the gateway and the versioned corpus" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans">
+  <defs>
+    <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="#1e3fb8"/>
+    </marker>
+  </defs>
+
+  <!-- plant side -->
+  <rect x="0.5" y="0.5" width="176" height="249" rx="9" fill="#ebe7dd" stroke="#1b1916" stroke-opacity="0.12"/>
+  <text x="12" y="18" font-family="IBM Plex Mono" font-size="8.5" letter-spacing="0.7" fill="#67625a">PURDUE LEVEL 0 TO 3</text>
+  <g font-size="9.5" fill="#45413a">
+    <rect x="12" y="26" width="152" height="21" rx="5" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="21" y="40">Control and safety systems</text>
+    <rect x="12" y="52" width="152" height="21" rx="5" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="21" y="66">Historian, EDMS, AIMS</text>
+    <rect x="12" y="78" width="152" height="21" rx="5" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="21" y="92">Controlled document set</text>
+  </g>
+  <text x="12" y="120" font-family="IBM Plex Mono" font-size="8.5" letter-spacing="0.7" fill="#67625a">PURDUE LEVEL 3.5</text>
+  <rect x="12" y="128" width="152" height="34" rx="5" fill="#fdfbf7" stroke="#9a5600" stroke-opacity="0.5"/>
+  <text x="21" y="142" font-size="9.5" fill="#1b1916">Read-only connector contracts</text>
+  <text x="21" y="154" font-family="IBM Plex Mono" font-size="8" fill="#9a5600">specified, not connected</text>
+  <text x="12" y="182" font-size="9" fill="#b42318" font-family="IBM Plex Mono">No write path, anywhere</text>
+  <path d="M12 190 h152" stroke="#b42318" stroke-width="1" stroke-dasharray="2 3"/>
+  <text x="12" y="212" font-size="9" fill="#45413a">The corpus never leaves the</text>
+  <text x="12" y="224" font-size="9" fill="#45413a">operator's control; the build</text>
+  <text x="12" y="236" font-size="9" fill="#45413a">reads one export, one digest.</text>
+
+  <!-- the one-way arrow across the boundary -->
+  <path d="M180 88 h30" stroke="#1e3fb8" stroke-width="1.4" fill="none" marker-end="url(#ah)"/>
+  <text x="182" y="80" font-family="IBM Plex Mono" font-size="8" fill="#67625a">read</text>
+
+  <!-- product side -->
+  <rect x="214.5" y="0.5" width="345" height="249" rx="9" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.14"/>
+  <text x="228" y="18" font-family="IBM Plex Mono" font-size="8.5" letter-spacing="0.7" fill="#67625a">THE HUB</text>
+
+  <g font-size="9.5">
+    <rect x="228" y="26" width="152" height="30" rx="5" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="237" y="40" fill="#1b1916">Ingestion, one extractor</text>
+    <text x="237" y="51" font-family="IBM Plex Mono" font-size="8" fill="#67625a">pdftotext -raw, canonical</text>
+
+    <rect x="392" y="26" width="152" height="30" rx="5" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="401" y="40" fill="#1b1916">Typed asset graph</text>
+    <text x="401" y="51" font-family="IBM Plex Mono" font-size="8" fill="#67625a">PostgreSQL, on the tag</text>
+
+    <rect x="228" y="66" width="152" height="30" rx="5" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="237" y="80" fill="#1b1916">Rule pack, as data</text>
+    <text x="237" y="91" font-family="IBM Plex Mono" font-size="8" fill="#67625a">safety intent, pre-call</text>
+
+    <rect x="392" y="66" width="152" height="30" rx="5" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="401" y="80" fill="#1b1916">Retrieval, both layers</text>
+    <text x="401" y="91" font-family="IBM Plex Mono" font-size="8" fill="#67625a">approved revisions only</text>
+
+    <rect x="228" y="106" width="316" height="34" rx="5" fill="#ffffff" stroke="#1e3fb8" stroke-opacity="0.45"/>
+    <text x="237" y="121" fill="#1b1916">One gateway module, the only code path that calls a provider</text>
+    <text x="237" y="133" font-family="IBM Plex Mono" font-size="8" fill="#67625a">per-role pins, per-role token budget, a daily spend cap</text>
+
+    <rect x="228" y="150" width="100" height="30" rx="5" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="237" y="164" fill="#1b1916">Gate G1</text>
+    <text x="237" y="175" font-family="IBM Plex Mono" font-size="8" fill="#67625a">typed numerals</text>
+
+    <rect x="336" y="150" width="100" height="30" rx="5" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="345" y="164" fill="#1b1916">Gate G2</text>
+    <text x="345" y="175" font-family="IBM Plex Mono" font-size="8" fill="#67625a">entailment</text>
+
+    <rect x="444" y="150" width="100" height="30" rx="5" fill="#ffffff" stroke="#1e7b45" stroke-opacity="0.5"/>
+    <text x="453" y="164" fill="#1b1916">Gate G3</text>
+    <text x="453" y="175" font-family="IBM Plex Mono" font-size="8" fill="#1e7b45">a human publishes</text>
+
+    <rect x="228" y="190" width="152" height="30" rx="5" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="237" y="204" fill="#1b1916">Draft store, separate</text>
+    <text x="237" y="215" font-family="IBM Plex Mono" font-size="8" fill="#67625a">no retrieval query reads it</text>
+
+    <rect x="392" y="190" width="152" height="30" rx="5" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="401" y="204" fill="#1b1916">Evaluation harness</text>
+    <text x="401" y="215" font-family="IBM Plex Mono" font-size="8" fill="#67625a"><tspan data-fx="golden.size"></tspan> cases, published</text>
+  </g>
+
+  <text x="228" y="238" font-family="IBM Plex Mono" font-size="8" fill="#67625a">Corpus version and digest travel on every answer and draft.</text>
+</svg>

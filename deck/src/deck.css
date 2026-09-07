@@ -1,0 +1,491 @@
+/* ------------------------------------------------------------------------------------------------------------
+   The Hub, deliverable 2: TheHub_deck.pdf.
+
+   Visual authority is blueprint section 7. This sheet carries the same tokens the product carries in
+   src/app/globals.css (7.1: Drafting ink, paper white and warm greys, one cobalt-ink accent, the plant's state
+   colours reserved for state alone) and the same named type pairing (Bricolage Grotesque for display, IBM Plex
+   Sans for body, IBM Plex Mono for every numeral that comes from a typed field). Print medium, so 7.2's motion
+   bands do not apply; the density registers do. None of 7.3's banned patterns appear: no gradient wash, no
+   decorative pill chips, no centred hero badge, no canned three-card row, no invented imagery, no raster.
+   ------------------------------------------------------------------------------------------------------------ */
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("../fonts/BricolageGrotesque-var.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: block;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("../fonts/IBMPlexSans-var.woff2") format("woff2");
+  font-weight: 100 700;
+  font-display: block;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../fonts/IBMPlexMono-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: block;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../fonts/IBMPlexMono-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: block;
+}
+
+:root {
+  --paper: #f4f1ea;
+  --paper-deep: #ebe7dd;
+  --film: #fdfbf7;
+  --film-rim: #ffffff;
+  --film-edge: rgba(27, 25, 22, 0.12);
+  --ink-900: #1b1916;
+  --ink-700: #45413a;
+  --ink-500: #67625a;
+  --accent: #1e3fb8;
+  --accent-soft: #dfe4f6;
+  --state-caveat: #9a5600;
+  --state-defect: #b42318;
+  --state-verified: #1e7b45;
+  --grid: rgba(27, 25, 22, 0.05);
+
+  --display: "Bricolage Grotesque", ui-sans-serif, sans-serif;
+  --sans: "IBM Plex Sans", ui-sans-serif, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --display-gap: 0.14em;
+}
+
+@page {
+  size: 1280px 720px;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper-deep);
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-900);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+/* --- the sheet ------------------------------------------------------------------------------------------- */
+
+.slide {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 100% 40px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 40px 100%,
+    var(--paper);
+  padding: 46px 64px 52px;
+  break-after: page;
+  page-break-after: always;
+}
+.slide:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+
+/* The drafting-film margin rule: a hairline down the left, the way a controlled drawing carries one. */
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 46px auto 52px 44px;
+  width: 1px;
+  background: var(--film-edge);
+}
+
+.rule {
+  height: 1px;
+  background: var(--film-edge);
+  border: 0;
+  margin: 0;
+}
+
+/* --- heading band ---------------------------------------------------------------------------------------- */
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ink-900);
+  margin-bottom: 18px;
+}
+h1 {
+  font-family: var(--display);
+  word-spacing: var(--display-gap);
+  font-variation-settings: "opsz" 48, "wght" 600;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  margin: 0;
+  color: var(--ink-900);
+}
+.head .kicker {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--ink-500);
+  margin-left: auto;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* --- body ------------------------------------------------------------------------------------------------ */
+
+.body {
+  height: 566px;
+  display: grid;
+  gap: 20px;
+  /* Rows size to their content and the slack falls at the foot of the page. The column layouts below want the
+     opposite: one row that fills the sheet, so that a .grow figure and a margin-top:auto line have height to
+     work with. */
+  align-content: start;
+}
+.body.split,
+.body.split-wide,
+.body.split-even {
+  align-content: stretch;
+}
+.body.split {
+  grid-template-columns: 7fr 5fr;
+}
+.body.split-wide {
+  grid-template-columns: 5fr 7fr;
+}
+.body.split-even {
+  grid-template-columns: 1fr 1fr;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+}
+.col.spread {
+  justify-content: space-between;
+}
+.body.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.duo {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
+}
+
+p {
+  margin: 0;
+}
+.lede {
+  font-family: var(--display);
+  word-spacing: var(--display-gap);
+  font-variation-settings: "opsz" 24, "wght" 500;
+  font-size: 20px;
+  line-height: 1.26;
+  letter-spacing: -0.012em;
+  color: var(--ink-900);
+}
+.note {
+  font-size: 11.5px;
+  color: var(--ink-700);
+  line-height: 1.42;
+}
+.fine {
+  font-size: 10px;
+  color: var(--ink-500);
+  line-height: 1.4;
+}
+
+.num {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-900);
+}
+.tag {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  color: var(--ink-700);
+}
+
+/* A number that is not a fixture value carries this marker in the source and this treatment on the page. */
+.nonfx {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- the film panel: 7.1's glass, flattened for print (a hairline rim and a tonal lift, never a shadow wash) */
+
+.panel {
+  background: var(--film);
+  border: 1px solid var(--film-edge);
+  border-top-color: var(--film-rim);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+.panel.tight {
+  padding: 11px 13px;
+}
+.panel > h2 {
+  font-family: var(--display);
+  word-spacing: var(--display-gap);
+  font-variation-settings: "opsz" 18, "wght" 600;
+  font-size: 13px;
+  letter-spacing: -0.004em;
+  margin: 0 0 8px;
+  color: var(--ink-900);
+}
+
+/* --- the method chip, the caveat chip, the label ---------------------------------------------------------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 8px;
+  border: 1px solid var(--film-edge);
+  background: var(--film);
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-700);
+  white-space: nowrap;
+}
+.chip.method {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+.chip.caveat {
+  border-color: var(--state-caveat);
+  color: var(--state-caveat);
+  background: rgba(154, 86, 0, 0.07);
+}
+.chip.verified {
+  border-color: var(--state-verified);
+  color: var(--state-verified);
+  background: rgba(30, 123, 69, 0.07);
+}
+.chip.defect {
+  border-color: var(--state-defect);
+  color: var(--state-defect);
+  background: rgba(180, 35, 24, 0.07);
+}
+.chiprow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.kq {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.kq b {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  padding-top: 1px;
+}
+.kq p {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--ink-900);
+}
+.kq.verbatim p {
+  font-size: 11px;
+  line-height: 1.46;
+  color: var(--ink-700);
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+}
+
+.assumption {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--state-caveat);
+  border: 1px solid var(--state-caveat);
+  border-radius: 5px;
+  padding: 0 4px;
+  white-space: nowrap;
+}
+
+/* --- tables ---------------------------------------------------------------------------------------------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10.5px;
+  line-height: 1.34;
+}
+th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: var(--ink-500);
+  border-bottom: 1px solid var(--ink-900);
+  padding: 0 8px 5px 0;
+  vertical-align: bottom;
+}
+td {
+  padding: 6px 8px 6px 0;
+  border-bottom: 1px solid var(--film-edge);
+  vertical-align: top;
+  color: var(--ink-700);
+}
+td:first-child,
+th:first-child {
+  padding-left: 0;
+}
+tr:last-child td {
+  border-bottom: 0;
+}
+td .num {
+  color: var(--ink-900);
+}
+td[lang="id"] {
+  font-style: normal;
+}
+
+/* --- figures --------------------------------------------------------------------------------------------- */
+
+figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 0;
+}
+figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* A figure that owns the slack in its column: the drawing scales to the height left over, keeping its aspect
+   (preserveAspectRatio defaults to xMidYMid meet), so a slide fills rather than trailing off into blank paper. */
+figure.grow {
+  flex: 1;
+  min-height: 0;
+}
+figure.grow svg {
+  flex: 1;
+  min-height: 0;
+  height: auto;
+}
+figcaption {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink-500);
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+}
+
+/* --- cover ----------------------------------------------------------------------------------------------- */
+
+.cover {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  padding-top: 8px;
+}
+.wordmark {
+  font-family: var(--display);
+  word-spacing: var(--display-gap);
+  font-variation-settings: "opsz" 96, "wght" 700;
+  font-size: 92px;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  margin: 0;
+  color: var(--ink-900);
+}
+.tagline {
+  font-family: var(--display);
+  word-spacing: var(--display-gap);
+  font-variation-settings: "opsz" 24, "wght" 400;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  margin: 10px 0 0;
+}
+.identifiers {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 18px;
+  font-size: 11.5px;
+  align-content: end;
+}
+.identifiers dt {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  padding-top: 2px;
+}
+.identifiers dd {
+  margin: 0;
+  color: var(--ink-900);
+}
+
+/* --- footer ---------------------------------------------------------------------------------------------- */
+
+.foot {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  color: var(--ink-500);
+  border-top: 1px solid var(--film-edge);
+  padding-top: 8px;
+}
+.foot .sep {
+  flex: 1;
+}
+.foot .mark {
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}

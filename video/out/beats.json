@@ -1,0 +1,73 @@
+{
+  "base_url": "https://thehub-3v.vercel.app",
+  "recorded_at": "2026-09-07T15:45:09.692Z",
+  "beats_retaken": [
+    "b6"
+  ],
+  "width": 1280,
+  "height": 720,
+  "fps": 15,
+  "total_seconds": 175,
+  "beats": [
+    {
+      "id": "b1",
+      "title": "B1 Hook",
+      "seconds": 20,
+      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b1.webm",
+      "lead": 0.38,
+      "filmed": 22.002,
+      "onScreen": "The Coverage Console with the method chip beside the number: the records no lesson mentions, and the records whose only trace is a copied row."
+    },
+    {
+      "id": "b2",
+      "title": "B2 Ask",
+      "seconds": 30,
+      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b2.webm",
+      "lead": 0.644,
+      "filmed": 30.002,
+      "onScreen": "The GA-1201A vibration question: the evidence packet, the typed setpoint carrying its sheet's own note, the effects it actuates, and a citation chip clicked through to the span it came from."
+    },
+    {
+      "id": "b3",
+      "title": "B3 Safety",
+      "seconds": 35,
+      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b3.webm",
+      "lead": 0.162,
+      "filmed": 35.001,
+      "onScreen": "A request to defeat the trip refused before any model call, with the permit route and the documented reset path shown; then the approved HV-6701 manual bypass answered verbatim from its own lesson."
+    },
+    {
+      "id": "b4",
+      "title": "B4 Context",
+      "seconds": 25,
+      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b4.webm",
+      "lead": 0.495,
+      "filmed": 25,
+      "onScreen": "A P&ID hotspot to the VSHH-1201 tag card, the setpoint ladder and the last proof test, then the misalignment chain ending at WO-240007."
+    },
+    {
+      "id": "b5",
+      "title": "B5 Gap",
+      "seconds": 20,
+      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b5.webm",
+      "lead": 0.262,
+      "filmed": 20.002,
+      "onScreen": "The partial answer: alignment is covered, the coupling element is not, and the uncovered cluster it belongs to is shown behind it."
+    },
+    {
+      "id": "b6",
+      "title": "B6 Loop",
+      "seconds": 45,
+      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b6.webm",
+      "lead": 0.748,
+      "filmed": 47.002,
+      "onScreen": "The draft with provenance on every element and the replacement interval left as its slot, then the SME note entered and signed, the redline pass, the manager's publication, the version increment, and the same question answered from the new lesson. Closing line and URL."
+    }
+  ],
+  "missing": [],
+  "misses": [
+    "the draft on DEBT-YD-2301 came back blocked; re-proposing it (9.6)",
+    "the loop route offered no engineer-note slot",
+    "POST /api/drafts/:id/publish was refused by the route, so no version roll and no recount are on camera"
+  ]
+}

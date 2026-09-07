@@ -1,0 +1,75 @@
+<!-- The self-healing loop. The only path from machine draft to published content is gate G3, and only a human in
+     the Manager role passes through it; the loop closes when the same question is answered from a lesson that did
+     not exist when it was first asked. -->
+<svg viewBox="0 0 560 230" role="img" aria-label="The self-healing loop, from measured gap to a recounted coverage figure" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans">
+  <defs>
+    <marker id="lh" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="#1e3fb8"/>
+    </marker>
+  </defs>
+
+  <g stroke="#1e3fb8" stroke-width="1.2" fill="none" marker-end="url(#lh)">
+    <path d="M130 32 h34"/>
+    <path d="M294 32 h34"/>
+    <path d="M424 48 v34"/>
+    <path d="M328 98 h-34"/>
+    <path d="M164 98 h-34"/>
+    <path d="M66 114 v34"/>
+    <path d="M130 164 h34"/>
+    <path d="M294 164 h34"/>
+  </g>
+
+  <g>
+    <rect x="2" y="14" width="128" height="36" rx="8" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.14"/>
+    <text x="14" y="31" font-size="10.5" fill="#1b1916">1. Measure the gap</text>
+    <text x="14" y="44" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a"><tspan data-fx="coverage.bands.unplanned_failure[t=0.62].no_lesson"></tspan> records, no lesson</text>
+  </g>
+  <g>
+    <rect x="164" y="14" width="130" height="36" rx="8" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.14"/>
+    <text x="176" y="31" font-size="10.5" fill="#1b1916">2. Draft from evidence</text>
+    <text x="176" y="44" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">six sections, cited</text>
+  </g>
+  <g>
+    <rect x="328" y="14" width="130" height="36" rx="8" fill="#fdfbf7" stroke="#9a5600" stroke-opacity="0.5"/>
+    <text x="340" y="31" font-size="10.5" fill="#1b1916">3. Open the slot</text>
+    <text x="340" y="44" font-family="IBM Plex Mono" font-size="8" fill="#9a5600">REQUIRES ENGINEER INPUT</text>
+  </g>
+
+  <g>
+    <rect x="328" y="80" width="130" height="36" rx="8" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.14"/>
+    <text x="340" y="97" font-size="10.5" fill="#1b1916">4. The engineer signs</text>
+    <text x="340" y="110" font-family="IBM Plex Mono" font-size="8" fill="#67625a">a stored, dated SME note</text>
+  </g>
+  <g>
+    <rect x="164" y="80" width="130" height="36" rx="8" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.14"/>
+    <text x="176" y="97" font-size="10.5" fill="#1b1916">5. Redline verdict</text>
+    <text x="176" y="110" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">question-blind, no edits</text>
+  </g>
+  <g>
+    <rect x="2" y="80" width="128" height="36" rx="8" fill="#fdfbf7" stroke="#1e7b45" stroke-opacity="0.55"/>
+    <text x="14" y="97" font-size="10.5" fill="#1b1916">6. Gate G3</text>
+    <text x="14" y="110" font-family="IBM Plex Mono" font-size="8.5" fill="#1e7b45">a human, Manager role</text>
+  </g>
+
+  <g>
+    <rect x="2" y="146" width="128" height="36" rx="8" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.14"/>
+    <text x="14" y="163" font-size="10.5" fill="#1b1916">7. Version increments</text>
+    <text x="14" y="176" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">one transaction</text>
+  </g>
+  <g>
+    <rect x="164" y="146" width="130" height="36" rx="8" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.14"/>
+    <text x="176" y="163" font-size="10.5" fill="#1b1916">8. Coverage recounts</text>
+    <text x="176" y="176" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">both layers, t = <tspan data-fx="method.threshold" data-fx-fmt="d2"></tspan></text>
+  </g>
+  <g>
+    <rect x="328" y="146" width="130" height="36" rx="8" fill="#fdfbf7" stroke="#1e3fb8" stroke-opacity="0.5"/>
+    <text x="340" y="163" font-size="10.5" fill="#1e3fb8">9. Ask again</text>
+    <text x="340" y="176" font-family="IBM Plex Mono" font-size="8" fill="#67625a">cited to the new lesson</text>
+  </g>
+
+  <path d="M470 164 h22 a10 10 0 0 0 10 -10 v-118 a10 10 0 0 0 -10 -10 h-22" stroke="#1e3fb8" stroke-width="1.2" fill="none" stroke-dasharray="3 3" marker-end="url(#lh)"/>
+  <text x="558" y="196" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a" text-anchor="end">the gap is smaller</text>
+
+  <text x="2" y="212" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">Machine output lives in draft tables no retrieval query reads. Step 6 is the only path out of them.</text>
+  <text x="2" y="224" font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">Every element of the draft carries its own evidence reference; an element that loses its span is dropped.</text>
+</svg>

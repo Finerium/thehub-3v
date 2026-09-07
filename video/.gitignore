@@ -1,0 +1,12 @@
+# The encode intermediates. video/raw/ and video/frames/ are ignored at the repository root; these are the two
+# files the encode builds from them, and both are rebuilt by `bash video/encode.sh` from what record.ts wrote.
+#
+# out/beats.json, out/beats-rehearsal.json and out/probe.txt are NOT ignored: they are the record of what was
+# filmed and what was measured, which is the evidence behind AC-DEL-03 and has to survive in the repository.
+out/master.mp4
+out/master.args
+out/probe-20s.mp4
+out/pass-0.log
+out/pass-0.log.mbtree
+out/probe-0.log
+out/probe-0.log.mbtree

@@ -5,7 +5,10 @@
 # against the organiser's corpus, read through the read-only deploy key). `seed` (AC-ING-09, AC-ING-10, AC-ING-15,
 # AC-NFR-07, AC-NFR-13) builds the bundle from the corpus checkout with `make bundle`, seeds it twice, timed, into a
 # disposable pgvector service container behind the local Neon proxy, then runs the `db` Vitest project against that
-# container as the application role. A push to main adds `production-smoke`
+# container as the application role. `deliverables` (AC-DEL-02, AC-DEL-03, AC-DEL-06) installs poppler and
+# chromium, builds the deck from its source and the bundled fixture, and runs the deck and video contracts of
+# tests/unit/; the video encode is not a CI job, because video/raw/ is gitignored and the capture needs the demo
+# accounts. A push to main adds `production-smoke`
 # (AC-M0-01 to AC-M0-06): once the Vercel deployment of that commit answers on /api/health, scripts/smoke.sh runs
 # against the production URL and its JSON is kept as a run artifact. Tier B (nightly, live model) is tier-b.yml.
 name: Tier A
@@ -91,6 +94,82 @@ jobs:
             1) echo "banned strings: clean in$dirs" ;;
             *) exit "$rc" ;;
           esac
+
+  deliverables:
+    # AC-DEL-02, AC-DEL-03 and AC-DEL-06, the deliverable half of Tier A. The deck is the one deliverable a runner
+    # can produce from a checkout: its source, its figures, its fonts and bundle/fixtures.json are all tracked, and
+    # deck/build.ts is itself the gate (it refuses to leave a PDF behind that would fail AC-DEL-02). It needs three
+    # things this job installs: poppler for the page and text measurements, chromium for the printer, and
+    # supplied/team-facts.json beside the checkout for the Team Profile page.
+    #
+    # The video encode is deliberately NOT a job here. video/raw/ is gitignored and the capture in video/record.ts
+    # signs in to the deployment with the three demo accounts, so a runner has no footage to encode and no reason to
+    # hold credentials for one; the encode stays the local `bash video/encode.sh` of video/narration.md. What CI can
+    # hold is the contract, and tests/unit/video.test.ts does: the cut, the captions against the PRD's 26.2
+    # narration, the settings of 9.12 in video/encode.sh, and ffprobe over the artefact wherever one is present.
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Check out thehub-harness beside the application (the deck build reads its banned-strings list)
+        run: |
+          harness="$GITHUB_WORKSPACE/../thehub-harness"
+          git init -q "$harness"
+          git -C "$harness" fetch -q --depth 1 https://github.com/Finerium/thehub-harness.git "$HARNESS_REF"
+          git -C "$harness" checkout -q FETCH_HEAD
+          git -C "$harness" log -1 --format='harness %H'
+
+      - name: poppler-utils (pdfinfo and pdftotext, the family of the pinned extractor of ADR-005)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils
+          pdftotext -v 2>&1 | head -1
+
+      - name: Chromium for the deck printer
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Team facts beside the checkout, when the repository carries them (D-08)
+        env:
+          TEAM_FACTS_JSON: ${{ secrets.TEAM_FACTS_JSON }}
+        run: |
+          # supplied/ is the organiser-facing input directory and is in no repository, so the runner needs its own
+          # copy of the one file the deck reads from it. The value is written by redirection and never printed.
+          if [ -n "${TEAM_FACTS_JSON:-}" ]; then
+            mkdir -p "$GITHUB_WORKSPACE/../supplied"
+            printf '%s' "$TEAM_FACTS_JSON" > "$GITHUB_WORKSPACE/../supplied/team-facts.json"
+            echo "team facts written beside the checkout ($(wc -c < "$GITHUB_WORKSPACE/../supplied/team-facts.json") bytes)"
+          else
+            echo "::notice::TEAM_FACTS_JSON is not set, so the deck build and the sandbox tests of"\
+                 "tests/unit/deck.test.ts skip in this run and the hermetic layers still run."
+          fi
+
+      - name: Build the deck (AC-DEL-02; the build is the gate, a red build leaves no artefact)
+        run: |
+          if [ -f "$GITHUB_WORKSPACE/../supplied/team-facts.json" ]; then
+            pnpm exec tsx deck/build.ts
+          else
+            echo "deck build skipped: no team facts on this runner"
+          fi
+
+      - name: The deck and the video contracts (AC-DEL-02, AC-DEL-03, AC-DEL-06)
+        run: pnpm exec vitest run --project unit tests/unit/deck.test.ts tests/unit/video.test.ts
+
+      - name: Keep the built deck
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: deck-${{ github.sha }}
+          path: deliverables/TheHub_deck.pdf
+          if-no-files-found: ignore
 
   no-corpus-text:
     runs-on: ubuntu-latest

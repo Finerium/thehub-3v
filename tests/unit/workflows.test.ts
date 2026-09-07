@@ -22,6 +22,10 @@ const REPOSITORY_SECRETS = [
   "ADMIN_JOB_TOKEN",
   "CI_INGEST_TOKEN",
   "GITHUB_TOKEN",
+  // Not a credential: the contents of supplied/team-facts.json, which is in no repository, so the deck job of
+  // ci.yml can write it beside the checkout and build the Team Profile page. Optional; without it that job runs
+  // its hermetic half and says so.
+  "TEAM_FACTS_JSON",
 ];
 
 describe("every workflow", () => {

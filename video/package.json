@@ -1,0 +1,6 @@
+{
+  "name": "thehub-3v-video",
+  "private": true,
+  "type": "module",
+  "description": "The video pipeline runs as ES modules. record.ts uses top-level await and import.meta.dirname, and the repository root carries no \"type\" field, so tsx would otherwise load these files as CommonJS and fail to parse them. pnpm-workspace.yaml declares no packages glob, so this manifest scopes the module type to video/ and is not a workspace package."
+}

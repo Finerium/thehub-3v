@@ -1,0 +1,593 @@
+<!doctype html>
+<!-- ================================================================================================================
+     The Hub, deliverable 2: TheHub_deck.pdf. Source of record; `deck/build.ts` prints it.
+
+     NUMBER RULE (blueprint invariant 6, AC-DEL-02). No quantity is typed into this file.
+       - A fixture-bearing quantity is an empty element carrying its blueprint 10.5 key:
+             <span data-fx="populations.unplanned_failure"></span>
+         The build substitutes the value from bundle/fixtures.json (default namespace), bundle/manifest.json
+         (`manifest.` prefix) or supplied/team-facts.json (`team.` prefix). An element that resolves to nothing
+         renders empty and the build fails; a value that is still a TBD_ placeholder renders visibly so the
+         pre-submit grep catches it.
+       - A quantity that is arithmetic over fixture values and named assumptions (the Chapter 23 value model),
+         or a team assumption in its own right, is typed and carries `class="nonfx"`.
+       - An identifier that happens to contain digits (KQ1, G3, M5, ES5, ADR-001, CD-1, IEC 62443, Level 3.5,
+         a tag, a work-order number) is a name, not a quantity: it carries `class="tag"`.
+
+     ORDER RULE (pre-submit check 4). "Background", "Solution", "Business Impact", "Feasibility", "Conclusion" and
+     "Team Profile" first occur, in that order, as the headings of slides 2 to 7. Nothing earlier in the document
+     may contain any of those words; the build checks it.
+
+     DENSITY RULE (PRD 26.1). No slide body over 120 words of running prose. The build counts and fails.
+     ================================================================================================================ -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Hub, CALIBER 2026 Case 1, Team 3V</title>
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+
+<!-- ============================================================ 1. Cover -->
+<section class="slide" data-slide="1">
+  <div class="cover">
+    <div>
+      <h1 class="wordmark">The Hub</h1>
+      <p class="tagline">The knowledge hub that knows what it is missing.</p>
+    </div>
+
+    <figure class="grow" style="justify-content:center">
+      <!--include:figures/surfaces.svg-->
+    </figure>
+
+    <dl class="identifiers">
+      <dt>Team</dt><dd><span data-fx="team.team_name_registered"></span></dd>
+      <dt>University</dt><dd><span data-fx="team.university"></span></dd>
+      <dt>Case</dt><dd><span data-fx="team.case_title"></span></dd>
+      <dt>Theme</dt><dd><span data-fx="team.theme_line"></span></dd>
+      <dt>Built on</dt><dd>corpus version <span class="tag">v1</span>, bundle <span class="tag" data-fx="manifest.bundle_version"></span>, digest <span class="tag" data-fx="inventory.corpus_sha256" data-fx-fmt="sha8"></span>, <span data-fx="inventory.files_total"></span> controlled files</dd>
+    </dl>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="nonfx">1</span></div>
+</section>
+
+<!-- ============================================================ 2. Background & Problem Statement -->
+<section class="slide" data-slide="2">
+  <div class="head">
+    <h1>Background &amp; Problem Statement</h1>
+    <span class="kicker">corpus <span class="tag">v1</span>, digest <span data-fx="inventory.corpus_sha256" data-fx-fmt="sha8"></span></span>
+  </div>
+  <div class="body split">
+    <div class="col">
+      <p class="lede">Of the <span class="num" data-fx="populations.unplanned_failure"></span> work orders recording an unplanned failure on these <span class="num" data-fx="equipment_master" data-fx-fmt="len"></span> assets, <span class="num" data-fx="coverage.bands.unplanned_failure[t=0.62].no_lesson"></span> match no same-asset lesson at all and <span class="num" data-fx="coverage.strict.unplanned_failure[t=0.62].uncovered"></span> carry nothing beyond a copied row.</p>
+      <div class="chiprow">
+        <span class="chip method">t = <span data-fx="method.threshold" data-fx-fmt="d2"></span>, both layers, window <span data-fx="method.window_multiplier"></span>n</span>
+      </div>
+      <figure class="grow">
+        <!--include:figures/bands.svg-->
+        <figcaption>Published method, both layers, recomputed on every corpus version. The threshold is a control on the Coverage Console, not a claim.</figcaption>
+      </figure>
+    </div>
+
+    <div class="col">
+      <div class="panel">
+        <h2>The records damage themselves</h2>
+        <p class="note"><span class="num" data-fx="verbatim.any_field"></span> work orders reproduce a narrative field verbatim inside a lesson of their own asset.</p>
+        <p class="note" style="margin-top:8px">Seven lessons a set, exactly <span class="num" data-fx="dates.within_set_gap_d"></span> days apart: an authoring cadence, not a plant's.</p>
+        <div class="chiprow" style="margin-top:9px"><span class="chip caveat">the supplied corpus is synthetic</span></div>
+      </div>
+
+      <div class="panel">
+        <span class="label">Governance traps in the record</span>
+        <div class="chiprow" style="margin-top:8px">
+          <span class="chip"><b class="num" data-fx="integrity.CD-1.count"></b> lessons naming another asset</span>
+          <span class="chip"><b class="num" data-fx="integrity.CD-2.count"></b> sheets, no drawing number</span>
+          <span class="chip"><b class="num" data-fx="populations.planned_flagged"></b> planned jobs flagged breakdown</span>
+          <span class="chip"><b class="num" data-fx="workbook.incomplete.rows"></b> closeouts, outcomes empty</span>
+        </div>
+      </div>
+
+      <p class="note" style="margin-top:auto">This is what an engineer needs at start-up, in troubleshooting, in maintenance and in abnormal operation; the case names improper execution as the risk.</p>
+    </div>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="nonfx">2</span></div>
+</section>
+
+<!-- ============================================================ 3. Solution -->
+<section class="slide" data-slide="3">
+  <div class="head">
+    <h1>Solution</h1>
+    <span class="kicker">KQ1 and KQ2 answered here, KQ3 opens here</span>
+  </div>
+  <div class="body split-wide">
+    <div class="col">
+      <p class="lede">One versioned corpus, one cited answer, one measured account of what the records never taught.</p>
+
+      <div class="panel tight">
+        <div class="kq"><b>KQ1</b><p>Versioned, offline ingestion of every controlled document into typed packages keyed on the equipment tag; edges from the documents' own cross-references.</p></div>
+      </div>
+      <div class="panel tight">
+        <div class="kq"><b>KQ2</b><p>Ask in natural language, receive an evidence packet: claims cited to approved revisions, numerals only from typed fields, procedures verbatim under hash.</p></div>
+      </div>
+      <div class="panel tight">
+        <div class="kq"><b>KQ3</b><p>It reads what operations already produce and drafts the missing lesson into the plant's own approval chain. Continues on slide 4.</p></div>
+      </div>
+
+      <p class="fine" style="margin-top:auto">Sentences in full: <span class="tag">A1</span>.</p>
+    </div>
+
+    <div class="col">
+      <figure class="grow">
+        <!--include:figures/lanes.svg-->
+      </figure>
+      <div class="panel tight">
+        <span class="label">Key technologies</span>
+        <div class="chiprow" style="margin-top:7px">
+          <span class="chip">typed asset graph</span>
+          <span class="chip">one gateway, per-role pins</span>
+          <span class="chip">gates G1 to G3</span>
+          <span class="chip">rule pack as data</span>
+          <span class="chip">evaluation harness</span>
+        </div>
+      </div>
+      <p class="fine">Organiser's own key: <q>Equipment-level maintenance history using Equipment Tag as the common key across datasets</q>.</p>
+    </div>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="nonfx">3</span></div>
+</section>
+
+<!-- ============================================================ 4. Business Impact -->
+<section class="slide" data-slide="4">
+  <div class="head">
+    <h1>Business Impact</h1>
+    <span class="kicker">KQ3 completes here</span>
+  </div>
+  <div class="body split">
+    <div class="col">
+      <div class="panel">
+        <span class="label">Uncaptured-knowledge exposure, both layers</span>
+        <table style="margin-top:6px">
+          <tr><th>Layer</th><th>Records</th><th>Breakdowns</th><th>Downtime</th><th>Recorded cost</th></tr>
+          <tr>
+            <td>No lesson at all</td>
+            <td><span class="num" data-fx="coverage.generous.unplanned_failure[t=0.62].uncovered"></span> of <span class="num" data-fx="populations.unplanned_failure"></span></td>
+            <td><span class="num" data-fx="coverage.generous.unplanned_failure[t=0.62].breakdowns"></span></td>
+            <td><span class="num" data-fx="coverage.generous.unplanned_failure[t=0.62].downtime_h" data-fx-fmt="d1"></span> h</td>
+            <td>IDR <span class="num" data-fx="coverage.generous.unplanned_failure[t=0.62].cost_idr" data-fx-fmt="comma"></span></td>
+          </tr>
+          <tr>
+            <td>Nothing taught</td>
+            <td><span class="num" data-fx="coverage.strict.unplanned_failure[t=0.62].uncovered"></span> of <span class="num" data-fx="populations.unplanned_failure"></span></td>
+            <td><span class="num" data-fx="coverage.strict.unplanned_failure[t=0.62].breakdowns"></span></td>
+            <td><span class="num" data-fx="coverage.strict.unplanned_failure[t=0.62].downtime_h" data-fx-fmt="d1"></span> h</td>
+            <td>IDR <span class="num" data-fx="coverage.strict.unplanned_failure[t=0.62].cost_idr" data-fx-fmt="comma"></span></td>
+          </tr>
+        </table>
+        <p class="fine" style="margin-top:8px">Exposure: recorded downtime hours and recorded maintenance cost, from a column the workbook's own Explanation sheet labels a dummy value. It is what the work cost, not what a product recovers.</p>
+      </div>
+
+      <div class="panel">
+        <span class="label">Benefit model, every factor visible, over an <span class="nonfx">18</span>-month window</span>
+        <table style="margin-top:6px">
+          <tr><th>Line</th><th>Arithmetic</th><th>Result</th></tr>
+          <tr><td>B1 recurrence avoidance</td><td>exposure times r (<span class="num" data-fx="families.r_by_tag.DC-3401A" data-fx-fmt="d2"></span> to <span class="num" data-fx="families.r_by_tag.KC-4501" data-fx-fmt="d2"></span>) times a <span class="assumption">ASSUMPTION 30%</span></td><td>IDR <span class="nonfx">4.0</span> to <span class="nonfx">17.6</span> m</td></tr>
+          <tr><td>B2 engineer search time</td><td><span class="assumption">ASSUMPTION 2 to 6</span> questions a shift times <span class="assumption">ASSUMPTION 6 to 12</span> min times <span class="nonfx">1,650</span> shifts times <span class="assumption">ASSUMPTION IDR 250,000/h</span>, so <span class="nonfx">330</span> to <span class="nonfx">1,980</span> engineer-hours</td><td>IDR <span class="nonfx">82.5</span> to <span class="nonfx">495.0</span> m</td></tr>
+          <tr><td>B3 authoring effort</td><td><span class="assumption">ASSUMPTION 6 less 1 h</span> a lesson times the backlog (<span class="num" data-fx="coverage.generous.unplanned_failure[t=0.62].uncovered"></span> or <span class="num" data-fx="coverage.strict.unplanned_failure[t=0.62].uncovered"></span>), so <span class="nonfx">70</span> to <span class="nonfx">205</span> hours</td><td>IDR <span class="nonfx">17.5</span> to <span class="nonfx">51.3</span> m</td></tr>
+          <tr><td>B4 onboarding packs</td><td>qualitative, deliberately uncosted</td><td>not costed</td></tr>
+          <tr><td><b>Benefit against cost of ownership</b></td><td>IDR <span class="nonfx">104.0</span> to <span class="nonfx">563.8</span> m against IDR <span class="nonfx">105.0</span> to <span class="nonfx">132.5</span> m</td><td><span class="nonfx">3.4</span> to <span class="nonfx">22.9</span> months</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="panel tight">
+        <div class="kq"><b>KQ3</b><p>Coverage is measured on the published method, the missing lesson is drafted from evidence, and the EDMS, AIMS and historian contracts are specified, not connected, so a pilot activates them without changing the product.</p></div>
+      </div>
+
+      <figure class="grow">
+        <!--include:figures/debt.svg-->
+        <figcaption>Knowledge debt per asset: uncovered downtime, uncovered recorded cost, repeat-family share and incomplete closeouts, composited by the harness.</figcaption>
+      </figure>
+
+      <div class="panel tight">
+        <span class="label">Day one, with every AI feature switched off</span>
+        <p class="note" style="margin-top:6px">The Integrity Register lists <span class="num" data-fx="integrity.total"></span> findings against the document set, computed by rule and reproducible from the bundle.</p>
+      </div>
+      <p class="fine">Outcome KPIs and the evaluation run: <span class="tag">A3</span>. Both ends of every range are printed, because a range with one end hidden is a forecast.</p>
+    </div>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="nonfx">4</span></div>
+</section>
+
+<!-- ============================================================ 5. Feasibility & Roadmap -->
+<section class="slide" data-slide="5">
+  <div class="head">
+    <h1>Feasibility &amp; Roadmap</h1>
+    <span class="kicker">read-only posture, no new process</span>
+  </div>
+  <div class="body stack">
+    <div class="duo">
+      <div class="col">
+        <figure class="grow">
+          <!--include:figures/arch.svg-->
+        </figure>
+        <p class="fine">Technical: one extractor, one canonical form, one frozen recipe; every model role on one pinned provider and model id through one gateway (<span class="tag">ADR-001</span>), the verifier question-blind.</p>
+      </div>
+      <div class="panel tight">
+        <table>
+          <tr><th>Dimension</th><th>Position</th></tr>
+          <tr><td>Operational</td><td>No new process. The Hub fills the Prepared box in the approval chain the plant already runs.</td></tr>
+          <tr><td>Legal</td><td>Corpus terms honoured, Law No. 27 of 2022 obligations met by role coding and metadata stripping, no safety claim and no conformity claim.</td></tr>
+          <tr><td>Cybersecurity</td><td>A Purdue Level 3.5 replica, IEC 62443 zones and conduits, and no write path toward any control system anywhere in the product.</td></tr>
+          <tr><td>Data governance</td><td>Versioned corpus, provenance on every span, approval status on every citation.</td></tr>
+          <tr><td>Organisational readiness</td><td>One coordinator at 0.2 FTE, one engineer for two half-days, one read-only export.</td></tr>
+        </table>
+      </div>
+    </div>
+    <figure>
+      <!--include:figures/roadmap.svg-->
+    </figure>
+    <p class="fine">The team's own build calendar is not the operator-side roadmap and is not drawn here.</p>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="nonfx">5</span></div>
+</section>
+
+<!-- ============================================================ 6. Conclusion -->
+<section class="slide" data-slide="6">
+  <div class="head">
+    <h1>Conclusion</h1>
+    <span class="kicker">the loop, closed</span>
+  </div>
+  <div class="body split">
+    <div class="col">
+      <figure class="grow">
+        <!--include:figures/loop.svg-->
+      </figure>
+    </div>
+
+    <div class="col spread">
+      <p class="lede">A cited answer at the moment of need, and a measured account of the knowledge the records never taught, falling as the plant's own chain publishes what was missing.</p>
+
+      <div class="panel tight">
+        <span class="label">For the engineer</span>
+        <p class="note" style="margin-top:5px">A trusted answer with its source, or an honest abstention with a named escalation.</p>
+      </div>
+      <div class="panel tight">
+        <span class="label">For the supervisor</span>
+        <p class="note" style="margin-top:5px">A drafted lesson to review instead of a blank page.</p>
+      </div>
+      <div class="panel tight">
+        <span class="label">For the organisation</span>
+        <p class="note" style="margin-top:5px">A measured account of what its records never taught, and a number that falls.</p>
+      </div>
+
+      <p class="lede" style="margin-top:auto;color:var(--accent)">The Hub that knows what it is missing.</p>
+    </div>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="nonfx">6</span></div>
+</section>
+
+<!-- ============================================================ 7. Team Profile -->
+<section class="slide" data-slide="7">
+  <div class="head">
+    <h1>Team Profile</h1>
+    <span class="kicker">CALIBER 2026, Case 1</span>
+  </div>
+  <div class="body stack">
+    <div class="panel">
+      <div class="identifiers" style="grid-template-columns:auto 1fr auto 1fr">
+        <dt>Team</dt><dd><span data-fx="team.team_name_registered"></span></dd>
+        <dt>University</dt><dd><span data-fx="team.university"></span></dd>
+      </div>
+      <p class="note" style="margin-top:9px"><b>Faculty supervisor:</b> as registered with the CALIBER 2026 Committee</p>
+    </div>
+
+    <table>
+      <tr><th style="width:34px">No.</th><th style="width:172px">Name</th><th style="width:212px">Major</th><th style="width:74px">Semester</th><th style="width:186px">Area of expertise</th><th>Contribution</th></tr>
+      <tr>
+        <td><span class="num" data-fx="team.members[no=1].no"></span></td>
+        <td data-fx="team.members[no=1].name"></td>
+        <td lang="id" data-fx="team.members[no=1].major"></td>
+        <td><span class="num" data-fx="team.members[no=1].semester"></span></td>
+        <td data-fx="team.members[no=1].area"></td>
+        <td data-fx="team.members[no=1].contribution"></td>
+      </tr>
+      <tr>
+        <td><span class="num" data-fx="team.members[no=2].no"></span></td>
+        <td data-fx="team.members[no=2].name"></td>
+        <td lang="id" data-fx="team.members[no=2].major"></td>
+        <td><span class="num" data-fx="team.members[no=2].semester"></span></td>
+        <td data-fx="team.members[no=2].area"></td>
+        <td data-fx="team.members[no=2].contribution"></td>
+      </tr>
+      <tr>
+        <td><span class="num" data-fx="team.members[no=3].no"></span></td>
+        <td data-fx="team.members[no=3].name"></td>
+        <td lang="id" data-fx="team.members[no=3].major"></td>
+        <td><span class="num" data-fx="team.members[no=3].semester"></span></td>
+        <td data-fx="team.members[no=3].area"></td>
+        <td data-fx="team.members[no=3].contribution"></td>
+      </tr>
+    </table>
+    <p class="fine" style="margin-top:auto">The supervisor's name is withheld here at the team's request; it is on file with the Committee from registration. Every other cell above is printed from the team record at build time.</p>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="nonfx">7</span></div>
+</section>
+
+<!-- ============================================================ A1 -->
+<section class="slide appendix" data-slide="8">
+  <div class="head">
+    <h1><span class="tag">A1</span> Compliance map, and the three answers in full</h1>
+    <span class="kicker">PRD 2.2, verbatim</span>
+  </div>
+  <div class="body split-even">
+    <div class="col">
+      <figure>
+        <!--include:figures/heatmap.svg-->
+      </figure>
+    </div>
+    <div class="col">
+      <div class="panel tight">
+        <div class="kq verbatim"><b>KQ1</b><p>The Hub builds the foundation as an offline, versioned ingestion of every controlled document into typed packages keyed on the equipment tag (datasheet parameters, cause-and-effect rows, plot-plan and BOM facts, work orders, lessons), with document-to-document edges taken from the documents' own cross-references and a gate that fails the build on any dangling reference.</p></div>
+      </div>
+      <div class="panel tight">
+        <div class="kq verbatim"><b>KQ2</b><p>Engineers ask in natural language and receive evidence packets: claims cited to approved revisions, numbers only from typed fields, procedures verbatim under hash, a deterministic confidence band, and an abstention with a named escalation when the corpus cannot answer; protective-function questions are classified before any model call.</p></div>
+      </div>
+      <div class="panel tight">
+        <div class="kq verbatim"><b>KQ3</b><p>The Hub connects to operations through what operations already produce: work orders, proof-test results, setpoint ladders and the approval chain; it measures which failure knowledge has no lesson, drafts the missing lesson from evidence, routes it through the plant's Prepared/Reviewed/Approved chain, and specifies read-only connector contracts for EDMS, AIMS and the historian that a pilot activates without changing the product.</p></div>
+      </div>
+      <p class="fine">The compressions on slides 3 and 4 carry the same three labels; these are the sentences they compress.</p>
+    </div>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="mark">APPENDIX</span><span class="nonfx">8</span></div>
+</section>
+
+<!-- ============================================================ A2 -->
+<section class="slide appendix" data-slide="9">
+  <div class="head">
+    <h1><span class="tag">A2</span> The five guarantees, and the gate that enforces each</h1>
+    <span class="kicker">mechanical, not aspirational</span>
+  </div>
+  <div class="body">
+    <table>
+      <tr><th style="width:30px"></th><th style="width:250px">Guarantee</th><th style="width:180px">Enforced by</th><th>What fails, and how it fails</th></tr>
+      <tr><td class="num nonfx">1</td><td>No number is generated.</td><td>Gate G1, schema, numeric-fidelity check over the golden set</td><td>Setpoints, limits, costs, hours and dates render from typed fields. A numeral with no typed source is a gate failure, not a style problem. The drafter's only legal move for a value the corpus does not carry is the literal slot REQUIRES ENGINEER INPUT, which a named reviewer fills as a stored, dated, cited SME note.</td></tr>
+      <tr><td class="num nonfx">2</td><td>Procedures are never paraphrased.</td><td>Content hash on the stored text</td><td>Lesson steps render verbatim under hash; a mismatch blocks the render instead of degrading into a summary. Permit, LOTO and car-seal conditions render as a block above the steps, the order a panel operator reads them in.</td></tr>
+      <tr><td class="num nonfx">3</td><td>Provenance or nothing.</td><td>Gate G2, question-blind verifier AG-4</td><td>Every claim cites a resolvable revision with its approval status; every draft element carries its own evidence reference. A sentence its cited span does not entail is dropped, and an answer with nothing left is an abstention carrying a reason and a named escalation role, which is a success state.</td></tr>
+      <tr><td class="num nonfx">4</td><td>Drafts are physically separate.</td><td>Gate G3, schema</td><td>Machine output lives in draft tables that no retrieval query references. The only code path from draft content to published content is G3, one transaction, a human in the Manager role. Humans approve everything is a schema property, not a policy memo.</td></tr>
+      <tr><td class="num nonfx">5</td><td>Safety intent is classified in code, before any model call.</td><td>The versioned rule pack, as data</td><td>Defeat is refused with the governing function and its SIL, the documented start permissives, the latched-reset path and the interlock bypass or override permit route. A documented bypass is served verbatim with its permit conditions. A permanent change goes to Management of Change. A false refusal is a safety failure, so both safety categories are hard-gated together.</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="mark">APPENDIX</span><span class="nonfx">9</span></div>
+</section>
+
+<!-- ============================================================ A3 -->
+<section class="slide appendix" data-slide="10">
+  <div class="head">
+    <h1><span class="tag">A3</span> Outcome KPIs, and the evaluation set</h1>
+    <span class="kicker">failures published, not summarised</span>
+  </div>
+  <div class="body split">
+    <div class="col">
+      <div class="panel tight">
+        <span class="label">Quality gates at the competition freeze</span>
+        <table style="margin-top:6px">
+          <tr><th>Gate</th><th>Freeze criterion</th><th>Pilot target</th></tr>
+          <tr><td>Golden-set pass rate</td><td>at or above <span class="nonfx">90</span>% across <span class="num" data-fx="golden.size"></span> cases, every failure published in-product</td><td>at or above <span class="nonfx">95</span>%</td></tr>
+          <tr><td>Safety refusal and safety-adjacent served</td><td><span class="nonfx">100</span>% in both categories; one failure in either direction blocks release</td><td><span class="nonfx">100</span>%, re-run on every corpus version</td></tr>
+          <tr><td>Fabricated numerals or citations</td><td>zero across the set, checked in CI on every run</td><td>zero, sampled monthly on served answers</td></tr>
+          <tr><td>Claim-level traceability</td><td><span class="nonfx">100</span>% of claims and draft elements resolve to a revision, page and span</td><td><span class="nonfx">100</span>%, sampled monthly</td></tr>
+          <tr><td>Judging-window availability</td><td>the demo path renders with zero live model calls; scale-to-zero disabled</td><td><span class="nonfx">99.5</span>% monthly</td></tr>
+        </table>
+      </div>
+      <div class="panel tight">
+        <span class="label">Business KPIs</span>
+        <table style="margin-top:6px">
+          <tr><th>KPI</th><th>Baseline on this corpus</th><th>Pilot target</th></tr>
+          <tr><td>Time to trusted answer</td><td>none: the corpus records the work, not the searching. Measured on site in pilot week one.</td><td>median under <span class="nonfx">2</span> minutes; replaces both assumptions carrying B2</td></tr>
+          <tr><td>Share of answers carrying a source</td><td>measured across the golden set: resolve every claim, or abstain with a reason and an escalation</td><td><span class="nonfx">100</span>% of served answers; a drop is a release blocker</td></tr>
+          <tr><td>False-abstention rate</td><td>the False abstention category is the standing measurement</td><td>zero on the set at freeze</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel tight">
+        <span class="label">The evaluation set, by category</span>
+        <table style="margin-top:6px">
+          <tr><th>Category</th><th>Cases</th></tr>
+          <tr><td>Grounded answering</td><td class="num" data-fx="golden.by_category.Grounded answering"></td></tr>
+          <tr><td>Traceability</td><td class="num" data-fx="golden.by_category.Traceability"></td></tr>
+          <tr><td>Abstention</td><td class="num" data-fx="golden.by_category.Abstention"></td></tr>
+          <tr><td>False abstention</td><td class="num" data-fx="golden.by_category.False abstention"></td></tr>
+          <tr><td>Safety refusal</td><td class="num" data-fx="golden.by_category.Safety refusal"></td></tr>
+          <tr><td>Safety-adjacent served</td><td class="num" data-fx="golden.by_category.Safety-adjacent served"></td></tr>
+          <tr><td>Adversarial phrasing</td><td class="num" data-fx="golden.by_category.Adversarial phrasing"></td></tr>
+          <tr><td>Trap integrity</td><td class="num" data-fx="golden.by_category.Trap integrity"></td></tr>
+          <tr><td>Operational context</td><td class="num" data-fx="golden.by_category.Operational context"></td></tr>
+          <tr><td>Moment-shaped answers</td><td class="num" data-fx="golden.by_category.Moment-shaped answers"></td></tr>
+          <tr><td>Loop</td><td class="num" data-fx="golden.by_category.Loop"></td></tr>
+          <tr><td><b>Total, of which hard-gated</b></td><td><b class="num" data-fx="golden.size"></b> / <b class="num" data-fx="golden.hard_gate_count"></b></td></tr>
+        </table>
+      </div>
+      <p class="fine">The Evaluation page in the product carries the latest run itself: pass rate per category and the full failure list, hard-gated categories first. It is a product surface, not a slide, so a judge reads the run rather than a summary of it.</p>
+    </div>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="mark">APPENDIX</span><span class="nonfx">10</span></div>
+</section>
+
+<!-- ============================================================ A4 -->
+<section class="slide appendix" data-slide="11">
+  <div class="head">
+    <h1><span class="tag">A4</span> Data sources beyond the baseline</h1>
+    <span class="kicker">none in the MVP</span>
+  </div>
+  <div class="body">
+    <p class="lede">The build adds no data source to the supplied corpus at all. Every addition below is a roadmap item and earns its place with a business justification, because the case book prefers a well-justified architecture to more data.</p>
+    <table style="margin-top:16px">
+      <tr><th style="width:220px">Source</th><th style="width:120px">Phase</th><th>Justification, one line</th></tr>
+      <tr><td>Historian mirror, read-only replica</td><td>B, plant scale</td><td>Turns a typed setpoint ladder into a reading an engineer can act on at the moment of need, and only from the Level 3.5 replica, never from the control network.</td></tr>
+      <tr><td>Capture at job close, voice notes included</td><td>B, plant scale</td><td>Catches the knowledge while the job is still open, which is the cheapest fix for what this corpus shows: it was written in one late campaign.</td></tr>
+      <tr><td>Digital-twin deep links</td><td>C, group scale</td><td>Removes the last hand step between a tag on a drawing and the document that governs it, into the asset-information object model the group already runs.</td></tr>
+      <tr><td>EDMS registry sync, read-only</td><td>A, pilot</td><td>Approval status and revision currency stop being a periodic export and become a property the answer can cite.</td></tr>
+      <tr><td>Published company facts</td><td>A, pilot</td><td>Ties the exposure to units this operator is actually commissioning, rather than to a generic plant.</td></tr>
+      <tr><td>ISO 30401 framing</td><td>A, pilot</td><td>The standard a knowledge programme is audited against, used as vocabulary and constraint. No conformity is claimed.</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="mark">APPENDIX</span><span class="nonfx">11</span></div>
+</section>
+
+<!-- ============================================================ A5 -->
+<section class="slide appendix" data-slide="12">
+  <div class="head">
+    <h1><span class="tag">A5</span> AI-tool usage, and how the work was validated</h1>
+    <span class="kicker">disclosed in full</span>
+  </div>
+  <div class="body split">
+    <div class="col">
+      <div class="panel tight">
+        <span class="label">In the build</span>
+        <p class="note" style="margin-top:6px">The three repositories were built by an orchestrated run of Claude Code on Claude Fable 5.1, directed by the team lead. The model wrote code, documentation, this deck's source and the report from the PRD and the blueprint, provisioned platform resources through their CLIs, and ran the harness. It never saw a secret, never published a lesson, and never typed a number onto a surface: every figure here binds to the fixture, the bundle or the seeded database.</p>
+      </div>
+      <div class="panel tight">
+        <span class="label">In the product</span>
+        <p class="note" style="margin-top:6px">Every model role, the extractor, the composer, the drafter and the verifier, runs on one pinned provider and one model id through one gateway module, the only code path that calls a provider. The embedding role is a local, hash-pinned open-weights model. Safety intent is classified in deterministic code before any model call; the verifier never sees the question and never edits; the gates decide.</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel tight">
+        <span class="label">The validation loop</span>
+        <table style="margin-top:6px">
+          <tr><th>Layer</th><th>What it does</th></tr>
+          <tr><td>Deterministic checks</td><td>Every change merges through a pull request with required checks: tests, lint, type check, secret scan, the banned-strings grep, the copy audit and the no-corpus-text check.</td></tr>
+          <tr><td>Fresh-context review</td><td>Read-only verification fleets, separate from the threads that wrote the code, review each artefact and record a schema result on the pull request.</td></tr>
+          <tr><td>Independence, honestly stated</td><td>One provider and one model id, so verifier independence is prompt-and-question-blindness plus the deterministic gates, not a different model family. Stated here and on the Evaluation page rather than implied away.</td></tr>
+          <tr><td>Human acceptance</td><td>The owner's acceptance of the report closes the loop. Only a human publishes, through G3.</td></tr>
+        </table>
+      </div>
+      <p class="fine">Every generated artefact records the model id, the prompt version, the gateway configuration hash and the corpus version, so any answer, draft or evaluation run can be traced to what produced it.</p>
+    </div>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="mark">APPENDIX</span><span class="nonfx">12</span></div>
+</section>
+
+<!-- ============================================================ A6 -->
+<section class="slide appendix" data-slide="13">
+  <div class="head">
+    <h1><span class="tag">A6</span> Readiness detail: legal, cybersecurity, data governance</h1>
+    <span class="kicker">what is claimed, and what is not</span>
+  </div>
+  <div class="body">
+    <table>
+      <tr><th style="width:150px">Area</th><th style="width:300px">Position</th><th>Detail, and the limit of the claim</th></tr>
+      <tr><td>Corpus terms</td><td>The organiser's property, used for this entry only</td><td>Never committed to a public repository and never served in bulk: one page at a time, to a role, with provenance. The deployment is unlisted and carries a no-index directive. Extracted text is not tracked.</td></tr>
+      <tr><td>Personal data</td><td>Law No. 27 of 2022 obligations met by design</td><td>Personal names in the corpus sit behind role coding; derivative renders are stripped of metadata; there is no per-person analytic anywhere in the product, and nothing aggregates by person.</td></tr>
+      <tr><td>Safety claim</td><td>None is made</td><td>The Hub serves documented, approved content and refuses defeat intent. It is not a protective function, it is not certified, assessed or audited against any standard named here, and it makes no conformity claim.</td></tr>
+      <tr><td>Network posture</td><td>Purdue Level 3.5 replica, IEC 62443 zones and conduits</td><td>Every specified operational read is taken from the replica. No write path toward any control system exists anywhere in the codebase, and no connector is ever drawn as live.</td></tr>
+      <tr><td>Access and identity</td><td>Login-required deployment for the judging window</td><td>Roles carry the rights: Admin holds no drafting, review or publication right, and only a Manager publishes. At a pilot the operator's own identity provider replaces the built-in credentials before any live use.</td></tr>
+      <tr><td>Data governance</td><td>Versioned corpus, provenance on every span</td><td>Every claim carries the document, revision, page and span it came from, with the approval status of that revision. A claim that cannot resolve is not shown. Every answer, draft and evaluation run stores the corpus version it ran against.</td></tr>
+      <tr><td>Inference locality</td><td>A named gate before any site corpus</td><td>Phase A sends spans of controlled documents to a model provider, so an in-region or in-tenancy option is a prerequisite of the phase, not work inside it. A sponsor who cannot get one does not start Phase A.</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="mark">APPENDIX</span><span class="nonfx">13</span></div>
+</section>
+
+<!-- ============================================================ A7 -->
+<section class="slide appendix" data-slide="14">
+  <div class="head">
+    <h1><span class="tag">A7</span> Reproduction</h1>
+    <span class="kicker">every number on every slide</span>
+  </div>
+  <div class="body split">
+    <div class="col">
+      <div class="panel tight">
+        <span class="label">The harness command</span>
+        <p class="note" style="margin-top:6px">One extractor, one canonical form, one frozen recipe. Point the harness at the corpus export and it rebuilds every figure in this deck from the documents themselves.</p>
+        <pre class="note" style="font-family:var(--mono);font-size:10px;line-height:1.6;margin-top:8px;background:#fff;border:1px solid var(--film-edge);border-radius:8px;padding:10px 12px;white-space:pre-wrap">uv sync --frozen
+make fixtures      # packages/fixtures.json
+make test          # the method, the golden set, the value model
+make bundle        # the versioned bundle this deck reads</pre>
+      </div>
+      <div class="panel tight">
+        <span class="label">The pinned inputs</span>
+        <table style="margin-top:6px">
+          <tr><td style="width:150px">Extractor</td><td class="tag" data-fx="inventory.extractor"></td></tr>
+          <tr><td>Canonical form</td><td class="tag" data-fx="inventory.canonical_form_version"></td></tr>
+          <tr><td>Corpus digest</td><td class="tag" data-fx="inventory.corpus_sha256" data-fx-fmt="sha16"></td></tr>
+          <tr><td>Bundle</td><td class="tag" data-fx="manifest.bundle_version"></td></tr>
+          <tr><td>Recipe digest</td><td class="tag" data-fx="method.recipe_sha256" data-fx-fmt="sha16"></td></tr>
+          <tr><td>Threshold, window</td><td>t = <span class="num" data-fx="method.threshold" data-fx-fmt="d2"></span>, <span class="num" data-fx="method.window_multiplier"></span>n, both layers</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel tight">
+        <span class="label">A fixture excerpt, as the deck reads it</span>
+        <pre class="note" style="font-family:var(--mono);font-size:9.5px;line-height:1.55;margin-top:8px;background:#fff;border:1px solid var(--film-edge);border-radius:8px;padding:10px 12px;white-space:pre-wrap">coverage.bands.unplanned_failure[t=<span data-fx="method.threshold" data-fx-fmt="d2"></span>]
+  no_lesson        <span data-fx="coverage.bands.unplanned_failure[t=0.62].no_lesson"></span>
+  copied_row_only  <span data-fx="coverage.bands.unplanned_failure[t=0.62].copied_row_only"></span>
+  taught           <span data-fx="coverage.bands.unplanned_failure[t=0.62].taught"></span>
+
+coverage.strict.unplanned_failure[t=<span data-fx="method.threshold" data-fx-fmt="d2"></span>]
+  uncovered        <span data-fx="coverage.strict.unplanned_failure[t=0.62].uncovered"></span>
+  downtime_h       <span data-fx="coverage.strict.unplanned_failure[t=0.62].downtime_h" data-fx-fmt="d1"></span>
+  cost_idr         <span data-fx="coverage.strict.unplanned_failure[t=0.62].cost_idr" data-fx-fmt="comma"></span></pre>
+      </div>
+      <div class="panel tight">
+        <span class="label">Where to look</span>
+        <p class="note" style="margin-top:6px">The application is deployed at <span class="tag">thehub-3v.vercel.app</span> behind a login for the judging window; a signed reviewer link opens it without an account. The offline export opens from a local file with the network off and carries the same seeded content.</p>
+      </div>
+      <p class="fine">Every slide element bearing a number in this deck carries its fixture key in the source, and the build substitutes the value; a stale number cannot survive a build, which is a stronger guarantee than proofreading.</p>
+    </div>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="mark">APPENDIX</span><span class="nonfx">14</span></div>
+</section>
+
+<!-- ============================================================ A8 -->
+<section class="slide appendix" data-slide="15">
+  <div class="head">
+    <h1><span class="tag">A8</span> Capability matrix, stated honestly</h1>
+    <span class="kicker">built, partial, or not built</span>
+  </div>
+  <div class="body">
+    <table>
+      <tr><th style="width:230px">Capability</th><th style="width:100px">State</th><th>What that means precisely</th></tr>
+      <tr><td>ES1 Industrial Data Ops</td><td><span class="chip verified">built</span></td><td>The supplied corpus ingested into a versioned, typed asset graph keyed on the equipment tag, with a digest and a dangling-reference gate.</td></tr>
+      <tr><td>ES2 AI document ingestion</td><td><span class="chip verified">built</span></td><td>All <span class="num" data-fx="inventory.files_total"></span> files across <span class="num" data-fx="inventory.by_class" data-fx-fmt="len"></span> classes. The P&amp;ID sheets are image drawings: their sidecars are disclosed as agent-transcribed with review pending, never as extracted text.</td></tr>
+      <tr><td>ES3 Q and A, semantic search</td><td><span class="chip verified">built</span></td><td>Natural-language questions over the corpus with a local embedding model; the demo path replays stored packets so no provider outage takes it down.</td></tr>
+      <tr><td>ES4 Traceable answers</td><td><span class="chip verified">built</span></td><td>Every claim resolves to a revision, page and span with approval status; an unresolvable claim is not shown; abstention carries a reason and a named escalation role.</td></tr>
+      <tr><td>ES5 EDMS, AIMS, digital twin</td><td><span class="chip caveat">partial</span></td><td>Specified, not connected. Read-only connector contracts, each naming its typed schema, sync semantics, conflict rule and failure behaviour, plus the operational-context layer built from what the plant already writes. Nothing is mocked and no connector is drawn as live.</td></tr>
+      <tr><td>ES6 Failure memory</td><td><span class="chip verified">built</span></td><td><span class="num" data-fx="chains.links"></span> causal links across the record, <span class="num" data-fx="chains.by_tag.GA-1201A"></span> of them on the demo asset, each carrying the verbatim sentence that links it.</td></tr>
+      <tr><td>Live model calls on the demo path</td><td><span class="chip">not used</span></td><td>Seeded questions, the guided route and the demo answers render stored packets. A novel typed question does call the pinned provider, under a per-role token budget and a daily spend cap.</td></tr>
+      <tr><td>Verifier on a second provider family</td><td><span class="chip">not built</span></td><td>One provider and one model id by owner decision. Independence is a separate question-blind prompt plus the deterministic gates, and this is stated wherever the verifier is described.</td></tr>
+      <tr><td>Prediction, alerting, work assignment</td><td><span class="chip">out of scope</span></td><td>Case 1 only. Nothing here forecasts a failure, ranks anything by urgency, assigns work, or aggregates anything by person.</td></tr>
+      <tr><td>Narration on the video</td><td><span class="chip caveat">human-gated</span></td><td>No narration was recorded, so the audio track is silence and the captions are burned in. The video reads with the sound off.</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="mark">APPENDIX</span><span class="nonfx">15</span></div>
+</section>
+
+<!-- ============================================================ A9 -->
+<section class="slide appendix" data-slide="16">
+  <div class="head">
+    <h1><span class="tag">A9</span> External facts, with citations and access dates</h1>
+    <span class="kicker">re-verified, or dropped</span>
+  </div>
+  <div class="body">
+    <p class="lede">A claim whose source could not be re-verified was dropped rather than softened. Everything the corpus itself supports is cited to the corpus and appears elsewhere in this deck; the rows below are the only claims that reach outside it.</p>
+    <table style="margin-top:14px">
+      <tr><th style="width:280px">Fact as used</th><th style="width:230px">Source</th><th style="width:96px">Checked</th><th>Where it is used</th></tr>
+      <tr><td>The Cilegon polyethylene swing unit and its capacity, and the description of the Singapore transaction</td><td>S&amp;P Global Commodity Insights, <span class="nonfx">8</span> May <span class="nonfx">2024</span>, with the EPC contractor's project record for the same unit</td><td class="tag nonfx">2026-08-27</td><td>Customer context behind B4</td></tr>
+      <tr><td>Completion of the acquisition of the Shell Energy and Chemicals Park Singapore. The <span class="nonfx">2024</span> statement is the agreement, not the completion, and is cited as such</td><td>Shell plc and PT Chandra Asri Pacific Tbk completion releases, <span class="nonfx">1</span> to <span class="nonfx">2</span> April <span class="nonfx">2025</span></td><td class="tag nonfx">2026-08-27</td><td>Customer context behind B4</td></tr>
+      <tr><td>The acquired assets operating as Aster Chemicals and Energy</td><td>Reuters, <span class="nonfx">5</span> February <span class="nonfx">2026</span></td><td class="tag nonfx">2026-08-27</td><td>Customer context behind B4</td></tr>
+      <tr><td>The chlor-alkali and ethylene dichloride project in Cilegon: construction progress, scheduled start-up year, import-substitution positioning and the Phase II announcement</td><td>PT Chandra Asri Group news releases, <span class="nonfx">8</span> September <span class="nonfx">2025</span> and <span class="nonfx">23</span> July <span class="nonfx">2026</span></td><td class="tag nonfx">2026-08-27</td><td>Customer context behind B4</td></tr>
+      <tr><td>The group's asset-information programme on Siemens COMOS and Bentley AssetWise, the object model the ES5 deep links would target</td><td>Siemens press release, <span class="nonfx">22</span> July <span class="nonfx">2020</span></td><td class="tag nonfx">2026-08-27</td><td>Roadmap C, and A4</td></tr>
+      <tr><td>Scale-to-zero and wake behaviour of the free database tier, and the hosting platform's cron frequency</td><td>Platform documentation for the deployment and database providers</td><td class="tag nonfx">2026-08-27</td><td>Judging-window availability, A3</td></tr>
+      <tr><td>Structured-output behaviour, the exact model id strings and the data-processing terms that gate a pin</td><td>Model-provider documentation, read current and dated in <span class="tag">ADR-001</span></td><td class="tag nonfx">2026-08-27</td><td>A5, and the gateway</td></tr>
+    </table>
+    <p class="fine" style="margin-top:12px">Standards named anywhere in this deck (ISO 30401, IEC 62443 with the Purdue reference model, IEC 61511, and Law No. 27 of 2022) are used as vocabulary and as constraints. No conformity claim is made against any of them: The Hub is a student competition build, and it is not certified, assessed or audited against any standard.</p>
+  </div>
+  <div class="foot"><span>The Hub, Team 3V, Politeknik Negeri Bandung</span><span class="sep"></span><span class="mark">APPENDIX</span><span class="nonfx">16</span></div>
+</section>
+
+</body>
+</html>

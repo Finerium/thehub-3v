@@ -1,0 +1,83 @@
+<!-- The workflow in three lanes (build, answer, self-healing) with the gate that closes each lane and the five
+     mechanical guarantees of the PRD's Chapter 11 carried on the gate that enforces them. Arrowheads are drawn
+     paths, never a text glyph. -->
+<svg viewBox="0 0 600 268" role="img" aria-label="The workflow in three lanes: build, answer, self-healing" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans">
+  <defs>
+    <marker id="hd" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0.5 L7.5 4 L0 7.5 Z" fill="#1e3fb8"/>
+    </marker>
+  </defs>
+
+  <g font-family="IBM Plex Mono" font-size="9" letter-spacing="0.7" fill="#67625a">
+    <text x="0" y="8">LANE 1 &#183; BUILD</text>
+    <text x="0" y="98">LANE 2 &#183; ANSWER</text>
+    <text x="0" y="188">LANE 3 &#183; SELF-HEALING</text>
+  </g>
+
+  <!-- lane 1 -->
+  <g>
+    <rect x="0" y="16" width="600" height="52" rx="9" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.12"/>
+    <g font-size="10.5" fill="#1b1916">
+      <text x="14" y="38">Corpus, versioned</text>
+      <text x="150" y="38">Extract and canonicalise</text>
+      <text x="316" y="38">Typed asset graph</text>
+      <text x="464" y="38">Coverage recipe</text>
+    </g>
+    <g font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">
+      <text x="14" y="53"><tspan data-fx="inventory.files_total"></tspan> files, one digest</text>
+      <text x="150" y="53">pdftotext -raw, pinned</text>
+      <text x="316" y="53">keyed on the equipment tag</text>
+      <text x="464" y="53">t = <tspan data-fx="method.threshold" data-fx-fmt="d2"></tspan>, both layers</text>
+    </g>
+    <g stroke="#1e3fb8" stroke-width="1.1" marker-end="url(#hd)" fill="none">
+      <path d="M124 42 h18"/><path d="M290 42 h18"/><path d="M438 42 h18"/>
+    </g>
+  </g>
+
+  <!-- lane 2 -->
+  <g>
+    <rect x="0" y="106" width="600" height="52" rx="9" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.12"/>
+    <g font-size="10.5" fill="#1b1916">
+      <text x="14" y="128">Question, classified</text>
+      <text x="150" y="128">Retrieve spans</text>
+      <text x="316" y="128">Compose claims</text>
+      <text x="464" y="128">Evidence packet</text>
+    </g>
+    <g font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">
+      <text x="14" y="143">rule pack, before any call</text>
+      <text x="150" y="143">approved revisions only</text>
+      <text x="316" y="143">gate G2 entailment</text>
+      <text x="464" y="143">a citation on every claim</text>
+    </g>
+    <g stroke="#1e3fb8" stroke-width="1.1" marker-end="url(#hd)" fill="none">
+      <path d="M124 132 h18"/><path d="M290 132 h18"/><path d="M438 132 h18"/>
+    </g>
+  </g>
+
+  <!-- lane 3 -->
+  <g>
+    <rect x="0" y="196" width="600" height="52" rx="9" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.12"/>
+    <g font-size="10.5" fill="#1b1916">
+      <text x="14" y="218">Measure the gap</text>
+      <text x="150" y="218">Draft the lesson</text>
+      <text x="316" y="218">Review and redline</text>
+      <text x="464" y="218">Publish, recount</text>
+    </g>
+    <g font-family="IBM Plex Mono" font-size="8.5" fill="#67625a">
+      <text x="14" y="233">what no lesson covers</text>
+      <text x="150" y="233">provenance on each element</text>
+      <text x="316" y="233">a named engineer signs</text>
+      <text x="464" y="233">gate G3, a human only</text>
+    </g>
+    <g stroke="#1e3fb8" stroke-width="1.1" marker-end="url(#hd)" fill="none">
+      <path d="M124 222 h18"/><path d="M290 222 h18"/><path d="M438 222 h18"/>
+    </g>
+  </g>
+
+  <!-- the five guarantees, on the lane that enforces each -->
+  <g font-family="IBM Plex Mono" font-size="8" fill="#9a5600">
+    <text x="0" y="80">G1  no number generated  &#183;  procedures never paraphrased</text>
+    <text x="0" y="170">G2  provenance or nothing  &#183;  safety intent classified in code, before any model call</text>
+    <text x="0" y="262">G3  drafts physically separate, and only a human publishes</text>
+  </g>
+</svg>
