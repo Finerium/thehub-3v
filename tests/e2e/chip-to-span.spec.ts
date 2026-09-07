@@ -18,8 +18,16 @@ async function chipOf(page: Page, citations: Record<string, Citation>): Promise<
   return { chip: chips.nth(index), citation: citations[spans[index]] };
 }
 
-/** The 6.2 anchor a citation resolves to, written once here and compared byte for byte. */
-const anchorHref = (c: Citation) => `/documents/${encodeURIComponent(c.document_id)}#page=${c.page}&span=${encodeURIComponent(c.span_id)}`;
+/** The 6.2 anchor itself: `#page=n&span=<span_id>`, written once here and compared byte for byte. */
+const anchorFragment = (c: Citation) => `#page=${c.page}&span=${encodeURIComponent(c.span_id)}`;
+/** The bare anchor address, as a reviewer would type or paste one: no query, the fragment alone. */
+const anchorHref = (c: Citation) => `/documents/${encodeURIComponent(c.document_id)}${anchorFragment(c)}`;
+/**
+ * What a chip's link must be: the frozen anchor at the end, and the same page and span in the query, because a
+ * fragment never reaches the server and the first render would otherwise show page one (AC-UI-02).
+ */
+const chipHref = (c: Citation) =>
+  `/documents/${encodeURIComponent(c.document_id)}?page=${c.page}&span=${encodeURIComponent(c.span_id)}${anchorFragment(c)}`;
 
 /** The viewer showing the page the address named, with the span marked on it. */
 async function expectSpanInViewer(page: Page, citation: Citation): Promise<void> {
@@ -51,7 +59,10 @@ test.describe("chip to span (AC-UI-02)", () => {
     await expect(drawer).toContainText(citation.document_id);
     await expect(drawer).toContainText(citation.approval_status_text);
 
-    await expect(drawer.getByRole("link", { name: /Open in the document viewer/ })).toHaveAttribute("href", anchorHref(citation));
+    const viewerLink = drawer.getByRole("link", { name: /Open in the document viewer/ });
+    await expect(viewerLink).toHaveAttribute("href", chipHref(citation));
+    // The frozen form of 6.2 is still the tail of the address, whatever the query carries.
+    await expect(viewerLink).toHaveAttribute("href", new RegExp(`${anchorFragment(citation).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`));
   });
 
   test("following the drawer's link resolves the span in the viewer", async ({ page }) => {
