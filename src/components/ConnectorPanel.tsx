@@ -141,7 +141,9 @@ function Contract({ contract }: { contract: ConnectorContract }) {
         </div>
         <div className="contents">
           <dt>{SCHEMA_ID}</dt>
-          <dd className="mono text-[12px]">{schema.$id}</dd>
+          {/* The identifier without its scheme and host: a JSON Schema $id is a name, not a place, and the offline
+              export may carry no absolute address but the live URL, which its own build refuses. */}
+          <dd className="mono text-[12px]">{schema.$id.replace(/^https?:\/\//, "")}</dd>
         </div>
       </dl>
 

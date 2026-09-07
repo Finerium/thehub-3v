@@ -19,6 +19,7 @@ import path from "node:path";
 import { inArray } from "drizzle-orm";
 import { ask, login } from "../golden/client";
 import { db } from "@/db/client";
+import { EXPORT_LIVE_URL } from "@/lib/fixed-strings";
 import { answerTrace, equipment, seededChip } from "@/db/schema";
 
 const ROOT = path.resolve(__dirname, "..", "..");
@@ -61,7 +62,7 @@ function arg(name: string): string | undefined {
 }
 
 async function main(): Promise<number> {
-  const baseUrl = (arg("--base-url") ?? process.env.BASE_URL ?? "https://thehub-3v.vercel.app").replace(/\/$/, "");
+  const baseUrl = (arg("--base-url") ?? process.env.BASE_URL ?? EXPORT_LIVE_URL).replace(/\/$/, "");
   const dryRun = process.argv.includes("--dry-run");
   const tags = (await db.select({ tag: equipment.tag }).from(equipment)).map((r) => r.tag).sort();
   const picked = chosen(candidates(tags), tags);
