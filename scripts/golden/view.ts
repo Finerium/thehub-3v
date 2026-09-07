@@ -285,13 +285,30 @@ export function numeralsIn(text: string): string[] {
 }
 
 /** The numerals a packet renders: the claim sentences and the typed facts (blocks are verbatim source rows). */
+/**
+ * The numerals a packet STATES, which is what a golden case's numerals_allowed is a closed set of: the sentences the
+ * composer wrote. A typed fact is not a stated number, it is a value transcribed from one cited row with its unit,
+ * its comparator and that sheet's own qualifier beside it, so scanning it here would read "the packet showed the
+ * datasheet" as "the packet invented a number" (measured: 448 of 458 unaccounted numerals sat in typed facts, 10 in
+ * claims). What a typed fact owes instead is provenance, and unsourcedFacts below is the check that collects it.
+ */
 export function renderedNumerals(packet: EvidencePacket): { numeral: string; where: string }[] {
   const out: { numeral: string; where: string }[] = [];
   packet.claims.forEach((claim, i) => {
     for (const numeral of numeralsIn(claim.text)) out.push({ numeral, where: `claims[${i}]` });
   });
-  packet.typed_facts.forEach((fact, i) => {
-    for (const numeral of numeralsIn(factText(fact))) out.push({ numeral, where: `typed_facts[${i}]` });
-  });
   return out;
+}
+
+/** Every typed fact that reaches the reader without a source citation: "provenance or nothing", checked from outside the lane. */
+export function unsourcedFacts(packet: EvidencePacket): string[] {
+  return packet.typed_facts
+    .map((fact, i) => ({ fact, i }))
+    .filter(({ fact }) => {
+      const source: unknown = (fact as { source?: unknown }).source;
+      if (source === null || typeof source !== "object") return true;
+      const span = (source as { span_id?: unknown }).span_id;
+      return typeof span !== "string" || span === "";
+    })
+    .map(({ fact, i }) => `typed_facts[${i}] ${String((fact as { label?: unknown }).label ?? "")}`.trim());
 }

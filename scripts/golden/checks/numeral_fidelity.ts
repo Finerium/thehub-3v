@@ -6,7 +6,7 @@
 // A numeral is accounted for when it is the `value` of an allowed entry, or occurs inside that entry's `unit`
 // (the allowance "0.12 mm/100mm" carries the 100 of its own unit). Identifiers are removed before the scan by
 // view.numeralsIn, so a tag, a document number or a voting arrangement is never read as a stated number.
-import { renderedNumerals } from "../view";
+import { renderedNumerals, unsourcedFacts } from "../view";
 import { asString, fail, guard, pass, type CheckModule } from "./types";
 
 const KNOWN = ["from"] as const;
@@ -23,6 +23,11 @@ export const numeral_fidelity: CheckModule = (args, ctx) => {
   const allowed = ctx.goldenCase.expected.numerals_allowed;
   const accounted = (numeral: string): boolean =>
     allowed.some((entry) => entry.value === numeral || entry.unit.includes(numeral));
+
+  // Provenance or nothing, from outside the lane: a typed fact without its source citation fails here whatever its
+  // numerals are, and the numerals themselves are read from what the packet states (see view.renderedNumerals).
+  const unsourced = unsourcedFacts(packet);
+  if (unsourced.length > 0) return fail(`${unsourced.length} typed fact(s) rendered without a source citation: ${unsourced.slice(0, 6).join("; ")}`);
 
   const unaccounted = renderedNumerals(packet).filter((n) => !accounted(n.numeral));
   if (unaccounted.length === 0) return pass();
