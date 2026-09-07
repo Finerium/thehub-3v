@@ -4226,7 +4226,7 @@
   "extractor": "pdftotext -raw (pdftotext version 26.02.0)",
   "labels_status": "machine_drafted_pending_human",
   "min_content_words": 3,
-  "recipe_sha256": "8ae343b0495b86ad347907006ce9701ceb9f7ea9d4e8fd6c7610de362a0bb7db",
+  "recipe_sha256": "964d739cea9a2a090421384716d546b7071ca60c85af5b99cd0478c73e2930d0",
   "stop_list_sha256": "8262d5122704987d0f503b4f3289c8081d31c0469415ec442099bba4185b3ea5",
   "strict_cut_marker": "This is sample data provided for CALIBER purposes only",
   "strict_sections": [

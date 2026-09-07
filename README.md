@@ -119,7 +119,7 @@ In one sentence: **98 controlled documents** in, **14 of 57** unplanned-failure 
 | Golden set | **102 cases, 16 hard-gated** | `golden.size`, `golden.hard_gate_count` | written from the case's own expectations before the lane was measured; no case is edited to move a number |
 | Golden set, last complete run | **5 of 102 pass, 5 of 16 hard gates** | `evaluation/last-run.json` | tier A and tier B against https://thehub-3v.vercel.app, corpus version cv-1.0.1-b5eb2fb76d26, recorded 2026-09-07 |
 
-Fixture: harness 1.1.0, bundle `1.0.4`, recipe `8ae343b0495b`. Regenerate with `pnpm readme:numbers --write`; `pnpm readme:numbers` fails the build when this table or a figure in the prose differs from the data.
+Fixture: harness 1.1.0, bundle `1.0.5`, recipe `964d739cea9a`. Regenerate with `pnpm readme:numbers --write`; `pnpm readme:numbers` fails the build when this table or a figure in the prose differs from the data.
 <!-- numbers:end -->
 
 The coverage figures are never a bare percentage. The gap is always stated with its layer, its population, its threshold and the method beside it, on this page and on every surface that shows it. The generous layer scans the whole lesson text; the strict layer scans the rebuilt header fields plus sections 1, 2, 3, 4 and 6, so a lesson that only copies the work order's own row back does not count as having taught anything. Both layers use the same tokeniser, the same stop list and the same window of twice the field's word count, and a record is uncovered when its best score does not exceed the threshold.

@@ -1,8 +1,8 @@
 {
- "bundle_version": "1.0.4",
+ "bundle_version": "1.0.5",
  "canonical_form_version": "1",
  "corpus_sha256": "918706e41dad6323819db1dca5b568e71a2f827a0cdc4d37b5e5ad735ffa61de",
- "created_at": "2026-09-07T17:54:39Z",
+ "created_at": "2026-09-07T20:24:19Z",
  "embedding_model": "Xenova/multilingual-e5-small",
  "extractor": "pdftotext -raw (pdftotext version 26.02.0)",
  "files": [
@@ -59,7 +59,7 @@
   {
    "bytes": 107139,
    "path": "coverage_scores.json",
-   "sha256": "944a8a6561a6ef591582ca432875085c8cc93b4c2c0d46dca9017cbb1689702a"
+   "sha256": "bd06ef214eae72746533076e86735a20bcdf1a4427e844c7d9f53322f8dc54a0"
   },
   {
    "bytes": 74324,
@@ -94,7 +94,7 @@
   {
    "bytes": 426217,
    "path": "fixtures.json",
-   "sha256": "bcdc30db56c6b03b4484ac6f806530e04243dd06d7e1936a9b5aff4fda8054b9"
+   "sha256": "7cb89961e347e8e1914dd6fe7f0f5bb96b0a450e8d3288a8422a80cb2f15f0d7"
   },
   {
    "bytes": 234255,
@@ -1957,8 +1957,8 @@
    "sha256": "00c3525400c40558cb4a305faca9e251d52b00c9a8e97a1e70399ec1ac4da1cd"
   }
  ],
- "harness_commit": "d060e7532990a0f05ef72aaee6180930b5a0d0e8-dirty",
- "recipe_sha256": "8ae343b0495b86ad347907006ce9701ceb9f7ea9d4e8fd6c7610de362a0bb7db",
+ "harness_commit": "27de406dc995ff6c9c5cf459ac3337083a6af4de-dirty",
+ "recipe_sha256": "964d739cea9a2a090421384716d546b7071ca60c85af5b99cd0478c73e2930d0",
  "rulepack_version": "1",
  "stop_list_sha256": "8262d5122704987d0f503b4f3289c8081d31c0469415ec442099bba4185b3ea5"
 }

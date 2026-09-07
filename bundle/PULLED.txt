@@ -1,5 +1,5 @@
-bundle_version: 1.0.4
-tarball: thehub-bundle-1.0.4.tar.gz
-tarball_sha256: 7a1935cb91713f0f8049d8bc8901aadab1d522b32fa11fd60cc54b396e585bc9
-harness_commit: d060e7532990a0f05ef72aaee6180930b5a0d0e8-dirty
-release: https://github.com/Finerium/thehub-harness/releases/tag/v1.0.4
+bundle_version: 1.0.5
+tarball: thehub-bundle-1.0.5.tar.gz
+tarball_sha256: 6022a7aaa5e1f1804ac955aee17f49c39df005100c1ed1173ad2cb03213b6e1d
+harness_commit: 27de406dc995ff6c9c5cf459ac3337083a6af4de-dirty
+release: https://github.com/Finerium/thehub-harness/releases/tag/v1.0.5
