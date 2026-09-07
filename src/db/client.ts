@@ -4,10 +4,23 @@
 // (G3, the state machine, the seed): SELECT ... FOR UPDATE, then decide, then write, all on one connection.
 // Migrations never come through here; drizzle-kit runs them over DATABASE_URL_UNPOOLED (drizzle.config.ts).
 import type { ExtractTablesWithRelations } from "drizzle-orm";
-import { neon, Pool } from "@neondatabase/serverless";
+import { neon, neonConfig, Pool } from "@neondatabase/serverless";
 import { drizzle as drizzleHttp } from "drizzle-orm/neon-http";
 import { drizzle as drizzleWs, type NeonTransaction } from "drizzle-orm/neon-serverless";
 import * as schema from "./schema";
+
+// CI and the local docker pair run a plain Postgres behind a Neon HTTP and WebSocket proxy. The preload of
+// tests/db/neon-local.mjs configures the copy in node_modules, which is the copy drizzle-kit, the seed and the
+// integration tests load; a built Next server carries its own bundled copy, so the same redirection is applied
+// here on the instance the application itself uses. Without NEON_LOCAL_PROXY nothing changes and no Neon
+// connection can be redirected.
+const localProxy = process.env.NEON_LOCAL_PROXY;
+if (localProxy) {
+  neonConfig.fetchEndpoint = `http://${localProxy}/sql`;
+  neonConfig.useSecureWebSocket = false;
+  neonConfig.wsProxy = () => `${localProxy}/v1`;
+  neonConfig.pipelineConnect = false;
+}
 
 function connectionString(): string {
   // D-20: the application connects as the dedicated role thehub_app through DATABASE_URL_APP (the pooled URL with

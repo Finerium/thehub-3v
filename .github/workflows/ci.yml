@@ -5,10 +5,11 @@
 # against the organiser's corpus, read through the read-only deploy key). `seed` (AC-ING-09, AC-ING-10, AC-ING-15,
 # AC-NFR-07, AC-NFR-13) builds the bundle from the corpus checkout with `make bundle`, seeds it twice, timed, into a
 # disposable pgvector service container behind the local Neon proxy, then runs the `db` Vitest project against that
-# container as the application role. `deliverables` (AC-DEL-02, AC-DEL-03, AC-DEL-06) installs poppler and
-# chromium, builds the deck from its source and the bundled fixture, and runs the deck and video contracts of
-# tests/unit/; the video encode is not a CI job, because video/raw/ is gitignored and the capture needs the demo
-# accounts. A push to main adds `production-smoke`
+# container as the application role. `deliverables` (AC-DEL-01 to AC-DEL-06, AC-DEL-08) installs poppler, ffmpeg
+# and chromium, builds the deck from its source and the bundled fixture, runs the deck and video contracts of
+# tests/unit/, runs the pre-submit checklist and the README figure bindings, and opens the offline export from
+# file:// with the network aborted; the video encode is not a CI job, because video/raw/ is gitignored and the
+# capture needs the demo accounts. A push to main adds `production-smoke`
 # (AC-M0-01 to AC-M0-06): once the Vercel deployment of that commit answers on /api/health, scripts/smoke.sh runs
 # against the production URL and its JSON is kept as a run artifact. Tier B (nightly, live model) is tier-b.yml.
 name: Tier A
@@ -71,7 +72,10 @@ jobs:
       - name: Coverage thresholds (AC-EVAL-08, 100 percent of lines on src/gates/** and src/rulepack/**)
         run: pnpm exec vitest run --coverage
 
-      - name: Audits (provider egress, AC-NFR-10; rule-pack equality with the harness reference, AC-ANS-10)
+      - name: Audits (provider egress, AC-NFR-10; rule-pack equality, AC-ANS-10; README figures, AC-DEL-08)
+        # scripts/audits/readme-numbers.sh is one of the audits `pnpm audit` globs: it regenerates the README's
+        # numbers table from bundle/fixtures.json and evaluation/last-run.json and fails on any drift, so a fixture
+        # that moves and a README that does not is a red build rather than a stale claim on the front page.
         run: pnpm run audit
         env:
           HARNESS_DIR: ${{ github.workspace }}/../thehub-harness
@@ -128,13 +132,14 @@ jobs:
           git -C "$harness" checkout -q FETCH_HEAD
           git -C "$harness" log -1 --format='harness %H'
 
-      - name: poppler-utils (pdfinfo and pdftotext, the family of the pinned extractor of ADR-005)
+      - name: poppler-utils and ffmpeg (the deck measurements, and ffprobe over the built video)
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq poppler-utils
+          sudo apt-get install -y -qq poppler-utils ffmpeg
           pdftotext -v 2>&1 | head -1
+          ffprobe -version | head -1
 
-      - name: Chromium for the deck printer
+      - name: Chromium for the deck printer and for the offline export walk
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Team facts beside the checkout, when the repository carries them (D-08)
@@ -162,6 +167,34 @@ jobs:
 
       - name: The deck and the video contracts (AC-DEL-02, AC-DEL-03, AC-DEL-06)
         run: pnpm exec vitest run --project unit tests/unit/deck.test.ts tests/unit/video.test.ts
+
+      # The checklist and the README bindings. tests/unit/presubmit.test.ts runs tools/presubmit.sh twice against a
+      # throwaway copy of deliverables/, so nothing tracked is touched: once clean with --skip-live, where the only
+      # check that may fail is the live leg the flag withheld, and once with a TBD_ marker planted in the export,
+      # which must exit non-zero naming it (AC-DEL-04, AC-DEL-05). tests/unit/readme.test.ts holds every figure the
+      # README states against the fixture key that row names, and proves the generator reddens when one moves
+      # (AC-DEL-08). Both also run in `pnpm gate:quick`; they are named here because this is the job that carries
+      # the tools they need (poppler, ffmpeg, chromium).
+      - name: The pre-submit checklist and the README figure bindings (AC-DEL-04, AC-DEL-05, AC-DEL-08)
+        run: pnpm exec vitest run --project unit tests/unit/presubmit.test.ts tests/unit/readme.test.ts
+
+      # AC-DEL-01, over the export as this checkout carries it. The project holds no session and no base address:
+      # it opens deliverables/TheHub_prototype.html from file:// with every network route aborted, walks every
+      # read-only surface of 6.2 and asserts that nothing was asked for. A checkout without the built export fails
+      # here rather than skipping, because an export nobody can open is the one result a judge would find first.
+      - name: The offline export opens from file:// and reaches every surface (AC-DEL-01)
+        run: pnpm exec playwright test --project=export
+
+      - name: Keep the Playwright report of the offline export walk
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: export-offline-${{ github.sha }}
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: ignore
+          retention-days: 14
 
       - name: Keep the built deck
         if: always()
@@ -263,8 +296,12 @@ jobs:
       NEON_LOCAL_PROXY: localhost:4444
       NEON_PRELOAD: --import ${{ github.workspace }}/tests/db/neon-local.mjs
       SEED_LIMIT_SECONDS: "300"
-      TIMING_LOG: ${{ runner.temp }}/seed-timing.log
     steps:
+      # runner.temp is not available in a job-level env block, so the path is exported by the first step and
+      # every later step reads it from the environment; the log stays outside the workspace either way.
+      - name: The timing log path
+        run: echo "TIMING_LOG=$RUNNER_TEMP/seed-timing.log" >> "$GITHUB_ENV"
+
       - uses: actions/checkout@v7
 
       - uses: pnpm/action-setup@v6 # the version comes from package.json "packageManager"
@@ -487,8 +524,12 @@ jobs:
     timeout-minutes: 30
     env:
       PLAYWRIGHT_BASE_URL: https://thehub-3v.vercel.app
-      PLAYWRIGHT_STATE_PATH: ${{ runner.temp }}/playwright-state.json
     steps:
+      # runner.temp is not available in a job-level env block; the storage state path is exported here and read
+      # by the Playwright config, which keeps it outside the workspace.
+      - name: The storage state path
+        run: echo "PLAYWRIGHT_STATE_PATH=$RUNNER_TEMP/playwright-state.json" >> "$GITHUB_ENV"
+
       - uses: actions/checkout@v7
 
       - uses: pnpm/action-setup@v6 # the version comes from package.json "packageManager"
