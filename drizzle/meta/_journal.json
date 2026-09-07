@@ -15,6 +15,13 @@
       "when": 1788667902580,
       "tag": "0001_integrity_finding_register",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788754435557,
+      "tag": "0002_draft_transition_deadline_reason",
+      "breakpoints": true
     }
   ]
 }

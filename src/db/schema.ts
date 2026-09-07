@@ -1006,7 +1006,7 @@ export const draftTransition = draft.table(
         ('redlined', 'blocked'), ('in_review', 'in_review'), ('in_review', 'accepted'), ('in_review', 'rejected'),
         ('accepted', 'published'), ('accepted', 'rejected'), ('blocked', 'proposed'), ('rejected', 'proposed')
       ) OR (
-        ${t.toState} = 'blocked' AND ${t.reason} = 'deadline_exceeded'
+        ${t.toState} = 'blocked' AND ${t.reason} IS NOT DISTINCT FROM 'deadline_exceeded'
         AND ${t.fromState} IN ('proposed', 'drafted', 'redlined', 'in_review', 'accepted')
       )`,
     ),

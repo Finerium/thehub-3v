@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { asc, count, eq } from "drizzle-orm";
+import { getSandbox } from "@/auth/sandbox";
+import { BandBars } from "@/components/BandBars";
 import { DesignedState } from "@/components/DesignedState";
 import { EmptyState } from "@/components/EmptyState";
 import { GlassPanel } from "@/components/GlassPanel";
+import { MethodChip } from "@/components/MethodChip";
+import { StatusBadge } from "@/components/StatusBadge";
 import { VersionBadge } from "@/components/VersionBadge";
 import { DocumentClass } from "@/contracts/generated/document";
 import { db } from "@/db/client";
+import { LABELS_STATUS_TEXT, POPULATION_LABEL, hoursText, idrText, percentOf, readCoverageConsole, type CoverageConsole } from "@/db/queries/coverage";
 import { corpusVersion, documentTable, equipment, seededChip } from "@/db/schema";
 import { fixtures } from "@/lib/fixtures";
 
@@ -38,15 +44,91 @@ function utc(d: Date): string {
 
 async function readHome() {
   const [version] = await db.select().from(corpusVersion).where(eq(corpusVersion.isActive, true)).limit(1);
-  const [docCounts, assets, chips] = await Promise.all([
+  const [docCounts, assets, chips, gap] = await Promise.all([
     db.select({ cls: documentTable.class, n: count() }).from(documentTable).groupBy(documentTable.class),
     db.select().from(equipment).orderBy(asc(equipment.tag)),
     db.select().from(seededChip).orderBy(asc(seededChip.equipmentTag), asc(seededChip.id)),
+    // The gap headline reads the coverage rows of the version this browser sees (the sandbox recount when one exists, D-16).
+    getSandbox(await cookies()).then(readCoverageConsole),
   ]);
-  return { version: version ?? null, docCounts, assets, chips };
+  return { version: version ?? null, docCounts, assets, chips, gap };
 }
 
 type HomeData = Awaited<ReturnType<typeof readHome>>;
+
+const T = "t";
+
+// The gap headline of surface 1 (7.3 content-first: the hero is the figure with its method chip and the bands).
+// Both layers from the same coverage_summary rows the Console reads, the three bands, the adjudicated reading
+// labelled with its status; the register is expressive here only (7.2), staggered reveals on the children.
+function GapHeadline({ gap }: { gap: CoverageConsole }) {
+  const { generous, strict } = gap.unplanned;
+  const n = generous.population_count;
+  const bands = generous.bands ?? strict.bands;
+  const layers = [
+    { s: generous, reading: "matched by no same-asset lesson at all" },
+    { s: strict, reading: "taught by nothing beyond a copied work-order row" },
+  ];
+  return (
+    <GlassPanel className="p-6" aria-label="Coverage gap headline" data-component="gap-headline" data-version={gap.version.id}>
+      <p className="rise font-display text-[24px] leading-tight font-semibold tracking-tight text-ink-900" style={stagger(1)}>
+        Of <span className="mono">{n}</span> {POPULATION_LABEL.unplanned_failure}, <span className="mono">{generous.uncovered_count}</span> are matched by no same-asset lesson at
+        all and <span className="mono">{strict.uncovered_count}</span> have nothing beyond a copied work-order row.
+      </p>
+      <div className="mt-5 grid gap-6 sm:grid-cols-2">
+        {layers.map(({ s, reading }, i) => (
+          <div key={s.layer} className="rise min-w-0" style={stagger(2 + i)} data-layer={s.layer}>
+            <p className="eyebrow">{s.layer} layer</p>
+            <p className="mono mt-1 flex items-baseline gap-2">
+              <span className="text-[56px] leading-none font-medium text-ink-900">{s.uncovered_count}</span>
+              <span className="text-[16px] text-ink-500">of {s.population_count}</span>
+            </p>
+            <p className="mt-2 text-[13px] leading-snug text-ink-700">
+              <span className="mono text-ink-900">{percentOf(s.uncovered_count, s.population_count)}</span> at {T} = <span className="mono">{s.threshold}</span>, {s.layer} layer:{" "}
+              {reading}; <span className="mono">{s.uncovered_breakdowns}</span> breakdowns carrying <span className="mono">{hoursText(s.uncovered_downtime_hours)}</span> and{" "}
+              <span className="mono">{idrText(s.uncovered_cost_idr)}</span> of recorded downtime and cost, an exposure and not a saving.
+            </p>
+          </div>
+        ))}
+      </div>
+      <div className="rise mt-5" style={stagger(4)}>
+        <MethodChip
+          className="[&>summary]:flex-wrap [&>summary]:gap-y-1"
+          threshold={gap.method.threshold}
+          layer="both"
+          windowMultiplier={gap.method.window_multiplier}
+          recipeSha256={gap.method.recipe_sha256}
+          stopListSha256={gap.method.stop_list_sha256}
+          extractor={gap.method.extractor}
+        />
+      </div>
+      {bands ? (
+        <div className="rise mt-5" style={stagger(5)}>
+          <p className="eyebrow mb-2">Three bands of the {n} records</p>
+          <BandBars bands={bands} populationCount={n} recountKey={gap.version.id} />
+        </div>
+      ) : null}
+      <div className="rise mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-edge pt-4" style={stagger(6)}>
+        <p className="flex flex-wrap items-center gap-2 text-[12.5px] text-ink-700">
+          {gap.labels ? (
+            <>
+              <span>
+                Adjudicated reading: <span className="mono text-ink-900">{gap.labels.uncovered_count}</span> of {n} ({percentOf(gap.labels.uncovered_count, n)})
+              </span>
+              <StatusBadge kind="machine_drafted" />
+              <span className="text-ink-500">{LABELS_STATUS_TEXT[gap.labels.status]}</span>
+            </>
+          ) : (
+            <span className="text-ink-500">Adjudicated reading not available on this deployment.</span>
+          )}
+        </p>
+        <Link href="/coverage" className="draw text-[13px]">
+          Coverage Console
+        </Link>
+      </div>
+    </GlassPanel>
+  );
+}
 
 export default async function Home() {
   let data: HomeData;
@@ -65,7 +147,7 @@ export default async function Home() {
     );
   }
 
-  const { version, docCounts, assets, chips } = data;
+  const { version, docCounts, assets, chips, gap } = data;
 
   // File counts by class: document rows of the seeded database first, the fixture inventory as the fallback.
   const counts: { source: string; total: number; rows: Array<{ cls: string; n: number }> } | null =
@@ -115,16 +197,20 @@ export default async function Home() {
           <h2 id="gap-heading" className="mb-3 text-[15px] font-medium text-ink-500">
             Coverage gap
           </h2>
-          <DesignedState
-            inline
-            title="Not yet computed on this version"
-            explanation={
-              version
-                ? `The gap headline binds to the coverage_assessment rows of corpus version ${version.label}. None exist yet: the coverage track computes both layers under the frozen recipe and renders the figure here with its method chip, the two layers and the three bands.`
-                : "The gap headline binds to the coverage_assessment rows of the active corpus version. No version is active on this deployment yet."
-            }
-            next={{ href: "/coverage", label: "Coverage Console" }}
-          />
+          {gap ? (
+            <GapHeadline gap={gap} />
+          ) : (
+            <DesignedState
+              inline
+              title="Not yet computed on this version"
+              explanation={
+                version
+                  ? `The gap headline binds to the coverage_summary rows of corpus version ${version.label}. None exist yet: the seed writes both layers under the frozen recipe and the figure renders here with its method chip, the two layers and the three bands.`
+                  : "The gap headline binds to the coverage_summary rows of the active corpus version. No version is active on this deployment yet."
+              }
+              next={{ href: "/coverage", label: "Coverage Console" }}
+            />
+          )}
         </section>
 
         {/* Corpus status card: 6.2 surface 1. */}

@@ -18,7 +18,17 @@ function connectionString(): string {
   return url;
 }
 
-export const db = drizzleHttp(neon(connectionString()), { schema });
+// Built on first use, not at module load: a module that only imports a type or a table must not need a URL, and
+// the database test lane skips itself without one (it cannot skip if the import already threw).
+let handle: ReturnType<typeof drizzleHttp<typeof schema>> | null = null;
+function client(): ReturnType<typeof drizzleHttp<typeof schema>> {
+  if (handle === null) handle = drizzleHttp(neon(connectionString()), { schema });
+  return handle;
+}
+export const db = new Proxy({} as ReturnType<typeof drizzleHttp<typeof schema>>, {
+  get: (_t, prop, receiver) => Reflect.get(client(), prop, receiver),
+  has: (_t, prop) => Reflect.has(client(), prop),
+}) as ReturnType<typeof drizzleHttp<typeof schema>>;
 export type Db = typeof db;
 
 export type Tx = NeonTransaction<typeof schema, ExtractTablesWithRelations<typeof schema>>;

@@ -252,6 +252,17 @@ jobs:
       - name: The TypeScript G1 admits the same bundle (dry run, no database)
         run: pnpm db:seed --bundle ../thehub-harness/bundle --dry-run
 
+      # The one job with a bundle on disk, so the one job where the coverage equality gate of ADR-002 can compare
+      # anything. Everywhere else it skips with a message; a skip here would be a silent pass, so the run is asserted.
+      - name: Coverage equality gate against the harness bundle (ADR-002, AC-LOOP-01, 02, 03)
+        env:
+          HARNESS_BUNDLE: ${{ github.workspace }}/../thehub-harness/bundle
+        run: |
+          pnpm exec vitest run tests/equality/coverage.test.ts --project unit --reporter verbose \
+            | tee "$RUNNER_TEMP/equality.log"
+          grep -q "the coverage port equals the harness bundle" "$RUNNER_TEMP/equality.log"
+          ! grep -q "the coverage equality gate is skipped" "$RUNNER_TEMP/equality.log"
+
       - name: Wait for the Neon proxy in front of the service container
         run: |
           for attempt in $(seq 1 30); do
@@ -384,3 +395,46 @@ jobs:
           name: m0-smoke-${{ github.sha }}
           path: ${{ runner.temp }}/m0-smoke.json
           if-no-files-found: error
+
+  e2e:
+    # The M1 surface evidence (AC-UI-01, AC-UI-02, AC-COV, AC-INT-04, the designed states of 6.3 and axe), run
+    # against the production deployment the smoke job has just confirmed, so it reads the seeded database rather
+    # than a fixture of it. tests/e2e/global-setup.ts signs in once as engineer_demo with the repository secret;
+    # the password reaches the request body through the environment and is never printed, and the storage state is
+    # written to a temporary path outside the workspace. The report is kept whether the run passes or fails.
+    needs: production-smoke
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PLAYWRIGHT_BASE_URL: https://thehub-3v.vercel.app
+      PLAYWRIGHT_STATE_PATH: ${{ runner.temp }}/playwright-state.json
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6 # the version comes from package.json "packageManager"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Chromium for Playwright (the one project the config declares)
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: pnpm test:e2e against the production deployment
+        env:
+          DEMO_ENGINEER_PASSWORD: ${{ secrets.DEMO_ENGINEER_PASSWORD }}
+        run: pnpm test:e2e
+
+      - name: Keep the Playwright report (the AC-UI evidence input)
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: e2e-report-${{ github.sha }}
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: warn
+          retention-days: 14
