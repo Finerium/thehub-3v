@@ -6,6 +6,7 @@
 // itself is a width-limited, metadata-free derivative served one at a time by GET /api/documents/:id/pages/:n
 // under the role check, and no bulk or archive route exists (INV-7). An unknown id renders the designed 404.
 import type { Metadata } from "next";
+import { AnchorSync } from "@/components/AnchorSync";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -50,30 +51,6 @@ function Stated({ value, absence }: { value: string | null; absence: string }) {
   return value ? <span className="verbatim">{value}</span> : <span className="text-ink-500">{absence}</span>;
 }
 
-// ponytail: the hash is mirrored into the query so the server can resolve the span, at the cost of one reload per
-// page turn; a client component in src/components would turn the page without one.
-//
-// The `#page=n&span=<span_id>` anchor of 6.2 lives in the fragment, which never reaches the server. This mirrors it
-// into the query once, so the page the chip named and the span it named are resolved from the database rather than
-// guessed in the browser. It replaces rather than pushes, so the back button still leaves the viewer, and it stops
-// as soon as the query already says what the fragment says.
-const ANCHOR_SYNC_SOURCE = `(function(){
-function sync(){
-  var h = location.hash.replace(/^#/, "");
-  if (!h) return;
-  var f = new URLSearchParams(h);
-  var p = f.get("page");
-  if (!p) return;
-  var n = f.get("span") || "";
-  var u = new URL(location.href);
-  if (u.searchParams.get("page") === p && (u.searchParams.get("span") || "") === n) return;
-  u.searchParams.set("page", p);
-  if (n) { u.searchParams.set("span", n); } else { u.searchParams.delete("span"); }
-  location.replace(u.toString());
-}
-sync();
-addEventListener("hashchange", sync);
-})();`;
 
 function Header({ view }: { view: DocumentView }) {
   const d = view.document;
@@ -520,7 +497,7 @@ export default async function DocumentPage({ params, searchParams }: Props) {
       </GlassPanel>
 
       {/* The six lines that mirror the 6.2 fragment into the query: no data, no corpus text, no user input. */}
-      <script dangerouslySetInnerHTML={{ __html: ANCHOR_SYNC_SOURCE }} />
+      <AnchorSync />
     </div>
   );
 }

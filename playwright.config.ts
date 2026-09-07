@@ -30,6 +30,10 @@ export default defineConfig({
     baseURL,
     storageState: STATE_PATH,
     viewport: { width: 1440, height: 900 },
+    // The reveal of 7.2 fades opacity in over 0.4 s, so a colour measured mid-animation is a blend of ink and
+    // paper and axe reads a false contrast failure. Reduced motion is also the state section 7 requires to render
+    // the complete static experience, so every run measures the settled page and exercises that path.
+    reducedMotion: "reduce",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     // The deployment is noindex and unlisted; a run must not be mistaken for a crawler in the access log.
