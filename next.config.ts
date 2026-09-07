@@ -20,7 +20,10 @@ const nextConfig: NextConfig = {
     "/api/search": EMBEDDER_FILES,
     // G3 embeds the published lesson's chunks inside the transaction (ARCHITECTURE 8.6 step 3), so the publish
     // function needs the pinned model too; without it the route threw past every designed refusal and answered 500.
-    "/api/drafts/[id]/publish": EMBEDDER_FILES,
+    // The key is a glob, so the route's own "[id]" would read as a character class matching one of "i" or "d" and
+    // the include would land on no function at all, which is what the deployment answered 500 for a second time
+    // (libonnxruntime.so.1: cannot open shared object file, in the deployment's own log).
+    "/api/drafts/*/publish": EMBEDDER_FILES,
   },
   outputFileTracingExcludes: {
     "*": [`${ORT}/darwin/**`, `${ORT}/win32/**`, `${ORT}/linux/arm64/**`, "./node_modules/.pnpm/onnxruntime-web@*/**"],

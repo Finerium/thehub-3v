@@ -152,6 +152,8 @@ jobs:
       - name: Migrate, create the application role and seed corpus version v1
         env:
           NODE_OPTIONS: ${{ env.NEON_PRELOAD }}
+          # the accounts of db:seed:m0, which refuses to seed without every one of them
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
           pnpm db:migrate
           pnpm db:app-role
