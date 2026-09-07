@@ -15,6 +15,7 @@
     "db:generate": "dotenv -e .env.local -- drizzle-kit generate",
     "db:migrate": "dotenv -e .env.local -- drizzle-kit migrate",
     "db:seed:m0": "dotenv -e .env.local -- tsx scripts/db/seed-m0.ts",
+    "db:seed:chips": "dotenv -e .env.local -- tsx scripts/db/seed-chips.ts",
     "db:check": "dotenv -e .env.local -- tsx scripts/db/check.ts",
     "smoke": "bash scripts/smoke.sh",
     "test:e2e": "playwright test",

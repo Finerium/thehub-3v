@@ -64,9 +64,19 @@ export async function traceIdFromSearch(api: APIRequestContext, question: string
 // ---------------------------------------------------------------------------------------------------------------
 
 type FixtureLayerRow = { t: number; n: number; uncovered: number };
+/** One breakdown kind of the workbook slice, as blueprint 10.5 keys it (`workbook.breakdown_kinds.<kind>`). */
+type FixtureKindTotals = { rows: number; hours: number; cost_idr: number };
 type Fixtures = {
   method: { threshold: number };
   coverage: { generous: Record<string, FixtureLayerRow[]>; strict: Record<string, FixtureLayerRow[]> };
+  /** 10.5 `populations`: the record counts the operational-context panel reconciles its fleet column against. */
+  populations: { all: number; unplanned_breakdowns: number; planned_flagged: number };
+  /** 10.5 `workbook`: the rows, the breakdown split and the notification lead time the same panel prints beside. */
+  workbook: {
+    rows: number;
+    breakdown_kinds: { unplanned: FixtureKindTotals; planned_flagged: FixtureKindTotals };
+    lead_time: { median_h: number; at_least_24h: number; share: number; min_h: number; max_h: number };
+  };
 };
 
 const FIXTURES_PATH =
