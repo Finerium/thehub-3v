@@ -34,13 +34,13 @@
   },
   {
    "as_drawn_text": "GA-5610",
-   "bound_tag": "GA-5610",
+   "bound_tag": null,
    "drawn_setpoint": null,
    "foreign": false,
    "h_frac": 0.0,
    "id": "set05-002",
    "role": "equipment",
-   "unbound_reason": null,
+   "unbound_reason": "drawn 'GA-5610' was read as GA-5610, an equipment item outside the assets this corpus describes",
    "w_frac": 0.0,
    "x_frac": 0.199,
    "y_frac": 0.221

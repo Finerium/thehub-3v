@@ -348,13 +348,13 @@
   },
   {
    "as_drawn_text": "Request Start of Spare Coil CT-7802",
-   "bound_tag": "CT-7802",
+   "bound_tag": null,
    "drawn_setpoint": null,
    "foreign": false,
    "h_frac": 0.0,
    "id": "set07-025",
    "role": "effect",
-   "unbound_reason": null,
+   "unbound_reason": "drawn 'Request Start of Spare Coil CT-7802' was read as CT-7802, an equipment item outside the assets this corpus describes",
    "w_frac": 0.0,
    "x_frac": 0.912,
    "y_frac": 0.297

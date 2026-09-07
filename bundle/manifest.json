@@ -1,8 +1,8 @@
 {
- "bundle_version": "1.0.1",
+ "bundle_version": "1.0.2",
  "canonical_form_version": "1",
  "corpus_sha256": "918706e41dad6323819db1dca5b568e71a2f827a0cdc4d37b5e5ad735ffa61de",
- "created_at": "2026-09-06T03:13:36Z",
+ "created_at": "2026-09-07T09:27:19Z",
  "embedding_model": "Xenova/multilingual-e5-small",
  "extractor": "pdftotext -raw (pdftotext version 26.02.0)",
  "files": [
@@ -32,9 +32,9 @@
    "sha256": "055f892b164207f9f78c860150cdad560ca6a40871e817d23fa76dafe211a861"
   },
   {
-   "bytes": 766644,
+   "bytes": 1051570,
    "path": "claims.json",
-   "sha256": "dc317abc34c3336edc31ddd17214fe2b5393bfbe1522838f51b4bfcd10ab3a92"
+   "sha256": "1dbf3e210a8cbfb07e466b730dbffe21b6a7f01ce5d6b5e2ec5bac2082d1dc8a"
   },
   {
    "bytes": 1257,
@@ -112,9 +112,9 @@
    "sha256": "3480515e52953bfe0750323deb06fe78ad351671b47cd093d49baafed541515e"
   },
   {
-   "bytes": 79841,
+   "bytes": 78030,
    "path": "interlocks.json",
-   "sha256": "6e4aa0ecf364b58200d67d98f87cd49ac40e7558c0bdec631e83fbf5ff76e01e"
+   "sha256": "548eaf43a52372164af300ce598030a6eab1b43b02c17d6b2b7fde58ffbabd06"
   },
   {
    "bytes": 35572,
@@ -122,9 +122,9 @@
    "sha256": "6546b1e63b4e3e0193be203e7819787e18371902ab1cbfdb0ea784c51b2c9583"
   },
   {
-   "bytes": 405805,
+   "bytes": 435752,
    "path": "opls.json",
-   "sha256": "176f5b64e14244c64b195d78ff272afd96bc553d6d6d9b1a49dad04262ebf972"
+   "sha256": "c284b1f14bf76a2653426b1084ada66b35ec30b271b469e72a03925d662748b4"
   },
   {
    "bytes": 175992,
@@ -1892,44 +1892,44 @@
    "sha256": "0241acbd9b95692829163b44d610ccd3a6235737ca4cbde2d48ec6c8daaa8fda"
   },
   {
-   "bytes": 11966,
+   "bytes": 12065,
    "path": "pid_sidecars/set_01.json",
-   "sha256": "9125fceacf8e663f9102f876f1d1f19bc66a124bf47138a4cb324443b1bf2034"
+   "sha256": "05bbdc9e70ee780beadb2c40dfdd517b04c879a94df62048aa339b596e5b2759"
   },
   {
-   "bytes": 18903,
+   "bytes": 19002,
    "path": "pid_sidecars/set_02.json",
-   "sha256": "35e8e9f80f95c8d3679c661b8ee7523155dda2dd5bc06d19eb017e19452e4844"
+   "sha256": "40f43de6807e91d6591cd0148143bb81615af2c2884843184cec750c10bf241b"
   },
   {
-   "bytes": 21139,
+   "bytes": 21242,
    "path": "pid_sidecars/set_03.json",
-   "sha256": "fbce57e22191756ac48acadc25b5ab0a0d0cee2c1a7ab4966da8e1aeefa2aba6"
+   "sha256": "761a1633c7452bfc998e7f0409f0971a5996ca9072e2e916a17819ff9579badd"
   },
   {
-   "bytes": 21483,
+   "bytes": 21579,
    "path": "pid_sidecars/set_04.json",
-   "sha256": "69d0e90ad0b0633a4d4c211cadb9b03d4b5d56dbe339dd4a21e36e5123634fb5"
+   "sha256": "dc8e8cfab71367bdabb1304c8ac3348a0a5fba8192c358d5d64e20ce4efb59a6"
   },
   {
-   "bytes": 17110,
+   "bytes": 17198,
    "path": "pid_sidecars/set_05.json",
-   "sha256": "472c51757a4198e3bce47dce39b003523cf7daa6c88b983b8c317ecaa98edd3c"
+   "sha256": "49e8304973e1ac5a84db94c16e2aa30d5d967824bb0a844d6475f359bbb8552e"
   },
   {
-   "bytes": 14181,
+   "bytes": 14282,
    "path": "pid_sidecars/set_06.json",
-   "sha256": "3e82c72328fbb6f25632e937aac6bc7ad6bb1d3b949b103af9063adaa6e4ca98"
+   "sha256": "3a74633b86720502d7169d8b7f0dc8b5bbc01125e5d51510588f48317deb7273"
   },
   {
-   "bytes": 13739,
+   "bytes": 13855,
    "path": "pid_sidecars/set_07.json",
-   "sha256": "4f3985dd9e1c6689e4c1f75f3a75dbfc5e439ad7c0cb63069950841264169f48"
+   "sha256": "dcb574fc3c269159847d7fca71a3c5607dacaf28f8c83aeadb6a6f2fa7b64307"
   },
   {
-   "bytes": 22657,
+   "bytes": 23069,
    "path": "pid_sidecars/set_08.json",
-   "sha256": "3c7518884ad573b05dbdda000e5ab39ba5e6379d0a0184cc9eb6e95f23f1d903"
+   "sha256": "5b01dc9ff6da2d9ac147801489874b0dab4f3ee00621f6178daae2c0f8cf2875"
   },
   {
    "bytes": 10231,
@@ -1957,7 +1957,7 @@
    "sha256": "00c3525400c40558cb4a305faca9e251d52b00c9a8e97a1e70399ec1ac4da1cd"
   }
  ],
- "harness_commit": "b06e2eeeaf41aa83bc72bacfe47ee0f5d1fdd5e4",
+ "harness_commit": "57b98f699914b8c98c3224524c069dd911c779cc",
  "recipe_sha256": "a16e70cf22ae9ca1699c95555842580d8e6a6ea844486d9b797d8d018c9c7680",
  "rulepack_version": "1",
  "stop_list_sha256": "8262d5122704987d0f503b4f3289c8081d31c0469415ec442099bba4185b3ea5"

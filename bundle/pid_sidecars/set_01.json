@@ -302,13 +302,13 @@
   },
   {
    "as_drawn_text": "TO REACTOR DC-4501",
-   "bound_tag": "DC-4501",
+   "bound_tag": null,
    "drawn_setpoint": null,
    "foreign": false,
    "h_frac": 0.0,
    "id": "set01-022",
    "role": "equipment",
-   "unbound_reason": null,
+   "unbound_reason": "drawn 'TO REACTOR DC-4501' was read as DC-4501, an equipment item outside the assets this corpus describes",
    "w_frac": 0.0,
    "x_frac": 0.955,
    "y_frac": 0.157

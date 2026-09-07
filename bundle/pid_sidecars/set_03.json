@@ -781,13 +781,13 @@
   },
   {
    "as_drawn_text": "IN-LINE HEATER EA-3401",
-   "bound_tag": "EA-3401",
+   "bound_tag": null,
    "drawn_setpoint": null,
    "foreign": false,
    "h_frac": 0.0,
    "id": "set03-059",
    "role": "equipment",
-   "unbound_reason": null,
+   "unbound_reason": "drawn 'IN-LINE HEATER EA-3401' was read as EA-3401, an equipment item outside the assets this corpus describes",
    "w_frac": 0.0,
    "x_frac": 0.528,
    "y_frac": 0.777

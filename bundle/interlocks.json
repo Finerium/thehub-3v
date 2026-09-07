@@ -157,33 +157,6 @@
    "tag": "AT-2307"
   },
   {
-   "equipment_tag": "CT-7801",
-   "role": "final_element",
-   "sources": [
-    "doc-5956488b1878",
-    "doc-eebaf2dfb732"
-   ],
-   "tag": "CT-7802"
-  },
-  {
-   "equipment_tag": "FA-8901",
-   "role": "unknown",
-   "sources": [
-    "doc-5682ee067bd1",
-    "doc-b470d97ed566"
-   ],
-   "tag": "DA-8910"
-  },
-  {
-   "equipment_tag": "GA-1201A",
-   "role": "unknown",
-   "sources": [
-    "doc-8f1851948743",
-    "doc-c825f0afd6a1"
-   ],
-   "tag": "DC-4501"
-  },
-  {
    "equipment_tag": "LV-6701",
    "role": "permissive",
    "sources": [
@@ -201,49 +174,12 @@
   },
   {
    "equipment_tag": "DC-3401A",
-   "role": "final_element",
-   "sources": [
-    "doc-2ac61d30549d",
-    "doc-3e2e8d0b4977",
-    "doc-468ad6e6a04c",
-    "doc-a2b637ea5f1e",
-    "doc-a3a6b1f0f149",
-    "doc-a7aa4c227eea"
-   ],
-   "tag": "EA-3401"
-  },
-  {
-   "equipment_tag": "KC-4501",
-   "role": "unknown",
-   "sources": [
-    "doc-5ad9ec251d90",
-    "doc-698f6cc812f8",
-    "doc-d13e41e2dc26",
-    "doc-ff81ba9654f0"
-   ],
-   "tag": "EA-4502"
-  },
-  {
-   "equipment_tag": "DC-3401A",
    "role": "initiator",
    "sources": [
     "doc-3e2e8d0b4977",
     "doc-a3a6b1f0f149"
    ],
    "tag": "EHT-3401"
-  },
-  {
-   "equipment_tag": "LV-6701",
-   "role": "unknown",
-   "sources": [
-    "doc-18d193968911",
-    "doc-7cf17027cf00",
-    "doc-8ae170ad4c3f",
-    "doc-939ace9389a8",
-    "doc-de4f69577847",
-    "doc-fee80769bc91"
-   ],
-   "tag": "FA-6710"
   },
   {
    "equipment_tag": "KC-4501",
@@ -353,43 +289,6 @@
     "doc-f8cb31ac235f"
    ],
    "tag": "FV-4502"
-  },
-  {
-   "equipment_tag": "GA-1201A",
-   "role": "final_element",
-   "sources": [
-    "doc-1b2a465bf4ad"
-   ],
-   "tag": "GA-1201B"
-  },
-  {
-   "equipment_tag": "EA-5601",
-   "role": "permissive",
-   "sources": [
-    "doc-1b30dab2c3c9",
-    "doc-3686d03098e6"
-   ],
-   "tag": "GA-5610"
-  },
-  {
-   "equipment_tag": "FA-8901",
-   "role": "final_element",
-   "sources": [
-    "doc-5682ee067bd1",
-    "doc-743b1aef7bb6",
-    "doc-b470d97ed566",
-    "doc-f82f361d022b"
-   ],
-   "tag": "GA-8920"
-  },
-  {
-   "equipment_tag": "YD-2301",
-   "role": "final_element",
-   "sources": [
-    "doc-16d4f296c47e",
-    "doc-18ff60f606ab"
-   ],
-   "tag": "GF-2210"
   },
   {
    "equipment_tag": "GA-1201A",

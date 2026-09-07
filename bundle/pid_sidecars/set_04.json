@@ -171,13 +171,13 @@
   },
   {
    "as_drawn_text": "EA-4502",
-   "bound_tag": "EA-4502",
+   "bound_tag": null,
    "drawn_setpoint": null,
    "foreign": false,
    "h_frac": 0.0,
    "id": "set04-011",
    "role": "equipment",
-   "unbound_reason": null,
+   "unbound_reason": "drawn 'EA-4502' was read as EA-4502, an equipment item outside the assets this corpus describes",
    "w_frac": 0.0,
    "x_frac": 0.511,
    "y_frac": 0.225
@@ -398,7 +398,7 @@
    "h_frac": 0.0,
    "id": "set04-028",
    "role": "equipment",
-   "unbound_reason": "drawn 'KO DRUM FA-4510' was read as FA-4510, which no cause-and-effect sheet or datasheet types",
+   "unbound_reason": "drawn 'KO DRUM FA-4510' was read as FA-4510, an equipment item outside the assets this corpus describes",
    "w_frac": 0.0,
    "x_frac": 0.132,
    "y_frac": 0.535

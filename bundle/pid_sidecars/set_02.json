@@ -256,13 +256,13 @@
   },
   {
    "as_drawn_text": "CENTRIFUGE GF-2210",
-   "bound_tag": "GF-2210",
+   "bound_tag": null,
    "drawn_setpoint": null,
    "foreign": false,
    "h_frac": 0.0,
    "id": "set02-017",
    "role": "equipment",
-   "unbound_reason": null,
+   "unbound_reason": "drawn 'CENTRIFUGE GF-2210' was read as GF-2210, an equipment item outside the assets this corpus describes",
    "w_frac": 0.0,
    "x_frac": 0.046,
    "y_frac": 0.46

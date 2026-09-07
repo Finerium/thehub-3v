@@ -81,13 +81,13 @@
   },
   {
    "as_drawn_text": "LP SEPARATOR FA-6710",
-   "bound_tag": "FA-6710",
+   "bound_tag": null,
    "drawn_setpoint": null,
    "foreign": false,
    "h_frac": 0.0,
    "id": "set06-005",
    "role": "equipment",
-   "unbound_reason": null,
+   "unbound_reason": "drawn 'LP SEPARATOR FA-6710' was read as FA-6710, an equipment item outside the assets this corpus describes",
    "w_frac": 0.0,
    "x_frac": 0.304,
    "y_frac": 0.249
