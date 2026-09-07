@@ -39,6 +39,7 @@
     "test:db": "vitest run --project db",
     "export:demo": "dotenv -e .env.local -- tsx scripts/export/build.ts",
     "deck:build": "tsx deck/build.ts",
+    "pointer:build": "tsx deck/pointer.ts",
     "video:encode": "bash video/encode.sh",
     "presubmit": "bash tools/presubmit.sh"
   },

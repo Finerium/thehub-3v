@@ -47,6 +47,7 @@ const BLUEPRINT_9_15 = [
 // below holds it to that, so this list can never become a way to keep a deployment variable off the example file.
 const TEST_RUN_KNOBS = new Set([
   "VISUAL_EXPORT_PATH", // tests/e2e/visual.spec.ts: points the walk at a copy, to prove a check reddens
+  "LOAD_REPORT", // tests/db/load.test.ts: where the bounded-load reading is written when a run wants to keep it
 ]);
 
 const PROVIDED_BY_THE_PLATFORM = new Set([

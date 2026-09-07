@@ -176,6 +176,15 @@ jobs:
           DEMO_ENGINEER_PASSWORD: ${{ secrets.DEMO_ENGINEER_PASSWORD }}
         run: pnpm exec tsx scripts/export/build.ts
 
+      - name: Build the pointer sheet (AC-DEL-09; it reads the same fixture the deck reads)
+        if: hashFiles('deck/pointer.ts') != ''
+        run: |
+          if [ -f "$GITHUB_WORKSPACE/../supplied/team-facts.json" ]; then
+            pnpm pointer:build
+          else
+            echo "pointer build skipped: no team facts on this runner"
+          fi
+
       - name: The deck and the video contracts (AC-DEL-02, AC-DEL-03, AC-DEL-06)
         run: pnpm exec vitest run --project unit tests/unit/deck.test.ts tests/unit/video.test.ts
 
