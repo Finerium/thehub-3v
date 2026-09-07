@@ -8,7 +8,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { AG4RedlineInput, AG4RedlineOutput } from "@/contracts/generated/gateway";
 import { gatewayCall as gatewayCallTable } from "@/db/schema";
 import { MAX_RETRIES, PROMPTS } from "@/gateway";
-import { canonicalJson, sha256Hex } from "@/gateway/config";
+import { ROLE_TABLE, canonicalJson, sha256Hex } from "@/gateway/config";
 import { CLEAN_OUTPUT, REDLINE_BLOCK, REDLINE_PASS } from "../../tests/fixtures/drafting";
 import { argOf, resetFakeDb, statementWith } from "../../tests/helpers/fake-db-client";
 import { redline } from "./redline";
@@ -114,13 +114,14 @@ describe("the verdict the caller stores", () => {
     expect(result).toMatchObject({ verdict: "pass", reasons: [], round: 1, outcome: "ok" });
   });
 
-  // A timeout is retryable, so invoke() spends its real 500 ms and 2000 ms backoffs across three attempts before it
-  // gives up; the case is given room for that rather than racing the default per-test budget.
+  // A timeout is retryable, so invoke() spends its real backoffs across this role's own ladder before it gives up;
+  // the case is given room for that rather than racing the default per-test budget. The redline takes one attempt
+  // of 60 s rather than three, so that a draft and its redline together stay inside the 240 s lease.
   it("blocks when the call does not return, so an unreachable redliner never passes a draft", async () => {
     provider.callProvider.mockResolvedValue({ kind: "timeout" });
     const result = await redline(CLEAN_OUTPUT, EVIDENCE_REFS, TEMPLATE_RULES, 1);
 
-    expect(provider.callProvider).toHaveBeenCalledTimes(MAX_RETRIES + 1);
+    expect(provider.callProvider).toHaveBeenCalledTimes((ROLE_TABLE["AG-4/redline"].retries ?? MAX_RETRIES) + 1);
     expect(result.outcome).toBe("timeout");
     expect(result.verdict).toBe("block");
     expect(result.reasons[0]?.category).toBe("technical_plausibility");

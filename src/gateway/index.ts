@@ -2,7 +2,8 @@
 // invoke(task, envelope, outputSchema) validates the envelope against its task's input contract, checks the daily
 // budget, posts the prompt file plus the envelope as JSON data, validates the parsed reply against outputSchema and
 // writes one gateway_call row per attempt: retries with backoff 500 ms then 2000 ms on timeout, 5xx and 429, at
-// most two retries, each failed attempt its own row (timeout, provider_error) and one ok row per logical call. A
+// most two retries, or the role's own `retries` where it declares one (AG-3 and the redline buy a longer cut by
+// giving theirs up), each failed attempt its own row (timeout, provider_error) and one ok row per logical call. A
 // parse or schema failure is outcome parse_failed and the caller's rule applies (AG-4: not_entailed; AG-3: retry
 // once then block; AG-2: one retry then abstention). embed() loads the local model lazily (ADR-009).
 import { randomUUID } from "node:crypto";
@@ -132,7 +133,8 @@ export async function invoke<T>(
 
   const body = buildRequestBody(task, envelope);
   let last: InvokeResult<T> | null = null;
-  for (let attempt = 1; attempt <= MAX_RETRIES + 1; attempt++) {
+  const retries = ROLE_TABLE[task].retries ?? MAX_RETRIES; // a role may buy a longer cut by giving up its retries
+  for (let attempt = 1; attempt <= retries + 1; attempt++) {
     const started = performance.now();
     const result = await callProvider(task, body);
     const latencyMs = Math.round(performance.now() - started);
@@ -154,10 +156,10 @@ export async function invoke<T>(
         latency_ms: latencyMs,
         attempt,
         status: result.kind === "provider_error" ? result.status : null,
-        retry: retryable && attempt <= MAX_RETRIES,
+        retry: retryable && attempt <= retries,
       });
       last = { outcome, data: null, call };
-      if (!retryable || attempt > MAX_RETRIES) break;
+      if (!retryable || attempt > retries) break;
       await sleep(RETRY_BACKOFF_MS[attempt - 1] ?? RETRY_BACKOFF_MS[RETRY_BACKOFF_MS.length - 1] ?? 0);
       continue;
     }

@@ -11,6 +11,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { GatewayRole } from "@/contracts/generated/gateway";
 import { EMBEDDING_DIM } from "@/db/embedding";
+import { LEASE_SECONDS } from "@/loop/lease";
 import { MAX_RETRIES, RETRY_BACKOFF_MS } from "./index";
 import {
   BUDGETS,
@@ -72,20 +73,22 @@ describe("the role table (9.13, ARCHITECTURE 9.2)", () => {
     // the 372 ok AG-2 calls to that date: output 33 to 1102 tokens, latency 1.2 s to 19.4 s against a 20 s cut.
     // Truncation costs a whole round and a timeout costs three attempts; an unreached ceiling costs nothing.
     expect(row("AG-2")).toEqual(["low", 4096, 35_000]);
-    // AG-3 moved on 2026-09-07 (ADR-001 Records): at 8192 three of four live replies stopped at exactly 8192
+    // AG-3 moved twice on 2026-09-07 (ADR-001 Records): at 8192 three of four live replies stopped at exactly 8192
     // completion tokens, which is a truncated reply that does not parse, and the one complete two-round draft took
     // 352 s against a 300 s route. A complete reply measured 4284 to 6679 completion tokens, so 16384 is over twice
-    // the largest of them; 75000 is the timeout the retry ladder below has to close with.
-    expect(row("AG-3")).toEqual(["high", 16_384, 75_000]);
+    // the largest of them. The cut then moved from 75000 to 150000 against the deployment's own rows: of 41 complete
+    // replies 27 arrived inside 60 s, 39 inside 120 s and all 41 inside 150 s, while 60 calls died at the 75 s cut,
+    // more than completed. The role gives up its retries to buy that cut, which the ladder check below reads.
+    expect(row("AG-3")).toEqual(["high", 16_384, 150_000]);
     expect(row("AG-4")).toEqual(["low", 2048, 20_000]);
     expect(row("AG-4/redline")).toEqual(["low", 2048, 60_000]);
     for (const task of TASKS) expect(ROLE_TABLE[task].timeout_ms).toBeLessThanOrEqual(300_000);
   });
 
-  // The check that keeps a demo drafting at all. The gateway retries a timeout twice inside one logical call, so
-  // one AG-3 call costs up to three timeouts plus the backoff whatever the drafting lane does about it, and all of
-  // it runs inside the invocation POST /api/drafts declares. A timeout raised back toward 120000 fails here, which
-  // is where it should fail, and not on a live cluster at 352 s.
+  // The check that keeps a demo drafting at all. One logical call costs its role's own ladder, and all of it runs
+  // inside the invocation POST /api/drafts declares and inside the 240 s lease that invocation holds. A role that
+  // takes a longer cut without giving up its retries fails here, which is where it should fail, and not on a live
+  // cluster at 352 s.
   it("AG-3's whole retry ladder closes inside the drafting route's maxDuration (ADR-004)", () => {
     const route = readFileSync(path.join(process.cwd(), "src", "app", "api", "drafts", "route.ts"), "utf8");
     const declared = /export const maxDuration = (\d+)/.exec(route)?.[1];
@@ -94,9 +97,16 @@ describe("the role table (9.13, ARCHITECTURE 9.2)", () => {
     expect(routeMs).toBe(300_000); // Vercel Hobby's maximum, ARCHITECTURE 8.2
 
     const backoff = RETRY_BACKOFF_MS.reduce((a, b) => a + b, 0);
-    const ladder = (MAX_RETRIES + 1) * ROLE_TABLE["AG-3"].timeout_ms + backoff;
-    expect(ladder).toBe(227_500);
-    expect(ladder).toBeLessThan(routeMs);
+    const ladderOf = (task: "AG-3" | "AG-4/redline"): number => {
+      const retries = ROLE_TABLE[task].retries ?? MAX_RETRIES;
+      return (retries + 1) * ROLE_TABLE[task].timeout_ms + RETRY_BACKOFF_MS.slice(0, retries).reduce((a, b) => a + b, 0);
+    };
+    expect(backoff).toBe(2_500);
+    expect(ladderOf("AG-3")).toBe(150_000);
+    // The round the lane runs is a draft and its redline, and both of them together stay inside the lease, so a
+    // draft that fails does so with reasons a supervisor can act on rather than on the deadline.
+    expect(ladderOf("AG-3") + ladderOf("AG-4/redline")).toBeLessThanOrEqual(LEASE_SECONDS * 1000);
+    expect(ladderOf("AG-3") + ladderOf("AG-4/redline")).toBeLessThan(routeMs);
   });
 
   it("the two AG-4 tasks share the 9.13 role name AG-4 and its budget", () => {

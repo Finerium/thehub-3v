@@ -146,6 +146,9 @@ jobs:
           pnpm db:migrate
           pnpm db:app-role
           pnpm db:seed --bundle ../thehub-harness/bundle
+          # The demo accounts the golden cases sign in with: without them every case that needs a role skips,
+          # and a tier measured on skipped cases is not a measurement.
+          pnpm db:seed:m0
 
       - name: The embedder files the ask route traces (ADR-009)
         run: pnpm models:fetch
@@ -172,7 +175,9 @@ jobs:
       # written before the ingest, so the artifact survives a failed post; the runner's own application takes it
       # under CI_INGEST_TOKEN as the ci principal (9.7 EvaluationRun, POST /api/evaluation/runs).
       - name: golden:a (Tier A, 50 cases) and ingest into the runner's own application
-        run: pnpm exec tsx scripts/golden/run.ts --tier A --base-url "http://127.0.0.1:$APP_PORT" --out "$RUNNER_TEMP/golden" --ingest
+        run: |
+          pnpm exec tsx scripts/golden/run.ts --tier A --base-url "http://127.0.0.1:$APP_PORT" \
+            --out "$RUNNER_TEMP/golden" --ingest --bundle ../thehub-harness/bundle
 
       # AC-EVAL-07: two runs on identical pins produce identical deterministic-check results. The compared shape is
       # the per-case verdict and the names of the checks that failed or could not be evaluated; the timings, the

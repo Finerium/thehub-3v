@@ -55,8 +55,15 @@ export default defineConfig({
       name: OFFLINE_PROJECT,
       testMatch: OFFLINE_SPEC,
       // No base address and no stored session: the one artefact under test is a file, and a context that carried
-      // a cookie jar for a deployment would be a context that could reach one.
-      use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 }, baseURL: undefined, storageState: undefined },
+      // a cookie jar for a deployment would be a context that could reach one. The empty state is written out
+      // rather than left undefined, because an undefined value in a project inherits the top-level one, which is
+      // the path the signed-in projects use and which a checkout that never signed in does not have.
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1440, height: 900 },
+        baseURL: undefined,
+        storageState: { cookies: [], origins: [] },
+      },
     },
   ],
 });

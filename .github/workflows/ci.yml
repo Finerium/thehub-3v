@@ -465,6 +465,11 @@ jobs:
             grep -F 'current revisions after activation equal the bundle' "$RUNNER_TEMP/seed-run-2.log"
           fi
 
+      # G3 embeds the published lesson's chunks, so the publication cases of tests/db/loop.test.ts need the pinned
+      # embedding model on the runner (ADR-009). Without it they fail on a missing file rather than on the gate.
+      - name: The embedding model files the publication path needs (ADR-009)
+        run: pnpm models:fetch
+
       - name: The db Vitest project against the seeded container as the application role (AC-ING-10, AC-NFR-07, AC-NFR-13)
         env:
           NODE_OPTIONS: ${{ env.NEON_PRELOAD }}
@@ -561,7 +566,9 @@ jobs:
       - name: pnpm test:e2e against the production deployment
         env:
           DEMO_ENGINEER_PASSWORD: ${{ secrets.DEMO_ENGINEER_PASSWORD }}
-        run: pnpm test:e2e
+        # The browser suite against the deployment. The offline export project is not run here: its artefact is
+        # built and walked in the deliverables job, and this job has no export to open.
+        run: pnpm exec playwright test --project=chromium
 
       - name: Keep the Playwright report (the AC-UI evidence input)
         if: always()

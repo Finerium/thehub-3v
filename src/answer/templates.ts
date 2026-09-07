@@ -163,13 +163,14 @@ export function taskShaped(template: Template | null, question: string): boolean
  * does not carry renders nothing rather than an empty fact, because a title block that states no approver is not
  * the same document as one that states an empty approver.
  */
-const REVISION_COLUMNS: ReadonlyArray<{ field: string; unit: string | null; value: (r: q.RevisionRow) => string | null }> = [
-  { field: "Rev", unit: null, value: (r) => r.revision },
-  { field: "Approval status", unit: null, value: (r) => r.approvalStatusText },
-  { field: "Prepared by", unit: null, value: (r) => r.preparedByAlias },
-  { field: "Reviewed by", unit: null, value: (r) => r.reviewedByAlias },
-  { field: "Approved by", unit: null, value: (r) => r.approvedByAlias },
-  { field: "Date of sharing", unit: "date", value: (r) => r.dateOfSharing },
+const REVISION_COLUMNS: ReadonlyArray<{ field: string; unit: string | null; signature: boolean; value: (r: q.RevisionRow) => string | null }> = [
+  { field: "Rev", unit: null, signature: false, value: (r) => r.revision },
+  { field: "Approval status", unit: null, signature: false, value: (r) => r.approvalStatusText },
+  { field: "Rev date", unit: "date", signature: true, value: (r) => r.revisionDate },
+  { field: "Prepared by", unit: null, signature: true, value: (r) => r.preparedByAlias },
+  { field: "Reviewed by", unit: null, signature: true, value: (r) => r.reviewedByAlias },
+  { field: "Approved by", unit: null, signature: true, value: (r) => r.approvedByAlias },
+  { field: "Date of sharing", unit: "date", signature: true, value: (r) => r.dateOfSharing },
 ];
 
 /**
@@ -865,7 +866,12 @@ export async function typedFacts(db: Db, scope: Scope, template: Template | null
     const name = titleBlock?.docNo ?? null;
     if (row === undefined || titleBlock === undefined || name === null || name.length === 0) continue;
     const source = citeSource(titleBlock, data.findings);
+    // A lesson's four signature columns are already served verbatim on its own block item (LessonItem.footer, 9.5
+    // Opl.footer) under this same title-block span, so repeating them here would print the same four values seven
+    // times over on a seven-lesson asset and bury the typed layer the question is about.
+    const signed = titleBlock.documentClass !== "opl";
     for (const column of REVISION_COLUMNS) {
+      if (column.signature && !signed) continue;
       const value = column.value(row);
       if (value === null || value.length === 0) continue;
       addFact({

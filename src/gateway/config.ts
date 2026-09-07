@@ -141,6 +141,8 @@ export type RoleConfig = {
   temperature: number | null;
   max_tokens: number;
   timeout_ms: number;
+  /** Retries inside one logical call, on a timeout or a retryable provider error. Absent means MAX_RETRIES. */
+  retries?: number;
   prompt_version: string | null;
   budget: Budget;
 };
@@ -189,20 +191,24 @@ export const ROLE_TABLE: Record<Task, RoleConfig> = {
   // shape of the other rows (ADR-001 Records). At max_tokens 8192 three of four T4 replies stopped at exactly 8192
   // completion tokens, which does not parse and costs the round its retry; the two that completed returned 5904 and
   // 6653, and under prompt v2 a complete reply is 5023 to 6679. 16384 is well over twice the largest of those and
-  // far inside this model's own 128K output ceiling, so a truncated reply is off the table. timeout_ms is the
-  // number that has to close against the route's 300 s, and it closes downwards, not upwards. The gateway retries a
-  // timeout twice inside one call, so one AG-3 call can cost 3 x timeout_ms plus 2.5 s of backoff whatever the
-  // drafting lane does about it. Against the envelope as src/loop/evidence.ts now sends it, eight complete replies
-  // took 39.4 to 60.6 s, and a call that misses that band does not come back slowly, it hangs: at 90 s no reply
-  // ever arrived between 61 s and the cut. So a timeout is a stall to abandon cheaply, not a reply to wait for,
-  // and 75 s is a fifth again the slowest complete reply with a ladder of 227.5 s, which leaves a first round of
-  // its measured 53 s and a second round's whole ladder inside the route.
+  // far inside this model's own 128K output ceiling, so a truncated reply is off the table.
+  // timeout_ms and retries moved together on 2026-09-07, against the 108 AG-3 calls the deployment logged in the
+  // three days to that date (gateway_call). The earlier row assumed a reply that misses 61 s never arrives, and the
+  // rows say otherwise: 41 replies completed, 27 of them inside 60 s, 38 inside 90 s, 39 inside 120 s and all 41
+  // inside 150 s, the slowest at 145.9 s. Against a 75 s cut, 60 calls timed out, more of them than completed. So
+  // the cut was killing replies that were on their way, and each death cost the lane a retry inside the same call:
+  // three attempts of 75 s plus backoff is 227.5 s of a 240 s lease spent on one logical call, which is why a draft
+  // on the deployment reached its deadline twice in four walks. The cut is now 150 s, which covers every complete
+  // reply measured, and the gateway does not retry this role: the drafting lane already decides whether there is
+  // time for another attempt, and a reply that misses 150 s is a stall, not a slow reply. One round therefore costs
+  // at most 150 s for the draft and 60 s for its redline, and both fit the lease with room to spare.
   "AG-3": {
     role: "AG-3",
     ...ZAI_CHAT,
     effort: "high",
     max_tokens: 16_384,
-    timeout_ms: 75_000,
+    timeout_ms: 150_000,
+    retries: 0, // the drafting lane's own budget decides whether a second attempt fits (src/loop/draft.ts)
     prompt_version: PROMPTS["AG-3"].version,
     budget: BUDGETS["AG-3"],
   },
@@ -221,6 +227,7 @@ export const ROLE_TABLE: Record<Task, RoleConfig> = {
     effort: "low",
     max_tokens: 2048,
     timeout_ms: 60_000,
+    retries: 0, // measured p90 11 s: one 60 s attempt, so the round closes inside the 240 s lease
     prompt_version: PROMPTS["AG-4/redline"].version,
     budget: BUDGETS["AG-4/redline"],
   },

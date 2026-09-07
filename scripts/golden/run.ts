@@ -39,7 +39,7 @@ import { citationsOf, citedDocuments, renderedNumerals, textAt, type Answer } fr
 const ROOT = path.resolve(import.meta.dirname, "..", "..");
 const ASK_ROUTE = "POST /api/ask";
 
-type Options = { tier: Tier; ids: string[] | null; baseUrl: string; out: string; ingest: boolean; ingestUrl: string; casesFile: string };
+type Options = { tier: Tier; ids: string[] | null; baseUrl: string; out: string; ingest: boolean; ingestUrl: string; casesFile: string; bundleDir: string };
 
 function parseArgs(argv: string[]): Options {
   const value = (flag: string): string | null => {
@@ -55,6 +55,10 @@ function parseArgs(argv: string[]): Options {
     baseUrl: (value("--base-url") ?? process.env.BASE_URL ?? "http://127.0.0.1:3000").replace(/\/$/, ""),
     out: value("--out") ?? path.join(ROOT, ".golden"),
     ingest: argv.includes("--ingest"),
+    // The bundle the measured server was seeded from: its manifest names the corpus version the ingest
+    // posts. A rebuilt bundle carries its own created_at, so a copy is not the same version as the one
+    // the database holds, and the run has to name the one it measured.
+    bundleDir: value("--bundle") ?? path.join(ROOT, "bundle"),
     ingestUrl: (value("--ingest-url") ?? value("--base-url") ?? process.env.BASE_URL ?? "http://127.0.0.1:3000").replace(/\/$/, ""),
     casesFile: value("--cases") ?? casesPath(ROOT),
   };
@@ -157,10 +161,10 @@ function evaluateExpected(goldenCase: Case, answer: Answer, corpusVersion: strin
   return failures;
 }
 
-async function ingest(baseUrl: string, report: Report): Promise<void> {
+async function ingest(baseUrl: string, bundleDir: string, report: Report): Promise<void> {
   const token = process.env.CI_INGEST_TOKEN;
   if (!token) throw new Error("CI_INGEST_TOKEN is not set in the environment");
-  const payload = evaluationPayload(report, seededVersionFromBundle(path.join(ROOT, "bundle")).id);
+  const payload = evaluationPayload(report, seededVersionFromBundle(bundleDir).id);
   const response = await fetch(`${baseUrl}/api/evaluation/runs`, {
     method: "POST",
     headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
@@ -315,7 +319,7 @@ async function main(): Promise<number> {
   console.log(`summary ${markdownPath}`);
 
   if (options.ingest) {
-    await ingest(options.ingestUrl, report);
+    await ingest(options.ingestUrl, options.bundleDir, report);
     console.log(`ingested into ${options.ingestUrl}/api/evaluation/runs`);
   }
 

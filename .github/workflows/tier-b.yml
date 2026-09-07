@@ -156,6 +156,8 @@ jobs:
           pnpm db:migrate
           pnpm db:app-role
           pnpm db:seed --bundle ../thehub-harness/bundle
+          # the demo accounts the cases sign in with
+          pnpm db:seed:m0
 
       - name: The embedder files the ask route traces (ADR-009)
         run: pnpm models:fetch
