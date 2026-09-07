@@ -6,6 +6,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { AbstentionCard } from "@/components/AbstentionCard";
+import { AuditList, AuditRow } from "@/components/AuditRow";
 import { BandBars } from "@/components/BandBars";
 import { CaveatLine } from "@/components/CaveatLine";
 import { Chain } from "@/components/ChainHop";
@@ -15,7 +16,10 @@ import { ClusterCard } from "@/components/ClusterCard";
 import { ConfidenceBand } from "@/components/ConfidenceBand";
 import { ContradictionChip } from "@/components/ContradictionChip";
 import { CopyId } from "@/components/CopyId";
+import { DecisionButtons } from "@/components/DecisionButtons";
 import { DesignedState } from "@/components/DesignedState";
+import { DraftElement } from "@/components/DraftElement";
+import { DraftSection } from "@/components/DraftSection";
 import { EffectsRow } from "@/components/EffectsRow";
 import { EmptyState } from "@/components/EmptyState";
 import { EvidenceList } from "@/components/EvidenceLine";
@@ -33,22 +37,28 @@ import { Pagination } from "@/components/Pagination";
 import { PartialAnswerBanner } from "@/components/PartialAnswerBanner";
 import { PermissiveGate } from "@/components/PermissiveGate";
 import { ProofTestCard } from "@/components/ProofTestCard";
+import { RecountMoment, type RecountSide } from "@/components/RecountMoment";
+import { RedlineVerdictPanel } from "@/components/RedlineVerdictPanel";
 import { RefusalCard } from "@/components/RefusalCard";
 import { RequestLessonAction } from "@/components/RequestLessonAction";
 import { SearchResultList, SearchResultRow } from "@/components/SearchResultRow";
 import { SensitivityStrip } from "@/components/SensitivityStrip";
+import { SlotField } from "@/components/SlotField";
+import { StateRail } from "@/components/StateRail";
 import { StatusBadge, type StatusKind } from "@/components/StatusBadge";
 import { TagCard } from "@/components/TagCard";
+import { TourStep } from "@/components/TourStep";
 import { TraceView } from "@/components/TraceView";
 import { TypedFactGrid } from "@/components/TypedFactCard";
 import { VerdictStrip } from "@/components/VerdictStrip";
 import { VersionBadge } from "@/components/VersionBadge";
 import type { DatasheetParam, InstrumentTag, InterlockRow, PidSidecar, StartPermissive } from "@/contracts/generated/asset";
 import type { DebtCluster } from "@/contracts/generated/coverage";
+import type { DraftField, DraftTransition, RedlineVerdict, SmeNote } from "@/contracts/generated/drafts";
 import type { Abstention, Citation, Claim, EvidencePacket, Refusal, TypedFact } from "@/contracts/generated/evidence_packet";
 import type { CausalLink, FailureFamily, ProofTest } from "@/contracts/generated/operations";
 import { AnswerTrace } from "@/contracts/generated/serving";
-import { ASSUMPTION_LABEL, AS_BUILT_CAVEAT, ENTAILED, STATUS_WORDING } from "@/lib/fixed-strings";
+import { ASSUMPTION_LABEL, AS_BUILT_CAVEAT, ENTAILED, SLOT_TEXT, STATUS_WORDING } from "@/lib/fixed-strings";
 import "@/components/system.css";
 
 export const metadata: Metadata = { title: "Gallery" };
@@ -302,6 +312,48 @@ const UNDERLAY_SVG = [
 ].join("");
 const UNDERLAY = `data:image/svg+xml;utf8,${encodeURIComponent(UNDERLAY_SVG)}`;
 
+/* Surface 8's synthetic draft: three elements, one of them a slot, with two redline rounds and a history. ------ */
+
+const DRAFT_ID = "draft-example-1";
+const SLOT_ID = "field-example-3";
+
+const DRAFT_FIELDS: DraftField[] = [
+  { id: "field-example-1", draft_id: DRAFT_ID, section: 4, ordinal: 1, text: "Example step, one action per element, written against the evidence item named below it.", provenance: { type: "opl_step", ref: "OPL-EX-0001#3", span_id: "span-example-1" }, numeric_provenance: [], quarantined: false, is_slot: false },
+  { id: "field-example-2", draft_id: DRAFT_ID, section: 4, ordinal: 2, text: "Example step carrying a numeral, which is typed by the item that states it and never by the drafter.", provenance: { type: "datasheet_param", ref: "param-example-1", span_id: "span-example-2" }, numeric_provenance: [{ numeral: "45.6", source_ref: "param-example-1", unit: "unit" }], quarantined: false, is_slot: false },
+  { id: SLOT_ID, draft_id: DRAFT_ID, section: 4, ordinal: 3, text: SLOT_TEXT, provenance: { type: "slot", ref: null, span_id: null }, numeric_provenance: [], quarantined: false, is_slot: true },
+];
+
+const NOTE: SmeNote = { id: "note-example-1", draft_id: DRAFT_ID, field_id: SLOT_ID, author_alias: "example_alias", author_role: "Engineer", captured_at: STAMP, text: "Example judgement an engineer recorded against the slot on a date.", source_reference: "example reference", provenance: "human, dated, unreviewed", citeable: false };
+const NOTE_PUBLISHED: SmeNote = { ...NOTE, id: "note-example-2", citeable: true };
+
+const REDLINE: RedlineVerdict[] = [
+  { draft_id: DRAFT_ID, round: 1, verdict: "block", reasons: [{ category: "safety_framing", text: "Example reason: the element frames a protective function as optional.", field_id: "field-example-1" }, { category: "outstanding_slot", text: "Example reason: an element states a value the evidence does not type.", field_id: SLOT_ID }, { category: "template_conformance", text: "Example reason: a section of the house template is missing.", field_id: null }], model_id: "example-model", prompt_version: "vX", created_at: STAMP },
+  { draft_id: DRAFT_ID, round: 2, verdict: "pass", reasons: [], model_id: "example-model", prompt_version: "vX", created_at: STAMP },
+];
+
+const TRANSITIONS: DraftTransition[] = [
+  { id: "t-example-1", draft_id: DRAFT_ID, from_state: "proposed", to_state: "drafted", actor_alias: "system", actor_role: "system", reason: null, edit_diff: null, server_ts: STAMP },
+  { id: "t-example-2", draft_id: DRAFT_ID, from_state: "drafted", to_state: "redlined", actor_alias: "system", actor_role: "system", reason: null, edit_diff: null, server_ts: STAMP },
+  { id: "t-example-3", draft_id: DRAFT_ID, from_state: "redlined", to_state: "in_review", actor_alias: "system", actor_role: "system", reason: null, edit_diff: null, server_ts: STAMP },
+  { id: "t-example-4", draft_id: DRAFT_ID, from_state: "in_review", to_state: "in_review", actor_alias: "example_alias", actor_role: "Reviewing Supervisor", reason: null, edit_diff: "field-example-1: - Example step before the edit. + Example step after the edit. (example reason)", server_ts: STAMP },
+  { id: "t-example-5", draft_id: DRAFT_ID, from_state: "in_review", to_state: "accepted", actor_alias: "example_alias", actor_role: "Reviewing Supervisor", reason: "example acceptance reason", server_ts: STAMP, edit_diff: null },
+];
+
+/* RecountMoment: two example readings of an example population; no figure here is a plant figure. */
+const RECOUNT_BEFORE: RecountSide = {
+  version: { label: "vX", digest_prefix: "0123abcd" },
+  generous: { layer: "generous", threshold: 0.5, uncovered_count: 12, population_count: 40, bands: { no_lesson: 12, copied_row_only: 18, taught: 10 } },
+  strict: { layer: "strict", threshold: 0.5, uncovered_count: 28, population_count: 40, bands: { no_lesson: 12, copied_row_only: 18, taught: 10 } },
+  cluster: { rank: 1, score: 0.5, uncovered_wo_numbers: [WO(1), WO(2)] },
+};
+const RECOUNT_AFTER: RecountSide = {
+  version: { label: "vY", digest_prefix: "4567ef89" },
+  generous: { layer: "generous", threshold: 0.5, uncovered_count: 11, population_count: 40, bands: { no_lesson: 11, copied_row_only: 18, taught: 11 } },
+  strict: { layer: "strict", threshold: 0.5, uncovered_count: 28, population_count: 40, bands: { no_lesson: 12, copied_row_only: 18, taught: 10 } },
+  cluster: { rank: 1, score: 0.4, uncovered_wo_numbers: [WO(2)] },
+};
+const RECOUNT_METHOD = { recipe_sha256: EXAMPLE_HASH, stop_list_sha256: ZERO_HASH };
+
 const CHIP_ICON = (
   <svg viewBox="0 0 16 16" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
     <path d="M3 8h10M8 3v10" />
@@ -309,6 +361,33 @@ const CHIP_ICON = (
 );
 
 /* The sheet ------------------------------------------------------------------------------------------------------ */
+
+const AUDIT_EVENTS = [
+  { id: "audit-example-1", actor_alias: "EX-ENG", actor_role: "Engineer", action: "answer.issued", entity: "answer_trace", entity_id: "trace-example-0001", trace_id: "trace-example-0001", route: "/api/ask", corpus_version_label: "vX", server_ts: STAMP },
+  { id: "audit-example-2", actor_alias: "EX-MGR", actor_role: "Manager", action: "draft.published", entity: "draft", entity_id: "draft-example-1", trace_id: null, route: "/api/drafts/draft-example-1/publish", corpus_version_label: "vX", server_ts: STAMP },
+  { id: "audit-example-3", actor_alias: "EX-ADMIN", actor_role: "Admin", action: "corpus.version_activated", entity: "corpus_version", entity_id: "cv-example-0001", trace_id: null, route: "/api/admin/corpus/activate", corpus_version_label: "vX", server_ts: STAMP },
+  { id: "audit-example-4", actor_alias: "EX-ENG", actor_role: "Engineer", action: "auth.role_violation", entity: "permission", entity_id: "publish", trace_id: null, route: "/api/drafts/draft-example-1/publish", corpus_version_label: "vX", server_ts: STAMP },
+] as const;
+
+const AUDIT_SAFETY_EVENT = {
+  id: "audit-example-5",
+  actor_alias: "EX-ENG",
+  actor_role: "Engineer",
+  action: "safety.request_refused",
+  entity: "answer_trace",
+  entity_id: "trace-example-0002",
+  trace_id: "trace-example-0002",
+  route: "/api/ask",
+  corpus_version_label: "vX",
+  server_ts: STAMP,
+} as const;
+
+const AUDIT_SAFETY_PAYLOAD = {
+  request_text: "Example request text as a visitor typed it, held on this sheet as an example and never a plant request.",
+  matched_phrase: "example matched phrase",
+  rule_id: "EX-RULE-DEFEAT",
+  rulepack_class: "defeat",
+};
 
 type SectionSpec = { id: string; title: string; note: string };
 
@@ -326,6 +405,7 @@ const SECTIONS: SectionSpec[] = [
   { id: "closeout-chip", title: "ClosedoutChip", note: "The incomplete-closeout wording, the empty fields and the priority, linking to the CD-4 finding." },
   { id: "caveat-line", title: "CaveatLine", note: "The fixed as-built caveat and the fixed unverified-value line in the caveat token, read from fixed-strings.ts." },
   { id: "band-bars", title: "BandBars", note: "The three bands scaled to the population; the bars animate only while recountKey changes." },
+  { id: "recount-moment", title: "RecountMoment", note: "The signature moment of 7.2: the version badge rolls, the record that left the uncovered set travels from the no-lesson band to the taught band on each layer\u2019s population axis, and the cluster score recomputes. Armed (no publication yet) beside played. Transform and opacity only; reduced motion lands on the same states with no travel." },
   { id: "layer-toggle", title: "LayerToggle and SensitivityStrip", note: "Generous and strict side by side; the sensitivity ladder with the current threshold marked." },
   { id: "method-chip", title: "MethodChip", note: "Threshold, layer, window, recipe and stop-list hash prefixes, the extractor string; expands to the full values." },
   { id: "cluster-card", title: "ClusterCard", note: "Rank, asset, score with the incomplete-closeout count beside it, the four factors with their maxima, the coefficients labelled ASSUMPTION, the uncovered work orders with their matched unit, the request action." },
@@ -336,8 +416,14 @@ const SECTIONS: SectionSpec[] = [
   { id: "permissive-gate", title: "PermissiveGate and EffectsRow", note: "The AND-gate rows with signal tags and a standing bypass state where recorded; the marked effects with their final elements and the not-actuated effects stated." },
   { id: "hotspot-layer", title: "HotspotLayer", note: "The underlay with fractional hotspot rectangles (bound, unbound, foreign), the provenance line with the transcription basis and review status, the sidecar defect list. The underlay here is a blank synthetic sheet." },
   { id: "tag-card", title: "TagCard", note: "The tag's role, its typed rows with setpoint and vote cell verbatim, its related work orders with their chain place, the datasheet limits of its equipment." },
+  { id: "draft-section", title: "DraftSection and DraftElement", note: "The six sections of the house template numbered as title-block cells; every element in the provenance margin with its ordinal, the evidence item that states it and one chip per numeral naming the item that types it. An element rewritten in review carries the accent rule and its reason; a quarantined one carries the defect rule." },
+  { id: "slot-field", title: "SlotField", note: "The unfilled cell: the fixed literal, hatched, then the note entry the surface passes. After capture the note is an attributed block with the role alias, the date and the fixed provenance; once the carrying lesson is published the fixed unverified-value line renders under it." },
+  { id: "redline-verdict-panel", title: "RedlineVerdictPanel", note: "One block per round with the verdict, the model id and prompt version it ran under, and the reasons by category, each linking to the element it points at. There is no edit path: the redliner never rewrites a draft." },
+  { id: "state-rail", title: "StateRail and DecisionButtons", note: "The transition history as a rail, machine steps drawn as square nodes and the step just taken marked and rolled; the recorded diff of an in-review edit verbatim. The controls follow the matrix: what a role may not do in this state is stated rather than hidden." },
+  { id: "tour-step", title: "TourStep", note: "One step of the six-step tour with its target: the Expected Solution code and position in the margin, the rail joining it to the next step, what to look at, the figures the step stands on, and the one link to the surface it names. The last step closes the rail." },
   { id: "trace-view", title: "TraceView", note: "The replay panels of surface 3 with copy-to-clipboard on every id; the question text is never rendered." },
   { id: "page-viewer", title: "PageViewer", note: "One page at a time, previous and next as hash links in the #page=n&span=<span_id> form, the span highlight resolved from a prop." },
+  { id: "audit-row", title: "AuditRow", note: "Actor alias, action, entity, corpus version, server timestamp; the action carries the state token its outcome deserves. A question text appears on no row but the two safety actions, and there only in the Admin safety view, whose read is itself audited." },
   { id: "list-primitives", title: "FilterBar, Pagination, SearchResultRow", note: "The register and list primitives: a GET form, a bound-aware pager, result rows without reveal animation." },
   { id: "integrity-dot", title: "IntegrityDot", note: "A static defect-red mark whose accessible name lists the open rule ids; a link into the register when one is passed." },
   { id: "primitives", title: "StatusBadge, VersionBadge, EmptyState, DesignedState", note: "The M0 primitives the surfaces already use, for reference beside the rest." },
@@ -459,6 +545,18 @@ export default function GalleryPage() {
         </GlassPanel>
       </Section>
 
+      <Section spec={S["recount-moment"]}>
+        <div className="gallery-stack">
+          <GlassPanel className="p-6">
+            <RecountMoment before={RECOUNT_BEFORE} after={null} method={RECOUNT_METHOD} record={WO(1)} />
+          </GlassPanel>
+          <GlassPanel className="p-6">
+            <RecountMoment before={RECOUNT_BEFORE} after={RECOUNT_AFTER} method={RECOUNT_METHOD} record={WO(1)} />
+          </GlassPanel>
+        </div>
+        <p className="gallery-note">The second panel is the played state: the strict layer of this example did not move, and says so rather than animating.</p>
+      </Section>
+
       <Section spec={S["layer-toggle"]}>
         <form method="get" action="#layer-toggle">
           <LayerToggle value="generous" />
@@ -572,6 +670,77 @@ export default function GalleryPage() {
         />
       </Section>
 
+      <Section spec={S["draft-section"]}>
+        <GlassPanel className="p-5">
+          <DraftSection n={4} heading="DETAILED PROCEDURE / STEPS" count={DRAFT_FIELDS.length}>
+            {DRAFT_FIELDS.map((field, i) => (
+              <DraftElement
+                key={field.id}
+                id={field.id}
+                ordinal={field.ordinal}
+                text={field.is_slot ? undefined : field.text}
+                provenance={field.provenance}
+                numericProvenance={field.numeric_provenance}
+                edited={i === 0 ? { reason: "example reason" } : null}
+                slot={field.is_slot ? <SlotField fieldId={field.id} /> : undefined}
+              />
+            ))}
+          </DraftSection>
+          <DraftSection n={5} heading="COMMON PROBLEMS & TROUBLESHOOTING" count={0} />
+        </GlassPanel>
+        <p className="gallery-note">Section 5 here has no row, which is the designed statement rather than a disappearing section; on a draft its rows carry the work order each one quotes.</p>
+      </Section>
+
+      <Section spec={S["slot-field"]}>
+        <div className="gallery-stack">
+          <SlotField fieldId={SLOT_ID}>
+            <p className="m-0 text-[12px] text-ink-500">The surface passes the note entry here, or the reason this role has none.</p>
+          </SlotField>
+          <SlotField fieldId={SLOT_ID} notes={[NOTE]} />
+          <SlotField fieldId={SLOT_ID} notes={[NOTE_PUBLISHED]} />
+        </div>
+        <p className="gallery-note">Unfilled, filled and unpublished, filled and published: only the third carries the fixed unverified-value line, and the literal never leaves the cell.</p>
+      </Section>
+
+      <Section spec={S["redline-verdict-panel"]}>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <GlassPanel className="p-5">
+            <RedlineVerdictPanel verdicts={REDLINE} />
+          </GlassPanel>
+          <GlassPanel className="p-5">
+            <RedlineVerdictPanel verdicts={[]} />
+          </GlassPanel>
+        </div>
+      </Section>
+
+      <Section spec={S["state-rail"]}>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <GlassPanel className="p-5">
+            <StateRail transitions={TRANSITIONS} current="accepted" />
+          </GlassPanel>
+          <div className="gallery-stack">
+            <GlassPanel className="p-5">
+              <DecisionButtons role="Reviewing Supervisor" state="in_review" />
+            </GlassPanel>
+            <GlassPanel className="p-5">
+              <DecisionButtons role="Manager" state="accepted" />
+            </GlassPanel>
+            <GlassPanel className="p-5">
+              <DecisionButtons role="Engineer" state="in_review" />
+            </GlassPanel>
+          </div>
+        </div>
+      </Section>
+
+      <Section spec={S["tour-step"]}>
+        <GlassPanel className="p-6">
+          <ol className="grid list-none gap-0 p-0">
+            <TourStep code="ES1" n={1} of={2} title="Example step with facts" body="What this step shows, in one or two sentences of the surface's own words." look="What to look at once the surface opens." target={{ href: "#tour-step", label: "an example surface" }} facts={[{ label: "version", value: "vX" }, { label: "files", value: "12" }]} />
+            <TourStep code="ES2" n={2} of={2} title="Example last step, closing the rail" body="The last step carries no rail below it, which is how the walk ends on the route it hands over to." target={{ href: "#tour-step", label: "the next route" }} />
+          </ol>
+        </GlassPanel>
+      </Section>
+
       <Section spec={S["trace-view"]}>
         <TraceView trace={TRACE} corpusVersionLabel="vX" />
         <p className="gallery-note">
@@ -583,6 +752,21 @@ export default function GalleryPage() {
         <GlassPanel className="max-w-3xl p-4">
           <PageViewer documentId="doc-example-1" page={2} pageCount={3} src={UNDERLAY} sourceSha256={ZERO_HASH} span={{ id: "span-example-1", text: "Example span text at citation length.", box: { x_frac: 0.2, y_frac: 0.4, w_frac: 0.5, h_frac: 0.06 } }} />
         </GlassPanel>
+      </Section>
+
+      <Section spec={S["audit-row"]}>
+        <GlassPanel className="p-5">
+          <AuditList aria-label="Example audit rows">
+            {AUDIT_EVENTS.map((event) => (
+              <AuditRow key={event.id} event={event} />
+            ))}
+            <AuditRow event={AUDIT_SAFETY_EVENT} safety={AUDIT_SAFETY_PAYLOAD} />
+          </AuditList>
+        </GlassPanel>
+        <p className="gallery-note">
+          The last row is the Admin safety view: the request text as typed, the matched phrase and the rule. Passing the same
+          payload with any other action renders nothing, so the text cannot leak onto another surface.
+        </p>
       </Section>
 
       <Section spec={S["list-primitives"]}>

@@ -1,0 +1,520 @@
+/* ------------------------------------------------------------------------------------------------------------
+   Surface 8's six components (blueprint 6.4 DraftSection, DraftElement, SlotField, RedlineVerdictPanel, StateRail,
+   DecisionButtons) in the tactile-transactional register of 7.2, drawn with the 7.1 tokens of globals.css. The
+   structural device of this surface is the provenance margin: every element of a draft sits in a two-column cell
+   whose gutter carries its ordinal and whose foot carries the evidence item that states it, so "provenance or
+   nothing" is a thing you can see rather than a claim. A slot is an unfilled cell on the sheet, hatched, carrying
+   the fixed literal; the state history is a rail with the transition just taken marked; the decision buttons are
+   the neumorphic accents 7.1 reserves for tactile controls. Motion is transform and opacity only and the global
+   reduced-motion rule turns every duration to zero.
+   ------------------------------------------------------------------------------------------------------------ */
+
+/* Section of the house template ------------------------------------------------------------------------------ */
+
+.dsection {
+  border-top: 1px solid var(--film-edge);
+  padding-top: 14px;
+}
+.dsection + .dsection {
+  margin-top: 22px;
+}
+.dsection-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+/* The section number as a title-block cell, the way a drawing numbers its blocks. */
+.dsection-n {
+  flex: none;
+  min-width: 26px;
+  padding: 1px 6px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-700);
+  box-shadow: inset 0 0 0 1px var(--film-edge);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--ink-500) 6%, transparent);
+}
+.dsection-head h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 24;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  color: var(--ink-900);
+}
+.dsection-count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-500);
+}
+.dsection-body {
+  margin-top: 10px;
+  /* the margin rule the elements hang from */
+  border-left: 1px solid color-mix(in srgb, var(--film-edge) 80%, transparent);
+  padding-left: 12px;
+}
+.dsection-empty {
+  padding: 8px 0;
+  font-size: 12.5px;
+  color: var(--ink-500);
+}
+
+/* One element, with its provenance margin -------------------------------------------------------------------- */
+
+.del {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 2px 10px;
+  padding: 9px 10px 9px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--film-edge) 55%, transparent);
+  scroll-margin-top: 24px;
+}
+.del:last-child {
+  border-bottom: 0;
+}
+.del-n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--ink-500);
+  text-align: right;
+}
+.del-text {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-900);
+}
+.del-foot {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 8px;
+  margin-top: 5px;
+}
+.del-prov {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-700);
+}
+.del-prov .kind {
+  color: var(--ink-500);
+}
+.del-prov .ref {
+  color: var(--accent);
+}
+/* A numeral and the evidence item that types it: content, never decoration. */
+.del-num {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-900);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.del-num .from {
+  color: var(--ink-500);
+}
+/* An element the supervisor rewrote in review: the accent rule and the reason, never a silent change. */
+.del[data-edited] {
+  border-left: 2px solid var(--accent);
+  padding-left: 8px;
+  margin-left: -10px;
+}
+.del[data-quarantined] {
+  border-left: 2px solid var(--state-defect);
+  padding-left: 8px;
+  margin-left: -10px;
+}
+.del-mark {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+}
+.del[data-quarantined] .del-mark {
+  color: var(--state-defect);
+}
+.del-reason {
+  font-size: 11.5px;
+  color: var(--ink-700);
+}
+
+/* The in-review editor of one element (tracked changes with reasons) ------------------------------------------ */
+
+.del-edit {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+.del-edit textarea,
+.del-edit input {
+  width: 100%;
+  padding: 7px 9px;
+  border: 0;
+  border-radius: var(--radius-chip);
+  background: var(--scrim);
+  box-shadow: inset 0 0 0 1px var(--film-edge);
+  color: var(--ink-900);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+}
+.del-edit textarea:focus-visible,
+.del-edit input:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.del-edit label {
+  font-size: 11.5px;
+  color: var(--ink-500);
+}
+.del-was {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--ink-500);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--state-defect) 60%, transparent);
+}
+
+/* SlotField: an unfilled cell on the sheet -------------------------------------------------------------------- */
+
+.slot {
+  border-radius: var(--radius-chip);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--state-caveat) 40%, transparent);
+  overflow: hidden;
+}
+.slot-literal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--state-caveat);
+  background: repeating-linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--state-caveat) 9%, transparent) 0 6px,
+    transparent 6px 13px
+  );
+}
+.slot-literal svg {
+  flex: none;
+  width: 13px;
+  height: 13px;
+}
+.slot-body {
+  padding: 10px 12px;
+  background: var(--scrim);
+  border-top: 1px solid color-mix(in srgb, var(--state-caveat) 25%, transparent);
+}
+/* The captured note: an attributed block, visibly not a document citation. */
+.note {
+  border-left: 2px solid var(--state-caveat);
+  padding-left: 10px;
+}
+.note-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-500);
+}
+.note-head .who {
+  color: var(--ink-900);
+}
+.note p {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-900);
+}
+.note-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-500);
+}
+
+/* RedlineVerdictPanel ---------------------------------------------------------------------------------------- */
+
+.redline {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.round {
+  border-top: 1px solid var(--film-edge);
+  padding-top: 10px;
+}
+.round:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.round-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+.round-head .n {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-500);
+}
+.round-meta {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-500);
+  overflow-wrap: anywhere;
+}
+.reasons {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.reason {
+  display: grid;
+  gap: 3px;
+  padding-left: 10px;
+  border-left: 2px solid color-mix(in srgb, var(--state-defect) 45%, transparent);
+}
+.reason-cat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  font-size: 11.5px;
+  color: var(--state-defect);
+}
+.reason p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-700);
+}
+.round[data-verdict="pass"] .reason {
+  border-left-color: color-mix(in srgb, var(--state-verified) 45%, transparent);
+}
+.round[data-verdict="pass"] .reason-cat {
+  color: var(--state-verified);
+}
+
+/* StateRail ---------------------------------------------------------------------------------------------------- */
+
+.rail-states {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.rstep {
+  position: relative;
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
+  gap: 10px;
+  padding: 0 0 14px;
+}
+.rstep:last-child {
+  padding-bottom: 0;
+}
+.rstep-mark {
+  position: relative;
+  width: 14px;
+}
+/* the rail itself, drawn between the marks */
+.rstep-mark::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 13px;
+  bottom: -13px;
+  width: 1px;
+  background: color-mix(in srgb, var(--ink-500) 35%, transparent);
+}
+.rstep:last-child .rstep-mark::before {
+  display: none;
+}
+.rstep-mark::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--ink-500);
+}
+.rstep[data-latest] .rstep-mark::after {
+  background: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.rstep[data-system] .rstep-mark::after {
+  border-radius: 1px;
+}
+.rstep-pair {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 6px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-900);
+}
+.rstep-pair .from {
+  color: var(--ink-500);
+}
+.rstep-pair .arrow {
+  color: var(--ink-500);
+}
+.rstep-who {
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--ink-500);
+}
+.rstep-who .mono {
+  color: var(--ink-700);
+}
+.rstep-reason {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--ink-700);
+}
+/* the recorded diff of an in-review edit, one line per element the supervisor rewrote */
+.rstep-diff {
+  margin: 6px 0 0;
+  padding: 7px 9px;
+  border-radius: var(--radius-chip);
+  background: var(--scrim);
+  box-shadow: inset 0 0 0 1px var(--film-edge);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--ink-700);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.rstep[data-latest] .rstep-pair {
+  animation: roll 0.35s var(--ease-out) both;
+}
+
+/* DecisionButtons ---------------------------------------------------------------------------------------------- */
+
+.decisions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.decisions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+/* the accent press: the primary decision of the state, still a neumorphic control */
+.neu.decision-primary {
+  color: var(--paper);
+  background: var(--accent);
+  box-shadow:
+    4px 4px 10px rgba(27, 25, 22, 0.18),
+    -4px -4px 10px rgba(255, 255, 255, 0.75);
+}
+.neu.decision-primary:active {
+  box-shadow:
+    inset 3px 3px 8px rgba(0, 0, 0, 0.25),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.18);
+}
+.neu.decision-reject {
+  color: var(--state-defect);
+}
+.decisions-why {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-500);
+}
+
+/* The two-column review sheet of surface 8 --------------------------------------------------------------------- */
+
+.review {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+@media (min-width: 1100px) {
+  .review {
+    grid-template-columns: minmax(0, 1fr) 372px;
+  }
+  .review-rail {
+    position: sticky;
+    top: 20px;
+  }
+}
+.review-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* The queue's state board: one tile per state of 9.6, each bound to its count. */
+.stateboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.stateboard a,
+.stateboard span {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: var(--radius-chip);
+  background: var(--scrim);
+  box-shadow: inset 0 0 0 1px var(--film-edge);
+  color: var(--ink-700);
+  font-size: 12px;
+}
+.stateboard a:hover,
+.stateboard a:focus-visible {
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.stateboard [aria-current="true"] {
+  box-shadow: inset 0 0 0 1px var(--accent);
+  color: var(--accent);
+}
+.stateboard .n {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--ink-900);
+}
+.stateboard [aria-current="true"] .n,
+.stateboard a:hover .n {
+  color: inherit;
+}
+.stateboard [data-zero] .n {
+  color: var(--ink-500);
+}

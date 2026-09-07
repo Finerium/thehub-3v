@@ -153,7 +153,15 @@ async function transitionIn(
   if (!rule) throw new IllegalTransition(from, to, "pair", actor.role);
   if (rule.role !== actor.role) throw new IllegalTransition(from, to, "actor", actor.role);
 
-  await tx.update(draftDocument).set({ state: to }).where(eq(draftDocument.id, draftId));
+  // ADR-004's lease covers the drafting invocation (proposed, drafted, redlined), not the person reviewing what it
+  // produced: a draft that reaches a human state carries no deadline, so the watchdog cannot block a supervisor who
+  // reads it for longer than the lease. The column is nullable exactly for this.
+  const HUMAN_STATES: readonly DraftState[] = ["in_review", "accepted"];
+  const clearsLease = HUMAN_STATES.includes(to);
+  await tx
+    .update(draftDocument)
+    .set(clearsLease ? { state: to, leaseExpiresAt: null } : { state: to })
+    .where(eq(draftDocument.id, draftId));
   await tx.insert(draftTransition).values({
     id: crypto.randomUUID(),
     draftId,

@@ -78,6 +78,23 @@ const wroteNothing = () => statements.every((s) => s[0]?.method === "select");
 
 beforeEach(resetFakeDb);
 
+describe("the lease of ADR-004 ends where the machine lane ends", () => {
+  it("redlined -> in_review clears lease_expires_at", async () => {
+    await run("redlined", "in_review", SYSTEM_ACTOR, null);
+    expect(argOf(stateUpdate()!, "set")).toMatchObject({ leaseExpiresAt: null });
+  });
+
+  it("in_review -> accepted clears lease_expires_at", async () => {
+    await run("in_review", "accepted", SUPERVISOR, null);
+    expect(argOf(stateUpdate()!, "set")).toMatchObject({ leaseExpiresAt: null });
+  });
+
+  it("the machine lane leaves the lease alone", async () => {
+    await run("proposed", "drafted", SYSTEM_ACTOR, null);
+    expect(argOf(stateUpdate()!, "set")).toEqual({ state: "drafted" });
+  });
+});
+
 describe("the legal pairs of 9.6", () => {
   it.each(LEGAL)("%s -> %s by its actor: state written, one transition row, one audit row", async (from, to, actor, action) => {
     const result = await run(from, to, actor, from === to ? "edit with reasons" : null);
@@ -88,7 +105,10 @@ describe("the legal pairs of 9.6", () => {
     expect(statements[0]?.some((c) => c.method === "from" && c.args[0] === draftDocument)).toBe(true);
     expect(statements[0]?.some((c) => c.method === "for" && c.args[0] === "update")).toBe(true);
 
-    expect(argOf(stateUpdate()!, "set")).toEqual({ state: to });
+    // ADR-004: the lease belongs to the drafting invocation, so reaching a human state clears it and a supervisor
+    // who reads the draft for longer than the lease is never blocked with deadline_exceeded.
+    const clearsLease = to === "in_review" || to === "accepted";
+    expect(argOf(stateUpdate()!, "set")).toEqual(clearsLease ? { state: to, leaseExpiresAt: null } : { state: to });
 
     const row = argOf(transitionInsert()!, "values") as Record<string, unknown>;
     expect(row).toMatchObject({
@@ -128,7 +148,7 @@ describe("the legal pairs of 9.6", () => {
     const diff = "field-loop-1: - old sentence + new sentence";
     await run("in_review", "in_review", SUPERVISOR, "wording", diff);
     expect(argOf(transitionInsert()!, "values")).toMatchObject({ toState: "in_review", editDiff: diff });
-    expect(argOf(stateUpdate()!, "set")).toEqual({ state: "in_review" });
+    expect(argOf(stateUpdate()!, "set")).toEqual({ state: "in_review", leaseExpiresAt: null });
   });
 
   it("accepted -> published binds its audit row to the version G3 names (AC-LOOP-12)", async () => {
