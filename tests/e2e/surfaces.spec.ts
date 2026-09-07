@@ -1,9 +1,28 @@
 // AC-UI-01 (the surface tour), AC-COV (the coverage figures read back), AC-INT-04 (the CSV header) and the
 // designed 404 of 6.3. Every id the tour walks is read from the route that owns it and every expected number from
 // bundle/fixtures.json: nothing in this file is typed against the seeded corpus.
+//
+// WHICH SURFACE ANSWERS TO WHICH CRITERION (blueprint 6.2 and section 11). The list itself is tests/e2e/inventory.ts.
+//   1  Home /                          AC-UI-01, AC-UI-05 (the 24 chips: seeded-chips.spec.ts), AC-UI-06
+//   2  Ask /ask                        AC-UI-01, AC-UI-02 (the budget and outcome states), AC-UI-06
+//   3  Trace /trace/:id                AC-UI-01, AC-UI-06
+//   4  Document viewer /documents/:id  AC-UI-01 (the chip lands on the span: chip-to-span.spec.ts), AC-UI-06
+//   5  Assets /assets, /assets/:tag    AC-UI-01, AC-UI-06
+//   6  Failure Memory /failures(/:tag) AC-UI-01, AC-UI-06
+//   7  Coverage /coverage(/clusters)   AC-UI-01 (the figures read back from fixtures.json), AC-UI-06
+//   8  Drafts /drafts, /drafts/:id     AC-UI-01, AC-UI-02 (the 403, 404, 409 and 422 states: states.spec.ts)
+//   9  Integrity /integrity            AC-UI-01, AC-INT-04, AC-UI-02 (the empty filter), AC-UI-06
+//  10  Evaluation /evaluation          AC-UI-01, AC-EVAL-03, AC-UI-06
+//  11  Guided loop /demo/loop          AC-UI-01 (loop.spec.ts walks it end to end), AC-UI-06
+//  12  Tour /tour                      AC-UI-01, AC-UI-04 (ES1 to ES6 in order: a11y.spec.ts); /tour/:token is
+//                                      retired by D-07, which put the whole deployment behind login
+//  13  Admin /admin                    AC-UI-01, AC-UI-02 (the designed 403), admin.spec.ts for the Admin's own read
+//  14  Auth /login, /api/health        AC-UI-01, AC-UI-06 (signed out)
+// The accessibility leg of every one of them is axe.spec.ts and a11y.spec.ts, which walk the same list.
 import { expect, test, type Page } from "@playwright/test";
 import { REQUEST_LESSON_ACTION, STATUS_WORDING } from "../../src/lib/fixed-strings";
 import { TAG, datasheetId, firstClusterId, getJson, headline, readAsset, traceIdFromSearch } from "./helpers";
+import { SURFACES, VIEWS, settled } from "./inventory";
 
 /** No surface may answer with a server-side designed error state (503) or a Next error overlay. */
 async function noErrorState(page: Page): Promise<void> {
@@ -181,5 +200,115 @@ test.describe("the integrity export", () => {
     const rows = Number(lines[6].replace("# rows: ", ""));
     expect(rows).toBeGreaterThan(0);
     expect(lines.length).toBeGreaterThanOrEqual(wanted.length + 1 + rows);
+  });
+});
+
+// ---------------------------------------------------------------------------------------------------------------
+// AC-UI-01, the literal clause: "the fourteen surfaces render". The tour above walks eleven of them in depth; this
+// one walks every address 6.2 declares, by its 6.2 number and name, and asserts the only thing every surface owes
+// in common: it draws its own heading, or the designed state that address answers with, and never a raw error.
+// The list is tests/e2e/inventory.ts, so a surface added to 6.2 and not to the walk fails the count case.
+// ---------------------------------------------------------------------------------------------------------------
+
+test.describe("every surface of 6.2 renders (AC-UI-01)", () => {
+  test("the walk covers the fourteen surfaces and names the address D-07 retired", () => {
+    expect(SURFACES.map((s) => `${s.n} ${s.name}`)).toEqual([
+      "1 Home",
+      "2 Ask",
+      "3 Trace",
+      "4 Document viewer",
+      "5 Assets",
+      "6 Failure Memory",
+      "7 Coverage Console",
+      "8 Drafts",
+      "9 Integrity Register",
+      "10 Evaluation",
+      "11 Guided loop",
+      "12 Reviewer landing and tour",
+      "13 Admin",
+      "14 Auth",
+    ]);
+    // Every criterion of this family is claimed by at least one surface, so none of them is unattached evidence.
+    const claimed = new Set(SURFACES.flatMap((s) => s.criteria));
+    expect([...claimed].sort()).toEqual(["AC-UI-01", "AC-UI-02", "AC-UI-04", "AC-UI-05", "AC-UI-06"]);
+    const retired = SURFACES.flatMap((s) => (s.retired ? [`${s.retired.pattern} ${s.retired.deviation}`] : []));
+    expect(retired, "an address of 6.2 dropped without naming the deviation that dropped it").toEqual(["/tour/:token D-07"]);
+    console.log(`6.2 surface walk: ${SURFACES.length} surfaces, ${VIEWS.length} addresses, 1 retired by deviation`);
+  });
+
+  for (const { view, title } of VIEWS.filter((v) => !v.view.signedOut)) {
+    test(title, async ({ page }) => {
+      const opened = await view.open(page.request);
+      await settled(page, opened.href, opened.designed);
+      if (opened.designed) {
+        // 6.3: a designed state states what happened and offers the next step; it is never a blank or a trace.
+        const state = page.locator(`[data-designed-state="${opened.designed}"]`);
+        await expect(state).toHaveAttribute("role", "status");
+        await expect(state.getByRole("link").first(), `the designed ${opened.designed} on ${opened.href} offers no next step`).toBeVisible();
+      }
+      await noErrorState(page);
+    });
+  }
+});
+
+test.describe("the signed-out surface of 6.2 (AC-UI-01, surface 14)", () => {
+  test.use({ storageState: { cookies: [], origins: [] } });
+
+  test("6.2 surface 14, Auth /login: the credentials form, with no self-registration and no reset path", async ({ page }) => {
+    await page.goto("/login");
+    await expect(page.getByLabel("Username")).toBeVisible();
+    await expect(page.getByLabel("Password")).toBeVisible();
+    await expect(page.getByRole("button")).toBeVisible();
+    // 6.2 surface 14: no self-registration and no reset path anywhere on the surface.
+    await expect(page.getByRole("link", { name: /register|sign up|forgot|reset/i })).toHaveCount(0);
+    await noErrorState(page);
+  });
+
+  test("6.2 surface 14, /api/health holds no data and no session", async ({ page }) => {
+    const response = await page.request.get("/api/health");
+    expect(response.status()).toBe(200);
+    const body = (await response.json()) as Record<string, unknown>;
+    // The route reports that it is up and which corpus version is active, and carries nothing else.
+    expect(Object.keys(body).sort()).toEqual(["commit", "corpus_version", "ok"]);
+    expect(response.headers()["set-cookie"], "the health route minted a cookie").toBeUndefined();
+  });
+});
+
+// ---------------------------------------------------------------------------------------------------------------
+// AC-UI-04, read against D-07. The criterion has six legs and the locked deviation removed four of them: the
+// login-free signed per-role link, its expiry, its revocation and the REVIEWER_LINK_SECRET rotation were withdrawn
+// and the whole deployment put behind login. What the deviation put in their place is a stronger property, and it
+// is what is asserted here: no route serves any part of this product without credentials, and no token route
+// exists at all, so there is nothing to issue, expire, revoke or rotate.
+//
+//   leg 1  the landing renders without credentials          RETIRED by D-07; the replacement is asserted below
+//   leg 2  the tour visits ES1 to ES6 and ends on the loop   tests/e2e/a11y.spec.ts, "the guided route by keyboard"
+//   leg 3  a string audit finds no password or key           tools/presubmit.sh, outside the browser suite
+//   leg 4  a link expires at the end of the judging window   RETIRED by D-07: no link is ever issued
+//   leg 5  a revoked link is rejected and audited            RETIRED by D-07
+//   leg 6  rotating REVIEWER_LINK_SECRET rejects old links   RETIRED by D-07: the secret does not exist
+// ---------------------------------------------------------------------------------------------------------------
+
+test.describe("the reviewer landing under D-07 (AC-UI-04)", () => {
+  test.use({ storageState: { cookies: [], origins: [] } });
+
+  test("no surface is served without credentials: the landing and the guided route both stop at the login", async ({ page }) => {
+    for (const path of ["/tour", "/demo/loop", "/", "/ask"]) {
+      const response = await page.request.get(path, { maxRedirects: 0 });
+      expect(response.status(), `GET ${path} without a session`).toBe(307);
+      expect(response.headers()["location"], `GET ${path} without a session`).toBe(`/login?next=${encodeURIComponent(path)}`);
+    }
+  });
+});
+
+test.describe("the reviewer link D-07 withdrew (AC-UI-04)", () => {
+  test("no token route exists, so no link can be issued, expired, revoked or rotated", async ({ page }) => {
+    // Signed in, because signed out every address answers with the login redirect and would prove nothing.
+    const response = await page.goto("/tour/any-token-at-all");
+    expect(response?.status(), "a /tour/:token route answers on this deployment").toBe(404);
+    await expect(page.locator('[data-designed-state="404"]')).toBeVisible();
+    // And the landing D-07 kept is there, behind the session, with its six steps.
+    await page.goto("/tour");
+    await expect(page.locator('[data-component="tour-step"]')).toHaveCount(6);
   });
 });

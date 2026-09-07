@@ -15,9 +15,9 @@
 // what the file order gives (loop before states). A run of this file alone is a run with fewer cases, and each one
 // says which state was missing and how many drafts the queue held.
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
-import { SLOT_TEXT, UNVERIFIED_VALUE_LINE } from "../../src/lib/fixed-strings";
-import { getJson } from "./helpers";
-import { hasPassword, missingPassword, signIn } from "./roles";
+import { AS_BUILT_CAVEAT, REQUEST_LESSON_ACTION, SLOT_TEXT, STATUS_WORDING, UNVERIFIED_VALUE_LINE } from "../../src/lib/fixed-strings";
+import { TAG, getJson } from "./helpers";
+import { hasPassword, missingPassword, passwordVariable, signIn } from "./roles";
 
 type Draft = { id: string; state: string; opl_id_reserved: string };
 type Transition = { to_state: string; reason: string | null };
@@ -275,4 +275,309 @@ test.describe("the evaluation surface (6.2 surface 10, AC-EVAL-03)", () => {
     }
     await noErrorState(page);
   });
+});
+
+// ---------------------------------------------------------------------------------------------------------------
+// AC-UI-02: "Every edge and honesty state of 6.3 renders as a designed state (no raw error, no stack trace) with
+// next steps; a seeded provider outage keeps the seeded path working. Expected: Playwright state tour green on 22
+// states." Blueprint 6.3 is one sentence of twenty-two semicolon-separated items; the table below is that sentence,
+// in its order, one entry per item. The tour walks the table, so a state that is added to 6.3 and not to this table
+// fails the count case rather than passing unnoticed.
+//
+// Three outcomes and no fourth. A state either RUNS (an assertion against the deployment or against the gallery,
+// where the component is drawn from props alone and costs no draft and no provider call), or is RETIRED by a
+// locked deviation and names it, or is GATED and says in its skip reason exactly what this run did not hold. A
+// gated state is never reported as green: the count case prints the three totals so "green on 22 states" can never
+// be claimed for a run that walked eighteen.
+// ---------------------------------------------------------------------------------------------------------------
+
+type State63 = {
+  /** The position of this item in the sentence of 6.3. */
+  n: number;
+  /** The item, in the blueprint's own words. */
+  name: string;
+  /** The assertion, or null when the state is retired by a deviation. */
+  run: ((page: Page) => Promise<void>) | null;
+  /** A locked deviation removed the subject of this state. */
+  retired?: { deviation: string; why: string };
+  /** What this run does not hold, stated as the skip reason; never a silent pass. */
+  gated?: string;
+};
+
+/** The gallery, where the components of 6.4 are drawn from props against synthetic rows. */
+async function gallery(page: Page): Promise<void> {
+  await page.goto("/gallery");
+  await expect(page.getByRole("heading", { level: 1, name: "Gallery" })).toBeVisible();
+}
+
+const ASSET_SHEET = `/assets/${TAG}`;
+
+const STATES_6_3: readonly State63[] = [
+  {
+    n: 1,
+    name: "abstention with its reason, escalation role, three nearest same-asset documents and the cluster action",
+    run: async (page) => {
+      await gallery(page);
+      const card = page.locator('[data-gallery="abstention-card"] [data-component="abstention-card"]').first();
+      await expect(card).toBeVisible();
+      await expect(card).toContainText(REQUEST_LESSON_ACTION);
+      // The three nearest documents are chips on the card itself.
+      expect(await card.locator('[data-component="citation-chip"]').count(), "nearest documents on the abstention card").toBeGreaterThanOrEqual(3);
+    },
+  },
+  {
+    n: 2,
+    name: "partial answer with gaps declared",
+    run: async (page) => {
+      await gallery(page);
+      const banner = page.locator('[data-gallery="partial-answer-banner"] [data-component="partial-answer-banner"]').first();
+      await expect(banner).toBeVisible();
+      await expect(banner).toHaveAttribute("role", "status");
+      expect((await banner.textContent())?.trim().length ?? 0, "the banner declared no gap").toBeGreaterThan(0);
+    },
+  },
+  {
+    n: 3,
+    name: "the three refusal classes",
+    run: async (page) => {
+      await gallery(page);
+      // Section 9's frozen Refusal contract carries two classes; the third intent class of invariant 2, the
+      // documented bypass, is served verbatim with its permit lines rather than refused, so it is not a card.
+      const cards = page.locator('[data-gallery="refusal-card"] [data-component="refusal-card"]');
+      expect(await cards.evaluateAll((nodes) => nodes.map((n) => n.getAttribute("data-class")).sort())).toEqual(["defeat", "permanent_change"]);
+      // The Management of Change block on the permanent-change class and on no other (6.4 RefusalCard). The
+      // wording itself is the rule pack's, carried by MOC_TEXT and served on a live refusal; the gallery draws
+      // from synthetic props, so what is asserted here is which class carries the block and which does not.
+      const change = page.locator('[data-component="refusal-card"][data-class="permanent_change"]').first();
+      const defeat = page.locator('[data-component="refusal-card"][data-class="defeat"]').first();
+      await expect(change).toContainText("Management of Change");
+      await expect(defeat).not.toContainText("Management of Change");
+      // Both carry the governing sheet, the permissives, the reset note and the route text of 6.3.
+      for (const card of [change, defeat]) {
+        await expect(card).toContainText("Governing sheet");
+        await expect(card).toContainText("LOGIC No");
+        await expect(card).toContainText("SIL");
+        await expect(card).toContainText("Route");
+      }
+    },
+  },
+  {
+    n: 4,
+    name: "the contradiction chip with both readings and the governing document named",
+    run: async (page) => {
+      await gallery(page);
+      const chip = page.locator('[data-gallery="contradiction-chip"] [data-component="contradiction-chip"]').first();
+      await expect(chip).toBeVisible();
+      expect(await chip.locator('[data-component="citation-chip"]').count(), "readings and governing document on the contradiction chip").toBeGreaterThanOrEqual(3);
+    },
+  },
+  {
+    n: 5,
+    name: "the empty-closeout chip with the empty fields and the priority",
+    run: async (page) => {
+      await gallery(page);
+      const chip = page.locator('[data-gallery="closeout-chip"] [data-component="closeout-chip"]').first();
+      await expect(chip).toBeVisible();
+      await expect(chip).toContainText(STATUS_WORDING.incomplete_closeout);
+    },
+  },
+  {
+    n: 6,
+    name: "the SIMULATED banner",
+    run: async (page) => {
+      await gallery(page);
+      await expect(page.locator('[data-status="simulated"]').first()).toHaveText(STATUS_WORDING.simulated);
+    },
+  },
+  {
+    n: 7,
+    name: "the specified, not connected label",
+    run: async (page) => {
+      // The real surface that owns it: the connector panel of the asset sheet (6.2 surface 5).
+      await page.goto(ASSET_SHEET);
+      await expect(page.getByRole("heading", { level: 1, name: TAG })).toBeVisible();
+      await expect(page.getByText(STATUS_WORDING.specified_not_connected).first()).toBeVisible();
+    },
+  },
+  {
+    n: 8,
+    name: "the machine-drafted label with the approver alias",
+    run: async (page) => {
+      await gallery(page);
+      const badge = page.locator('[data-status="machine_drafted"]').first();
+      await expect(badge).toContainText(STATUS_WORDING.machine_drafted);
+      await expect(badge).toContainText("approved by");
+    },
+  },
+  {
+    n: 9,
+    name: "the integrity note on a citation chip and a document",
+    run: async (page) => {
+      await gallery(page);
+      const dot = page.locator('[data-component="integrity-dot"]').first();
+      await expect(dot).toBeVisible();
+      // The accessible name lists the open rule ids, which is the whole content of the note.
+      const label = (await dot.getAttribute("aria-label")) ?? "";
+      expect(label, "the integrity dot carries no accessible name listing its rule ids").toMatch(/open integrity finding/);
+    },
+  },
+  {
+    n: 10,
+    name: "the training-values note on every setpoint from a sheet that carries it",
+    run: async (page) => {
+      await page.goto(ASSET_SHEET);
+      await expect(page.getByRole("heading", { level: 1, name: TAG })).toBeVisible();
+      const badges = page.locator('.badge[data-tone="caveat"]', { hasText: "training values" });
+      expect(await badges.count(), `no training-values note is marked on ${ASSET_SHEET}`).toBeGreaterThan(0);
+    },
+  },
+  {
+    n: 11,
+    name: "the as-built caveat closing every protective-function answer",
+    run: async (page) => {
+      await gallery(page);
+      await expect(page.locator('[data-gallery="caveat-line"]').getByText(AS_BUILT_CAVEAT).first()).toBeVisible();
+      // And on the real surface that closes with it: the setpoint ladders of the asset sheet.
+      await page.goto(ASSET_SHEET);
+      await expect(page.getByText(AS_BUILT_CAVEAT).first()).toBeAttached();
+    },
+  },
+  {
+    n: 12,
+    name: "provider unreachable (seeded content keeps working, live asking states why it is off)",
+    run: null,
+    gated:
+      "no browser can make the provider fail on demand, and the seeded half needs the 24 chips of AC-UI-05, which the deployment does not carry (tests/e2e/seeded-chips.spec.ts). The mechanism is a unit: src/app/api/ask/route.test.ts",
+  },
+  {
+    n: 13,
+    name: "live budget exhausted (429 naming the limit and its reset)",
+    run: async (page) => {
+      await page.goto("/ask");
+      await expect(page.getByRole("heading", { level: 1, name: "Ask" })).toBeVisible();
+      const budget = page.locator('[data-designed-state="429"]');
+      test.skip((await budget.count()) === 0, "no live role's daily budget is spent at this moment, so the state does not apply to this run");
+      // The limit and the moment it resets, both named, and a next step.
+      await expect(budget.first()).toContainText("tokens_per_day");
+      await expect(budget.first()).toContainText("spend_cap_idr_per_day");
+      await expect(budget.first()).toContainText("resets_at");
+      await expect(budget.first().getByRole("link")).toBeVisible();
+    },
+  },
+  {
+    n: 14,
+    name: "rate limited (429 naming the limit and the moment it resets)",
+    run: null,
+    gated:
+      "producing it means exhausting a shared limit on the live deployment, which this suite will not do to the next visitor. The state is a unit: src/lib/errors.test.ts, and the renderer is the same DesignedState 429 as item 13",
+  },
+  {
+    n: 15,
+    name: "expired or revoked reviewer link",
+    run: null,
+    retired: {
+      deviation: "D-07",
+      why: "the login-free signed reviewer link was withdrawn and the whole deployment put behind login, so no link exists to expire or revoke",
+    },
+  },
+  {
+    n: 16,
+    name: "hash mismatch on a procedure (blocked render with an integrity error and an audit event, never a paraphrase)",
+    run: null,
+    gated:
+      "it needs an answer carrying a procedure whose stored quote hash fails, which no read-only surface can produce. The gate is a unit: src/gates/g2/c2.ts with its test, and the render is AskClient's hash_mismatch designed state",
+  },
+  {
+    n: 17,
+    name: "403 on a role violation with an audit event",
+    run: async (page) => {
+      // The surface half: Admin is closed to every role but Admin, and says so with a next step (9.9). The route
+      // half, the 403 under a request id with the refusal audited beside it, is the pair of cases above.
+      await page.goto("/admin");
+      const state = page.locator('[data-designed-state="403"]');
+      await expect(state).toBeVisible();
+      await expect(state).toHaveAttribute("role", "status");
+      await expect(state.getByRole("link")).toBeVisible();
+    },
+  },
+  {
+    n: 18,
+    name: "409 on a repeated or racing publish",
+    run: null,
+    gated: `${passwordVariable("Manager")} and a published draft: the case that asserts it is "a published draft is published once" above, which skips for the same reason`,
+  },
+  {
+    n: 19,
+    name: "422 with the gate's machine-readable reason",
+    run: async (page) => {
+      await gallery(page);
+      // The renderer with its machine-readable reason line; the live refusal is the G3 case above.
+      const state = page.locator('[data-designed-state="422"]').first();
+      await expect(state).toBeVisible();
+      await expect(state).toHaveAttribute("aria-live", "polite");
+      await expect(state.locator(".mono").last()).not.toBeEmpty();
+    },
+  },
+  {
+    n: 20,
+    name: "a Reviewer mode banner",
+    run: null,
+    retired: {
+      deviation: "D-07",
+      why: "reviewer mode was the login-free link's session; with the deployment behind login there is no reviewer mode to banner (the wording itself is still owned by fixed-strings.ts and rendered in the gallery)",
+    },
+  },
+  {
+    n: 21,
+    name: "a 404 designed state",
+    run: async (page) => {
+      const response = await page.goto("/assets/NOT-A-TAG-0000");
+      expect(response?.status()).toBe(404);
+      const state = page.locator('[data-designed-state="404"]');
+      await expect(state).toBeVisible();
+      await expect(state.getByRole("link")).toBeVisible();
+      await expect(page.locator("body")).not.toContainText("Internal Server Error");
+    },
+  },
+  {
+    n: 22,
+    name: "an empty state for a filter that matches nothing",
+    run: async (page) => {
+      // A real filter on a real register, not a synthetic row: a discipline no finding carries.
+      await page.goto("/integrity?discipline=no-such-discipline");
+      await expect(page.getByRole("heading", { level: 1, name: "Integrity Register" })).toBeVisible();
+      const empty = page.locator('.empty[role="status"]', { hasText: "No finding matches this filter" }).first();
+      await expect(empty).toBeVisible();
+      await expect(empty.getByRole("link")).toBeVisible();
+      await noErrorState(page);
+    },
+  },
+];
+
+test.describe("the state tour of 6.3, all twenty-two (AC-UI-02)", () => {
+  test("the tour is the sentence of 6.3: twenty-two items, in order, none of them silently dropped", () => {
+    expect(STATES_6_3.map((s) => s.n)).toEqual(Array.from({ length: 22 }, (_, i) => i + 1));
+    // Every entry is one of the three outcomes, and only one of them.
+    for (const s of STATES_6_3) {
+      const shape = [s.run !== null, s.retired !== undefined, s.gated !== undefined].filter(Boolean).length;
+      expect(shape, `state ${s.n} (${s.name}) declares ${shape} outcomes, not exactly one`).toBe(1);
+      if (s.retired) expect(s.retired.deviation, `state ${s.n} is retired without a deviation id`).toMatch(/^D-\d\d$/);
+    }
+    const walked = STATES_6_3.filter((s) => s.run !== null).length;
+    const retired = STATES_6_3.filter((s) => s.retired).length;
+    const gated = STATES_6_3.filter((s) => s.gated).length;
+    // Printed so a reader of the log has the three numbers and never reads a partial tour as a full one.
+    console.log(`6.3 state tour: ${walked} walked, ${retired} retired by deviation, ${gated} gated; ${walked + retired + gated} of 22 accounted for`);
+    expect(walked + retired + gated).toBe(22);
+  });
+
+  for (const state of STATES_6_3) {
+    test(`6.3 state ${state.n}: ${state.name}`, async ({ page }) => {
+      test.skip(state.retired !== undefined, state.retired ? `retired by ${state.retired.deviation}: ${state.retired.why}` : "");
+      test.skip(state.gated !== undefined, state.gated ?? "");
+      await state.run!(page);
+      // Whatever the state, the surface that drew it is a designed surface: no 503, no overlay, no stack trace.
+      await noErrorState(page);
+    });
+  }
 });

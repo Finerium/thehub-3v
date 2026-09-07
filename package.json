@@ -22,6 +22,9 @@
     "db:retention": "dotenv -e .env.local -- tsx scripts/db/retention.ts",
     "models:fetch": "tsx scripts/models/fetch.ts",
     "audit": "bash scripts/audits/run.sh",
+    "audit:deps": "bash scripts/audits/dependencies.sh",
+    "verify:reproducible": "node tools/reproducible-build.mjs",
+    "verify:two-instances": "bash tools/two-instances.sh",
     "db:migrate:ci": "drizzle-kit migrate",
     "db:seed": "dotenv -e .env.local -- tsx scripts/db/seed.ts",
     "bundle:pull": "tsx scripts/bundle/pull.ts",
@@ -69,6 +72,13 @@
     "tsx": "4.23.13",
     "typescript": "^5",
     "vitest": "4.1.11"
+  },
+  "pnpm": {
+    "overrides": {
+      "@huggingface/transformers>sharp": "0.35.4",
+      "onnxruntime-node>adm-zip": "0.6.0",
+      "@esbuild-kit/core-utils>esbuild": "0.25.12"
+    }
   },
   "packageManager": "pnpm@10.33.2",
   "engines": {

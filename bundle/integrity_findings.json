@@ -1689,7 +1689,7 @@
     "tag": "YD-2301"
    },
    "observation_only": false,
-   "routing_recommendation": null,
+   "routing_recommendation": "SEQ-5500 (SIL 2) is the protective function this finding names, defined by cause-and-effect sheet TJC-LLD-IL-YD-2301. A correction that touches it goes through Management of Change with re-validation of the function, never as a drafting correction alone; until that change is approved the cause-and-effect sheet governs.",
    "rule": "Wrong interlock sequence cited",
    "rule_id": "CD-8",
    "safety_function": "SEQ-5500",
@@ -6783,7 +6783,7 @@
     "tag": "YD-2301"
    },
    "observation_only": false,
-   "routing_recommendation": null,
+   "routing_recommendation": "SEQ-5500 (SIL 2) is the protective function this finding names, defined by cause-and-effect sheet TJC-LLD-IL-YD-2301. A correction that touches it goes through Management of Change with re-validation of the function, never as a drafting correction alone; until that change is approved the cause-and-effect sheet governs.",
    "rule": "P&ID contradicts sibling document",
    "rule_id": "CD-18",
    "safety_function": "SEQ-5500",

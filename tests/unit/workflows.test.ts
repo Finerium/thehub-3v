@@ -221,6 +221,40 @@ describe("tier-a.yml (the golden set, AC-EVAL-02, 04, 07)", () => {
     expect(text).toContain('git clone -q --depth 1 git@github.com:Finerium/thehub-corpus.git "$RUNNER_TEMP/thehub-corpus"');
     expect(text).toContain("uses: actions/upload-artifact@");
   });
+
+  // AC-EVAL-02's expectation is "CI artefacts present", and a golden tier is EXPECTED to exit non-zero while a
+  // hard-gated case fails, so the upload must survive the failure that produced it. Without `if: always()` on the
+  // upload step, every red run would leave no per-category report at all and the criterion would die silently.
+  it("keeps the report even when the tier itself fails", () => {
+    const upload = text.slice(text.indexOf("Keep the report"), text.indexOf("if-no-files-found"));
+    expect(upload).toContain("if: always()");
+    expect(upload).toContain("name: golden-a-${{ github.sha }}");
+    expect(upload).toContain("${{ runner.temp }}/golden");
+  });
+
+  // The runner writes golden-<tier>.json and .md into --out; the upload names --out. A rename on either side
+  // would upload an empty directory, which `if-no-files-found: warn` would not fail on.
+  it("uploads the directory the runner actually writes its report into", () => {
+    const runner = readFileSync(path.join(process.cwd(), "scripts", "golden", "run.ts"), "utf8");
+    expect(runner).toContain("`golden-${suffix}.json`");
+    expect(runner).toContain("`golden-${suffix}.md`");
+    expect(runner).toContain("path.join(options.out,");
+    expect(text).toContain('--out "$RUNNER_TEMP/golden"');
+    expect(text).toContain("${{ runner.temp }}/golden");
+  });
+
+  // The lane died eleven times in a row before reaching the golden step because the account seed refuses to run
+  // without its passwords. The half that lives in this repository is the step's own env block: every variable the
+  // seed refuses to run without is declared on the step that runs it.
+  it("declares every account variable the seed refuses to run without", () => {
+    const seed = readFileSync(path.join(process.cwd(), "scripts", "db", "seed-m0.ts"), "utf8");
+    const required = [...seed.matchAll(/env: "([A-Z0-9_]+)"/g)].map((m) => m[1] as string);
+    expect(required.length, "seed-m0.ts named no account variable, so this check proves nothing").toBeGreaterThan(0);
+    const step = text.slice(text.indexOf("Migrate, create the application role"), text.indexOf("The embedder files"));
+    expect(step).toContain("pnpm db:seed:m0");
+    const declared = new Set([...text.matchAll(/^\s+([A-Z0-9_]+): \$\{\{ secrets\.[A-Z0-9_]+ \}\}$/gm)].map((m) => m[1] as string));
+    for (const name of required) expect([...declared], `the seed reads ${name} and no step declares it`).toContain(name);
+  });
 });
 
 describe("tier-b.yml (recorded replay and the live run, 9.16)", () => {
@@ -251,5 +285,13 @@ describe("tier-b.yml (recorded replay and the live run, 9.16)", () => {
   it("keeps the recordings as an artifact for the reviewed re-recording", () => {
     expect(text).toContain("${{ github.workspace }}/recordings");
     expect(text).toContain("uses: actions/upload-artifact@");
+  });
+
+  it("keeps the report even when the tier itself fails, under a name that separates the two modes", () => {
+    const upload = text.slice(text.indexOf("Keep the report"), text.indexOf("if-no-files-found"));
+    expect(upload).toContain("if: always()");
+    expect(upload).toContain("name: golden-b-${{ matrix.mode }}-${{ github.sha }}");
+    expect(upload).toContain("${{ runner.temp }}/golden");
+    expect(text).toContain('--out "$RUNNER_TEMP/golden"');
   });
 });

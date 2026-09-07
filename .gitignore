@@ -52,6 +52,9 @@ test-results/
 video/raw/
 video/frames/
 .env*
+# The last matching pattern wins, so the exception above has to be repeated after this block's wider rule, or the
+# example file the blueprint 9.15 audit reads would be ignored (AC-NFR-22). It carries placeholders and no value.
+!.env.example
 
 # third-party agent skills auto-installed by integrations (trace policy)
 .agents/

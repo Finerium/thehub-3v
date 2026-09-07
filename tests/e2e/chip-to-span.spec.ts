@@ -1,7 +1,11 @@
-// AC-UI-02, the one path a reader takes from a claim to the page it came from: a citation chip on the asset sheet
-// opens the glass drawer at its span, the drawer's link resolves to /documents/:id#page=n&span=<span_id>, and the
-// viewer there renders that page with that span marked. The chip's own citation is read from GET /api/assets/:tag,
-// so the document id, the page and the span id are the seeded corpus's, never typed here.
+// AC-UI-01's chip clause ("a citation chip opens its span") and AC-UI-06's chip leg (the same journey by keyboard).
+// The one path a reader takes from a claim to the page it came from: a citation chip on the asset sheet opens the
+// glass drawer at its span, the drawer's link resolves to /documents/:id#page=n&span=<span_id>, and the viewer
+// there renders that page with that span marked. The chip's own citation is read from GET /api/assets/:tag, so the
+// document id, the page and the span id are the seeded corpus's, never typed here.
+//
+// What this file is NOT: it is not AC-ANS-03, which asks that every claim of an answer resolves to its span. That
+// guarantee is gate G2 C1's, and asserting it here would need an answer, which the browser suite does not compose.
 //
 // The journey is asserted in three steps (the chip, the hop, the viewer) so a failure names which of them broke
 // rather than reporting one long timeout.
@@ -39,7 +43,7 @@ async function expectSpanInViewer(page: Page, citation: Citation): Promise<void>
   await expect(page.getByText("The address resolved span")).toContainText(citation.span_id);
 }
 
-test.describe("chip to span (AC-UI-02)", () => {
+test.describe("chip to span (AC-UI-01)", () => {
   test("a citation chip opens the drawer at its span, with the viewer link in the 6.2 anchor form", async ({ page }) => {
     const asset = await readAsset(page.request);
     await page.goto(`/assets/${TAG}`);
@@ -104,7 +108,7 @@ test.describe("chip to span (AC-UI-02)", () => {
   });
 });
 
-test.describe("keyboard (AC-UI-05)", () => {
+test.describe("the chip by keyboard (AC-UI-06)", () => {
   test("Tab reaches a citation chip and Enter opens its drawer", async ({ page }) => {
     await page.goto(`/assets/${TAG}`);
     await expect(page.locator('[data-component="citation-chip"]').first()).toBeVisible();

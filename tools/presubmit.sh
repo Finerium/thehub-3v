@@ -5,6 +5,7 @@
 #   tools/presubmit.sh                        the defaults below
 #   tools/presubmit.sh --dir deliverables --base-url https://thehub-3v.vercel.app
 #   tools/presubmit.sh --skip-live            everything except check 12 (no network available)
+#   tools/presubmit.sh --write-sums           check 13 records the checksums instead of comparing them
 #
 # Exit codes
 #   0  every check passed
@@ -31,11 +32,13 @@ WORLD="$(cd "$REPO/.." && pwd)"
 DIR="deliverables"
 BASE_URL="https://thehub-3v.vercel.app"
 SKIP_LIVE=0
+WRITE_SUMS=0
 while [ "$#" -gt 0 ]; do
   case "$1" in
     --dir) DIR="$2"; shift 2 ;;
     --base-url) BASE_URL="$2"; shift 2 ;;
     --skip-live) SKIP_LIVE=1; shift ;;
+    --write-sums) WRITE_SUMS=1; shift ;;
     *) echo "presubmit: unknown option $1" >&2; exit 2 ;;
   esac
 done
@@ -51,6 +54,7 @@ TEAM_FACTS="$WORLD/supplied/team-facts.json"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 DECK_TEXT="$TMP/deck.txt"
+EXPORT_TEXT="$TMP/export.txt"
 
 failures=0
 remainders=0
@@ -79,6 +83,22 @@ if [ -f "$DECK" ] && have pdftotext; then
   pdftotext -layout "$DECK" "$DECK_TEXT" 2>/dev/null || true
 fi
 
+# The export read the way the deck is: the bytes a reader reads. A single-file page carries its stylesheet, its
+# behaviour and its images inline, and a base64 payload is not language, so the English scan of check 9 reads the
+# export with the script blocks, the style blocks and the data URIs removed. That is the whole exemption, and it
+# is here rather than in tools/quoted-strings.txt because it is a class of bytes, not a quotation. Check 8, the
+# names scan, still reads the raw file: nothing is exempt from a legacy product name, not even a script block.
+if [ -f "$EXPORT" ] && have python3; then
+  python3 - "$EXPORT" > "$EXPORT_TEXT" 2>/dev/null <<'PY' || true
+import re, sys
+text = open(sys.argv[1], encoding="utf-8", errors="replace").read()
+text = re.sub(r"(?is)<script\b[^>]*>.*?</script>", "\n", text)
+text = re.sub(r"(?is)<style\b[^>]*>.*?</style>", "\n", text)
+text = re.sub(r"data:[^\"')\s]{200,}", "data:", text)
+sys.stdout.write(text)
+PY
+fi
+
 # ---------------------------------------------------------------------------------------------------------
 check "The three mandatory deliverables are present and each is the artefact its name claims"
 # ---------------------------------------------------------------------------------------------------------
@@ -98,7 +118,22 @@ else
   want_type "$EXPORT" text/html
   want_type "$DECK" application/pdf
   want_type "$VIDEO" video/mp4
-  [ -f "$POINTER" ] && pass "$POINTER is present (optional, the only other file that may be uploaded)"
+  # The pointer PDF is optional (AC-DEL-09 is POLISH and asks for it "present or listed"), but a pointer that is
+  # built must be the one page 9.12 asks for; its byte budget is check 2.
+  if [ -f "$POINTER" ]; then
+    if ! have pdfinfo; then
+      fail "$POINTER is present but pdfinfo is not on PATH, so its one-page limit cannot be read"
+    else
+      pointer_pages="$(pdfinfo "$POINTER" 2>/dev/null | awk '/^Pages:/{print $2}')"
+      if [ "${pointer_pages:-0}" = "1" ]; then
+        pass "$POINTER is present, one page (optional, the only other file that may be uploaded)"
+      else
+        fail "$POINTER is ${pointer_pages:-an unreadable number of} page(s); 9.12 asks for one"
+      fi
+    fi
+  else
+    note "$POINTER is not built; AC-DEL-09 is POLISH and asks for it present or listed, so the Report lists it"
+  fi
   # SHA256SUMS.txt is a repository record and is never uploaded; anything else in the directory would be.
   stray="$(find "$DIR" -maxdepth 1 -type f \
     ! -name 'TheHub_prototype.html' ! -name 'TheHub_deck.pdf' ! -name 'TheHub_demo.mp4' \
@@ -299,15 +334,26 @@ else
 fi
 
 # ---------------------------------------------------------------------------------------------------------
-check "English only in the deck text and the captions, outside a marked quotation"
+check "English only across the deck text, the narration, the captions and the export, outside a marked quotation"
 # ---------------------------------------------------------------------------------------------------------
+# AC-DEL-06 names four artefacts and this scan reads all four. The export is read as prepared text above: its
+# script blocks, style blocks and base64 payloads are removed first, so the scan reads the page's words. Nothing
+# else about it is exempt, and the organiser's own corpus text on its document surfaces is scanned like the rest.
 targets=()
 [ -s "$DECK_TEXT" ] && targets+=("$DECK_TEXT")
+[ -f "$NARRATION" ] && targets+=("$NARRATION")
 for c in video/*.vtt video/*.srt; do [ -f "$c" ] && targets+=("$c"); done
+if [ -f "$EXPORT" ]; then
+  if [ -s "$EXPORT_TEXT" ]; then
+    targets+=("$EXPORT_TEXT")
+  else
+    fail "$EXPORT is built but its text could not be prepared (python3 on PATH?), so it was not scanned"
+  fi
+fi
 if [ "${#targets[@]}" -eq 0 ]; then
-  absent "neither the deck text nor a caption file exists yet"
+  absent "none of the deck text, the narration, the captions or the export exists yet"
 elif bash tools/banned-strings.sh --english "${targets[@]}"; then
-  pass "no Indonesian outside tools/quoted-strings.txt"
+  pass "no Indonesian outside tools/quoted-strings.txt, over ${#targets[@]} path(s) including the export"
 else
   fail "tools/banned-strings.sh --english reported a hit"
 fi
@@ -394,11 +440,14 @@ fi
 # ---------------------------------------------------------------------------------------------------------
 check "SHA256SUMS.txt carries the commit and the time, and reads back equal to the files"
 # ---------------------------------------------------------------------------------------------------------
+# The record is COMPARED here, never rewritten: a check that regenerates the file it is about to read can only
+# ever pass, and the failure it exists to catch is exactly the one a regeneration hides, a deliverable rebuilt
+# after the record was written. `--write-sums` is the one way the file is (re)written, and it is a deliberate act.
 uploads=()
 for f in "$EXPORT" "$DECK" "$VIDEO" "$POINTER"; do [ -f "$f" ] && uploads+=("$f"); done
 if [ "${#uploads[@]}" -eq 0 ]; then
   absent "there is nothing to checksum yet"
-else
+elif [ "$WRITE_SUMS" -eq 1 ]; then
   commit="$(git -C "$REPO" rev-parse HEAD 2>/dev/null || echo unknown)"
   {
     echo "# The Hub, CALIBER 2026 Case 1, Team 3V. The files as they were uploaded."
@@ -408,11 +457,33 @@ else
       (cd "$DIR" && sha256sum "$(basename "$f")")
     done
   } > "$SUMS"
-  if (cd "$DIR" && sha256sum -c --quiet "$(basename "$SUMS")" 2>/dev/null); then
-    pass "$SUMS written and read back equal for ${#uploads[@]} file(s), commit ${commit:0:7}"
-    note "the checksum record stays in the repository and is never uploaded"
+  pass "$SUMS recorded for ${#uploads[@]} file(s) at commit ${commit:0:7} (--write-sums)"
+  note "the checksum record stays in the repository and is never uploaded"
+elif [ ! -f "$SUMS" ]; then
+  fail "$SUMS does not exist; record it with tools/presubmit.sh --write-sums"
+else
+  recorded_commit="$(awk '/^# commit/{print $3}' "$SUMS")"
+  recorded_at="$(awk '/^# recorded/{print $3}' "$SUMS")"
+  if [ -z "$recorded_commit" ] || [ -z "$recorded_at" ]; then
+    fail "$SUMS carries no '# commit' and '# recorded' header, so it records no moment"
+  elif ! (cd "$DIR" && sha256sum -c --quiet "$(basename "$SUMS")" >/dev/null 2>&1); then
+    (cd "$DIR" && sha256sum -c "$(basename "$SUMS")" 2>/dev/null | grep -v ': OK$' | sed 's/^/               /')
+    fail "$SUMS does not match the deliverables as they stand; rebuild or re-record with --write-sums"
   else
-    fail "$SUMS does not read back equal to the files it names"
+    # Every file that would be uploaded must be IN the record: a deliverable built after it was written is not
+    # caught by the digests, because a digest that is not there cannot differ.
+    missing=""
+    for f in "${uploads[@]}"; do
+      grep -qF "  $(basename "$f")" "$SUMS" || missing="$missing $(basename "$f")"
+    done
+    if [ -n "$missing" ]; then
+      fail "$SUMS names no digest for:$missing"
+    else
+      pass "$SUMS matches ${#uploads[@]} file(s), recorded at $recorded_at for commit ${recorded_commit:0:7}"
+      note "the checksum record stays in the repository and is never uploaded"
+      head="$(git -C "$REPO" rev-parse HEAD 2>/dev/null || echo unknown)"
+      [ "$recorded_commit" = "$head" ] || note "recorded at ${recorded_commit:0:7}, HEAD is now ${head:0:7}; the bytes are unchanged"
+    fi
   fi
 fi
 

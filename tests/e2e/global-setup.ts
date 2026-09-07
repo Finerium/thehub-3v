@@ -1,7 +1,9 @@
 // One login for the whole run (D-07: every surface is behind a session). POST /api/auth/login with the demo
 // engineer's credentials, then the session and sandbox cookies are written to STATE_PATH as Playwright storage
-// state. The password is read from the environment and handed straight to the request body: it is never logged,
-// never put on a command line, and never written anywhere but the cookie jar the platform returns.
+// state. The password is read from the environment, or from standard input where an operator pipes it in through
+// tools/secret-pipe.sh, and handed straight to the request body: it is never logged, never put on a command line,
+// and never written anywhere but the cookie jar the platform returns.
+import { readFileSync } from "node:fs";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import { request, type FullConfig } from "@playwright/test";
@@ -23,6 +25,27 @@ function selectedProjects(argv: readonly string[]): string[] {
   return names;
 }
 
+
+/**
+ * The demo Engineer's password, from the environment where a runner puts it (CI hands the job one repository
+ * secret), or from standard input where an operator pipes it in without ever putting it in an environment or on a
+ * command line:
+ *
+ *   thehub/tools/secret-pipe.sh DEMO_ENGINEER_PASSWORD -- pnpm exec playwright test --project=chromium
+ *
+ * The value is read once, handed straight to the request body below and never logged, stored or echoed; a run with
+ * neither source stops with the name of the variable and nothing else.
+ */
+function engineerPassword(): string {
+  const fromEnv = process.env.DEMO_ENGINEER_PASSWORD;
+  if (fromEnv) return fromEnv;
+  if (process.stdin.isTTY !== true) {
+    const piped = readFileSync(0, "utf8").trim();
+    if (piped.length > 0) return piped;
+  }
+  throw new Error("DEMO_ENGINEER_PASSWORD is neither in this run's environment nor on standard input (see tools/secret-pipe.sh)");
+}
+
 export default async function globalSetup(config: FullConfig): Promise<void> {
   // The offline export project opens a file and aborts every network route, so a run that selects it alone signs
   // in to nothing: Tier A checks AC-DEL-01 on a runner that holds no credential and has no deployment to hold one
@@ -34,8 +57,7 @@ export default async function globalSetup(config: FullConfig): Promise<void> {
   }
   const baseURL = config.projects[0]?.use.baseURL ?? process.env.PLAYWRIGHT_BASE_URL;
   if (!baseURL) throw new Error("no baseURL: set PLAYWRIGHT_BASE_URL");
-  const password = process.env.DEMO_ENGINEER_PASSWORD;
-  if (!password) throw new Error("DEMO_ENGINEER_PASSWORD is not set in the environment (run through the dotenv wrapper)");
+  const password = engineerPassword();
 
   const context = await request.newContext({ baseURL });
   try {

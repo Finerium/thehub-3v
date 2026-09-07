@@ -11,6 +11,10 @@
 //   2. The planted run, always. A TBD_ marker is written into the copied export and the script must exit non-zero
 //      naming it (AC-DEL-05, the placeholder leg of check 7). A marker check that has never fired is a marker check
 //      nobody knows works, and a placeholder reaching a judge is the exact failure the PRD's 26.4 exists to stop.
+//   3. The checksum leg of check 13, both ways (AC-DEL-05). The record is written into the copy with --write-sums,
+//      compared, then a deliverable is changed under it and the same check must fail. Until this landed the check
+//      regenerated the record before reading it, so it could not fail on a stale record however wrong the record
+//      was; the sandbox record is seeded here for the same reason the clean run needs one.
 //
 // The live leg (check 12) is never exercised here: a unit test reaches no network. `--skip-live` reports it as
 // unproved rather than passed, which is the behaviour asserted below.
@@ -48,9 +52,13 @@ if (!existsSync(path.join(sandbox, "TheHub_prototype.html"))) {
   writeFileSync(path.join(sandbox, "TheHub_prototype.html"), "<!doctype html><title>stub</title><body>no export in this checkout</body>\n");
 }
 
-function presubmit(): SpawnSyncReturns<string> {
-  return spawnSync("bash", [SCRIPT, "--dir", sandbox, "--skip-live"], { cwd: REPO, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+function presubmit(...extra: string[]): SpawnSyncReturns<string> {
+  return spawnSync("bash", [SCRIPT, "--dir", sandbox, "--skip-live", ...extra], { cwd: REPO, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
 }
+
+// The copy is a fresh set of deliverables with no record of its own, so check 13 is given one to compare against.
+// The tracked deliverables/SHA256SUMS.txt is never read or written by this file.
+const seeded = presubmit("--write-sums");
 
 type Verdict = { number: number; title: string; kind: "PASS" | "FAIL" | "NOT BUILT" | "HUMAN"; detail: string };
 
@@ -111,6 +119,100 @@ describe("tools/presubmit.sh, the clean run (AC-DEL-04)", () => {
     ).toEqual([]);
     // Exit 1 and not 0: `--skip-live` leaves the live leg unproved, and the script refuses to call that a pass.
     expect(clean.status).toBe(1);
+  });
+});
+
+describe("tools/presubmit.sh, the checksum record of check 13 (AC-DEL-05)", () => {
+  const SUMS = path.join(sandbox, "SHA256SUMS.txt");
+  const check13 = (report: string) => verdicts(report).filter((v) => v.title.includes("SHA256SUMS.txt"));
+
+  it("records the digests only when asked, with the commit and the time", () => {
+    expect(seeded.status, `--write-sums did not run:\n${seeded.stdout}${seeded.stderr}`).not.toBe(2);
+    const record = readFileSync(SUMS, "utf8");
+    expect(record).toMatch(/^# commit {4}[0-9a-f]{7,40}$/m);
+    expect(record).toMatch(/^# recorded {2}\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/m);
+    expect(check13(`${seeded.stdout}${seeded.stderr}`).some((v) => v.kind === "PASS" && v.detail.includes("--write-sums"))).toBe(true);
+  });
+
+  it("compares the record it finds instead of rewriting it", () => {
+    const before = readFileSync(SUMS, "utf8");
+    const report = `${clean.stdout}${clean.stderr}`;
+    expect(check13(report).some((v) => v.kind === "PASS" && v.detail.includes("matches"))).toBe(true);
+    expect(readFileSync(SUMS, "utf8"), "the run rewrote the record it was meant to compare").toBe(before);
+  });
+
+  // The negative control this check existed without: a deliverable rebuilt after the record was written.
+  it("fails when a deliverable changes under the record, and passes again once it is re-recorded", () => {
+    const deck = path.join(sandbox, "TheHub_deck.pdf");
+    const original = existsSync(deck) ? readFileSync(deck) : null;
+    const target = original === null ? path.join(sandbox, "TheHub_prototype.html") : deck;
+    const bytes = readFileSync(target);
+    try {
+      appendFileSync(target, "\n<!-- one byte more than the record knows about -->\n");
+      const stale = presubmit();
+      const report = `${stale.stdout}${stale.stderr}`;
+
+      expect(stale.status, `a changed deliverable did not fail the checklist:\n${report.slice(0, 3000)}`).not.toBe(0);
+      expect(check13(report).some((v) => v.kind === "FAIL" && v.detail.includes("does not match the deliverables as they stand"))).toBe(true);
+      expect(report).toContain(`${path.basename(target)}: FAILED`);
+
+      const rerecorded = presubmit("--write-sums");
+      expect(check13(`${rerecorded.stdout}${rerecorded.stderr}`).some((v) => v.kind === "PASS")).toBe(true);
+    } finally {
+      writeFileSync(target, bytes);
+      presubmit("--write-sums");
+    }
+  }, 600_000);
+
+  it("fails when there is no record at all rather than writing one", () => {
+    const record = readFileSync(SUMS, "utf8");
+    try {
+      rmSync(SUMS);
+      const report = `${presubmit().stdout}`;
+      expect(check13(report).some((v) => v.kind === "FAIL" && v.detail.includes("--write-sums"))).toBe(true);
+      expect(existsSync(SUMS), "the comparing run created the record it was meant to compare against").toBe(false);
+    } finally {
+      writeFileSync(SUMS, record);
+    }
+  }, 600_000);
+});
+
+describe("tools/presubmit.sh, the English scan of check 9 (AC-DEL-06)", () => {
+  it("reads all four artefacts the criterion names, the export included", () => {
+    const check9 = cleanVerdicts.filter((v) => v.title.includes("English only"));
+    expect(check9.length, "check 9 printed no verdict at all").toBeGreaterThan(0);
+    expect(check9[0]?.title).toContain("the export");
+    if (built) {
+      expect(check9[0]?.kind).toBe("PASS");
+      // deck text, narration, captions, export: the four of AC-DEL-06, none of them exempt as a whole file.
+      expect(check9[0]?.detail).toContain("4 path(s)");
+    }
+  });
+
+  // The export was outside this scan until the check was widened, so the scan had never fired on it. It fires now.
+  it("catches an Indonesian sentence planted in the export", () => {
+    const planted = path.join(sandbox, "TheHub_prototype.html");
+    const before = readFileSync(planted, "utf8");
+    try {
+      appendFileSync(planted, "\n<p>Sistem ini dibuat untuk membantu operator dan tidak menggantikan prosedur</p>\n");
+      const report = `${presubmit().stdout}`;
+      const check9 = verdicts(report).filter((v) => v.title.includes("English only"));
+      expect(check9.some((v) => v.kind === "FAIL" && v.detail.includes("--english reported a hit"))).toBe(true);
+      expect(report).toContain("an Indonesian word appears outside");
+    } finally {
+      writeFileSync(planted, before);
+      presubmit("--write-sums");
+    }
+  }, 600_000);
+
+  it("scans the export as prepared text, with only its script, style and base64 payloads removed", () => {
+    const script = readFileSync(SCRIPT, "utf8");
+    expect(script).toContain("<script");
+    expect(script).toContain("data:[^");
+    // The names scan still reads the raw file: nothing is exempt from a legacy product name.
+    const names = script.slice(script.indexOf("check \"Banned strings"), script.indexOf("check \"English only"));
+    expect(names).toContain('targets+=("$EXPORT")');
+    expect(names).not.toContain("EXPORT_TEXT");
   });
 });
 

@@ -196,3 +196,87 @@ describe("the generator that prints the table", () => {
     });
   });
 });
+
+// ---------------------------------------------------------------------------------------------------------------
+// AC-DEL-08's other half: "the main repository README is pitch-grade ... and no corpus content". The numbers are
+// bound above; what had no check was the shape of the page a reviewer actually lands on, and the one rule that
+// would be a real breach if it broke. The screenshots leg of the criterion is deliberately unmet (invariant 7),
+// and the refusal is asserted here so it stays a stated decision rather than becoming an oversight.
+// ---------------------------------------------------------------------------------------------------------------
+describe("README.md, the front page a reviewer lands on (AC-DEL-08)", () => {
+  const readme = readFileSync(README, "utf8");
+  const headings = readme
+    .split("\n")
+    .filter((line) => /^##\s/.test(line))
+    .map((line) => line.replace(/^##\s+/, "").trim());
+
+  it.each([
+    ["what it does", /^## What it does, in five lines$/m, 5],
+    ["the three Key Questions", /^## The three Key Questions$/m, 3],
+    ["the numbers", /^## The numbers$/m, 1],
+    ["the reproduction command", /^## Run it$/m, 1],
+    ["the reviewer path", /^## See it live$/m, 1],
+    ["the honest capability matrix", /^## Honest limits$/m, 1],
+    ["the AI disclosure", /^## AI disclosure$/m, 1],
+  ])("carries the %s section", (_what, pattern) => {
+    expect(readme).toMatch(pattern);
+  });
+
+  it("states what it does in five lines and asks the three Key Questions", () => {
+    const five = section(readme, "What it does, in five lines");
+    expect(five.split("\n").filter((l) => /^\d+\.\s/.test(l.trim()))).toHaveLength(5);
+    for (const kq of ["KQ1", "KQ2", "KQ3"]) expect(section(readme, "The three Key Questions")).toContain(kq);
+  });
+
+  it("carries the inter-repo diagram as a file in this repository, not a hotlink", () => {
+    expect(readme).toContain("docs/architecture.svg");
+    expect(existsSync(FIGURE)).toBe(true);
+    expect(readFileSync(FIGURE, "utf8")).toContain("<svg");
+  });
+
+  it("gives a reproduction command block a reader can run", () => {
+    const run = section(readme, "Run it");
+    expect(run).toContain("pnpm install --frozen-lockfile");
+    expect(run).toMatch(/```/);
+  });
+
+  it("lists at least eight honest limits, each one a stated decision", () => {
+    const limits = section(readme, "Honest limits")
+      .split("\n")
+      .filter((l) => /^\d+\.\s\*\*/.test(l.trim()));
+    expect(limits.length).toBeGreaterThanOrEqual(8);
+  });
+
+  it("records the screenshots leg as refused rather than missing (invariant 7)", () => {
+    const limits = section(readme, "Honest limits");
+    expect(limits).toContain("No screenshots are in this repository");
+    expect(limits).toContain("invariant 7");
+    // A README that grew a screenshot would break the refusal it states.
+    expect(readme).not.toMatch(/!\[[^\]]*\]\([^)]*\.(png|jpg|jpeg|gif|webp)\)/i);
+  });
+
+  it("carries no corpus content: no anchor text of any bundle span appears on the front page", () => {
+    const claims = JSON.parse(readFileSync(path.join(REPO, "bundle", "claims.json"), "utf8")) as { spans: { id: string; anchor_text: string }[] };
+    // A short anchor may be an identifier the README is allowed to name (a document number, a tag); a sentence is
+    // corpus content wherever it appears. 40 characters is the line, the same one the entailment set draws at.
+    const quoted = claims.spans.filter((s) => s.anchor_text.trim().length >= 40).filter((s) => readme.includes(s.anchor_text.trim()));
+    expect(
+      quoted.map((s) => `${s.id}: ${s.anchor_text.slice(0, 60)}`),
+      "the README quotes the organiser's corpus",
+    ).toEqual([]);
+    expect(claims.spans.length, "no span was long enough to check, so this proves nothing").toBeGreaterThan(100);
+  });
+
+  it("keeps every heading it promises in the reading order the reviewer path assumes", () => {
+    expect(headings.indexOf("See it live")).toBeLessThan(headings.indexOf("The numbers"));
+    expect(headings.indexOf("The numbers")).toBeLessThan(headings.indexOf("Honest limits"));
+  });
+});
+
+/** One `##` section of the README, from its heading to the next one. */
+function section(readme: string, heading: string): string {
+  const start = readme.indexOf(`## ${heading}`);
+  if (start === -1) throw new Error(`README carries no section "${heading}"`);
+  const next = readme.indexOf("\n## ", start + 1);
+  return readme.slice(start, next === -1 ? undefined : next);
+}
