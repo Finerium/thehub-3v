@@ -10,7 +10,18 @@ import { REQUEST_ID_HEADER, REQUEST_PATH_HEADER } from "@/lib/request-id";
 // 6.2 surface 14 and 9.9: the reviewer-link route GET /api/auth/tour/:token is not built (D-07).
 // POST /api/evaluation/runs is the CI principal's one route (9.9): it authenticates by Bearer CI_INGEST_TOKEN
 // inside the handler, compared in constant time, so the cookie gate would refuse it before that check could run.
-const PUBLIC_PATHS = new Set(["/login", "/api/auth/login", "/api/health", "/robots.txt", "/api/evaluation/runs"]);
+// POST /api/admin/corpus/activate is the nightly job principal's one route (ARCHITECTURE 10): it authenticates by
+// Bearer ADMIN_JOB_TOKEN, compared in constant time inside the route, and is listed here for the same reason as
+// the ingest route. Without it this gate answered the job 401 before its own check ever ran, which is what the
+// nightly re-assertion had been failing on.
+const PUBLIC_PATHS = new Set([
+  "/login",
+  "/api/auth/login",
+  "/api/health",
+  "/robots.txt",
+  "/api/evaluation/runs",
+  "/api/admin/corpus/activate",
+]);
 
 export function proxy(request: NextRequest): NextResponse {
   const requestId = crypto.randomUUID();
