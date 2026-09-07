@@ -21,10 +21,13 @@ import { GlassPanel } from "@/components/GlassPanel";
 import { IntegrityDot } from "@/components/IntegrityDot";
 import { NeumorphicChip } from "@/components/NeumorphicChip";
 import { PageViewer } from "@/components/PageViewer";
+import { PidHotspotPanel } from "@/components/PidHotspotPanel";
+import { PidSheet } from "@/components/PidSheet";
 import { StatusBadge } from "@/components/StatusBadge";
 import { EDGE_KIND_LABEL } from "@/db/queries/assets";
 import { DOCUMENT_CLASS_LABEL, findingLocator, getDocumentView, type DocumentView } from "@/db/queries/documents-view";
 import { preferenceOrder } from "@/db/queries/failures";
+import { readPidSheet, type Hotspot, type PidSheetView } from "@/db/queries/pid";
 import { HISTORY_TOGGLE_BASIS } from "@/lib/fixed-strings";
 import { log } from "@/lib/log";
 
@@ -36,7 +39,12 @@ const stagger = (i: number) => ({ "--i": i }) as CSSProperties;
 
 type Props = {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ page?: string | string[]; span?: string | string[]; history?: string | string[] }>;
+  searchParams: Promise<{
+    page?: string | string[];
+    span?: string | string[];
+    history?: string | string[];
+    hotspot?: string | string[];
+  }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -139,6 +147,27 @@ export default async function DocumentPage({ params, searchParams }: Props) {
   const d = view.document;
   const anchor = anchorFragment(view.page, view.span?.id ?? null);
 
+  // A P&ID is an image: it carries no span and no chunk, so the drawing page serves the adopted sidecar's hotspot
+  // layer in place of the span viewer (AC-CTX-02). A read that fails leaves the sheet unrendered and the rest of
+  // the viewer intact, which is what the class-less branch below already draws.
+  let sheet: PidSheetView | null = null;
+  if (d.class === "pid") {
+    try {
+      sheet = await readPidSheet(d.id, first(query.hotspot));
+    } catch (error) {
+      log.error({
+        event: "documents.sidecar_read_failed",
+        route: "/documents/:id",
+        message: error instanceof Error ? error.message : String(error),
+      });
+    }
+  }
+  const hotspotHref = (h: Hotspot): string => {
+    const params = new URLSearchParams({ hotspot: h.id });
+    if (historyOpen) params.set("history", "on");
+    return `/documents/${encodeURIComponent(d.id)}?${params.toString()}#hotspot-panel`;
+  };
+
   return (
     <div className="flex flex-col gap-8">
       <Header view={view} />
@@ -169,7 +198,50 @@ export default async function DocumentPage({ params, searchParams }: Props) {
               />
             ) : null}
 
-            {view.page_available ? (
+            {sheet !== null ? (
+              <div className="mt-4 flex flex-col gap-6">
+                <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-ink-700">
+                  <span>
+                    P&amp;ID Set <span className="mono text-ink-900">{sheet.sidecar.set}</span>
+                  </span>
+                  {sheet.equipment_tag === null ? null : (
+                    <Link href={`/assets/${encodeURIComponent(sheet.equipment_tag)}`} className="mono draw">
+                      {sheet.equipment_tag}
+                    </Link>
+                  )}
+                  <span className="verbatim">{sheet.sidecar.reference_box}</span>
+                </p>
+                <PidSheet
+                  sidecar={sheet.sidecar}
+                  underlay={
+                    sheet.page_available
+                      ? {
+                          src: `/api/documents/${encodeURIComponent(d.id)}/pages/1`,
+                          alt: `${d.doc_no ?? d.id}, P&ID sheet ${sheet.sidecar.set}`,
+                          sourceSha256: d.sha256,
+                        }
+                      : null
+                  }
+                  typedTags={sheet.typed_tags}
+                  selectedId={sheet.selected?.hotspot.id ?? null}
+                  hrefFor={hotspotHref}
+                />
+                <div id="hotspot-panel">
+                  {sheet.selected === null ? (
+                    <EmptyState
+                      title="No hotspot is selected"
+                      explanation="Every hotspot of the sheet opens here: a bound one with the typed rows the seeded corpus carries under its tag, an unbound one with the reason the sidecar recorded for the absent binding."
+                    />
+                  ) : (
+                    <PidHotspotPanel
+                      selection={sheet.selected}
+                      provenance={sheet.sidecar.provenance}
+                      citations={sheet.citations}
+                    />
+                  )}
+                </div>
+              </div>
+            ) : view.page_available ? (
               <PageViewer
                 className="mt-4"
                 documentId={d.id}

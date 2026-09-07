@@ -20,7 +20,7 @@
 //
 // Everything here is hermetic: the bundle and the fixture are files, and the components are props-only and
 // server-renderable, so they are rendered to static markup in the node lane (the pattern of DecisionButtons.test).
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -221,9 +221,13 @@ describe("AC-FM-08, the per-asset visual over all 8 assets (the timeline of P2 w
     expect([...html.matchAll(/class="hop-basis"/g)]).toHaveLength(fixtureCount);
   });
 
-  it("has no timeline component and no operational-context panel to match it against (the criterion as written)", () => {
+  // The criterion asks for a timeline visual that matches the operational-context panel. Half of that pairing now
+  // exists: the panel was built for AC-CTX-05 and reconciles to the fixture, and its own file proves it. The
+  // timeline is POLISH (blueprint line 140, P2) and was scoped out, so this asserts the state as it is rather than
+  // as the sentence reads: no timeline component anywhere, and the panel the timeline would have matched present.
+  it("has no timeline component, and names the operational-context panel that would be its counterpart", () => {
     const sources = M3_SOURCES.map(read).join("\n");
-    expect(sources).not.toMatch(/\bTimeline\b/);
-    expect(sources).not.toMatch(/operational[- ]context/i);
+    expect(sources, "a timeline component appeared without this criterion being revisited").not.toMatch(/\bTimeline\b/);
+    expect(existsSync(path.join(REPO, "src/components/OperationalContextPanel.tsx")), "the operational-context panel of AC-CTX-05").toBe(true);
   });
 });

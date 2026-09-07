@@ -165,6 +165,10 @@ jobs:
         env:
           NODE_OPTIONS: ${{ env.NEON_PRELOAD }}
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          # Without the provider key the server answers every composed question with an error and the tier measures
+          # a stack that cannot answer: 33 of 50 cases failed on "the stream carried no packet line" before this line
+          # existed. The runner's budget rows live in its own disposable database, so this spending is its own.
+          ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
         run: |
           nohup pnpm exec next start -p "$APP_PORT" > "$RUNNER_TEMP/next.log" 2>&1 &
           for attempt in $(seq 1 60); do

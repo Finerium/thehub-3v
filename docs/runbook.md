@@ -112,6 +112,19 @@ purpose: the database allowance would be spent by a ten-minute database ping (de
 final-round window, `LAST_DAY` in that file. GitHub disables a schedule after sixty days with no push, so if the
 demo goes cold, check that first.
 
+### The health alert
+
+`.github/workflows/keep-alive.yml` is also the alert on health failure, and it is the only one: no paid
+error-tracking service is in this path, and none is load-bearing anywhere in the build. Both of its steps assert the
+response code (`[[ "$code" == 2?? ]]`), so the run turns red on the first schedule that finds `GET /login` or
+`GET /api/health` not answering: one cadence later, which is ten minutes for the login page and thirty for the
+health endpoint, as promptly as GitHub runs the schedule (a scheduled run can be delayed under load).
+A red run is what GitHub notifies on: per GitHub's documentation, run notifications for a scheduled workflow go to
+the account that created the workflow, or to whoever last changed the `cron` lines in the file, or to whoever
+re-enabled the schedule after a disable. Set that account's Actions notifications (Settings, then Notifications,
+then Actions) to email with **Only notify for failed workflows**, so the only message that ever arrives from this
+repository's schedules is a failure. Section 5 says what to do with one.
+
 ---
 
 ## 4. Rotation
@@ -147,6 +160,33 @@ A published lesson cannot be unpublished, by design: publication is an append to
 the record. The remedy is the same one the plant would use, which is to publish a correcting revision, and in the
 meantime to activate the previous corpus version so the answer lane reads it. `POST /api/drafts/:id/publish` is a
 single transaction under an advisory lock (`src/gates/g3.ts`), so a racing publish is a 409 and never a half-write.
+
+### The keep-alive workflow went red
+
+This is the health alert of section 3 firing, and it means one of two requests stopped answering with a 2xx.
+
+1. Open the failed run and read which step failed. **Warm the function** is `GET /login`: the application itself is
+   not answering. **Wake the database** is `GET /api/health`: the function answers and the database or the active
+   version does not.
+2. Ask the same two questions by hand, which also tells you whether it is still failing:
+
+   ```bash
+   curl -s -o /dev/null -w '%{http_code}\n' https://thehub-3v.vercel.app/login
+   curl -s https://thehub-3v.vercel.app/api/health; echo
+   ```
+
+3. Act on what the health body says. `{"ok":false,"reason":"database"}` is **The database is unreachable** below.
+   `{"ok":false,"reason":"no_active_version"}` is section 2: activate the seeded version, and see **The demo shows
+   the wrong numbers** above. A `/login` that does not answer at all is a deployment fault rather than a data one:
+   read the latest Vercel deployment and, if it is the new one that broke, promote the previous production
+   deployment while it is investigated. Nothing is lost by doing so, because the database is not redeployed.
+4. Both answering by hand while the run stayed red means the failure was transient, most often a cold start longer
+   than the workflow's own 60 s `--max-time` after a long idle window. Re-run the workflow (`workflow_dispatch`) to
+   confirm, then watch the next scheduled run rather than changing anything.
+5. No run at all is the opposite failure and the alert cannot report it: the schedule is disabled, either by the
+   sixty-day inactivity rule or by `LAST_DAY` having passed. Re-enable it in the Actions tab and push.
+
+The alert is the ping, not a monitoring product. When it is quiet, the two requests answered.
 
 ### The database is unreachable
 
@@ -219,6 +259,7 @@ pnpm gate:quick                  # lint, typecheck, unit tests
 pnpm run audit                   # the deterministic audits, including the README's numbers
                                  # (`run` is not optional: pnpm has a built-in command of that name)
 pnpm contracts:check             # the Zod modules still equal the frozen JSON Schema
+pnpm docs:api --check            # docs/api.md still equals the routes, the matrix and the contracts
 pnpm smoke                       # the deployed instance answers on every route a judge will open
 bash tools/presubmit.sh          # the thirteen submission checks
 ```

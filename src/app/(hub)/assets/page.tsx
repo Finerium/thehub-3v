@@ -1,9 +1,12 @@
-// Assets, the fleet register (blueprint 6.2 surface 5, first screen; AC-CTX-01; register dense-operational, 7.2).
+// Assets, the fleet register with the interlock matrix (blueprint 6.2 surface 5, first screen; AC-CTX-01 and
+// AC-CTX-03; register dense-operational, 7.2).
 // Eight rows joined on the tag: the criticality the datasheet states with the workbook's own value beside it, the
 // interlock_ref verbatim, and the unplanned and breakdown-flagged hours of the failure_event rows reconciled
 // against the workbook slice of fixtures.json. Every figure is read at request time from equipment, area,
 // interlock, work_order, failure_event, opl and integrity_finding rows (src/db/queries/assets.ts); nothing here is
-// typed, ranked or predicted, and no line aggregates by person (Case 1).
+// typed, ranked or predicted, and no line aggregates by person (Case 1). The matrix below the register draws
+// every cause-and-effect sheet of the corpus from src/db/queries/interlock.ts: the rows against the effect
+// columns with the sheet's own marks, the SIL it states, the permissives as their gate and its notes.
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties } from "react";
@@ -12,9 +15,11 @@ import { CaveatLine } from "@/components/CaveatLine";
 import { DesignedState } from "@/components/DesignedState";
 import { EmptyState } from "@/components/EmptyState";
 import { GlassPanel } from "@/components/GlassPanel";
+import { InterlockMatrix } from "@/components/InterlockMatrix";
 import { VersionBadge } from "@/components/VersionBadge";
 import { readFleet, reconciled, type Fleet, type FleetRow } from "@/db/queries/assets";
 import { hoursText } from "@/db/queries/coverage";
+import { readInterlockMatrix, type InterlockMatrixView } from "@/db/queries/interlock";
 import { activeVersion } from "@/db/versions";
 import { log } from "@/lib/log";
 
@@ -193,9 +198,10 @@ export default async function AssetsPage() {
   await requireSession();
 
   let fleet: Fleet;
+  let matrix: InterlockMatrixView;
   let version: Awaited<ReturnType<typeof activeVersion>>;
   try {
-    [fleet, version] = await Promise.all([readFleet(), activeVersion()]);
+    [fleet, matrix, version] = await Promise.all([readFleet(), readInterlockMatrix(), activeVersion()]);
   } catch (error) {
     log.error({ event: "assets.fleet_read_failed", route: "/assets", message: error instanceof Error ? error.message : String(error) });
     return (
@@ -203,7 +209,7 @@ export default async function AssetsPage() {
         code="503"
         tone="defect"
         title="The database did not answer"
-        explanation="The fleet register joins the equipment, area, interlock, work-order and failure-event rows at request time. The read failed, so no line is shown in their place."
+        explanation="The fleet register joins the equipment, area, interlock, work-order and failure-event rows at request time, and the matrix reads the cause-and-effect rows beside them. The read failed, so no line is shown in their place."
         next={{ href: "/", label: "Back to Home" }}
       />
     );
@@ -248,8 +254,67 @@ export default async function AssetsPage() {
         )}
       </GlassPanel>
 
+      <GlassPanel className="rise p-6" id="interlock" aria-labelledby="interlock-heading">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2" style={stagger(2)}>
+          <h2 id="interlock-heading" className="text-[20px]">
+            Interlock matrix
+          </h2>
+          <p className="text-[12px] text-ink-500">
+            <span className="mono">{matrix.totals.sheets}</span> sheets, <span className="mono">{matrix.totals.trip_logic}</span> trip
+            logic and <span className="mono">{matrix.totals.control_loop}</span> control loop ·{" "}
+            <span className="mono">{matrix.totals.rows}</span> typed rows, <span className="mono">{matrix.totals.trip_rows}</span> of
+            them trips · <span className="mono">{matrix.totals.permissives}</span> start permissives,{" "}
+            <span className="mono">{matrix.totals.permissives_by_logic_no}</span> filed under a LOGIC No and{" "}
+            <span className="mono">{matrix.totals.permissives_by_tag}</span> under a tag
+          </p>
+        </div>
+        <p className="mt-2 max-w-[92ch] text-[13.5px] leading-snug text-ink-700">
+          Every cause-and-effect sheet of the corpus as it is written: the start permissives as their gate, the typed
+          rows down the side, the effect columns across the top with the final element each one actuates, and the mark
+          the sheet prints in the cell. The SIL is the sheet&apos;s own line; a sheet that types a control loop states
+          no LOGIC No and no SIL, and where the register read trip wording on such a sheet the finding is shown beside
+          the note that carries it.
+        </p>
+        {matrix.sheets.length > 0 ? (
+          <div className="mt-5 flex flex-col gap-8">
+            {matrix.sheets.map((sheet) => (
+              <article
+                key={sheet.equipment.tag}
+                className="border-t border-edge pt-6 first:border-t-0 first:pt-0"
+                aria-labelledby={`sheet-${sheet.equipment.tag}`}
+              >
+                <h3 id={`sheet-${sheet.equipment.tag}`} className="text-[17px]">
+                  <Link href={`/assets/${encodeURIComponent(sheet.equipment.tag)}#interlock`} className="mono draw">
+                    {sheet.equipment.tag}
+                  </Link>{" "}
+                  <span className="text-[13.5px] font-normal text-ink-700">{sheet.equipment.name}</span>
+                </h3>
+                <InterlockMatrix
+                  className="mt-4"
+                  interlock={sheet.interlock}
+                  rows={sheet.rows}
+                  permissives={sheet.permissives}
+                  permissiveKey={sheet.permissive_key}
+                  citations={matrix.citations}
+                  ceDocumentId={sheet.ce_document_id}
+                  finding={sheet.boilerplate_finding}
+                />
+              </article>
+            ))}
+          </div>
+        ) : (
+          <EmptyState
+            className="mt-4"
+            title="No cause-and-effect sheet is seeded"
+            explanation="The matrix reads the interlock rows of the active corpus version. This deployment carries none, so no sheet can be drawn."
+            action={{ href: "/admin", label: "Corpus versions" }}
+          />
+        )}
+        <CaveatLine kind="as_built" className="mt-6" />
+      </GlassPanel>
+
       <GlassPanel className="rise p-6" aria-labelledby="binding-heading">
-        <h2 id="binding-heading" className="text-[20px]" style={stagger(2)}>
+        <h2 id="binding-heading" className="text-[20px]" style={stagger(3)}>
           What each column is read from
         </h2>
         <dl className="fields mt-3 max-w-[92ch]">

@@ -23,6 +23,7 @@ import { PrecedentPanel } from "@/components/FamilyList";
 import { FilterBar } from "@/components/FilterBar";
 import { GlassPanel } from "@/components/GlassPanel";
 import { NeumorphicChip } from "@/components/NeumorphicChip";
+import { OperationalContextPanel } from "@/components/OperationalContextPanel";
 import { Pagination } from "@/components/Pagination";
 import { ProofTestCard, TEST_CLASS_LABEL } from "@/components/ProofTestCard";
 import { VersionBadge } from "@/components/VersionBadge";
@@ -42,6 +43,7 @@ import {
   type HistoryRecord,
   type WorkType,
 } from "@/db/queries/failures";
+import { operationalContext, type OperationalContext } from "@/db/queries/operational-context";
 import { log } from "@/lib/log";
 
 export const metadata: Metadata = { title: "Failure Memory" };
@@ -409,8 +411,9 @@ export default async function AssetFailuresPage({ params, searchParams }: Props)
   const versions = preferenceOrder(await visibleVersionIds(box), box?.corpusVersionId ?? null);
 
   let memory: AssetFailureMemory | null;
+  let context: OperationalContext | null;
   try {
-    memory = await assetFailureMemory(tag, { work_type: workType, breakdown }, versions, page, PAGE_SIZE);
+    [memory, context] = await Promise.all([assetFailureMemory(tag, { work_type: workType, breakdown }, versions, page, PAGE_SIZE), operationalContext(tag, versions)]);
   } catch (error) {
     log.error({ event: "failures.asset_read_failed", route: `${BASE}/${tag}`, message: error instanceof Error ? error.message : String(error) });
     return (
@@ -529,6 +532,8 @@ export default async function AssetFailuresPage({ params, searchParams }: Props)
           </dl>
         </div>
       </GlassPanel>
+
+      {context ? <OperationalContextPanel className="rise" context={context} hrefFor={(wo) => `#${wo}`} /> : null}
 
       <UncoveredPanel memory={memory} role={role} />
 

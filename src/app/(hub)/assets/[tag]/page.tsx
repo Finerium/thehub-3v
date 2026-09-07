@@ -16,13 +16,12 @@ import { requireSession } from "@/auth/session";
 import { CaveatLine } from "@/components/CaveatLine";
 import { CitationChip } from "@/components/CitationChip";
 import { DesignedState } from "@/components/DesignedState";
-import { EffectsRow } from "@/components/EffectsRow";
 import { EmptyState } from "@/components/EmptyState";
 import { GlassPanel } from "@/components/GlassPanel";
 import { HotspotLayer } from "@/components/HotspotLayer";
+import { InterlockMatrix } from "@/components/InterlockMatrix";
 import { IntegrityDot } from "@/components/IntegrityDot";
 import { NeumorphicChip } from "@/components/NeumorphicChip";
-import { PermissiveGate } from "@/components/PermissiveGate";
 import { StatusBadge } from "@/components/StatusBadge";
 import { ROLE_LABEL, TagCard } from "@/components/TagCard";
 import type { InstrumentTag, PidSidecar } from "@/contracts/generated/asset";
@@ -32,12 +31,12 @@ import {
   EDGE_KIND_LABEL,
   RELATED_WORK_ORDER_BASIS,
   isDocumentTab,
-  isTrainingValuesNote,
   readAsset,
   type AssetView,
   type DocumentTab,
 } from "@/db/queries/assets";
 import { DOCUMENT_CLASS_LABEL, findingLocator } from "@/db/queries/documents-view";
+import { TRIP_BOILERPLATE_RULE } from "@/db/queries/interlock";
 import { preferenceOrder } from "@/db/queries/failures";
 import { activeVersion } from "@/db/versions";
 import { log } from "@/lib/log";
@@ -55,8 +54,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag } = await params;
   return { title: `Asset ${decodeURIComponent(tag)}` };
 }
-
-const LOGIC_KIND_LABEL = { trip_logic: "trip logic", control_loop_only: "control loop only" } as const;
 
 /** A field the sheet does not print is stated, never left as an empty cell or a dangling separator. */
 function Stated({ value, absence }: { value: string | null; absence: string }) {
@@ -438,9 +435,11 @@ function PidIndex({ asset }: { asset: AssetView }) {
 }
 
 // ---------------------------------------------------------------------------------------------------------------
-// The interlock summary: the sheet's LOGIC No and SIL, its start permissives as their AND gate, its typed rows
-// with the vote cell where the row carries one, the marked effects per row, and the sheet's own notes verbatim.
-// ---------------------------------------------------------------------------------------------------------------
+// The interlock section: the cause-and-effect sheet drawn as the matrix it is (6.4 InterlockMatrix; AC-CTX-03).
+// The sheet's LOGIC No with the SIL it states, its start permissives as their AND gate, its rows down the side
+// against the effect columns across the top, and its notes with the citation that opens the page they came from.
+// A sheet that types a control loop states no LOGIC No and no SIL and renders as one; its permissive block is
+// filed under the equipment tag, and the register's trip-boilerplate finding is shown beside the note it reads.
 function InterlockSummary({ asset }: { asset: AssetView }) {
   const lock = asset.interlock;
   if (!lock) {
@@ -453,128 +452,18 @@ function InterlockSummary({ asset }: { asset: AssetView }) {
     );
   }
   const sheet = asset.documents.find((d) => d.document.doc_no === lock.ce_doc_no && d.document.class === "interlock");
-  const tripRows = asset.rows.filter((r) => r.row_kind === "trip");
-
   return (
     <>
-      <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
-        <span className="mono text-[18px] font-medium text-ink-900">{lock.seq_id ?? asset.equipment.interlock_ref}</span>
-        <span className="tag" data-tone="accent">
-          {LOGIC_KIND_LABEL[lock.logic_kind]}
-        </span>
-        {lock.sil_sheet === null ? (
-          <span className="tag">no SIL stated on the sheet</span>
-        ) : (
-          <span className="badge" data-tone="accent">
-            SIL {lock.sil_sheet} on the sheet
-          </span>
-        )}
-        {sheet ? (
-          <Link href={`/documents/${encodeURIComponent(sheet.document.id)}`} className="mono draw text-[13px]">
-            {lock.ce_doc_no} rev {lock.ce_revision}
-          </Link>
-        ) : (
-          <span className="mono text-[13px]">
-            {lock.ce_doc_no} rev {lock.ce_revision}
-          </span>
-        )}
-      </div>
-
-      <div className="mt-5">
-        <p className="eyebrow mb-2">Start permissives</p>
-        {asset.permissives.length > 0 && lock.seq_id ? (
-          <div className="max-w-[860px]">
-            <PermissiveGate seqId={lock.seq_id} gate={lock.permissive_gate} permissives={asset.permissives} />
-          </div>
-        ) : (
-          <p className="m-0 text-[12.5px] text-ink-700">The sheet lists no start permissive for this function.</p>
-        )}
-      </div>
-
-      <div className="mt-6 overflow-x-auto">
-        <p className="eyebrow mb-2">Typed rows</p>
-        {asset.rows.length > 0 ? (
-          <table className="reg">
-            <thead>
-              <tr>
-                <th scope="col">Row</th>
-                <th scope="col">Kind</th>
-                <th scope="col">Initiator</th>
-                <th scope="col">Instrument tag</th>
-                <th scope="col">Setpoint</th>
-                <th scope="col">Vote cell</th>
-                <th scope="col">Source</th>
-              </tr>
-            </thead>
-            <tbody>
-              {asset.rows.map((r) => (
-                <tr key={r.id}>
-                  <td className="mono font-medium text-ink-900">{r.row_id}</td>
-                  <td>
-                    <span className="tag" data-tone={r.row_kind === "trip" ? "defect" : r.row_kind === "alarm" ? "caveat" : undefined}>
-                      {r.row_kind}
-                    </span>
-                  </td>
-                  <td>
-                    <span className="verbatim">{r.initiator}</span>
-                  </td>
-                  <td>
-                    <Link href={`#tag-${r.instrument_tag}`} className="mono draw">
-                      {r.instrument_tag}
-                    </Link>
-                  </td>
-                  <td className="mono">
-                    <span className="verbatim">{r.setpoint_text}</span>
-                  </td>
-                  <td className="mono">
-                    {r.voting === null ? (
-                      <span className="text-[11.5px] text-ink-500">no vote cell on this row</span>
-                    ) : (
-                      <span className="verbatim">{r.vote_cell_text}</span>
-                    )}
-                  </td>
-                  <td>
-                    <Chip citation={asset.citations[r.span_id]} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p className="m-0 text-[12.5px] text-ink-700">The sheet types no row for this asset.</p>
-        )}
-      </div>
-
-      {tripRows.length > 0 ? (
-        <div className="mt-6">
-          <p className="eyebrow mb-2">Effects of every trip row</p>
-          <div className="grid gap-4 lg:grid-cols-2">
-            {tripRows.map((r) => (
-              <EffectsRow key={r.id} rowId={r.row_id} effects={r.effects} basis={r.effects_basis} />
-            ))}
-          </div>
-        </div>
-      ) : null}
-
-      {lock.notes.length > 0 ? (
-        <div className="mt-6">
-          <p className="eyebrow mb-2">Sheet notes</p>
-          <ul className="idlist">
-            {lock.notes.map((n) => (
-              <li key={n.n} className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                <span className={isTrainingValuesNote(n.text) ? "verbatim text-caveat" : "verbatim"}>{n.text}</span>
-                {isTrainingValuesNote(n.text) ? (
-                  <span className="badge" data-tone="caveat">
-                    training values
-                  </span>
-                ) : null}
-                <Chip citation={asset.citations[n.span_id]} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
-
+      <InterlockMatrix
+        className="mt-4"
+        interlock={lock}
+        rows={asset.rows}
+        permissives={asset.permissives}
+        permissiveKey={lock.seq_id ?? lock.equipment_tag}
+        citations={asset.citations}
+        ceDocumentId={sheet?.document.id ?? null}
+        finding={asset.integrity_findings.find((f) => f.rule_id === TRIP_BOILERPLATE_RULE) ?? null}
+      />
       <CaveatLine kind="as_built" className="mt-6" />
     </>
   );
@@ -754,8 +643,8 @@ export default async function AssetPage({ params, searchParams }: Props) {
       <Section
         id="interlock"
         index={4}
-        title="Interlock summary"
-        lead="The cause-and-effect sheet as it is written: the LOGIC No, the SIL the sheet states, the start permissives as their gate, the typed rows with their vote cell, and the effects marked against each trip."
+        title="Interlock matrix"
+        lead="The cause-and-effect sheet as it is written: the LOGIC No, the SIL the sheet states, the start permissives as their gate, the typed rows down the side, and the effect columns across the top with the mark the sheet prints in each cell."
       >
         <InterlockSummary asset={asset} />
       </Section>

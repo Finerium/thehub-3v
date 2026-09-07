@@ -30,7 +30,13 @@ const read = (file: string) => readFileSync(path.join(REPO, file), "utf8");
  * A file that only counts sidecars (the tour) shows none, so it is not a point of use. A new one is, and it must
  * state the basis too, either in its own words or by handing the sidecar to HotspotLayer.
  */
-const POINTS_OF_USE = ["src/components/HotspotLayer.tsx", "src/app/(hub)/assets/[tag]/page.tsx", "src/app/(hub)/gallery/page.tsx"];
+const POINTS_OF_USE = [
+  "src/components/HotspotLayer.tsx",
+  "src/components/PidSheet.tsx", // the drawing sheet of AC-CTX-02, with the hotspots placed on it
+  "src/app/(hub)/assets/[tag]/page.tsx",
+  "src/app/(hub)/documents/[id]/page.tsx", // the document viewer, where a P&ID opens its own sheet
+  "src/app/(hub)/gallery/page.tsx",
+];
 const RENDERS_A_SIDECAR = /<HotspotLayer|sidecar\.provenance|sidecar\.hotspots|provenance: p \} = sidecar/;
 
 /** The wordings of D-12 and ADR-007, as the components spell them. */
@@ -54,15 +60,23 @@ describe("AC-ING-12, the basis is stated at every point of use", () => {
     expect(renderers.sort(), "a surface renders a sidecar without being a known point of use").toEqual([...POINTS_OF_USE].sort());
   });
 
-  it.each(POINTS_OF_USE)("%s states the basis and the review status, in its own words or through HotspotLayer", (file) => {
+  // Two components carry the wording: HotspotLayer, which draws the hotspots over a page image, and PidSheet, which
+  // draws the drawing itself. A surface either says the words or hands the WHOLE sidecar to one of them.
+  const DELEGATES = [
+    { tag: "<HotspotLayer", pattern: /<HotspotLayer[^>]*sidecar=\{/ },
+    { tag: "<PidSheet", pattern: /<PidSheet[^>]*sidecar=\{/ },
+  ];
+
+  it.each(POINTS_OF_USE)("%s states the basis and the review status, in its own words or through a component that does", (file) => {
     const source = read(file);
-    if (!source.includes("<HotspotLayer")) {
+    const delegate = DELEGATES.find((d) => source.includes(d.tag));
+    if (!delegate) {
       for (const word of [...BASIS_WORDS, ...REVIEW_WORDS]) expect(source, `${file} does not say "${word}"`).toContain(word);
       return;
     }
-    // A surface that draws the layer inherits its provenance line; what it must not do is draw the hotspots
-    // without it, so the sidecar it passes is the whole sidecar and not a hotspot list.
-    expect(source).toMatch(/<HotspotLayer[^>]*sidecar=\{/);
+    // A surface that draws through a component inherits its provenance line; what it must not do is draw the
+    // hotspots without it, so what it passes is the whole sidecar and not a hotspot list.
+    expect(source, `${file} passes something other than the whole sidecar to ${delegate.tag}`).toMatch(delegate.pattern);
   });
 
   it.each(sidecars())("states agent transcription and review pending over $file (D-12)", ({ sidecar }) => {

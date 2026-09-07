@@ -479,7 +479,10 @@ export async function readAsset(tag: string, versionIds: readonly string[]): Pro
 
   const lock = lockRows[0] ? toInterlock(lockRows[0]) : null;
   const rows = rowRows.map(toInterlockRow);
-  const permissives = lock?.seq_id ? permissiveRows.filter((p) => p.seqId === lock.seq_id).map(toPermissive) : [];
+  // The sheet files its permissives under its LOGIC No, or under the equipment tag where it states none (the
+  // control-loop sheet): keying on seq_id alone drops that block silently. AC-CTX-03.
+  const permissiveKey = lock ? (lock.seq_id ?? lock.equipment_tag) : null;
+  const permissives = permissiveKey === null ? [] : permissiveRows.filter((p) => p.seqId === permissiveKey).map(toPermissive);
   const params = paramRows.map(toParam);
   const sidecar = sidecarRow[0] ? toSidecar(sidecarRow[0]) : null;
 

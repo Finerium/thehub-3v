@@ -233,7 +233,8 @@ This repository, its siblings and the submission artefacts were built with model
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), the implementation architecture in full.
 - [`docs/adr/`](docs/adr/), thirteen decision records, including the provider pin, the extractor pin, the equality gate and the login-required deployment.
-- [`docs/runbook.md`](docs/runbook.md), seed, activation, rotation, recovery, the nightly job, and what to do when the provider is unreachable or the day's budget is spent.
+- [`docs/api.md`](docs/api.md), the API reference: every route with its methods, the permission it asks for and the roles that hold it, its request and response shapes and every status it answers with, generated from the route files and the Zod contracts by `pnpm docs:api` and checked against them by `pnpm docs:api --check`.
+- [`docs/runbook.md`](docs/runbook.md), seed, activation, rotation, recovery, the nightly job, the health alert, and what to do when the provider is unreachable or the day's budget is spent.
 - [`docs/DISCLOSURE-AI.md`](docs/DISCLOSURE-AI.md), the AI disclosure.
 - [`CHANGELOG.md`](CHANGELOG.md), what actually landed, dated by its commit.
 
