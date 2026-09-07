@@ -27,8 +27,15 @@ const REPOSITORY_SECRETS = [
 describe("every workflow", () => {
   const files = readdirSync(workflows).filter((f) => f.endsWith(".yml"));
 
-  it("is one of the three M0 workflows or the nightly", () => {
-    expect(files.sort()).toEqual(["ci.yml", "db-migrate-production.yml", "keep-alive.yml", "nightly.yml"]);
+  it("is one of the three M0 workflows, the nightly or a golden tier", () => {
+    expect(files.sort()).toEqual([
+      "ci.yml",
+      "db-migrate-production.yml",
+      "keep-alive.yml",
+      "nightly.yml",
+      "tier-a.yml",
+      "tier-b.yml",
+    ]);
   });
 
   for (const file of files) {
@@ -179,5 +186,66 @@ describe("ci.yml (Tier A)", () => {
       expect(job).toContain("uses: actions/upload-artifact@");
       expect(job).toContain("path: ${{ runner.temp }}/m0-smoke.json");
     });
+  });
+});
+
+describe("tier-a.yml (the golden set, AC-EVAL-02, 04, 07)", () => {
+  const text = read("tier-a.yml");
+
+  it("runs on every pull request and every push to main, and not on a fork's pull request", () => {
+    expect(text).toContain("pull_request:");
+    expect(text).toMatch(/push:\n\s+branches: \[main\]/);
+    expect(text).toContain("github.event.pull_request.head.repo.full_name == github.repository");
+  });
+
+  it("seeds a disposable database, starts next and runs Tier A against it with the ingest", () => {
+    expect(text).toContain("image: pgvector/pgvector:pg17");
+    expect(text).toContain("pnpm db:seed --bundle ../thehub-harness/bundle");
+    expect(text).toContain('pnpm exec next start -p "$APP_PORT"');
+    expect(text).toContain("scripts/golden/run.ts --tier A");
+    expect(text).toContain("--ingest");
+    expect(text.indexOf("pnpm db:seed")).toBeLessThan(text.indexOf("scripts/golden/run.ts --tier A"));
+  });
+
+  it("runs the tier twice and diffs the check results (AC-EVAL-07)", () => {
+    expect(text).toContain('--out "$RUNNER_TEMP/golden-2"');
+    expect(text).toContain("diff <(shape");
+    expect(text).toContain("failed: ([.failures[].check] | sort)");
+  });
+
+  it("never clones the corpus into the repository tree and keeps the report as an artifact", () => {
+    expect(text).toContain('git clone -q --depth 1 git@github.com:Finerium/thehub-corpus.git "$RUNNER_TEMP/thehub-corpus"');
+    expect(text).toContain("uses: actions/upload-artifact@");
+  });
+});
+
+describe("tier-b.yml (recorded replay and the live run, 9.16)", () => {
+  const text = read("tier-b.yml");
+
+  it("runs nightly, by hand, and on a pull request touching the rule pack, the gates or the prompts", () => {
+    expect(text).toContain("- cron:");
+    expect(text).toContain("workflow_dispatch:");
+    for (const path of ["src/rulepack/**", "src/gates/**", "prompts/**", "bundle/rulepack/**"]) {
+      expect(text).toContain(`- "${path}"`);
+    }
+  });
+
+  it("sets RECORD_MODE and RECORD_DIR on the application, not on the runner, and keeps the key out of replay", () => {
+    const start = text.slice(text.indexOf("Start next on"), text.indexOf("golden:b ("));
+    expect(start).toContain("RECORD_DIR: ${{ github.workspace }}/recordings");
+    expect(start).toContain("RECORD_MODE: ${{ matrix.mode == 'replay' && 'replay' || 'record' }}");
+    expect(start).toContain("ZAI_API_KEY: ${{ matrix.mode == 'live' && secrets.ZAI_API_KEY || '' }}");
+  });
+
+  it("runs Tier B and ingests a scheduled live run into production", () => {
+    expect(text).toContain("scripts/golden/run.ts --tier B");
+    expect(text).toContain("PRODUCTION_URL: https://thehub-3v.vercel.app");
+    expect(text).toContain('--ingest --ingest-url "$PRODUCTION_URL"');
+    expect(text).toContain('[ "${{ github.event_name }}" != "pull_request" ]');
+  });
+
+  it("keeps the recordings as an artifact for the reviewed re-recording", () => {
+    expect(text).toContain("${{ github.workspace }}/recordings");
+    expect(text).toContain("uses: actions/upload-artifact@");
   });
 });

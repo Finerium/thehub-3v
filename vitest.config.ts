@@ -50,7 +50,7 @@ export default defineConfig({
           // tests/equality holds the ADR-002 gates. They import nothing but the port and read the harness bundle
           // from disk, so they stay hermetic in this project and skip with a message when the bundle is absent
           // (which is every run outside the `seed` CI job, the one job that builds it with `make bundle`).
-          include: ["src/**/*.test.ts", "tests/unit/**/*.test.ts", "tests/equality/**/*.test.ts"],
+          include: ["src/**/*.test.ts", "tests/unit/**/*.test.ts", "tests/equality/**/*.test.ts", "tests/golden/**/*.test.ts"],
         },
       },
       {

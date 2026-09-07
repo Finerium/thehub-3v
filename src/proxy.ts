@@ -8,7 +8,9 @@ import { SESSION_COOKIE, verifySessionCookie } from "@/auth/cookie";
 import { REQUEST_ID_HEADER, REQUEST_PATH_HEADER } from "@/lib/request-id";
 
 // 6.2 surface 14 and 9.9: the reviewer-link route GET /api/auth/tour/:token is not built (D-07).
-const PUBLIC_PATHS = new Set(["/login", "/api/auth/login", "/api/health", "/robots.txt"]);
+// POST /api/evaluation/runs is the CI principal's one route (9.9): it authenticates by Bearer CI_INGEST_TOKEN
+// inside the handler, compared in constant time, so the cookie gate would refuse it before that check could run.
+const PUBLIC_PATHS = new Set(["/login", "/api/auth/login", "/api/health", "/robots.txt", "/api/evaluation/runs"]);
 
 export function proxy(request: NextRequest): NextResponse {
   const requestId = crypto.randomUUID();

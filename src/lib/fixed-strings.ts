@@ -107,3 +107,6 @@ export const HISTORY_TOGGLE_BASIS = "history toggle: superseded revisions includ
 export function familyLinkBasis(familyId: string, label: string, tags: readonly string[]): string {
   return `family link ${familyId} (${label}) named in the question: members on ${tags.join(", ")}`;
 }
+
+/** 6.2 surface 10, AC-EVAL-03: a golden-set category the latest ingested run holds no case for. */
+export const NO_CASES_IN_CATEGORY = "No case of this category ran in this run.";

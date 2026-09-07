@@ -1,0 +1,196 @@
+# Tier A of the golden set (blueprint 9.11, 11.7 AC-EVAL-02, 04, 07; ARCHITECTURE section 10 and track T6): the 50
+# cases that are settled without a provider response, run on every pull request and every push to main against a
+# `next start` on the runner over a disposable seeded database.
+#
+# ci.yml holds the deterministic Tier A checks (contracts, lint, typecheck, unit tests, the coverage thresholds of
+# AC-EVAL-08, the audits, gitleaks, the seed timings). This workflow is the golden lane alone, so a red here names
+# a golden case and nothing else. The two share the corpus checkout and the bundle build because a seeded database
+# is the only thing the answer lane can answer from.
+#
+# Secrets read: CORPUS_DEPLOY_KEY (the read-only corpus key), the three demo passwords (the seed creates the demo
+# accounts from them and the runner logs in with them; no value is ever printed) and CI_INGEST_TOKEN (the runner's
+# own application accepts the report under it). The database credentials below are throwaway values of this job.
+name: Tier A golden set
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: golden-a-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  HARNESS_REF: main
+  APP_PORT: "3181"
+
+jobs:
+  golden-a:
+    runs-on: ubuntu-latest
+    # A fork's pull request has no access to the corpus deploy key, so the golden lane cannot run there.
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    timeout-minutes: 60
+    services:
+      postgres:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: thehub
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      neon-proxy:
+        image: ghcr.io/timowilhelm/local-neon-http-proxy:main
+        env:
+          PG_CONNECTION_STRING: postgres://postgres:postgres@postgres:5432/thehub
+        ports:
+          - 4444:4444
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/thehub
+      DATABASE_URL_UNPOOLED: postgres://postgres:postgres@localhost:5432/thehub
+      APP_ROLE_PASSWORD: thehub-app-ci-only
+      NEON_LOCAL_PROXY: localhost:4444
+      NEON_PRELOAD: --import ${{ github.workspace }}/tests/db/neon-local.mjs
+      DEMO_ENGINEER_PASSWORD: ${{ secrets.DEMO_ENGINEER_PASSWORD }}
+      DEMO_SUPERVISOR_PASSWORD: ${{ secrets.DEMO_SUPERVISOR_PASSWORD }}
+      DEMO_MANAGER_PASSWORD: ${{ secrets.DEMO_MANAGER_PASSWORD }}
+      CI_INGEST_TOKEN: ${{ secrets.CI_INGEST_TOKEN }}
+      BASE_URL: http://127.0.0.1:3181
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6 # the version comes from package.json "packageManager"
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Check out thehub-harness beside the application
+        run: |
+          harness="$GITHUB_WORKSPACE/../thehub-harness"
+          git init -q "$harness"
+          git -C "$harness" fetch -q --depth 1 https://github.com/Finerium/thehub-harness.git "$HARNESS_REF"
+          git -C "$harness" checkout -q FETCH_HEAD
+          git -C "$harness" log -1 --format='harness %H'
+
+      - name: SSH agent with the read-only corpus deploy key
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.CORPUS_DEPLOY_KEY }}
+          log-public-key: false
+
+      - name: Clone the corpus outside the workspace (never inside this repository's tree)
+        run: |
+          mkdir -p ~/.ssh
+          curl -sS https://api.github.com/meta | jq -r '.ssh_keys[] | "github.com \(.)"' >> ~/.ssh/known_hosts
+          git clone -q --depth 1 git@github.com:Finerium/thehub-corpus.git "$RUNNER_TEMP/thehub-corpus"
+
+      - name: Poppler 26.02.0 (the extractor pin, ADR-005, D-11)
+        uses: mamba-org/setup-micromamba@v3
+        with:
+          environment-name: poppler
+          create-args: >-
+            -c conda-forge
+            poppler=26.02.0
+          init-shell: bash
+          cache-environment: true
+
+      - name: The extractor build must read 26.02.0
+        shell: bash -el {0}
+        run: pdftotext -v 2>&1 | head -1 | tee /dev/stderr | grep -F 'pdftotext version 26.02.0'
+
+      - uses: astral-sh/setup-uv@v10.0.1
+        with:
+          python-version: "3.12"
+
+      - name: Harness environment (uv sync --frozen)
+        run: uv sync --frozen --directory "$GITHUB_WORKSPACE/../thehub-harness"
+
+      - name: Cache the pinned embedding model files of the harness (ADR-009)
+        uses: actions/cache@v5
+        with:
+          path: ${{ github.workspace }}/../thehub-harness/.cache/models
+          key: harness-embedding-model-${{ hashFiles('bundle/embedding_pin.json') }}
+
+      - name: make bundle from the corpus checkout (D-17)
+        shell: bash -el {0}
+        env:
+          CASE1_CORPUS: ${{ runner.temp }}/thehub-corpus/CALIBER-2026_The-Case/Supporting Data/Case 1_ Manufacturing Knowledge Hub
+        run: make -C "$GITHUB_WORKSPACE/../thehub-harness" bundle
+
+      - name: Wait for the Neon proxy in front of the service container
+        run: |
+          for attempt in $(seq 1 30); do
+            if curl -s -o /dev/null -X POST "http://$NEON_LOCAL_PROXY/sql" -H 'content-type: application/json' \
+                 -H "Neon-Connection-String: $DATABASE_URL" --data '{"query":"select 1","params":[]}'; then
+              echo "proxy answers after $attempt attempt(s)"; exit 0
+            fi
+            sleep 2
+          done
+          echo "::error::the Neon proxy at $NEON_LOCAL_PROXY did not answer"; exit 1
+
+      - name: Migrate, create the application role and seed corpus version v1
+        env:
+          NODE_OPTIONS: ${{ env.NEON_PRELOAD }}
+        run: |
+          pnpm db:migrate
+          pnpm db:app-role
+          pnpm db:seed --bundle ../thehub-harness/bundle
+
+      - name: The embedder files the ask route traces (ADR-009)
+        run: pnpm models:fetch
+
+      - name: Build the application
+        run: pnpm build
+
+      # The application answers over the Neon HTTP protocol, so it runs behind the same local proxy preload.
+      - name: Start next on ${{ env.APP_PORT }} and wait for /api/health
+        env:
+          NODE_OPTIONS: ${{ env.NEON_PRELOAD }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+        run: |
+          nohup pnpm exec next start -p "$APP_PORT" > "$RUNNER_TEMP/next.log" 2>&1 &
+          for attempt in $(seq 1 60); do
+            if curl -fsS "http://127.0.0.1:$APP_PORT/api/health" -o "$RUNNER_TEMP/health.json"; then
+              jq -r '"health ok, corpus_version \(.corpus_version)"' "$RUNNER_TEMP/health.json"; exit 0
+            fi
+            sleep 2
+          done
+          echo "::error::the application did not answer /api/health"; tail -50 "$RUNNER_TEMP/next.log"; exit 1
+
+      # The golden lane. Non-zero when a hard-gated case fails or is skipped (AC-EVAL-04, 16 of 16). The report is
+      # written before the ingest, so the artifact survives a failed post; the runner's own application takes it
+      # under CI_INGEST_TOKEN as the ci principal (9.7 EvaluationRun, POST /api/evaluation/runs).
+      - name: golden:a (Tier A, 50 cases) and ingest into the runner's own application
+        run: pnpm exec tsx scripts/golden/run.ts --tier A --base-url "http://127.0.0.1:$APP_PORT" --out "$RUNNER_TEMP/golden" --ingest
+
+      # AC-EVAL-07: two runs on identical pins produce identical deterministic-check results. The compared shape is
+      # the per-case verdict and the names of the checks that failed or could not be evaluated; the timings, the
+      # trace ids and the failure wordings are not compared, since a clock is not a check result. A Tier A case
+      # whose answer still reaches the composer will flip this diff, which is the signal AC-EVAL-07 asks for.
+      - name: golden:a again and diff the check results (AC-EVAL-07)
+        run: |
+          pnpm exec tsx scripts/golden/run.ts --tier A --base-url "http://127.0.0.1:$APP_PORT" --out "$RUNNER_TEMP/golden-2"
+          shape() { jq -S '[.results[] | {case_id, verdict, failed: ([.failures[].check] | sort), gaps: ([.unsupported[].check] | sort)}]' "$1"; }
+          diff <(shape "$RUNNER_TEMP/golden/golden-a.json") <(shape "$RUNNER_TEMP/golden-2/golden-a.json")
+
+      - name: Keep the report, the summary and the application log
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: golden-a-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/golden
+            ${{ runner.temp }}/golden-2
+            ${{ runner.temp }}/next.log
+          if-no-files-found: warn

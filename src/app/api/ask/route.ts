@@ -62,7 +62,10 @@ import {
 } from "@/lib/fixed-strings";
 import { log } from "@/lib/log";
 import { clientAddress, limit } from "@/lib/ratelimit";
+import type { InvokeOptions } from "@/gateway/index";
 import { requestIdOf } from "@/lib/request-id";
+// The header the golden runner sets (scripts/golden/client.ts CASE_HEADER); recorded replay keys on it.
+const GOLDEN_CASE_HEADER = "x-golden-case";
 import { classify, entityRows, pack, packVersion, type Classification } from "@/rulepack";
 
 export const maxDuration = 120;
@@ -119,6 +122,10 @@ async function versionFor(sandboxVersionId: string | null): Promise<Version> {
 
 export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _context: unknown, user: SessionUser) => {
   const traceId = requestIdOf(request);
+  // 9.16 recorded replay: the golden runner names the case it is running, and the gateway records or replays under
+  // that name. A request without the header carries no case id, so a visitor's question is never recorded.
+  const caseId = request.headers.get(GOLDEN_CASE_HEADER);
+  const caseOptions: InvokeOptions = caseId === null || caseId === "" ? {} : { case_id: caseId };
   const parsed = Body.safeParse(await request.json().catch(() => null));
   if (!parsed.success) throw new HttpError(400, "invalid_body");
   const { question, mode, include_superseded: includeSuperseded } = parsed.data;
@@ -393,7 +400,7 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
 
     const input: ComposeInput = { question, template, scope, chunks: cited, typed_facts: facts.typed_facts, repair: null };
     const round = async (repair: ComposeInput["repair"], n: 0 | 1) => {
-      const composed = await compose({ ...input, repair }, n);
+      const composed = await compose({ ...input, repair }, n, caseOptions);
       composerCalls += 1;
       calls.push(composed.call);
       return composed;
@@ -405,7 +412,7 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
     else if (composed.outcome !== "ok") providerDown = true;
 
     const gateRound = async (claims: typeof composed.claims) => {
-      const verified = await verify(claims, spansById);
+      const verified = await verify(claims, spansById, caseOptions);
       if (verified.call !== null) calls.push(verified.call);
       if (verified.outcome === "timeout" || verified.outcome === "provider_error") providerDown = true;
       verdictsAll.push(...verified.verdicts);

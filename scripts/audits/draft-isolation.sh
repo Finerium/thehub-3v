@@ -19,6 +19,7 @@
 # frozen section 9 vocabulary, which holds "sme_note" as a provenance type and "draft.created" as an audit action;
 # those files import nothing but zod, which provider-egress.sh asserts).
 #
+# A hit inside a comment line is prose, not a query, and is dropped: a component may say what it renders.
 # A name is a hit only as a whole word, so the permission key `add_sme_note` of src/auth/matrix.ts is not one, and
 # only in the case the schema declares it in, so the contract type `DraftState` of 9.6, which every lane may name,
 # is not one either. The `draft.` prefix is matched case-insensitively, because SQL keywords are written both ways.
@@ -60,6 +61,10 @@ while IFS= read -r hit; do
     # the loop lane
     src/loop/* | src/gates/g3.ts | src/gates/g3/* | src/db/queries/loop.ts | src/db/schema.ts) continue ;;
     src/app/api/drafts/* | src/app/api/sme-notes/* | drizzle/*) continue ;;
+    # the loop's own surfaces and the components that render a draft: 6.2 surfaces 8 and 11 read the draft through
+    # the lane's query module, which is the lane reaching its own tables, not the answer lane reaching them.
+    src/app/\(hub\)/drafts/* | src/app/\(hub\)/demo/* | src/db/queries/drafts-view.ts | src/db/queries/loop-view.ts) continue ;;
+    src/components/Draft*.tsx | src/components/SlotField.tsx | src/components/StateRail.tsx | src/components/DecisionButtons.tsx | src/components/RedlineVerdictPanel.tsx | src/components/RecountMoment.tsx) continue ;;
     # the tests, and the one other path that names the tables without reaching a database
     tests/* | *.test.ts | *.test.tsx | scripts/audits/*) continue ;;
   esac
