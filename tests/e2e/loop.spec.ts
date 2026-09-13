@@ -19,7 +19,10 @@
 //
 // No number below is typed: the cluster comes from GET /api/coverage, the ids from the routes that mint them, the
 // recount from the publication's own answer, and the active version's label from GET /api/health.
-import { expect, test, type APIRequestContext } from "@playwright/test";
+import { mkdir } from "node:fs/promises";
+import path from "node:path";
+import { expect, request, test, type APIRequestContext } from "@playwright/test";
+import { STATE_PATH } from "../../playwright.config";
 import { getJson } from "./helpers";
 import { hasPassword, missingPassword, signIn } from "./roles";
 
@@ -112,6 +115,26 @@ async function pollToPersonOrTerminal(api: APIRequestContext, id: string): Promi
 
 // A retry would request a second live draft and spend the budget again, which is exactly what "run the walk once"
 // forbids. The walk therefore never retries, whatever the project's retry policy is; the run reports what happened.
+// The walk publishes into its sandbox and the numbers move there (D-16). The storage state global-setup minted
+// carries the suite's sandbox, the one every other case compares to the fixture, so this file starts from a
+// sandbox of its own: a login with no cookie is issued a new one at /api/auth/login, and that state is what every
+// case of this file opens with. The suite's sandbox therefore never sees a publication.
+const LOOP_STATE = path.join(path.dirname(STATE_PATH), "loop-sandbox.json");
+test.use({ storageState: LOOP_STATE });
+test.beforeAll(async () => {
+  const baseURL = test.info().project.use.baseURL ?? process.env.PLAYWRIGHT_BASE_URL;
+  // Explicit empty state: inside a test file, newContext inherits this file's storageState option, the very
+  // file this hook is about to write.
+  const api = await request.newContext({ baseURL, storageState: { cookies: [], origins: [] } });
+  try {
+    await signIn(api, "Engineer");
+    await mkdir(path.dirname(LOOP_STATE), { recursive: true });
+    await api.storageState({ path: LOOP_STATE });
+  } finally {
+    await api.dispose();
+  }
+});
+
 test.describe.configure({ retries: 0 });
 
 test.describe.serial("the loop walk (AC-LOOP-13, AC-UI-01)", () => {
