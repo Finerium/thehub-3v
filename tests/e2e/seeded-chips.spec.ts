@@ -3,7 +3,8 @@
 //
 // What a browser can prove of that, and what it cannot. It cannot unplug the provider, so "with the gateway
 // unreachable" is asserted as the property that makes an unreachable gateway survivable: the chip's answer is
-// rebuilt from the stored packet and the trace it leaves records no gateway call at all (9.17, src/answer/seeded.ts).
+// rebuilt from the stored packet and every play links to the one stored trace, which carries the calls of the one
+// live answer that seeded it and gains none from a play (9.17, src/answer/seeded.ts).
 // A chip that reached the provider would carry calls on its trace and fail here.
 //
 // The count is read, never typed: the fleet comes from GET /api/assets and the chips from Home itself, so this file
@@ -84,27 +85,35 @@ test.describe("Home's seeded chips (AC-UI-05)", () => {
     expect(missing, `chip ids whose ?chip= link resolved to no stored packet (${chips.length - missing.length} of ${chips.length} resolved)`).toEqual([]);
   });
 
-  test("a chip plays from storage: the packet renders and its trace records no gateway call", async ({ page }) => {
+  test("a chip plays from storage: the packet renders and two plays link to the one stored trace", async ({ page }) => {
     const chips = await chipsOnHome(page.request, page);
     test.skip(chips.length === 0, "Home renders no seeded chip, so none can be played (see the count case)");
 
     const chip = chips[0];
-    await page.goto(chip.href);
-    // The seeded lead states which chip is playing; the packet is the stored one, rebuilt through the real stream.
-    await expect(page.locator('[data-component="seeded-chip-lead"]')).toBeVisible();
-    await expect(page.locator('[data-component="packet"]')).toBeVisible();
-
-    // The trace the play left, and the gateway calls inside its window: none, which is what survives an
-    // unreachable gateway. The id is read from the surface, never typed.
-    const traceLink = page.locator('a[href^="/trace/"]').first();
-    const href = (await traceLink.getAttribute("href")) ?? "";
-    const id = /^\/trace\/([^/?#]+)/.exec(href)?.[1] ?? "";
-    expect(id.length, "the played packet carried no trace link").toBeGreaterThan(0);
-    const replay = (await getJson(page.request, `/api/trace/${encodeURIComponent(id)}`)) as unknown as {
-      calls: unknown[];
-      calls_expected: number | null;
+    // A play links to the trace it rendered; the id is read from the surface, never typed.
+    const play = async (): Promise<string> => {
+      await page.goto(chip.href);
+      // The seeded lead states which chip is playing; the packet is the stored one, rebuilt through the real stream.
+      await expect(page.locator('[data-component="seeded-chip-lead"]')).toBeVisible();
+      await expect(page.locator('[data-component="packet"]')).toBeVisible();
+      const href = (await page.locator('a[href^="/trace/"]').first().getAttribute("href")) ?? "";
+      const id = /^\/trace\/([^/?#]+)/.exec(href)?.[1] ?? "";
+      expect(id.length, "the played packet carried no trace link").toBeGreaterThan(0);
+      return id;
     };
-    expect(replay.calls, `the seeded chip ${chip.id} reached the gateway`).toEqual([]);
-    expect(replay.calls_expected, `the trace of seeded chip ${chip.id} stamped a non-zero gateway-call count`).toBe(0);
+
+    // Two plays link to one and the same trace: the stored one, whose row carries the calls of the one live answer
+    // that seeded it. A play that reached the gateway would compute a new answer and write a new trace, with a new
+    // id, each time; that is what an unreachable gateway would have broken, and it does not.
+    const first = await play();
+    const second = await play();
+    expect(second, `the seeded chip ${chip.id} computed a new answer instead of replaying its stored trace`).toBe(first);
+    const trace = (await getJson(page.request, `/api/trace/${encodeURIComponent(first)}`)) as unknown as {
+      id: string;
+      model_ids: Record<string, string>;
+    };
+    expect(trace.id).toBe(first);
+    // The stored trace is the seeding answer's, reconciled: it stamps the calls it made, and the play added none.
+    expect(trace.model_ids.gateway_calls, `the stored trace of ${chip.id} carries no gateway-call stamp`).toMatch(/^\d+$/);
   });
 });

@@ -1,6 +1,8 @@
 // AC-CTX-02 (the P&ID hotspot layer), AC-CTX-03 (the interlock matrix), AC-CTX-04 (the connector panel) and
 // AC-CTX-05 (the operational-context panel): the four asset-context surfaces of blueprint 6.2 and 6.4, each of
-// which names a browser check in its own expectation and none of which any spec walked before this file.
+// which names a browser check in its own expectation and none of which any spec walked before this file. Two
+// criteria of other sections name a browser check on the same two surfaces and are proved here beside them:
+// AC-ING-12 (the transcription basis stated on every P&ID render, D-12) and AC-INT-05 (the contextual chips).
 //
 // The conventions are tests/e2e/surfaces.spec.ts's. Nothing here types an id, a count, a setpoint, a digest or a
 // figure of the seeded corpus: every expected value is read at run time from the route that owns it, from
@@ -31,12 +33,20 @@
 //              the panel on every failure surface                   "every asset's failure surface carries the panel ..."
 //              EA-5601 states no protective function                "EA-5601's panel states that no protective function ..."
 //              the demand history stated as not recorded            "the demand history is stated as not recorded ..."
+//   AC-ING-12  the basis and the review status on a P&ID render         "the Set 1 P&ID states the basis it was ..."
+//   AC-INT-05  the CD-1 chip on a citation of OPL-EA-5601-04,          "a citation of OPL-EA-5601-04 carries its ..."
+//              the CD-2 placeholder chip on the Set 1 P&ID
 //
 // WHAT A BROWSER CANNOT CHECK, AND WHY
-//   AC-CTX-02  the hotspots are placed over the sheet's own drawing. This deployment holds no page derivative for
-//              any P&ID (`pid_page_available` is false on all eight), so the underlay is the stated-absence plate
-//              of 6.3 and no case here asserts that a pin sits over the symbol it names. Whether a fractional
+//   AC-CTX-02  the hotspots are placed over the sheet's own drawing. Bundle 1.0.6 gives all eight P&IDs a page
+//              derivative, so the underlay is the sheet itself and the AC-ING-12 case below asserts that it draws;
+//              what no case here asserts is that a pin sits over the symbol it names, because whether a fractional
 //              coordinate lands on the right symbol is a reading of the supplied image, not a DOM fact.
+//   AC-INT-05  that citing the Set 1 P&ID shows its CD-2 placeholder cannot be asserted on a citation: the sheet is
+//              an image, `pdftotext -raw` extracts no span from it, and the CD-2 finding carries `span_id: null`,
+//              so no citation of that document exists anywhere to hang a chip on. The case below asserts the chip
+//              the surface does render for it, the document's own integrity chip, and reads the rule id back out
+//              of the register.
 //   AC-CTX-04  "each contract validates as JSON Schema 2020-12" is a compile, not a render: `pnpm contracts:check`
 //              (scripts/contracts-check.mjs) compiles every schema file with Ajv in 2020-12 strict mode. This file
 //              asserts the served bytes declare that dialect and parse, which is the part a browser can see.
@@ -63,7 +73,9 @@ type Hotspot = {
   drawn_setpoint: string | null;
 };
 
-type Sidecar = { set: number; document_id: string; hotspots: Hotspot[] };
+type Provenance = { basis: string; alias: string; date: string; reviewed_by: string | null; review_status: string };
+
+type Sidecar = { set: number; document_id: string; hotspots: Hotspot[]; provenance: Provenance };
 
 type Effect = { effect_id: string; final_element: string; marked: boolean };
 
@@ -828,5 +840,148 @@ test.describe("the operational-context panel (AC-CTX-05)", () => {
     await page.goto(`/failures/${CONTROL_LOOP_TAG}`);
     await expect(demandBlock().locator("[data-demand]")).toHaveCount(0);
     await expect(demandBlock()).toContainText("No protective function is recorded for this asset, so no demand is inferred against one either.");
+  });
+});
+
+
+// ---------------------------------------------------------------------------------------------------------------
+// AC-ING-12, the transcription basis on a P&ID render (blueprint 11.3, ADR-007, deviation D-12). The sidecar half
+// of the criterion is the harness gate and tests/unit/sidecar-basis.test.ts; what only a browser can say is that
+// the sheet a visitor actually opens states the basis it was transcribed on and that no human has reviewed it yet.
+// ---------------------------------------------------------------------------------------------------------------
+
+/** The wordings D-12 fixes for a sidecar's own provenance values; the surface prints no other. */
+const BASIS_WORDING: Record<string, string> = { agent_transcription: "agent transcription", manual: "manual transcription" };
+const REVIEW_WORDING: Record<string, string> = { pending: "review pending", reviewed: "reviewed" };
+/** An adopted sidecar is an agent's (D-12), so the human wording must appear nowhere on a sheet that renders one. */
+const NOT_THE_BASIS = BASIS_WORDING.manual;
+
+test.describe("the transcription basis of a rendered P&ID (AC-ING-12)", () => {
+  test("the Set 1 P&ID states the basis it was transcribed on and its review status, on the sheet and in an opened hotspot card", async ({ page }) => {
+    const { tag, sidecar } = await sheetOfSet(page.request, 1);
+    const p = sidecar.provenance;
+    expect(p, "the Set 1 sidecar read carries no provenance").toBeDefined();
+    expect(p.basis, "an adopted sidecar carries agent_transcription (ADR-007, D-12)").toBe("agent_transcription");
+    expect(p.review_status, "an adopted sidecar stays pending until a human review is recorded (D-12)").toBe("pending");
+    const basis = BASIS_WORDING[p.basis] as string;
+    const review = REVIEW_WORDING[p.review_status] as string;
+
+    const asset = await assetOf(page.request, tag);
+    expect(asset.pid_page_available, "this deployment holds no page derivative of the Set 1 P&ID, so nothing renders to state a basis on").toBe(true);
+
+    await page.goto(`/documents/${encodeURIComponent(sidecar.document_id)}`);
+    const sheet = sheetAt(page, sidecar.set);
+    await expect(sheet).toBeVisible();
+    // The sheet draws: the basis below is stated on a render of the drawing, not on the stated-absence plate of 6.3.
+    await expect(sheet.locator(`img[data-document="${sidecar.document_id}"]`)).toHaveCount(1);
+
+    const stated = sheet.locator("figcaption.hotspots-provenance");
+    await expect(stated).toBeVisible();
+    await expect(stated).toContainText(basis);
+    await expect(stated).toContainText(review);
+    await expect(stated, "the sheet does not name who transcribed it").toContainText(p.alias);
+    await expect(stated, "the sheet does not carry the date of the transcription").toContainText(p.date);
+
+    // The same two facts inside one opened hotspot card, which is where a reader lands from a pin.
+    const bound = sidecar.hotspots.find((h) => h.bound_tag !== null);
+    expect(bound, `the Set ${sidecar.set} sidecar binds no hotspot, so no card opens`).toBeDefined();
+    await sheet.locator(`a[data-hotspot="${(bound as Hotspot).id}"]`).click();
+    const card = page.locator('[data-component="pid-hotspot-panel"]');
+    await expect(card).toHaveAttribute("data-hotspot", (bound as Hotspot).id);
+    await expect(card, "the opened hotspot card states no transcription basis").toContainText(basis);
+    await expect(card, "the opened hotspot card states no review status").toContainText(review);
+
+    // Nothing on the surface claims a human transcribed this sheet.
+    const surface = (await page.locator("body").textContent()) ?? "";
+    expect(surface.toLowerCase(), `the sheet claims ${NOT_THE_BASIS}`).not.toContain(NOT_THE_BASIS);
+
+    // "On every P&ID render": the same line under every other sheet the fleet carries a sidecar for.
+    const others = (await assetContexts(page.request)).flatMap((a) => (a.hotspots === null || a.hotspots.set === sidecar.set ? [] : [a.hotspots]));
+    expect(others.length, "the fleet carries no second P&ID sidecar").toBeGreaterThan(0);
+    for (const other of others) {
+      await page.goto(`/documents/${encodeURIComponent(other.document_id)}`);
+      const caption = sheetAt(page, other.set).locator("figcaption.hotspots-provenance");
+      await expect(caption, `the Set ${other.set} sheet states no transcription basis`).toContainText(BASIS_WORDING[other.provenance.basis] as string);
+      await expect(caption, `the Set ${other.set} sheet states no review status`).toContainText(REVIEW_WORDING[other.provenance.review_status] as string);
+    }
+    await noErrorState(page);
+  });
+});
+
+// ---------------------------------------------------------------------------------------------------------------
+// AC-INT-05, the contextual chips (blueprint 11.7). The register is read for both document ids and for the rule
+// each chip must name, so the only strings this section types are the two the criterion itself names.
+// ---------------------------------------------------------------------------------------------------------------
+
+/** One row of GET /api/integrity, narrowed to the fields this section reads (9.9). */
+type RegisterFinding = {
+  rule_id: string;
+  rule: string | null;
+  span_id: string | null;
+  document_id: string | null;
+  document: { doc_no: string | null; class: string } | null;
+};
+
+/** The lesson and the two rule ids the criterion names in its own words. */
+const LESSON_WITH_CROSSREF = "OPL-EA-5601-04";
+const CROSSREF_RULE = "CD-1";
+const PLACEHOLDER_RULE = "CD-2";
+
+const findingsOf = async (page: Page, query: string): Promise<RegisterFinding[]> =>
+  (await getJson(page.request, `/api/integrity?${query}&page_size=200`)).findings as RegisterFinding[];
+
+/** The rule ids an integrity chip states, read back out of its accessible name. */
+const chipRules = (label: string): string[] => label.match(/CD-\d{1,2}/g) ?? [];
+
+test.describe("the contextual integrity chips (AC-INT-05)", () => {
+  test(`a citation of ${LESSON_WITH_CROSSREF} carries its ${CROSSREF_RULE} chip, and the Set 1 P&ID carries its ${PLACEHOLDER_RULE} placeholder chip`, async ({ page }) => {
+    // The lesson's document id is the register's own, never typed: the CD-1 listing names the document each finding
+    // stands against, and the one whose sheet number is the lesson the criterion names is the document to open.
+    const crossrefs = await findingsOf(page, `rule=${CROSSREF_RULE}`);
+    const onLesson = crossrefs.filter((f) => f.document?.doc_no === LESSON_WITH_CROSSREF);
+    expect(onLesson.length, `the register opens no ${CROSSREF_RULE} finding on ${LESSON_WITH_CROSSREF}`).toBeGreaterThan(0);
+    const lessonId = onLesson[0].document_id as string;
+    expect(typeof lessonId, `the ${CROSSREF_RULE} finding on ${LESSON_WITH_CROSSREF} names no document`).toBe("string");
+
+    // Every rule the register holds open against that one document, which is what a chip on a citation of it lists.
+    const openOnLesson = new Set((await findingsOf(page, `document=${encodeURIComponent(lessonId)}&observations=true`)).map((f) => f.rule_id));
+    expect([...openOnLesson], `the register filtered by ${LESSON_WITH_CROSSREF} carries no ${CROSSREF_RULE}`).toContain(CROSSREF_RULE);
+
+    await page.goto(`/documents/${encodeURIComponent(lessonId)}`);
+    const cites = page.locator('[data-component="citation-chip"]', { hasText: LESSON_WITH_CROSSREF });
+    const count = await cites.count();
+    expect(count, `nothing on the surface of ${LESSON_WITH_CROSSREF} cites it, so no chip can hang on a citation`).toBeGreaterThan(0);
+    for (let i = 0; i < count; i += 1) {
+      const dot = cites.nth(i).locator('[data-component="integrity-dot"]');
+      await expect(dot, `citation ${i} of ${LESSON_WITH_CROSSREF} carries no integrity chip`).toHaveCount(1);
+      const label = (await dot.getAttribute("aria-label")) ?? "";
+      expect(chipRules(label), `the chip on citation ${i} does not state ${CROSSREF_RULE}`).toContain(CROSSREF_RULE);
+      for (const id of chipRules(label)) expect([...openOnLesson], `the chip states ${id}, which the register does not open on this document`).toContain(id);
+    }
+
+    // The Set 1 P&ID: the sheet is an image, so its CD-2 finding names no span and no citation of it exists; the
+    // chip the surface renders for it is the document's own, and it states the same rule id the register does.
+    const { sidecar } = await sheetOfSet(page.request, 1);
+    const sheetFindings = await findingsOf(page, `document=${encodeURIComponent(sidecar.document_id)}`);
+    const placeholder = sheetFindings.find((f) => f.rule_id === PLACEHOLDER_RULE);
+    expect(placeholder, `the register opens no ${PLACEHOLDER_RULE} finding on the Set 1 P&ID`).toBeDefined();
+    const found = placeholder as RegisterFinding;
+    expect(found.span_id, "the Set 1 P&ID carries a span, so this case understates what can be asserted").toBeNull();
+
+    await page.goto(`/documents/${encodeURIComponent(sidecar.document_id)}`);
+    const chip = page.locator('header [data-component="integrity-dot"]');
+    await expect(chip, "the Set 1 P&ID surface carries no integrity chip of its own").toHaveCount(1);
+    const label = (await chip.getAttribute("aria-label")) ?? "";
+    expect(chipRules(label), `the chip on the Set 1 P&ID does not state ${PLACEHOLDER_RULE}`).toContain(PLACEHOLDER_RULE);
+    const onSheet = new Set(sheetFindings.map((f) => f.rule_id));
+    for (const id of chipRules(label)) expect([...onSheet], `the chip states ${id}, which the register does not open on this sheet`).toContain(id);
+    await expect(chip).toHaveAttribute("href", `/integrity?document=${encodeURIComponent(sidecar.document_id)}`);
+
+    // What CD-2 is about: the drawing number the sheet prints is the placeholder the register recorded against it.
+    await expect(page.locator("h1"), "the sheet prints a drawing number the register does not carry").toHaveText(found.document?.doc_no as string);
+    const findings = page.locator('[aria-labelledby="findings-heading"]');
+    await expect(findings).toContainText(PLACEHOLDER_RULE);
+    await expect(findings, "the finding panel does not name the rule the register names").toContainText(found.rule as string);
+    await noErrorState(page);
   });
 });

@@ -22,7 +22,7 @@
 // The accessibility leg of every one of them is axe.spec.ts and a11y.spec.ts, which walk the same list.
 import { expect, test, type Page } from "@playwright/test";
 import { REQUEST_LESSON_ACTION, STATUS_WORDING } from "../../src/lib/fixed-strings";
-import { TAG, datasheetId, firstClusterId, getJson, headline, readAsset, traceIdFromSearch } from "./helpers";
+import { TAG, datasheetId, firstClusterId, fixtures, getJson, headline, readAsset, traceIdFromSearch } from "./helpers";
 import { SURFACES, VIEWS, settled } from "./inventory";
 
 /** No surface may answer with a server-side designed error state (503) or a Next error overlay. */
@@ -201,6 +201,11 @@ test.describe("the integrity export", () => {
     const rows = Number(lines[6].replace("# rows: ", ""));
     expect(rows).toBeGreaterThan(0);
     expect(lines.length).toBeGreaterThanOrEqual(wanted.length + 1 + rows);
+
+    // The unfiltered export of the deployment carries one row per finding the fixture counts: the row count the
+    // route writes into its header equals fixtures.integrity.total, read at run time, never typed.
+    const fixtureRegisterTotal = (fixtures() as unknown as { integrity: { total: number } }).integrity.total;
+    expect(rows, "the deployed register's row count is not the fixture's").toBe(fixtureRegisterTotal);
   });
 });
 
