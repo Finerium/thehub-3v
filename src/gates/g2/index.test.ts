@@ -87,6 +87,40 @@ describe("a claim that fails several checks is labelled with the first failing c
   });
 });
 
+describe("the outbound screen of 9.10 is enforced over the whole kept answer, not reported", () => {
+  // Each sentence clears C5 on its own ("none"), the two of them together classify defeat: the screen is the only
+  // check that can see it, so a screen that is merely returned lets the assembled instruction leave the gate.
+  const a = claim("s1", "SEQ-6701 protects the pump.", ["sp-opl-1"]);
+  const b = claim("s2", "Bypass it during start-up.", ["sp-opl-1"]);
+
+  it("each sentence alone is kept: neither classifies on its own", () => {
+    for (const c of [a, b]) {
+      const r = runG2(input({ claims: [c] }));
+      expect(r.outbound.blocked).toBe(false);
+      expect(r.kept.map((k) => k.id)).toEqual([c.id]);
+    }
+  });
+
+  it("together the residual classifies defeat, every kept sentence drops under C5 and nothing is kept", () => {
+    const r = runG2(input({ claims: [a, b] }));
+    expect(r.outbound.blocked).toBe(true);
+    expect(r.outbound.classification.intent_class).toBe("defeat");
+    expect(r.kept).toEqual([]);
+    expect(r.dropped.map((d) => [d.claim.id, d.check])).toEqual([
+      ["s1", "C5"],
+      ["s2", "C5"],
+    ]);
+    expect(r.dropped[0].reason).toContain("classifies the outbound answer as defeat");
+  });
+
+  it("a whitelisted lesson is not blocked by its own words (INV-2: a false refusal is a safety failure)", () => {
+    const text = `${a.text} ${b.text}`;
+    const r = runG2(input({ claims: [a, b], whitelisted_spans: [text] }));
+    expect(r.outbound.blocked).toBe(false);
+    expect(r.kept.map((k) => k.id)).toEqual(["s1", "s2"]);
+  });
+});
+
 describe("the gate is deterministic and pure (AC-NFR-06, AC-ANS-07)", () => {
   afterEach(() => {
     vi.useRealTimers();

@@ -74,22 +74,36 @@ while [ "$i" -lt $((limit + 1)) ]; do
 done
 elapsed=$(( $(date +%s) - started ))
 
-accepted="$(grep -cv ' 429$' "$codes" || true)"
+# Accepted means the login route answered: an empty JSON body is a 400, taken after the rate-limit upsert and
+# before any credential lookup. A curl transport failure writes 000 and is neither accepted nor refused, so it is
+# counted apart rather than folded into the accepted side, where it would hide a dead instance behind a green run.
+accepted="$(grep -c ' 400$' "$codes" || true)"
 refused="$(grep -c ' 429$' "$codes" || true)"
-echo "$((limit + 1)) requests over $elapsed s across two instances on address $address: $accepted accepted, $refused refused with 429"
+other="$(grep -cvE ' (400|429)$' "$codes" || true)"
+echo "$((limit + 1)) requests over $elapsed s across two instances on address $address: $accepted accepted (400), $refused refused with 429, $other neither"
 
 if [ "$elapsed" -ge 60 ]; then
   echo "the walk crossed a rate-limit window ($elapsed s); run it again"
   exit 1
 fi
-if [ "$refused" != "1" ] || [ "$accepted" != "$limit" ]; then
-  echo "FAIL: expected exactly $limit accepted and 1 refused, so the counter is shared, not per instance"
+if [ "$refused" != "1" ] || [ "$accepted" != "$limit" ] || [ "$other" != "0" ]; then
+  echo "FAIL: expected exactly $limit accepted, 1 refused and no other code, so the counter is shared, not per instance"
   sort "$codes" | uniq -c
   exit 1
 fi
 
+# The walk alternates strictly, so one instance can serve at most ceil((limit + 1) / 2) of it. That share, not the
+# limit, is what the refusing instance's own count must be bounded by: comparing it against the limit itself is an
+# assertion that no alternating walk can ever fail, and it would stay green if the walk stopped alternating and one
+# instance served the whole limit by itself. Both bounds are stated, the share first because it is the one that can
+# go red, and the walk's own split is printed so a reader sees the two counts the argument rests on.
+share=$(( (limit + 2) / 2 ))
 refuser="$(grep ' 429$' "$codes" | cut -d' ' -f1)"
 own="$(grep -c "^$refuser " "$codes")"
+for port in "$port_a" "$port_b"; do
+  echo "  the instance on $port served $(grep -c "^$port " "$codes") of the $((limit + 1)) requests"
+done
 echo "the 429 was answered by the instance on $refuser, which had served $own of the $((limit + 1)) requests itself"
-[ "$own" -le "$limit" ] || { echo "FAIL: that instance served more than the limit on its own, so the walk proves nothing"; exit 1; }
+[ "$own" -le "$share" ] || { echo "FAIL: the walk did not alternate: that instance served $own of $((limit + 1)), above the share $share, so the split the argument rests on is gone"; exit 1; }
+[ "$own" -lt "$limit" ] || { echo "FAIL: that instance served $own on its own, at or above the limit $limit, so its 429 proves nothing about a shared counter"; exit 1; }
 echo "stateless: the rate-limit counter is shared through Postgres, no instance memory is load-bearing"

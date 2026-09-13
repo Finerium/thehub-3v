@@ -77,6 +77,7 @@ function citationOf(s: EvidenceSpan): Citation {
 
 export function runG2(input: G2Input): G2Result {
   const kept: Claim[] = [];
+  const keptInput: ComposerClaim[] = [];
   const dropped: Dropped[] = [];
   const includeSuperseded = input.include_superseded === true;
   for (const claim of input.claims) {
@@ -91,8 +92,22 @@ export function runG2(input: G2Input): G2Result {
     ];
     const failed = checks.map(([check, run]) => ({ check, reason: run() })).find((r) => r.reason !== null);
     if (failed !== undefined) dropped.push({ claim, check: failed.check, reason: failed.reason ?? "" });
-    else kept.push({ id: claim.id, text: claim.text, citations: resolved.spans.map(citationOf), entailment: ENTAILED });
+    else {
+      kept.push({ id: claim.id, text: claim.text, citations: resolved.spans.map(citationOf), entailment: ENTAILED });
+      keptInput.push(claim);
+    }
   }
+  // The outbound screen of 9.10 over the whole kept answer, not sentence by sentence: C5 cleared each sentence on
+  // its own, and a defeat or a permanent change can be assembled across sentences that each cleared. The screen is
+  // the gate's own decision, so it is enforced here rather than left to a caller to read: a residual that classifies
+  // defeat or permanent_change drops every kept sentence under C5 and the packet abstains. The whitelist is cut
+  // first, so an approved lesson served verbatim never blocks itself (INV-2: a false refusal is a safety failure).
   const outbound = screenOutbound(input.pack, kept.map((c) => c.text).join(" "), input.whitelisted_spans);
+  if (outbound.blocked) {
+    const c = outbound.classification;
+    const reason = `${c.rule_id}: "${c.matched_phrase ?? ""}" classifies the outbound answer as ${c.intent_class}`;
+    for (const claim of keptInput) dropped.push({ claim, check: "C5", reason });
+    kept.length = 0;
+  }
   return { kept, dropped, outbound };
 }

@@ -1,8 +1,10 @@
-// Blueprint 6.4 VerdictStrip: C1 to C6 with pass and fail marks (a glyph and the word, never colour alone), the
-// repair-round count and the trace link. Typed by AnswerTrace.gate_results; each cell's title carries the gate's
-// detail line.
+// Blueprint 6.4 VerdictStrip: C1 to C6 with pass, fail and not-run marks (a glyph and the word, never colour
+// alone), the repair-round count and the trace link. Typed by AnswerTrace.gate_results; each cell's title carries
+// the gate's detail line. A gate that never ran (a refusal, search mode, a composer that never answered) carries
+// the detail GATE_NOT_RUN and is drawn as "not run": a check nobody ran is never a tick.
 import Link from "next/link";
 import type { AnswerTrace } from "@/contracts/generated/serving";
+import { GATE_NOT_RUN } from "@/lib/fixed-strings";
 import { cx } from "./cx";
 import "./system.css";
 
@@ -18,6 +20,7 @@ export type VerdictStripProps = {
 
 const PASS = "pass";
 const FAIL = "fail";
+const NOT_RUN = GATE_NOT_RUN;
 const REPAIR_ROUNDS = "repair rounds";
 const TRACE = "Trace";
 
@@ -27,11 +30,13 @@ export function VerdictStrip({ results, repairRounds, traceHref, className }: Ve
       <span className="verdicts-gates">
         {GATES.map((gate) => {
           const r = results[gate];
+          const ran = r.detail !== GATE_NOT_RUN;
+          const state = !ran ? "not-run" : r.pass ? "true" : "false";
           return (
-            <span key={gate} className="vcell" data-gate={gate} data-pass={r.pass ? "true" : "false"} title={r.detail}>
+            <span key={gate} className="vcell" data-gate={gate} data-pass={state} title={r.detail}>
               {gate}
               <b>
-                <span aria-hidden>{r.pass ? "✓" : "✕"}</span> {r.pass ? PASS : FAIL}
+                <span aria-hidden>{!ran ? "–" : r.pass ? "✓" : "✕"}</span> {!ran ? NOT_RUN : r.pass ? PASS : FAIL}
               </b>
             </span>
           );

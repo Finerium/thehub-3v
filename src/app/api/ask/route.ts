@@ -23,6 +23,7 @@ import {
   clusterFor,
   decide,
   escalationRole,
+  liveReadingQuestion,
   nearestDocuments,
   procedureFor,
   pseudonymise,
@@ -32,7 +33,7 @@ import {
 } from "@/answer/outcome";
 import { procedureOf, type ProcedureBundle } from "@/answer/permit";
 import { retrieve } from "@/answer/retrieve";
-import { resolveScope } from "@/answer/scope";
+import { nearestScope, resolveScope } from "@/answer/scope";
 import { approvedLessonSpans, screenLines, type CitedText } from "@/answer/screen";
 import { evidenceOf, findSeeded, seededTrace } from "@/answer/seeded";
 import { ndjsonResponse, type Emit } from "@/answer/stream";
@@ -56,6 +57,7 @@ import {
   DOCUMENTED_BYPASS_NOTICE,
   ENTAILED,
   HISTORY_TOGGLE_BASIS,
+  LIVE_READING_REASON,
   NO_ASSET_IN_SCOPE_REASON,
   NO_ENTAILED_CLAIM_REASON,
   NO_EVIDENCE_IN_SCOPE_REASON,
@@ -399,9 +401,19 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
     // quotes an approved lesson's anchor text is cleared; a chunk-text whitelist never matches that quotation and the
     // line would be screened as a defeat, which is a false refusal and therefore a safety failure.
     const whitelist = approvedLessonSpans(cited, served);
+    // AC-ANS-06: a question naming a tag-shaped asset the master does not know resolves to an empty scope, so
+    // retrieval returns nothing and the abstention would name no nearest document at all, although the basis line
+    // already names the nearest asset by tag stem. nearestScope reads that asset's own documents for this list
+    // alone: they enter neither the evidence set, nor retrieved_chunk_ids, nor line 1 of the stream, so no
+    // sentence is ever composed about the neighbouring asset.
+    const offered = evidence.length === 0 ? await nearestScope(db, question, box) : null;
+    const nearest =
+      offered === null
+        ? null
+        : await retrieve(db, offered, question, queryVector, { k: RETRIEVAL_K, include_superseded: includeSuperseded, visible_version_ids: visible });
     const ctx: AbstentionContext = {
       escalation_role: escalationRole(question, scope, template),
-      nearest_documents: nearestDocuments(evidence),
+      nearest_documents: nearestDocuments(nearest?.evidence ?? evidence),
       cluster: await clusterFor(scope.tags, version.id),
       served_beside: facts.typed_facts,
     };
@@ -483,6 +495,9 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
     // A task-shaped question that no approved lesson teaches is a declared gap, never a silent omission.
     const lessonGap = taskShaped(template, question) && served === null ? [NO_TASK_LESSON_GAP] : [];
     const declared = [...screenedGaps, ...lessonGap, ...(bypassGap === null ? [] : [bypassGap])];
+    // AC-ANS-06: a question asking for a live or as-built value is told so in the reason, and the typed setpoint
+    // ladder of the cited documents is served beside it (ctx.served_beside), rather than being told that no
+    // sentence answers it. The provider, composer and scope reasons still come first: they say more.
     const reason = providerDown
       ? PROVIDER_UNREACHABLE_REASON
       : composerFailed
@@ -491,7 +506,9 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
           ? NO_ASSET_IN_SCOPE_REASON
           : evidence.length === 0
             ? NO_EVIDENCE_IN_SCOPE_REASON
-            : NO_ENTAILED_CLAIM_REASON;
+            : liveReadingQuestion(question, template)
+              ? LIVE_READING_REASON
+              : NO_ENTAILED_CLAIM_REASON;
     const decision = decide(kept, dropped, declared, reason, ctx);
     const inputs = confidenceInputs(question, retrieval.chunks, decision.claims.flatMap((c) => c.citations));
     const band = confidenceBand(inputs);

@@ -9,12 +9,10 @@
 // full packet rather than a refusal. That makes every chip a question the run is already measured on, and it fills
 // seeded_chip.golden_case_id with the case it came from.
 //
-// The packets are not written into a public repository: a packet carries block items quoted from the corpus, which
-// invariant 7 keeps out of a public tree (the same reason as D-17). What is written for CI is the hash of each
-// stored packet, in bundle/seeded-chips.sha256.json, so a check can prove the chips did not change without
-// publishing a word of the corpus.
-import { createHash } from "node:crypto";
-import { readFileSync, writeFileSync } from "node:fs";
+// Nothing is written into the repository: a packet carries block items quoted from the corpus, which invariant 7
+// keeps out of a public tree (the same reason as D-17), and the chips themselves are database rows. The run's own
+// record is the lines it prints.
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import { inArray } from "drizzle-orm";
 import { ask, login } from "../golden/client";
@@ -24,7 +22,6 @@ import { answerTrace, equipment, seededChip } from "@/db/schema";
 
 const ROOT = path.resolve(__dirname, "..", "..");
 const CASES = path.join(ROOT, "bundle", "golden", "cases.yaml");
-const HASHES = path.join(ROOT, "bundle", "seeded-chips.sha256.json");
 const PER_ASSET = 3;
 
 type Candidate = { caseId: string; question: string; tag: string; answers: boolean };
@@ -78,7 +75,6 @@ async function main(): Promise<number> {
 
   const cookie = await login(baseUrl, "Engineer");
   const rows: { id: string; equipmentTag: string; question: string; goldenCaseId: string; traceId: string }[] = [];
-  const hashes: Record<string, string> = {};
   let failed = 0;
   for (const [index, c] of picked.entries()) {
     const result = await ask(baseUrl, cookie, { question: c.question }, c.caseId);
@@ -90,7 +86,6 @@ async function main(): Promise<number> {
     }
     const id = `chip-${c.tag}-${String((index % PER_ASSET) + 1)}`;
     rows.push({ id, equipmentTag: c.tag, question: c.question, goldenCaseId: c.caseId, traceId });
-    hashes[id] = createHash("sha256").update(JSON.stringify(result.packet)).digest("hex");
     process.stdout.write(`  ${id} ${c.caseId} ${result.packet.outcome} ${result.latency_ms} ms\n`);
   }
 
@@ -98,14 +93,14 @@ async function main(): Promise<number> {
     process.stdout.write("chips: nothing to write\n");
     return 1;
   }
-  // The chips are replaced whole, so a re-run leaves no chip from an earlier corpus version behind.
-  const ids = rows.map((r) => r.id);
-  await db.delete(seededChip).where(inArray(seededChip.id, ids));
+  // The chips are replaced whole: every row goes, then this run's rows are written. Deleting only the ids this run
+  // is about to write would leave a question whose ask failed above with its previous row, and src/answer/seeded.ts
+  // would go on replaying that stored packet from a superseded corpus version. A chip this run could not answer is
+  // therefore absent rather than stale, which Home renders as a missing chip and no reader can mistake.
+  await db.delete(seededChip);
   await db.insert(seededChip).values(rows);
-  writeFileSync(HASHES, `${JSON.stringify({ chips: hashes }, null, 1)}\n`);
   const stored = await db.select({ id: answerTrace.id }).from(answerTrace).where(inArray(answerTrace.id, rows.map((r) => r.traceId)));
-  process.stdout.write(`chips: ${rows.length} written, ${stored.length} of ${rows.length} traces stored, ${failed} question(s) without a packet\n`);
-  process.stdout.write(`hashes: ${HASHES}\n`);
+  process.stdout.write(`chips: ${rows.length} written over a table emptied first, ${stored.length} of ${rows.length} traces stored, ${failed} question(s) without a packet\n`);
   return failed === 0 ? 0 : 1;
 }
 

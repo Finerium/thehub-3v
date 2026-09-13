@@ -92,7 +92,18 @@ export function TraceView({ trace, corpusVersionLabel, className }: TraceViewPro
             <div key={role} className="contents">
               <dt className="mono">{role}</dt>
               <dd>
-                <Id value={model} label={`${role} model id`} />
+                <Id
+                  value={model}
+                  label={
+                    role.endsWith(":prompt_version")
+                      ? `${role.split(":")[0]} prompt version`
+                      : role === "gateway_config_sha256"
+                        ? "gateway configuration hash"
+                        : role === "gateway_calls"
+                          ? "gateway calls"
+                          : `${role} model id`
+                  }
+                />
               </dd>
             </div>
           ))}

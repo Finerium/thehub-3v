@@ -98,7 +98,7 @@ test.describe("the keyboard-only walk of the fourteen surfaces of 6.2 (AC-UI-06)
   for (const { view, title } of VIEWS.filter((v) => !v.view.signedOut)) {
     test(title, async ({ page }) => {
       const opened = await view.open(page.request);
-      await settled(page, opened.href, opened.designed);
+      await settled(page, opened);
 
       // WCAG 2.4.3: the tab order is the document order, so no element may claim a place in it.
       const positive = await page
@@ -122,7 +122,7 @@ test.describe("the keyboard-only walk of the signed-out surface (AC-UI-06)", () 
   for (const { view, title } of VIEWS.filter((v) => v.view.signedOut)) {
     test(title, async ({ page }) => {
       const opened = await view.open(page.request);
-      await settled(page, opened.href, opened.designed);
+      await settled(page, opened);
       expect(await unfocusable(page), `rendered controls that refuse focus on ${opened.href}`).toEqual([]);
       const walk = await tabWalk(page, 15);
       expect(walk.first, "Tab from the top of /login reached no control").not.toBeNull();

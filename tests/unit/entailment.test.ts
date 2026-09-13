@@ -7,10 +7,13 @@
 //   the score  the acceptance arithmetic of 11.7 (at least 27 agreements, at most one false accept), proved in
 //              both directions against stub verdicts, including the run that answers nothing.
 //
-// The live half is one call the Orchestrator makes: `runConfirmation(bundle, (claims, spans) => verify(claims,
-// spans).then((r) => r.verdicts))`, on the AG-4 pin of ADR-001, writing the result, the model ids and the prompt
-// versions back into ADR-001. No test here calls a provider: a unit lane that reached the network would measure
-// the day's budget rather than the verifier.
+// The live half has no runner in this repository: `runConfirmation` is exported by ./entailment and called only
+// by the stub cases below, and there is no script, no package.json entry and no workflow step that calls it with
+// a provider. So AC-EVAL-05's one AG-4 run is still the human-gated remainder ADR-001 records as pending, and
+// whoever takes it makes one call, `runConfirmation(bundle, (claims, spans) => verify(claims, spans).then((r) =>
+// r.verdicts))`, on the AG-4 pin of ADR-001, and writes the result, the model ids and the prompt versions back
+// into ADR-001. No test here calls a provider: a unit lane that reached the network would measure the day's
+// budget rather than the verifier.
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";

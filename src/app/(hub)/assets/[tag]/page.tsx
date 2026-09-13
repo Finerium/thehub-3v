@@ -88,9 +88,9 @@ const ROLE_ORDER: ReadonlyArray<InstrumentTag["role"]> = [
   "unknown",
 ];
 
-function Section({ id, title, lead, children, index }: { id: string; title: string; lead?: ReactNode; children: ReactNode; index: number }) {
+function Section({ id, title, lead, children, index, scrim }: { id: string; title: string; lead?: ReactNode; children: ReactNode; index: number; scrim?: boolean }) {
   return (
-    <GlassPanel className="rise scroll-mt-6 p-6" id={id} aria-labelledby={`${id}-heading`}>
+    <GlassPanel className="rise scroll-mt-6 p-6" id={id} aria-labelledby={`${id}-heading`} scrim={scrim}>
       <div style={stagger(index)}>
         <h2 id={`${id}-heading`} className="text-[20px]">
           {title}
@@ -638,7 +638,7 @@ export default async function AssetPage({ params, searchParams }: Props) {
         <DocumentSet asset={asset} tab={tab} />
       </Section>
 
-      <Section
+      <Section scrim={asset.pid_page_available}
         id="pid"
         index={3}
         title="P&ID index"

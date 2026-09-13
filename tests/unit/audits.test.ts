@@ -1,8 +1,9 @@
 // The deterministic audits as tests (deterministic checks as scripts): the provider-egress audit (INV-4, AC-NFR-10:
 // no code path outside src/gateway/ names or calls a provider) and the draft-isolation audit (ARCHITECTURE 3.2,
 // AC-LOOP-07 static leg: no file outside the loop lane reaches the draft schema) always run; the rule-pack equality
-// gate (ADR-002, AC-ANS-10: the Python reference and the TypeScript port classify every fixture text
-// byte-identically) runs when the harness checkout and its uv environment sit beside this repository, and in CI
+// gate (ADR-002, AC-ANS-10: the Python reference and the TypeScript port classify every fixture text of every
+// fixture group identically, field by field) runs when the harness checkout and its uv environment sit beside
+// this repository, and in CI
 // (ci.yml) otherwise. Every one of them is a script `pnpm audit` runs, so a green test here is the same check CI runs.
 import { spawnSync } from "node:child_process";
 import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -87,12 +88,23 @@ describe("scripts/audits/rulepack-equality.sh (ADR-002, AC-ANS-10)", () => {
       const out = mkdtempSync(path.join(os.tmpdir(), "thehub-rulepack-equality-"));
       try {
         const result = run("rulepack-equality.sh", [out]);
-        expect(result.stdout + result.stderr).toContain("byte-identical");
+        expect(result.stdout + result.stderr).toMatch(/identical/);
         expect(result.status).toBe(0);
         const reference = readFileSync(path.join(out, "reference.json"), "utf8");
         const port = readFileSync(path.join(out, "port.json"), "utf8");
         expect(port).toBe(reference);
-        expect((JSON.parse(port) as unknown[]).length).toBe(30 + 21 + 4);
+        // The population is the pack's own, never a number typed here: reference.json and port.json carry the
+        // fixture texts, which is every fixture group but `outbound` (whose fixtures are lesson screens and get
+        // their own pair of files), so a text group added to the pack and left out of the gate reddens this line.
+        const fixtures = (JSON.parse(readFileSync(path.join(root, "bundle", "rulepack", "v1.json"), "utf8")) as { fixtures: Record<string, unknown[]> }).fixtures;
+        const texts = Object.entries(fixtures).reduce((n, [group, items]) => (group === "outbound" ? n : n + items.length), 0);
+        expect(texts, "the pack declares no fixture text, so this count proves nothing").toBeGreaterThan(0);
+        expect((JSON.parse(port) as unknown[]).length).toBe(texts);
+        // The lesson lane runs only where the corpus is reachable; where it ran, its two files must match too.
+        const outbound = path.join(out, "port-outbound.json");
+        if (existsSync(outbound)) {
+          expect(readFileSync(outbound, "utf8")).toBe(readFileSync(path.join(out, "reference-outbound.json"), "utf8"));
+        }
       } finally {
         rmSync(out, { recursive: true, force: true });
       }

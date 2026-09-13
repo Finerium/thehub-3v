@@ -9,13 +9,19 @@ import { db } from "@/db/client";
 import { answerTrace } from "@/db/schema";
 import { GATE_CHECKS, type Dropped, type GateCheck } from "@/gates/g2";
 import { GATEWAY_CONFIG_SHA256, PROMPTS, ROLE_TABLE, type ChatTask } from "@/gateway";
+import { GATE_NOT_RUN } from "@/lib/fixed-strings";
 
 export type GateResults = AnswerTrace["gate_results"];
 
-/** The 9.7 gate_results: a check passes when it dropped nothing; the detail names what it dropped, or "not run". */
+/**
+ * The 9.7 gate_results: a check passes when it ran and dropped nothing; the detail names what it dropped.
+ * A gate that never ran (a refusal, search mode, a composer that never answered) is recorded with pass false and
+ * the detail GATE_NOT_RUN: the strip reads that detail and renders "not run", never a green tick. Recording it as
+ * a pass told every reader of the trace that six checks had cleared an answer no gate had ever seen.
+ */
 export function gateResults(dropped: readonly Dropped[], ran: boolean): GateResults {
   const entry = (check: GateCheck) => {
-    if (!ran) return { pass: true, detail: "not run" };
+    if (!ran) return { pass: false, detail: GATE_NOT_RUN };
     const mine = dropped.filter((d) => d.check === check);
     return mine.length === 0
       ? { pass: true, detail: "no sentence dropped" }

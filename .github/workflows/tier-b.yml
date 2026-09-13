@@ -12,10 +12,18 @@
 # not on the runner: setting them on the runner alone would leave a "replay" run calling the provider.
 name: Tier B golden set
 
+# By hand, including the replay lane a pull request used to be the only way to reach:
+#   `gh workflow run "Tier B golden set" --ref <branch> -f mode=replay`   (or mode=live, or mode=both)
 on:
   schedule:
     - cron: "20 18 * * *" # 01:20 Asia/Jakarta, after the nightly activation of nightly.yml
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "replay (the recordings of 9.16), live (the provider), or both, which is what a pull request runs"
+        type: choice
+        default: live
+        options: [live, replay, both]
   pull_request:
     paths:
       - "src/rulepack/**"
@@ -43,8 +51,12 @@ jobs:
       fail-fast: false
       matrix:
         # A pull request runs both: replay proves the recordings still match, live proves the rule pack and the
-        # gates behave on the provider before the merge (blueprint 9.11). A scheduled run is live alone.
-        mode: ${{ github.event_name == 'pull_request' && fromJSON('["replay","live"]') || fromJSON('["live"]') }}
+        # gates behave on the provider before the merge (blueprint 9.11). A scheduled run is live alone. A hand
+        # run is whichever lane the dispatch input names, so the replay lane is reachable without a pull request.
+        mode: >-
+          ${{ (github.event_name == 'pull_request' || inputs.mode == 'both')
+              && fromJSON('["replay","live"]')
+              || fromJSON(format('["{0}"]', inputs.mode || 'live')) }}
     services:
       postgres:
         image: pgvector/pgvector:pg17

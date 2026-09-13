@@ -11,13 +11,14 @@
 // The ids the audit needs are read from the routes that own them; nothing here types an id of the seeded corpus.
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
-import { SURFACES, VIEWS, settled } from "./inventory";
+import { SURFACES, VIEWS, settled, type Opened } from "./inventory";
 
 const BLOCKING = new Set(["serious", "critical"]);
 const TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"];
 
-async function audit(page: Page, href: string, designed?: string): Promise<void> {
-  await settled(page, href, designed);
+async function audit(page: Page, opened: Opened): Promise<void> {
+  const { href } = opened;
+  await settled(page, opened);
   const results = await new AxeBuilder({ page }).withTags(TAGS).analyze();
   const blocking = results.violations.filter((v) => BLOCKING.has(v.impact ?? ""));
   const rest = results.violations.filter((v) => !BLOCKING.has(v.impact ?? ""));
@@ -40,13 +41,13 @@ test.describe("axe over every surface of 6.2 (AC-UI-06)", () => {
     expect(SURFACES.filter((s) => s.views.length === 0), "a surface of 6.2 with no address to audit").toEqual([]);
     const retired = SURFACES.flatMap((s) => (s.retired ? [`${s.retired.pattern} (${s.retired.deviation})`] : []));
     expect(retired, "the addresses of 6.2 a deviation removed, each named with its deviation id").toEqual(["/tour/:token (D-07)"]);
-    expect(VIEWS.length, "the addresses this file audits").toBe(18);
+    expect(VIEWS.length, "the addresses this file audits").toBe(19);
   });
 
   for (const { view, title } of VIEWS.filter((v) => !v.view.signedOut)) {
     test(title, async ({ page }) => {
       const opened = await view.open(page.request);
-      await audit(page, opened.href, opened.designed);
+      await audit(page, opened);
     });
   }
 });
@@ -57,7 +58,7 @@ test.describe("axe over the signed-out surface of 6.2 (AC-UI-06)", () => {
   for (const { view, title } of VIEWS.filter((v) => v.view.signedOut)) {
     test(title, async ({ page }) => {
       const opened = await view.open(page.request);
-      await audit(page, opened.href, opened.designed);
+      await audit(page, opened);
     });
   }
 });
@@ -65,5 +66,5 @@ test.describe("axe over the signed-out surface of 6.2 (AC-UI-06)", () => {
 // The component gallery is not a surface of 6.2: it is where the states of 6.3 are drawn from props alone, and the
 // state tour reads it. It is audited here so that a state the tour asserts is also a state axe has measured.
 test.describe("axe over the component gallery (AC-UI-06, the states of 6.3 drawn from props)", () => {
-  test("the gallery", async ({ page }) => audit(page, "/gallery"));
+  test("the gallery", async ({ page }) => audit(page, { href: "/gallery" }));
 });

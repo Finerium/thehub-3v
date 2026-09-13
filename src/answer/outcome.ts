@@ -37,15 +37,24 @@ const LIVE_VALUE_WORDS = new Set(["reading", "readings", "vibration", "temperatu
 const TIME_CUES = ["last night", "yesterday", "today", "right now", "now", "currently", "at the moment", "after", "since", "semalam", "kemarin", "hari ini", "sekarang", "setelah"];
 const ELECTRICAL_WORDS = new Set(["motor", "electrical", "mcc", "breaker", "switchgear", "vfd", "listrik", "kabel"]);
 
+/**
+ * A question asking for a live or as-built value (AC-ANS-06): the reading template, or a value word with a time cue
+ * ("the vibration right now"). The Hub holds no live readings, so such a question abstains with LIVE_READING_REASON
+ * and the typed setpoint ladder beside it, and it routes to the panel operator.
+ */
+export function liveReadingQuestion(question: string, template: Template | null): boolean {
+  if (template === "reading") return true;
+  const lower = question.toLowerCase();
+  return tokens(question).some((t) => LIVE_VALUE_WORDS.has(t)) && TIME_CUES.some((cue) => new RegExp(`\\b${cue}\\b`).test(lower));
+}
+
 /** The escalation role of an abstention or a partial answer, from the fixed set of 9.8; deterministic over the question and the scope. */
 export function escalationRole(question: string, scope: Scope, template: Template | null): EscalationRole {
   const known = new Set([...scope.tags, ...scope.instrument_tags]);
   // a SEQ-nnnn id is a protective function, never an asset tag: it is routed by the interlock branch below (9.3)
   if (tagsIn(question).filter((t) => !/^SEQ-/i.test(t)).some((t) => !known.has(t))) return "Shift Superintendent";
   const toks = tokens(question);
-  const lower = question.toLowerCase();
-  const liveValue = toks.some((t) => LIVE_VALUE_WORDS.has(t)) && TIME_CUES.some((cue) => new RegExp(`\\b${cue}\\b`).test(lower));
-  if (template === "reading" || liveValue) return "Panel operator on shift";
+  if (liveReadingQuestion(question, template)) return "Panel operator on shift";
   if (template === "trip" || template === "readiness" || scope.instrument_tags.length > 0 || toks.some((t) => t.startsWith("seq-"))) {
     return "On-call Instrument and Control engineer";
   }

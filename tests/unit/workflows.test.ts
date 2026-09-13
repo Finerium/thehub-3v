@@ -42,6 +42,13 @@ describe("every workflow", () => {
     ]);
   });
 
+  // A trigger nobody can raise is a lane nobody has run: until workflow_dispatch landed on ci.yml and tier-a.yml,
+  // the `on: pull_request` half of both, and tier-b's replay lane, waited on a pull request this repository has
+  // never had. `gh workflow run "<name>" --ref <branch>` is what a reader runs instead.
+  it("can be started by hand, so no half of it waits on an event nobody has raised", () => {
+    for (const file of files) expect(read(file), `${file} declares no workflow_dispatch trigger`).toContain("workflow_dispatch:");
+  });
+
   for (const file of files) {
     it(`${file} references repository secrets by a known name only`, () => {
       const named = [...read(file).matchAll(/secrets\.([A-Za-z0-9_]+)/g)].map((m) => m[1]);
@@ -164,6 +171,29 @@ describe("ci.yml (Tier A)", () => {
     expect(checks.indexOf("uv sync --frozen")).toBeLessThan(checks.indexOf("run: pnpm gate:quick"));
   });
 
+  // AC-DEL-02: deck/build.ts is the gate, so a runner that cannot run it must be red, not green with a notice.
+  // Before this, the step was wrapped in `if [ -f ../supplied/team-facts.json ]` and a missing TEAM_FACTS_JSON
+  // printed "deck build skipped" and exited 0 on every push to main.
+  it("fails the deliverables job when the team facts are absent, and skips the deck only on a fork's pull request", () => {
+    const job = text.slice(text.indexOf("\n  deliverables:"), text.indexOf("\n  no-corpus-text:"));
+    const build = job.slice(job.indexOf("Build the deck"), job.indexOf("Build the export"));
+    expect(build).toContain("run: pnpm exec tsx deck/build.ts");
+    expect(build, "the deck build is guarded by a file test again, so an absent secret passes").not.toContain("[ -f");
+    expect(build).toContain("if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository");
+    const facts = job.slice(job.indexOf("Team facts beside the checkout"), job.indexOf("Build the deck"));
+    expect(facts).toContain("FORK_PULL_REQUEST: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}");
+    expect(facts).toContain("exit 1");
+  });
+
+  // AC-VIS-01 to AC-VIS-04: six checks of banned-patterns.sh read the built export and report NOT AUDITED where
+  // there is none. The `checks` job never builds one, so they are read here, after the export step, or nowhere.
+  it("reads the export-dependent audits in the job that builds the export, and reddens on NOT AUDITED", () => {
+    const job = text.slice(text.indexOf("\n  deliverables:"), text.indexOf("\n  no-corpus-text:"));
+    expect(job).toContain("bash scripts/audits/banned-patterns.sh");
+    expect(job).toContain("grep -q '^NOT AUDITED: '");
+    expect(job.indexOf("scripts/export/build.ts")).toBeLessThan(job.indexOf("banned-patterns.sh"));
+  });
+
   it("never clones the corpus into the repository tree", () => {
     expect(text).toContain('git clone -q --depth 1 git@github.com:Finerium/thehub-corpus.git "$RUNNER_TEMP/thehub-corpus"');
   });
@@ -252,8 +282,13 @@ describe("tier-a.yml (the golden set, AC-EVAL-02, 04, 07)", () => {
     expect(required.length, "seed-m0.ts named no account variable, so this check proves nothing").toBeGreaterThan(0);
     const step = text.slice(text.indexOf("Migrate, create the application role"), text.indexOf("The embedder files"));
     expect(step).toContain("pnpm db:seed:m0");
-    const declared = new Set([...text.matchAll(/^\s+([A-Z0-9_]+): \$\{\{ secrets\.[A-Z0-9_]+ \}\}$/gm)].map((m) => m[1] as string));
-    for (const name of required) expect([...declared], `the seed reads ${name} and no step declares it`).toContain(name);
+    // Only two scopes reach that step: the job's own env block and the step's. A password declared on some other
+    // step, or in another job, is not in the seed's environment, so reading the whole file proves nothing.
+    const jobEnv = text.slice(text.indexOf("\n    env:\n"), text.indexOf("\n    steps:\n"));
+    expect(jobEnv.length, "the job-level env block was not found, so this check reads nothing").toBeGreaterThan(0);
+    const secretEnv = /^\s+([A-Z0-9_]+): \$\{\{ secrets\.[A-Z0-9_]+ \}\}$/gm;
+    const declared = new Set([jobEnv, step].flatMap((scope) => [...scope.matchAll(secretEnv)].map((m) => m[1] as string)));
+    for (const name of required) expect([...declared], `the seed reads ${name} and neither the job nor the step declares it`).toContain(name);
   });
 });
 
@@ -263,6 +298,10 @@ describe("tier-b.yml (recorded replay and the live run, 9.16)", () => {
   it("runs nightly, by hand, and on a pull request touching the rule pack, the gates or the prompts", () => {
     expect(text).toContain("- cron:");
     expect(text).toContain("workflow_dispatch:");
+    // The replay lane of 9.16 was reachable by a pull request alone, and this repository has never had one:
+    // `gh workflow run "Tier B golden set" --ref <branch> -f mode=replay` is what a reader runs instead.
+    expect(text).toContain("options: [live, replay, both]");
+    expect(text).toContain("inputs.mode");
     for (const path of ["src/rulepack/**", "src/gates/**", "prompts/**", "bundle/rulepack/**"]) {
       expect(text).toContain(`- "${path}"`);
     }

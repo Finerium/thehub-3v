@@ -205,6 +205,38 @@ export async function resolveScope(db: Db, question: string, sandbox: SandboxLik
 }
 
 /**
+ * The nearest asset's own documents, for the abstention alone (AC-ANS-06, 9.8 Abstention.nearest_documents).
+ * A question naming a tag-shaped asset the master does not know resolves to an empty scope, retrieval reads
+ * nothing, and the abstention would send the reader away with an empty list while resolveScope's basis line
+ * already names the nearest asset by tag stem. This returns a scope over that asset's own documents, by
+ * subject_tag and typed references, with no edge hop and no tag: the caller retrieves from it to fill the three
+ * nearest documents and nothing else, so no sentence is ever composed about a neighbouring asset. Null when the
+ * question named no unknown tag with a known stem.
+ */
+export async function nearestScope(db: Db, question: string, sandbox: SandboxLike): Promise<Scope | null> {
+  const master = await q.assetMaster(db);
+  const nearest = nearestAssetTags(question, master.equipment.map((e) => e.tag));
+  if (nearest.length === 0) return null;
+  const byTag = new Map(master.equipment.map((e) => [e.tag, e] as const));
+  const docNos = nearest.flatMap((t) => {
+    const e = byTag.get(t);
+    return e ? [e.datasheetDocNo, e.gaDrawingDocNo, e.plotPlanDocNo, e.ceDocNo] : [];
+  });
+  const documentIds = (await q.documentsOfTags(db, nearest, docNos)).map((d) => d.id).sort();
+  if (documentIds.length === 0) return null;
+  const visible = await visibleVersionIds(sandbox);
+  const revisionIds = (await q.revisionsOf(db, documentIds, visible, false)).map((r) => r.id).sort();
+  return Scope.parse({
+    tags: [],
+    instrument_tags: [],
+    document_ids: documentIds,
+    revision_ids: revisionIds,
+    basis: [`nearest assets by tag stem, read for the nearest documents of the abstention only: ${nearest.join(", ")}`],
+    family_ids: [],
+  });
+}
+
+/**
  * The corpus-wide lexical fallback: the question named no equipment tag, instrument tag, area alias, protective
  * function, work order or family, so instead of abstaining for want of a tag the scope carries every served current
  * revision of the visible corpus and retrieval ranks it by the question's content words. `tags` stays empty on

@@ -12,10 +12,13 @@
 # own application accepts the report under it). The database credentials below are throwaway values of this job.
 name: Tier A golden set
 
+# By hand: `gh workflow run "Tier A golden set" --ref <branch>`. workflow_dispatch exists so the lane a pull
+# request runs can be run without one, on any branch, by anybody with write access.
 on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -31,8 +34,9 @@ env:
 jobs:
   golden-a:
     runs-on: ubuntu-latest
-    # A fork's pull request has no access to the corpus deploy key, so the golden lane cannot run there.
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    # A fork's pull request has no access to the corpus deploy key, so the golden lane cannot run there. Every
+    # other event (push, workflow_dispatch, a pull request from this repository) does have it.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     timeout-minutes: 60
     services:
       postgres:

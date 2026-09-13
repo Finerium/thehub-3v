@@ -14,10 +14,14 @@
 # against the production URL and its JSON is kept as a run artifact. Tier B (nightly, live model) is tier-b.yml.
 name: Tier A
 
+# By hand: `gh workflow run "Tier A" --ref <branch>`. workflow_dispatch exists so the half of this workflow that
+# only a pull request used to reach (the export build, the offline walk, the corpus scan and the seed job) can be
+# run on any branch without opening one; every `if:` below reads "not a fork's pull request" rather than "a push".
 on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -145,6 +149,7 @@ jobs:
       - name: Team facts beside the checkout, when the repository carries them (D-08)
         env:
           TEAM_FACTS_JSON: ${{ secrets.TEAM_FACTS_JSON }}
+          FORK_PULL_REQUEST: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
         run: |
           # supplied/ is the organiser-facing input directory and is in no repository, so the runner needs its own
           # copy of the one file the deck reads from it. The value is written by redirection and never printed.
@@ -152,38 +157,51 @@ jobs:
             mkdir -p "$GITHUB_WORKSPACE/../supplied"
             printf '%s' "$TEAM_FACTS_JSON" > "$GITHUB_WORKSPACE/../supplied/team-facts.json"
             echo "team facts written beside the checkout ($(wc -c < "$GITHUB_WORKSPACE/../supplied/team-facts.json") bytes)"
+          elif [ "${FORK_PULL_REQUEST:-false}" = "true" ]; then
+            echo "::notice::a fork's pull request reaches no repository secret, so the deck build and the sandbox"\
+                 "layer of tests/unit/deck.test.ts do not run here; the hermetic layers still run."
           else
-            echo "::notice::TEAM_FACTS_JSON is not set, so the deck build and the sandbox tests of"\
-                 "tests/unit/deck.test.ts skip in this run and the hermetic layers still run."
+            echo "::error::TEAM_FACTS_JSON is not set on this runner, so AC-DEL-02's gate (deck/build.ts) cannot"\
+                 "run and a green job would mean nothing. Only a fork's pull request may skip it."
+            exit 1
           fi
 
+      # No file guard: the step above has already failed the job wherever the deck can be built and was not, so
+      # reaching this line means either the facts are on disk or this is a fork's pull request, which skips.
       - name: Build the deck (AC-DEL-02; the build is the gate, a red build leaves no artefact)
-        run: |
-          if [ -f "$GITHUB_WORKSPACE/../supplied/team-facts.json" ]; then
-            pnpm exec tsx deck/build.ts
-          else
-            echo "deck build skipped: no team facts on this runner"
-          fi
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        run: pnpm exec tsx deck/build.ts
 
       # D-25: the three artefacts are not tracked, so this checkout carries none of them. The export rebuilds here
       # from the deployment with the demo Engineer, which is the same walk `pnpm export:demo` runs locally, so the
       # budget, the banned strings and the offline walk below measure a real artefact rather than skipping. A fork's
       # pull request has no demo password, and the checks that need the file skip themselves there.
       - name: Build the export from the deployment (AC-DEL-01)
-        if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         env:
           EXPORT_BASE_URL: https://thehub-3v.vercel.app
           DEMO_ENGINEER_PASSWORD: ${{ secrets.DEMO_ENGINEER_PASSWORD }}
         run: pnpm exec tsx scripts/export/build.ts
 
-      - name: Build the pointer sheet (AC-DEL-09; it reads the same fixture the deck reads)
-        if: hashFiles('deck/pointer.ts') != ''
+      # The six checks of scripts/audits/banned-patterns.sh whose subject is the built export (AC-VIS-01 to
+      # AC-VIS-04) report NOT AUDITED and exit 0 wherever deliverables/TheHub_prototype.html is absent, and the
+      # `checks` job that runs `pnpm run audit` never builds one. This is the only job that does, so this is where
+      # those six are read; the grep is what turns "not audited" back into a red build rather than a silent pass.
+      - name: The audits that need the built export (AC-VIS-01 to AC-VIS-04)
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         run: |
-          if [ -f "$GITHUB_WORKSPACE/../supplied/team-facts.json" ]; then
-            pnpm pointer:build
-          else
-            echo "pointer build skipped: no team facts on this runner"
+          set -o pipefail
+          bash scripts/audits/banned-patterns.sh | tee "$RUNNER_TEMP/banned-patterns.log"
+          if grep -q '^NOT AUDITED: ' "$RUNNER_TEMP/banned-patterns.log"; then
+            echo "::error::a banned-patterns check was not audited in the one job that builds the export"
+            exit 1
           fi
+
+      - name: Build the pointer sheet (AC-DEL-09; it reads the same fixture the deck reads)
+        if: >-
+          hashFiles('deck/pointer.ts') != '' &&
+          (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+        run: pnpm pointer:build
 
       - name: The deck and the video contracts (AC-DEL-02, AC-DEL-03, AC-DEL-06)
         run: pnpm exec vitest run --project unit tests/unit/deck.test.ts tests/unit/video.test.ts
@@ -203,7 +221,7 @@ jobs:
       # read-only surface of 6.2 and asserts that nothing was asked for. A checkout without the built export fails
       # here rather than skipping, because an export nobody can open is the one result a judge would find first.
       - name: The offline export opens from file:// and reaches every surface (AC-DEL-01)
-        if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         run: pnpm exec playwright test --project=export
 
       - name: Keep the Playwright report of the offline export walk
@@ -228,7 +246,7 @@ jobs:
   no-corpus-text:
     runs-on: ubuntu-latest
     # The deploy key is a repository secret, absent on a pull request from a fork.
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     steps:
       - uses: actions/checkout@v7
 
@@ -288,7 +306,7 @@ jobs:
     # at it. The container credentials below are throwaway values of this job, not secrets; the deploy key is the
     # only secret.
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     timeout-minutes: 45
     services:
       postgres:
@@ -391,6 +409,14 @@ jobs:
 
       # The one job with a bundle on disk, so the one job where the coverage equality gate of ADR-002 can compare
       # anything. Everywhere else it skips with a message; a skip here would be a silent pass, so the run is asserted.
+      # The rule-pack equality audit's outbound lane screens all 56 approved lessons through both implementations
+      # (AC-ANS-10). It needs the lesson texts, which exist only where the bundle was built from the corpus, so it
+      # is required here and merely reported in the corpus-less checks job.
+      - name: Rule-pack equality over the 56 lesson screens (ADR-002, AC-ANS-10)
+        env:
+          RULEPACK_EQUALITY_REQUIRE_OUTBOUND: "1"
+        run: bash scripts/audits/rulepack-equality.sh
+
       - name: Coverage equality gate against the harness bundle (ADR-002, AC-LOOP-01, 02, 03)
         env:
           HARNESS_BUNDLE: ${{ github.workspace }}/../thehub-harness/bundle

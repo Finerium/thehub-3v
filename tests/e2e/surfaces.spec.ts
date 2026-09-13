@@ -16,7 +16,8 @@
 //  11  Guided loop /demo/loop          AC-UI-01 (loop.spec.ts walks it end to end), AC-UI-06
 //  12  Tour /tour                      AC-UI-01, AC-UI-04 (ES1 to ES6 in order: a11y.spec.ts); /tour/:token is
 //                                      retired by D-07, which put the whole deployment behind login
-//  13  Admin /admin                    AC-UI-01, AC-UI-02 (the designed 403), admin.spec.ts for the Admin's own read
+//  13  Admin /admin, /admin/connectors AC-UI-01, AC-UI-02 (the designed 403 on /admin), admin.spec.ts for the
+//                                      Admin's own read; the connector sheet is open to every role (AC-CTX-04)
 //  14  Auth /login, /api/health        AC-UI-01, AC-UI-06 (signed out)
 // The accessibility leg of every one of them is axe.spec.ts and a11y.spec.ts, which walk the same list.
 import { expect, test, type Page } from "@playwright/test";
@@ -239,7 +240,7 @@ test.describe("every surface of 6.2 renders (AC-UI-01)", () => {
   for (const { view, title } of VIEWS.filter((v) => !v.view.signedOut)) {
     test(title, async ({ page }) => {
       const opened = await view.open(page.request);
-      await settled(page, opened.href, opened.designed);
+      await settled(page, opened);
       if (opened.designed) {
         // 6.3: a designed state states what happened and offers the next step; it is never a blank or a trace.
         const state = page.locator(`[data-designed-state="${opened.designed}"]`);

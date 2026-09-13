@@ -16,10 +16,10 @@ beforeEach(() => {
 });
 
 describe("gateResults (9.7)", () => {
-  it("is 'not run' on every check when the gate never ran (a refusal, a search, a composer that never answered)", () => {
+  it("is 'not run' and not a pass on every check when the gate never ran (a refusal, a search, a composer that never answered)", () => {
     const r = gateResults([], false);
     expect(Object.keys(r)).toEqual(["C1", "C2", "C3", "C4", "C5", "C6"]);
-    expect(Object.values(r)).toEqual(Array<{ pass: boolean; detail: string }>(6).fill({ pass: true, detail: "not run" }));
+    expect(Object.values(r)).toEqual(Array<{ pass: boolean; detail: string }>(6).fill({ pass: false, detail: "not run" }));
   });
 
   it("passes every check that dropped nothing and names the dropped sentences on the check that failed them", () => {

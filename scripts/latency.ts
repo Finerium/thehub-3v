@@ -6,7 +6,13 @@
 //
 //   pnpm tsx scripts/latency.ts --base-url https://thehub-3v.vercel.app --out <file.json> \
 //     [--samples 50] [--ask-samples 20] [--idle-minutes 7] [--cold-samples 3] [--user engineer_demo] \
-//     [--question "<a seeded chip question>"] [--trace <id of a trace that exists>] [--gap-ms 40]
+//     [--question "<a seeded chip question>"] [--trace <id of a trace that exists>] [--gap-ms 40] [--fixture-10x]
+//
+// --fixture-10x is the caller's statement that the registers this run measures carry the tenfold rows AC-NFR-17
+// names, which is true only of a run against a disposable database that scripts/load-fixture.ts has multiplied
+// (the deployment is never multiplied, and this probe seeds nothing). Without it the tenfold clause stays
+// not_proven and says so; with it the report's own row counts are the figure a reader recomputes it from, so the
+// --out file is the artefact either way.
 //
 // The password never travels on a command line: it arrives on stdin through tools/secret-pipe.sh
 // (`tools/secret-pipe.sh DEMO_ENGINEER_PASSWORD -- pnpm tsx scripts/latency.ts ...`), or from
@@ -42,6 +48,7 @@ export const NOISE_BOUND_MS = 375; // AC-NFR-03, instrument validation
 export const COLD_FIRST_BYTE_BOUND_MS = 3000; // AC-NFR-05
 export const REGISTER_BOUND_MS = 5000; // AC-NFR-17
 export const EVIDENCE_LINE_BOUND_MS = 2000; // AC-NFR-04, the first stream line
+export const COLD_EXPECTED_STATUS = 200; // AC-NFR-05, the status /api/health owes every cold sample
 
 export type Stats = { n: number; min: number; p50: number; p95: number; max: number; mean: number };
 
@@ -259,14 +266,20 @@ export function verdicts(input: VerdictInput): Verdict[] {
     state: healthOk ? "green" : "red",
     evidence: healthOk ? `ok true, corpus version ${health.corpus_version}, commit ${health.commit?.slice(0, 12)}` : "the route did not answer with ok, a corpus version and a commit",
   };
-  const coldClause: Clause = { clause: `p95 first byte after an idle period under ${COLD_FIRST_BYTE_BOUND_MS} ms, instrument validated`, state: "not_proven", evidence: "" };
+  const coldOff = cold_start.samples.filter((one) => one.status !== COLD_EXPECTED_STATUS);
+  const coldClause: Clause = { clause: `p95 first byte after an idle period under ${COLD_FIRST_BYTE_BOUND_MS} ms, every sample answering ${COLD_EXPECTED_STATUS}, instrument validated`, state: "not_proven", evidence: "" };
   if (!validation.pass) {
     coldClause.evidence = "the instrument did not validate";
   } else if (coldStats === null || coldStats.n === 0) {
     coldClause.evidence = "no cold sample was taken in this run";
+  } else if (coldOff.length > 0) {
+    // A cold sample that did not answer 200 is not a reading of availability: an error page is fast, and a clause
+    // judged on the figure alone would report the fastest possible failure as green.
+    coldClause.state = "red";
+    coldClause.evidence = `${coldOff.length} of ${coldStats.n} cold samples on ${cold_start.route} answered ${JSON.stringify(countStatuses(coldOff))} against an expected 200`;
   } else {
     coldClause.state = coldStats.p95 >= COLD_FIRST_BYTE_BOUND_MS ? "red" : "green";
-    coldClause.evidence = `p95 ${coldStats.p95} ms, max ${coldStats.max} ms over ${coldStats.n} samples, each after ${cold_start.samples[0]?.idle_s ?? 0} s in which this probe made no request`;
+    coldClause.evidence = `p95 ${coldStats.p95} ms, max ${coldStats.max} ms over ${coldStats.n} samples, each after ${cold_start.samples[0]?.idle_s ?? 0} s in which this probe made no request, every one of them 200`;
   }
   const seededClause: Clause = {
     clause: "the seeded path serves with every provider unreachable",
@@ -289,21 +302,31 @@ export function verdicts(input: VerdictInput): Verdict[] {
 
   // AC-NFR-17. Bounded loads.
   const worstRegister = worstOf(registers);
-  const registerClause: Clause = { clause: `the fleet table, the register and the failure history within ${REGISTER_BOUND_MS} ms server time, instrument validated`, state: "not_proven", evidence: "" };
+  const registerOff = registers.filter((route) => route.off_expectation > 0);
+  const registerClause: Clause = { clause: `the fleet table, the register and the failure history within ${REGISTER_BOUND_MS} ms server time, each answering its expected status, instrument validated`, state: "not_proven", evidence: "" };
   if (!validation.pass) {
     registerClause.evidence = "the instrument did not validate";
   } else if (worstRegister === null) {
     registerClause.evidence = "no register route measured";
+  } else if (registerOff.length > 0) {
+    // The same rule the lookup clause applies above: a route that answered 500 on every sample, or redirected to
+    // /login, is a fast error page and not a register rendered inside the bound.
+    registerClause.state = "red";
+    registerClause.evidence = registerOff.map((route) => `${route.path} answered ${JSON.stringify(route.status_counts)} against an expected ${route.expected_status}`).join("; ");
   } else {
     registerClause.state = worstRegister.ttfb_ms.p95 >= REGISTER_BOUND_MS ? "red" : "green";
     registerClause.evidence = registers.map((route) => `${route.path} ${route.rows ?? "n/a"} rows p95 ${route.ttfb_ms.p95} ms (server ${route.server_ms.p95} ms)`).join("; ");
   }
+  const rowsRead = registers.map((route) => `${route.path} ${route.rows ?? "n/a"} rows`).join("; ");
   const fixtureClause: Clause = {
     clause: "under a fixture of 10x rows",
-    state: fixture_10x ? "green" : "not_proven",
+    // The flag is the caller's declaration that scripts/load-fixture.ts multiplied the database this run read, so
+    // the clause is green only beside the row counts it was taken from: those counts are in the report and a
+    // reader recomputes the claim from them rather than from the flag.
+    state: fixture_10x ? registerClause.state : "not_proven",
     evidence: fixture_10x
-      ? "measured under the 10x fixture the criterion names"
-      : "no 10x fixture is seeded and this probe seeds nothing; the readings above were taken at the page-size bound the pagination contract allows (200), so each row count is every row the route can return in one response",
+      ? `taken with --fixture-10x, against a database scripts/load-fixture.ts multiplied (its COPIES clones beside the seeded rows of the fleet, the register and the failure history); rows read this run: ${rowsRead}`
+      : "no 10x fixture is seeded and this probe seeds nothing; the readings above were taken at the page-size bound the pagination contract allows (200), so each row count is every row the route can return in one response. `pnpm tsx scripts/load-fixture.ts` builds the fixture on a disposable database and this probe reports it when run there with --fixture-10x",
   };
   const nfr17Clauses = [registerClause, fixtureClause];
   const nfr17: Verdict = {
@@ -386,6 +409,7 @@ type Options = {
   question: string | null;
   trace: string | null;
   gapMs: number;
+  fixture10x: boolean;
 };
 
 function options(argv: readonly string[]): Options {
@@ -419,6 +443,7 @@ function options(argv: readonly string[]): Options {
     question: flags.get("question") ?? null,
     trace: flags.get("trace") ?? null,
     gapMs: number("gap-ms", 40),
+    fixture10x: flags.get("fixture-10x") === "true",
   };
 }
 
@@ -443,7 +468,8 @@ async function sample(url: string, init: RequestInit): Promise<Sample> {
   };
 }
 
-function countStatuses(samples: readonly Sample[]): Record<string, number> {
+/** The status histogram of any reading that carries one: a route sample or a cold sample. */
+function countStatuses(samples: readonly { status: number }[]): Record<string, number> {
   const counts: Record<string, number> = {};
   for (const one of samples) counts[String(one.status)] = (counts[String(one.status)] ?? 0) + 1;
   return counts;
@@ -769,7 +795,7 @@ async function main(): Promise<void> {
       answer_lane: answerLane,
       cold_start: cold,
       health,
-      fixture_10x: false,
+      fixture_10x: opts.fixture10x,
       base_url: opts.baseUrl,
     });
     write(opts.out, report);

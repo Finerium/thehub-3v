@@ -7,7 +7,12 @@
 //   1. The clean run, `--skip-live`. Thirteen checks run, and the only one that does not pass is the live leg the
 //      flag withheld: every other check on the current tree passes or is named as an owner's remainder. That is
 //      AC-DEL-04 read literally, and it is what makes a green presubmit mean something on the evening it matters.
-//      The run is skipped, with a message, when the three artefacts are not built in this checkout.
+//      It is measured wherever the export exists, which is every CI run of the deliverables job and not only a
+//      machine holding all three artefacts: the video encode needs footage and the demo accounts, so no job
+//      produces it, and requiring it here left the verdict unmeasured in CI. A check whose subject is an artefact
+//      this checkout does not carry reports NOT BUILT and is excluded by name (ABSENT below); every other check
+//      is held to the same verdict it is held to on a machine that has all three. Only a checkout with no export
+//      at all skips, because the stub written below would redden it for the wrong reason.
 //   2. The planted run, always. A TBD_ marker is written into the copied export and the script must exit non-zero
 //      naming it (AC-DEL-05, the placeholder leg of check 7). A marker check that has never fired is a marker check
 //      nobody knows works, and a placeholder reaching a judge is the exact failure the PRD's 26.4 exists to stop.
@@ -38,6 +43,12 @@ const MARKER = "TBD_";
 const LIVE_WITHHELD = "skipped by --skip-live";
 
 const built = MANDATORY.every((f) => existsSync(path.join(DELIVERABLES, f)));
+
+/** The export is the one artefact CI builds, so it is the one the clean run of AC-DEL-04 is measured against. */
+const exportBuilt = existsSync(path.join(DELIVERABLES, "TheHub_prototype.html"));
+
+/** The mandatory uploads this checkout does not carry; a check whose subject is one of them reports NOT BUILT. */
+const ABSENT = MANDATORY.filter((f) => !existsSync(path.join(DELIVERABLES, f)));
 
 const sandbox = mkdtempSync(path.join(os.tmpdir(), "thehub-presubmit-"));
 afterAll(() => rmSync(sandbox, { recursive: true, force: true }));
@@ -110,12 +121,12 @@ describe("tools/presubmit.sh, the clean run (AC-DEL-04)", () => {
     for (const remainder of human) expect(remainder.detail.length).toBeGreaterThan(0);
   });
 
-  it.skipIf(!built)("passes every check that can run on this tree, so only the withheld live leg is outstanding", () => {
+  it.skipIf(!exportBuilt)("passes every check that can run on this tree, so only the withheld live leg is outstanding", () => {
     const failing = cleanVerdicts.filter((v) => v.kind === "FAIL" || v.kind === "NOT BUILT");
-    const unexpected = failing.filter((v) => !v.detail.includes(LIVE_WITHHELD));
+    const unexpected = failing.filter((v) => !v.detail.includes(LIVE_WITHHELD) && !ABSENT.some((f) => v.detail.includes(f)));
     expect(
       unexpected.map((v) => `check ${v.number} (${v.title}): ${v.detail}`),
-      "a check that does not need a network is failing on the current tree",
+      `a check that needs neither a network nor an unbuilt artefact${ABSENT.length > 0 ? ` (absent here: ${ABSENT.join(", ")})` : ""} is failing on the current tree`,
     ).toEqual([]);
     // Exit 1 and not 0: `--skip-live` leaves the live leg unproved, and the script refuses to call that a pass.
     expect(clean.status).toBe(1);

@@ -3,10 +3,10 @@
 //
 // Why the bundle and not a connection: `pnpm db:seed` writes these exact rows (src/db/seed/*.ts reads the same
 // files through src/gates/g1/bundle.ts), and the `unit` project of vitest.config.ts is hermetic by construction.
-// So the data half of each criterion is asserted here against bundle/ (the pulled copy, PULLED.txt bundle_version
-// 1.0.3, the corpus version the deployment is seeded with) and the code half against the modules the surfaces
-// import. `readBundle` parses every row through the generated 9.x Zod, so a row that drifts from the contract
-// fails before an assertion is reached.
+// So the data half of each criterion is asserted here against bundle/ (the pulled copy, at whichever
+// bundle_version bundle/PULLED.txt names, which is the corpus version the deployment is seeded with) and the
+// code half against the modules the surfaces import. `readBundle` parses every row through the generated 9.x
+// Zod, so a row that drifts from the contract fails before an assertion is reached.
 //
 // What each block proves, and what it deliberately does not:
 //
@@ -16,16 +16,21 @@
 //              of `readAsset`, resolved to the span it was read from on the document that makes the reference.
 //   AC-CTX-02  the hotspot data behind sets 1, 2, 4 and 5. Not the rendered layer: no P&ID carries a page
 //              derivative (the harness renders PDFs only and the eight sheets are PNG, run notes open item 2),
-//              so PidIndex renders its designed no-underlay state and no hotspot is clickable today. The e2e
+//              so PidSheet renders its designed no-underlay state and no hotspot is clickable today. The e2e
 //              lane owns the rendered proof once a derivative exists.
 //   AC-CTX-03  what the interlock matrix is given per sheet, including EA-5601 as a control loop whose trip
 //              boilerplate is the open CD-17 finding the page prints beside it.
 //   AC-CTX-04  the three connector contracts, the empty digital-twin deep link, and that no module builds a
-//              connector row anywhere. `GET /api/connectors/:name/schema` does not exist, so the byte-for-byte
-//              clause has no route to answer it; the only connector surface today is the identity panel's badge.
-//   AC-CTX-05  the figures the operational-context panel must bind to when it is built, recomputed from the rows
-//              rather than read from the fixture, plus EA-5601's absent protective function and the one demand
-//              SEQ-1201 carries by inference.
+//              connector row anywhere. The route `GET /api/connectors/:name/schema` and the three-contract panel
+//              are built (src/app/api/connectors/[name]/schema/route.ts, src/components/ConnectorPanel.tsx, the
+//              sheet at src/app/(hub)/admin/connectors/page.tsx); the byte-for-byte clause needs a served
+//              response, so it is proved in the deployment lane by tests/e2e/context.spec.ts ("GET
+//              /api/connectors/:name/schema answers with the repository's contract file byte for byte") and this
+//              hermetic block owns the data half only.
+//   AC-CTX-05  the figures the operational-context panel binds to (src/components/OperationalContextPanel.tsx,
+//              mounted on src/app/(hub)/assets/[tag]/page.tsx), recomputed from the rows rather than read from
+//              the fixture, plus EA-5601's absent protective function, and the demand rule of FR-114 itself
+//              (`inferDemands`, the function the panel's row list comes from) run over the bundle.
 //   AC-CTX-09  the route audit: no bulk, archive, zip or download route exists, and the one page route serves a
 //              single page under ask_read with a private, no-store cache directive.
 //   AC-CTX-10  no asset outside GA-1201A carries a simulated series (today none exists at all), and the two
@@ -37,6 +42,7 @@ import { describe, expect, it } from "vitest";
 import type { Equipment, PidSidecar } from "@/contracts/generated/asset";
 import { DigitalTwinRow } from "@/contracts/generated/edms";
 import { EDGE_KIND_LABEL, equipmentMaster, reconciled, type FleetRow, type MasterRow } from "@/db/queries/assets";
+import { inferDemands, type DemandCandidate, type Initiator } from "@/db/queries/operational-context";
 import { readBundle, type Bundle } from "@/gates/g1/bundle";
 import { STATUS_WORDING } from "@/lib/fixed-strings";
 import { parseYaml } from "../../scripts/golden/yaml";
@@ -60,6 +66,35 @@ const TAGS = ["CT-7801", "DC-3401A", "EA-5601", "FA-8901", "GA-1201A", "KC-4501"
 
 /** downtime_hours is numeric(6,1) in the database, so a sum of the seeded rows carries one decimal, not float dust. */
 const round1 = (n: number): number => Math.round(n * 10) / 10;
+
+/**
+ * The two arguments `operationalContext` hands `inferDemands`, rebuilt from the bundle in the same shape and the
+ * same order the read selects them in: the asset's trip initiators for its own protective function, ordered by
+ * row_id, and the asset's own records, newest first. So a case below runs the shipped rule on the shipped input.
+ */
+function initiatorsFor(b: Bundle, tag: string): Initiator[] {
+  const seqId = b.interlocks.interlocks.find((i) => i.equipment_tag === tag)?.seq_id ?? null;
+  if (seqId === null) return [];
+  return b.interlocks.rows
+    .filter((r) => r.equipment_tag === tag && r.seq_id === seqId && r.row_kind === "trip")
+    .sort((a, z) => a.row_id.localeCompare(z.row_id))
+    .map((r) => ({ row_id: r.row_id, instrument_tag: r.instrument_tag, initiator: r.initiator, setpoint_text: r.setpoint_text, voting: r.voting }));
+}
+
+function candidatesFor(b: Bundle, tag: string): DemandCandidate[] {
+  return b.workOrders
+    .filter((w) => w.equipment_tag === tag)
+    .sort((a, z) => (a.report_date === z.report_date ? a.wo_number.localeCompare(z.wo_number) : z.report_date.localeCompare(a.report_date)))
+    .map((w) => ({
+      wo_number: w.wo_number,
+      report_date: w.report_date,
+      related_interlock: w.related_interlock,
+      problem_description: w.problem_description,
+      root_cause: w.root_cause,
+      corrective_action: w.corrective_action,
+      remarks: w.remarks,
+    }));
+}
 
 /** The asset's document set, by the rule of `readAsset`: the P&ID by id, the four typed classes by doc_no, and every document whose own subject_tag is the asset. */
 function documentSet(b: Bundle, e: Equipment): Set<string> {
@@ -332,18 +367,52 @@ describe.skipIf(skip)("AC-CTX-05: the figures the operational-context panel bind
     expect(b.fixtures?.equipment_master.find((r) => r.tag === "EA-5601")?.sil_sheet ?? null).toBeNull();
   });
 
+  // The rule itself, not a paraphrase of it: `inferDemands` is the function src/db/queries/operational-context.ts
+  // hands the panel, and every case below calls it. A re-implementation here would let the shipped rule widen
+  // (drop the Related_Interlock guard, match a tag inside a longer token) with nothing going red.
   it("no record types a demand, and SEQ-1201's one demand resolves to WO-240003 by the initiator tag", () => {
     const b = bundle();
     // The workbook has no demand column: `related_interlock` names the function a record touches, not a demand on it.
     expect(Object.keys(b.workOrders[0]).filter((k) => k.includes("demand"))).toEqual([]);
-    const initiators = new Set(b.interlocks.rows.filter((r) => r.seq_id === "SEQ-1201" && r.row_kind === "trip").map((r) => r.instrument_tag));
-    const demands = b.workOrders.filter((w) => {
-      if (w.equipment_tag !== "GA-1201A") return false;
-      const text = [w.problem_description, w.root_cause, w.corrective_action, w.remarks ?? ""].join(" ");
-      return /tripped/i.test(text) && [...initiators].some((t) => text.includes(t));
-    });
-    expect(demands.map((w) => w.wo_number)).toEqual(["WO-240003"]);
-    expect(demands[0].problem_description).toContain("VSHH-1201");
+    const demands = inferDemands(candidatesFor(b, "GA-1201A"), initiatorsFor(b, "GA-1201A"));
+    expect(demands.map((d) => d.wo_number)).toEqual(["WO-240003"]);
+    expect(demands[0]?.initiator_tag).toBe("VSHH-1201");
+    expect(demands[0]?.field).toBe("problem_description");
+    expect(demands[0]?.field_text).toContain("VSHH-1201");
+  });
+
+  it("keeps the Related_Interlock guard: a record the corpus already links is never inferred as a demand", () => {
+    const b = bundle();
+    const candidates = candidatesFor(b, "GA-1201A");
+    const linked = candidates.filter((c) => (c.related_interlock ?? "").trim().length > 0);
+    expect(linked.length, "GA-1201A carries no linked record, so this guard would prove nothing").toBeGreaterThan(0);
+    // The negative control: with the guard removed the same rows would be inferred, WO-240006 among them.
+    const unguarded = inferDemands(
+      candidates.map((c) => ({ ...c, related_interlock: null })),
+      initiatorsFor(b, "GA-1201A"),
+    );
+    expect(unguarded.map((d) => d.wo_number)).toContain("WO-240006");
+    expect(inferDemands(candidates, initiatorsFor(b, "GA-1201A")).map((d) => d.wo_number)).not.toContain("WO-240006");
+  });
+
+  it("names a tag as a whole word and needs a trip word in the same field, over the whole fleet", () => {
+    const b = bundle();
+    const tags = [...new Set(b.workOrders.map((w) => w.equipment_tag))].sort();
+    const fleet = tags.flatMap((tag) => inferDemands(candidatesFor(b, tag), initiatorsFor(b, tag)));
+    // Four records over eight assets, and no more: the rule that resolves what the corpus leaves unlinked.
+    expect(fleet.map((d) => d.wo_number).sort()).toEqual(["WO-240003", "WO-240083", "WO-240084", "WO-240088"]);
+    // Every hit states a trip in the very field it was read from, and names its initiator as a whole word.
+    for (const d of fleet) {
+      expect(d.field_text, `${d.wo_number} was inferred from a field that states no trip`).toMatch(/\btrip(?:s|ped|ping)?\b/i);
+      expect(d.field_text).toMatch(new RegExp(`(?<![A-Za-z0-9-])${d.initiator_tag}(?![A-Za-z0-9-])`));
+    }
+    // A tag that only appears inside a longer token is not named: the word boundary is part of the rule.
+    const one = candidatesFor(b, "GA-1201A")[0];
+    expect(one, "GA-1201A carries no record").toBeDefined();
+    const initiator = initiatorsFor(b, "GA-1201A")[0];
+    expect(initiator, "GA-1201A carries no trip initiator").toBeDefined();
+    const glued = { ...(one as DemandCandidate), related_interlock: null, problem_description: `the unit tripped on X${initiator?.instrument_tag}-9`, root_cause: "", corrective_action: "", remarks: null };
+    expect(inferDemands([glued], initiatorsFor(b, "GA-1201A"))).toEqual([]);
   });
 });
 

@@ -5,11 +5,14 @@
 // src/app/api/connectors/contracts.ts: the title, the description, the four x- annotations, the record shapes and
 // their fields, and the digest and byte count of the file the schema route serves. Nothing about a connector is
 // typed here, so a contract that changes changes this panel, and a contract this runtime cannot read is named
-// rather than replaced by a plausible row (blueprint 10.3, AC-VIS-04).
+// rather than replaced by a plausible row (blueprint 10.3, AC-VIS-04). The one sentence below that is not read out
+// of a contract is the note under a $ref: it states where that pointer resolves, which is a fact about the
+// repository layout and not a value of any connector.
 //
 // The status wording is the fixed StatusBadge string of 6.3 and it is only rendered when the contract's own
 // x-status annotation says the same thing; a contract that ever said something else would print its own words in
 // the defect tone instead of being dressed as this one.
+import Link from "next/link";
 import type { ConnectorContract, ConnectorName, SchemaDefinition, SchemaField } from "@/app/api/connectors/contracts";
 import { DIGITAL_TWIN_DEEP_LINK, DIGITAL_TWIN_DEFINITION } from "@/app/api/connectors/contracts";
 import { STATUS_WORDING } from "@/lib/fixed-strings";
@@ -32,6 +35,10 @@ const BLUEPRINT = "Blueprint section";
 const SCHEMA_ID = "Schema id";
 const SHAPES = "Record shapes";
 const REF = "Shape fixed by";
+const REF_ELSEWHERE =
+  "The referenced document is an entity contract of the harness repository, thehub-harness/contracts/entities/. The bundle carries the three connector files and not their siblings, so this pointer resolves against the harness contracts and not against the bytes this route serves.";
+const SHEET_HREF = "/admin/connectors";
+const OPEN_SHEET = "Read the contracts";
 const FIELD = "Field";
 const TYPE = "Type";
 const REQUIRED = "Required";
@@ -155,10 +162,13 @@ function Contract({ contract }: { contract: ConnectorContract }) {
               <p className="mono text-[13px] font-medium text-ink-900">{name}</p>
               <p className="mt-1 max-w-prose text-[12.5px] text-ink-700">{definition.description}</p>
               {definition.properties === undefined ? (
-                <p className="mt-2 text-[12.5px]">
-                  <span className="eyebrow">{REF} </span>
-                  <span className="mono text-ink-900">{definition.$ref ?? ""}</span>
-                </p>
+                <>
+                  <p className="mt-2 text-[12.5px]">
+                    <span className="eyebrow">{REF} </span>
+                    <span className="mono text-ink-900">{definition.$ref ?? ""}</span>
+                  </p>
+                  <p className="mt-1 max-w-prose text-[12px] text-ink-500">{REF_ELSEWHERE}</p>
+                </>
               ) : (
                 <div className="mt-2">
                   <FieldTable definition={definition} />
@@ -223,10 +233,12 @@ export type ConnectorPanelProps = {
   contracts: readonly ConnectorContract[];
   /** The contracts it could not read; named on the panel rather than hidden. */
   unreadable?: readonly ConnectorName[];
+  /** True on the connector sheet itself, which is where the link below would otherwise point at its own address. */
+  onSheet?: boolean;
   className?: string;
 };
 
-export function ConnectorPanel({ contracts, unreadable = [], className }: ConnectorPanelProps) {
+export function ConnectorPanel({ contracts, unreadable = [], onSheet, className }: ConnectorPanelProps) {
   return (
     <section
       className={cx("flex flex-col gap-4", className)}
@@ -237,7 +249,14 @@ export function ConnectorPanel({ contracts, unreadable = [], className }: Connec
         <h2 id="connector-panel-heading" className="text-[20px]">
           {HEADING}
         </h2>
-        <span className="text-[12px] text-ink-500">{`${contracts.length} of ${contracts.length + unreadable.length} contract files read`}</span>
+        <span className="flex flex-wrap items-baseline gap-x-3 text-[12px] text-ink-500">
+          {`${contracts.length} of ${contracts.length + unreadable.length} contract files read`}
+          {onSheet ? null : (
+            <Link href={SHEET_HREF} className="draw text-[12.5px]">
+              {OPEN_SHEET}
+            </Link>
+          )}
+        </span>
       </div>
       <p className="max-w-prose text-[13px] text-ink-700">{INTRO}</p>
 

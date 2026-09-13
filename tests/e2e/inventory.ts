@@ -15,20 +15,18 @@
 //
 // Nothing here types an id of the seeded corpus: every address that carries one resolves it from the route that
 // owns it, the same way helpers.ts does.
-import { expect, type APIRequestContext, type Page } from "@playwright/test";
+import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
 import { TAG, datasheetId, firstClusterId, getJson, readAsset, traceIdFromSearch } from "./helpers";
 
 /** A draft id no browser ever minted, so surface 8's detail route is walked even when the sandbox holds no draft. */
 export const ABSENT_DRAFT_ID = "dr-00000000-0000-4000-8000-000000000000";
 
-/** One address of a surface, as this run opens it. */
-export type Opened = {
-  href: string;
-  /** The designed state this address renders for the demo Engineer, when the full surface is not what it shows. */
-  designed?: "403" | "404";
-  /** Why the designed state and not the surface: stated in the test title so a skip is never silent. */
-  because?: string;
-};
+/**
+ * One address of a surface, as this run opens it. Either the surface itself draws, or a designed state stands in
+ * for it and the run has to say why: the two are one type so that `because` cannot be forgotten, and `settled`
+ * writes it into the test's annotations, where the reporter prints it beside the case that claims the surface.
+ */
+export type Opened = { href: string; designed?: undefined; because?: undefined } | { href: string; designed: "403" | "404"; because: string };
 
 export type View = {
   /** The address as 6.2 writes it. */
@@ -54,10 +52,15 @@ export type Surface = {
 const at = (href: string) => async (): Promise<Opened> => ({ href });
 
 /** Open one address and wait for the surface, or for the designed state that address answers with, to have drawn. */
-export async function settled(page: Page, href: string, designed?: string): Promise<void> {
-  await page.goto(href);
-  if (designed) await expect(page.locator(`[data-designed-state="${designed}"]`)).toBeVisible();
-  else await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+export async function settled(page: Page, opened: Opened): Promise<void> {
+  await page.goto(opened.href);
+  if (opened.designed) {
+    // The case is titled after the surface, so the run records which address drew a designed state instead of it.
+    test.info().annotations.push({ type: "designed state", description: `${opened.href} drew the designed ${opened.designed}: ${opened.because}` });
+    await expect(page.locator(`[data-designed-state="${opened.designed}"]`)).toBeVisible();
+  } else {
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  }
 }
 
 /** The first draft this browser's sandbox holds, or null: a draft costs two provider calls, so no spec makes one. */
@@ -195,6 +198,14 @@ export const SURFACES: readonly Surface[] = [
         // INV-3 as a person meets it: the demo Engineer is told the surface is closed to the role, in a designed
         // state with a next step. The Admin's own read is admin.spec.ts, which skips without ADMIN_PASSWORD.
         open: async () => ({ href: "/admin", designed: "403", because: "this run holds the demo Engineer session, and Admin is closed to every other role (9.9)" }),
+      },
+      {
+        // The connector routes of 9.9 sit under ask_read, which every role holds, so this address turns no role
+        // away and the demo Engineer reads the sheet itself. It lives under /admin because that is where the
+        // deployment's own configuration is inspected, not because it is a second Admin right.
+        pattern: "/admin/connectors",
+        label: "the three connector contracts, each specified, not connected",
+        open: at("/admin/connectors"),
       },
     ],
   },

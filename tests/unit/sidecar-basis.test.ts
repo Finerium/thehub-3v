@@ -7,8 +7,8 @@
 // and none of them is a P&ID, and no sheet renders for a browser to assert on (open item 2 of .crown/notes.md).
 // That gap is in the derivative lane, not in the wording. So this file proves the wording where it lives:
 //
-//   1. every point of use renders the basis, the alias, the date and the review status, and there are exactly
-//      three such points, so a fourth surface that renders a sidecar without the line fails this test;
+//   1. every point of use renders the basis, the alias, the date and the review status, and POINTS_OF_USE below
+//      is the whole list of them, so a surface that renders a sidecar without the line fails this test;
 //   2. rendered over each of the eight bundle sidecars, the line reads "agent transcription ... review pending"
 //      (D-12: they were transcribed by an agent, so "manual" would be the label ADR-007 forbids);
 //   3. where the deployment holds no render for the sheet, the surface says so and keeps the index, which is the

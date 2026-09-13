@@ -26,9 +26,12 @@ D4 Teknik Informatika (Sarjana Terapan), Jurusan Teknik Komputer dan Informatika
 Jurusan Teknik Komputer dan Informatika
 
 # 3. The deck's own out-of-scope row (Feasibility & Roadmap): it names what The Hub deliberately does not do.
-#    Both spans sit inside a denial. The row reads "out of scope" and the sentence begins "Nothing here".
+#    Both spans sit inside a denial. The row reads "out of scope" and the sentence reads, in full, "Case 1 only.
+#    Nothing here forecasts a failure, ranks anything by urgency, assigns work, or aggregates anything by person."
+#    The second entry carries its subject and its negation with it: the bare term on its own would exempt the
+#    banned claim itself everywhere, and any deliverable stating that the product forecasts a failure would pass.
 Prediction, alerting, work assignment
-forecasts a failure
+Nothing here forecasts a failure
 
 # 3. The product's own denials beside the coverage exposure. Check 8 part 3 bans a saving attached to that
 #    figure; these three spans are the sentences that say the figure is not one. Each is the shortest span

@@ -54,6 +54,7 @@ TEAM_FACTS="$WORLD/supplied/team-facts.json"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 DECK_TEXT="$TMP/deck.txt"
+POINTER_TEXT="$TMP/pointer.txt"
 EXPORT_TEXT="$TMP/export.txt"
 
 failures=0
@@ -81,6 +82,14 @@ echo "recorded     $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 # every one of them reads the same bytes a reader would see.
 if [ -f "$DECK" ] && have pdftotext; then
   pdftotext -layout "$DECK" "$DECK_TEXT" 2>/dev/null || true
+fi
+
+# The pointer PDF is the fourth file that may be uploaded, so its words are read the way the deck's are: checks 7,
+# 8 and 9 scan it too. A file that is handed to the organiser is scanned whether or not its own criterion is
+# POLISH; a pointer carrying a placeholder marker, a legacy product name or a sentence outside English would reach
+# the panel exactly as the deck would.
+if [ -f "$POINTER" ] && have pdftotext; then
+  pdftotext -layout "$POINTER" "$POINTER_TEXT" 2>/dev/null || true
 fi
 
 # The export read the way the deck is: the bytes a reader reads. A single-file page carries its stylesheet, its
@@ -293,7 +302,7 @@ check "No placeholder marker survives in any deliverable"
 # ---------------------------------------------------------------------------------------------------------
 MARKER='TBD_'
 hits=""
-for f in "$DECK_TEXT" "$EXPORT" "$NARRATION" video/*.vtt video/*.srt; do
+for f in "$DECK_TEXT" "$POINTER_TEXT" "$EXPORT" "$NARRATION" video/*.vtt video/*.srt; do
   [ -f "$f" ] || continue
   h="$(grep -nF "$MARKER" "$f" 2>/dev/null)" && hits="$hits
 $f: $h"
@@ -318,10 +327,11 @@ if [ -f "$TEAM_FACTS" ]; then
 fi
 
 # ---------------------------------------------------------------------------------------------------------
-check "Banned strings are clean across the deck text, the narration script, the captions and the export"
+check "Banned strings are clean across the deck text, the pointer text, the narration script, the captions and the export"
 # ---------------------------------------------------------------------------------------------------------
 targets=()
 [ -s "$DECK_TEXT" ] && targets+=("$DECK_TEXT")
+[ -s "$POINTER_TEXT" ] && targets+=("$POINTER_TEXT")
 [ -f "$NARRATION" ] && targets+=("$NARRATION")
 [ -f "$EXPORT" ] && targets+=("$EXPORT")
 for c in video/*.vtt video/*.srt; do [ -f "$c" ] && targets+=("$c"); done
@@ -334,11 +344,12 @@ else
 fi
 
 # ---------------------------------------------------------------------------------------------------------
-check "English only across the deck text, the narration, the captions and the export, outside a marked quotation"
+check "English only across the deck text, the pointer text, the narration, the captions and the export, outside a marked quotation"
 # ---------------------------------------------------------------------------------------------------------
-# AC-DEL-06 names four artefacts and this scan reads all four. The export is read as prepared text above: its
-# script blocks, style blocks and base64 payloads are removed first, so the scan reads the page's words. Nothing
-# else about it is exempt, and the organiser's own corpus text on its document surfaces is scanned like the rest.
+# AC-DEL-06 names four artefacts and this scan reads all four, plus the pointer PDF, which is the fifth thing a
+# reader receives. The export is read as prepared text above: its script blocks, style blocks and base64 payloads
+# are removed first, so the scan reads the page's words. Nothing else about it is exempt, and the organiser's own
+# corpus text on its document surfaces is scanned like the rest.
 targets=()
 [ -s "$DECK_TEXT" ] && targets+=("$DECK_TEXT")
 [ -f "$NARRATION" ] && targets+=("$NARRATION")
@@ -350,10 +361,18 @@ if [ -f "$EXPORT" ]; then
     fail "$EXPORT is built but its text could not be prepared (python3 on PATH?), so it was not scanned"
   fi
 fi
+# The four AC-DEL-06 artefacts are counted on their own, and the pointer is added to the scan after the count, so
+# the criterion's own figure stays the criterion's and the fifth path is named rather than folded into it.
+del06="${#targets[@]}"
+if [ -f "$POINTER" ] && [ ! -s "$POINTER_TEXT" ]; then
+  fail "$POINTER is built but its text could not be extracted (pdftotext on PATH?), so it was not scanned"
+fi
+[ -s "$POINTER_TEXT" ] && targets+=("$POINTER_TEXT")
 if [ "${#targets[@]}" -eq 0 ]; then
   absent "none of the deck text, the narration, the captions or the export exists yet"
 elif bash tools/banned-strings.sh --english "${targets[@]}"; then
-  pass "no Indonesian outside tools/quoted-strings.txt, over ${#targets[@]} path(s) including the export"
+  pass "no Indonesian outside tools/quoted-strings.txt, over ${del06} path(s) including the export"
+  [ -s "$POINTER_TEXT" ] && note "the pointer PDF was scanned with them, a fifth path beyond the four AC-DEL-06 names"
 else
   fail "tools/banned-strings.sh --english reported a hit"
 fi

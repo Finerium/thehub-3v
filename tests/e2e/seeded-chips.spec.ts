@@ -60,7 +60,8 @@ test.describe("Home's seeded chips (AC-UI-05)", () => {
     expect(
       chips.length,
       `AC-UI-05 expects ${EXPECTED} seeded chips on Home; the deployment renders ${chips.length}. ` +
-        `Nothing writes a seeded_chip row (scripts/db/seed.ts), so Home draws the designed empty state instead of any chip.`,
+        `scripts/db/seed-chips.ts (\`pnpm db:seed:chips --base-url <deployment>\`) writes the rows and no job runs it: ` +
+        `neither \`pnpm db:seed\` nor any workflow calls it, so this deployment holds none and Home draws the designed empty state.`,
     ).toBe(EXPECTED);
     // Three per asset, over every asset of the fleet: no asset silently carries none and no asset carries four.
     expect([...byTag.entries()].sort(), "seeded chips per asset").toEqual(fleet.assets.map((a) => [a.tag, PER_ASSET] as [string, number]).sort());

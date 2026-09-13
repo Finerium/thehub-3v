@@ -2,9 +2,10 @@
 // unsupported, drawn from the golden set plus the WO-240007 drafting case. AG-4 on its pin must agree with the
 // labels on at least 27 of 30 with at most one false accept.
 //
-// This file is the instrument, not the run. It holds the pair set, resolves each pair's text from the bundle, and
-// scores a set of verdicts against the labels. It calls nothing: `runConfirmation` takes the verdict source as an
-// argument, so the live run passes `verify` from @/answer/verify (one batched, question-blind AG-4 call on its
+// This file is the instrument, not the run, and the run has not been taken: nothing outside this file and its
+// test calls `runConfirmation`. It holds the pair set, resolves each pair's text from the bundle, and scores a
+// set of verdicts against the labels. It calls nothing: `runConfirmation` takes the verdict source as an
+// argument, so a live run would pass `verify` from @/answer/verify (one batched, question-blind AG-4 call on its
 // pin) and the test passes a stub. That is what makes the scoring falsifiable without a provider.
 //
 // Why references and not text. Every pair names a claim id and a span id and nothing else; the sentences and the

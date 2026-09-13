@@ -57,6 +57,10 @@ export function reliefOmitted(variable: string): string {
   return `${RELIEF_OMITTED_FRAGMENT} ${variable} variable.`;
 }
 
+/** 9.7 AnswerTrace.gate_results detail on a check that never ran (a refusal, search mode, a composer that never
+ * answered): the record says so and `pass` is false, because a gate that never ran never passed. */
+export const GATE_NOT_RUN = "not run";
+
 /** 9.8, ARCHITECTURE 13 decision 5: the one gap of a search-mode packet (outcome partial, no claims). */
 export const SEARCH_MODE_GAP = "Search mode: evidence listed, no answer composed";
 

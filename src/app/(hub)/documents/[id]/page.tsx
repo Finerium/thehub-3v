@@ -118,6 +118,7 @@ export default async function DocumentPage({ params, searchParams }: Props) {
   const id = decodeURIComponent(rawId);
   const requestedPage = Number.parseInt(first(query.page) ?? "1", 10);
   const spanId = first(query.span);
+  const requestedHotspot = first(query.hotspot);
   const historyOpen = first(query.history) === "on";
 
   let view: DocumentView | null;
@@ -153,7 +154,7 @@ export default async function DocumentPage({ params, searchParams }: Props) {
   let sheet: PidSheetView | null = null;
   if (d.class === "pid") {
     try {
-      sheet = await readPidSheet(d.id, first(query.hotspot));
+      sheet = await readPidSheet(d.id, requestedHotspot);
     } catch (error) {
       log.error({
         event: "documents.sidecar_read_failed",
@@ -173,7 +174,7 @@ export default async function DocumentPage({ params, searchParams }: Props) {
       <Header view={view} />
 
       <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_420px]">
-        <GlassPanel className="rise p-6" aria-labelledby="page-heading">
+        <GlassPanel className="rise p-6" scrim={sheet?.page_available === true} aria-labelledby="page-heading">
           <div style={stagger(1)}>
             <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
               <h2 id="page-heading" className="text-[20px]">
@@ -227,7 +228,16 @@ export default async function DocumentPage({ params, searchParams }: Props) {
                   hrefFor={hotspotHref}
                 />
                 <div id="hotspot-panel">
-                  {sheet.selected === null ? (
+                  {sheet.selected === null && requestedHotspot !== null ? (
+                    <DesignedState
+                      inline
+                      code="404"
+                      tone="caveat"
+                      title="That hotspot is not on this sheet"
+                      explanation="The address named a hotspot id the adopted sidecar of this document does not carry. The sheet above is the one the address asked for, with every hotspot the sidecar did record; none of them is selected."
+                      reason={`hotspot ${requestedHotspot}`}
+                    />
+                  ) : sheet.selected === null ? (
                     <EmptyState
                       title="No hotspot is selected"
                       explanation="Every hotspot of the sheet opens here: a bound one with the typed rows the seeded corpus carries under its tag, an unbound one with the reason the sidecar recorded for the absent binding."
