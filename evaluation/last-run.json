@@ -1,51 +1,55 @@
 {
   "note": "The tallies of the last complete golden run (tier A and tier B), as the runner reported them. Regenerated from the runner report after every full run; the README prints from this file and the Evaluation surface publishes the same run with its per-case failures.",
-  "recorded": "2026-09-07",
-  "base_url": "https://thehub-3v.vercel.app",
-  "deployment": "1bc744a",
-  "corpus_version": "cv-1.0.1-b5eb2fb76d26",
+  "recorded": "2026-09-13",
+  "base_url": "https://thehub-3v.vercel.app (the CI runners' own stacks, same code and bundle; the reports are ingested into the deployment)",
+  "deployment": "9c4a88c",
+  "corpus_version": "cv-1.0.6-e2dcecac9750",
   "tiers": [
     "A",
     "B"
   ],
   "cases": 102,
-  "pass": 5,
-  "fail": 84,
-  "skipped": 13,
+  "pass": 19,
+  "fail": 73,
+  "skipped": 0,
   "hard_gates_present": 16,
-  "hard_gates_pass": 5,
+  "hard_gates_pass": 13,
   "by_tier": {
     "A": {
       "cases": 50,
-      "pass": 5,
-      "fail": 38,
-      "skipped": 7,
+      "pass": 14,
+      "fail": 31,
+      "skipped": 0,
       "hard_gates_present": 15,
-      "hard_gates_pass": 5,
-      "hard_gates_skipped": 1
+      "hard_gates_pass": 13,
+      "hard_gates_skipped": 0
     },
     "B": {
       "cases": 52,
-      "pass": 0,
-      "fail": 46,
-      "skipped": 6,
+      "pass": 5,
+      "fail": 42,
+      "skipped": 0,
       "hard_gates_present": 1,
       "hard_gates_pass": 0
     }
   },
   "leading_failing_checks": {
-    "string_present": 131,
-    "expected.must_contain": 83,
-    "citation_resolves": 73,
-    "expected.must_cite": 72,
-    "expected.outcome": 51,
-    "numeral_fidelity": 19,
-    "expected.numerals_allowed": 19,
-    "hash_render": 13
+    "string_present": 59,
+    "expected.outcome": 48,
+    "expected.must_contain": 39,
+    "expected.must_cite": 21,
+    "citation_resolves": 21,
+    "expected.numerals_allowed": 18,
+    "numeral_fidelity": 18,
+    "hash_render": 8
   },
-  "skipped_reason": "the case carries a setup the runner cannot satisfy (a published draft, an injected string, an outbound draft); GS-72 is hard-gated, so one gate is unproved rather than failed",
+  "skipped_reason": "no case was skipped in either run of record",
   "not_evaluated": {
     "checks": 196,
     "reason": "the check's arguments reach outside the ask lane (the corpus, the packages, the rule-pack port, a draft, the export or the coverage console); counted as neither pass nor fail"
+  },
+  "runs": {
+    "A": "CI run 34746196338, ingested as A-9c4a88c26cd3-2026-09-13T07:52:28.220Z",
+    "B": "CI run 34746769982 (live dispatch), ingested by the workflow"
   }
 }

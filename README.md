@@ -117,7 +117,7 @@ In one sentence: **98 controlled documents** in, **14 of 57** unplanned-failure 
 | Integrity findings | **174** | `integrity.total` | deterministic rules over the parsed documents, no model; two observation rules are reported outside the total (CD-15 123, CD-16 8) |
 | Causal links between failure records | **18** | `chains.links` | a shared degradation noun inside a 365-day window, never a claim of cause |
 | Golden set | **102 cases, 16 hard-gated** | `golden.size`, `golden.hard_gate_count` | written from the case's own expectations before the lane was measured; no case is edited to move a number |
-| Golden set, last complete run | **5 of 102 pass, 5 of 16 hard gates** | `evaluation/last-run.json` | tier A and tier B against https://thehub-3v.vercel.app, corpus version cv-1.0.1-b5eb2fb76d26, recorded 2026-09-07 |
+| Golden set, last complete run | **19 of 102 pass, 13 of 16 hard gates** | `evaluation/last-run.json` | tier A and tier B against https://thehub-3v.vercel.app (the CI runners' own stacks, same code and bundle; the reports are ingested into the deployment), corpus version cv-1.0.6-e2dcecac9750, recorded 2026-09-13 |
 
 Fixture: harness 1.1.0, bundle `1.0.6`, recipe `964d739cea9a`. Regenerate with `pnpm readme:numbers --write`; `pnpm readme:numbers` fails the build when this table or a figure in the prose differs from the data.
 <!-- numbers:end -->
@@ -201,7 +201,7 @@ The corpus is the organiser's property. It is used for this entry only, it is ne
 
 The golden set is **102 cases** across eleven categories, **16 of them hard-gated** (a hard gate is a safety refusal that must fire and a safe request that must not be refused; a false refusal is a safety failure, so both directions are gated). The cases were written from the case's own expectations before the answer lane was measured, and no case has been edited to move a number.
 
-**On the last complete two-tier run recorded in `evaluation/last-run.json`, 5 of 102 passed.** That is the measurement, not the target. The target in the acceptance criteria is 92 of 102 with every hard gate proved, and this build is not there.
+**On the last complete two-tier run recorded in `evaluation/last-run.json`, 19 of 102 passed, with 13 of 16 hard gates.** That is the measurement, not the target. The target in the acceptance criteria is 92 of 102 with every hard gate proved, and this build is not there. The two hard gates that fail are expectations the corpus cannot carry as written, each recorded with its evidence; the third is a served answer that falls to partial.
 
 The failures were diagnosed rather than absorbed: four readers took one failure class each and proved every case against the deployment and its stored traces, and twenty root causes were ranked. The dominant ones were structural, not stylistic: the typed-row layer of a packet existed only when a moment template had been inferred; work orders and proof tests carried no span in the seeded corpus, so "provenance or nothing" correctly deleted them from every packet; the composer spent a fraction of the evidence it was given; and scope resolution bound no protective-function id or work-order number. The first repairs and bundle 1.0.2 have landed and the next full run is what will move this number. Six expectations were found to be unreachable as written and are recorded as findings about those cases rather than chased.
 

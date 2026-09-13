@@ -55,7 +55,7 @@ test.describe("Home's seeded chips (AC-UI-05)", () => {
     const chips = await chipsOnHome(page.request, page);
     const byTag = new Map<string, number>();
     for (const c of chips) byTag.set(c.tag, (byTag.get(c.tag) ?? 0) + 1);
-    const fleet = (await getJson(page.request, "/api/assets")) as unknown as { assets: Array<{ tag: string }> };
+    const fleet = (await getJson(page.request, "/api/assets")) as unknown as { assets: Array<{ equipment: { tag: string } }> };
 
     expect(
       chips.length,
@@ -64,7 +64,7 @@ test.describe("Home's seeded chips (AC-UI-05)", () => {
         `neither \`pnpm db:seed\` nor any workflow calls it, so this deployment holds none and Home draws the designed empty state.`,
     ).toBe(EXPECTED);
     // Three per asset, over every asset of the fleet: no asset silently carries none and no asset carries four.
-    expect([...byTag.entries()].sort(), "seeded chips per asset").toEqual(fleet.assets.map((a) => [a.tag, PER_ASSET] as [string, number]).sort());
+    expect([...byTag.entries()].sort(), "seeded chips per asset").toEqual(fleet.assets.map((a) => [a.equipment.tag, PER_ASSET] as [string, number]).sort());
     expect(new Set(chips.map((c) => c.id)).size, "two chips share a chip id").toBe(chips.length);
     expect(chips.filter((c) => c.question.length === 0), "a chip with no question on its face").toEqual([]);
   });
@@ -96,9 +96,9 @@ test.describe("Home's seeded chips (AC-UI-05)", () => {
 
     // The trace the play left, and the gateway calls inside its window: none, which is what survives an
     // unreachable gateway. The id is read from the surface, never typed.
-    const traceLink = page.getByRole("link", { name: /trace/i }).first();
+    const traceLink = page.locator('a[href^="/trace/"]').first();
     const href = (await traceLink.getAttribute("href")) ?? "";
-    const id = href.split("/").pop() ?? "";
+    const id = /^\/trace\/([^/?#]+)/.exec(href)?.[1] ?? "";
     expect(id.length, "the played packet carried no trace link").toBeGreaterThan(0);
     const replay = (await getJson(page.request, `/api/trace/${encodeURIComponent(id)}`)) as unknown as {
       calls: unknown[];

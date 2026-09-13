@@ -137,6 +137,7 @@ Rotate on a schedule, on any suspicion, and immediately after the competition cl
 | `AUTH_SECRET` | Rotate in the Vercel project, then redeploy. **Every session is invalidated**, which is the intended effect: it is also the fastest way to sign everyone out. |
 | `ADMIN_JOB_TOKEN` | Rotate in the Vercel project and in the GitHub Actions secret in the same sitting. Between the two updates the nightly job will 401; run it by hand afterwards. |
 | `ZAI_API_KEY` | Rotate at the provider, then in the Vercel project and in the Tier B secret. Seeded content is unaffected: nothing on the demo path calls a provider. |
+| `CI_INGEST_TOKEN` | Rotate in the Vercel project and in the repository secret in the same change: the Tier A and Tier B golden workflows post their reports to `POST /api/evaluation/runs` with it, and a mismatch is a 401 on the next run, audited as `auth.reviewer_link_rejected`'s sibling for the CI principal. |
 | `CORPUS_DEPLOY_KEY` | Generate a new read-only deploy key on `thehub-corpus`, replace the CI secret, delete the old key at GitHub. |
 | `DATABASE_URL_APP`, `DATABASE_URL_UNPOOLED` | Reset the role's password in Neon, re-derive the pooled URL with `tools/app-role-url.sh` (shell only, nothing is printed), publish to the three Vercel environments and to the CI secret. |
 

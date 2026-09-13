@@ -196,6 +196,9 @@ jobs:
       # trace ids and the failure wordings are not compared, since a clock is not a check result. A Tier A case
       # whose answer still reaches the composer will flip this diff, which is the signal AC-EVAL-07 asks for.
       - name: golden:a again and diff the check results (AC-EVAL-07)
+        # The first pass exits non-zero while a hard-gated case fails (AC-EVAL-04), and the diff is about
+        # determinism, not about passing, so it runs on the report whenever the report exists.
+        if: always() && hashFiles(format('{0}/golden/golden-a.json', runner.temp)) != ''
         run: |
           pnpm exec tsx scripts/golden/run.ts --tier A --base-url "http://127.0.0.1:$APP_PORT" --out "$RUNNER_TEMP/golden-2"
           shape() { jq -S '[.results[] | {case_id, verdict, failed: ([.failures[].check] | sort), gaps: ([.unsupported[].check] | sort)}]' "$1"; }
