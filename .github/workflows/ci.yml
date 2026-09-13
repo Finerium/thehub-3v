@@ -602,6 +602,9 @@ jobs:
       - name: pnpm test:e2e against the production deployment
         env:
           DEMO_ENGINEER_PASSWORD: ${{ secrets.DEMO_ENGINEER_PASSWORD }}
+          DEMO_SUPERVISOR_PASSWORD: ${{ secrets.DEMO_SUPERVISOR_PASSWORD }}
+          DEMO_MANAGER_PASSWORD: ${{ secrets.DEMO_MANAGER_PASSWORD }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         # The browser suite against the deployment. The offline export project is not run here: its artefact is
         # built and walked in the deliverables job, and this job has no export to open.
         run: pnpm exec playwright test --project=chromium

@@ -197,9 +197,11 @@ jobs:
       # whose answer still reaches the composer will flip this diff, which is the signal AC-EVAL-07 asks for.
       - name: golden:a again and diff the check results (AC-EVAL-07)
         # The first pass exits non-zero while a hard-gated case fails (AC-EVAL-04), and the diff is about
-        # determinism, not about passing, so it runs on the report whenever the report exists.
-        if: always() && hashFiles(format('{0}/golden/golden-a.json', runner.temp)) != ''
+        # determinism, not about passing, so it runs whenever the job was not cancelled. hashFiles cannot see
+        # outside the workspace, which is why an earlier form of this condition never once let the step run.
+        if: ${{ !cancelled() }}
         run: |
+          test -f "$RUNNER_TEMP/golden/golden-a.json" || { echo "no first-pass report to diff against"; exit 1; }
           pnpm exec tsx scripts/golden/run.ts --tier A --base-url "http://127.0.0.1:$APP_PORT" --out "$RUNNER_TEMP/golden-2"
           shape() { jq -S '[.results[] | {case_id, verdict, failed: ([.failures[].check] | sort), gaps: ([.unsupported[].check] | sort)}]' "$1"; }
           diff <(shape "$RUNNER_TEMP/golden/golden-a.json") <(shape "$RUNNER_TEMP/golden-2/golden-a.json")
