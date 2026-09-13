@@ -1,6 +1,7 @@
 # The Hub, CALIBER 2026 Case 1, Team 3V. The files as they were uploaded.
-# commit    c3a3b44e439f152ee738ea105dbc2d0097870093
-# recorded  2026-09-07T16:52:42Z
-25fe2e844f93a8e78c052dd9767de886bdcb6398bd6d413159c0e7c4139516fb  TheHub_prototype.html
-664740c782b8449e1489731b726e8f144150de7134d9c5c8b9a3af04fcd3c978  TheHub_deck.pdf
+# commit    9c4a88c26cd3bd3873c48ac22e6369b6bef7e7e9
+# recorded  2026-09-13T08:07:51Z
+3df2e88b043a21c1373248b78963aba343f36bf2e2ac3c7f5fd5b1f5a2eaffa3  TheHub_prototype.html
+b3c869be639044f1622bb1f3e691cab398e5e050f54cdad2f1fb585a87c11066  TheHub_deck.pdf
 a9d65f9377fe3994f539e9acfa2226aed46abdd44ba10725cb0528c6293b0699  TheHub_demo.mp4
+817f7a1457877f75878d52054ef1a6b9aa2d17915f0a7e44a82911d4a61c9b05  TheHub_README.pdf

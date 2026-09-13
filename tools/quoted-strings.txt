@@ -39,3 +39,7 @@ Nothing here forecasts a failure
 an exposure and not a saving
 an exposure, not a saving
 not a saving and not a forecast
+
+# 3. The operational-context panel's own denial, on every asset's failure surface and asset page: the sentence says
+#    the readings are records and not a prediction. The shortest span that carries the denial.
+No reading here is a prediction
