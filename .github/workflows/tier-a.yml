@@ -202,7 +202,9 @@ jobs:
         if: ${{ !cancelled() }}
         run: |
           test -f "$RUNNER_TEMP/golden/golden-a.json" || { echo "no first-pass report to diff against"; exit 1; }
-          pnpm exec tsx scripts/golden/run.ts --tier A --base-url "http://127.0.0.1:$APP_PORT" --out "$RUNNER_TEMP/golden-2"
+          # The second pass is judged by the first (AC-EVAL-04); here only its report matters, so its exit status does not
+          # end the step before the diff runs.
+          pnpm exec tsx scripts/golden/run.ts --tier A --base-url "http://127.0.0.1:$APP_PORT" --out "$RUNNER_TEMP/golden-2" || echo "second pass exit $? (judged by the first pass)"
           shape() { jq -S '[.results[] | {case_id, verdict, failed: ([.failures[].check] | sort), gaps: ([.unsupported[].check] | sort)}]' "$1"; }
           diff <(shape "$RUNNER_TEMP/golden/golden-a.json") <(shape "$RUNNER_TEMP/golden-2/golden-a.json")
 
