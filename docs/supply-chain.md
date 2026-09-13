@@ -166,3 +166,14 @@ job has neither. The two other pieces of state the criterion names are proved el
 one revision, one child version and nine 409s, and the session by `src/db/schema.ts`, where it is a table. Every
 module-scope binding in `src/` is either a frozen lookup table or a memoised loader of immutable data
 (`stopWords`, the database handle, the tokeniser cache); none of them carries request state.
+
+### adm-zip 0.6.0, GHSA-vwc7-r8mq-g2x9 (moderate, no patched version)
+
+Reported after the override above landed: extraction follows a destination symlink, so an archive built by an
+attacker could overwrite a file outside the extraction directory. The advisory names no patched version at all
+(`<0.0.0`), so there is nothing to upgrade to, and it is listed under `pnpm.auditConfig.ignoreGhsas` with this
+entry as its reason. Reachability is the same as the entry above: adm-zip is used once, by onnxruntime-node's
+install script, to unpack the runtime binary the package itself downloads at install time, and that script is
+among the build scripts pnpm reports as ignored in this repository. No ZIP from any source reaches this code at
+runtime, the application extracts nothing, and the corpus is never an archive. The ignore is reviewed when the
+advisory publishes a patched version, at which point the override moves to it and the ignore comes out.

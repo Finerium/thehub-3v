@@ -17,6 +17,7 @@ import {
 } from "@/contracts/generated/evidence_packet";
 import type { Role } from "@/contracts/generated/serving";
 import { db } from "@/db/client";
+import * as q from "@/db/queries/retrieval";
 import { debtCluster, documentRevision, documentTable, interlock, interlockRow, opl, oplStep, startPermissive } from "@/db/schema";
 import type { Dropped } from "@/gates/g2";
 import { writeAudit } from "@/lib/audit";
@@ -25,8 +26,8 @@ import { AS_BUILT_CAVEAT, MOC_TEXT, NO_ENTAILED_CLAIM_REASON, droppedSentencesGa
 import { quoteHash } from "@/lib/hash";
 import { ROUTE_TEXT_NO_FUNCTION, pack, protectiveRow, routingText, tagsIn, tokens, type Classification } from "@/rulepack";
 import { cite, loadSources } from "./permit";
-import { blockOf, orderFor, setpointQualifier, silTextOf } from "./templates";
-import type { EffectItem, InterlockRowItem, Scope, Template } from "./types";
+import { blockOf, lessonItemOf, orderFor, proofTestItems, setpointQualifier, silTextOf } from "./templates";
+import type { EffectItem, InterlockRowItem, LessonItem, ProofTestItem, Scope, Template } from "./types";
 
 export type EscalationRole = Abstention["escalation_role"];
 
@@ -160,6 +161,53 @@ export async function refusalFor(c: Classification): Promise<Refusal> {
 /** The typed rows a refusal serves beside its route text: the sheet's own row layer, never a composed sentence. */
 export type RefusalEvidence = { typed_facts: TypedFact[]; blocks: Block[] };
 
+/**
+ * 9.8 EvidencePacket.gaps_declared on a refusal (9.10, AC-ANS-08): the request itself is the part of the question
+ * the answer does not cover, and a packet that says so is the honest one. Stated once, whatever the class, and
+ * without repeating the wording of the request: a refusal that named the way to defeat a function, even to deny it,
+ * would be the defeat itself.
+ * ponytail: the lane's own wording lives here for the reason NO_TASK_LESSON_GAP does, that src/lib/fixed-strings.ts
+ * belongs to another hand this round; move both there when that file is next opened.
+ */
+export const REFUSAL_GAP =
+  "The request itself is not answered: the Hub provides no procedure to defeat or change a protective function. What is served instead is the governing cause-and-effect sheet, its documented start permissives, its latched-reset note and the route a bypass or a permanent change must take.";
+
+/**
+ * The proof-test record of the function a refusal names, read by its own seq id, so the refusal shows how the
+ * function it is protecting is tested rather than asserting that it is (9.8 Block kind "proof_tests"; the diagnosis
+ * of 2026-09-07, rank 8: the refusal packet was built evidence-free). The rows are the sheet's own equipment, kept
+ * to the sheet's function where it has a seq id; a row whose work order has no workbook span is left out.
+ */
+async function refusalProofTests(sheet: typeof interlock.$inferSelect): Promise<ProofTestItem[]> {
+  const rows = rowsOf(await q.proofTestsOf(db, [sheet.equipmentTag])).filter((t) => sheet.seqId === null || t.seqId === sheet.seqId);
+  if (rows.length === 0) return [];
+  const spans = await q.workOrderSpans(db, rows.map((t) => t.woNumber));
+  const findings = await q.openFindingRuleIds(db, [...new Set([...spans.values()].map((s) => s.documentId))]);
+  return proofTestItems(rows, spans, findings);
+}
+
+/**
+ * The approved lesson a refusal serves beside its route text: the one the rule pack's documented_bypass_entities
+ * table names for the entity the request itself framed the defeat with ("for the proof test tonight") on the very
+ * asset the refused function governs. A request that names no such entity, or whose entity belongs to another
+ * asset, or that resolves to more than one lesson, is served none: the lesson of a different entity is not the
+ * route this request asked about, and the pack's own bypass-operation lesson is never the answer to "how do I
+ * bypass this trip" (9.10; GS-99 pins both halves of that rule).
+ */
+async function refusalLessons(sheet: typeof interlock.$inferSelect, question: string): Promise<LessonItem[]> {
+  const asked = tokens(question);
+  const names = (entity: string): boolean => {
+    const phrase = tokens(entity);
+    return phrase.length > 0 && asked.some((_, i) => phrase.every((t, j) => asked[i + j] === t));
+  };
+  const oplIds = [...new Set(pack.documented_bypass_entities.filter((e) => e.equipment_tag === sheet.equipmentTag && names(e.entity)).map((e) => e.opl_id))];
+  if (oplIds.length !== 1) return [];
+  const lessons = rowsOf(await q.oplsByIds(db, oplIds));
+  const spans = await q.firstSpanOfRevisions(db, lessons.map((o) => o.documentRevisionId));
+  const findings = await q.openFindingRuleIds(db, [...new Set([...spans.values()].map((s) => s.documentId))]);
+  return lessons.map((o) => lessonItemOf(o, spans.get(o.documentRevisionId), findings)).filter((l): l is LessonItem => l !== null);
+}
+
 // The unit tests settle an unqueued fake-client chain with undefined; a read that returns nothing is simply no
 // evidence, never a throw on the refusal path (the refusal must render whatever else is missing).
 function rowsOf<T>(value: readonly T[] | undefined): readonly T[] {
@@ -190,18 +238,20 @@ export async function refusalEvidence(refusal: Refusal, question: string): Promi
     .orderBy(asc(interlockRow.sourcePage), asc(interlockRow.rowId), asc(interlockRow.id));
   // Only the row the request itself targets: a request that names the function and no initiator is refused with the
   // sheet's permissives and reset note alone, because naming which initiator to defeat would answer the request.
+  // The record of the function and the lesson its own entity names do not depend on that row and are served either
+  // way (the diagnosis of 2026-09-07, rank 8).
   const named = new Set(tagsIn(question.toUpperCase()));
   const targeted = rowsOf(stored).filter((r) => r.rowKind === "trip" && named.has(r.instrumentTag));
-  if (targeted.length === 0) return { typed_facts: [], blocks: [] };
-
-  const sources = await loadSources(db, [...targeted.map((r) => r.spanId), ...sheet.notes.map((n) => n.span_id)]);
+  const order = orderFor(null);
   const sil = silTextOf(sheet);
   const qualifier = setpointQualifier(sheet);
   const facts: TypedFact[] = [];
   const rows: InterlockRowItem[] = [];
   const effects: EffectItem[] = [];
+  const sources = targeted.length === 0 ? null : await loadSources(db, [...targeted.map((r) => r.spanId), ...sheet.notes.map((n) => n.span_id)]);
+  // sources is null exactly when no row is targeted, so this loop runs only where the sheet row was read.
   for (const r of targeted) {
-    const citation = cite(sources, r.spanId);
+    const citation = sources === null ? null : cite(sources, r.spanId);
     if (citation === null) continue;
     const fact: TypedFact = {
       label: `${r.rowId} ${r.initiator} (${r.instrumentTag})`,
@@ -240,8 +290,10 @@ export async function refusalEvidence(refusal: Refusal, question: string): Promi
       });
     }
   }
-  const order = orderFor(null);
-  const blocks = [blockOf("initiator_row", order, rows), blockOf("effects", order, effects)].filter((b): b is Block => b !== null);
+  // Read last, so the reads of the targeted row keep their place: the record of the function and the lesson its own
+  // entity names are served whether or not the request named an initiator.
+  const record = [blockOf("proof_tests", order, await refusalProofTests(sheet)), blockOf("lessons", order, await refusalLessons(sheet, question))];
+  const blocks = [blockOf("initiator_row", order, rows), blockOf("effects", order, effects), ...record].filter((b): b is Block => b !== null);
   return { typed_facts: facts, blocks };
 }
 

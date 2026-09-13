@@ -116,10 +116,16 @@ export function citedDocuments(packet: EvidencePacket, citations: Citation[]): s
 function blockPath(packet: EvidencePacket, rest: string): string[] | null {
   const indexed = /^([a-z_]+)\[(\d+)\]$/.exec(rest);
   const kind = indexed ? indexed[1] : rest;
-  const block = packet.blocks.find((b) => b.kind === kind);
-  if (!block) return kind && /^[a-z_]+$/.test(kind) ? [] : null; // a known kind with no evidence is omitted (9.8)
+  const labelled = /^([a-z_]+)\.label$/.exec(rest);
+  const wanted = labelled ? labelled[1] : kind;
+  const block = packet.blocks.find((b) => b.kind === wanted);
+  if (!block) return wanted && /^[a-z_]+$/.test(wanted ?? "") ? [] : null; // a known kind with no evidence is omitted (9.8)
+  if (labelled) return [block.label];
+  // Items only: the label is the application's own fixed wording, not evidence, and a count over a block must
+  // count what the block carries. blocks.<kind>.label reads the label on its own. (A four-permissive block read as
+  // five items on 2026-09-13, which is how this line was found.)
   const items = block.items.map(itemText);
-  if (!indexed) return [block.label, ...items];
+  if (!indexed) return items;
   const at = Number.parseInt(indexed[2] ?? "0", 10);
   const one = items[at];
   return one === undefined ? [] : [one];

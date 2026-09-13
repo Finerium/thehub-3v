@@ -81,6 +81,11 @@
       "@huggingface/transformers>sharp": "0.35.4",
       "onnxruntime-node>adm-zip": "0.6.0",
       "@esbuild-kit/core-utils>esbuild": "0.25.12"
+    },
+    "auditConfig": {
+      "ignoreGhsas": [
+        "GHSA-vwc7-r8mq-g2x9"
+      ]
     }
   },
   "packageManager": "pnpm@10.33.2",

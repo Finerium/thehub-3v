@@ -42,7 +42,8 @@ describe("resolve", () => {
 
   it("reads a block by kind and an absent block as empty", () => {
     const a = answer(packet({ blocks: [{ kind: "effects", order: 1, label: "Effects", items: ["EFF-1", "EFF-2"] }] }));
-    expect(resolve(a, "blocks.effects")).toEqual(["Effects", "EFF-1", "EFF-2"]);
+    expect(resolve(a, "blocks.effects")).toEqual(["EFF-1", "EFF-2"]);
+    expect(resolve(a, "blocks.effects.label")).toEqual(["Effects"]);
     expect(resolve(a, "blocks.permissives")).toEqual([]);
     expect(resolve(a, "blocks")).toContain("EFF-1");
   });

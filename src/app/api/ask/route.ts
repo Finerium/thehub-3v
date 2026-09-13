@@ -29,6 +29,7 @@ import {
   pseudonymise,
   refusalEvidence,
   refusalFor,
+  REFUSAL_GAP,
   type AbstentionContext,
 } from "@/answer/outcome";
 import { procedureOf, type ProcedureBundle } from "@/answer/permit";
@@ -215,7 +216,8 @@ export const POST = withRoute(ROUTE, "ask_read", async (request: NextRequest, _c
       contradictions: [],
       abstention: null,
       refusal,
-      gaps_declared: [],
+      // The request itself is what a refusal does not answer, and 9.8 has one field for that (AC-ANS-08).
+      gaps_declared: [REFUSAL_GAP],
       confidence: { band: confidenceBand({ question_coverage: 0, source_count: 0, approval_share: 0 }) },
       caveat: null,
       safety_notice: null,

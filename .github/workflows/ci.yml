@@ -415,6 +415,7 @@ jobs:
       - name: Rule-pack equality over the 56 lesson screens (ADR-002, AC-ANS-10)
         env:
           RULEPACK_EQUALITY_REQUIRE_OUTBOUND: "1"
+          CASE1_CORPUS: ${{ runner.temp }}/thehub-corpus/CALIBER-2026_The-Case/Supporting Data/Case 1_ Manufacturing Knowledge Hub
         run: bash scripts/audits/rulepack-equality.sh
 
       - name: Coverage equality gate against the harness bundle (ADR-002, AC-LOOP-01, 02, 03)

@@ -128,6 +128,75 @@ export function blockOf(kind: Kind, order: readonly Kind[], items: readonly unkn
   return { kind, order: index + 1, label: BLOCK_LABEL[kind], items: [...items] };
 }
 
+/**
+ * The proof-test record of a set of rows in completion-date order, the last test of each class marked on its own
+ * item. `rows` arrive in proofTestsOf's order (class, then completion date descending), so the first row of each
+ * equipment-and-class pair is that class's last test. A row whose work order has no workbook span is left out:
+ * provenance or nothing. The refusal path of src/answer/outcome.ts builds the same block from the same rows, which
+ * is why this is a function rather than a closure of typedFacts.
+ */
+export function proofTestItems(rows: readonly q.ProofTestRow[], woSpans: Map<string, q.SpanSource>, findings: Map<string, string[]>): ProofTestItem[] {
+  const lastOfClass = new Set<string>();
+  const seen = new Set<string>();
+  for (const t of rows) {
+    const key = `${t.equipmentTag}|${t.testClass}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    lastOfClass.add(`${key}|${t.woNumber}`);
+  }
+  const items: ProofTestItem[] = [];
+  for (const t of rows) {
+    const s = woSpans.get(t.woNumber);
+    if (!s) continue;
+    items.push({
+      wo_number: t.woNumber,
+      seq_id: t.seqId,
+      device_tag: t.deviceTag,
+      test_class: t.testClass,
+      completion_date: t.completionDate,
+      result_text: t.resultText,
+      as_found: t.asFound,
+      as_left: t.asLeft,
+      last_of_class: lastOfClass.has(`${t.equipmentTag}|${t.testClass}|${t.woNumber}`),
+      citation: citeSource(s, findings),
+    });
+  }
+  items.sort((a, b) => b.completion_date.localeCompare(a.completion_date) || a.wo_number.localeCompare(b.wo_number));
+  return items;
+}
+
+/**
+ * A lesson as a block item: its identity, the head lines the sheet prints, every section heading with its own body
+ * and the footer aliases it was signed with, cited on the title-block span. Null where that span is missing.
+ * Shared with the refusal path, which serves the one approved lesson the rule pack names for the entity a refused
+ * request framed itself with (src/answer/outcome.ts refusalLessons).
+ */
+export function lessonItemOf(o: q.OplRow, source: q.SpanSource | undefined, findings: Map<string, string[]>, equipmentName?: string): LessonItem | null {
+  if (!source) return null;
+  return {
+    opl_id: o.oplId,
+    title: o.title,
+    classification: o.classification,
+    aspect: o.aspect,
+    discipline: o.discipline,
+    // The head of the sheet as the sheet prints it: the form's field name, then the stored column. The span this
+    // item cites is the title block those lines are on (the diagnosis of 2026-09-07: the lesson item dropped the
+    // three head fields the lesson itself leads with).
+    header_lines: [
+      `Equipment ${o.equipmentTag}${equipmentName === undefined ? "" : ` - ${equipmentName}`}`,
+      `Area / Unit ${o.areaUnit}`,
+      `Related Interlock ${o.relatedInterlockText}`,
+      `P&ID Ref ${o.pidRef}`,
+    ],
+    related_interlock_text: o.relatedInterlockText,
+    sections: o.sections.map((x) => ({ n: x.n, heading: x.heading, body_text: x.body_text })),
+    footer: o.footer,
+    machine_drafted: o.machineDrafted,
+    approver_alias: o.approverAlias,
+    citation: citeSource(source, findings),
+  };
+}
+
 export type TypedFactsOptions = {
   /** The retrieval of the same question: the lessons it cited join the asset's own as procedure candidates. */
   retrieval?: Retrieval;
@@ -493,46 +562,22 @@ export async function typedFacts(db: Db, scope: Scope, template: Template | null
   // The whole proof-test record of the scope in completion-date order, with the last of each class marked on the
   // item; the readiness summary of AC-ANS-16 is the typed fact built from the marked record, so both readings of
   // "when was this last proof-tested" are served and neither hides the other (the diagnosis of 2026-09-07).
-  const lastOfClass = new Set<string>();
-  const seenTest = new Set<string>();
-  for (const t of data.proofTests) {
-    // proofTestsOf orders by class then completion date descending: the first of each class is the last test.
-    const key = `${t.equipmentTag}|${t.testClass}`;
-    if (seenTest.has(key)) continue;
-    seenTest.add(key);
-    lastOfClass.add(`${key}|${t.woNumber}`);
-  }
-  const tests: ProofTestItem[] = [];
-  for (const t of data.proofTests) {
-    const s = data.woSpans.get(t.woNumber);
-    if (!s) continue;
-    const citation = citeSource(s, data.findings);
-    const last = lastOfClass.has(`${t.equipmentTag}|${t.testClass}|${t.woNumber}`);
-    tests.push({
-      wo_number: t.woNumber,
-      seq_id: t.seqId,
-      device_tag: t.deviceTag,
-      test_class: t.testClass,
-      completion_date: t.completionDate,
-      result_text: t.resultText,
-      as_found: t.asFound,
-      as_left: t.asLeft,
-      last_of_class: last,
-      citation,
-    });
-    if (!last) continue;
+  const tests = proofTestItems(data.proofTests, data.woSpans, data.findings);
+  for (const item of tests) {
+    if (!item.last_of_class) continue;
+    const row = data.proofTests.find((t) => t.woNumber === item.wo_number);
+    if (row === undefined) continue;
     typeFact("proof_tests", {
-      label: `Last ${PROOF_TEST_CLASS_LABEL[t.testClass]} (${t.seqId ?? t.deviceTag ?? t.equipmentTag})`,
-      value_text: t.completionDate,
+      label: `Last ${PROOF_TEST_CLASS_LABEL[row.testClass]} (${row.seqId ?? row.deviceTag ?? row.equipmentTag})`,
+      value_text: row.completionDate,
       value_num: null,
       unit: "date",
       comparator: null,
-      source: citation,
-      qualifier: t.resultText,
+      source: item.citation,
+      qualifier: row.resultText,
       source_class: "proof_test",
     });
   }
-  tests.sort((a, b) => b.completion_date.localeCompare(a.completion_date) || a.wo_number.localeCompare(b.wo_number));
   push("proof_tests", tests);
 
   // --- datasheet limits ------------------------------------------------------------------------------------------
@@ -680,33 +725,7 @@ export async function typedFacts(db: Db, scope: Scope, template: Template | null
 
   // --- lessons: the block, then the one procedure the question's task selects -----------------------------------
   const stepsOf = (oplId: string) => data.steps.filter((s) => s.oplId === oplId);
-  const lessonItem = (o: q.OplRow): LessonItem | null => {
-    const s = data.lessonSpans.get(o.documentRevisionId);
-    if (!s) return null;
-    const name = eqOf(o.equipmentTag)?.name;
-    return {
-      opl_id: o.oplId,
-      title: o.title,
-      classification: o.classification,
-      aspect: o.aspect,
-      discipline: o.discipline,
-      // The head of the sheet as the sheet prints it: the form's field name, then the stored column. The span this
-      // item cites is the title block those lines are on, so the reader can open them (the diagnosis of
-      // 2026-09-07: the lesson item dropped the three head fields the lesson itself leads with).
-      header_lines: [
-        `Equipment ${o.equipmentTag}${name === undefined ? "" : ` - ${name}`}`,
-        `Area / Unit ${o.areaUnit}`,
-        `Related Interlock ${o.relatedInterlockText}`,
-        `P&ID Ref ${o.pidRef}`,
-      ],
-      related_interlock_text: o.relatedInterlockText,
-      sections: o.sections.map((x) => ({ n: x.n, heading: x.heading, body_text: x.body_text })),
-      footer: o.footer,
-      machine_drafted: o.machineDrafted,
-      approver_alias: o.approverAlias,
-      citation: citeSource(s, data.findings),
-    };
-  };
+  const lessonItem = (o: q.OplRow): LessonItem | null => lessonItemOf(o, data.lessonSpans.get(o.documentRevisionId), data.findings, eqOf(o.equipmentTag)?.name);
   const sectionText = (o: q.OplRow) => `${o.title} ${o.aspect} ${o.sections.map((s) => s.body_text).join(" ")}`;
   let lessons = data.opls.filter((o) => mentionsTerm(sectionText(o), terms) || mentionsTag(sectionText(o), initiatorTags));
   if (lessons.length === 0) lessons = data.opls.filter((o) => [...seqSet].some((s) => o.relatedInterlockText.includes(s)));

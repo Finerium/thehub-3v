@@ -682,7 +682,10 @@ test.describe("the connector panel (AC-CTX-04)", () => {
       for (const key of ["title", "description", "x-sync", "x-conflict-rule", "x-failure-behaviour", "x-blueprint", "$id"] as const) {
         const value = served[key];
         expect(typeof value, `${contract.file} carries no ${key}`).toBe("string");
-        await expect(card, `${contract.name} does not print its own ${key}`).toContainText(String(value));
+        // The identifier is printed without its scheme: a JSON Schema $id is a name, not a place, and the offline
+        // export may carry no absolute address but the live URL. The rest of the value must appear verbatim.
+        const printed = key === "$id" ? String(value).replace(/^https?:\/\//, "") : String(value);
+        await expect(card, `${contract.name} does not print its own ${key}`).toContainText(printed);
       }
       // And the record shapes are the file's $defs, in the file's order.
       const defs = Object.keys(served.$defs as Record<string, unknown>);
