@@ -9,10 +9,30 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Not
 not in the history: `git log --oneline` is the authority, and a claim that cannot be traced to a commit does
 not belong in this file.
 
-## [Unreleased]
+## [1.0.0] M2, complete and measured - 2026-09-13
 
-The deliverable track: the offline export, the deck, the video, the pre-submit script and the repository
-front matter. What is present and what is not is stated in the README's honest limits.
+The deliverable track and the closing pass: the offline export, the deck, the video, the pre-submit script,
+the repository front matter, the measurement of record, and the run report. What is present and what is not
+is stated in the README's honest limits and in `Report.md`.
+
+### Closing pass
+
+- `Report.md`: the run report, sections 1 to 9, with the per-criterion evidence ledger and every deviation.
+- The golden set of record, measured on the CI runner against `9c4a88c` with its own database and budget and
+  ingested into the deployment's Evaluation page: Tier A 14 of 50 with 13 of 15 hard gates, Tier B 5 of 52 with
+  0 of 1; `evaluation/last-run.json` and the README carry those numbers (d245958).
+- The AG-4 confirmation run of ADR-001 (AC-EVAL-05): `pnpm eval:confirm`, one question-blind call over the
+  thirty labelled pairs, thirty agreements of thirty, recorded in the ADR with the model id and prompt version;
+  the ADR's role table brought back to the gateway configuration's pins (e579c52).
+- Home's 24 seeded chips, three per asset, seeded by `pnpm db:seed:chips` from golden questions and replayed
+  from storage; the browser case proves replay by trace identity (d245958, e579c52).
+- The drafter's cut sized on the deployment's own rows, with its gateway retries given up (D-27), and the
+  publication route's tracing key written as a glob rather than a bracketed path (0223de9, 9c4a88c).
+- The refusal serves the record of the function it refuses, and the composer no longer contradicts the gates:
+  hard gates from 8 to 13 of 15 on Tier A (9c4a88c).
+- Bundle 1.0.6, in which the eight drawings have page renders for the first time (8a379bb).
+- The three checks the evidence ledger still lacked: the transcription basis on a rendered drawing, the register
+  export's round trip and its live row count against the fixture, and the integrity chip on a citation (e579c52).
 
 ### Added
 
