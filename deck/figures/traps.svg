@@ -1,0 +1,70 @@
+<!-- The governance traps the supplied record sets for its own readers, and the two ways the record damages itself.
+     Every count is a fixture value and is named in the provenance line at the foot of the figure; nothing here is
+     drawn from a lesson, a datasheet or a work order's text, only from counts the harness computes over them. -->
+<svg viewBox="0 0 560 308" role="img" aria-label="Governance traps in the supplied record: six counted findings and the Integrity Register total" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, ui-sans-serif, sans-serif">
+  <g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9" letter-spacing="0.6" fill="#67625a">
+    <text x="0" y="9">COUNT</text>
+    <text x="62" y="9">WHAT THE RECORD DOES TO ITS OWN READER</text>
+    <text x="554" y="9" text-anchor="end">RULE</text>
+  </g>
+  <line x1="0" y1="15" x2="560" y2="15" stroke="#1b1916" stroke-width="1"/>
+
+  <g transform="translate(0,15)">
+    <text x="0" y="24" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="20" font-weight="600" fill="#1b1916">47</text>
+    <text x="62" y="18" font-size="11.5" fill="#1b1916">Work orders reproducing a narrative field verbatim</text>
+    <text x="62" y="31" font-size="10" fill="#67625a">inside a lesson of their own asset: the row is reprinted, nothing is taught</text>
+    <text x="554" y="18" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9.5" fill="#9a5600">verbatim</text>
+    <line x1="0" y1="40" x2="560" y2="40" stroke="#1b1916" stroke-opacity="0.1"/>
+  </g>
+
+  <g transform="translate(0,55)">
+    <text x="0" y="24" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="20" font-weight="600" fill="#1b1916">4</text>
+    <text x="62" y="18" font-size="11.5" fill="#1b1916">Days between the seven lessons of a set, exactly, on all eight assets</text>
+    <text x="62" y="31" font-size="10" fill="#67625a">an authoring cadence, not a plant's; the supplied corpus is synthetic</text>
+    <text x="554" y="18" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9.5" fill="#9a5600">cadence</text>
+    <line x1="0" y1="40" x2="560" y2="40" stroke="#1b1916" stroke-opacity="0.1"/>
+  </g>
+
+  <g transform="translate(0,95)">
+    <text x="0" y="24" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="20" font-weight="600" fill="#1b1916">28</text>
+    <text x="62" y="18" font-size="11.5" fill="#1b1916">Lessons whose cross-reference line names another asset</text>
+    <text x="62" y="31" font-size="10" fill="#67625a">a reader following the reference leaves the equipment in front of them</text>
+    <text x="554" y="18" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9.5" fill="#9a5600">CD-1</text>
+    <line x1="0" y1="40" x2="560" y2="40" stroke="#1b1916" stroke-opacity="0.1"/>
+  </g>
+
+  <g transform="translate(0,135)">
+    <text x="0" y="24" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="20" font-weight="600" fill="#1b1916">6</text>
+    <text x="62" y="18" font-size="11.5" fill="#1b1916">Cause-and-effect sheets carrying no drawing number</text>
+    <text x="62" y="31" font-size="10" fill="#67625a">the protective function is documented, its drawing cannot be resolved</text>
+    <text x="554" y="18" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9.5" fill="#9a5600">CD-2</text>
+    <line x1="0" y1="40" x2="560" y2="40" stroke="#1b1916" stroke-opacity="0.1"/>
+  </g>
+
+  <g transform="translate(0,175)">
+    <text x="0" y="24" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="20" font-weight="600" fill="#1b1916">8</text>
+    <text x="62" y="18" font-size="11.5" fill="#1b1916">Planned jobs flagged as a breakdown</text>
+    <text x="62" y="31" font-size="10" fill="#67625a">the population an engineer filters on is not the population the flag names</text>
+    <text x="554" y="18" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9.5" fill="#9a5600">workbook</text>
+    <line x1="0" y1="40" x2="560" y2="40" stroke="#1b1916" stroke-opacity="0.1"/>
+  </g>
+
+  <g transform="translate(0,215)">
+    <text x="0" y="24" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="20" font-weight="600" fill="#1b1916">26</text>
+    <text x="62" y="18" font-size="11.5" fill="#1b1916">Closeouts of 211 rows with the outcome fields empty</text>
+    <text x="62" y="31" font-size="10" fill="#67625a">the job is closed, what it taught was never written down</text>
+    <text x="554" y="18" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9.5" fill="#9a5600">workbook</text>
+    <line x1="0" y1="40" x2="560" y2="40" stroke="#1b1916" stroke-width="1"/>
+  </g>
+
+  <g transform="translate(0,255)">
+    <rect x="0" y="4" width="560" height="24" rx="6" fill="#fdfbf7" stroke="#1b1916" stroke-opacity="0.12"/>
+    <text x="10" y="20" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="12.5" font-weight="600" fill="#1e3fb8">174</text>
+    <text x="44" y="20" font-size="10.5" fill="#45413a">findings in the Integrity Register, computed by deterministic rule, with no model involved at all.</text>
+  </g>
+
+  <g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="7.5" fill="#67625a">
+    <text x="0" y="296">bundle/fixtures.json: verbatim.any_field, dates.within_set_gap_d, integrity.CD-1.count, integrity.CD-2.count,</text>
+    <text x="0" y="306">populations.planned_flagged, workbook.incomplete.rows, workbook.rows, integrity.total</text>
+  </g>
+</svg>

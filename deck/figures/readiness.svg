@@ -1,0 +1,63 @@
+<!-- The readiness matrix the booklet's slide 5 asks for: the six dimensions, what is ready in each, and the claim
+     that is deliberately not made beside it. The right-hand column is the point of the figure: a readiness claim
+     with no stated limit is a claim a reader cannot check. No number on this figure, so none is a fixture value. -->
+<svg viewBox="0 0 1120 244" role="img" aria-label="Readiness matrix across six dimensions, each with what is ready and what is deliberately not claimed" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, ui-sans-serif, sans-serif">
+  <g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9" letter-spacing="0.6" fill="#67625a">
+    <text x="14" y="9">DIMENSION</text>
+    <text x="186" y="9">WHAT IS READY</text>
+    <text x="700" y="9" fill="#9a5600">WHAT IS NOT CLAIMED</text>
+  </g>
+  <line x1="0" y1="15" x2="1120" y2="15" stroke="#1b1916" stroke-width="1"/>
+
+  <g transform="translate(0,22)">
+    <rect x="0" y="4" width="3" height="22" fill="#1e3fb8"/>
+    <text x="14" y="20" font-size="12" fill="#1b1916">Technical</text>
+    <text x="186" y="20" font-size="9.5" fill="#45413a">One extractor, one canonical form, one frozen recipe; one gateway is the only provider path.</text>
+    <text x="700" y="20" font-size="9.5" fill="#9a5600">Not certified, assessed or audited against any standard named anywhere.</text>
+    <line x1="0" y1="31" x2="1120" y2="31" stroke="#1b1916" stroke-opacity="0.1"/>
+  </g>
+
+  <g transform="translate(0,56)">
+    <rect x="0" y="4" width="3" height="22" fill="#1e3fb8" fill-opacity="0.85"/>
+    <text x="14" y="20" font-size="12" fill="#1b1916">Operational</text>
+    <text x="186" y="20" font-size="9.5" fill="#45413a">No new process. The Hub fills the Prepared box in the approval chain the plant already runs.</text>
+    <text x="700" y="20" font-size="9.5" fill="#9a5600">It does not schedule work, does not assign it, and does not chase it.</text>
+    <line x1="0" y1="31" x2="1120" y2="31" stroke="#1b1916" stroke-opacity="0.1"/>
+  </g>
+
+  <g transform="translate(0,90)">
+    <rect x="0" y="4" width="3" height="22" fill="#1e3fb8" fill-opacity="0.7"/>
+    <text x="14" y="20" font-size="12" fill="#1b1916">Legal</text>
+    <text x="186" y="20" font-size="9.5" fill="#45413a">Corpus terms honoured; Law No. 27 of 2022 met by role coding and metadata stripping.</text>
+    <text x="700" y="20" font-size="9.5" fill="#9a5600">No safety claim, and no conformity claim against any standard.</text>
+    <line x1="0" y1="31" x2="1120" y2="31" stroke="#1b1916" stroke-opacity="0.1"/>
+  </g>
+
+  <g transform="translate(0,124)">
+    <rect x="0" y="4" width="3" height="22" fill="#1e3fb8" fill-opacity="0.6"/>
+    <text x="14" y="20" font-size="12" fill="#1b1916">Cybersecurity</text>
+    <text x="186" y="20" font-size="9.5" fill="#45413a">A Purdue Level 3.5 replica, with IEC 62443 zones and conduits drawn around it.</text>
+    <text x="700" y="20" font-size="9.5" fill="#9a5600">No write path toward any control system exists anywhere in the codebase.</text>
+    <line x1="0" y1="31" x2="1120" y2="31" stroke="#1b1916" stroke-opacity="0.1"/>
+  </g>
+
+  <g transform="translate(0,158)">
+    <rect x="0" y="4" width="3" height="22" fill="#1e3fb8" fill-opacity="0.5"/>
+    <text x="14" y="20" font-size="12" fill="#1b1916">Data governance</text>
+    <text x="186" y="20" font-size="9.5" fill="#45413a">Versioned corpus, provenance on every span, approval status on every citation.</text>
+    <text x="700" y="20" font-size="9.5" fill="#9a5600">The EDMS, AIMS and historian contracts are specified, not connected.</text>
+    <line x1="0" y1="31" x2="1120" y2="31" stroke="#1b1916" stroke-opacity="0.1"/>
+  </g>
+
+  <g transform="translate(0,192)">
+    <rect x="0" y="4" width="3" height="22" fill="#1e3fb8" fill-opacity="0.4"/>
+    <text x="14" y="20" font-size="12" fill="#1b1916">Organisational</text>
+    <text x="186" y="20" font-size="9.5" fill="#45413a">One coordinator at 0.2 FTE, one engineer for two half-days, one read-only export.</text>
+    <text x="700" y="20" font-size="9.5" fill="#9a5600">No new role is created, and nothing in the product aggregates by person.</text>
+    <line x1="0" y1="31" x2="1120" y2="31" stroke="#1b1916" stroke-width="1"/>
+  </g>
+
+  <g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="7.5" fill="#67625a">
+    <text x="14" y="238">drawn from deck/src/deck.html slide 5 and appendix A6, README.md (Honest limits) and blueprint-thehub.md section 1, invariants 7, 8 and 12. No quantity appears on this figure, so no fixture key is read.</text>
+  </g>
+</svg>

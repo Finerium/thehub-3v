@@ -1,0 +1,92 @@
+<!-- Success metrics as measured, against the target each one is held to. The two golden-set rows are below their
+     target and are drawn in the defect colour rather than rounded up or left out: the bar is the measurement and
+     the tick is the target. Every value is named in the provenance line at the foot of the figure. -->
+<svg viewBox="0 0 560 330" role="img" aria-label="Success metrics measured against target: the golden set below target, the deterministic checks met" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, ui-sans-serif, sans-serif">
+  <g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9" letter-spacing="0.6" fill="#67625a">
+    <text x="0" y="9">GATE</text>
+    <text x="262" y="9">MEASURED</text>
+    <text x="554" y="9" text-anchor="end">TARGET</text>
+  </g>
+  <line x1="0" y1="15" x2="560" y2="15" stroke="#1b1916" stroke-width="1"/>
+
+  <!-- golden set, whole -->
+  <g transform="translate(0,22)">
+    <text x="0" y="14" font-size="12" fill="#1b1916">Golden set, all cases</text>
+    <text x="0" y="28" font-size="10" fill="#67625a">written from the case's own expectations before the lane was measured</text>
+    <text x="250" y="16" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="15" font-weight="600" fill="#b42318">19 of 102</text>
+    <rect x="262" y="6" width="190" height="11" rx="3" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.14"/>
+    <rect x="262" y="6" width="35.4" height="11" rx="3" fill="#b42318"/>
+    <line x1="433.4" y1="2" x2="433.4" y2="21" stroke="#1b1916" stroke-width="1.6"/>
+    <text x="554" y="15" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10" fill="#1b1916">92 of 102</text>
+    <text x="554" y="28" text-anchor="end" font-size="9.5" fill="#b42318">below target</text>
+  </g>
+
+  <!-- golden set, hard gates -->
+  <g transform="translate(0,62)">
+    <text x="0" y="14" font-size="12" fill="#1b1916">Golden set, hard gates</text>
+    <text x="0" y="28" font-size="10" fill="#67625a">a refusal that must fire, and a safe request that must not be refused</text>
+    <text x="250" y="16" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="15" font-weight="600" fill="#b42318">13 of 16</text>
+    <rect x="262" y="6" width="190" height="11" rx="3" fill="#ffffff" stroke="#1b1916" stroke-opacity="0.14"/>
+    <rect x="262" y="6" width="154.4" height="11" rx="3" fill="#b42318"/>
+    <line x1="452" y1="2" x2="452" y2="21" stroke="#1b1916" stroke-width="1.6"/>
+    <text x="554" y="15" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10" fill="#1b1916">16 of 16</text>
+    <text x="554" y="28" text-anchor="end" font-size="9.5" fill="#b42318">below target</text>
+  </g>
+
+  <line x1="0" y1="106" x2="560" y2="106" stroke="#1b1916" stroke-width="1"/>
+
+  <g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9" letter-spacing="0.6" fill="#67625a">
+    <text x="0" y="124">THE REST OF THE RECORD, AS THE COMMANDS REPORTED IT</text>
+  </g>
+  <line x1="0" y1="130" x2="560" y2="130" stroke="#1b1916" stroke-opacity="0.18"/>
+
+  <g transform="translate(0,130)">
+    <g>
+      <text x="0" y="17" font-size="10.5" fill="#1b1916">One lane run twice on identical pins, verdicts compared</text>
+      <text x="436" y="17" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10.5" fill="#1b1916">4 of 50 changed</text>
+      <rect x="444" y="6" width="108" height="16" rx="5" fill="#f7e9e8" stroke="#b42318" stroke-opacity="0.55"/>
+      <text x="498" y="17" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9" fill="#b42318">not met</text>
+      <line x1="0" y1="27" x2="560" y2="27" stroke="#1b1916" stroke-opacity="0.1"/>
+    </g>
+    <g transform="translate(0,27)">
+      <text x="0" y="17" font-size="10.5" fill="#1b1916">Browser suite over every surface of the deployment</text>
+      <text x="436" y="17" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10.5" fill="#1b1916">169 pass, 0 fail</text>
+      <rect x="444" y="6" width="108" height="16" rx="5" fill="#e9f2ec" stroke="#1e7b45" stroke-opacity="0.55"/>
+      <text x="498" y="17" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9" fill="#1e7b45">met</text>
+      <line x1="0" y1="27" x2="560" y2="27" stroke="#1b1916" stroke-opacity="0.1"/>
+    </g>
+    <g transform="translate(0,54)">
+      <text x="0" y="17" font-size="10.5" fill="#1b1916">Accessibility audit across the 20 pages it audits</text>
+      <text x="436" y="17" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10.5" fill="#1b1916">0 serious, 0 critical</text>
+      <rect x="444" y="6" width="108" height="16" rx="5" fill="#e9f2ec" stroke="#1e7b45" stroke-opacity="0.55"/>
+      <text x="498" y="17" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9" fill="#1e7b45">met</text>
+      <line x1="0" y1="27" x2="560" y2="27" stroke="#1b1916" stroke-opacity="0.1"/>
+    </g>
+    <g transform="translate(0,81)">
+      <text x="0" y="17" font-size="10.5" fill="#1b1916">Production smoke over the routes a judge opens</text>
+      <text x="436" y="17" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10.5" fill="#1b1916">7 of 7</text>
+      <rect x="444" y="6" width="108" height="16" rx="5" fill="#e9f2ec" stroke="#1e7b45" stroke-opacity="0.55"/>
+      <text x="498" y="17" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9" fill="#1e7b45">met</text>
+      <line x1="0" y1="27" x2="560" y2="27" stroke="#1b1916" stroke-opacity="0.1"/>
+    </g>
+    <g transform="translate(0,108)">
+      <text x="0" y="17" font-size="10.5" fill="#1b1916">Pre-submit checklist over the submission bundle</text>
+      <text x="436" y="17" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10.5" fill="#1b1916">13 checks, 0 failing</text>
+      <rect x="444" y="6" width="108" height="16" rx="5" fill="#f6efe4" stroke="#9a5600" stroke-opacity="0.55"/>
+      <text x="498" y="17" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9" fill="#9a5600">2 human-gated</text>
+      <line x1="0" y1="27" x2="560" y2="27" stroke="#1b1916" stroke-opacity="0.1"/>
+    </g>
+    <g transform="translate(0,135)">
+      <text x="0" y="17" font-size="10.5" fill="#1b1916">Four artefacts against the 10,000,000 byte ceiling</text>
+      <text x="436" y="17" text-anchor="end" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="10.5" fill="#1b1916">6,822,279 bytes</text>
+      <rect x="444" y="6" width="108" height="16" rx="5" fill="#e9f2ec" stroke="#1e7b45" stroke-opacity="0.55"/>
+      <text x="498" y="17" text-anchor="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="9" fill="#1e7b45">met</text>
+      <line x1="0" y1="27" x2="560" y2="27" stroke="#1b1916" stroke-width="1"/>
+    </g>
+  </g>
+
+  <g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="7.5" fill="#67625a">
+    <text x="0" y="316">evaluation/last-run.json (cases, pass, hard_gates_present, hard_gates_pass); bundle/fixtures.json golden.size,</text>
+    <text x="0" y="328">golden.hard_gate_count; Report.md sections 1, 3 and 8 for the target, the suites and the byte record.</text>
+  </g>
+</svg>
