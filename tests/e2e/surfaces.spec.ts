@@ -264,7 +264,9 @@ test.describe("the signed-out surface of 6.2 (AC-UI-01, surface 14)", () => {
     await page.goto("/login");
     await expect(page.getByLabel("Username")).toBeVisible();
     await expect(page.getByLabel("Password")).toBeVisible();
-    await expect(page.getByRole("button")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Sign in", exact: true })).toBeVisible();
+    // The Committee's demo access (owner decision of 2026-10-04): one one-click sign-in per demo account.
+    await expect(page.getByRole("button", { name: /^Sign in as / })).toHaveCount(4);
     // 6.2 surface 14: no self-registration and no reset path anywhere on the surface.
     await expect(page.getByRole("link", { name: /register|sign up|forgot|reset/i })).toHaveCount(0);
     await noErrorState(page);
