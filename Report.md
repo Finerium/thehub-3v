@@ -317,6 +317,8 @@ full, because a reader of this Report should never have to open a process file t
 | D-34 | The PDF export of drafts in the house layout is not built; it is a P2 item. The pointer PDF is delivered. | The criterion's second option. |
 | D-35 | Neither README carries a screenshot. | A screenshot of the product shows the organiser's corpus. The README says so, naming invariant 7, and a test pins that sentence and the absence of any image link. |
 | D-36 | The keep-alive cadence the platform delivers is recorded as it is: two to three and a third hours between runs, against the declared ten and thirty minutes. | GitHub's cron on a low-traffic repository is best-effort. The measured cold-start p95 is 3,392 ms against the 3,000 ms bound; an external pinger is the next pass's item. |
+| D-37 | The demo video is 1920 by 1080 at 25 fps, captured as lossless screenshots and encoded at the rate the 5,000,000-byte budget allows, not 1280 by 720 at 15 fps and 190 kbps. | The owner asked for a sharp, clear demo; the 9.12 settings could not carry the product's small type. Budget, limit, captions and the replay disclosure stand. Delivered at 43.9 dB PSNR against the master. |
+| D-38 | One sentence of the video's B4 narration differs from the team's revised script. | The script explained a 404 the first cut filmed before the drawings had page renders; the re-shoot shows the drawing, so the sentence speaks to its transcription line instead. |
 
 ## 6. The items only a person can close
 
@@ -345,7 +347,13 @@ Report; the file that holds them is named and is not tracked.
 10. **The credential handover.** The deployment is behind login (D-07). `CREDENTIALS_FOR_COMMITTEE.txt` at the
     world root, which is not tracked and never printed, holds the three demo accounts and the Admin account for
     the Committee. It travels out of band with the submission.
-11. **The database owner password.** A worker ran a process listing early in the run and the platform's own
+11. **The model provider.** Since 2026-09-14 Z.ai has answered every call with HTTP 429, so every live question on
+    the deployment abstains with "The model provider did not answer", the scheduled Tier B lane has ingested an
+    outage run (0 of 52) as the latest run on the Evaluation page, and the loop cannot draft. Top up the account or
+    rotate the key; put the new key in the env file and the main thread propagates it with `tools/secret-pipe.sh`.
+    Then re-take video beat B6 (`bash video/run.sh pnpm exec tsx video/record.ts --beats b6`, `bash video/encode.sh`)
+    and let the nightly Tier B run, or run it by hand, so the Evaluation page shows a measurement of the product again.
+12. **The database owner password.** A worker ran a process listing early in the run and the platform's own
     process title carried the connection string into that worker's transcript. The transcript line was redacted,
     the listing is banned in the rules and in every worker definition, and the incident is recorded. Rotate the
     owner password in the database console and re-run `pnpm db:app-role`; nothing else reads that value.
@@ -366,15 +374,15 @@ measurement of record was taken on a runner with its own budget. That is the gua
 | artefact | bytes | budget | what it is |
 | --- | --- | --- | --- |
 | `deliverables/TheHub_deck.pdf` | 704,908 | 2,000,000 | the seven booklet slides and the appendix |
-| `deliverables/TheHub_demo.mp4` | 4,128,927 | 5,000,000 | 175 s of the deployment, captions burned in |
+| `deliverables/TheHub_demo.mp4` | 4,928,099 | 5,000,000 | 175 s of the deployment at 1920 by 1080, captions burned in (re-cut 2026-10-04, D-37) |
 | `deliverables/TheHub_prototype.html` | 1,861,208 | 2,000,000 | every read-only surface, offline, in one file |
 | `deliverables/TheHub_README.pdf` | 127,336 | 150,000 | the one-page pointer: the live URL, the repositories, the corpus version |
 | `deliverables/SHA256SUMS.txt` | the record | none | the digests, the commit and the time they were taken |
 
-The upload sums to 6,822,279 of 10,000,000 bytes with the 850,000 buffer unspent. The four artefacts are not
+The upload sums to 7,621,551 of 10,000,000 bytes with the 850,000 buffer unspent. The four artefacts are not
 tracked in the public repository (D-25): the export carries a run of corpus text beyond citation length and the
-video shows corpus pages, so the corpus invariant governs. The checksum record is tracked, taken at commit
-`c7f6faf` over the artefacts as they stand, unchanged since, and is what the repository says about them. The PDF export of drafts in the house layout, the second
+video shows corpus pages, so the corpus invariant governs. The checksum record is tracked, re-taken
+after the video re-cut of 2026-10-04, and is what the repository says about them. The PDF export of drafts in the house layout, the second
 half of the pointer criterion, is neither present nor built; it is listed here as the criterion allows.
 
 **The steps, in order.**

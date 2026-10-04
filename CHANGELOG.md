@@ -9,6 +9,18 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Not
 not in the history: `git log --oneline` is the authority, and a claim that cannot be traced to a commit does
 not belong in this file.
 
+## [1.0.1] The demo re-cut - 2026-10-04
+
+### Changed
+
+- `deliverables/TheHub_demo.mp4` is re-cut to the team's revised script of 2026-10-02: seven beats, the narration and
+  captions rewritten, every beat re-filmed against the deployment. The picture is 1920 by 1080 at 25 fps from lossless
+  screenshots, with a drawn pointer, click ripples and outlines, encoded two-pass at the rate the 5,000,000-byte budget
+  allows (D-37); 43.9 dB PSNR against the master. B4's second sentence follows the picture (D-38). B6 carries the
+  script's fallback until the model provider answers again and the loop can be walked to a publication.
+- `video/record.ts`, `video/encode.sh`, `video/beats.ts`, `video/narration.md` and the new `video/overlay.py` are the
+  pipeline; `tests/unit/video.test.ts` restates the video contract.
+
 ## [1.0.0] M2, complete and measured - 2026-09-13
 
 The deliverable track and the closing pass: the offline export, the deck, the video, the pre-submit script,

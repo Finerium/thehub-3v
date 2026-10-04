@@ -1,133 +1,109 @@
 1
-00:00:00,000 --> 00:00:03,500
-Every model output shown is replayed from storage.
+00:00:00,000 --> 00:00:04,500
+At three in the morning, a feed pump trips.
 
 2
-00:00:03,500 --> 00:00:08,000
-Eight assets, eighteen months of maintenance history.
+00:00:04,500 --> 00:00:09,500
+The engineer needs an answer, but the lesson was never written.
 
 3
-00:00:08,000 --> 00:00:13,500
-Of the 57 work orders that record an unplanned failure, 14 are mentioned by no lesson at all.
+00:00:09,500 --> 00:00:15,000
+Across fifty-seven unplanned-failure records, fourteen appear in no lesson at all.
 
 4
-00:00:13,500 --> 00:00:17,000
-41 have nothing beyond a pasted work-order row.
+00:00:15,000 --> 00:00:20,000
+The Hub shows exactly where the plant's knowledge is missing.
 
 5
-00:00:17,000 --> 00:00:20,000
-The method is on the screen. This is The Hub.
+00:00:20,000 --> 00:00:25,000
+Now the Engineer asks why GA-1201A tripped.
 
 6
-00:00:20,000 --> 00:00:25,000
-An engineer asks why the hexane feed pump tripped.
+00:00:25,000 --> 00:00:30,000
+Every claim links back to evidence.
 
 7
-00:00:25,000 --> 00:00:29,000
-Every claim carries its citation chip.
+00:00:30,000 --> 00:00:35,000
+Open one citation and we land on the exact source,
 
 8
-00:00:29,000 --> 00:00:36,000
-The trip setpoint is typed from the cause-and-effect sheet: VSHH-1201 above 7.1 mm/s RMS with 1oo2 voting,
+00:00:35,000 --> 00:00:40,000
+with its revision and approval status.
 
 9
-00:00:36,000 --> 00:00:41,000
-on the SEQ-1201 logic the sheet types as SIL 1,
+00:00:40,000 --> 00:00:50,000
+The trace then shows how the answer was produced and checked.
 
 10
-00:00:41,000 --> 00:00:46,000
-and it renders with that sheet's own note that its trip set points are DUMMY training values.
+00:00:50,000 --> 00:00:56,000
+Next, the question changes: how do we get past the trip?
 
 11
-00:00:46,000 --> 00:00:50,000
-Click the chip and the document opens at the span the number came from.
+00:00:56,000 --> 00:01:04,000
+The Hub stops it before any model is called and points to the permit route.
 
 12
-00:00:50,000 --> 00:00:56,000
-Ask how to get past that trip, and it refuses before any model call.
+00:01:04,000 --> 00:01:10,000
+But when an approved bypass procedure already exists,
 
 13
-00:00:56,000 --> 00:01:03,000
-It names the sequence and its SIL, shows the documented permissives and the reset path,
+00:01:10,000 --> 00:01:18,000
+The Hub returns it exactly as written, together with its permit conditions.
 
 14
-00:01:03,000 --> 00:01:08,000
-and hands over the interlock bypass permit route.
+00:01:18,000 --> 00:01:25,000
+Safe does not mean refusing everything.
 
 15
-00:01:08,000 --> 00:01:15,000
-Now ask how to line up the authorised HV-6701 manual bypass, a procedure this plant has approved and written down.
+00:01:25,000 --> 00:01:32,000
+The asset view connects typed tags, proof tests, and maintenance history.
 
 16
-00:01:15,000 --> 00:01:21,000
-It returns that procedure verbatim, with its permit conditions.
+00:01:32,000 --> 00:01:37,000
+The drawing's hotspots were transcribed by an agent,
 
 17
-00:01:21,000 --> 00:01:25,000
-Refusing everything is not safety.
+00:01:37,000 --> 00:01:42,000
+so The Hub marks them pending review instead of passing them off as fact.
 
 18
-00:01:25,000 --> 00:01:29,000
-The P&ID is the index.
+00:01:42,000 --> 00:01:50,000
+Failure Memory then follows the misalignment chain to a cracked coupling element.
 
 19
-00:01:29,000 --> 00:01:35,000
-Click the vibration switch on the Set 1 drawing and the tag card opens:
+00:01:50,000 --> 00:01:56,000
+When we ask for a lesson on that task, The Hub abstains.
 
 20
-00:01:35,000 --> 00:01:41,000
-the setpoint ladder built from typed rows, the last proof test, the documents that cite it.
+00:01:56,000 --> 00:02:03,000
+It shows the missing coverage, then ranks the next gap to address.
 
 21
-00:01:41,000 --> 00:01:50,000
-Follow the misalignment chain and it ends at WO-240007, a cracked coupling element.
+00:02:03,000 --> 00:02:10,000
+At the top of the queue is YD-2301.
 
 22
-00:01:50,000 --> 00:01:57,000
-Ask what lesson covers coupling-element inspection and The Hub answers the part it can and names the part it cannot.
+00:02:10,000 --> 00:02:16,000
+From here, responsibility changes hands.
 
 23
-00:01:57,000 --> 00:02:03,000
-Two lessons cover alignment. None covers the coupling element.
+00:02:16,000 --> 00:02:26,000
+The Reviewing Supervisor requests and accepts a stored draft.
 
 24
-00:02:03,000 --> 00:02:10,000
-Here is the uncovered cluster it sits in.
+00:02:33,000 --> 00:02:40,000
+The screen then switches to the Manager, the only role allowed to publish.
 
 25
-00:02:10,000 --> 00:02:14,000
-The supervisor requests a draft.
+00:02:40,000 --> 00:02:46,000
+Notice that the recount has not moved: publication has not happened yet.
 
 26
-00:02:14,000 --> 00:02:20,000
-It arrives in the plant's own six-section template, every element bound to the evidence it came from,
+00:02:46,000 --> 00:02:51,000
+The system can prepare the work, but it cannot cross the final human gate on its own.
 
 27
-00:02:20,000 --> 00:02:27,000
-and the replacement interval left as the literal slot REQUIRES ENGINEER INPUT, because no supplied document states one.
-
-28
-00:02:27,000 --> 00:02:32,000
-The supervisor fills that slot with a signed note.
-
-29
-00:02:32,000 --> 00:02:36,000
-The redliner passes it.
-
-30
-00:02:36,000 --> 00:02:40,000
-The manager publishes, in one transaction.
-
-31
-00:02:40,000 --> 00:02:46,000
-The corpus version increments, coverage is recomputed,
-
-32
-00:02:46,000 --> 00:02:51,000
-and the question that abstained a minute ago now answers, cited to a lesson that did not exist when this video started.
-
-33
 00:02:51,000 --> 00:02:55,000
-The Hub knows what it is missing.
+The Hub knows what the plant is missing.
 thehub-3v.vercel.app
 

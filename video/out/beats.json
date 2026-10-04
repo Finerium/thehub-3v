@@ -1,73 +1,120 @@
 {
   "base_url": "https://thehub-3v.vercel.app",
-  "recorded_at": "2026-09-07T15:45:09.692Z",
+  "recorded_at": "2026-10-04T03:03:27.887Z",
   "beats_retaken": [
-    "b6"
+    "b7"
   ],
-  "width": 1280,
-  "height": 720,
-  "fps": 15,
+  "width": 1920,
+  "height": 1080,
+  "layout": {
+    "width": 1280,
+    "height": 720,
+    "device_scale": 1.5
+  },
+  "fps": 25,
   "total_seconds": 175,
+  "b6_variant": "fallback",
   "beats": [
     {
       "id": "b1",
-      "title": "B1 Hook",
+      "title": "B1 The problem",
       "seconds": 20,
-      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b1.webm",
-      "lead": 0.38,
-      "filmed": 22.002,
-      "onScreen": "The Coverage Console with the method chip beside the number: the records no lesson mentions, and the records whose only trace is a copied row."
+      "speaker": "Hafiz",
+      "onScreen": "Home, then the Coverage Console: the records no lesson mentions and the records whose only trace is a copied row, the method chip and the three bands.",
+      "concat": "video/frames/b1/frames.ffconcat",
+      "frames": 35,
+      "source": null
     },
     {
       "id": "b2",
-      "title": "B2 Ask",
+      "title": "B2 Evidence",
       "seconds": 30,
-      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b2.webm",
-      "lead": 0.644,
-      "filmed": 30.002,
-      "onScreen": "The GA-1201A vibration question: the evidence packet, the typed setpoint carrying its sheet's own note, the effects it actuates, and a citation chip clicked through to the span it came from."
+      "speaker": "Elang",
+      "onScreen": "The seeded GA-1201A trip question replayed from storage, its claims with their citation chips, one citation opened to its drawer and to the document viewer at the source span, then the stored trace.",
+      "concat": "video/frames/b2/frames.ffconcat",
+      "frames": 64,
+      "source": null
     },
     {
       "id": "b3",
       "title": "B3 Safety",
       "seconds": 35,
-      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b3.webm",
-      "lead": 0.162,
-      "filmed": 35.001,
-      "onScreen": "A request to defeat the trip refused before any model call, with the permit route and the documented reset path shown; then the approved HV-6701 manual bypass answered verbatim from its own lesson."
+      "speaker": "Ghaisan",
+      "onScreen": "A request to get past the SEQ-1201 trip refused by the rule pack before any model call, with the governing sheet, the permissives and the permit route; then the approved HV-6701 manual-bypass lesson with its permit conditions.",
+      "concat": "video/frames/b3/frames.ffconcat",
+      "frames": 110,
+      "source": null
     },
     {
       "id": "b4",
-      "title": "B4 Context",
+      "title": "B4 Context and honest state",
       "seconds": 25,
-      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b4.webm",
-      "lead": 0.495,
-      "filmed": 25,
-      "onScreen": "A P&ID hotspot to the VSHH-1201 tag card, the setpoint ladder and the last proof test, then the misalignment chain ending at WO-240007."
+      "speaker": "Elang",
+      "onScreen": "The VSHH-1201 typed rows and related work orders on the asset view, the Set 1 P&ID with its transcription line, then the misalignment chain to WO-240007.",
+      "concat": "video/frames/b4/frames.ffconcat",
+      "frames": 25,
+      "source": null
     },
     {
       "id": "b5",
-      "title": "B5 Gap",
+      "title": "B5 From one gap to the queue",
       "seconds": 20,
-      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b5.webm",
-      "lead": 0.262,
-      "filmed": 20.002,
-      "onScreen": "The partial answer: alignment is covered, the coupling element is not, and the uncovered cluster it belongs to is shown behind it."
+      "speaker": "Hafiz",
+      "onScreen": "The stored GA-1201A abstention trace, the records no lesson teaches on that asset, then the ranked knowledge-debt clusters with YD-2301 first.",
+      "concat": "video/frames/b5/frames.ffconcat",
+      "frames": 3,
+      "source": null
     },
     {
       "id": "b6",
-      "title": "B6 Loop",
-      "seconds": 45,
-      "file": "/Users/ghaisan/Documents/thehub/thehub-3v/video/raw/b6.webm",
-      "lead": 0.748,
-      "filmed": 47.002,
-      "onScreen": "The draft with provenance on every element and the replacement interval left as its slot, then the SME note entered and signed, the redline pass, the manager's publication, the version increment, and the same question answered from the new lesson. Closing line and URL."
+      "title": "B6 Human-controlled publication (fallback)",
+      "seconds": 41,
+      "speaker": "Ghaisan",
+      "onScreen": "The footage of 2026-09-07: the stored draft accepted by the Reviewing Supervisor, the Manager's publish act ready, and the recount panel stating that no publication has recounted this browser's corpus.",
+      "concat": "video/frames/b6/frames.ffconcat",
+      "frames": 5,
+      "source": {
+        "file": "video/raw/b6.webm",
+        "stills": [
+          {
+            "at": 34.3,
+            "until": 6,
+            "what": "the guided loop as the Reviewing Supervisor, on the top-ranked cluster"
+          },
+          {
+            "at": 2,
+            "until": 11,
+            "what": "the request taken and the stored draft in review"
+          },
+          {
+            "at": 9,
+            "until": 16,
+            "what": "the stored draft with the evidence the drafter received"
+          },
+          {
+            "at": 35.5,
+            "until": 23,
+            "what": "the acceptance in the state history"
+          },
+          {
+            "at": 36.6,
+            "until": 41,
+            "what": "the Manager's publish act, ready and not taken"
+          }
+        ]
+      }
+    },
+    {
+      "id": "b7",
+      "title": "B7 Closing",
+      "seconds": 4,
+      "speaker": "Hafiz",
+      "onScreen": "The Evaluation page and the deployment address.",
+      "concat": "video/frames/b7/frames.ffconcat",
+      "frames": 1,
+      "source": null
     }
   ],
   "missing": [],
-  "misses": [
-    "the draft on DEBT-YD-2301 came back blocked; re-proposing it (9.6)",
-    "the loop route offered no engineer-note slot",
-    "POST /api/drafts/:id/publish was refused by the route, so no version roll and no recount are on camera"
-  ]
+  "misses": []
 }

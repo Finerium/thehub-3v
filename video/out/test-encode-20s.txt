@@ -1,6 +1,9 @@
 test encode, the roughest 20 s at the delivery settings
-  bytes            456116
-  seconds          20.000
-  achieved rate    182.4 kbps over the window
-  extrapolated     3991015 bytes over 175 s, against a budget of 5000000
-  verdict          INSIDE the budget
+  window           74.080 s to 94.080 s of the master
+  requested rate   217.4 kbps, sized so the cut fills the budget
+  achieved rate    221.8 kbps over the window (554581 bytes)
+  picture          34.43 dB PSNR against the master over the window
+  extrapolated     4756238 bytes over 175 s at the requested rate, against a budget of 5000000
+  reading          a window encoded alone at the cut's average rate is the worst case: the full two-pass run
+                   moves bits from the held frames to exactly these seconds
+  verdict          INSIDE the budget; the roughest window holds 30 dB even at the flat rate

@@ -1,54 +1,56 @@
-// The video pipeline as tests (blueprint 2.2, 9.12 and 11.9 AC-DEL-03, AC-DEL-06; the PRD's 26.2 and 26.3).
+// The video pipeline as tests (blueprint 2.2 and 11.9 AC-DEL-03, AC-DEL-06; the revised script of 2026-10-02;
+// deviation D-37 for the delivery settings).
 //
-// video/beats.ts is the one place the cut's timing and wording live: record.ts paces the capture from it and writes
-// video/captions.srt out of it, and encode.sh reads the slot lengths back out of video/out/beats.json. Three layers
-// of check follow that shape.
+// video/beats.ts is the one place the cut's timing and wording live: record.ts films each beat to its slot from it and
+// writes video/captions.srt out of it, and encode.sh reads the frame lists and slots back out of video/out/beats.json.
+// Three layers of check follow that shape.
 //
-//   1. The cut, hermetic and always run. Six beats in their planned slots summing to 175 s, every cue inside its
-//      beat, the captions on disk equal to the ones beats.ts generates, the narration of the PRD's 26.2 reproduced
-//      character for character by `checkVerbatim`, and every quantity a caption states read from the fixture rather
-//      than typed. The two rounded quantities the script's own prose carries are marked `nonfx` in beats.ts and
-//      nowhere else, so a third one appearing is a red test.
-//   2. The delivery settings, from video/encode.sh. ffprobe cannot report two-pass, `-tune stillimage` or the rate
-//      ceiling, so the flags of 9.12 are held against the script that applies them.
+//   1. The cut, hermetic and always run. Seven beats in their planned slots summing to 175 s, for the B6 retake and
+//      for its fallback alike; every cue inside its beat; the captions on disk equal to the ones beats.ts generates
+//      for the B6 the take carries; the narration reproduced character for character by `checkVerbatim`; every
+//      quantity a caption states read from the fixture rather than typed, with the one story quantity marked `nonfx`.
+//   2. The delivery settings, from video/encode.sh. ffprobe cannot report two-pass or the tune, so the flags are held
+//      against the script that applies them, and so is the absence of a rate ceiling (D-37).
 //   3. The artefact, when deliverables/TheHub_demo.mp4 exists: duration, resolution, frame rate, the codecs, the
-//      embedded mov_text caption stream, the silent audio track of D-09 and the byte budget, all by ffprobe.
-//
-// Nothing here encodes anything. The test encode of the roughest twenty seconds, which AC-DEL-03 asks for before
-// the full run, is checked as the report it leaves in video/out/.
+//      embedded mov_text caption stream, the audio track and the byte budget, all by ffprobe.
 import { spawnSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { beats, checkVerbatim, DEPLOYMENT_URL, fixtures, REPLAY_LINE, srt, timeline, totalSeconds } from "../../video/beats";
+import { beats, checkVerbatim, DEPLOYMENT_URL, fixtures, headline, REPLAY_LINE, srt, timeline, topRanked, totalSeconds, words, type B6Variant } from "../../video/beats";
 
 const REPO = process.cwd();
 const VIDEO_DIR = path.join(REPO, "video");
 const CAPTIONS = path.join(VIDEO_DIR, "captions.srt");
 const NARRATION = path.join(VIDEO_DIR, "narration.md");
 const BEATS_TS = path.join(VIDEO_DIR, "beats.ts");
+const RECORD_TS = path.join(VIDEO_DIR, "record.ts");
 const ENCODE = path.join(VIDEO_DIR, "encode.sh");
-const FRAMES = path.join(VIDEO_DIR, "frames");
+const LAYER = path.join(VIDEO_DIR, "frames", "captions");
 const RECORDED = path.join(VIDEO_DIR, "out", "beats.json");
 const TEST_ENCODE = path.join(VIDEO_DIR, "out", "test-encode-20s.txt");
+const AUDIO_DIR = path.join(VIDEO_DIR, "audio");
 const MP4 = path.join(REPO, "deliverables", "TheHub_demo.mp4");
 
-/** Blueprint 9.12, the video contract. */
+/** The video contract as D-37 restates 9.12: the byte budget and the limit stand, the picture is 1080p at 25 fps. */
 const CONTRACT = {
   bytes: 5_000_000,
   limitSeconds: 180,
   plannedSeconds: 175,
-  width: 1280,
-  height: 720,
-  fps: 15,
-  slots: [20, 30, 35, 25, 20, 45],
+  width: 1920,
+  height: 1080,
+  fps: 25,
+  slots: [20, 30, 35, 25, 20, 41, 4],
 };
 
 const has = (tool: string) => spawnSync("sh", ["-c", `command -v ${tool}`], { encoding: "utf8" }).status === 0;
 const ffprobeReady = has("ffprobe") && existsSync(MP4);
 
 const fx = fixtures();
-const cut = beats(fx);
+const recorded = existsSync(RECORDED) ? (JSON.parse(readFileSync(RECORDED, "utf8")) as { b6_variant?: B6Variant }) : null;
+/** The B6 the take on disk carries; the captions on disk are written for it. */
+const variant: B6Variant = recorded?.b6_variant ?? "retake";
+const cut = beats(fx, variant);
 const cues = timeline(cut);
 const captions = readFileSync(CAPTIONS, "utf8");
 const narration = readFileSync(NARRATION, "utf8");
@@ -57,82 +59,75 @@ const narration = readFileSync(NARRATION, "utf8");
  * 1. The cut
  * ============================================================================================================== */
 
-describe("video/beats.ts is the cut (blueprint 2.2, PRD 26.2)", () => {
-  it("holds six beats in their planned slots, summing to the planned duration", () => {
-    expect(cut.map((b) => b.id)).toEqual(["b1", "b2", "b3", "b4", "b5", "b6"]);
-    expect(cut.map((b) => b.seconds)).toEqual(CONTRACT.slots);
-    expect(totalSeconds(cut)).toBe(CONTRACT.plannedSeconds);
-    expect(totalSeconds(cut)).toBeLessThanOrEqual(CONTRACT.limitSeconds);
+describe("video/beats.ts is the cut (the revised script of 2026-10-02)", () => {
+  it.each(["retake", "fallback"] as const)("holds seven beats in their planned slots, summing to the planned duration (B6 %s)", (b6) => {
+    const list = beats(fx, b6);
+    expect(list.map((b) => b.id)).toEqual(["b1", "b2", "b3", "b4", "b5", "b6", "b7"]);
+    expect(list.map((b) => b.seconds)).toEqual(CONTRACT.slots);
+    expect(totalSeconds(list)).toBe(CONTRACT.plannedSeconds);
   });
 
-  it("places every cue inside its own beat and on one rising clock", () => {
-    for (const beat of cut) {
+  it.each(["retake", "fallback"] as const)("places every cue inside its own beat and on one rising clock (B6 %s)", (b6) => {
+    const list = beats(fx, b6);
+    for (const beat of list) {
       for (const cue of beat.cues) {
         expect(cue.at, `${beat.id}: a cue starts at ${cue.at}`).toBeGreaterThanOrEqual(0);
         expect(cue.until, `${beat.id}: a cue runs past its ${beat.seconds} s slot`).toBeLessThanOrEqual(beat.seconds);
         expect(cue.until).toBeGreaterThan(cue.at);
       }
     }
-    const starts = cues.map((c) => c.start);
+    const all = timeline(list);
+    const starts = all.map((c) => c.start);
     expect(starts).toEqual([...starts].sort((a, b) => a - b));
-    expect(cues[cues.length - 1].end).toBe(CONTRACT.plannedSeconds);
+    expect(all[all.length - 1].end).toBe(CONTRACT.plannedSeconds);
   });
 
-  it("opens with the replay disclosure and closes on the deployment address", () => {
-    expect(cues[0].text).toBe(REPLAY_LINE);
-    expect(cues[0].tone).toBe("caveat");
-    expect(cues[0].start).toBe(0);
-    expect(captions).toContain(REPLAY_LINE);
+  it("closes on the deployment address, and burns the replay disclosure into the corner of every frame", () => {
     expect(cues[cues.length - 1].sub).toBe(DEPLOYMENT_URL);
     expect(captions.trimEnd().endsWith(DEPLOYMENT_URL)).toBe(true);
+    // The disclosure is the caption layer's own badge, written once into the layer page record.ts renders.
+    const record = readFileSync(RECORD_TS, "utf8");
+    expect(record).toContain('<div id="badge"></div>');
+    expect(record).toContain("REPLAY_LINE");
+    expect(REPLAY_LINE).toBe("Every model output shown is replayed from storage.");
   });
 
-  it("reproduces the narration of the PRD's 26.2 character for character", () => {
-    expect(checkVerbatim(cut, narration)).toEqual([]);
+  it.each(["retake", "fallback"] as const)("reproduces the narration character for character (B6 %s)", (b6) => {
+    expect(checkVerbatim(beats(fx, b6), narration)).toEqual([]);
   });
 
-  it("keeps video/captions.srt exactly as beats.ts generates it", () => {
+  it("keeps video/captions.srt exactly as beats.ts generates it for the B6 the take carries", () => {
     expect(captions).toBe(srt(cues));
     expect((captions.match(/ --> /g) ?? []).length).toBe(cues.length);
   });
 });
 
 describe("every quantity a caption states comes from the fixture (invariant 6)", () => {
-  const spoken = cues.map((c) => c.text).join(" ");
+  const spoken = timeline(beats(fx, "retake"))
+    .map((c) => c.text)
+    .join(" ");
 
-  it("reads the coverage headline, the population and the asset count from packages/fixtures.json", () => {
-    const at = (layer: "generous" | "strict") => {
-      const row = fx.coverage[layer].unplanned_failure.find((r) => r.t === fx.method.threshold);
-      if (row === undefined) throw new Error(`fixtures.json carries no ${layer} row at t = ${fx.method.threshold}`);
-      return row;
-    };
-    expect(spoken).toContain(`${fx.populations.unplanned_failure} work orders`);
-    expect(spoken).toContain(`${at("generous").uncovered} are mentioned by no lesson at all`);
-    expect(spoken).toContain(`${at("strict").uncovered} have nothing beyond a pasted work-order row`);
-    // Eight assets: the count is the fixture's, the cardinal word is the cut's own table.
-    expect(fx.equipment_master.length).toBe(8);
-    expect(spoken).toContain("Eight assets");
+  it("speaks the population and the generous headline as the fixture scores them, in words", () => {
+    expect(fx.populations.unplanned_failure).toBe(headline(fx, "generous").of);
+    expect(spoken).toContain(`Across ${words(fx.populations.unplanned_failure)} unplanned-failure records, ${words(headline(fx, "generous").uncovered)} appear in no lesson at all.`);
   });
 
-  it("reads the typed setpoint, its voting, the logic and the SIL text from the cause-and-effect sheet", () => {
-    const sheet = fx.interlock_rows["GA-1201A"];
-    const row = sheet.rows.find((r) => r.tag === "VSHH-1201");
-    if (row === undefined) throw new Error("fixtures.json types no VSHH-1201 row on the GA-1201A sheet");
-    expect(spoken).toContain(`${row.tag} above ${row.setpoint_value} ${row.setpoint_unit} RMS with ${row.voting} voting`);
-    expect(spoken).toContain(`on the ${sheet.header.logic_no} logic the sheet types as ${sheet.header.sil_text}`);
+  it("names the asset the knowledge-debt ranking puts first", () => {
+    expect(spoken).toContain(`At the top of the queue is ${topRanked(fx)}.`);
   });
 
-  it("names the demo work order the fixture designates", () => {
-    expect(spoken).toContain(fx.demo.primary_wo);
-    expect(captions).toContain(fx.demo.primary_wo);
+  it("spells counts the way the narration speaks them", () => {
+    expect(words(57)).toBe("fifty-seven");
+    expect(words(14)).toBe("fourteen");
+    expect(words(40)).toBe("forty");
+    expect(() => words(100)).toThrow();
   });
 
-  it("marks the two rounded quantities no fixture key holds, and only those two", () => {
+  it("marks the one story quantity no fixture key holds, and only that one", () => {
     const source = readFileSync(BEATS_TS, "utf8");
     const marks = source.split("\n").filter((line) => line.trim().startsWith("// nonfx:"));
-    expect(marks.length).toBe(2);
-    expect(spoken).toContain("eighteen months of maintenance history");
-    expect(spoken).toContain("Two lessons cover alignment");
+    expect(marks.length).toBe(1);
+    expect(spoken).toContain("At three in the morning");
   });
 });
 
@@ -156,7 +151,7 @@ describe("the caption files carry nothing banned (AC-DEL-06)", () => {
       ["captions.srt", captions],
     ] as const) {
       expect(text.match(/TBD_[A-Z_]+/g), name).toBeNull();
-      expect(text, name).not.toMatch(/[\u2014\u2013]/);
+      expect(text, name).not.toMatch(/[—–]/);
     }
   });
 });
@@ -165,30 +160,31 @@ describe("the caption files carry nothing banned (AC-DEL-06)", () => {
  * 2. The delivery settings
  * ============================================================================================================== */
 
-describe("video/encode.sh applies the settings of 9.12 and the PRD's 26.3", () => {
+describe("video/encode.sh applies the delivery settings of D-37", () => {
   const encode = readFileSync(ENCODE, "utf8");
 
-  it("pins the geometry, the frame rate, the rate control and the budget", () => {
+  it("pins the geometry, the frame rate, the tune and the budget", () => {
     for (const setting of [
       `WIDTH=${CONTRACT.width}`,
       `HEIGHT=${CONTRACT.height}`,
       `FPS=${CONTRACT.fps}`,
-      "VIDEO_RATE=190k",
-      "MAXRATE=260k",
-      "BUFSIZE=520k",
+      "TUNE=animation",
       "AUDIO_RATE=32k",
       `BUDGET_BYTES=${CONTRACT.bytes}`,
       `LIMIT_SECONDS=${CONTRACT.limitSeconds}`,
+      `PLANNED_SECONDS=${CONTRACT.plannedSeconds}`,
     ]) {
       expect(encode, setting).toContain(setting);
     }
   });
 
-  it("encodes in two x264 passes tuned for still images, with silent AAC-LC mono and a mov_text stream", () => {
+  it("encodes in two x264 passes at a rate computed from the budget, with no ceiling that starves a cut", () => {
     expect(encode).toContain("-pass 1");
     expect(encode).toContain("-pass 2");
     expect(encode).toContain("-c:v libx264");
-    expect(encode).toContain("-tune stillimage");
+    expect(encode).toContain('-tune "$TUNE"');
+    expect(encode).toContain("rate_for");
+    expect(encode).not.toMatch(/-maxrate|-bufsize/);
     expect(encode).toContain("anullsrc=channel_layout=mono:sample_rate=48000");
     expect(encode).toContain("-c:a aac -profile:a aac_low -ac 1");
     expect(encode).toContain("-c:s mov_text");
@@ -202,6 +198,15 @@ describe("video/encode.sh applies the settings of 9.12 and the PRD's 26.3", () =
     expect(extrapolated).toBeGreaterThan(0);
     expect(extrapolated).toBeLessThanOrEqual(CONTRACT.bytes);
     expect(report).toContain("INSIDE the budget");
+    expect(report).toContain("the roughest window holds 30 dB even at the flat rate");
+  });
+
+  it.skipIf(!existsSync(path.join(VIDEO_DIR, "out", "probe.txt")))("records the delivered picture against the master, over the cut and its roughest 20 s", () => {
+    const probe = readFileSync(path.join(VIDEO_DIR, "out", "probe.txt"), "utf8");
+    const m = /picture\s+([\d.]+) dB PSNR against the master over the cut; ([\d.]+) dB over its roughest 20 s/.exec(probe);
+    expect(m, "video/out/probe.txt records no delivered PSNR").not.toBeNull();
+    expect(Number(m?.[1])).toBeGreaterThanOrEqual(38);
+    expect(Number(m?.[2])).toBeGreaterThanOrEqual(38);
   });
 });
 
@@ -211,25 +216,27 @@ describe.skipIf(!existsSync(RECORDED))("video/out/beats.json records the take th
     height: number;
     fps: number;
     total_seconds: number;
-    beats: Array<{ id: string; seconds: number; lead: number | null; file?: string }>;
+    b6_variant: B6Variant;
+    beats: Array<{ id: string; seconds: number; concat: string | null }>;
   };
 
-  it("agrees with beats.ts on every slot and with 9.12 on the geometry", () => {
-    const recorded = JSON.parse(readFileSync(RECORDED, "utf8")) as Recorded;
-    expect(recorded.width).toBe(CONTRACT.width);
-    expect(recorded.height).toBe(CONTRACT.height);
-    expect(recorded.fps).toBe(CONTRACT.fps);
-    expect(recorded.total_seconds).toBe(CONTRACT.plannedSeconds);
-    expect(recorded.beats.map((b) => b.id)).toEqual(cut.map((b) => b.id));
-    expect(recorded.beats.map((b) => b.seconds)).toEqual(cut.map((b) => b.seconds));
+  it("agrees with beats.ts on every slot and with D-37 on the geometry, and names a frame list for every beat", () => {
+    const take = JSON.parse(readFileSync(RECORDED, "utf8")) as Recorded;
+    expect(take.width).toBe(CONTRACT.width);
+    expect(take.height).toBe(CONTRACT.height);
+    expect(take.fps).toBe(CONTRACT.fps);
+    expect(take.total_seconds).toBe(CONTRACT.plannedSeconds);
+    expect(take.beats.map((b) => b.id)).toEqual(cut.map((b) => b.id));
+    expect(take.beats.map((b) => b.seconds)).toEqual(cut.map((b) => b.seconds));
+    for (const beat of take.beats) expect(beat.concat, `${beat.id} carries no frame list`).toMatch(/^video\/frames\/b\d\/frames\.ffconcat$/);
   });
 });
 
-describe.skipIf(!existsSync(FRAMES))("the burned-in caption layer covers every cue (D-09)", () => {
-  it("renders one frame per cue and lists each in the concat file", () => {
-    const frames = readdirSync(FRAMES).filter((f) => /^cue-\d+\.png$/.test(f));
-    expect(frames.length).toBe(cues.length);
-    const concat = readFileSync(path.join(FRAMES, "captions.ffconcat"), "utf8");
+describe.skipIf(!existsSync(LAYER))("the burned-in caption layer covers every cue (D-09)", () => {
+  it("renders one frame per segment of the strip and lists each in the concat file", () => {
+    const frames = readdirSync(LAYER).filter((f) => /^cue-\d+\.png$/.test(f));
+    expect(frames.length).toBeGreaterThanOrEqual(cues.length);
+    const concat = readFileSync(path.join(LAYER, "captions.ffconcat"), "utf8");
     expect(concat.startsWith("ffconcat version 1.0")).toBe(true);
     for (const frame of frames) expect(concat, frame).toContain(frame);
   });
@@ -266,7 +273,7 @@ describe.skipIf(!ffprobeReady)("deliverables/TheHub_demo.mp4 by ffprobe (AC-DEL-
     expect(seconds).toBeCloseTo(CONTRACT.plannedSeconds, 1);
   });
 
-  it("is 1280 by 720 at 15 frames per second, x264 in a progressive 4:2:0 picture", () => {
+  it("is 1920 by 1080 at 25 frames per second, x264 in a progressive 4:2:0 picture", () => {
     const video = stream("video");
     expect(video.codec_name).toBe("h264");
     expect(video.width).toBe(CONTRACT.width);
@@ -289,18 +296,16 @@ describe.skipIf(!ffprobeReady)("deliverables/TheHub_demo.mp4 by ffprobe (AC-DEL-
     expect(probed().streams.length).toBe(3);
   });
 
-  it("holds the delivered rate under the ceiling of the rate control", () => {
-    expect(Number(probed().format.bit_rate)).toBeLessThanOrEqual(260_000);
-    expect(probed().format.format_name).toContain("mp4");
-  });
-
-  it("stays inside the byte budget of 9.12", () => {
+  it("stays inside the byte budget, and so inside the rate the budget allows", () => {
     const bytes = statSync(MP4).size;
     expect(bytes).toBe(Number(probed().format.size));
     expect(bytes, `${bytes} bytes against a budget of ${CONTRACT.bytes}`).toBeLessThanOrEqual(CONTRACT.bytes);
+    expect(Number(probed().format.bit_rate)).toBeLessThanOrEqual((CONTRACT.bytes * 8) / CONTRACT.plannedSeconds);
+    expect(probed().format.format_name).toContain("mp4");
   });
 
-  it.skipIf(!has("ffmpeg"))("delivers silence, because no narration was recorded (D-09)", () => {
+  const narrated = existsSync(AUDIO_DIR) && readdirSync(AUDIO_DIR).some((f) => /^b\d\.(wav|m4a|mp3)$/.test(f));
+  it.skipIf(!has("ffmpeg") || narrated)("delivers silence while no narration is recorded (D-09)", () => {
     const measured = spawnSync("ffmpeg", ["-hide_banner", "-i", MP4, "-af", "volumedetect", "-f", "null", "-"], {
       encoding: "utf8",
     });

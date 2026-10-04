@@ -1,77 +1,93 @@
 # Narration script, TheHub_demo.mp4
 
-The text below is the PRD's chapter 26.2 narration, verbatim, and it is the only source the captions are written
-from. It is held here beside `captions.srt` because the blueprint's 9.12 requires the script to live in the
-repository next to them. Nothing in it is improvised at the edit: the criterion scores pacing and narration as much
-as content, so the words are fixed before the shoot rather than after it.
+The text below is the narration of the team's revised demo script of 2026-10-02, written after a frame-by-frame
+review of the previous cut, verbatim, and it is the only source the captions are written from. Nothing in it is
+improvised at the edit: the criterion scores pacing and narration as much as content.
+
+One sentence differs from that script, in B4, and it differs because the picture did. The script was written against
+the cut of 2026-09-07, filmed while the deployment held no page render of the P&ID, so its B4 explained a designed
+404 ("When a source-page image is unavailable, The Hub says so instead of drawing a fake one"). Bundle 1.0.6 renders
+the eight drawings, the re-shoot frames the drawing itself, and the honest-state point is carried by the line the
+product prints under it instead: the hotspots are an agent transcription, pending review. The story function of the
+beat is unchanged.
 
 No narration was recorded for this cut (deviation D-09). The delivered audio track is AAC-LC mono silence and the
-captions below are burned into the picture, so the video reads with the sound off. Recording a voice to this script
-is a human-gated remainder, named as such in the Report; the encode pipeline takes a narration file without any
-other change when one exists.
+captions below are burned into the picture, so the video reads with the sound off. The script names a speaker per
+beat, so recording the three voices is a human-gated remainder; `video/encode.sh` takes one file per beat from
+`video/audio/` (b1 to b7, any of wav, m4a or mp3) and lays each at the start of its beat without any other change.
 
-Every figure the script states binds to a key of `packages/fixtures.json` through `beats.ts`. Where the script's own
-sentence carries a rounded quantity that no fixture key holds, `beats.ts` marks it `nonfx` at the line that writes
-it.
+Every figure the captions state binds to a key of `bundle/fixtures.json` through `beats.ts`, written out in words
+where the script speaks it. Where a sentence carries a quantity no fixture key holds, `beats.ts` marks it `nonfx` at
+the line that writes it.
 
 ## The beat sheet
 
-| Beat | Time | On screen |
-|---|---|---|
-| B1 Hook | 0 to 20 s | The Coverage Console with the method chip beside the number: the records no lesson mentions, and the records whose only trace is a copied row. |
-| B2 Ask | 20 to 50 s | The GA-1201A vibration question: the evidence packet, the typed setpoint carrying its sheet's own note, the effects it actuates, and a citation chip clicked through to the span it came from. |
-| B3 Safety | 50 to 85 s | A request to defeat the trip refused before any model call, with the permit route and the documented reset path shown; then the approved HV-6701 manual bypass answered verbatim from its own lesson. |
-| B4 Context | 85 to 110 s | A P&ID hotspot to the VSHH-1201 tag card, the setpoint ladder and the last proof test, then the misalignment chain ending at WO-240007. |
-| B5 Gap | 110 to 130 s | The partial answer: alignment is covered, the coupling element is not, and the uncovered cluster it belongs to is shown behind it. |
-| B6 Loop | 130 to 175 s | The draft with provenance on every element and the replacement interval left as its slot, then the SME note entered and signed, the redline pass, the manager's publication, the version increment, and the same question answered from the new lesson. Closing line and URL. |
+| Beat | Time | Speaker | On screen |
+|---|---|---|---|
+| B1 The problem | 0 to 20 s | Hafiz | Home, then the Coverage Console: 14 and 41 of 57, the method chip and the coverage bands. |
+| B2 Evidence | 20 to 50 s | Elang | The seeded GA-1201A trip question and its packet, a citation opened to its drawer and to the document viewer at the source span, then the stored trace. |
+| B3 Safety | 50 to 85 s | Ghaisan | The defeat request refused before any model call with the permit route, then the approved HV-6701 manual-bypass lesson with its permit conditions. |
+| B4 Context and honest state | 85 to 110 s | Elang | The VSHH-1201 typed rows on the asset view, the P&ID with its transcription line, then the Failure Memory chain to WO-240007. |
+| B5 From one gap to the queue | 110 to 130 s | Hafiz | The stored GA-1201A abstention trace, the records no lesson teaches, then the ranked clusters with YD-2301 first. |
+| B6 Human-controlled publication | 130 to 171 s | Ghaisan | Supervisor: request, stored draft with evidence and redline, accept. Manager: publish, revision, child corpus version, recount, and the same question answered from the new lesson. |
+| B7 Closing | 171 to 175 s | Hafiz | Evaluation and the deployment address. |
 
-## Narration, as recorded
+## Narration
 
-The script is fixed here rather than improvised at the edit, because the criterion scores pacing and narration as
-much as content.
+**B1**, 41 words in 20 s:
 
-**B1**, about 45 words in 20 s:
+> "At three in the morning, a feed pump trips. The engineer needs an answer, but the lesson was never written. Across fifty-seven unplanned-failure records, fourteen appear in no lesson at all. The Hub shows exactly where the plant's knowledge is missing."
 
-> "Eight assets, eighteen months of maintenance history. Of the 57 work orders that record an unplanned failure, 14 are mentioned by no lesson at all. 41 have nothing beyond a pasted work-order row. The method is on the screen. This is The Hub."
+**B2**, 40 words in 30 s:
 
-**B2**:
+> "Now the Engineer asks why GA-1201A tripped. Every claim links back to evidence. Open one citation and we land on the exact source, with its revision and approval status. The trace then shows how the answer was produced and checked."
 
-> "An engineer asks why the hexane feed pump tripped. Every claim carries its citation chip. The trip setpoint is typed from the cause-and-effect sheet: VSHH-1201 above 7.1 mm/s RMS with 1oo2 voting, on the SEQ-1201 logic the sheet types as SIL 1, and it renders with that sheet's own note that its trip set points are DUMMY training values. Click the chip and the document opens at the span the number came from."
+**B3**, 52 words in 35 s:
 
-**B3**, about 72 words in 35 s, the slowest beat in the cut because it is the one that has to land first time:
+> "Next, the question changes: how do we get past the trip? The Hub stops it before any model is called and points to the permit route. But when an approved bypass procedure already exists, The Hub returns it exactly as written, together with its permit conditions. Safe does not mean refusing everything."
 
-> "Ask how to get past that trip, and it refuses before any model call. It names the sequence and its SIL, shows the documented permissives and the reset path, and hands over the interlock bypass permit route. Now ask how to line up the authorised HV-6701 manual bypass, a procedure this plant has approved and written down. It returns that procedure verbatim, with its permit conditions. Refusing everything is not safety."
+**B4**, 46 words in 25 s:
 
-**B4**:
+> "The asset view connects typed tags, proof tests, and maintenance history. The drawing's hotspots were transcribed by an agent, so The Hub marks them pending review instead of passing them off as fact. Failure Memory then follows the misalignment chain to a cracked coupling element."
 
-> "The P&ID is the index. Click the vibration switch on the Set 1 drawing and the tag card opens: the setpoint ladder built from typed rows, the last proof test, the documents that cite it. Follow the misalignment chain and it ends at WO-240007, a cracked coupling element."
+**B5**, 32 words in 20 s:
 
-**B5**:
+> "When we ask for a lesson on that task, The Hub abstains. It shows the missing coverage, then ranks the next gap to address. At the top of the queue is YD-2301."
 
-> "Ask what lesson covers coupling-element inspection and The Hub answers the part it can and names the part it cannot. Two lessons cover alignment. None covers the coupling element. Here is the uncovered cluster it sits in."
+**B6**, 60 words in 41 s:
 
-**B6**:
+> "From here, the workflow changes hands. The Reviewing Supervisor requests a stored draft, checks its evidence and redline result, then accepts it. The role switches to the Manager, the only persona allowed to publish. After that human decision, The Hub creates a new revision, recounts coverage in the browser sandbox, and answers the same question from the lesson just added."
 
-> "The supervisor requests a draft. It arrives in the plant's own six-section template, every element bound to the evidence it came from, and the replacement interval left as the literal slot REQUIRES ENGINEER INPUT, because no supplied document states one. The supervisor fills that slot with a signed note. The redliner passes it. The manager publishes, in one transaction. The corpus version increments, coverage is recomputed, and the question that abstained a minute ago now answers, cited to a lesson that did not exist when this video started. The Hub knows what it is missing."
+**B7**, 8 words in 4 s:
+
+> "The Hub knows what the plant is missing."
+
+### B6 when the publication cannot be filmed
+
+The script's own fallback, used only when the loop could not be walked to a publication on the day of the shoot
+(the provider unreachable, or every draft blocked). It is factual against the footage of 2026-09-07, in which the
+draft is accepted and the Manager's publish act is ready but nothing has been published.
+
+> fallback "From here, responsibility changes hands. The Reviewing Supervisor requests and accepts a stored draft. The screen then switches to the Manager, the only role allowed to publish. Notice that the recount has not moved: publication has not happened yet. The system can prepare the work, but it cannot cross the final human gate on its own."
 
 ## Production rules
 
-Narration is recorded to this script and the captions are burned into the picture, so the video reads with the
-sound off. Every model call the video shows is generated before the recording and played back from the stored
-draft, trace and packet: the loop beat shows a stored draft, never a spinner, and the recording says so on screen
-rather than implying a live call. Capture is 1280 by 720 on the deployed instance with the seeded corpus version
-active, recorded by Playwright and delivered at 15 frames per second. Two drafts are prepared and reviewed before
-the shoot, WO-240007 as the primary and WO-240039 as the backup, so a weak draft is a swap rather than a re-plan.
+- Every model output the video shows was produced and stored before the frame that shows it was captured: the
+  seeded packet, the stored traces, the drafted and redlined lesson. The disclosure badge says so on every frame.
+- No spinner and no model wait is on screen. The capture is a sequence of lossless screenshots taken after each
+  state has settled, so a wait costs the cut nothing.
+- Role switches happen off camera, through `POST /api/auth/login` on the request context. No login form, username
+  or password is ever in frame.
+- The publication creates a child corpus version inside this browser's sandbox. The cut never claims a global
+  activation.
+- Every frame is 1920 by 1080: the deployed instance at a 1280 by 720 layout, rendered at device scale 1.5, so the
+  product's own type is sharp at full screen.
 
-## How this cut was produced
+## How this cut is produced
 
-1. `bash video/run.sh pnpm exec tsx video/record.ts` signs in through `POST /api/auth/login` with the three demo
-   accounts, so no login field and no credential is ever on camera. It then warms every model-backed artefact the
-   cut shows (the answer traces and the drafted, redlined lesson) before the camera rolls, records the six beats
-   into `video/raw/`, writes `video/captions.srt` from `video/beats.ts`, and renders the burn-in caption layer into
-   `video/frames/`.
-2. `bash video/encode.sh` trims or holds each beat to its planned slot, concatenates them, overlays the caption
-   layer, runs the two x264 passes with the rate the PRD's 26.3 fixes, muxes silent AAC-LC mono and a `mov_text`
-   caption stream, and writes `deliverables/TheHub_demo.mp4` with an ffprobe report beside it in `video/out/`.
-3. `bash video/encode.sh --probe` runs the roughest twenty seconds alone, which is the test encode that confirms
-   the bitrate before the full run.
+1. `bash video/run.sh pnpm exec tsx video/record.ts` renders the caption layer, then films each beat as a sequence
+   of PNG frames with their durations into `video/frames/<beat>/`, and writes `video/out/beats.json`.
+   `--beats b6` re-takes one beat and keeps the others.
+2. `bash video/encode.sh` assembles the frames into a master, overlays the caption layer, and runs two x264 passes
+   sized to the byte budget, then muxes the audio and a `mov_text` caption stream into
+   `deliverables/TheHub_demo.mp4`. `bash video/encode.sh --probe` encodes the roughest twenty seconds alone first.

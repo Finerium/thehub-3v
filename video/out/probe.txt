@@ -1,11 +1,14 @@
 TheHub_demo.mp4, as delivered
-  built        2026-09-07T15:55:13Z
-  commit       76697f2
-  bytes        4128927 of 5000000
+  built        2026-10-04T03:10:44Z
+  commit       cd354cd
+  bytes        4928099 of 5000000
   duration     175.000000 s of 180 (planned 175)
   container    mov,mp4,m4a,3gp,3g2,mj2
-  overall rate 188750 bps
-  video        codec_name=h264 profile=High width=1280 height=720 pix_fmt=yuv420p r_frame_rate=15/1 bit_rate=182924 nb_frames=2625 
+  overall rate 225284 bps
+  video rate   211743 bps requested, x264 veryslow, tune animation, keyint=250:min-keyint=25, two-pass
+  video        codec_name=h264 profile=High width=1920 height=1080 pix_fmt=yuv420p r_frame_rate=25/1 bit_rate=218398 nb_frames=4375 
   audio        codec_name=aac profile=LC sample_rate=48000 channels=1 bit_rate=1525 
   captions     codec_name=mov_text codec_type=subtitle 
-  srt cues     33 in video/captions.srt
+  picture      43.927583 dB PSNR against the master over the cut; 43.849653 dB over its roughest 20 s (from 74.080 s)
+  srt cues     27 in video/captions.srt
+  b6           fallback

@@ -1,40 +1,70 @@
-// The capture half of the video pipeline (AC-DEL-03; blueprint 2.2, 9.12; PRD 26.2).
+// The capture half of the video pipeline (AC-DEL-03; blueprint 2.2; deviation D-37 for the frame format).
 //
-// It does three things, in this order, and writes what it did to video/out/beats.json so the encode half needs no
-// argument of its own:
+// What changed from the first cut, and why. The first cut was Playwright's own screen recording: VP8 at 1280 by 720
+// and about 600 kbps, re-encoded to 190 kbps at 15 frames per second. The product's small type did not survive two
+// lossy passes, and the cut showed every wait it filmed. This capture is a sequence of lossless PNG screenshots of
+// the deployed instance at a 1280 by 720 layout rendered at device scale 1.5, so every frame is 1920 by 1080 with the
+// product's own type drawn at that resolution. Each frame carries its duration in 25 fps frames, so a hold costs one
+// screenshot and a wait for the provider, the drafter or a page load costs the cut nothing: nothing is filmed until a
+// state has settled.
 //
-//   1. Captions. `beats.ts` is checked against `narration.md` (the PRD's 26.2 text verbatim), then written out as
-//      video/captions.srt and rendered frame by frame into video/frames/ as the burn-in layer. This host's ffmpeg
-//      carries neither libass nor libfreetype, so the burn-in cannot be a text filter: the layer is a transparent
-//      PNG per segment, set in the product's own typefaces by the browser that is already a dependency here, and
-//      composited by one `overlay`.
+// It does four things, in this order, and writes what it did to video/out/beats.json:
 //
-//   2. The warm pass, with no camera running. Every model-backed artefact the cut shows is produced here, before
-//      the recording: the answer traces and the drafted, redlined lesson. It runs through `context.request`, so no
-//      page exists and nothing of it reaches the footage. This is what makes the on-screen disclosure true, and it
-//      is why the loop beat can show a stored draft instead of a spinner.
+//   1. The beats. Each beat is a script against the deployed instance, played into a reel: frames, holds to the
+//      cue marks of `beats.ts`, a drawn pointer that glides to what it clicks, a ripple on the click, an outline on
+//      what the caption is about, and animated scrolls. The reel is cut to the beat's slot exactly.
+//   2. The loop beat, B6, on a fresh browser context so it walks in a sandbox of its own (D-16). It needs the model
+//      provider: the drafter, the redliner and the second ask. When the walk cannot reach a publication, the beat
+//      falls back to the script's own fallback text over the footage of 2026-09-07, and the record says so.
+//   3. Captions. `beats.ts` is checked against `narration.md`, written out as video/captions.srt and rendered as the
+//      burn-in layer: transparent 1920 by 1080 PNGs, set in the product's typefaces, with the replay disclosure in
+//      the corner of every frame.
+//   4. The record, video/out/beats.json, which is all the encode reads.
 //
-//   3. The six beats, one page each, at 1280 by 720 against the deployed instance. Every sign-in is a POST to
-//      /api/auth/login through the request context: no login form is ever opened, so no field and no credential is
-//      on camera, and no password is logged, printed or put on a command line.
-//
-// A surface that is mid-repair does not end the run. Each step is attempted, and a step whose target is not there
-// is recorded as a miss in video/out/beats.json and held on what is there instead, so the cut is always producible
-// and the report always says which beat is short.
+// Every sign-in is a POST to /api/auth/login through the request context: no login form is ever opened, so no field
+// and no credential is ever in frame, and no password is logged, printed or put on a command line.
+import { spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { chromium, type APIRequestContext, type BrowserContext, type Page } from "@playwright/test";
-import { beats, checkVerbatim, fixtures, REPLAY_LINE, srt, timeline, totalSeconds, type Beat, type TimedCue } from "./beats";
+import { chromium, type APIRequestContext, type Browser, type BrowserContext, type Locator, type Page } from "@playwright/test";
+import { beats, checkVerbatim, fixtures, REPLAY_LINE, srt, timeline, totalSeconds, type B6Variant, type Beat, type TimedCue } from "./beats";
 
 const BASE = process.env.VIDEO_BASE_URL ?? "https://thehub-3v.vercel.app";
 const HERE = import.meta.dirname;
-const RAW = path.join(HERE, "raw");
 const FRAMES = path.join(HERE, "frames");
 const OUT = path.join(HERE, "out");
-const WIDTH = 1280;
-const HEIGHT = 720;
+const RAW_B6 = path.join(HERE, "raw", "b6.webm");
+/** The layout the product is filmed at, and the scale it is rendered at: 1280 by 720 CSS pixels, 1920 by 1080 frames. */
+const CSS_W = 1280;
+const CSS_H = 720;
+const SCALE = 1.5;
+const FPS = 25;
+/** The caption band covers the bottom of the frame; what a caption is about is framed above this line. */
+const SAFE_BOTTOM = 560;
 
-/** The demo accounts of this deployment and the variable each password is read from. The value is never read here. */
+/** The stored GA-1201A abstention B5 opens on: the coupling-element question of 2026-09-07, abstained on coverage. */
+const GAP_TRACE = "7937a596-fc67-46fc-a0af-e0b1ef36475c";
+/** The seeded chip B2 replays: the GA-1201A trip question, answered once over the real corpus and stored. */
+const CHIP = "chip-GA-1201A-1";
+/** The question B3 types: a request to get past the GA-1201A trip, refused by the rule pack before any model call. */
+const DEFEAT_QUESTION = "Start-up is tonight. How do we get past the SEQ-1201 trip on GA-1201A?";
+/** The approved manual-bypass lesson B3 shows, found by its document number on the LV-6701 asset sheet. */
+const BYPASS_DOC_NO = "OPL-LV-6701-05";
+/**
+ * The B6 fallback: five stills from the footage of 2026-09-07, each held for its stretch of the beat. Stills, not the
+ * running footage, because the running footage goes on to the publish call of that day, which the route answered
+ * with a 500 (the tracing-key defect fixed at 9c4a88c), and then to the Integrity Register; neither belongs under the
+ * fallback's words. Each still is a moment the fallback text describes: the Supervisor's walk, the stored draft, the
+ * acceptance, and the Manager's publish act ready and not yet taken.
+ */
+const FALLBACK_STILLS: Array<{ at: number; until: number; what: string }> = [
+  { at: 34.3, until: 6, what: "the guided loop as the Reviewing Supervisor, on the top-ranked cluster" },
+  { at: 2.0, until: 11, what: "the request taken and the stored draft in review" },
+  { at: 9.0, until: 16, what: "the stored draft with the evidence the drafter received" },
+  { at: 35.5, until: 23, what: "the acceptance in the state history" },
+  { at: 36.6, until: 41, what: "the Manager's publish act, ready and not taken" },
+];
+
 const ACCOUNTS = {
   Engineer: { username: "engineer_demo", env: "DEMO_ENGINEER_PASSWORD" },
   Supervisor: { username: "supervisor_demo", env: "DEMO_SUPERVISOR_PASSWORD" },
@@ -42,30 +72,18 @@ const ACCOUNTS = {
 } as const;
 type Role = keyof typeof ACCOUNTS;
 
-/** src/loop/lease.ts holds a draft for 240 s; the poll is given that plus room for the watchdog to land. */
-const DRAFT_DEADLINE_MS = 480_000;
-const DRAFT_POLL_MS = 6_000;
-const MACHINE_STATES = ["proposed", "drafted", "redlined"];
-/** How far down the knowledge-debt ranking the warm pass will go looking for a draft it can film. */
-const CLUSTERS_TRIED = 3;
-/** How long `show` waits for a node before calling it absent. One navigation on the deployed instance, no more. */
-const SHOW_TIMEOUT_MS = 6_000;
-/** How long the loop beat waits for the review act to mount and offer its slot field. */
-const SLOT_TIMEOUT_MS = 20_000;
-
-/**
- * `--beats b3,b6` records only the named beats and merges them into the beats.json already on disk, leaving the
- * other beats' footage and their records untouched. A cut is six recordings against a live deployment, and one
- * beat missing its moment is not a reason to re-shoot the five that landed: the slots are fixed, so a beat is a
- * self-contained file and re-taking it cannot move anything else. The warm pass then does only the work the
- * chosen beats need, so a loop re-take does not spend three more answers it will not film.
- */
+/** `--beats b2,b4` films only the named beats and keeps every other beat's frames and record as they are. */
 const ONLY: Set<string> | null = (() => {
   const at = process.argv.indexOf("--beats");
   if (at < 0) return null;
   const ids = (process.argv[at + 1] ?? "").split(",").map((s) => s.trim()).filter(Boolean);
   if (ids.length === 0) throw new Error("--beats needs a comma-separated list of beat ids, for example --beats b6");
   return new Set(ids);
+})();
+/** `--b6 fallback` skips the live walk and uses the fallback footage. */
+const FORCE_B6: B6Variant | null = (() => {
+  const at = process.argv.indexOf("--b6");
+  return at < 0 ? null : (process.argv[at + 1] as B6Variant);
 })();
 
 const misses: string[] = [];
@@ -74,13 +92,667 @@ const note = (message: string): void => {
   console.log(`  miss: ${message}`);
 };
 const wait = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+const ease = (x: number): number => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 
-/* 1. The caption layer ------------------------------------------------------------------------------------------ */
+/* Signing in ---------------------------------------------------------------------------------------------------- */
 
-/** One stretch of the caption layer: a cue on screen, or the badge alone between two of them. */
+/** Sign this context in as `role`. The password goes straight into the request body and nowhere else. */
+async function signIn(api: APIRequestContext, role: Role): Promise<void> {
+  const account = ACCOUNTS[role];
+  const password = process.env[account.env];
+  if (!password) throw new Error(`${account.env} is not in this run's environment; run through video/run.sh`);
+  const response = await api.post(`${BASE}/api/auth/login`, { data: { username: account.username, password } });
+  if (!response.ok()) throw new Error(`login as ${account.username} answered ${response.status()}`);
+  console.log(`  signed in as ${role}`);
+}
+
+async function newContext(browser: Browser): Promise<BrowserContext> {
+  return browser.newContext({
+    viewport: { width: CSS_W, height: CSS_H },
+    deviceScaleFactor: SCALE,
+    reducedMotion: "reduce",
+    userAgent: "thehub-3v-video (Playwright)",
+  });
+}
+
+/* The reel ------------------------------------------------------------------------------------------------------ */
+
+/** One captured frame, its length in 25 fps frames, and what video/overlay.py draws over it, in CSS pixels. */
+type Frame = { file: string; n: number; scale: number; cursor: Point | null; ripple: number | null; box: Box | null };
+type Point = { x: number; y: number };
+type Box = { x: number; y: number; width: number; height: number };
+
+/** Wait until a navigated page has painted what it is going to paint: network quiet, fonts, the images in view. */
+async function settle(page: Page): Promise<void> {
+  await page.waitForLoadState("networkidle", { timeout: 20_000 }).catch(() => undefined);
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    const images = Array.from(document.images).filter((img) => !img.complete);
+    await Promise.race([Promise.all(images.map((img) => new Promise((r) => { img.onload = img.onerror = () => r(null); }))), new Promise((r) => setTimeout(r, 8000))]);
+  });
+  await wait(450);
+}
+
+class Reel {
+  readonly frames: Frame[] = [];
+  private count = 0;
+  private files = 0;
+  cursor: Point | null = null;
+  private ripple: number | null = null;
+  private outline: Locator | null = null;
+  readonly dir: string;
+
+  constructor(
+    public page: Page,
+    readonly id: string,
+    readonly slot: number,
+  ) {
+    this.dir = path.join(FRAMES, id);
+    rmSync(this.dir, { recursive: true, force: true });
+    mkdirSync(this.dir, { recursive: true });
+  }
+
+  /** Seconds of the beat filmed so far. */
+  get seconds(): number {
+    return this.count / FPS;
+  }
+
+  async snap(n = 1): Promise<void> {
+    const box = this.outline ? await this.outline.boundingBox({ timeout: 3_000 }).catch(() => null) : null;
+    const scale = await this.page.evaluate(() => window.devicePixelRatio);
+    const file = path.join(this.dir, `f${String(++this.files).padStart(4, "0")}.png`);
+    await this.page.screenshot({ path: file, type: "png", animations: "disabled", caret: "hide" });
+    this.frames.push({ file, n, scale, cursor: this.cursor ? { ...this.cursor } : null, ripple: this.ripple, box });
+    this.count += n;
+  }
+
+  /** Hold the last frame until the beat's clock reaches `seconds`, the mark the caption cues are set to. */
+  until(seconds: number): void {
+    const target = Math.round(seconds * FPS);
+    const short = target - this.count;
+    if (this.frames.length === 0) throw new Error(`${this.id}: nothing filmed before the ${seconds} s mark`);
+    if (short > 0) {
+      this.frames[this.frames.length - 1].n += short;
+      this.count = target;
+    } else if (short < 0) {
+      note(`${this.id}: the motion before the ${seconds} s mark ran ${(-short / FPS).toFixed(2)} s over it`);
+    }
+  }
+
+  /** Outline what the caption is about, or clear the outline. Painted on the next frame. */
+  mark(target: Locator | null): void {
+    this.outline = target;
+  }
+
+  hide(): void {
+    this.cursor = null;
+  }
+
+  async glide(to: Point, seconds = 0.48): Promise<void> {
+    const from = this.cursor ?? { x: CSS_W * 0.66, y: CSS_H * 0.6 };
+    const steps = Math.max(2, Math.round(seconds * FPS));
+    for (let i = 1; i <= steps; i++) {
+      const e = ease(i / steps);
+      this.cursor = { x: from.x + (to.x - from.x) * e, y: from.y + (to.y - from.y) * e };
+      await this.snap(1);
+    }
+  }
+
+  /** Bring the pointer onto a node, where a person's hand would land on it. */
+  async point(target: Locator, seconds = 0.48): Promise<boolean> {
+    const box = await target.boundingBox({ timeout: 8_000 }).catch(() => null);
+    if (!box) {
+      note(`${this.id}: the pointer found nothing to land on`);
+      return false;
+    }
+    await this.glide({ x: box.x + Math.min(box.width / 2, 48), y: box.y + box.height / 2 }, seconds);
+    return true;
+  }
+
+  /** The click a viewer sees (a ripple under the pointer), then the click itself. */
+  async press(act: () => Promise<unknown>): Promise<boolean> {
+    for (const r of [7, 13, 19]) {
+      this.ripple = r;
+      await this.snap(1);
+    }
+    this.ripple = null;
+    try {
+      await act();
+      return true;
+    } catch (error) {
+      note(`${this.id}: a click did not land (${error instanceof Error ? error.message.split("\n")[0] : String(error)})`);
+      return false;
+    }
+  }
+
+  async click(target: Locator, seconds = 0.48): Promise<boolean> {
+    if (!(await this.point(target, seconds))) return false;
+    return this.press(() => target.click({ timeout: 15_000 }));
+  }
+
+  /** Type into a field a few characters a frame, so the question is seen being asked. */
+  async type(target: Locator, text: string, perFrame = 3): Promise<void> {
+    await target.click({ timeout: 10_000 });
+    for (let i = 0; i < text.length; i += perFrame) {
+      await target.pressSequentially(text.slice(i, i + perFrame));
+      await this.snap(2);
+    }
+  }
+
+  private async scrollY(): Promise<number> {
+    return this.page.evaluate(() => window.scrollY);
+  }
+
+  /** An animated scroll of the window to `y`, one frame per step. */
+  async scrollTo(y: number, seconds = 0.56): Promise<void> {
+    const from = await this.scrollY();
+    const max = await this.page.evaluate(() => document.documentElement.scrollHeight - window.innerHeight);
+    const to = Math.max(0, Math.min(max, Math.round(y)));
+    if (Math.abs(to - from) < 2) return;
+    const steps = Math.max(2, Math.round(seconds * FPS));
+    for (let i = 1; i <= steps; i++) {
+      await this.page.evaluate((v) => window.scrollTo(0, v), Math.round(from + (to - from) * ease(i / steps)));
+      await this.snap(1);
+    }
+  }
+
+  /** Where a node sits on the page, in document pixels. */
+  async topOf(target: Locator): Promise<number | null> {
+    return target
+      .first()
+      .evaluate((e) => e.getBoundingClientRect().top + window.scrollY, undefined, { timeout: 8_000 })
+      .catch(() => null);
+  }
+
+  /** Scroll so a node's top lands `atY` pixels below the top of the frame: animated, or instantly between shots. */
+  async frame(target: Locator, atY = 80, seconds = 0.56): Promise<boolean> {
+    const top = await this.topOf(target);
+    if (top === null) {
+      note(`${this.id}: nothing to frame`);
+      return false;
+    }
+    if (seconds <= 0) await this.page.evaluate((v) => window.scrollTo(0, v), Math.max(0, Math.round(top - atY)));
+    else await this.scrollTo(top - atY, seconds);
+    return true;
+  }
+
+  async goto(url: string): Promise<void> {
+    await this.page.goto(`${BASE}${url}`, { waitUntil: "domcontentloaded", timeout: 90_000 });
+    await settle(this.page);
+  }
+
+  /** Cut the reel to the slot: the last hold absorbs any shortfall, the longest holds give back any overrun. */
+  fit(): { frames: number; concat: string } {
+    const target = Math.round(this.slot * FPS);
+    if (this.count < target) this.frames[this.frames.length - 1].n += target - this.count;
+    let over = this.count - target;
+    if (over > 0) note(`${this.id}: filmed ${(over / FPS).toFixed(2)} s over its ${this.slot} s slot; the longest holds give it back`);
+    while (over > 0) {
+      const longest = this.frames.reduce((a, b) => (b.n > a.n ? b : a));
+      if (longest.n <= 1) throw new Error(`${this.id}: the reel cannot be cut to its slot`);
+      longest.n -= 1;
+      over -= 1;
+    }
+    this.count = target;
+    // The drawn layer goes onto a copy of each raw frame (c0001.png beside f0001.png); the concat names the copies.
+    const drawn = this.frames.map((f) => ({ ...f, raw: path.basename(f.file), out: path.basename(f.file).replace(/^f/, "c") }));
+    writeFileSync(path.join(this.dir, "frames.json"), `${JSON.stringify(drawn.map((f) => ({ raw: f.raw, out: f.out, n: f.n, scale: f.scale, cursor: f.cursor, ripple: f.ripple, box: f.box })), null, 1)}\n`);
+    const painted = spawnSync("python3", [path.join(HERE, "overlay.py"), path.join(this.dir, "frames.json")], { encoding: "utf8" });
+    if (painted.status !== 0) throw new Error(`${this.id}: video/overlay.py failed: ${painted.stderr}`);
+    const lines = ["ffconcat version 1.0"];
+    for (const f of drawn) lines.push(`file ${f.out}`, `duration ${(f.n / FPS).toFixed(4)}`);
+    lines.push(`file ${drawn[drawn.length - 1].out}`);
+    const concat = path.join(this.dir, "frames.ffconcat");
+    writeFileSync(concat, `${lines.join("\n")}\n`);
+    return { frames: this.frames.length, concat };
+  }
+}
+
+/* The beats ----------------------------------------------------------------------------------------------------- */
+
+const q = (page: Page, selector: string): Locator => page.locator(selector).first();
+
+/** Tag the innermost node matching `selector` whose text includes every `text` (climbing `up` parents), for a locator. */
+async function tag(page: Page, name: string, selector: string, text: string | string[], up = 0): Promise<Locator> {
+  const texts = Array.isArray(text) ? text : [text];
+  await page.evaluate(
+    ({ name, selector, texts, up }) => {
+      document.querySelectorAll(`[data-reel="${name}"]`).forEach((e) => e.removeAttribute("data-reel"));
+      // The innermost match: every ancestor of a node also "includes" its text, so the shortest text is the node.
+      const hits = Array.from(document.querySelectorAll(selector)).filter((e) => texts.every((t) => (e.textContent ?? "").includes(t)));
+      hits.sort((a, b) => (a.textContent ?? "").length - (b.textContent ?? "").length);
+      let node: Element | null = hits[0] ?? null;
+      for (let i = 0; i < up && node?.parentElement; i++) node = node.parentElement;
+      node?.setAttribute("data-reel", name);
+    },
+    { name, selector, texts, up },
+  );
+  return page.locator(`[data-reel="${name}"]`).first();
+}
+
+type Shot = (reel: Reel, context: BrowserContext) => Promise<void>;
+
+const SCRIPTS: Record<string, Shot> = {
+  // B1 The problem: Home's gap headline, then the Console with its two layers, the method and the three bands.
+  async b1(reel) {
+    const { page } = reel;
+    await reel.goto("/");
+    await reel.snap();
+    reel.until(4.5);
+    reel.mark(q(page, '[data-component="gap-headline"]'));
+    await reel.snap();
+    reel.until(8.1);
+    reel.mark(null);
+    reel.cursor = { x: 780, y: 470 };
+    await reel.click(q(page, 'nav a[href="/coverage"], aside a[href="/coverage"]'), 0.6);
+    await page.waitForURL(/\/coverage$/, { timeout: 30_000 }).catch(() => note("b1: the sidebar did not reach the Console"));
+    await settle(page);
+    reel.mark(await tag(page, "generous", '[data-component="coverage-gap"] *', "generous layer", 1));
+    await reel.snap();
+    reel.until(15);
+    reel.mark(null);
+    await reel.scrollTo(150, 0.48);
+    reel.mark(await tag(page, "method", "details", "window 2n", 0));
+    await reel.snap();
+    reel.until(17.4);
+    reel.mark(q(page, '[data-component="band-bars"]'));
+    await reel.snap();
+    reel.until(20);
+  },
+
+  // B2 Evidence: the seeded trip question replayed from storage, a claim's citation to its drawer and its page, then
+  // the stored trace.
+  async b2(reel) {
+    const { page } = reel;
+    await reel.goto(`/ask?chip=${CHIP}`);
+    const traceHref = await page.locator('a[href^="/trace/"]').first().getAttribute("href");
+    reel.mark(q(page, '[data-component="ask-form"]'));
+    await reel.snap();
+    reel.until(5);
+    reel.mark(null);
+    const claims = q(page, '[data-component="packet"] [aria-label="Claims"]');
+    await reel.frame(claims, 70);
+    reel.mark(claims);
+    await reel.snap();
+    reel.until(9.3);
+    reel.mark(null);
+    reel.cursor = { x: 900, y: 420 };
+    const chip = page.locator('[data-component="packet"] [aria-label="Claims"] [data-component="citation-chip"]').filter({ hasText: "OPL-GA-1201A-07" }).first();
+    await reel.click(chip, 0.5);
+    const drawer = q(page, 'dialog[data-component="glass-drawer"]');
+    await drawer.waitFor({ state: "visible", timeout: 15_000 }).catch(() => note("b2: the citation drawer did not open"));
+    await wait(700);
+    reel.mark(await tag(page, "approval", 'dialog[data-component="glass-drawer"] *', "Approval status", 1));
+    await reel.snap();
+    reel.until(14.3);
+    reel.mark(null);
+    const viewer = page.locator('dialog[data-component="glass-drawer"]').getByRole("link", { name: /Open in the document viewer/ }).first();
+    await reel.click(viewer, 0.45);
+    await page.waitForURL(/\/documents\//, { timeout: 30_000 }).catch(() => note("b2: the viewer did not open"));
+    await settle(page);
+    await reel.frame(q(page, '[data-component="page-viewer"]'), 64, 0);
+    reel.hide();
+    reel.mark(q(page, '[data-component="page-viewer"] [data-span], [data-component="page-viewer"] mark, [data-component="span-box"], [data-component="page-viewer"] [class*="span"]'));
+    await reel.snap();
+    reel.until(20);
+    reel.mark(null);
+    await reel.goto(traceHref ?? "/trace");
+    await reel.snap();
+    reel.until(24.5);
+    await reel.frame(q(page, '[data-component="verdict-strip"]'), 60);
+    reel.mark(q(page, '[data-component="verdict-strip"]'));
+    await reel.snap();
+    reel.until(30);
+  },
+
+  // B3 Safety: the defeat request typed and refused by the rule pack, the permit route, then the approved bypass
+  // lesson read at 160 percent, as a person zooms in to read a page.
+  async b3(reel, context) {
+    const { page } = reel;
+    await reel.goto("/ask");
+    reel.cursor = { x: 760, y: 470 };
+    await reel.snap(25);
+    const box = q(page, '[data-component="ask-form"] textarea');
+    await reel.point(box, 0.4);
+    await reel.press(() => box.click());
+    await reel.type(box, DEFEAT_QUESTION, 3);
+    const submit = q(page, '[data-component="ask-submit"]');
+    await reel.point(submit, 0.36);
+    await reel.press(() => submit.click());
+    const card = q(page, '[data-component="refusal-card"]');
+    await card.waitFor({ state: "visible", timeout: 60_000 }).catch(() => note("b3: the refusal card did not arrive"));
+    await wait(600);
+    await reel.frame(card, 30, 0.48);
+    reel.mark(await tag(page, "refused", '[data-component="refusal-card"] *', "Refused", 0));
+    await reel.snap();
+    reel.until(10);
+    reel.mark(null);
+    const route = await tag(page, "route", '[data-component="refusal-card"] *', "permit-to-work procedure", 0);
+    await reel.frame(route, 220, 0.56);
+    reel.mark(route);
+    await reel.snap();
+    reel.until(14);
+    reel.mark(null);
+    reel.hide();
+
+    await reel.goto("/assets/LV-6701");
+    const href = await page.locator("a", { hasText: BYPASS_DOC_NO }).first().getAttribute("href");
+    if (!href) note(`b3: ${BYPASS_DOC_NO} is not linked from the LV-6701 sheet`);
+    await reel.goto(href ?? "/documents");
+    reel.mark(await tag(page, "approved", "main *", "Approval status", 1));
+    await reel.snap();
+    reel.until(20);
+    reel.mark(null);
+
+    // The same page at 160 percent, in a second view of the same signed-in browser: what Ctrl and plus does.
+    const zoom = 1.6;
+    const zoomed = await context.browser()!.newContext({
+      viewport: { width: Math.round(CSS_W / zoom), height: Math.round(CSS_H / zoom) },
+      deviceScaleFactor: SCALE * zoom,
+      reducedMotion: "reduce",
+      storageState: await context.storageState(),
+    });
+    const zpage = await zoomed.newPage();
+    const main = reel.page;
+    reel.page = zpage;
+    try {
+      await reel.goto(href ?? "/documents");
+      const render = q(zpage, '[data-component="page-viewer"] img');
+      const top = await reel.topOf(render);
+      const height = await render.evaluate((e) => e.getBoundingClientRect().height).catch(() => 0);
+      if (top === null) note("b3: the lesson page render was not found at 160 percent");
+      await zpage.evaluate((v) => window.scrollTo(0, v), Math.max(0, Math.round((top ?? 0) + height * 0.16)));
+      await reel.snap();
+      reel.until(24);
+      await reel.scrollTo((top ?? 0) + height * 0.42, 1.2);
+      reel.until(35);
+    } finally {
+      reel.page = main;
+      await zoomed.close();
+    }
+  },
+
+  // B4 Context: the typed rows behind a tag, the drawing with its transcription line, then the misalignment chain.
+  async b4(reel) {
+    const { page } = reel;
+    await reel.goto("/assets/GA-1201A");
+    const card = page.locator('[data-component="tag-card"]').filter({ hasText: "VSHH-1201" }).first();
+    await reel.frame(card, 70, 0);
+    await card.evaluate((e) => e.setAttribute("data-reel-card", "vs"));
+    reel.mark(q(page, '[data-reel-card="vs"] table'));
+    await reel.snap();
+    reel.until(3.6);
+    reel.mark(await tag(page, "related", '[data-reel-card="vs"] *', "Related work orders", 1));
+    await reel.snap();
+    reel.until(7);
+    reel.mark(null);
+    const caption = q(page, "#pid figcaption");
+    const capTop = await reel.topOf(caption);
+    await reel.scrollTo((capTop ?? 0) - (SAFE_BOTTOM - 20), 0.8);
+    reel.mark(caption);
+    await reel.snap();
+    reel.until(17);
+    reel.mark(null);
+    await reel.goto("/failures/GA-1201A");
+    await reel.frame(q(page, '[data-component="chain"]'), 70, 0);
+    await reel.snap();
+    reel.until(19.5);
+    reel.mark(await tag(page, "cracked", '[data-component="chain"] li, [data-component="chain"] > *', ["WO-240003", fixtures().demo.primary_wo], 0));
+    await reel.snap();
+    reel.until(25);
+  },
+
+  // B5 From one gap to the queue: the stored abstention, the records no lesson teaches, the ranked clusters.
+  async b5(reel) {
+    const { page } = reel;
+    await reel.goto(`/trace/${encodeURIComponent(GAP_TRACE)}`);
+    reel.mark(await tag(page, "outcome", "main span, main p, main a", "outcome abstention", 0));
+    await reel.snap();
+    reel.until(6);
+    reel.mark(null);
+    await reel.goto("/failures/GA-1201A");
+    const records = q(page, '[data-component="uncovered-records"]');
+    await reel.frame(records, 60, 0);
+    reel.mark(records);
+    await reel.snap();
+    reel.until(13);
+    reel.mark(null);
+    await reel.goto("/coverage");
+    const first = q(page, '[data-component="cluster-card"]');
+    await reel.frame(first, 110, 0);
+    reel.mark(first);
+    await reel.snap();
+    reel.until(20);
+  },
+
+  // B7 Closing: the run this product is scored by, and the address.
+  async b7(reel, context) {
+    const zoom = 1.25;
+    const zoomed = await context.browser()!.newContext({
+      viewport: { width: Math.round(CSS_W / zoom), height: Math.round(CSS_H / zoom) },
+      deviceScaleFactor: SCALE * zoom,
+      reducedMotion: "reduce",
+      storageState: await context.storageState(),
+    });
+    const main = reel.page;
+    reel.page = await zoomed.newPage();
+    try {
+      await reel.goto("/evaluation");
+      await reel.snap();
+      reel.until(4);
+    } finally {
+      reel.page = main;
+      await zoomed.close();
+    }
+  },
+};
+
+/* B6, the loop ---------------------------------------------------------------------------------------------------- */
+
+const MACHINE_STATES = ["proposed", "drafted", "redlined"];
+const DRAFT_DEADLINE_MS = 480_000;
+const REPROPOSE_ROUNDS = 3;
+const PROVIDER_DOWN = /model provider did not answer|budget|Live answering is off/i;
+
+/** The draft this browser's sandbox holds, read back the way the loop surface reads it. */
+async function draftState(api: APIRequestContext, id: string): Promise<string | null> {
+  const r = await api.get(`${BASE}/api/drafts/${encodeURIComponent(id)}`, { timeout: 90_000 }).catch(() => null);
+  if (!r || r.status() !== 200) return null;
+  return ((await r.json()) as { draft: { state: string } }).draft.state;
+}
+
+async function settleDraft(api: APIRequestContext, id: string): Promise<string> {
+  const until = Date.now() + DRAFT_DEADLINE_MS;
+  for (;;) {
+    const state = (await draftState(api, id)) ?? "proposed";
+    if (!MACHINE_STATES.includes(state)) return state;
+    if (Date.now() > until) return state;
+    await wait(6_000);
+  }
+}
+
+/**
+ * The walk, filmed as the script's shot plan: the Supervisor's request, the stored draft with its evidence and
+ * redline verdict, the acceptance; the Manager's publication, the revision, the child corpus version and the recount;
+ * the same question asked again. Every model call happens between frames, so no wait is on screen. Returns false at
+ * the first step that cannot be filmed truthfully, and the caller falls back.
+ */
+async function walkLoop(reel: Reel, context: BrowserContext): Promise<boolean> {
+  const { page } = reel;
+  await signIn(context.request, "Supervisor");
+  await reel.goto("/demo/loop");
+
+  // Act 1, off camera: the question before the lesson exists. It is the provider check as well.
+  const ask = page.getByRole("button", { name: "Ask the question" }).first();
+  if (!(await ask.isVisible().catch(() => false))) {
+    note("b6: the loop offered no first ask; this sandbox already holds a walk");
+    return false;
+  }
+  await ask.click();
+  const outcome = page.locator('[data-act="ask_before"] .tag').first();
+  await outcome.waitFor({ state: "visible", timeout: 180_000 }).catch(() => undefined);
+  const act1 = (await page.locator('[data-act="ask_before"]').innerText().catch(() => "")) ?? "";
+  if (PROVIDER_DOWN.test(act1)) {
+    note("b6: the model provider did not answer the first ask, so the walk cannot be filmed");
+    return false;
+  }
+
+  // 0 to 9 s: the Supervisor's badge, the target, then the request.
+  await page.evaluate(() => window.scrollTo(0, 0));
+  reel.mark(q(page, 'header p.badge[data-tone="accent"]'));
+  await reel.snap();
+  reel.until(2.2);
+  reel.mark(q(page, '[aria-labelledby="loop-target"]'));
+  await reel.snap();
+  reel.until(4.2);
+  reel.mark(null);
+  await reel.frame(q(page, '[data-act="request"]'), 90, 0.5);
+  reel.cursor = { x: 820, y: 430 };
+  const request = page.getByRole("button", { name: "Request the lesson" }).first();
+  if (!(await reel.click(request, 0.5))) return false;
+  await page.getByText("Draft requested").first().waitFor({ timeout: 60_000 }).catch(() => undefined);
+  await reel.snap();
+  reel.until(7);
+
+  // Off camera: the drafter and the redliner, re-proposed on a block (9.6) a bounded number of times.
+  const idText = (await page.locator('[data-act="request"] .mono').first().textContent().catch(() => null))?.trim() ?? null;
+  let id: string | null = idText;
+  if (!id) {
+    note("b6: the request carried no draft id");
+    return false;
+  }
+  let state = await settleDraft(context.request, id);
+  for (let round = 0; (state === "blocked" || state === "rejected") && round < REPROPOSE_ROUNDS; round++) {
+    note(`b6: the draft came back ${state}; re-proposing it (9.6)`);
+    const reproposed: Awaited<ReturnType<APIRequestContext["post"]>> = await context.request.post(`${BASE}/api/drafts/${encodeURIComponent(id)}/repropose`, { data: {}, timeout: 300_000 });
+    if (!reproposed.ok()) break;
+    id = ((await reproposed.json()) as { draft_id: string }).draft_id;
+    state = await settleDraft(context.request, id);
+  }
+  if (state !== "in_review") {
+    note(`b6: the draft settled ${state}, not in_review`);
+    return false;
+  }
+
+  // 7 to 17 s: the stored draft, its evidence, its redline verdict.
+  reel.hide();
+  await reel.goto(`/drafts/${encodeURIComponent(id)}`);
+  await reel.snap();
+  reel.until(11.5);
+  const verdict = q(page, '[data-component="redline-verdict"], [data-component="redline-verdict-panel"], [data-component="redline"]');
+  if (await reel.frame(verdict, 90, 0.6)) reel.mark(verdict);
+  await reel.snap();
+  reel.until(17);
+  reel.mark(null);
+
+  // 17 to 23 s: back on the loop, any slot answered off camera, then the acceptance.
+  await reel.goto("/demo/loop");
+  const slots = page.getByLabel("Engineer note");
+  for (let i = 0; i < (await slots.count()); i++) {
+    await slots.nth(i).fill("Replace on the interval the supplier states; until one is on file, inspect at every second alignment check.");
+    await page.getByRole("button", { name: "Record the note" }).first().click();
+    await page.getByText("Note recorded").nth(i).waitFor({ timeout: 30_000 }).catch(() => undefined);
+  }
+  await reel.frame(q(page, '[data-act="review"]'), 90, 0);
+  reel.cursor = { x: 860, y: 420 };
+  const accept = page.getByRole("button", { name: "Accept the draft" }).first();
+  if (!(await reel.click(accept, 0.5))) return false;
+  const accepted = page.locator('[data-act="review"]').getByText("Accepted").first();
+  if (!(await accepted.waitFor({ timeout: 60_000 }).then(() => true).catch(() => false))) {
+    note("b6: the acceptance did not land");
+    return false;
+  }
+  reel.mark(accepted);
+  await reel.snap();
+  reel.until(23);
+  reel.mark(null);
+
+  // 23 to 30 s: the Manager, signed in off camera; the badge, then the publication.
+  await signIn(context.request, "Manager");
+  reel.hide();
+  await reel.goto("/demo/loop");
+  reel.mark(q(page, 'header p.badge[data-tone="accent"]'));
+  await reel.snap();
+  reel.until(25.2);
+  reel.mark(null);
+  await reel.frame(q(page, '[data-act="publish"]'), 90, 0.5);
+  reel.cursor = { x: 860, y: 420 };
+  const publish = page.getByRole("button", { name: "Publish the lesson" }).first();
+  if (!(await reel.click(publish, 0.5))) return false;
+  const published = page.locator('[data-act="publish"]').getByText("Published").first();
+  if (!(await published.waitFor({ timeout: 180_000 }).then(() => true).catch(() => false))) {
+    note("b6: the publication did not land");
+    return false;
+  }
+  await wait(1200);
+  reel.until(Math.max(28.4, reel.seconds));
+  reel.mark(published.locator("xpath=.."));
+  await reel.snap();
+  reel.until(30);
+
+  // 30 to 36 s: the revision and the recount, then the child version on the recount panel.
+  reel.mark(await tag(page, "recount", '[data-act="publish"] p', "uncovered before", 0));
+  await reel.snap();
+  reel.until(33);
+  const moment = q(page, '[data-component="recount-moment"]');
+  await reel.frame(moment, 70, 0.5);
+  reel.mark(moment);
+  await reel.snap();
+  reel.until(36);
+  reel.mark(null);
+
+  // 36 to 41 s: the same question, one lesson later, answered between frames and shown once it is stored.
+  await reel.frame(q(page, '[data-act="ask_after"]'), 90, 0.4);
+  const again = page.getByRole("button", { name: "Ask the same question again" }).first();
+  if (!(await reel.click(again, 0.4))) return false;
+  const done = page.locator('[data-act="ask_after"]').getByText("Done.").first();
+  if (!(await done.waitFor({ timeout: 180_000 }).then(() => true).catch(() => false))) {
+    note("b6: the second ask did not finish");
+    return false;
+  }
+  const act6 = (await page.locator('[data-act="ask_after"]').innerText().catch(() => "")) ?? "";
+  if (PROVIDER_DOWN.test(act6)) {
+    note("b6: the provider did not answer the second ask");
+    return false;
+  }
+  reel.hide();
+  await reel.frame(q(page, '[data-act="ask_after"]'), 40, 0);
+  reel.mark(q(page, '[data-act="ask_after"] [aria-label="Claims"]'));
+  await reel.snap();
+  reel.until(41);
+  return true;
+}
+
+/** The B6 fallback as a reel of stills from the earlier footage, scaled to the frame with Lanczos and a light unsharp. */
+function fallbackReel(): { frames: number; concat: string } {
+  const dir = path.join(FRAMES, "b6");
+  rmSync(dir, { recursive: true, force: true });
+  mkdirSync(dir, { recursive: true });
+  const drawn: Array<{ n: number; scale: number; cursor: null; ripple: null; box: null; raw: string; out: string }> = [];
+  let from = 0;
+  FALLBACK_STILLS.forEach((still, i) => {
+    const raw = `f${String(i + 1).padStart(4, "0")}.png`;
+    const made = spawnSync("ffmpeg", ["-y", "-loglevel", "error", "-ss", String(still.at), "-i", RAW_B6, "-frames:v", "1", "-vf", `scale=${CSS_W * SCALE}:${CSS_H * SCALE}:flags=lanczos,unsharp=5:5:0.5:5:5:0.0`, path.join(dir, raw)], { encoding: "utf8" });
+    if (made.status !== 0) throw new Error(`b6 fallback: the still at ${still.at} s could not be taken: ${made.stderr}`);
+    drawn.push({ n: Math.round((still.until - from) * FPS), scale: 1, cursor: null, ripple: null, box: null, raw, out: raw.replace(/^f/, "c") });
+    from = still.until;
+  });
+  writeFileSync(path.join(dir, "frames.json"), `${JSON.stringify(drawn, null, 1)}\n`);
+  const painted = spawnSync("python3", [path.join(HERE, "overlay.py"), path.join(dir, "frames.json")], { encoding: "utf8" });
+  if (painted.status !== 0) throw new Error(`b6 fallback: video/overlay.py failed: ${painted.stderr}`);
+  const lines = ["ffconcat version 1.0"];
+  for (const f of drawn) lines.push(`file ${f.out}`, `duration ${(f.n / FPS).toFixed(4)}`);
+  lines.push(`file ${drawn[drawn.length - 1].out}`);
+  const concat = path.join(dir, "frames.ffconcat");
+  writeFileSync(concat, `${lines.join("\n")}\n`);
+  return { frames: drawn.length, concat };
+}
+
+/* The caption layer --------------------------------------------------------------------------------------------- */
+
 type Segment = { seconds: number; cue: TimedCue | null };
 
-/** The whole 175 s as segments, so the layer is a continuous strip and the disclosure badge is on every frame. */
+/** The whole cut as segments, so the layer is a continuous strip and the disclosure badge is on every frame. */
 function segments(cues: TimedCue[], total: number): Segment[] {
   const out: Segment[] = [];
   let at = 0;
@@ -93,568 +765,167 @@ function segments(cues: TimedCue[], total: number): Segment[] {
   return out;
 }
 
-/** The burn-in layer's own page: the product's palette and typefaces of blueprint 7.1, over nothing at all. */
 const LAYER_HTML = `<!doctype html><html><head><meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root { --paper:#f4f1ea; --ink-900:#1b1916; --ink-700:#4a453e; --accent:#1e3fb8; --caveat:#9a5600; --rim:rgba(27,25,22,0.12); }
+  :root { --ink-900:#1b1916; --accent:#1e3fb8; --caveat:#9a5600; --rim:rgba(27,25,22,0.12); }
   * { box-sizing: border-box; }
-  html, body { margin:0; padding:0; width:${WIDTH}px; height:${HEIGHT}px; background:transparent; overflow:hidden; }
+  html, body { margin:0; padding:0; width:${CSS_W}px; height:${CSS_H}px; background:transparent; overflow:hidden; }
   body { font-family:"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
-  #badge { position:absolute; top:18px; right:18px; display:inline-flex; align-items:center; gap:8px;
-    font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:13px; line-height:1; letter-spacing:0.01em;
-    color:var(--caveat); background:rgba(255,253,248,0.94); border:1px solid rgba(154,86,0,0.42);
-    border-radius:999px; padding:8px 14px; box-shadow:0 1px 0 rgba(255,255,255,0.9) inset; }
-  #badge::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--caveat); }
-  #band { position:absolute; left:50%; transform:translateX(-50%); bottom:34px; width:1128px; display:none;
-    background:rgba(255,253,248,0.95); border:1px solid var(--rim); border-radius:12px; padding:16px 26px;
-    box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 10px 26px rgba(27,25,22,0.10); }
-  #band[data-tone="caveat"] { border-color:rgba(154,86,0,0.45); box-shadow:inset 4px 0 0 var(--caveat), 0 10px 26px rgba(27,25,22,0.10); }
-  #text { margin:0; text-align:center; font-size:27px; line-height:1.34; font-weight:500; color:var(--ink-900);
-    font-variant-numeric:tabular-nums; }
-  #band[data-tone="caveat"] #text { color:var(--caveat); font-size:24px; font-weight:500; }
-  #sub { margin:10px 0 0; display:none; text-align:center; font-family:"IBM Plex Mono", ui-monospace, monospace;
-    font-size:20px; line-height:1.2; color:var(--accent); }
+  #badge { position:absolute; top:14px; right:16px; display:inline-flex; align-items:center; gap:7px;
+    font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:11.5px; line-height:1; letter-spacing:0.01em;
+    color:var(--caveat); background:rgba(255,253,248,0.95); border:1px solid rgba(154,86,0,0.40);
+    border-radius:999px; padding:7px 12px; box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 4px 12px rgba(27,25,22,0.08); }
+  #badge::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--caveat); }
+  #band { position:absolute; left:0; right:0; margin:0 auto; width:fit-content; bottom:30px; max-width:1100px; display:none;
+    background:rgba(255,253,248,0.96); border:1px solid var(--rim); border-radius:12px; padding:13px 28px 14px;
+    box-shadow:0 1px 0 rgba(255,255,255,0.9) inset, 0 12px 30px rgba(27,25,22,0.14); }
+  #text { margin:0; text-align:center; font-size:26px; line-height:1.34; font-weight:500; color:var(--ink-900);
+    font-variant-numeric:tabular-nums; text-wrap:balance; }
+  #sub { margin:8px 0 0; display:none; text-align:center; font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:19px; line-height:1.2; color:var(--accent); }
 </style></head><body>
 <div id="badge"></div><div id="band"><p id="text"></p><p id="sub"></p></div>
 </body></html>`;
 
-async function renderCaptionLayer(page: Page, list: Segment[]): Promise<void> {
-  rmSync(FRAMES, { recursive: true, force: true });
-  mkdirSync(FRAMES, { recursive: true });
-  await page.setContent(LAYER_HTML, { waitUntil: "load" });
+async function renderCaptionLayer(browser: Browser, list: Segment[]): Promise<void> {
+  const dir = path.join(FRAMES, "captions");
+  rmSync(dir, { recursive: true, force: true });
+  mkdirSync(dir, { recursive: true });
+  const context = await newContext(browser);
+  const page = await context.newPage();
+  await page.setContent(LAYER_HTML, { waitUntil: "networkidle" });
   await page.evaluate((line) => {
     (document.getElementById("badge") as HTMLElement).textContent = line;
   }, REPLAY_LINE);
-  // The web fonts, once, before the first frame is taken: a fallback face would change every frame's metrics.
   await page.evaluate(() => document.fonts.ready);
-
   const lines: string[] = ["ffconcat version 1.0"];
   for (const [i, segment] of list.entries()) {
     const file = `cue-${String(i).padStart(3, "0")}.png`;
-    await page.evaluate((cue: { text: string; sub: string; tone: string } | null) => {
+    await page.evaluate((cue: { text: string; sub: string } | null) => {
       const band = document.getElementById("band") as HTMLElement;
-      const text = document.getElementById("text") as HTMLElement;
       const sub = document.getElementById("sub") as HTMLElement;
       if (cue === null) {
         band.style.display = "none";
         return;
       }
       band.style.display = "block";
-      band.dataset.tone = cue.tone;
-      text.textContent = cue.text;
+      (document.getElementById("text") as HTMLElement).textContent = cue.text;
       sub.textContent = cue.sub;
       sub.style.display = cue.sub ? "block" : "none";
-    }, segment.cue ? { text: segment.cue.text, sub: segment.cue.sub ?? "", tone: segment.cue.tone ?? "plain" } : null);
-    await page.screenshot({ path: path.join(FRAMES, file), omitBackground: true, clip: { x: 0, y: 0, width: WIDTH, height: HEIGHT } });
-    lines.push(`file ${file}`, `duration ${segment.seconds.toFixed(3)}`);
+    }, segment.cue ? { text: segment.cue.text, sub: segment.cue.sub ?? "" } : null);
+    await page.screenshot({ path: path.join(dir, file), omitBackground: true });
+    lines.push(`file ${file}`, `duration ${segment.seconds.toFixed(4)}`);
   }
-  // The concat demuxer drops the last entry's duration unless the file is named once more (documented behaviour).
   lines.push(`file cue-${String(list.length - 1).padStart(3, "0")}.png`);
-  writeFileSync(path.join(FRAMES, "captions.ffconcat"), `${lines.join("\n")}\n`);
-  console.log(`captions: ${list.length} segments rendered into video/frames/`);
+  writeFileSync(path.join(dir, "captions.ffconcat"), `${lines.join("\n")}\n`);
+  await context.close();
+  console.log(`captions: ${list.length} segments rendered into video/frames/captions/`);
 }
-
-/* 2. The warm pass ---------------------------------------------------------------------------------------------- */
-
-/** Sign this browser in as `role`. The password goes straight into the request body and nowhere else. */
-async function signIn(api: APIRequestContext, role: Role): Promise<string> {
-  const account = ACCOUNTS[role];
-  const password = process.env[account.env];
-  if (!password) throw new Error(`${account.env} is not in this run's environment; run through video/run.sh`);
-  const response = await api.post(`${BASE}/api/auth/login`, { data: { username: account.username, password } });
-  // The status alone: no body of a credential exchange is ever printed, failed or not.
-  if (!response.ok()) throw new Error(`login as ${account.username} answered ${response.status()}`);
-  const body = (await response.json()) as { alias?: string };
-  if (typeof body.alias !== "string") throw new Error(`login as ${account.username} answered 200 without an alias`);
-  console.log(`signed in as ${role} (${body.alias})`);
-  return body.alias;
-}
-
-type AskLine = {
-  stage: string;
-  trace_id?: string;
-  evidence?: Array<{ doc_no: string; document_id: string }>;
-  packet?: { trace_id: string; outcome: string };
-};
-
-/** POST /api/ask once and hand back both stream lines, so the cut can replay the answer it stored. */
-async function warmAsk(api: APIRequestContext, question: string): Promise<{ trace: string | null; evidence: AskLine["evidence"] }> {
-  const response = await api.post(`${BASE}/api/ask`, { data: { question }, timeout: 180_000 });
-  if (!response.ok()) {
-    note(`the warm ask answered ${response.status()}`);
-    return { trace: null, evidence: undefined };
-  }
-  const lines = (await response.text()).split("\n").filter(Boolean).map((l) => JSON.parse(l) as AskLine);
-  const evidence = lines.find((l) => l.stage === "evidence")?.evidence;
-  const packet = lines.find((l) => l.stage === "packet")?.packet;
-  if (!packet) {
-    note("the warm ask closed before its packet line");
-    return { trace: null, evidence };
-  }
-  console.log(`  warmed: outcome ${packet.outcome}, trace ${packet.trace_id}`);
-  return { trace: packet.trace_id, evidence };
-}
-
-/** What `warmAsk` would have returned for a question this run has no beat to spend it on. */
-const EMPTY_ASK: { trace: string | null; evidence: AskLine["evidence"] } = { trace: null, evidence: undefined };
-
-type WarmDraft = { id: string; state: string; cluster_id: string } | null;
-
-/** Poll one draft until the machine lane is done with it, and hand back the state it settled in. */
-async function pollDraft(api: APIRequestContext, id: string): Promise<string> {
-  const until = Date.now() + DRAFT_DEADLINE_MS;
-  let state = "proposed";
-  for (;;) {
-    const poll = await api.get(`${BASE}/api/drafts/${encodeURIComponent(id)}`, { timeout: 90_000 }).catch(() => null);
-    if (poll?.status() === 200) {
-      state = ((await poll.json()) as { draft: { state: string } }).draft.state;
-      if (!MACHINE_STATES.includes(state)) break;
-    }
-    if (Date.now() >= until) {
-      note(`the draft ${id} was still in the machine lane (${state}) when the poll deadline passed`);
-      break;
-    }
-    await wait(DRAFT_POLL_MS);
-  }
-  return state;
-}
-
-/**
- * The lesson the loop beat is built on, with the swap the PRD's 26.2 and its risk R-07 plan for.
- *
- * The drafting lane can end a draft `blocked`: the lease of ADR-004 expires, or the redliner blocks a round. Both
- * are re-proposable by 9.6, and neither is a reason to film a walk with nothing in it, because the version roll
- * and the recount are the signature moment of the whole cut. So a blocked draft is re-proposed on the same cluster
- * a bounded number of times, and a cluster that still will not yield one is swapped for the next in the ranking
- * rather than re-planned. Every attempt that failed is a miss in video/out/beats.json, so the record says how many
- * it took and on which cluster it landed.
- */
-const REPROPOSE_ROUNDS = 2;
-const REPROPOSABLE = ["blocked", "rejected"];
-
-async function warmDraft(api: APIRequestContext, clusterIds: string[]): Promise<WarmDraft> {
-  let last: WarmDraft = null;
-  for (const clusterId of clusterIds) {
-    const requested = await api.post(`${BASE}/api/drafts`, { data: { cluster_id: clusterId }, timeout: 300_000 });
-    if (requested.status() !== 202 && !requested.ok()) {
-      note(`the draft request on ${clusterId} answered ${requested.status()}`);
-      continue;
-    }
-    let { draft_id: id } = (await requested.json()) as { draft_id: string };
-    console.log(`  draft ${id} requested on ${clusterId}; polling`);
-
-    for (let round = 0; ; round++) {
-      const state = await pollDraft(api, id);
-      console.log(`  draft ${id} is ${state}`);
-      last = { id, state, cluster_id: clusterId };
-      if (!REPROPOSABLE.includes(state)) return last;
-      if (round >= REPROPOSE_ROUNDS) {
-        note(`the draft on ${clusterId} came back ${state} after ${round + 1} attempts; trying the next cluster`);
-        break;
-      }
-      note(`the draft on ${clusterId} came back ${state}; re-proposing it (9.6)`);
-      const again = await api.post(`${BASE}/api/drafts/${encodeURIComponent(id)}/repropose`, { data: {}, timeout: 300_000 });
-      if (again.status() !== 201 && !again.ok()) {
-        note(`the re-proposal of ${id} answered ${again.status()}`);
-        break;
-      }
-      id = ((await again.json()) as { draft_id: string }).draft_id;
-      console.log(`  re-proposed as ${id}; polling`);
-    }
-  }
-  return last;
-}
-
-/* 3. The beats -------------------------------------------------------------------------------------------------- */
-
-type Camera = {
-  page: Page;
-  /** Seconds of footage before the beat's first framed moment; the encode trims exactly this much off the head. */
-  lead: () => number;
-  /** Seconds of footage after the head, as filmed; the record beside the footage carries it. */
-  filmed: () => number;
-  /** Mark the head: everything up to here (the navigation and the first paint) is trimmed away. */
-  ready: () => void;
-  /** Bring a node into frame and hold on it. A node that is not there is a miss, and the hold happens anyway. */
-  show: (selector: string, seconds: number, label?: string) => Promise<boolean>;
-  hold: (seconds: number) => Promise<void>;
-};
-
-/**
- * The camera keeps a wall clock, not a stopwatch per step.
- *
- * A beat owns a fixed slot, and the encode trims the footage to it from the head, so a beat that overruns loses its
- * ending: on the loop beat that ending is the closing card, which is the one frame of the cut that must survive. A
- * hold therefore waits until the beat's own clock reaches the cumulative mark the script has asked for, rather than
- * waiting that long from wherever the previous step happened to finish. Navigation, first paint and the 7.2 reveals
- * are then absorbed by the hold that follows them instead of being added on top of it, and a beat whose planned
- * holds sum to its slot lands on its slot. A beat that still overruns says so in video/out/beats.json.
- */
-function camera(page: Page, slot: number): Camera {
-  const opened = Date.now();
-  let readyAt: number | null = null;
-  let cursor = 0; // the seconds of the beat the script has spent, as planned rather than as elapsed
-  const until = async (seconds: number): Promise<void> => {
-    cursor += seconds;
-    const left = (readyAt ?? opened) + cursor * 1000 - Date.now();
-    if (left > 0) await wait(left);
-  };
-  return {
-    page,
-    lead: () => (readyAt === null ? 0 : (readyAt - opened) / 1000),
-    filmed: () => (readyAt === null ? 0 : (Date.now() - readyAt) / 1000),
-    ready: () => {
-      readyAt = Date.now();
-      void slot; // the slot is the encode's business; the camera only reports what it filmed against it
-    },
-    hold: until,
-    show: async (selector, seconds, label) => {
-      const target = page.locator(selector).first();
-      // Waited for, not counted. A click that navigates resolves before the next document paints, so counting the
-      // node straight away asks the page being left whether the page being opened has rendered, and calls a slow
-      // surface a missing one. The wait is short because the beat is on a wall clock: time spent here is time the
-      // following hold gives back, and a surface that really is absent still costs only this much.
-      const there = await target
-        .waitFor({ state: "visible", timeout: SHOW_TIMEOUT_MS })
-        .then(() => true)
-        .catch(() => false);
-      if (there) {
-        await target.scrollIntoViewIfNeeded({ timeout: 8_000 }).catch(() => note(`${label ?? selector} would not scroll into frame`));
-      } else {
-        note(`${label ?? selector} is not on this surface`);
-      }
-      await until(seconds);
-      return there;
-    },
-  };
-}
-
-async function open(context: BrowserContext, url: string, slot: number): Promise<Camera> {
-  const page = await context.newPage();
-  // The camera is opened before the navigation, not after it: Playwright starts writing the beat's video file the
-  // moment the page exists, so a clock started after goto() would report a lead shorter than the footage actually
-  // carries, and the encode would leave that much navigation and blank paint at the head of the beat.
-  const cam = camera(page, slot);
-  await page.goto(`${BASE}${url}`, { waitUntil: "domcontentloaded", timeout: 90_000 });
-  return cam;
-}
-
-type Warm = { askTrace: string | null; gapTrace: string | null; bypassDoc: string | null; draft: WarmDraft; clusterId: string | null };
-
-/** The six beats. Each returns the camera it filmed on; the caller closes the page, which flushes its video. */
-const SCRIPTS: Record<string, (context: BrowserContext, warm: Warm, slot: number) => Promise<Camera>> = {
-  // B1 Hook: the gap headline on Home, then the Console with the method chip, both layers and the three bands.
-  async b1(context, _warm, slot) {
-    const cam = await open(context, "/", slot);
-    await cam.page.locator('[data-component="gap-headline"]').first().waitFor({ timeout: 45_000 }).catch(() => note("Home did not render its gap headline"));
-    cam.ready();
-    await cam.show('[data-component="gap-headline"]', 7, "the gap headline");
-    await cam.page.goto(`${BASE}/coverage`, { waitUntil: "domcontentloaded" });
-    await cam.show('[data-component="coverage-gap"]', 6, "the Console gap");
-    await cam.page.locator('[data-component="neumorphic-chip"] summary, details summary').first().click({ timeout: 5_000 }).catch(() => note("the method chip would not open"));
-    await cam.hold(3);
-    await cam.show('[data-component="band-bars"]', 6, "the three bands");
-    return cam;
-  },
-
-  // B2 Ask: the typed setpoint with its sheet's own note and its effects, a citation chip through to its span, and
-  // the stored trace of the warmed answer. The seeded question chips of 9.17 arrive with bundle 1.1.0 and this
-  // deployment runs 1.0.2, so the packet itself has no replay surface here and the beat frames what does.
-  async b2(context, warm, slot) {
-    const cam = await open(context, "/assets/GA-1201A", slot);
-    await cam.page.locator('[data-component="tag-card"]').first().waitFor({ timeout: 45_000 }).catch(() => note("the asset sheet rendered no tag card"));
-    cam.ready();
-    const vs = cam.page.locator('[data-component="tag-card"]').filter({ hasText: "VSHH-1201" }).first();
-    if (await vs.count()) {
-      await vs.scrollIntoViewIfNeeded().catch(() => undefined);
-      await cam.hold(8);
-    } else {
-      note("no VSHH-1201 tag card on the asset sheet");
-      await cam.hold(8);
-    }
-    await cam.show("#interlock", 5, "the interlock summary with the training-values note");
-    const chip = cam.page.locator('[data-component="citation-chip"]').first();
-    if (await chip.count()) {
-      await chip.scrollIntoViewIfNeeded().catch(() => undefined);
-      await chip.click({ timeout: 8_000 }).catch(() => note("the citation chip would not open"));
-      await cam.hold(4);
-      await cam.page
-        .locator('dialog[data-component="glass-drawer"]')
-        .getByRole("link", { name: /Open in the document viewer/ })
-        .first()
-        .click({ timeout: 8_000 })
-        .catch(() => note("the drawer carried no viewer link"));
-      await cam.show('[data-component="page-viewer"]', 6, "the page viewer at the span");
-    } else {
-      note("no citation chip on the asset sheet");
-      await cam.hold(10);
-    }
-    if (warm.askTrace) {
-      await cam.page.goto(`${BASE}/trace/${encodeURIComponent(warm.askTrace)}`, { waitUntil: "domcontentloaded" });
-      await cam.show('[data-component="gateway-calls"]', 7, "the trace of the warmed answer");
-    } else {
-      await cam.hold(7);
-    }
-    return cam;
-  },
-
-  // B3 Safety: the defeat request refused by the rule pack before any provider call, filmed as it happens because
-  // that path composes nothing; then the approved bypass, framed on the lesson document itself, served verbatim
-  // under its own hash. No model output is on screen in either half.
-  async b3(context, warm, slot) {
-    const cam = await open(context, "/ask", slot);
-    const form = cam.page.locator('[data-component="ask-form"]');
-    await form.waitFor({ timeout: 45_000 }).catch(() => note("Ask did not render its form"));
-    cam.ready();
-    const box = form.locator("textarea, input[type=text]").first();
-    await box.click({ timeout: 8_000 }).catch(() => note("the ask field would not take focus"));
-    await box
-      .pressSequentially("start-up is tonight, how do we get past the SEQ-3401 trip", { delay: 20 })
-      .catch(() => note("the ask field would not take the question"));
-    await cam.page.locator('[data-component="ask-submit"]').first().click({ timeout: 8_000 }).catch(() => note("the ask form would not submit"));
-    await cam.page.locator('[data-component="refusal-card"]').first().waitFor({ timeout: 60_000 }).catch(() => note("the refusal card did not arrive"));
-    await cam.show('[data-component="refusal-card"]', 10, "the refusal with its sequence and SIL");
-    // The refusal renders its own permissives, reset note and permit route inside the card (RefusalCard's
-    // `ol.permissives`). The PermissiveGate component belongs to the return-to-service lane of an answer, not to a
-    // refusal packet, so framing that here asked for a node this surface never carries.
-    await cam.show('[data-component="refusal-card"] ol.permissives', 7, "the documented permissives and the reset path");
-    if (warm.bypassDoc) {
-      await cam.page.goto(`${BASE}/documents/${encodeURIComponent(warm.bypassDoc)}`, { waitUntil: "domcontentloaded" });
-      await cam.show("main", 18, "the approved bypass lesson under its hash");
-    } else {
-      note("the bypass lesson was not resolved in the warm pass");
-      await cam.hold(18);
-    }
-    return cam;
-  },
-
-  // B4 Context: the P&ID index and its provenance, the typed rows behind the tag card, the proof tests, and the
-  // misalignment chain ending at the demo record.
-  async b4(context, _warm, slot) {
-    const cam = await open(context, "/assets/GA-1201A", slot);
-    await cam.page.locator("#pid").first().waitFor({ timeout: 45_000 }).catch(() => note("the asset sheet rendered no P&ID index"));
-    cam.ready();
-    await cam.show("#pid", 7, "the P&ID index");
-    await cam.show('[data-component="sidecar-provenance"]', 4, "the sidecar provenance line");
-    await cam.page.goto(`${BASE}/failures/GA-1201A`, { waitUntil: "domcontentloaded" });
-    await cam.show('[data-component="proof-test-card"]', 5, "the last proof tests");
-    await cam.show('[data-component="chain"]', 9, "the misalignment chain");
-    return cam;
-  },
-
-  // B5 Gap: the trace of the warmed coupling-element question, which names the part it could not answer, then the
-  // records no lesson teaches on that asset and the ranked cluster they sit in.
-  async b5(context, warm, slot) {
-    const cam = await open(context, warm.gapTrace ? `/trace/${encodeURIComponent(warm.gapTrace)}` : "/failures/GA-1201A", slot);
-    await cam.page.locator("h1").first().waitFor({ timeout: 45_000 }).catch(() => note("the gap beat's first surface did not render"));
-    cam.ready();
-    if (warm.gapTrace) await cam.show("main", 6, "the trace of the partial answer");
-    else await cam.hold(6);
-    await cam.page.goto(`${BASE}/failures/GA-1201A`, { waitUntil: "domcontentloaded" });
-    await cam.show('[data-component="uncovered-records"]', 7, "the records no lesson teaches");
-    await cam.page.goto(`${BASE}/coverage`, { waitUntil: "domcontentloaded" });
-    await cam.show('[data-component="cluster-card"]', 7, "the ranked clusters");
-    return cam;
-  },
-
-  // B6 Loop: the stored draft, the note, the acceptance, the Manager's publication and the recount. The draft and
-  // the redline verdict were written in the warm pass; what happens on camera is the two human decisions, the one
-  // publishing transaction and the recount it returns.
-  async b6(context, warm, slot) {
-    const cam = await open(context, "/demo/loop", slot);
-    await cam.page.locator("[data-act]").first().waitFor({ timeout: 45_000 }).catch(() => note("the guided loop rendered no acts"));
-    cam.ready();
-    await cam.show('[data-act="draft"]', 6, "the drafted and redlined lesson");
-    if (warm.draft) {
-      await cam.page.goto(`${BASE}/drafts/${encodeURIComponent(warm.draft.id)}`, { waitUntil: "domcontentloaded" });
-      await cam.show("main", 8, "the stored draft with provenance on every element");
-      await cam.page.goto(`${BASE}/demo/loop`, { waitUntil: "domcontentloaded" });
-    } else {
-      note("no draft was warmed, so the loop beat has no stored draft to frame");
-      await cam.hold(8);
-    }
-    // The slot the drafter could not fill, answered by the person who holds the judgement.
-    //
-    // Waited for, not counted, for the same reason `show` waits: the loop is a client component that fetches the
-    // draft after mount, so the review act and its slot field appear a moment after domcontentloaded. Asking
-    // whether the node exists the instant the navigation resolves answers "no" on a draft that does have a slot,
-    // and the accept that follows then finds its button still disabled behind `slotsFilled`.
-    const noteField = cam.page.getByLabel(/Engineer note/i).first();
-    const hasSlot = await noteField
-      .waitFor({ state: "visible", timeout: SLOT_TIMEOUT_MS })
-      .then(() => true)
-      .catch(() => false);
-    if (hasSlot) {
-      await noteField.scrollIntoViewIfNeeded().catch(() => undefined);
-      await noteField.click({ timeout: 8_000 }).catch(() => undefined);
-      await noteField
-        .pressSequentially("Replace the coupling element at every second alignment check until a supplier interval is on file.", { delay: 16 })
-        .catch(() => note("the engineer-note field would not take the note"));
-      await cam.page.getByRole("button", { name: /Record the note/i }).first().click({ timeout: 10_000 }).catch(() => note("the note would not record"));
-      await cam.hold(3);
-    } else {
-      note("the loop route offered no engineer-note slot");
-      await cam.hold(5);
-    }
-    await cam.page.getByRole("button", { name: /Accept the draft/i }).first().click({ timeout: 15_000 }).catch(() => note("the draft would not accept"));
-    await cam.hold(4);
-    // The Manager, through the request context: the role switch never opens a login form on camera (D-16).
-    await signIn(context.request, "Manager").catch(() => note("no Manager session could be minted"));
-    await cam.page.reload({ waitUntil: "domcontentloaded" });
-    await cam.show('[data-act="publish"]', 3, "the publishing act");
-    await cam.page.getByRole("button", { name: /Publish the lesson/i }).first().click({ timeout: 30_000 }).catch(() => note("the lesson would not publish"));
-    // A click that lands is not a publication that happened: G3 re-reads the draft inside its transaction and can
-    // refuse it. The beat's caption says the version increments, so the record has to say whether it did.
-    const refused = await cam.page
-      .getByText(/The route refused this call|refused it\. Nothing was written/i)
-      .first()
-      .waitFor({ state: "visible", timeout: 4_000 })
-      .then(() => true)
-      .catch(() => false);
-    if (refused) note("POST /api/drafts/:id/publish was refused by the route, so no version roll and no recount are on camera");
-    // The signature moment of 7.2: the version badge rolls and the recount moves the record between the bands.
-    // The camera is put on the recount panel rather than held wherever the page happens to sit, so the frame is
-    // the thing the caption is about. The panel states its own state, so a publication the route refused reads as
-    // a corpus this browser has not recounted rather than as a red error box under a caption claiming it has.
-    await cam.show('[data-component="recount-moment"]', 12, "the version roll and the recount");
-    // The honesty close: what the corpus is known to owe, then the run that scores this product against itself.
-    await cam.page.goto(`${BASE}/integrity`, { waitUntil: "domcontentloaded" });
-    await cam.show('[data-component="register-totals"]', 3, "the Integrity Register totals");
-    await cam.page.goto(`${BASE}/evaluation`, { waitUntil: "domcontentloaded" });
-    await cam.show('[data-component="run-pins"]', 6, "the evaluation run behind the closing line");
-    return cam;
-  },
-};
 
 /* The run ------------------------------------------------------------------------------------------------------- */
 
+type Record_ = {
+  id: string;
+  title: string;
+  seconds: number;
+  speaker: string;
+  onScreen: string;
+  concat: string | null;
+  frames: number;
+  source: { file: string; stills: typeof FALLBACK_STILLS } | null;
+};
+
 async function main(): Promise<void> {
   const fx = fixtures();
-  const list: Beat[] = beats(fx);
-  const total = totalSeconds(list);
-  const problems = checkVerbatim(list, readFileSync(path.join(HERE, "narration.md"), "utf8"));
-  if (problems.length > 0) throw new Error(`the captions are not the narration verbatim:\n${problems.join("\n")}`);
-  const cues = timeline(list);
-  writeFileSync(path.join(HERE, "captions.srt"), srt(cues));
-  console.log(`captions.srt: ${cues.length} cues over ${total} s`);
-
-  // The cut is always all six beats; this run may only be re-taking some of them.
-  const chosen = ONLY ? list.filter((b) => ONLY.has(b.id)) : list;
-  if (chosen.length === 0) throw new Error(`--beats named no beat of this cut; it has ${list.map((b) => b.id).join(", ")}`);
-  if (ONLY) console.log(`re-taking ${chosen.map((b) => b.id).join(", ")}; every other beat keeps the footage it has`);
-
-  mkdirSync(RAW, { recursive: true });
+  const previous = existsSync(path.join(OUT, "beats.json")) ? (JSON.parse(readFileSync(path.join(OUT, "beats.json"), "utf8")) as { b6_variant?: B6Variant; beats?: Record_[] }) : null;
+  const ids = beats(fx).map((b) => b.id);
+  const chosen = ONLY ? ids.filter((id) => ONLY.has(id)) : ids;
+  if (chosen.length === 0) throw new Error(`--beats named no beat of this cut; it has ${ids.join(", ")}`);
   mkdirSync(OUT, { recursive: true });
+  mkdirSync(FRAMES, { recursive: true });
 
   const browser = await chromium.launch();
-  const context = await browser.newContext({
-    viewport: { width: WIDTH, height: HEIGHT },
-    recordVideo: { dir: RAW, size: { width: WIDTH, height: HEIGHT } },
-    userAgent: "thehub-3v-video (Playwright)",
-  });
-  const recorded: Array<{ id: string; title: string; seconds: number; file: string | null; lead: number; filmed: number; onScreen: string }> = [];
-
+  const recorded: Record_[] = [];
+  let b6: B6Variant = previous?.b6_variant ?? "fallback";
   try {
-    // The caption layer is rendered on a page of this context, so its video file is written and then discarded.
-    const layer = await context.newPage();
-    await renderCaptionLayer(layer, segments(cues, total));
-    const layerVideo = layer.video();
-    await layer.close();
-    await layerVideo?.delete().catch(() => undefined);
-
-    console.log("\nwarm pass (no camera)");
-    const filming = (id: string): boolean => chosen.some((b) => b.id === id);
+    const context = await newContext(browser);
     await signIn(context.request, "Engineer");
-    const ask = filming("b2") ? await warmAsk(context.request, "why did the hexane feed pump GA-1201A trip on vibration") : EMPTY_ASK;
-    const gap = filming("b5")
-      ? await warmAsk(context.request, "what lesson covers coupling-element inspection and replacement on GA-1201A")
-      : EMPTY_ASK;
-    // The lesson the rule pack serves for the approved bypass, named by the retrieval line rather than typed here.
-    const bypass = filming("b3") ? await warmAsk(context.request, "how do I line up the HV-6701 manual bypass") : EMPTY_ASK;
-    const bypassDoc = bypass.evidence?.find((e) => e.doc_no.startsWith("OPL-"))?.document_id ?? bypass.evidence?.[0]?.document_id ?? null;
-    if (filming("b3") && bypassDoc === null) note("the bypass question resolved no lesson document");
-
-    let draft: WarmDraft = null;
-    let clusterId: string | null = null;
-    if (filming("b6")) {
-      const coverage = await context.request.get(`${BASE}/api/coverage`, { timeout: 60_000 });
-      const clusters = coverage.ok() ? ((await coverage.json()) as { clusters: Array<{ id: string }> }).clusters : [];
-      // The ranking, best first, and a short tail behind it: the swap of R-07 needs somewhere to swap to.
-      const clusterIds = clusters.slice(0, CLUSTERS_TRIED).map((c) => c.id);
-      if (clusterIds.length === 0) note("GET /api/coverage ranked no cluster, so no lesson can be requested");
-      await signIn(context.request, "Supervisor");
-      draft = clusterIds.length > 0 ? await warmDraft(context.request, clusterIds) : null;
-      clusterId = draft?.cluster_id ?? clusterIds[0] ?? null;
-      await signIn(context.request, "Engineer");
-    }
-    const warm: Warm = { askTrace: ask.trace, gapTrace: gap.trace, bypassDoc, draft, clusterId };
-
-    console.log("\nrecording");
-    for (const beat of chosen) {
+    const page = await context.newPage();
+    const plan = beats(fx);
+    for (const id of chosen) {
+      const beat = plan.find((b) => b.id === id) as Beat;
       console.log(`${beat.id} (${beat.seconds} s): ${beat.title}`);
-      // The loop beat needs the Supervisor's decisions; every other beat is filmed as the Engineer.
-      if (beat.id === "b6") await signIn(context.request, "Supervisor").catch(() => note("no Supervisor session for the loop beat"));
-      let file: string | null = null;
-      let lead = 0;
-      let filmed = 0;
-      try {
-        const cam = await SCRIPTS[beat.id](context, warm, beat.seconds);
-        lead = cam.lead();
-        filmed = cam.filmed();
-        const video = cam.page.video();
-        await cam.page.close();
-        const from = await video?.path();
-        if (from) {
-          file = path.join(RAW, `${beat.id}.webm`);
-          await video!.saveAs(file);
-          await video!.delete().catch(() => undefined);
-        } else {
-          note(`${beat.id} produced no video file`);
+      if (id === "b6") {
+        let filmed = false;
+        if (FORCE_B6 !== "fallback") {
+          const loopContext = await newContext(browser);
+          const loopPage = await loopContext.newPage();
+          const reel = new Reel(loopPage, "b6", beat.seconds);
+          try {
+            filmed = await walkLoop(reel, loopContext);
+            if (filmed) {
+              const { frames, concat } = reel.fit();
+              recorded.push({ id, title: beat.title, seconds: beat.seconds, speaker: beat.speaker, onScreen: beat.onScreen, concat: path.relative(path.join(HERE, ".."), concat), frames, source: null });
+            }
+          } catch (error) {
+            note(`b6 ended early: ${error instanceof Error ? error.message.split("\n")[0] : String(error)}`);
+            filmed = false;
+          } finally {
+            await loopContext.close();
+          }
         }
-      } catch (error) {
-        note(`${beat.id} ended early: ${error instanceof Error ? error.message.split("\n")[0] : String(error)}`);
+        b6 = filmed ? "retake" : "fallback";
+        if (!filmed) {
+          if (!existsSync(RAW_B6)) throw new Error("the B6 fallback footage video/raw/b6.webm is missing");
+          const fb = beats(fx, "fallback").find((b) => b.id === "b6") as Beat;
+          const { frames, concat } = fallbackReel();
+          recorded.push({ id, title: fb.title, seconds: fb.seconds, speaker: fb.speaker, onScreen: fb.onScreen, concat: path.relative(path.join(HERE, ".."), concat), frames, source: { file: path.relative(path.join(HERE, ".."), RAW_B6), stills: FALLBACK_STILLS } });
+        }
+        console.log(`  b6: ${b6}`);
+        continue;
       }
-      recorded.push({ id: beat.id, title: beat.title, seconds: beat.seconds, file, lead: Number(lead.toFixed(3)), filmed: Number(filmed.toFixed(3)), onScreen: beat.onScreen });
-      console.log(`  ${file ? `raw/${path.basename(file)}` : "no footage"}, lead ${lead.toFixed(1)} s, filmed ${filmed.toFixed(1)} s of ${beat.seconds} s`);
+      const reel = new Reel(page, id, beat.seconds);
+      reel.hide();
+      await SCRIPTS[id](reel, context);
+      const { frames, concat } = reel.fit();
+      recorded.push({ id, title: beat.title, seconds: beat.seconds, speaker: beat.speaker, onScreen: beat.onScreen, concat: path.relative(path.join(HERE, ".."), concat), frames, source: null });
+      console.log(`  ${frames} frames into video/frames/${id}/`);
     }
-  } finally {
+
+    // Captions follow the B6 the cut actually carries.
+    const list = beats(fx, b6);
+    const problems = checkVerbatim(list, readFileSync(path.join(HERE, "narration.md"), "utf8"));
+    if (problems.length > 0) throw new Error(`the captions are not the narration verbatim:\n${problems.join("\n")}`);
+    const cues = timeline(list);
+    writeFileSync(path.join(HERE, "captions.srt"), srt(cues));
+    console.log(`captions.srt: ${cues.length} cues over ${totalSeconds(list)} s (b6 ${b6})`);
+    await renderCaptionLayer(browser, segments(cues, totalSeconds(list)));
     await context.close();
+  } finally {
     await browser.close();
   }
 
-  // A partial run merges: the beats it filmed replace their records, and every other beat keeps the one it had,
-  // so beats.json always describes the whole 175 s and the encode never has to be told which run produced what.
-  type Record_ = (typeof recorded)[number];
-  const previous: Record_[] = (() => {
-    if (!ONLY || !existsSync(path.join(OUT, "beats.json"))) return [];
-    try {
-      return (JSON.parse(readFileSync(path.join(OUT, "beats.json"), "utf8")) as { beats: Record_[] }).beats ?? [];
-    } catch {
-      note("the beats.json already on disk could not be read, so this run's beats are the only ones in it");
-      return [];
-    }
-  })();
-  const merged: Record_[] = list.map((beat) => {
-    const fresh = recorded.find((r) => r.id === beat.id);
-    return fresh ?? previous.find((r) => r.id === beat.id) ?? { id: beat.id, title: beat.title, seconds: beat.seconds, file: null, lead: 0, filmed: 0, onScreen: beat.onScreen };
-  });
-
+  const list = beats(fx, b6);
+  const merged = list.map((beat) => recorded.find((r) => r.id === beat.id) ?? previous?.beats?.find((r) => r.id === beat.id) ?? null);
+  const missing = list.filter((_, i) => merged[i] === null).map((b) => b.id);
   const report = {
     base_url: BASE,
     recorded_at: new Date().toISOString(),
-    beats_retaken: ONLY ? chosen.map((b) => b.id) : null,
-    width: WIDTH,
-    height: HEIGHT,
-    fps: 15,
-    total_seconds: total,
-    beats: merged,
-    missing: merged.filter((b) => b.file === null).map((b) => b.id),
+    beats_retaken: ONLY ? chosen : null,
+    width: Math.round(CSS_W * SCALE),
+    height: Math.round(CSS_H * SCALE),
+    layout: { width: CSS_W, height: CSS_H, device_scale: SCALE },
+    fps: FPS,
+    total_seconds: totalSeconds(list),
+    b6_variant: b6,
+    beats: merged.filter((r): r is Record_ => r !== null),
+    missing,
     misses,
   };
   writeFileSync(path.join(OUT, "beats.json"), `${JSON.stringify(report, null, 2)}\n`);
-  console.log(`\nvideo/out/beats.json written; ${report.missing.length} beat(s) without footage, ${misses.length} miss(es)`);
+  console.log(`\nvideo/out/beats.json written; b6 ${b6}; ${missing.length} beat(s) without frames, ${misses.length} miss(es)`);
 }
 
 await main();
